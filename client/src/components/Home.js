@@ -1,30 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css';
+import { useFetchData } from './useFetchData';
+import World from './Home/World';
+import CharacterBox from './Home/CharacterBox';
 
 function Home() {
+    const [account, setAccount] = useState([]);
+    let [mastery, setMastery] = useState([]);
     const [characters, setCharacters] = useState([]);
+    let masteryCount = 0;
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await axios.get('http://localhost:3001/api/characters');
-            setCharacters(response.data);
-        }
-
-        fetchData();
-    }, []);
-
+    useFetchData('http://localhost:3001/api/account', setAccount);
+    useFetchData('http://localhost:3001/api/account/mastery/points', setMastery);
+    useFetchData('http://localhost:3001/api/characters', setCharacters);
+    
+    if (mastery.totals) {
+        masteryCount = mastery.totals[0].spent + mastery.totals[1].spent + mastery.totals[2].spent;
+    }
     return (
         <div>
-            <h1>Character List</h1>
-            <ul>
+            <span className='account-name'>
+                <h1>{account.name}</h1>
+                <h5>Fractal Level: {account.fractal_level}</h5>
+                <h5>Mastery Points: {masteryCount}</h5>
+                <h5 className='item-or-loader'><span>World: </span>{<World worldName={account.world} />}</h5>
+                <h5>WvW Rank: {account.wvw_rank}</h5>
+            </span>
+            <div className='home-flex'>
                 {characters.map((character) => (
-                    <div key={character}>
-                        <Link className='home-link' to={`/characters/${character}`}>{character}</Link>
+                    <div key={character} className='home-boxes'>
+                        <Link className='home-link' to={`/characters/${character}`}>
+                            <CharacterBox character={character} />
+                        </Link>
                     </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }

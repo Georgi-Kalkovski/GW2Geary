@@ -7,9 +7,69 @@ body {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.account-name {
+  text-align: center;
+}
+
+.home-flex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-boxes {
+  min-width: 8%;
+  text-align: center;
+}
+
+.home-box {
+  border: 2px #ffffff solid;
+  margin: 5%;
+}
+
+.inner-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.home-character-box :nth-child() {
+  text-decoration: none;
+}
+
+
+.item-or-loader {
+  display: flex;
+  justify-content: center;
+}
+
+.item-or-loader>span {
+  padding-right: 5px;
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  /* Light grey */
+  border-top: 2px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

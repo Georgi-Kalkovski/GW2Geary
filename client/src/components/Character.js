@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { useFetchData } from './useFetchData';
 
 function Character() {
     const [characterData, setCharacterData] = useState([]);
     const characterName = window.location.pathname.split("/").pop();
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await axios.get(`http://localhost:3001/api/characters/${characterName}`);
-            setCharacterData(response.data);
-        }
+    useFetchData(`http://localhost:3001/api/characters/${characterName}`, setCharacterData);
 
-        fetchData();
-    }, [characterName]);
 
     if (!characterData) {
         return <div>Loading...</div>;
     }
-    
-    // TODO: Play with the reading of the build tabs
-    console.log(characterData.build_tabs)
 
+    // TODO: Play with the reading of the build tabs
+    // console.log(characterData.build_tabs)
+    console.log(characterData.world)
     return (
         <div>
             <h1>{characterData.name}</h1>
