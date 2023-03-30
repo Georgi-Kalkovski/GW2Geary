@@ -5,7 +5,7 @@ function Character() {
     const [characterData, setCharacterData] = useState([]);
     const characterName = window.location.pathname.split("/").pop();
 
-    useFetchData(`http://localhost:3001/api/characters/${characterName}`, setCharacterData);
+    useFetchData(`characters/${characterName}`, setCharacterData);
 
 
     if (!characterData) {

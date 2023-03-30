@@ -5,14 +5,14 @@ import World from './Home/World';
 import CharacterBox from './Home/CharacterBox';
 
 function Home() {
-    const [account, setAccount] = useState([]);
-    let [mastery, setMastery] = useState([]);
+    const [account, setAccount] = useState({});
+    let [mastery, setMastery] = useState({});
     const [characters, setCharacters] = useState([]);
     let masteryCount = 0;
 
-    useFetchData('http://localhost:3001/api/account', setAccount);
-    useFetchData('http://localhost:3001/api/account/mastery/points', setMastery);
-    useFetchData('http://localhost:3001/api/characters', setCharacters);
+    useFetchData('account', setAccount);
+    useFetchData('account/mastery/points', setMastery);
+    useFetchData('characters', setCharacters);
     
     if (mastery.totals) {
         masteryCount = mastery.totals[0].spent + mastery.totals[1].spent + mastery.totals[2].spent;

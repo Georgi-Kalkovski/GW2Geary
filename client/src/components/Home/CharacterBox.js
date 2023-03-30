@@ -5,7 +5,7 @@ import ProfessionInfo from './ProfessionInfo';
 function CharacterBox({ character }) {
     const [characterData, setCharacterData] = useState([]);
 
-    useFetchData(`http://localhost:3001/api/characters/${character}`, setCharacterData);
+    useFetchData(`characters/${character}`, setCharacterData);
 
     // TODO: Play with the reading of the build tabs
     // console.log(characterData.build_tabs)
