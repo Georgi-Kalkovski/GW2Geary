@@ -72,6 +72,36 @@ app.get('/api/worlds/:id', async (req, res) => {
     }
 });
 
+app.get('/api/characters/:name/equipmenttabs', async (req, res) => {
+    try {
+        const {name} = req.params;
+        const response = await axios.get(`${baseUrl}/characters/${name}/equipmenttabs${apiKey}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
+app.get('/api/characters/:name/equipmenttabs/active', async (req, res) => {
+    try {
+        const {name} = req.params;
+        const response = await axios.get(`${baseUrl}/characters/${name}/equipmenttabs/active${apiKey}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
+app.get('/api/items/:item', async (req, res) => {
+    try {
+        const {item} = req.params;
+        const response = await axios.get(`${baseUrl}/items/${item}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

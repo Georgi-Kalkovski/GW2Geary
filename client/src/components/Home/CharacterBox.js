@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFetchData } from '../useFetchData';
 import ProfessionInfo from './ProfessionInfo';
+import EqupmentTabs from './EquipmentTabs';
 
 function CharacterBox({ character }) {
     const [characterData, setCharacterData] = useState([]);
@@ -21,6 +22,7 @@ function CharacterBox({ character }) {
                         {<ProfessionInfo professionName={characterData.profession} />}
                     </div>
                     <div className='inside-box-right'>
+                        {<EqupmentTabs character={character} />}
                     </div>
                 </span>
             </div>

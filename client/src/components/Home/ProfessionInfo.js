@@ -6,7 +6,7 @@ function ProfessionInfo({ professionName }) {
     useFetchData(`professions/${professionName}`, setProfession);
     return (
         <>
-        <img src={profession.icon} alt={profession} />
+        <img src={profession.icon} alt={profession.name} />
         </>
     );
 }
