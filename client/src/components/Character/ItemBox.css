@@ -1,0 +1,7 @@
+.item-box {
+    display: flex;
+    margin: 3px;
+    border: 3px solid purple;
+    min-width: 64px;
+    min-height: 64px;
+}

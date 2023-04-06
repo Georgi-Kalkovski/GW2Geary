@@ -5,6 +5,7 @@ const urlCharacters = urlBasic + 'characters/';
 const urlProfessions = urlBasic + 'professions/';
 const urlWorlds = urlBasic + 'worlds/';
 const urlItems = urlBasic + 'items/';
+const urlSkins = urlBasic + 'skins/';
 const urlSpecs = urlBasic + 'specializations/';
 
 export {
@@ -15,5 +16,6 @@ export {
     urlProfessions,
     urlWorlds,
     urlItems,
+    urlSkins,
     urlSpecs,
 }

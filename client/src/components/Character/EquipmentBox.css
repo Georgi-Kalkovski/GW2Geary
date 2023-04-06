@@ -1,0 +1,9 @@
+.equipment-box {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly
+}
+
+.equipment-trinkets {
+    display: flex;
+}

@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 import Specialization from "./Character/Specialization";
-import BuildDropdown from './Character/BuildDropdown';
+import EquipmentDropdown from './Character/EquipmentDropdown';
+import EquipmentBox from './Character/EquipmentBox';
 import { loading } from './functions';
 import './Character.css';
 
@@ -22,7 +23,8 @@ function Character() {
 
     useEffect(() => {
         const fetchProfession = async () => {
-            const prof = await fetchData('professions', character.profession);
+            const response = await fetchData('characters', name);
+            const prof = await fetchData('professions', response.profession);
             setProfession(prof);
         };
         fetchProfession();
@@ -38,7 +40,7 @@ function Character() {
                 <h1>{character.name}</h1>
                 <p>{character.level} {character.race}</p>
                 <p className="center-class"><img src={profession.icon} />{character.profession} - <Specialization char={character} /></p>
-                <BuildDropdown />
+                <EquipmentDropdown char={character}/>
             </div>
         </>
     );
