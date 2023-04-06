@@ -1,5 +1,0 @@
-http://localhost:3001/api/account 
-http://localhost:3001/api/characters
-http://localhost:3001/api/characters/:id
-http://localhost:3001/api/professions/:id
-http://localhost:3001/api/worlds/:id

@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
-import { useFetchData } from './useFetchData';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import fetchData from './fetchData';
+import Specialization from "./Character/Specialization";
+import BuildDropdown from './Character/BuildDropdown';
+import { loading } from './functions';
+import './Character.css';
 
 function Character() {
-    const [characterData, setCharacterData] = useState([]);
-    const characterName = window.location.pathname.split("/").pop();
+    const { name } = useParams();
+    const [character, setCharacter] = useState(null);
+    const [profession, setProfession] = useState('');
 
-    useFetchData(`characters/${characterName}`, setCharacterData);
+    useEffect(() => {
+        const fetchCharacter = async () => {
+            const char = await fetchData('characters', name);
+            setCharacter(char);
+        };
+        fetchCharacter();
+    }, [name]);
 
 
-    if (!characterData) {
-        return <div>Loading...</div>;
+    useEffect(() => {
+        const fetchProfession = async () => {
+            const prof = await fetchData('professions', character.profession);
+            setProfession(prof);
+        };
+        fetchProfession();
+    }, []);
+
+    if (!character) {
+        return loading;
     }
 
-    // TODO: Play with the reading of the build tabs
-    // console.log(characterData.build_tabs)
-    console.log(characterData.world)
     return (
-        <div>
-            <h1>{characterData.name}</h1>
-            <p>Level: {characterData.level}</p>
-            <p>Race: {characterData.race}</p>
-            <p>Profession: {characterData.profession}</p>
-            <p>Guild: {characterData.guild}</p>
-        </div>
+        <>
+            <div className='center-items'>
+                <h1>{character.name}</h1>
+                <p>{character.level} {character.race}</p>
+                <p className="center-class"><img src={profession.icon} />{character.profession} - <Specialization char={character} /></p>
+                <BuildDropdown />
+            </div>
+        </>
     );
 }
 

@@ -62,6 +62,17 @@ app.get('/api/professions/:profession', async (req, res) => {
     }
 });
 
+app.get('/api/specializations/:spec', async (req, res) => {
+    try {
+        const {spec} = req.params;
+        const response = await axios.get(`${baseUrl}/specializations/${spec}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
+
 app.get('/api/worlds/:id', async (req, res) => {
     try {
         const {id} = req.params;
@@ -91,7 +102,6 @@ app.get('/api/characters/:name/equipmenttabs/active', async (req, res) => {
         //res.status(500).json({ error: 'Error fetching data from API' });
     }
 });
-
 app.get('/api/items/:item', async (req, res) => {
     try {
         const {item} = req.params;

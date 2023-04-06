@@ -1,33 +1,36 @@
-import { useState } from 'react';
-import { useFetchData } from '../useFetchData';
-import ProfessionInfo from './ProfessionInfo';
-import EqupmentTabs from './EquipmentTabs';
+import { useState, useEffect } from "react";
+import fetchData from "../fetchData";
+import { loading } from "../functions";
 
-function CharacterBox({ character }) {
-    const [characterData, setCharacterData] = useState([]);
+function CharacterBox({ charName }) {
+    const [character, setCharacter] = useState({});
+    const [profession, setProfession] = useState('');
 
-    useFetchData(`characters/${character}`, setCharacterData);
-
-    // TODO: Play with the reading of the build tabs
-    // console.log(characterData.build_tabs)
+    useEffect(() => {
+        const fetchProfession = async () => {
+            const response = await fetchData('characters', charName);
+            const prof = await fetchData('professions', response.profession);
+            setCharacter(response);
+            setProfession(prof);
+        };
+        fetchProfession();
+    }, []);
 
     return (
-        <div className='character-box'>
-            <p>{characterData.name}</p>
-            <div className='home-box'>
-                <p>{characterData.race}</p>
-                <span className='inner-flex'>
-                    <div className='inside-box-left'>
-                        <p>{characterData.level}</p>
-                        {<ProfessionInfo professionName={characterData.profession} />}
+        <>
+            {profession ?
+                <>
+                    <div><h3>{character.name}</h3></div>
+                    <div className='home-box'>
+                        <p>Lvl.{character.level} {character.race}</p>
+                        <p className="center-class"><img src={profession.icon} />{character.profession}</p>
                     </div>
-                    <div className='inside-box-right'>
-                        {<EqupmentTabs character={character} />}
-                    </div>
-                </span>
-            </div>
-        </div >
+                </>
+                : loading
+            }
+        </>
     );
+
 }
 
 export default CharacterBox;

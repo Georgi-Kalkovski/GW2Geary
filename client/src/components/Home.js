@@ -1,41 +1,70 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { useFetchData } from './useFetchData';
-import World from './Home/World';
+import fetchData from "./fetchData";
 import CharacterBox from './Home/CharacterBox';
+import { loading } from "./functions";
 
 function Home() {
-    const [account, setAccount] = useState({});
-    let [mastery, setMastery] = useState({});
-    const [characters, setCharacters] = useState([]);
-    let masteryCount = 0;
+    const [account, setAccount] = useState([]);
+    const [mastery, setMastery] = useState(null);
+    const [world, setWorld] = useState({});
+    const [charNames, setCharNames] = useState([]);
 
-    useFetchData('account', setAccount);
-    useFetchData('account/mastery/points', setMastery);
-    useFetchData('characters', setCharacters);
-    
-    if (mastery.totals) {
-        masteryCount = mastery.totals[0].spent + mastery.totals[1].spent + mastery.totals[2].spent;
-    }
+    useEffect(() => {
+        const fetchAccount = async () => {
+            const response = await fetchData('account');
+            setAccount(response);
+        };
+        fetchAccount();
+    }, []);
+
+    useEffect(() => {
+        const fetchWorld = async () => {
+            if (account.world) {
+                const response = await fetchData('worlds', account.world);
+                setWorld(response[0]);
+            }
+        };
+        fetchWorld();
+    }, [account.world]);
+
+    useEffect(() => {
+        const fetchMastery = async () => {
+            const response = await fetchData('mastery');
+            const totals = response.totals;
+            const earnedSum = totals.reduce((acc, x) => acc + x.earned, 0)
+            setMastery(earnedSum)
+        };
+        fetchMastery();
+    }, []);
+
+    useEffect(() => {
+        const fetchCharNames = async () => {
+            const response = await fetchData('characters', account.world);
+            setCharNames(response);
+        };
+        fetchCharNames();
+    }, []);
+
     return (
-        <div>
-            <span className='account-name'>
+        <>
+            <span className="home-account">
                 <h1>{account.name}</h1>
                 <h5>Fractal Level: {account.fractal_level}</h5>
-                <h5>Mastery Points: {masteryCount}</h5>
-                <h5 className='item-or-loader'><span>World: </span>{<World worldName={account.world} />}</h5>
+                <h5>Mastery Points: {mastery}</h5>
+                <h5>World: {world.name ? world.name : loading}</h5>
                 <h5>WvW Rank: {account.wvw_rank}</h5>
             </span>
-            <div className='home-flex'>
-                {characters.map((character) => (
-                    <div key={character} className='home-boxes'>
-                        <Link className='home-link' to={`/characters/${character}`}>
-                            <CharacterBox character={character} />
+            <div className="home-characters">
+                {charNames.map((charName) => (
+                    <div key={charName} className="home-character">
+                        <Link to={`/characters/${charName}`} className="home-character-link" char={charName}>
+                            <CharacterBox charName={charName} />
                         </Link>
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 
