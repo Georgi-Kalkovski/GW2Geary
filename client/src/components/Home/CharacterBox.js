@@ -22,8 +22,9 @@ function CharacterBox({ charName }) {
                 <>
                     <div><h3>{character.name}</h3></div>
                     <div className='home-box'>
-                        <p>Lvl.{character.level} {character.race}</p>
-                        <p className="center-class"><img src={profession.icon} />{character.profession}</p>
+                        <p>{character.level} {character.race}</p>
+                        <img src={profession.icon_big} key={character.name}/>
+                        <p>{character.profession}</p>
                     </div>
                 </>
                 : loading
