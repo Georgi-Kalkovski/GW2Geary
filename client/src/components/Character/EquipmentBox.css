@@ -1,7 +1,7 @@
 .equipment-box {
     display: flex;
-    justify-content: center;
-    justify-content: space-evenly
+    margin: 1% 17% 0% 24%;
+    justify-content: space-evenly;
 }
 
 .equipment-trinkets {

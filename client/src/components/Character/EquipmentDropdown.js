@@ -16,17 +16,20 @@ function EquipmentDropdown({ char }) {
     setSelectedTab(parseInt(tab));
     setIsOpen(false);
   }
-  console.log(char.equipment_tabs)
+  
+  const selectedStats = char.equipment_tabs.find((stats) => stats.tab === selectedTab);
+  const activeStats = char.equipment_tabs.find((stats) => stats.is_active);
+
   return (
     <>
       <div className="dropdown">
         <button className="dropdown-button" onClick={toggleMenu}>
-          Dropdown
+          {selectedStats ? selectedStats.name : activeStats.name}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
             {char.equipment_tabs.map((stats) => (
-               <li key={stats.tab} onClick={handleItemClick} value={stats.tab}>{stats.name}</li>
+              <li key={stats.tab} onClick={handleItemClick} value={stats.tab}>{stats.name}</li>
             ))};
           </ul>
         )}
