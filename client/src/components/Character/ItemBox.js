@@ -43,15 +43,15 @@ function ItemBox({ char, item }) {
                         setLowerAttributes(id.details.infix_upgrade.attributes)
 
                     }
-                    if (newItem.details) {
-                        setDetails(newItem.details);
+                    if (id.details) {
+                        setDetails(id.details);
                     }
                 }
             }
         }
         logItem();
     }, [item]);
-    console.log()
+
     if (loading) {
         return <img className="item-box box-gray" alt="" />;
     }
@@ -77,9 +77,9 @@ function ItemBox({ char, item }) {
                             }
                         </Row>
                         <br />
-                        {details && details.defence &&
+                        {details && details.defense !== 0 && details.defense &&
                             <>
-                                <Row>Defence: <span className='green'>{details.defence}</span></Row>
+                                <Row> Defense: <span className='green'>{details.defense}</span></Row>
                                 <br />
                             </>
                         }
@@ -100,7 +100,7 @@ function ItemBox({ char, item }) {
                         ))}
                     </Container>
                 </Popup>
-            </div>
+            </div >
         </>
     );
 }
