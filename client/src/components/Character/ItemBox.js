@@ -4,38 +4,56 @@ import Popup from 'reactjs-popup';
 import fetchData from '../fetchData';
 import './ItemBox.css';
 
-function ItemBox({ item }) {
+function ItemBox({ char, item }) {
     const [id, setId] = useState(null);
     const [skin, setSkin] = useState(null);
     const [stats, setStats] = useState(null);
+    const [attributes, setAttributes] = useState(null);
+    const [lowerAttributes, setLowerAttributes] = useState(null);
     const [details, setDetails] = useState(null);
+    const [rarity, setRarity] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function logItem() {
             const newItem = await item;
-            if (newItem.id) {
-                fetchData('items', newItem.id)
-                    .then(setId)
-                    .finally(() => setLoading(false));
-            }
-            if (newItem.skin) {
-                fetchData('skins', newItem.skin)
-                    .then(setSkin)
-                    .finally(() => setLoading(false));
-            }
-            if (newItem.stats) {
-                setStats(newItem.stats);
-            }
-            if (newItem.details) {
-                setDetails(newItem.details);
+            if (newItem) {
+                if (newItem.id) {
+                    fetchData('items', newItem.id)
+                        .then(setId)
+                        .then(setRarity(id.rarity.toLowerCase()))
+                        .finally(() => setLoading(false));
+                    if (newItem.skin) {
+                        fetchData('skins', newItem.skin)
+                            .then(setSkin)
+                            .finally(() => setLoading(false));
+                    }
+                    if (newItem.stats && newItem.id) {
+                        if (newItem.stats) {
+                            setStats(newItem.stats);
+                        }
+                    } else {
+                        for (const equip of char.equipment) {
+                            if (newItem.id === equip.id) {
+                                setAttributes(equip.stats)
+                            }
+                        }
+                    }
+                    if (id.details.infix_upgrade != undefined) {
+                        setLowerAttributes(id.details.infix_upgrade.attributes)
+
+                    }
+                    if (newItem.details) {
+                        setDetails(newItem.details);
+                    }
+                }
             }
         }
         logItem();
     }, [item]);
-
+    console.log()
     if (loading) {
-        return <img className="item-box" alt="" />;
+        return <img className="item-box box-gray" alt="" />;
     }
 
     return (
@@ -44,15 +62,15 @@ function ItemBox({ item }) {
                 <Popup
                     trigger=
                     {skin
-                        ? <img className="item-box" src={skin.icon} alt="" />
-                        : <img className="item-box" src={id.icon} alt="" />
+                        ? <img className={'item-box box-' + rarity} src={skin.icon} alt="" />
+                        : <img className={'item-box box-' + rarity} src={id.icon} alt="" />
                     }
                     arrow={false}
                     position="right center"
                     on={'hover'}
                 >
                     <Container className='item-popup'>
-                        <Row>
+                        <Row className={'name-' + rarity}>
                             {skin
                                 ? <span>{skin.name}</span>
                                 : <span>{id.name}</span>
@@ -65,9 +83,19 @@ function ItemBox({ item }) {
                                 <br />
                             </>
                         }
-                        {stats && Object.keys(stats.attributes).map(key => (
+                        {stats && stats.attributes && Object.keys(stats.attributes).map(key => (
                             <Row key={key}>
                                 <span className='green'>+{stats.attributes[key]} {key}</span>
+                            </Row>
+                        ))}
+                        {attributes && attributes.attributes && Object.keys(attributes.attributes).map(key => (
+                            <Row key={key}>
+                                <span className='green'>+{attributes.attributes[key]} {key}</span>
+                            </Row>
+                        ))}
+                        {lowerAttributes && lowerAttributes.map(key => (
+                            <Row key={key}>
+                                <span className='green'>+{key.attribute} {key.modifier}</span>
                             </Row>
                         ))}
                     </Container>

@@ -104,6 +104,16 @@ app.get('/api/items/:item', async (req, res) => {
     }
 });
 
+app.get('/api/itemstats/:item', async (req, res) => {
+    try {
+        const {item} = req.params;
+        const response = await axios.get(`${baseUrl}/itemstats/${item}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
 app.get('/api/skins/:item', async (req, res) => {
     try {
         const {item} = req.params;

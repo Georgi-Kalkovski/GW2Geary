@@ -1,14 +1,76 @@
 .item-box {
     display: flex;
     margin: 3px;
-    border: 3px solid purple;
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
 }
+
+.box-gray {
+    border: 3px solid gray;
+}
+
+.box-basic {
+    border: 3px solid #ffffff;
+}
+
+.box-fine {
+    border: 3px solid #5fbdff;
+}
+
+.box-masterwork {
+    border: 3px solid #32e532;
+}
+
+.box-rare {
+    border: 3px solid #d5b737;
+}
+
+.box-exotic {
+    border: 3px solid #d87e00;
+}
+
+.box-ascended {
+    border: 3px solid #ff61b4;
+}
+
+.box-legendary {
+    border: 3px solid #ce45da;
+}
+
+.name-basic {
+    color: #ffffff;
+}
+
+.name-fine {
+    color: #5fbdff;
+}
+
+.name-masterwork {
+    color: #32e532;
+}
+
+.name-rare {
+    color: #d5b737;
+}
+
+.name-exotic {
+    color: #d87e00;
+}
+
+.name-ascended {
+    color: #ff61b4;
+}
+
+.name-legendary {
+    color: #ce45da;
+}
+
+
 .item-popup {
     background-color: black;
-    padding: 4%;
+    padding: 10px;
+    white-space: nowrap;
 }
 
 .green {
