@@ -20,7 +20,6 @@ function CharacterBox({ charName }) {
         <>
             {profession ?
                 <>
-                    <div><h3>{character.name}</h3></div>
                     <div className='home-box'>
                         <p>{character.level} {character.race}</p>
                         <img src={profession.icon_big} key={character.name}/>

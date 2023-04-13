@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 import Specialization from "./Character/Specialization";
 import EquipmentDropdown from './Character/EquipmentDropdown';
-import EquipmentBox from './Character/EquipmentBox';
 import { loading } from './functions';
 import './Character.css';
 
