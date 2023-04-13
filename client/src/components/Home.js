@@ -58,8 +58,8 @@ function Home() {
             <div className="home-characters">
                 {charNames.map((charName) => (
                     <div key={charName} className="home-character">
-                        <div><h3>{charName}</h3></div>
                         <Link to={`/characters/${charName}`} className="home-character-link" char={charName}>
+                            <div><h3>{charName}</h3></div>
                             <CharacterBox charName={charName} />
                         </Link>
                     </div>
