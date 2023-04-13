@@ -62,8 +62,8 @@ function ItemBox({ char, item }) {
                 <Popup
                     trigger=
                     {skin
-                        ? <img className={'item-box box-' + rarity} src={skin.icon} alt="" />
-                        : <img className={'item-box box-' + rarity} src={id.icon} alt="" />
+                        ? <img className={'item-box box-' + rarity} src={skin.icon} alt={skin.name} />
+                        : <img className={'item-box box-' + rarity} src={id.icon} alt={id.name} />
                     }
                     arrow={false}
                     position="right center"

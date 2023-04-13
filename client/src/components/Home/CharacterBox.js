@@ -14,7 +14,7 @@ function CharacterBox({ charName }) {
             setProfession(prof);
         };
         fetchProfession();
-    }, []);
+    }, [charName]);
 
     return (
         <>
@@ -22,7 +22,7 @@ function CharacterBox({ charName }) {
                 <>
                     <div className='home-box'>
                         <p>{character.level} {character.race}</p>
-                        <img src={profession.icon_big} key={character.name}/>
+                        <img src={profession.icon_big} key={character.name} alt={character.name}/>
                         <p>{character.profession}</p>
                     </div>
                 </>
