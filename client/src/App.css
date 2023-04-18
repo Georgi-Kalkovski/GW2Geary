@@ -21,6 +21,7 @@ body {
 
 .home-character-link {
   color: #ffffff;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -36,6 +37,7 @@ body {
 
 .home-box {
   border: 2px #ffffff solid;
+  padding: 2%;
   margin: 5%;
 }
 

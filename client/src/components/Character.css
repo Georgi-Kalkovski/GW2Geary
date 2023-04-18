@@ -4,7 +4,6 @@
   }
   
   .dropdown-button {
-    background-color: #4CAF50;
     color: white;
     padding: 10px;
     font-size: 16px;
@@ -33,3 +32,16 @@
   .dropdown-menu li:hover {
     background-color: #ddd;
   }
+
+.go-back-button {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16%;
+  color: white;
+  text-decoration: none;
+  font-size: large;
+  padding: 2px;
+  border: 2px solid white;
+  border-radius: 10px;
+}

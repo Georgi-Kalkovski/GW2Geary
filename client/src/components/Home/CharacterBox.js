@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import fetchData from "../fetchData";
 import { loading } from "../functions";
+import '../Classes.css';
 
 function CharacterBox({ charName }) {
     const [character, setCharacter] = useState({});
@@ -20,10 +21,10 @@ function CharacterBox({ charName }) {
         <>
             {profession ?
                 <>
-                    <div className='home-box'>
-                        <p>{character.level} {character.race}</p>
-                        <img src={profession.icon_big} key={character.name} alt={character.name}/>
-                        <p>{character.profession}</p>
+                    <div className={character.profession.toLowerCase() + '-border home-box'} >
+                        <div>{character.level} {character.race}</div>
+                        <img src={profession.icon_big} key={character.name} alt={character.name} />
+                        <div>{character.profession}</div>
                     </div>
                 </>
                 : loading

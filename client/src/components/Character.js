@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 import Specialization from "./Character/Specialization";
 import EquipmentDropdown from './Character/EquipmentDropdown';
+import BackButton from './BackButton';
 import { loading } from './functions';
 import './Character.css';
 
@@ -27,7 +28,7 @@ function Character() {
             setProfession(prof);
         };
         fetchProfession();
-    }, []);
+    }, [name]);
 
     if (!character) {
         return loading;
@@ -35,11 +36,12 @@ function Character() {
 
     return (
         <>
+            <BackButton />
             <div className='center-items'>
                 <h1>{character.name}</h1>
-                <p>{character.level} {character.race}</p>
-                <p className="center-class"><img src={profession.icon} />{character.profession} - <Specialization char={character} /></p>
-                <EquipmentDropdown char={character}/>
+                <div>{character.level} {character.race}</div>
+                <div className="center-class"><img src={profession.icon} alt={character.profession}/>{character.profession} - <Specialization char={character} /></div>
+                <EquipmentDropdown char={character} />
             </div>
         </>
     );

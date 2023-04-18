@@ -20,19 +20,19 @@ function EquipmentDropdown({ char }) {
     }
   }
 
-  const selectedStats = char.equipment_tabs.find((stats) => stats.tab === selectedTab);
-  const activeStats = char.equipment_tabs.find((stats) => stats.is_active);
-
+  const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
+  const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
+  
   return (
     <>
       <div className="dropdown">
-        <button className="dropdown-button" onClick={toggleMenu}>
-          {selectedTab === null ? 'Unknown' : (selectedStats ? selectedStats.name : activeStats.name)}
+        <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
+          {selectedTab === null ? 'Unknown' : (selectedEquip && activeEquip ? selectedEquip.name : activeEquip.name)}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
-            {char.equipment_tabs.map((stats) => (
-              <li key={stats.tab} onClick={handleItemClick} value={stats.name ? stats.tab : 'Unknown'}>{stats.name ? stats.name : 'Unknown'}</li>
+            {char.equipment_tabs.map((equip) => (
+              <li key={equip.tab} onClick={handleItemClick} value={equip.name ? equip.tab : 'Unknown'}>{equip.name ? equip.name : 'Unknown'}</li>
             ))}
           </ul>
         )}

@@ -17,38 +17,35 @@ function ItemBox({ char, item }) {
     useEffect(() => {
         async function logItem() {
             const newItem = await item;
-            if (newItem) {
-                if (newItem.id) {
-                    fetchData('items', newItem.id)
-                        .then(setId)
-                        .then(setRarity(id.rarity.toLowerCase()))
-                        .finally(() => setLoading(false));
-                    if (newItem.skin) {
-                        fetchData('skins', newItem.skin)
-                            .then(setSkin)
-                            .finally(() => setLoading(false));
-                    }
-                    if (newItem.stats && newItem.id) {
-                        if (newItem.stats) {
-                            setStats(newItem.stats);
+            if (newItem && newItem.id) {
+                const idResult = await fetchData('items', newItem.id);
+                setId(idResult);
+                if (idResult) {
+                    setRarity(idResult.rarity.toLowerCase());
+                }
+                if (newItem.skin) {
+                    const skinResult = await fetchData('skins', newItem.skin);
+                    setSkin(skinResult);
+                }
+                if (newItem.stats) {
+                    setStats(newItem.stats);
+                } else {
+                    for (const equip of char.equipment) {
+                        if (newItem.id === equip.id) {
+                            setAttributes(equip.stats)
                         }
-                    } else {
-                        for (const equip of char.equipment) {
-                            if (newItem.id === equip.id) {
-                                setAttributes(equip.stats)
-                            }
-                        }
-                    }
-                    if (id.details.infix_upgrade != undefined) {
-                        setLowerAttributes(id.details.infix_upgrade.attributes)
-
-                    }
-                    if (id.details) {
-                        setDetails(id.details);
                     }
                 }
+                if (id && id.details && id.details.infix_upgrade !== undefined && id.details.infix_upgrade.attributes !== undefined) {
+                    setLowerAttributes(id.details.infix_upgrade.attributes);
+                }
+                if (id && id.details) {
+                    setDetails(id.details);
+                }
+                setLoading(false);
             }
         }
+
         logItem();
     }, [item]);
 
@@ -94,7 +91,7 @@ function ItemBox({ char, item }) {
                             </Row>
                         ))}
                         {lowerAttributes && lowerAttributes.map(key => (
-                            <Row key={key}>
+                            <Row key={key.attribute}>
                                 <span className='green'>+{key.attribute} {key.modifier}</span>
                             </Row>
                         ))}
