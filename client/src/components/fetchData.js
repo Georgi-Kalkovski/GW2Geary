@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { urlAccount, urlMasteryPoints, urlCharacters, urlProfessions, urlWorlds, urlItems, urlSkins, urlSpecs, urlItemstats } from './urls';
+import { urlAccount, urlMasteryPoints, urlCharacters, urlProfessions, urlWorlds, urlItems, urlSkins, urlSpecs, urlItemstats, urlTraits } from './urls';
 
 const fetchData = async (urls, id) => {
   let url = {
@@ -12,6 +12,7 @@ const fetchData = async (urls, id) => {
     itemstats: urlItemstats,
     skins: urlSkins,
     specializations: urlSpecs,
+    traits: urlTraits
   }[urls] || '';
 
   if (id) { url = url + id }

@@ -37,7 +37,13 @@ function Equipment({ char }) {
         {isOpen && (
           <ul className="dropdown-menu">
             {char.equipment_tabs.map((equip) => (
-              <li key={equip.tab} onClick={handleItemClick} value={equip.name ? equip.tab : 'Unknown'}>{equip.name ? equip.name : 'Unknown'}</li>
+              <li
+                key={equip.tab}
+                onClick={handleItemClick}
+                value={equip.name ? equip.tab : 'Unknown'}
+              >
+                {equip.name ? equip.name : 'Unknown'}
+              </li>
             ))}
           </ul>
         )}

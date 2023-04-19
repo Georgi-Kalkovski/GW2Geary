@@ -26,14 +26,22 @@ function EquipmentBox({ char, tab }) {
                         <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Leggings' })} /></Col>
                         <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Boots' })} /></Col>
                         <br />
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA1' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA2' })} /></Col>
+                        <Row className='equipment-trinkets'>
+                            <Col>
+                                <span>E1</span>
+                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA1' })} />
+                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA2' })} />
+                            </Col>
+                            <Col>
+                                <span>E2</span>
+                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB1' })} />
+                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB2' })} />
+                            </Col>
+                        </Row>
                         <br />
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB1' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB2' })} /></Col>
                     </Row>
                     <Col>
-                    Attributes
+                        Attributes
                         <Row className='equipment-trinkets'>
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Backpack' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory1' })} />

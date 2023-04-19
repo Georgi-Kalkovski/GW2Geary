@@ -8,6 +8,7 @@ const urlItems = urlBasic + 'items/';
 const urlItemstats = urlBasic + 'itemstats/';
 const urlSkins = urlBasic + 'skins/';
 const urlSpecs = urlBasic + 'specializations/';
+const urlTraits = urlBasic + 'traits/';
 
 export {
     urlBasic,
@@ -20,4 +21,5 @@ export {
     urlItemstats,
     urlSkins,
     urlSpecs,
+    urlTraits
 }

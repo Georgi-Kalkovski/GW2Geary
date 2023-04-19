@@ -23,8 +23,6 @@ function Build({ char }) {
 
     const selectedBuild = char.build_tabs.find((build) => build.tab === selectedTab);
     const activeBuild = char.build_tabs.find((build) => build.is_active);
-    console.log(selectedBuild)
-    console.log(activeBuild)
 
     return (
         <div className='build'>
@@ -38,14 +36,20 @@ function Build({ char }) {
                                 : (activeBuild.build.name ? activeBuild.build.name : 'Unknown'))}
                 </button>
                 {isOpen && (
-                    <ul className="dropdown-menu">
+                    <ul className="dropdown-menu-right">
                         {char.build_tabs.map((build) => (
-                            <li key={build.tab} onClick={handleItemClick} value={build.build.name ? build.tab : 'Unknown'}>{build.build.name ? build.build.name : 'Unknown'}</li>
+                            <li
+                                key={build.tab}
+                                onClick={handleItemClick}
+                                value={build.build.name ? build.tab : 'Unknown'}
+                            >
+                                {build.build.name ? build.build.name : 'Unknown'}
+                            </li>
                         ))}
                     </ul>
                 )}
-                <BuildBox char={char} tab={selectedTab} key={selectedTab} />
             </div>
+            {<BuildBox char={char} tab={selectedTab} key={selectedTab} />}
         </div>
     );
 }

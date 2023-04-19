@@ -1,15 +1,19 @@
 .equipment-build-flex {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
+  padding-top: 1%;
 }
 
 .equipment {
   width: 50%;
+  
 }
 
 .build {
   width: 50%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .equipment-block {
