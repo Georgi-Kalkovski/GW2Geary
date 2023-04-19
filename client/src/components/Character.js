@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
-import Specialization from "./Character/Specialization";
-import Equipment from './Character/Equipment';
-import Build from './Character/Build';
+import Specialization from "./Character/Equipment/Specialization";
+import Equipment from './Character/Equipment/Equipment';
+import Build from './Character/Build/Build';
 import BackButton from './BackButton';
 import { loading } from './functions';
 import './Character.css';

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Popup from 'reactjs-popup';
-import fetchData from '../fetchData';
+import fetchData from '../../fetchData';
 import './ItemBox.css';
 
 function ItemBox({ char, item }) {

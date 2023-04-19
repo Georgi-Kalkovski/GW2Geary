@@ -26,7 +26,7 @@ function EquipmentBox({ char, tab }) {
                         <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Leggings' })} /></Col>
                         <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Boots' })} /></Col>
                         <br />
-                        <Row className='equipment-trinkets'>
+                        <Row className='custom-row'>
                             <Col>
                                 <span>E1</span>
                                 <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA1' })} />
@@ -42,18 +42,18 @@ function EquipmentBox({ char, tab }) {
                     </Row>
                     <Col>
                         Attributes
-                        <Row className='equipment-trinkets'>
+                        <Row className='custom-row'>
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Backpack' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory1' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory2' })} />
                         </Row>
-                        <Row className='equipment-trinkets'>
+                        <Row className='custom-row'>
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Amulet' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Ring1' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Ring2' })} />
                         </Row>
                         <br />
-                        <Row className='equipment-trinkets'>
+                        <Row className='custom-row'>
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'HelmAquatic' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponAquaticA' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponAquaticB' })} />

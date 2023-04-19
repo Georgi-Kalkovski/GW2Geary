@@ -7,7 +7,6 @@ function BuildBox({ char, tab }) {
     if (tab) {
         build = builds[tab - 1].build;
     }
-
     return (
         <Container className='spec-box'>
             {build.specializations &&

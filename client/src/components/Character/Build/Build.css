@@ -39,3 +39,15 @@
 .cropped-spec-img {
     margin-top: -19%;
 }
+
+.traits-box {
+    position: absolute;
+    z-index: 1;
+    margin: auto;
+    width: 30%;
+    padding-top: 2%;
+}
+
+.minor-trait-icon {
+    clip-path: polygon(50% 0%, 95% 26%, 96% 75%, 50% 101%, 7% 73%, 7% 28%)
+}

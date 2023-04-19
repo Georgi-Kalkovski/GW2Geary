@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import fetchData from "../fetchData";
+import fetchData from "../../fetchData";
 
 function Specialization({ char }) {
     const tabs = char.build_tabs;
