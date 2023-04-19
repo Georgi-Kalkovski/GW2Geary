@@ -4,12 +4,11 @@ import ItemBox from './ItemBox';
 import './EquipmentBox.css';
 
 
-async function findItem({ equip, slot, char }) {
-    // console.log(equip.equipment.find(x => x.slot === slot))
+async function findItem({ equip, slot }) {
     return await equip.equipment.find(x => x.slot === slot);
 }
 
-function EquipmentDropdown({ char, tab }) {
+function EquipmentBox({ char, tab }) {
     const equipments = char.equipment_tabs;
     let equipment = equipments.find(x => x.is_active === true);
     if (tab) {
@@ -34,6 +33,7 @@ function EquipmentDropdown({ char, tab }) {
                         <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB2' })} /></Col>
                     </Row>
                     <Col>
+                    Attributes
                         <Row className='equipment-trinkets'>
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Backpack' })} />
                             <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory1' })} />
@@ -58,4 +58,4 @@ function EquipmentDropdown({ char, tab }) {
     );
 }
 
-export default EquipmentDropdown;
+export default EquipmentBox;

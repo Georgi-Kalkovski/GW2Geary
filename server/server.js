@@ -63,6 +63,17 @@ app.get('/api/characters/:name/equippmenttabs/:id', async (req, res) => {
     }
 });
 
+app.get('/api/characters/:name/buildtabs/:id', async (req, res) => {
+    try {
+        const {name} = req.params;
+        const {id} = req.params;
+        const response = await axios.get(`${baseUrl}/characters/${name}buildtabs/${id}/${apiKey}&v=2021-07-15T13:00:00.000Z`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
 app.get('/api/professions/:profession', async (req, res) => {
     try {
         const {profession} = req.params;

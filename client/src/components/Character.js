@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 import Specialization from "./Character/Specialization";
-import EquipmentDropdown from './Character/EquipmentDropdown';
+import Equipment from './Character/Equipment';
+import Build from './Character/Build';
 import BackButton from './BackButton';
 import { loading } from './functions';
 import './Character.css';
@@ -40,8 +41,11 @@ function Character() {
             <div className='center-items'>
                 <h1>{character.name}</h1>
                 <div>{character.level} {character.race}</div>
-                <div className="center-class"><img src={profession.icon} alt={character.profession}/>{character.profession} - <Specialization char={character} /></div>
-                <EquipmentDropdown char={character} />
+                <div className="center-class"><img src={profession.icon} alt={character.profession} />{character.profession} - <Specialization char={character} /></div>
+                <div className='equipment-build-flex'>
+                    <Equipment char={character} />
+                    <Build char={character} />
+                </div>
             </div>
         </>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EquipmentBox from './EquipmentBox';
 
-function EquipmentDropdown({ char }) {
+function Equipment({ char }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(null);
 
@@ -22,12 +22,17 @@ function EquipmentDropdown({ char }) {
 
   const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
   const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
-  
+  //console.log(selectedEquip)
+  //console.log(activeEquip)
   return (
-    <>
+    <div className='equipment'>
       <div className="dropdown">
         <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
-          {selectedTab === null ? 'Unknown' : (selectedEquip && activeEquip ? selectedEquip.name : activeEquip.name)}
+          {selectedTab === null && selectedEquip === null && activeEquip === null
+            ? 'Unknown'
+            : (selectedEquip && activeEquip
+              ? (selectedEquip.name ? selectedEquip.name : 'Unknown')
+              : (activeEquip.name ? activeEquip.name : 'Unknown'))}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
@@ -38,8 +43,8 @@ function EquipmentDropdown({ char }) {
         )}
       </div>
       {<EquipmentBox char={char} tab={selectedTab} key={selectedTab} />}
-    </>
+    </div>
   );
 }
 
-export default EquipmentDropdown;
+export default Equipment;
