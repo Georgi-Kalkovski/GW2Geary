@@ -31,8 +31,8 @@
 
 .cropped-spec-img-div {
     box-sizing: border-box;
-    width: 650px;
-    height: 140px;
+    max-width: 644px;
+    max-height: 140px;
     overflow: hidden;
 }
 
@@ -45,9 +45,23 @@
     z-index: 1;
     margin: auto;
     width: 30%;
-    padding-top: 2%;
+    padding-top: 2.7%;
+    padding-left: 10%;
 }
 
 .minor-trait-icon {
     clip-path: polygon(50% 0%, 95% 26%, 96% 75%, 50% 101%, 7% 73%, 7% 28%)
+}
+
+.minor-trait-icon,
+.major-trait-icon {
+    width: 58%;
+}
+
+.major-col {
+    margin-top: -8%;
+}
+
+.inactive-trait {
+    opacity: 0.5;
 }

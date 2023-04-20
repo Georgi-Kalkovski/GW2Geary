@@ -3,27 +3,28 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Traits from './Traits';
 import fetchData from '../../fetchData';
 
-function SpecBox({ spec }) {
+function TraitsBox({ spec }) {
     const [specialization, setSpecialization] = useState(null);
-    const [traits, setTraits] = useState(null);
+    const [traitsMin, setTraitsMin] = useState(null);
+    const [traitsMaj, setTraitsMaj] = useState(null);
 
     useEffect(() => {
         const fetchSpec = async () => {
             const char = await fetchData('specializations', spec.id);
             setSpecialization(char);
-            setTraits(char.minor_traits);
+            setTraitsMin(char.minor_traits);
+            setTraitsMaj(char.major_traits);
         };
         fetchSpec();
     }, [spec.id]);
-
     return (
         <Container className='cropped-spec-img-div'>
-            {specialization && traits && (
+            {specialization && traitsMin && traitsMaj && (
                 <>
                     {
-                        <Row className='traits-box'>
-                            <Col><Traits trait={traits} /></Col>
-                        </Row>
+                        <Col className='traits-box'>
+                            <Traits traitsMin={traitsMin} traitsMaj={traitsMaj} traitsActive={spec.traits}/>
+                        </Col>
                     }
                     <img className='cropped-spec-img' src={specialization.background} alt={specialization.name} />
                 </>
@@ -33,4 +34,4 @@ function SpecBox({ spec }) {
     );
 }
 
-export default SpecBox;
+export default TraitsBox;

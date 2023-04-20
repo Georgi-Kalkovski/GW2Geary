@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import SpecBox from './SpecBox';
+import TraitsBox from './TraitsBox';
 
 function BuildBox({ char, tab }) {
     const builds = char.build_tabs;
@@ -11,9 +11,9 @@ function BuildBox({ char, tab }) {
         <Container className='spec-box'>
             {build.specializations &&
                 <>
-                    <SpecBox spec={build.specializations[0]}/>
-                    <SpecBox spec={build.specializations[1]}/>
-                    <SpecBox spec={build.specializations[2]}/>
+                    <TraitsBox spec={build.specializations[0]}/>
+                    <TraitsBox spec={build.specializations[1]}/>
+                    <TraitsBox spec={build.specializations[2]}/>
                 </>
             }
         </Container>
