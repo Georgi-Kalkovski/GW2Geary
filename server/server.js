@@ -82,6 +82,16 @@ app.get('/api/traits/:trait', async (req, res) => {
     }
 });
 
+app.get('/api/skills/:skill', async (req, res) => {
+    try {
+        const {skill} = req.params;
+        const response = await axios.get(`${baseUrl}/skills/${skill}`);
+        res.json(response.data);
+    } catch (error) {
+        //res.status(500).json({ error: 'Error fetching data from API' });
+    }
+});
+
 
 app.get('/api/worlds/:id', async (req, res) => {
     try {

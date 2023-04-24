@@ -65,3 +65,26 @@
 .inactive-trait {
     opacity: 0.5;
 }
+
+.skills-center {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-direction: column;
+    margin-bottom: 3%;
+}
+
+.skill-box {
+    display: flex;
+    margin: 3px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+}
+
+.center-land,
+.center-water {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
