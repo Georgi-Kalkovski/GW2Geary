@@ -22,7 +22,7 @@ function BuildDropdown({ char }) {
 
     const selectedBuild = char.build_tabs.find((build) => build.tab === selectedTab);
     const activeBuild = char.build_tabs.find((build) => build.is_active);
-console.log('Tab ' + char.build_tabs)
+    
     return (
         <div className='build'>
             <div className="dropdown">
