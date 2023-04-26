@@ -1,3 +1,8 @@
+/**
+ * @author that_shaman
+ * PS: Thank you That_Shaman <3
+ */
+
 class BuildTemplate {
     profession = 1;
     specializations = [

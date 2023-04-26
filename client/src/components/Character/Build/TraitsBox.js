@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Popup from 'reactjs-popup';
+//import Popup from 'reactjs-popup';
 import fetchData from '../../fetchData';
 
 function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
@@ -15,7 +15,7 @@ function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
             setTraitMin(fetchedTraits);
         };
         fetchTraits();
-    }, []);
+    }, [traitsMin]);
     useEffect(() => {
         const fetchTraits = async () => {
             const fetchedTraits = await Promise.all(
@@ -24,29 +24,36 @@ function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
             setTraitMaj(fetchedTraits);
         };
         fetchTraits();
-    }, []);
-    if(traitMaj)
+    }, [traitsMaj]);
+
+    function imageTraitMin(trait) {
+        return <img className='minor-trait-icon' src={trait.icon} alt={trait.name} />;
+    }
+
+    function imageTraitMaj(trait) {
+        return <img className={traitsActive.includes(trait.id) ? 'major-trait-icon' : 'major-trait-icon inactive-trait'} src={trait.icon} alt={trait.name} />;
+    }
     return (
         <>
             {traitMin && traitMaj &&
                 <Container className='custom-row'>
-                    <Col><img className='minor-trait-icon' src={traitMin[0].icon} alt={traitMin[0].name} /></Col>
+                    <Col>{imageTraitMin(traitMin[0])}</Col>
                     <Col className='major-col'>
-                        <Row><img className={traitsActive.includes(traitMaj[0].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[0].icon} alt={traitMaj[0].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[1].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[1].icon} alt={traitMaj[1].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[2].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[2].icon} alt={traitMaj[2].name} /></Row>
+                        <Row>{imageTraitMaj(traitMaj[0])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[1])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[2])}</Row>
                     </Col>
-                    <Col><img className='minor-trait-icon' src={traitMin[1].icon} alt={traitMin[1].name} /></Col>
+                    <Col>{imageTraitMin(traitMin[1])}</Col>
                     <Col className='major-col'>
-                        <Row><img className={traitsActive.includes(traitMaj[3].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[3].icon} alt={traitMaj[3].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[4].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[4].icon} alt={traitMaj[4].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[5].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[5].icon} alt={traitMaj[5].name} /></Row>
+                        <Row>{imageTraitMaj(traitMaj[3])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[4])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[5])}</Row>
                     </Col>
-                    <Col><img className='minor-trait-icon' src={traitMin[2].icon} alt={traitMin[2].name} /></Col>
+                    <Col>{imageTraitMin(traitMin[2])}</Col>
                     <Col className='major-col'>
-                        <Row><img className={traitsActive.includes(traitMaj[6].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[6].icon} alt={traitMaj[6].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[7].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[7].icon} alt={traitMaj[7].name} /></Row>
-                        <Row><img className={traitsActive.includes(traitMaj[8].id) ? 'major-trait-icon': 'major-trait-icon inactive-trait' } src={traitMaj[8].icon} alt={traitMaj[8].name} /></Row>
+                        <Row>{imageTraitMaj(traitMaj[6])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[7])}</Row>
+                        <Row>{imageTraitMaj(traitMaj[8])}</Row>
                     </Col>
                 </Container>
             }

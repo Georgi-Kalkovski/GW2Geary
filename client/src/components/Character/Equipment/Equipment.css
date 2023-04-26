@@ -1,3 +1,9 @@
+.equipment-box {
+    display: flex;
+    margin: 1% 0% 0% 12%;
+    justify-content: space-evenly;
+}
+
 .item-box {
     display: flex;
     margin: 3px;

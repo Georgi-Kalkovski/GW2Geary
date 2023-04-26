@@ -7,7 +7,6 @@ function Template({ buildInput }) {
     const [traits, setTraits] = useState([]);
     const [profession, setProfession] = useState([]);
     const [skillIndex, setSkillIndex] = useState([]);
-
     useEffect(() => {
         async function fetchTraits() {
             const fetchedTraits = [];

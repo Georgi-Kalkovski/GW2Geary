@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import EquipmentBox from './EquipmentBox';
+import './Equipment.css';
 
 function Equipment({ char }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +23,7 @@ function Equipment({ char }) {
 
   const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
   const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
-  //console.log(selectedEquip)
-  //console.log(activeEquip)
+  
   return (
     <div className='equipment'>
       <div className="dropdown">

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ItemBox from './ItemBox';
-import './EquipmentBox.css';
 
 
 async function findItem({ equip, slot }) {
@@ -14,28 +13,33 @@ function EquipmentBox({ char, tab }) {
     if (tab) {
         equipment = equipments[tab - 1];
     }
+
+    function printItemBox(slot) {
+        return <ItemBox equip={char.equipment} item={findItem({ equip: equipment, slot: slot })} />
+    }
+
     return (
         <>
             {equipment && <>
                 <Container className="equipment-box">
                     <Row>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Helm' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Shoulders' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Coat' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Gloves' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Leggings' })} /></Col>
-                        <Col><ItemBox char={char} item={findItem({ equip: equipment, slot: 'Boots' })} /></Col>
+                        <Col>{printItemBox('Helm')}</Col>
+                        <Col>{printItemBox('Shoulders')}</Col>
+                        <Col>{printItemBox('Coat')}</Col>
+                        <Col>{printItemBox('Gloves')}</Col>
+                        <Col>{printItemBox('Leggings')}</Col>
+                        <Col>{printItemBox('Boots')}</Col>
                         <br />
                         <Row className='custom-row'>
                             <Col>
                                 <span>E1</span>
-                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA1' })} />
-                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponA2' })} />
+                                {printItemBox('WeaponA1')}
+                                {printItemBox('WeaponA2')}
                             </Col>
                             <Col>
                                 <span>E2</span>
-                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB1' })} />
-                                <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponB2' })} />
+                                {printItemBox('WeaponB1')}
+                                {printItemBox('WeaponB2')}
                             </Col>
                         </Row>
                         <br />
@@ -43,20 +47,20 @@ function EquipmentBox({ char, tab }) {
                     <Col>
                         Attributes
                         <Row className='custom-row'>
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Backpack' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory1' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Accessory2' })} />
+                            {printItemBox('Backpack')}
+                            {printItemBox('Accessory1')}
+                            {printItemBox('Accessory2')}
                         </Row>
                         <Row className='custom-row'>
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Amulet' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Ring1' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'Ring2' })} />
+                            {printItemBox('Amulet')}
+                            {printItemBox('Ring1')}
+                            {printItemBox('Ring2')}
                         </Row>
                         <br />
                         <Row className='custom-row'>
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'HelmAquatic' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponAquaticA' })} />
-                            <ItemBox char={char} item={findItem({ equip: equipment, slot: 'WeaponAquaticB' })} />
+                            {printItemBox('HelmAquatic')}
+                            {printItemBox('WeaponAquaticA')}
+                            {printItemBox('WeaponAquaticB')}
                         </Row>
                     </Col>
                 </Container>

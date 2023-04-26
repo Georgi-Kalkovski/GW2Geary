@@ -1,16 +1,17 @@
+const professionMap = {
+  'Guardian': 1,
+  'Warrior': 2,
+  'Engineer': 3,
+  'Ranger': 4,
+  'Thief': 5,
+  'Elementalist': 6,
+  'Mesmer': 7,
+  'Necromancer': 8,
+  'Revenant': 9,
+};
+
 function Profession(input) {
-    switch (input) {
-      case 'Guardian': return 1;
-      case 'Warrior': return 2;
-      case 'Engineer': return 3;
-      case 'Ranger': return 4;
-      case 'Thief': return 5;
-      case 'Elementalist': return 6;
-      case 'Mesmer': return 7;
-      case 'Necromancer': return 8;
-      case 'Revenant': return 9;
-      default: return 0;
-    }
-  }
-  
-  export default Profession;
+  return professionMap[input] || 0;
+}
+
+export default Profession;

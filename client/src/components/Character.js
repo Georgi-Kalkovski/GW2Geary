@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
-import Specialization from "./Character/Equipment/Specialization";
 import Equipment from './Character/Equipment/Equipment';
 import Build from './Character/Build/Build';
 import BackButton from './BackButton';
@@ -41,7 +40,9 @@ function Character() {
             <div className='center-items'>
                 <h1>{character.name}</h1>
                 <div>{character.level} {character.race}</div>
-                <div className="center-class"><img src={profession.icon} alt={character.profession} />{character.profession} - <Specialization char={character} /></div>
+                <div className="center-class">
+                    <img src={profession.icon} alt={character.profession} />{character.profession}
+                </div>
                 <div className='equipment-build-flex'>
                     <Equipment char={character} />
                     <Build char={character} />

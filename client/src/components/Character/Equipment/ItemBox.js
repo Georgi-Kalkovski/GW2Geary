@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Popup from 'reactjs-popup';
 import fetchData from '../../fetchData';
-import './ItemBox.css';
 
-function ItemBox({ char, item }) {
+function ItemBox({ equip, item }) {
     const [id, setId] = useState(null);
     const [skin, setSkin] = useState(null);
     const [stats, setStats] = useState(null);
@@ -30,9 +29,9 @@ function ItemBox({ char, item }) {
                 if (newItem.stats) {
                     setStats(newItem.stats);
                 } else {
-                    for (const equip of char.equipment) {
-                        if (newItem.id === equip.id) {
-                            setAttributes(equip.stats)
+                    for (const e of equip) {
+                        if (newItem.id === e.id) {
+                            setAttributes(e.stats)
                         }
                     }
                 }
@@ -47,7 +46,7 @@ function ItemBox({ char, item }) {
         }
 
         logItem();
-    }, [item]);
+    }, [item, equip, id]);
 
     if (loading) {
         return <img className="item-box box-gray" alt="" />;
@@ -58,13 +57,12 @@ function ItemBox({ char, item }) {
             <div>
                 <Popup
                     trigger=
-                    {skin
-                        ? <img className={'item-box box-' + rarity} src={skin.icon} alt={skin.name} />
-                        : <img className={'item-box box-' + rarity} src={id.icon} alt={id.name} />
-                    }
+                    {<img className={'item-box box-' + rarity} src={skin?.icon || id.icon} alt={skin?.name || id.name} />}
                     arrow={false}
                     position="right center"
-                    on={'hover'}
+                    on="hover"
+                    offsetX={10}
+                    mouseLeaveDelay={0}
                 >
                     <Container className='item-popup'>
                         <Row className={'name-' + rarity}>
@@ -73,25 +71,31 @@ function ItemBox({ char, item }) {
                                 : <span>{id.name}</span>
                             }
                         </Row>
+
                         <br />
+
                         {details && details.defense !== 0 && details.defense &&
                             <>
-                                <Row> Defense: <span className='green'>{details.defense}</span></Row>
+                                <Row key={'defense' + details.defense}> Defense: <span className='green'>{details.defense}</span></Row>
                                 <br />
                             </>
                         }
+
                         {stats && stats.attributes && Object.keys(stats.attributes).map(key => (
-                            <Row key={key}>
-                                <span className='green'>+{stats.attributes[key]} {key}</span>
+                            <Row key={'stats' + stats.id + key}>
+                                <span className='green'>+{stats.attributes['stats' + stats.id + key]} {key}</span>
                             </Row>
                         ))}
+
                         {attributes && attributes.attributes && Object.keys(attributes.attributes).map(key => (
-                            <Row key={key}>
+                            
+                            <Row key={'attributes' + attributes.id + key}>
                                 <span className='green'>+{attributes.attributes[key]} {key}</span>
                             </Row>
                         ))}
+
                         {lowerAttributes && lowerAttributes.map(key => (
-                            <Row key={key.attribute}>
+                            <Row key={'lowerAttributes' + key.attribute + key.modifier}>
                                 <span className='green'>+{key.attribute} {key.modifier}</span>
                             </Row>
                         ))}
