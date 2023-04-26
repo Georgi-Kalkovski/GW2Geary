@@ -72,6 +72,7 @@
     align-content: center;
     flex-direction: column;
     margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .skill-box {
@@ -87,4 +88,26 @@
     display: flex;
     align-content: center;
     flex-wrap: wrap;
+}
+
+.template-container {
+    width:100%
+}
+
+.template-text {
+    color: white;
+    background-color: #191919;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    width:84%;
+    margin-right: 6px;
+}
+
+.template-button {
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
 }

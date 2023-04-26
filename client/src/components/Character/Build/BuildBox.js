@@ -17,6 +17,7 @@ function BuildBox({ char, tab }) {
                     <Traits spec={build.specializations[0]} />
                     <Traits spec={build.specializations[1]} />
                     <Traits spec={build.specializations[2]} />
+                    <br/>
                     <Template buildInput={build} />
                 </>
             }

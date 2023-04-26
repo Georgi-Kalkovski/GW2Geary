@@ -30,7 +30,6 @@ function Template({ buildInput }) {
         };
         fetchProfession();
     }, []);
-
     useEffect(() => {
         async function fetchSkillIndex() {
             const skills =
@@ -78,10 +77,20 @@ function Template({ buildInput }) {
     build.skills.aquatic.utilities[1] = skillIndex[7];
     build.skills.aquatic.utilities[2] = skillIndex[8];
     build.skills.aquatic.elite = skillIndex[9];
-    
+
+    const copyText = () => {
+        // Copy the text to the clipboard
+        navigator.clipboard.writeText(build.toString());
+    };
+
     return (
         <div id="output">
-            {build.toString()}
+            <div className='template-container'>
+                <input className='template-text' type="text" value={build.toString()} readOnly onDoubleClick={copyText} />
+                <button className={buildInput.profession.toLowerCase() + '-border template-button'} onClick={copyText}>Copy</button>
+            </div>
+
+
         </div>
     );
 }
