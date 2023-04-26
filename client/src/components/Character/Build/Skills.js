@@ -18,10 +18,6 @@ function Skills({ skills, water_skills }) {
             const skill = await fetchData('skills', skills.heal);
             setHeal(skill);
         };
-        fetchHeal();
-    }, []);
-
-    useEffect(() => {
         const fetchUtilities = async () => {
             const utilitySkills = [];
             for (const utility of skills.utilities) {
@@ -30,26 +26,14 @@ function Skills({ skills, water_skills }) {
             }
             setUtilities(utilitySkills);
         };
-        fetchUtilities();
-    }, []);
-
-    useEffect(() => {
         const fetchElite = async () => {
             const skill = await fetchData('skills', skills.elite);
             setElite(skill);
         };
-        fetchElite();
-    }, []);
-
-    useEffect(() => {
         const fetchWaterHeal = async () => {
             const skill = await fetchData('skills', water_skills.heal);
             setWaterHeal(skill);
         };
-        fetchWaterHeal();
-    }, []);
-
-    useEffect(() => {
         const fetchWaterUtilities = async () => {
             const utilitySkills = [];
             for (const utility of water_skills.utilities) {
@@ -58,15 +42,13 @@ function Skills({ skills, water_skills }) {
             }
             setWaterUtilities(utilitySkills);
         };
-        fetchWaterUtilities();
-    }, []);
-
-    useEffect(() => {
         const fetchWaterElite = async () => {
             const skill = await fetchData('skills', water_skills.elite);
             setWaterElite(skill);
         };
-        fetchWaterElite();
+        Promise.all([fetchHeal(), fetchUtilities(), fetchElite(), fetchWaterHeal(), fetchWaterUtilities(), fetchWaterElite()])
+            .then(() => console.log('All data loaded'))
+            .catch((error) => console.error('Error loading data:', error));
     }, []);
 
     function skillCheck(skill) {

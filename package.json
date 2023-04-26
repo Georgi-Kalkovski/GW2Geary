@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "buffer": "^6.0.3"
+  }
+}

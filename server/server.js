@@ -55,7 +55,7 @@ app.get('/api/characters/:name', async (req, res) => {
 app.get('/api/professions/:profession', async (req, res) => {
     try {
         const {profession} = req.params;
-        const response = await axios.get(`${baseUrl}/professions/${profession}`);
+        const response = await axios.get(`${baseUrl}/professions/${profession}?v=latest`);
         res.json(response.data);
     } catch (error) {
         //res.status(500).json({ error: 'Error fetching data from API' });
