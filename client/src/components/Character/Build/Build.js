@@ -1,56 +1,28 @@
-import React, { useState } from 'react';
-import BuildBox from './BuildBox';
+import { Container } from 'react-bootstrap';
+import Traits from './Traits';
+import Skills from './Skills';
+import Template from './Template/Template';
 import './Build.css';
 
-function Build({ char }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedTab, setSelectedTab] = useState(null);
-
-    function toggleMenu() {
-        setIsOpen(!isOpen);
+function Build({ char, tab }) {
+    const builds = char.build_tabs;
+    let build = builds.find(x => x.is_active === true).build;
+    if (tab) {
+        build = builds[tab - 1].build;
     }
-
-    function handleItemClick(event) {
-        const clickedItem = event.target;
-        const tab = clickedItem.getAttribute('value');
-        if (tab === selectedTab) {
-            setIsOpen(false);
-        } else {
-            setSelectedTab(tab === "Unknown" ? null : parseInt(tab));
-            setIsOpen(false);
-        }
-    }
-
-    const selectedBuild = char.build_tabs.find((build) => build.tab === selectedTab);
-    const activeBuild = char.build_tabs.find((build) => build.is_active);
-
     return (
-        <div className='build'>
-            <div className="dropdown">
-                <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
-                    {
-                        selectedTab === null && selectedBuild === null && activeBuild === null
-                            ? 'Unknown'
-                            : (selectedBuild && activeBuild
-                                ? (selectedBuild.build.name ? selectedBuild.build.name : 'Unknown')
-                                : (activeBuild.build.name ? activeBuild.build.name : 'Unknown'))}
-                </button>
-                {isOpen && (
-                    <ul className="dropdown-menu-right">
-                        {char.build_tabs.map((build) => (
-                            <li
-                                key={build.tab}
-                                onClick={handleItemClick}
-                                value={build.build.name ? build.tab : 'Unknown'}
-                            >
-                                {build.build.name ? build.build.name : 'Unknown'}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-            {<BuildBox char={char} tab={selectedTab} key={selectedTab} />}
-        </div>
+        <Container className='spec-box'>
+            {build.specializations && build.skills && build.aquatic_skills &&
+                <>
+                    <Skills skills={build.skills} water_skills={build.aquatic_skills} />
+                    <Traits spec={build.specializations[0]} />
+                    <Traits spec={build.specializations[1]} />
+                    <Traits spec={build.specializations[2]} />
+                    <br/>
+                    <Template buildInput={build} />
+                </>
+            }
+        </Container>
     );
 }
 

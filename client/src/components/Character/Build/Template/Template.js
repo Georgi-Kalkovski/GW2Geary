@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Profession from './Profession';
-import fetchData from '../../fetchData';
+import fetchData from '../../../fetchData';
 const BuildTemplate = require('./BuildTemplate');
 
 function Template({ buildInput }) {
     const [traits, setTraits] = useState([]);
     const [profession, setProfession] = useState([]);
     const [skillIndex, setSkillIndex] = useState([]);
+    const [buttonColor, setButtonColor] = useState('');
+
     useEffect(() => {
         async function fetchTraits() {
             const fetchedTraits = [];
@@ -79,18 +81,22 @@ function Template({ buildInput }) {
     build.skills.aquatic.elite = skillIndex[9];
 
     const copyText = () => {
-        // Copy the text to the clipboard
         navigator.clipboard.writeText(build.toString());
+        setButtonColor('darkgreen');
+        setTimeout(() => {
+            setButtonColor('');
+        }, 250);
     };
 
     return (
-        <div id="output">
-            <div className='template-container'>
-                <input className='template-text' type="text" value={build.toString()} readOnly onDoubleClick={copyText} />
-                <button className={buildInput.profession.toLowerCase() + '-border template-button'} onClick={copyText}>Copy</button>
-            </div>
-
-
+        <div className='template-container'>
+            <input className='template-text' type='text' value={build.toString()} readOnly onDoubleClick={copyText} />
+            <button
+                className={buildInput.profession.toLowerCase() + '-border template-button'}
+                onClick={copyText}
+                style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}>
+                Copy
+            </button>
         </div>
     );
 }

@@ -1,56 +1,73 @@
-import React, { useState } from 'react';
-import EquipmentBox from './EquipmentBox';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import ItemBox from './ItemBox';
 import './Equipment.css';
 
-function Equipment({ char }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(null);
+async function findItem({ equip, slot }) {
+    return await equip.equipment.find(x => x.slot === slot);
+}
 
-  function toggleMenu() {
-    setIsOpen(!isOpen);
-  }
-
-  function handleItemClick(event) {
-    const clickedItem = event.target;
-    const tab = clickedItem.getAttribute('value');
-    if (tab === selectedTab) {
-      setIsOpen(false);
-    } else {
-      setSelectedTab(tab === "Unknown" ? null : parseInt(tab));
-      setIsOpen(false);
+function Equipment({ char, tab }) {
+    const equipments = char.equipment_tabs;
+    let equipment = equipments.find(x => x.is_active === true);
+    if (tab) {
+        equipment = equipments[tab - 1];
     }
-  }
 
-  const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
-  const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
-  
-  return (
-    <div className='equipment'>
-      <div className="dropdown">
-        <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
-          {selectedTab === null && selectedEquip === null && activeEquip === null
-            ? 'Unknown'
-            : (selectedEquip && activeEquip
-              ? (selectedEquip.name ? selectedEquip.name : 'Unknown')
-              : (activeEquip.name ? activeEquip.name : 'Unknown'))}
-        </button>
-        {isOpen && (
-          <ul className="dropdown-menu">
-            {char.equipment_tabs.map((equip) => (
-              <li
-                key={equip.tab}
-                onClick={handleItemClick}
-                value={equip.name ? equip.tab : 'Unknown'}
-              >
-                {equip.name ? equip.name : 'Unknown'}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      {<EquipmentBox char={char} tab={selectedTab} key={selectedTab} />}
-    </div>
-  );
+    function printItemBox(slot) {
+        return <ItemBox equip={char.equipment} item={findItem({ equip: equipment, slot: slot })} />
+    }
+
+    return (
+        <>
+            {equipment && <>
+                <Container className="equipment-box">
+                    <Row>
+                        <Col>{printItemBox('Helm')}</Col>
+                        <Col>{printItemBox('Shoulders')}</Col>
+                        <Col>{printItemBox('Coat')}</Col>
+                        <Col>{printItemBox('Gloves')}</Col>
+                        <Col>{printItemBox('Leggings')}</Col>
+                        <Col>{printItemBox('Boots')}</Col>
+                        <br />
+                        <Row className='custom-row'>
+                            <Col>
+                                <span>E1</span>
+                                {printItemBox('WeaponA1')}
+                                {printItemBox('WeaponA2')}
+                            </Col>
+                            <Col>
+                                <span>E2</span>
+                                {printItemBox('WeaponB1')}
+                                {printItemBox('WeaponB2')}
+                            </Col>
+                        </Row>
+                        <br />
+                    </Row>
+                    <Col>
+                        Attributes
+                        <Row className='custom-row'>
+                            {printItemBox('Backpack')}
+                            {printItemBox('Accessory1')}
+                            {printItemBox('Accessory2')}
+                        </Row>
+                        <Row className='custom-row'>
+                            {printItemBox('Amulet')}
+                            {printItemBox('Ring1')}
+                            {printItemBox('Ring2')}
+                        </Row>
+                        <br />
+                        <Row className='custom-row'>
+                            {printItemBox('HelmAquatic')}
+                            {printItemBox('WeaponAquaticA')}
+                            {printItemBox('WeaponAquaticB')}
+                        </Row>
+                    </Col>
+                </Container>
+            </>
+            }
+        </>
+    );
 }
 
 export default Equipment;

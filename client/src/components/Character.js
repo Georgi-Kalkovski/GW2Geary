@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
-import Equipment from './Character/Equipment/Equipment';
-import Build from './Character/Build/Build';
+import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
+import BuildDropdown from './Character/Build/BuildDropdown';
 import BackButton from './BackButton';
 import { loading } from './functions';
 import './Character.css';
@@ -44,8 +44,8 @@ function Character() {
                     <img src={profession.icon} alt={character.profession} />{character.profession}
                 </div>
                 <div className='equipment-build-flex'>
-                    <Equipment char={character} />
-                    <Build char={character} />
+                    <EquipmentDropdown char={character} />
+                    <BuildDropdown char={character} />
                 </div>
             </div>
         </>
