@@ -30,8 +30,8 @@ function EquipmentDropdown({ char }) {
           {selectedTab === null && selectedEquip === null && activeEquip === null
             ? 'Unknown'
             : (selectedEquip && activeEquip
-              ? (selectedEquip.name ? selectedEquip.name : 'Unknown')
-              : (activeEquip.name ? activeEquip.name : 'Unknown'))}
+              ? (selectedEquip.name ? selectedEquip.name : `Equipment ${selectedEquip.tab}`)
+              : (activeEquip.name ? activeEquip.name : `Equipment ${activeEquip.tab}`))}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
@@ -39,9 +39,9 @@ function EquipmentDropdown({ char }) {
               <li
                 key={equip.tab}
                 onClick={handleItemClick}
-                value={equip.name ? equip.tab : 'Unknown'}
+                value={equip.tab}
               >
-                {equip.name ? equip.name : 'Unknown'}
+                {equip.name ? equip.name : `Equipment ${equip.tab}`}
               </li>
             ))}
           </ul>

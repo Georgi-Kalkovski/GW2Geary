@@ -22,7 +22,6 @@ function BuildDropdown({ char }) {
 
     const selectedBuild = char.build_tabs.find((build) => build.tab === selectedTab);
     const activeBuild = char.build_tabs.find((build) => build.is_active);
-    
     return (
         <div className='build'>
             <div className="dropdown">
@@ -31,8 +30,8 @@ function BuildDropdown({ char }) {
                         selectedTab === null && selectedBuild === null && activeBuild === null
                             ? 'Unknown'
                             : (selectedBuild && activeBuild
-                                ? (selectedBuild.build.name ? selectedBuild.build.name : 'Unknown')
-                                : (activeBuild.build.name ? activeBuild.build.name : 'Unknown'))}
+                                ? (selectedBuild.build.name ? selectedBuild.build.name : `Build ${selectedBuild.tab}`)
+                                : (activeBuild.build.name ? activeBuild.build.name : `Build ${activeBuild.tab}`))}
                 </button>
                 {isOpen && (
                     <ul className="dropdown-menu-right">
@@ -40,9 +39,9 @@ function BuildDropdown({ char }) {
                             <li
                                 key={build.tab}
                                 onClick={handleItemClick}
-                                value={build.build.name ? build.tab : 'Unknown'}
+                                value={build.tab}
                             >
-                                {build.build.name ? build.build.name : 'Unknown'}
+                                {build.build.name ? build.build.name : `Build ${build.tab}`}
                             </li>
                         ))}
                     </ul>
