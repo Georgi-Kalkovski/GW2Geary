@@ -4,8 +4,6 @@ const axios = require('axios');
 const app = express();
 
 const port = process.env.PORT || 3001;
-const apiKey = '?access_token=' + process.env.API_KEY;
-const baseUrl = 'https://api.guildwars2.com/v2';
 
 // Enable CORS
 app.use(express.json())
@@ -15,124 +13,29 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/api/account', async (req, res) => {
-    try {
-        const response = await axios.get(`${baseUrl}/account${apiKey}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
+// Require routes
+const accountRouter = require('./routes/account');
+const charactersRouter = require('./routes/characters');
+const itemsRouter = require('./routes/items');
+const itemstatsRouter = require('./routes/itemstats');
+const professionsRouter = require('./routes/professions');
+const skillsRouter = require('./routes/skills');
+const skinsRouter = require('./routes/skins');
+const specializationsRouter = require('./routes/specializations');
+const traitsRouter = require('./routes/traits');
+const worldsRouter = require('./routes/worlds');
 
-app.get('/api/account/mastery/points', async (req, res) => {
-    try {
-        const response = await axios.get(`${baseUrl}/account/mastery/points${apiKey}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/characters', async (req, res) => {
-    try {
-        const response = await axios.get(`${baseUrl}/characters${apiKey}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/characters/:name', async (req, res) => {
-    try {
-        const {name} = req.params;
-        const response = await axios.get(`${baseUrl}/characters/${name}${apiKey}&v=2021-07-15T13:00:00.000Z`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/professions/:profession', async (req, res) => {
-    try {
-        const {profession} = req.params;
-        const response = await axios.get(`${baseUrl}/professions/${profession}?v=latest`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/specializations/:spec', async (req, res) => {
-    try {
-        const {spec} = req.params;
-        const response = await axios.get(`${baseUrl}/specializations/${spec}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/traits/:trait', async (req, res) => {
-    try {
-        const {trait} = req.params;
-        const response = await axios.get(`${baseUrl}/traits/${trait}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/skills/:skill', async (req, res) => {
-    try {
-        const {skill} = req.params;
-        const response = await axios.get(`${baseUrl}/skills/${skill}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-
-app.get('/api/worlds/:id', async (req, res) => {
-    try {
-        const {id} = req.params;
-        const response = await axios.get(`${baseUrl}/worlds?ids=${id}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/items/:item', async (req, res) => {
-    try {
-        const {item} = req.params;
-        const response = await axios.get(`${baseUrl}/items/${item}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/itemstats/:item', async (req, res) => {
-    try {
-        const {item} = req.params;
-        const response = await axios.get(`${baseUrl}/itemstats/${item}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
-app.get('/api/skins/:item', async (req, res) => {
-    try {
-        const {item} = req.params;
-        const response = await axios.get(`${baseUrl}/skins/${item}`);
-        res.json(response.data);
-    } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
-    }
-});
-
+// Register routes
+app.use('/api/account', accountRouter);
+app.use('/api/characters', charactersRouter);
+app.use('/api/items', itemsRouter);
+app.use('/api/itemstats', itemstatsRouter);
+app.use('/api/professions', professionsRouter);
+app.use('/api/skills', skillsRouter);
+app.use('/api/skins', skinsRouter);
+app.use('/api/specializations', specializationsRouter);
+app.use('/api/traits', traitsRouter);
+app.use('/api/worlds', worldsRouter);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
