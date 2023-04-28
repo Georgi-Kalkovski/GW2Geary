@@ -1,8 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-
-const baseUrl = 'https://api.guildwars2.com/v2';
+const { baseUrl } = require('./config');
 
 router.get('/:spec', async (req, res) => {
     try {

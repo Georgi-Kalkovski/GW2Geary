@@ -1,9 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-
-const apiKey = '?access_token=' + process.env.API_KEY;
-const baseUrl = 'https://api.guildwars2.com/v2';
+const { apiKey, baseUrl } = require('./config');
 
 router.get('/', async (req, res) => {
     try {
