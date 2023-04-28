@@ -38,16 +38,16 @@ function Skills({ skills, water_skills }) {
                 waterEliteSkill && setWaterElite(waterEliteSkill);
             })
             .catch(error => console.error('Error loading data:', error));
-    }, []);
+    }, [skills.elite, skills.heal, skills.utilities, utilities, waterUtilities, water_skills.elite, water_skills.heal, water_skills.utilities]);
 
     function skillCheck(skill) {
-        return skill && skill.icon ? <img className='skill-box' src={skill.icon} /> : <img className="skill-box" alt="" />;
+        return skill && skill.icon ? <img className='skill-box' src={skill.icon} alt={skill.name} /> : <img className="skill-box" alt="" />;
     }
 
     return (
         <Container className='skills-center'>
             <Row className='custom-row'>
-                <Col className='center-land'><img src={Land} /></Col>
+                <Col className='center-land'><img src={Land} alt="land"/></Col>
                 <Col>{skillCheck(heal)}</Col>
                 <Col>{skillCheck(utilities[0])}</Col>
                 <Col>{skillCheck(utilities[1])}</Col>
@@ -55,7 +55,7 @@ function Skills({ skills, water_skills }) {
                 <Col>{skillCheck(elite)}</Col>
             </Row>
             <Row className='custom-row'>
-                <Col className='center-water'><img src={Water} /></Col>
+                <Col className='center-water'><img src={Water} alt="water"/></Col>
                 <Col>{skillCheck(waterHeal)}</Col>
                 <Col>{skillCheck(waterUtilities[0])}</Col>
                 <Col>{skillCheck(waterUtilities[1])}</Col>

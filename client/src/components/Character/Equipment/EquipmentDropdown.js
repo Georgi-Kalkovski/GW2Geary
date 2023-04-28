@@ -22,11 +22,11 @@ function EquipmentDropdown({ char }) {
 
   const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
   const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
-  
+
   return (
     <div className='equipment'>
       <div className="dropdown">
-        <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
+        <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
           {selectedTab === null && selectedEquip === null && activeEquip === null
             ? 'Unknown'
             : (selectedEquip && activeEquip

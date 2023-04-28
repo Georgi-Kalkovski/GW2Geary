@@ -44,7 +44,7 @@ function Home() {
             setCharNames(response);
         };
         fetchCharNames();
-    }, []);
+    }, [account.world]);
 
     return (
         <>

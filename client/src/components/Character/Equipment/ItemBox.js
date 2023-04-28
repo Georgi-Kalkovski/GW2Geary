@@ -47,7 +47,6 @@ function ItemBox({ equip, item }) {
 
         logItem();
     }, [item, equip, id]);
-
     if (loading) {
         return <img className="item-box box-gray" alt="" />;
     }
@@ -57,7 +56,7 @@ function ItemBox({ equip, item }) {
             <div>
                 <Popup
                     trigger=
-                    {<img className={'item-box box-' + rarity} src={skin?.icon || id.icon} alt={skin?.name || id.name} />}
+                    {<img className={`item-box box-${rarity}`} src={skin?.icon || id.icon} alt={skin?.name || id.name} />}
                     arrow={false}
                     position="right center"
                     on="hover"
@@ -65,7 +64,7 @@ function ItemBox({ equip, item }) {
                     mouseLeaveDelay={0}
                 >
                     <Container className='item-popup'>
-                        <Row className={'name-' + rarity}>
+                        <Row className={`name-${rarity}`}>
                             {skin
                                 ? <span>{skin.name}</span>
                                 : <span>{id.name}</span>
@@ -83,20 +82,20 @@ function ItemBox({ equip, item }) {
 
                         {stats && stats.attributes && Object.keys(stats.attributes).map(key => (
                             <Row key={'stats' + stats.id + key}>
-                                <span className='green'>+{stats.attributes['stats' + stats.id + key]} {key}</span>
+                                <span className='green'>+ {stats.attributes[key]} {key}</span>
                             </Row>
                         ))}
 
                         {attributes && attributes.attributes && Object.keys(attributes.attributes).map(key => (
                             
                             <Row key={'attributes' + attributes.id + key}>
-                                <span className='green'>+{attributes.attributes[key]} {key}</span>
+                                <span className='green'>+ {attributes.attributes[key]} {key}</span>
                             </Row>
                         ))}
 
                         {lowerAttributes && lowerAttributes.map(key => (
                             <Row key={'lowerAttributes' + key.attribute + key.modifier}>
-                                <span className='green'>+{key.attribute} {key.modifier}</span>
+                                <span className='green'>+ {key.modifier} {key.attribute} </span>
                             </Row>
                         ))}
                     </Container>

@@ -1,71 +1,116 @@
 .engineer-text {
-    color: #98692c;
-  }
-  
-  .engineer-border {
-    background-color: #98692c;
-  }
-  
-  .necromancer-text {
-    color: #3f5847;
-  }
-  
-  .necromancer-border {
-    background-color: #3f5847;
-  }
-  
-  .thief-text {
-    color: #495578;
-  }
-  
-  .thief-border {
-    background-color: #495578;
-  }
-  
-  .elementalist-text {
-    color: #a3362e;
-  }
-  
-  .elementalist-border {
-    background-color: #a3362e;
-  }
-  
-  .warrior-text {
-    color: #bc8d16;
-  }
-  
-  .warrior-border {
-    background-color: #bc8d16;
-  }
-  
-  .ranger-text {
-    color: #8ea53a;
-  }
-  
-  .ranger-border {
-    background-color: #8ea53a;
-  }
-  
-  .mesmer-text {
-    color: #724192;
-  }
-  
-  .mesmer-border {
-    background-color: #724192;
-  }
-  
-  .guardian-text {
-    color: #67aecb;
-  }
-  
-  .guardian-border {
-    background-color: #67aecb;
-  }
-  
-  .revenant-text {
-    color: #572435;
-  }
-  
-  .revenant-border {
-    background-color: #572435;
-  }
+  color: #98692c;
+}
+
+.engineer-border {
+  background-color: #98692c;
+}
+
+.engineer-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #65451d;
+}
+
+.necromancer-text {
+  color: #3f5847;
+}
+
+.necromancer-border {
+  background-color: #3f5847;
+}
+
+.necromancer-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #1a241d;
+}
+
+.thief-text {
+  color: #495578;
+}
+
+.thief-border {
+  background-color: #495578;
+}
+
+.thief-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #293045;
+}
+
+.elementalist-text {
+  color: #a3362e;
+}
+
+.elementalist-border {
+  background-color: #a3362e;
+}
+
+.elementalist-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #6f251f;
+}
+
+.warrior-text {
+  color: #bc8d16;
+}
+
+.warrior-border {
+  background-color: #bc8d16;
+}
+
+.warrior-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #896610;
+}
+
+.ranger-text {
+  color: #8ea53a;
+}
+
+.ranger-border {
+  background-color: #8ea53a;
+}
+
+.ranger-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #627228;
+}
+
+.mesmer-text {
+  color: #724192;
+}
+
+.mesmer-border {
+  background-color: #724192;
+}
+
+.mesmer-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #4a2a5e;
+}
+
+.guardian-text {
+  color: #67aecb;
+}
+
+.guardian-border {
+  background-color: #67aecb;
+}
+
+.guardian-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #4d8297;
+}
+
+.revenant-text {
+  color: #572435;
+}
+
+.revenant-border {
+  background-color: #572435;
+}
+
+.revenant-border:hover {
+  transition: background-color 0.3s ease-out;
+  background-color: #240e15;
+}

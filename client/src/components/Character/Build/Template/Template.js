@@ -23,7 +23,7 @@ function Template({ buildInput }) {
             setTraits(fetchedTraits);
         }
         fetchTraits();
-    }, [buildInput]);
+    }, [buildInput.specializations]);
 
     useEffect(() => {
         const fetchProfession = async () => {
@@ -31,7 +31,8 @@ function Template({ buildInput }) {
             setProfession(prof);
         };
         fetchProfession();
-    }, []);
+    }, [buildInput.profession]);
+
     useEffect(() => {
         async function fetchSkillIndex() {
             const skills =
@@ -44,7 +45,7 @@ function Template({ buildInput }) {
                     buildInput.aquatic_skills.elite,
                 ];
 
-            if (profession && profession.skills_by_palette) {
+            if (profession.skills_by_palette) {
                 const skillIndex = await Promise.all(
                     skills.map(skill =>
                         profession.skills_by_palette.find(element => element[1] === skill)
@@ -55,7 +56,7 @@ function Template({ buildInput }) {
         }
 
         fetchSkillIndex();
-    }, [profession]);
+    }, [profession.skills_by_palette, buildInput.aquatic_skills.elite, buildInput.aquatic_skills.heal, buildInput.aquatic_skills.utilities, buildInput.skills.elite, buildInput.skills.heal, buildInput.skills.utilities]);
 
     const build = new BuildTemplate();
     build.profession = Profession(buildInput.profession);

@@ -21,7 +21,7 @@ function CharacterBox({ charName }) {
         <>
             {profession ?
                 <>
-                    <div className={character.profession.toLowerCase() + '-border home-box'} >
+                    <div className={`${character.profession.toLowerCase()}-border home-box`} >
                         <div>{character.level} {character.race}</div>
                         <img src={profession.icon_big} key={character.name} alt={character.name} />
                         <div>{character.profession}</div>
