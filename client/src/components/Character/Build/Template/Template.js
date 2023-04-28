@@ -93,7 +93,7 @@ function Template({ buildInput }) {
         <div className='template-container'>
             <input className='template-text' type='text' value={build.toString()} readOnly onDoubleClick={copyText} />
             <button
-                className={buildInput.profession.toLowerCase() + '-border template-button'}
+                className={`${buildInput.profession.toLowerCase()}-border template-button`}
                 onClick={copyText}
                 style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}>
                 Copy
