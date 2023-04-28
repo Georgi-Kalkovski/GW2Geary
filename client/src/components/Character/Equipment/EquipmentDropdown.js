@@ -19,10 +19,8 @@ function EquipmentDropdown({ char }) {
       setIsOpen(false);
     }
   }
-
   const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
   const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
-
   return (
     <div className='equipment'>
       <div className="dropdown">
@@ -47,7 +45,7 @@ function EquipmentDropdown({ char }) {
           </ul>
         )}
       </div>
-      {<Equipment char={char} tab={selectedTab} key={selectedTab} />}
+      {<Equipment key={selectedTab} tab={selectedTab} tabs={char.equipment_tabs} equip={char.equipment}/>}
     </div>
   );
 }

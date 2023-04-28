@@ -3,70 +3,64 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ItemBox from './ItemBox';
 import './Equipment.css';
 
-async function findItem({ equip, slot }) {
-    return await equip.equipment.find(x => x.slot === slot);
-}
-
-function Equipment({ char, tab }) {
-    const equipments = char.equipment_tabs;
-    let equipment = equipments.find(x => x.is_active === true);
+function Equipment({ tab, tabs, equip }) {
+    let t;
+    if (!tab) {
+        t = tabs.find(x => x.is_active === true);
+    }
+    t = tabs.find(x => x.is_active === true);
     if (tab) {
-        equipment = equipments[tab - 1];
+        t = tabs[tab - 1]
     }
+    console.log(t)
 
-    function printItemBox(slot) {
-        return <ItemBox equip={char.equipment} item={findItem({ equip: equipment, slot: slot })} />
-    }
+    const items = equip.filter(item => t.equipment.some(tab_item => tab_item.id === item.id));
 
-    return (
-        <>
-            {equipment && <>
-                <Container className="equipment-box">
-                    <Row>
-                        <Col>{printItemBox('Helm')}</Col>
-                        <Col>{printItemBox('Shoulders')}</Col>
-                        <Col>{printItemBox('Coat')}</Col>
-                        <Col>{printItemBox('Gloves')}</Col>
-                        <Col>{printItemBox('Leggings')}</Col>
-                        <Col>{printItemBox('Boots')}</Col>
-                        <br />
-                        <Row className='custom-row'>
-                            <Col>
-                                <span>E1</span>
-                                {printItemBox('WeaponA1')}
-                                {printItemBox('WeaponA2')}
-                            </Col>
-                            <Col>
-                                <span>E2</span>
-                                {printItemBox('WeaponB1')}
-                                {printItemBox('WeaponB2')}
-                            </Col>
-                        </Row>
-                        <br />
-                    </Row>
+    return (<>
+        <Container className="equipment-box">
+            <Row>
+                <Col><ItemBox item={items.find(x => x.slot === 'Helm')} /></Col>
+                <Col><ItemBox item={items.find(x => x.slot === 'Shoulders')} /></Col>
+                <Col><ItemBox item={items.find(x => x.slot === 'Coat')} /></Col>
+                <Col><ItemBox item={items.find(x => x.slot === 'Gloves')} /></Col>
+                <Col><ItemBox item={items.find(x => x.slot === 'Leggings')} /></Col>
+                <Col><ItemBox item={items.find(x => x.slot === 'Boots')} /></Col>
+                <br />
+                <Row className='custom-row'>
                     <Col>
-                        Attributes
-                        <Row className='custom-row'>
-                            {printItemBox('Backpack')}
-                            {printItemBox('Accessory1')}
-                            {printItemBox('Accessory2')}
-                        </Row>
-                        <Row className='custom-row'>
-                            {printItemBox('Amulet')}
-                            {printItemBox('Ring1')}
-                            {printItemBox('Ring2')}
-                        </Row>
-                        <br />
-                        <Row className='custom-row'>
-                            {printItemBox('HelmAquatic')}
-                            {printItemBox('WeaponAquaticA')}
-                            {printItemBox('WeaponAquaticB')}
-                        </Row>
+                        <span>E1</span>
+                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponA1')} /></Col>
+                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponA2')} /></Col>
                     </Col>
-                </Container>
-            </>
-            }
-        </>
+                    <Col>
+                        <span>E2</span>
+                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponB1')} /></Col>
+                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponB2')} /></Col>
+                    </Col>
+                </Row>
+                <br />
+            </Row>
+            <Col>
+                Attributes
+                <Row className='custom-row'>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Backpack')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Accessory1')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Accessory2')} /></Col>
+                </Row>
+                <Row className='custom-row'>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Amulet')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Ring1')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'Ring2')} /></Col>
+                </Row>
+                <br />
+                <Row className='custom-row'>
+                    <Col><ItemBox item={items.find(x => x.slot === 'HelmAquatic')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'WeaponAquaticA')} /></Col>
+                    <Col><ItemBox item={items.find(x => x.slot === 'WeaponAquaticB')} /></Col>
+                </Row>
+            </Col>
+        </Container>
+    </>
     );
 }
 
