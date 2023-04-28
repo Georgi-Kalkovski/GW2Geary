@@ -25,7 +25,7 @@ function BuildDropdown({ char }) {
     return (
         <div className='build'>
             <div className="dropdown">
-                <button className={char.profession.toLowerCase() + '-border dropdown-button'} onClick={toggleMenu}>
+                <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
                     {
                         selectedTab === null && selectedBuild === null && activeBuild === null
                             ? 'Unknown'
