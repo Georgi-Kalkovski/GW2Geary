@@ -4,10 +4,9 @@ import Popup from 'reactjs-popup';
 import fetchData from '../../fetchData';
 
 function ItemBox({ item }) {
-    const [id, setId] = useState(null);
+    const [fetchedItemId, setFetchedItemId] = useState(null);
     const [skin, setSkin] = useState(null);
     const [stats, setStats] = useState(null);
-    const [lowerAttributes, setLowerAttributes] = useState(null);
     const [details, setDetails] = useState(null);
     const [rarity, setRarity] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,28 +15,39 @@ function ItemBox({ item }) {
         if (!item || !item.id) {
             return;
         }
+
         (async () => {
-            const idResult = await fetchData('items', item.id);
-            setId(idResult);
-            if (idResult) {
-                setRarity(idResult.rarity.toLowerCase());
+            const fetchedItemId = await fetchData('items', item.id);
+            setFetchedItemId(fetchedItemId);
+
+            if (fetchedItemId) {
+                setRarity(fetchedItemId.rarity.toLowerCase());
             }
+
             if (item.skin) {
                 const skinResult = await fetchData('skins', item.skin);
                 setSkin(skinResult);
             }
+
             if (item.stats) {
                 setStats(item.stats);
+            } else {
+                const obj = fetchedItemId.details.infix_upgrade.attributes.reduce((acc, cur) => {
+                    acc[cur.attribute] = cur.modifier;
+                    return acc;
+                }, {});
+                const result = { id: fetchedItemId.id, attributes: obj };
+                setStats(result)
             }
-            if (id && id.details && id.details.infix_upgrade !== undefined && id.details.infix_upgrade.attributes !== undefined) {
-                setLowerAttributes(id.details.infix_upgrade.attributes);
+
+            if (fetchedItemId && fetchedItemId.details) {
+                setDetails(fetchedItemId.details);
             }
-            if (id && id.details) {
-                setDetails(id.details);
-            }
+
             setLoading(false);
         })();
     }, [item]);
+
     if (loading) {
         return <img className="item-box box-gray" alt="" />;
     }
@@ -47,7 +57,14 @@ function ItemBox({ item }) {
             <div>
                 <Popup
                     trigger=
-                    {<img className={`item-box box-${rarity}`} src={skin?.icon || id.icon} alt={skin?.name || id.name} />}
+                    {
+                        skin
+                            ? <img className={`item-box box-${rarity}`} src={skin.icon} alt={skin.name} />
+                            : fetchedItemId
+                                ? <img className={`item-box box-${rarity}`} src={fetchedItemId.icon} alt={fetchedItemId.id} />
+                                : <img className="item-box box-gray" alt="" />
+                    }
+                    
                     arrow={false}
                     position="right center"
                     on="hover"
@@ -57,8 +74,8 @@ function ItemBox({ item }) {
                     <Container className='item-popup'>
                         <Row className={`name-${rarity}`}>
                             {skin
-                                ? <span>{skin.name}</span>
-                                : <span>{id.name}</span>
+                                ? <span>{skin?.name}</span>
+                                : <span>{fetchedItemId?.name}</span>
                             }
                         </Row>
 
@@ -72,14 +89,8 @@ function ItemBox({ item }) {
                         }
 
                         {stats && stats.attributes && Object.keys(stats.attributes).map(key => (
-                            <Row key={'stats' + stats.id + key}>
+                            <Row key={'stats' + fetchedItemId.id + key}>
                                 <span className='green'>+ {stats.attributes[key]} {key}</span>
-                            </Row>
-                        ))}
-
-                        {lowerAttributes && lowerAttributes.map(key => (
-                            <Row key={'lowerAttributes' + key.attribute + key.modifier}>
-                                <span className='green'>+ {key.modifier} {key.attribute} </span>
                             </Row>
                         ))}
                     </Container>

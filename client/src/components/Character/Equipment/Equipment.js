@@ -3,18 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ItemBox from './ItemBox';
 import './Equipment.css';
 
-function Equipment({ tab, tabs, equip }) {
-    let t;
-    if (!tab) {
-        t = tabs.find(x => x.is_active === true);
-    }
-    t = tabs.find(x => x.is_active === true);
-    if (tab) {
-        t = tabs[tab - 1]
-    }
-    console.log(t)
-
-    const items = equip.filter(item => t.equipment.some(tab_item => tab_item.id === item.id));
+function Equipment({ items }) {
+    console.log('items', items)
 
     return (<>
         <Container className="equipment-box">

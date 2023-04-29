@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Equipment from './Equipment';
 
 function EquipmentDropdown({ char }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(
+    char.equipment_tabs.find((equip) => equip.is_active).tab
+  );
+  const charTab = char.equipment_tabs[selectedTab - 1]
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -15,21 +18,46 @@ function EquipmentDropdown({ char }) {
     if (tab === selectedTab) {
       setIsOpen(false);
     } else {
-      setSelectedTab(tab === "Unknown" ? null : parseInt(tab));
+      setSelectedTab(char.equipment_tabs[tab - 1].tab);
       setIsOpen(false);
     }
   }
-  const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab);
-  const activeEquip = char.equipment_tabs.find((equip) => equip.is_active);
+
+  const filterEquipment = useCallback(
+    (tab, equip) => {
+      return equip.filter(item => item.tabs?.includes(tab));
+    },
+    []
+  );
+
+  const filteredEquip = filterEquipment(selectedTab, char.equipment);
+
+  const mergeEquipment = useCallback(
+    (selectedEquip, filteredEquip) => {
+      const selectedDict = {};
+      for (const equip of selectedEquip) {
+        selectedDict[equip.id] = equip;
+      }
+      for (const equip of filteredEquip) {
+        if (selectedDict[equip.id] && selectedDict[equip.id].stats) {
+          selectedDict[equip.id].stats = equip.stats;
+        } else {
+          selectedDict[equip.id] = equip;
+        }
+      }
+      return Object.values(selectedDict);
+    },
+    []
+  );
+
+  const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab).equipment;
+  const mergedEquip = mergeEquipment(selectedEquip, filteredEquip);
+
   return (
     <div className='equipment'>
       <div className="dropdown">
         <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
-          {selectedTab === null && selectedEquip === null && activeEquip === null
-            ? 'Unknown'
-            : (selectedEquip && activeEquip
-              ? (selectedEquip.name ? selectedEquip.name : `Equipment ${selectedEquip.tab}`)
-              : (activeEquip.name ? activeEquip.name : `Equipment ${activeEquip.tab}`))}
+          {charTab && charTab.name ? charTab.name : `Equipment ${charTab.tab}`}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
@@ -45,7 +73,7 @@ function EquipmentDropdown({ char }) {
           </ul>
         )}
       </div>
-      {<Equipment key={selectedTab} tab={selectedTab} tabs={char.equipment_tabs} equip={char.equipment}/>}
+      <Equipment key={selectedTab} tab={selectedTab} items={mergedEquip} />
     </div>
   );
 }
