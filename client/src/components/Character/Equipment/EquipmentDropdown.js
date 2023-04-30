@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Equipment from './Equipment';
 
 function EquipmentDropdown({ char }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(
-    char.equipment_tabs.find((equip) => equip.is_active).tab
+    char.equipment_tabs.find((equip) => equip.is_active)
   );
-  const charTab = char.equipment_tabs[selectedTab - 1]
+  const [mergedItems, setMergedItems] = useState([]);
 
   function toggleMenu() {
     setIsOpen(!isOpen);
@@ -14,50 +14,35 @@ function EquipmentDropdown({ char }) {
 
   function handleItemClick(event) {
     const clickedItem = event.target;
-    const tab = clickedItem.getAttribute('value');
-    if (tab === selectedTab) {
+    const tab = parseInt(clickedItem.getAttribute('value'));
+    if (tab === selectedTab.tab) {
       setIsOpen(false);
     } else {
-      setSelectedTab(char.equipment_tabs[tab - 1].tab);
+      setSelectedTab(char.equipment_tabs[tab - 1]);
       setIsOpen(false);
     }
   }
 
-  const filterEquipment = useCallback(
-    (tab, equip) => {
-      return equip.filter(item => item.tabs?.includes(tab));
-    },
-    []
-  );
-
-  const filteredEquip = filterEquipment(selectedTab, char.equipment);
-
-  const mergeEquipment = useCallback(
-    (selectedEquip, filteredEquip) => {
-      const selectedDict = {};
-      for (const equip of selectedEquip) {
-        selectedDict[equip.id] = equip;
-      }
-      for (const equip of filteredEquip) {
-        if (selectedDict[equip.id] && selectedDict[equip.id].stats) {
-          selectedDict[equip.id].stats = equip.stats;
-        } else {
-          selectedDict[equip.id] = equip;
+  useEffect(() => {
+    const mergedTabs = [];
+    for (const tab of char.equipment_tabs) {
+      for (const tabItem of tab.equipment) {
+        for (const equipItem of char.equipment) {
+          if (tabItem.id === equipItem.id && tab.tab === selectedTab.tab && equipItem.tabs.includes(selectedTab.tab)) {
+            const mergedItems = { ...tabItem, ...equipItem };
+            mergedTabs.push(mergedItems);
+          }
         }
       }
-      return Object.values(selectedDict);
-    },
-    []
-  );
-
-  const selectedEquip = char.equipment_tabs.find((equip) => equip.tab === selectedTab).equipment;
-  const mergedEquip = mergeEquipment(selectedEquip, filteredEquip);
+    }
+    setMergedItems(mergedTabs.filter(equip => equip.tabs.includes(selectedTab.tab)));
+  }, [char, selectedTab.tab]);
 
   return (
     <div className='equipment'>
       <div className="dropdown">
         <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
-          {charTab && charTab.name ? charTab.name : `Equipment ${charTab.tab}`}
+          {selectedTab && selectedTab.name ? selectedTab.name : `Equipment ${selectedTab.tab}`}
         </button>
         {isOpen && (
           <ul className="dropdown-menu">
@@ -73,7 +58,7 @@ function EquipmentDropdown({ char }) {
           </ul>
         )}
       </div>
-      <Equipment key={selectedTab} tab={selectedTab} items={mergedEquip} />
+      <Equipment key={selectedTab.tab} items={mergedItems} />
     </div>
   );
 }

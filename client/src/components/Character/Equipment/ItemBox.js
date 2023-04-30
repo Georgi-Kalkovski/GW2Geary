@@ -31,14 +31,15 @@ function ItemBox({ item }) {
 
             if (item.stats) {
                 setStats(item.stats);
-            } else {
-                const obj = fetchedItemId.details.infix_upgrade.attributes.reduce((acc, cur) => {
-                    acc[cur.attribute] = cur.modifier;
-                    return acc;
-                }, {});
+            } else if (fetchedItemId.details.infix_upgrade) {
+                const attributes = fetchedItemId.details.infix_upgrade.attributes;
+                const obj = {};
+                for (const attribute of attributes) {
+                    obj[attribute.attribute] = attribute.modifier;
+                }
                 const result = { id: fetchedItemId.id, attributes: obj };
-                setStats(result)
-            }
+                setStats(result);
+            } 
 
             if (fetchedItemId && fetchedItemId.details) {
                 setDetails(fetchedItemId.details);
@@ -57,14 +58,13 @@ function ItemBox({ item }) {
             <div>
                 <Popup
                     trigger=
-                    {
-                        skin
-                            ? <img className={`item-box box-${rarity}`} src={skin.icon} alt={skin.name} />
-                            : fetchedItemId
-                                ? <img className={`item-box box-${rarity}`} src={fetchedItemId.icon} alt={fetchedItemId.id} />
-                                : <img className="item-box box-gray" alt="" />
+                    {skin
+                        ? <img className={`item-box box-${rarity}`} src={skin.icon} alt={skin.id} />
+                        : fetchedItemId
+                            ? <img className={`item-box box-${rarity}`} src={fetchedItemId.icon} alt={fetchedItemId.id} />
+                            : <img className="item-box box-gray" alt="" />
                     }
-                    
+
                     arrow={false}
                     position="right center"
                     on="hover"
@@ -83,13 +83,19 @@ function ItemBox({ item }) {
 
                         {details && details.defense !== 0 && details.defense &&
                             <>
-                                <Row key={'defense' + details.defense}> Defense: <span className='green'>{details.defense}</span></Row>
+                                <Row key={`defense${details.defense}`}> Defense: <span className='green'>{details.defense}</span></Row>
+                                <br />
+                            </>
+                        }
+                        {details && details.min_power && details.max_power &&
+                            <>
+                                <Row key={`power${details.min_power}${details.max_power}`}> Weapon Strength: <span className='green'>{details.min_power} - {details.max_power}</span></Row>
                                 <br />
                             </>
                         }
 
                         {stats && stats.attributes && Object.keys(stats.attributes).map(key => (
-                            <Row key={'stats' + fetchedItemId.id + key}>
+                            <Row key={`stats${fetchedItemId.id}${key}`}>
                                 <span className='green'>+ {stats.attributes[key]} {key}</span>
                             </Row>
                         ))}
