@@ -38,13 +38,25 @@ function EquipmentDropdown({ char }) {
       }
     }
     const mergedItems = mergedTabs.filter(equip => equip.tabs.includes(selectedTab.tab));
-
     const equipItemWithDetails = async (equipItem) => {
-      const itemData = await fetchData('items', equipItem.id);
-      let skinData = {};
 
+      const itemData = await fetchData('items', equipItem.id);
+
+      let skinData = {};
       if (equipItem.skin) {
         skinData = await fetchData('skins', equipItem.skin)
+      }
+
+      const updates = [];
+      if (equipItem.upgrades) {
+        for (const upgrade of equipItem.upgrades) {
+          updates.push(await fetchData('items', upgrade));
+        }
+      }
+      if (equipItem.infusions) {
+        for (const infusion of equipItem.infusions) {
+          updates.push(await fetchData('items', infusion));
+        }
       }
 
       const itemDetails = itemData ? itemData.details : null;
@@ -66,7 +78,8 @@ function EquipmentDropdown({ char }) {
         skin_icon: skinData?.icon,
         stats: equipItem.stats || stats,
         details: itemDetails,
-        item_data: itemData
+        item_data: itemData,
+        upgrades: updates,
       };
     };
 

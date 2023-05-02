@@ -4,7 +4,7 @@ import ItemBox from './ItemBox';
 import './Equipment.css';
 
 function Equipment({ items }) {
-    //console.log('items', items)
+    console.log('items', items)
 
     return (<>
         <Container className="equipment-box">

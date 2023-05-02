@@ -1,13 +1,12 @@
 .equipment-build-flex {
   display: flex;
   flex-direction: row;
-  width: 90%;
+  height: 100vh;
   padding-top: 1%;
 }
 
 .equipment {
   width: 50%;
-  
 }
 
 .build {
@@ -70,4 +69,9 @@
 
 .custom-row {
   display: flex;
+}
+
+.tooltip-container {
+  min-width: 100vw;
+  z-index: 5;
 }

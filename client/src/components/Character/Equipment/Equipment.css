@@ -12,6 +12,30 @@
     max-width: 50px;
 }
 
+.item-popup {
+    background-color: #000000e0;
+    padding: 10px;
+    white-space: nowrap;
+    font-size: smaller;
+    max-width:300px;
+    width: 80%;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.item-name {
+    font-size: medium;
+    font-weight: 500;
+}
+
+.green {
+    color: #32e532;
+}
+
+.upgrade {
+    color: #5fbdff;
+}
+
 .box-gray {
     border: 3px solid gray;
 }
@@ -70,15 +94,4 @@
 
 .name-legendary {
     color: #ce45da;
-}
-
-
-.item-popup {
-    background-color: black;
-    padding: 10px;
-    white-space: nowrap;
-}
-
-.green {
-    color: #32e532;
 }
