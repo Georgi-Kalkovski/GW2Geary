@@ -23,6 +23,7 @@ function ItemBox({ item }) {
                     {...getTooltipProps({ className: 'tooltip-container' })}
                 >
                     <Container className='item-popup'>
+                        {/* NAME */}
                         <Row key={`name-${item.id}`} className={`name-${item.rarity.toLowerCase()}`}>
                             {item.skin_name
                                 ? <span className='item-name'>{item.skin_name}</span>
@@ -30,6 +31,8 @@ function ItemBox({ item }) {
                             }
                         </Row>
                         <br />
+                        {/* DEFENSE */}
+                        Power
                         {item.details.defense !== 0 && item.details.defense &&
                             <>
                                 <Row key={`defense-${item.id}`}>
@@ -38,6 +41,7 @@ function ItemBox({ item }) {
                                 <br />
                             </>
                         }
+                        {/* POWER */}
                         {item.details.min_power && item.details.max_power &&
                             <>
                                 <Row key={`power-${item.details.min_power}${item.details.max_power}`}>
@@ -47,48 +51,73 @@ function ItemBox({ item }) {
                             </>
                         }
 
+                        {/* STATS */}
                         {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
-                            <Row key={`attributes-${item.id}-${index}`}>
-                                <span className='green'>+ {item.stats.attributes[stat]} {stat}</span>
-                            </Row>
+                                <Row key={`attributes-${item.id}-${index}`}>
+                                    <span className='green'>+ {item.stats.attributes[stat]} {stat}</span>
+                                </Row>
                         ))}
                         <br />
+                        {/* UPGRADES */}
                         {item.upgrades && item.upgrades.map((upgrade, index) => (
                             <Row key={`upgrade-${upgrade.id}-${index}`}>
                                 <img src={upgrade.icon} width="20" alt={upgrade.icon} />
-                                <span className='upgrade'> {upgrade.name}</span>
+                                <span className='upgrade-blue'> {upgrade.name}</span>
+                                {
+                                    // upgrade.details &&
+                                    // upgrade.details.bonuses &&
+                                    // !upgrade.details.infix_upgrade &&
+                                    // upgrade.details.bonuses.map(bonus => (
+                                    //     <Row key={`upgrade-bonus-${item.id}`}>
+                                    //         <span className='upgrade-gray'> {bonus}</span>
+                                    //     </Row>
+                                    // ))
+                                }
+
+                                {/* Runes */}
                                 {
                                     upgrade.details &&
                                     upgrade.details.bonuses &&
-                                    !upgrade.details.infix_upgrade &&
-                                    upgrade.details.bonuses.map(bonus => (
-                                        <Row key={`upgrade-bonus-${item.id}`}>
-                                            <span className='upgrade'> {bonus}</span>
-                                        </Row>
-                                    ))}
+                                    upgrade.details.bonuses.map((bonus, index) => {
+                                        const matchingRune = item.runeCount && item.runeCount.find((rune) => rune.name === upgrade.name);
+                                        const bonusCount = matchingRune ? matchingRune.count : 0;
+                                        const bonusSpans = [];
+                                        if (index < bonusCount) {
+                                            bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
+                                        } else {
+                                            bonusSpans.push(<span key={`bonus-gray-${index}`} className='upgrade-gray'>{`(${index + 1}): `}{bonus}</span>);
+                                        }
+                                        return (
+                                            <Row key={`sigil-bonus-${item.id}-${bonus}`}>
+                                                {bonusSpans}
+                                            </Row>
+                                        );
+                                    })
+                                }
+
+                                {/* Sigils & Infusions */}
                                 {
                                     upgrade.details &&
                                     upgrade.details.infix_upgrade &&
                                     upgrade.details.infix_upgrade.buff &&
                                     upgrade.details.infix_upgrade.buff &&
                                     <Row key={`description-${item.id}`}>
-                                        <span className='upgrade'> {upgrade.details.infix_upgrade.buff.description}</span>
+                                        <span className='upgrade-blue'> {upgrade.details.infix_upgrade.buff.description}</span>
                                     </Row>
                                 }
-                                {upgrade.details && upgrade.details.bonuses && upgrade.details.bonuses.map(bonus => (
-                                    <Row key={`sigil-bonus-${item.id}-${bonus}`}>
-                                        <span className='upgrade'> {bonus}</span>
-                                    </Row>
-                                ))}
                                 <br />
                             </Row>
                         ))
                         }
-
+                        {/* RARITY */}
                         <div className={`name-${item.rarity.toLowerCase()}`}>{item.rarity}</div>
+                        {/* WEIGHT */}
                         <div>{item.details.weight_class}</div>
+                        {/* TYPE */}
                         <div>{item.details.type}</div>
+                        {/* LEVEL */}
                         <div>Required level: {item.item_data.level}</div>
+                        {/* TRANSMUTED */}
                         {item.skin_name &&
                             <>
                                 <br />
@@ -104,6 +133,7 @@ function ItemBox({ item }) {
             {item
                 ?
                 <div className='' ref={setTriggerRef}>
+                    {/* ITEM ICON */}
                     {item.skin_icon && item.skin_name
                         ? <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
                         : <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.item_icon} alt={item.item_icon} />

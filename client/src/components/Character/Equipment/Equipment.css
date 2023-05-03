@@ -32,8 +32,12 @@
     color: #32e532;
 }
 
-.upgrade {
-    color: #5fbdff;
+.upgrade-blue {
+    color: #5192f2;
+}
+
+.upgrade-gray{
+    color: #a0a0a0;
 }
 
 .box-gray {

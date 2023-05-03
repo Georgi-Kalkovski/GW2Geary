@@ -9,7 +9,6 @@ function EquipmentDropdown({ char }) {
   );
   const [mergedItems, setMergedItems] = useState([]);
   const [loading, setLoading] = useState(true);
-
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
@@ -27,6 +26,7 @@ function EquipmentDropdown({ char }) {
 
   useEffect(() => {
     const mergedTabs = [];
+    const runeCount = [];
     for (const tab of char.equipment_tabs) {
       for (const tabItem of tab.equipment) {
         for (const equipItem of char.equipment) {
@@ -53,6 +53,19 @@ function EquipmentDropdown({ char }) {
           updates.push(await fetchData('items', upgrade));
         }
       }
+
+      for (const update of updates) {
+        if (update.details && update.details.type && update.details.type === "Rune") {
+          const matchingIndex = runeCount.findIndex(elem => elem.name === update.name);
+          if (equipItem.slot !== 'HelmAquatic')
+            if (matchingIndex !== -1) {
+              runeCount[matchingIndex].count += 1;
+            } else {
+              runeCount.push({ name: update.name, count: 1 });
+            }
+        }
+      }
+
       if (equipItem.infusions) {
         for (const infusion of equipItem.infusions) {
           updates.push(await fetchData('items', infusion));
@@ -62,7 +75,6 @@ function EquipmentDropdown({ char }) {
       const itemDetails = itemData ? itemData.details : null;
       const stats = itemDetails?.infix_upgrade;
       const attributesArray = itemDetails?.infix_upgrade?.attributes;
-
       if (stats && attributesArray) {
         stats.attributes = {};
         for (const attributeObj of attributesArray) {
@@ -80,6 +92,7 @@ function EquipmentDropdown({ char }) {
         details: itemDetails,
         item_data: itemData,
         upgrades: updates,
+        runeCount: runeCount
       };
     };
 
