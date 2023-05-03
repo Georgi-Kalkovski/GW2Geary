@@ -17,32 +17,49 @@ import Agony_Resistance from './img/Agony_Resistance.png';
 
 //import { parseCharacter } from 'gw2e-item-attributes'
 
-function Attributes({ stats }) {
-    console.log(stats)
+function Attributes({ items }) {
     let power = 1000;
     let precision = 1000;
     let toughness = 1000;
     let vitality = 1000;
 
-    for (const obj of stats) {
-        const stat = obj[0];
-        const level = obj[1];
-        for (const key in stat) {
-            if (key === 'attributes') {
-                const element = stat[key];
-                for (const key in element) {
-                    const attribute = element[key];
-                    if (key === 'Power') { power += attribute }
-                    if (key === 'Precision') { precision += attribute }
-                    if (key === 'Toughness') { toughness += attribute }
-                    if (key === 'Vitality') { vitality += attribute }
+    console.log(items)
+    
+    for (const item of items) {
+        if (item.slot !== 'HelmAquatic' && item.slot !== 'WeaponAquaticA' && item.slot !== 'WeaponAquaticB') {
+
+            // Getting attributes from items
+            if (item.stats && item.stats.attributes) {
+                const attributes = item.stats.attributes;
+                for (const attribute in attributes) {
+                    const value = attributes[attribute];
+                    if (attribute === 'Power') { power += value }
+                    if (attribute === 'Precision') { precision += value }
+                    if (attribute === 'Toughness') { toughness += value }
+                    if (attribute === 'Vitality') { vitality += value }
                 }
             }
+
+            //Getting runes, sigils and infusions from items
+            if (item.upgrades) {
+                //console.log('upgrades', item.upgrades)
+
+                // Runes
+                console.log(item.runeCount)
+                if (item.upgrades.details && item.upgrades.details.type === 'Rune') {
+                    for (const rune of item.upgrades.details.bonuses) {
+                        console.log('rune',rune)
+                    }
+                }
+            }
+            // TODO: {name: 'Superior Rune of the Thief', type: 'Rune', bonuses: Array(6), count: 5}
         }
     }
 
     // Calculate critical chance based on precision
-    let criticalChance = (precision - 895) / 21;
+    //at lvl 80 
+    // https://wiki.guildwars2.com/wiki/Precision
+    let criticalChance = (precision - 1000) / 21;
     if (criticalChance < 5) {
         criticalChance = 5;
     } else if (criticalChance > 100) {
@@ -63,7 +80,7 @@ function Attributes({ stats }) {
         </Row>
         <Row className='custom-row'>
             <Col><img src={Precision} alt="Precision" /> {precision}</Col>
-            <Col><img src={Critical_Chance} alt="Critical_Chance" /> {criticalChance}</Col>
+            <Col><img src={Critical_Chance} alt="Critical_Chance" /> {criticalChance.toFixed(2)}</Col>
         </Row>
         <Row className='custom-row'>
             <Col><img src={Ferocity} alt="Ferocity" /> Ferocity</Col>

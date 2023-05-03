@@ -63,17 +63,7 @@ function ItemBox({ item }) {
                             <Row key={`upgrade-${upgrade.id}-${index}`}>
                                 <img src={upgrade.icon} width="20" alt={upgrade.icon} />
                                 <span className='upgrade-blue'> {upgrade.name}</span>
-                                {
-                                    // upgrade.details &&
-                                    // upgrade.details.bonuses &&
-                                    // !upgrade.details.infix_upgrade &&
-                                    // upgrade.details.bonuses.map(bonus => (
-                                    //     <Row key={`upgrade-bonus-${item.id}`}>
-                                    //         <span className='upgrade-gray'> {bonus}</span>
-                                    //     </Row>
-                                    // ))
-                                }
-
+                                
                                 {/* Runes */}
                                 {
                                     upgrade.details &&

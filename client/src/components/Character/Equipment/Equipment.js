@@ -5,7 +5,7 @@ import './Equipment.css';
 import Attributes from './Attributes';
 
 function Equipment({ items }) {
-    console.log('items', items)
+    //console.log('items', items)
 
     return (<>
         <Container className="equipment-box">
@@ -33,16 +33,7 @@ function Equipment({ items }) {
             </Row>
             <Col>
                 Attributes
-                <Attributes stats={items.reduce((accumulator, currentItem) => {
-                    if (currentItem.stats && 
-                        currentItem.slot !== 'HelmAquatic' &&
-                        currentItem.slot !== 'WeaponAquaticA' &&
-                        currentItem.slot !== 'WeaponAquaticB') {
-                        accumulator.push([currentItem.stats, currentItem.item_data.level]);
-                    }
-                    return accumulator;
-                }, [])}
-                />
+                <Attributes items={items}/>
                 <Row className='custom-row'>
                     <Col><ItemBox item={items.find(x => x.slot === 'Backpack')} /></Col>
                     <Col><ItemBox item={items.find(x => x.slot === 'Accessory1')} /></Col>

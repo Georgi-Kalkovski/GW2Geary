@@ -61,7 +61,7 @@ function EquipmentDropdown({ char }) {
             if (matchingIndex !== -1) {
               runeCount[matchingIndex].count += 1;
             } else {
-              runeCount.push({ name: update.name, count: 1 });
+              runeCount.push({ name: update.name, type: update.details.type, bonuses: update.details.bonuses, count: 1 });
             }
         }
       }
