@@ -36,7 +36,7 @@ function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
     return (
         <>
             {traitMin && traitMaj &&
-                <Container className='custom-row'>
+                <Container className='flex'>
                     <Col>{imageTraitMin(traitMin[0])}</Col>
                     <Col className='major-col'>
                         <Row>{imageTraitMaj(traitMaj[0])}</Row>

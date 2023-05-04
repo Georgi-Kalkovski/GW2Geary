@@ -46,7 +46,7 @@ function Skills({ skills, water_skills }) {
 
     return (
         <Container className='skills-center'>
-            <Row className='custom-row'>
+            <Row className='flex'>
                 <Col className='center-land'><img src={Land} alt="land"/></Col>
                 <Col>{skillCheck(heal)}</Col>
                 <Col>{skillCheck(utilities[0])}</Col>
@@ -54,7 +54,7 @@ function Skills({ skills, water_skills }) {
                 <Col>{skillCheck(utilities[2])}</Col>
                 <Col>{skillCheck(elite)}</Col>
             </Row>
-            <Row className='custom-row'>
+            <Row className='flex'>
                 <Col className='center-water'><img src={Water} alt="water"/></Col>
                 <Col>{skillCheck(waterHeal)}</Col>
                 <Col>{skillCheck(waterUtilities[0])}</Col>

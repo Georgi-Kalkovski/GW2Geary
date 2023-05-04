@@ -111,27 +111,27 @@ function Attributes({ items, upgrades }) {
         }
     }
     return (
-        <Container style={{ display: 'flex' }}>
-            <Col>
-                <Row title="Power" ><img src={Power} alt="Power" /> {power}</Row>
-                <Row title="Toughness" ><img src={Toughness} alt="Toughness" /> {toughness}</Row>
-                <Row title="Vitality" ><img src={Vitality} alt="Vitality" /> {vitality}</Row>
-                <Row title="Precision"><img src={Precision} alt="Precision" /> {precision}</Row>
-                <Row title="Ferocity" ><img src={Ferocity} alt="Ferocity" /> {ferocity}</Row>
-                <Row title="Condition Damage" ><img src={CondiDamage} alt="CondiDamage" /> {condiDamage}</Row>
-                <Row title="Expertise"><img src={CondiDuration} alt="Expertise" /> {expertise}</Row>
-                <Row title="Concentration" ><img src={BoonDuration} alt="Concentration" /> {concentration}</Row>
-                <Row title="Agony Resistance"><img src={AgonyResistance} alt="Agony_Resistance" /> {agonyResistance}</Row>
+        <Container className='attribute-container'style={{ display: 'flex', paddingLeft: '20%' }}>
+            <Col className='attribute-col-one' style={{ width: '50%', textAlign: 'left' }}>
+                <Row className='attribute' title="Power"><img src={Power} alt="Power" /> {power}</Row>
+                <Row className='attribute' title="Toughness"><img src={Toughness} alt="Toughness" /> {toughness}</Row>
+                <Row className='attribute' title="Vitality"><img src={Vitality} alt="Vitality" /> {vitality}</Row>
+                <Row className='attribute' title="Precision"><img src={Precision} alt="Precision" /> {precision}</Row>
+                <Row className='attribute' title="Ferocity"><img src={Ferocity} alt="Ferocity" /> {ferocity}</Row>
+                <Row className='attribute' title="Condition Damage"><img src={CondiDamage} alt="CondiDamage" /> {condiDamage}</Row>
+                <Row className='attribute' title="Expertise"><img src={CondiDuration} alt="Expertise" /> {expertise}</Row>
+                <Row className='attribute' title="Concentration"><img src={BoonDuration} alt="Concentration" /> {concentration}</Row>
+                <Row className='attribute' title="Agony Resistance"><img src={AgonyResistance} alt="Agony_Resistance" /> {agonyResistance}</Row>
             </Col>
-            <Col>
+            <Col className='attribute-col-two' style={{ width: '50%', textAlign: 'left' }}>
                 <br />
-                <Row title="Armor"><img src={Armor} alt="Armor" /> {armor}</Row>
-                <Row title="Health"><img src={Health} alt="Health" /> {health}</Row>
-                <Row title="Critical Chance"><img src={CritChance} alt="CritChance" /> {critChance.toFixed(2)}</Row>
-                <Row title="Critical Damage"><img src={CritDamage} alt="CritDamage" /> {critDamage}</Row>
-                <Row title="Healing Power"><img src={HealingPower} alt="HealingPower" /> {healingPower}</Row>
-                <Row title="Condition Duration"><img src={CondiDuration} alt="CondiDuration" /> {condiDuration}</Row>
-                <Row title="Boon Duration"><img src={BoonDuration} alt="Boon_Duration" /> {boonDuration}</Row>
+                <Row className='attribute' title="Armor"><img src={Armor} alt="Armor" /> {armor}</Row>
+                <Row className='attribute' title="Health"><img src={Health} alt="Health" /> {health}</Row>
+                <Row className='attribute' title="Critical Chance"><img src={CritChance} alt="CritChance" /> {critChance.toFixed(2)}</Row>
+                <Row className='attribute' title="Critical Damage"><img src={CritDamage} alt="CritDamage" /> {critDamage}</Row>
+                <Row className='attribute' title="Healing Power"><img src={HealingPower} alt="HealingPower" /> {healingPower}</Row>
+                <Row className='attribute' title="Condition Duration"><img src={CondiDuration} alt="CondiDuration" /> {condiDuration}</Row>
+                <Row className='attribute' title="Boon Duration"><img src={BoonDuration} alt="Boon_Duration" /> {boonDuration}</Row>
             </Col>
         </Container>);
 }

@@ -9,47 +9,51 @@ function Equipment({ items, upgrades }) {
 
     return (<>
         <Container className="equipment-box">
-            <Row>
-                <Col><ItemBox item={items.find(x => x.slot === 'Helm')} upgrades={upgrades} /></Col>
-                <Col><ItemBox item={items.find(x => x.slot === 'Shoulders')} upgrades={upgrades} /></Col>
-                <Col><ItemBox item={items.find(x => x.slot === 'Coat')} upgrades={upgrades} /></Col>
-                <Col><ItemBox item={items.find(x => x.slot === 'Gloves')} upgrades={upgrades} /></Col>
-                <Col><ItemBox item={items.find(x => x.slot === 'Leggings')} upgrades={upgrades} /></Col>
-                <Col><ItemBox item={items.find(x => x.slot === 'Boots')} upgrades={upgrades} /></Col>
+            <Col>
                 <br />
-                <Row className='custom-row'>
+                <ItemBox item={items.find(x => x.slot === 'Helm')} upgrades={upgrades} />
+                <ItemBox item={items.find(x => x.slot === 'Shoulders')} upgrades={upgrades} />
+                <ItemBox item={items.find(x => x.slot === 'Coat')} upgrades={upgrades} />
+                <ItemBox item={items.find(x => x.slot === 'Gloves')} upgrades={upgrades} />
+                <ItemBox item={items.find(x => x.slot === 'Leggings')} upgrades={upgrades} />
+                <ItemBox item={items.find(x => x.slot === 'Boots')} upgrades={upgrades} />
+                <br />
+                <Row className='flex'>
                     <Col>
                         <span>E1</span>
-                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponA1')} upgrades={upgrades} /></Col>
-                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponA2')} upgrades={upgrades} /></Col>
+                        <ItemBox item={items.find(x => x.slot === 'WeaponA1')} upgrades={upgrades} />
+                        <ItemBox item={items.find(x => x.slot === 'WeaponA2')} upgrades={upgrades} />
                     </Col>
                     <Col>
                         <span>E2</span>
-                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponB1')} upgrades={upgrades} /></Col>
-                        <Col><ItemBox item={items.find(x => x.slot === 'WeaponB2')} upgrades={upgrades} /></Col>
+                        <ItemBox item={items.find(x => x.slot === 'WeaponB1')} upgrades={upgrades} />
+                        <ItemBox item={items.find(x => x.slot === 'WeaponB2')} upgrades={upgrades} />
                     </Col>
                 </Row>
                 <br />
-            </Row>
+            </Col>
             <Col>
-                Attributes
-                <Attributes items={items} upgrades={upgrades}/>
-                <Row className='custom-row'>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Backpack')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Accessory1')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Accessory2')} upgrades={upgrades} /></Col>
-                </Row>
-                <Row className='custom-row'>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Amulet')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Ring1')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'Ring2')} upgrades={upgrades} /></Col>
-                </Row>
                 <br />
-                <Row className='custom-row'>
-                    <Col><ItemBox item={items.find(x => x.slot === 'HelmAquatic')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'WeaponAquaticA')} upgrades={upgrades} /></Col>
-                    <Col><ItemBox item={items.find(x => x.slot === 'WeaponAquaticB')} upgrades={upgrades} /></Col>
-                </Row>
+                <Row>Attributes</Row>
+                <br />
+                <Attributes items={items} upgrades={upgrades} />
+                <br />
+                <Col className='flex'>
+                    <ItemBox item={items.find(x => x.slot === 'Backpack')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'Accessory1')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'Accessory2')} upgrades={upgrades} />
+                </Col>
+                <Col className='flex'>
+                    <ItemBox item={items.find(x => x.slot === 'Amulet')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'Ring1')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'Ring2')} upgrades={upgrades} />
+                </Col>
+                <br />
+                <Col className='flex'>
+                    <ItemBox item={items.find(x => x.slot === 'HelmAquatic')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'WeaponAquaticA')} upgrades={upgrades} />
+                    <ItemBox item={items.find(x => x.slot === 'WeaponAquaticB')} upgrades={upgrades} />
+                </Col>
             </Col>
         </Container>
     </>
