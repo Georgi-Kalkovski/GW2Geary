@@ -9,6 +9,7 @@ function EquipmentDropdown({ char }) {
   );
   const [mergedItems, setMergedItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [upgradesInfo, setUpgradesInfo] = useState([])
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
@@ -26,7 +27,7 @@ function EquipmentDropdown({ char }) {
 
   useEffect(() => {
     const mergedTabs = [];
-    const runeCount = [];
+    const upgradeInfo = [];
     for (const tab of char.equipment_tabs) {
       for (const tabItem of tab.equipment) {
         for (const equipItem of char.equipment) {
@@ -47,28 +48,28 @@ function EquipmentDropdown({ char }) {
         skinData = await fetchData('skins', equipItem.skin)
       }
 
-      const updates = [];
+      const upgrades = [];
       if (equipItem.upgrades) {
         for (const upgrade of equipItem.upgrades) {
-          updates.push(await fetchData('items', upgrade));
+          upgrades.push(await fetchData('items', upgrade));
         }
       }
 
-      for (const update of updates) {
-        if (update.details && update.details.type && update.details.type === "Rune") {
-          const matchingIndex = runeCount.findIndex(elem => elem.name === update.name);
-          if (equipItem.slot !== 'HelmAquatic')
-            if (matchingIndex !== -1) {
-              runeCount[matchingIndex].count += 1;
-            } else {
-              runeCount.push({ name: update.name, type: update.details.type, bonuses: update.details.bonuses, count: 1 });
-            }
-        }
+      for (const upgrade of upgrades) {
+        const matchingIndex = upgradeInfo.findIndex(elem => elem.name === upgrade.name);
+        if (equipItem.slot !== 'HelmAquatic' && equipItem.slot !== 'WeaponAquaticA' && equipItem.slot !== 'WeaponAquaticB')
+          if (matchingIndex !== -1) {
+            upgradeInfo[matchingIndex].count += 1;
+          } else {
+            upgradeInfo.push({ name: upgrade.name, type: upgrade.details.type, bonuses: upgrade.details.bonuses, count: 1 });
+          }
       }
+
+      setUpgradesInfo(upgradeInfo);
 
       if (equipItem.infusions) {
         for (const infusion of equipItem.infusions) {
-          updates.push(await fetchData('items', infusion));
+          upgrades.push(await fetchData('items', infusion));
         }
       }
 
@@ -81,6 +82,7 @@ function EquipmentDropdown({ char }) {
           stats.attributes[attributeObj.attribute] = attributeObj.modifier;
         }
       }
+
       return {
         ...equipItem,
         rarity: itemData?.rarity,
@@ -91,8 +93,7 @@ function EquipmentDropdown({ char }) {
         stats: equipItem.stats || stats,
         details: itemDetails,
         item_data: itemData,
-        upgrades: updates,
-        runeCount: runeCount
+        upgrades: upgrades
       };
     };
 
@@ -129,7 +130,7 @@ function EquipmentDropdown({ char }) {
         )}
       </div>{loading
         ? <div>Loading...</div>
-        : <Equipment key={selectedTab.tab} items={mergedItems} />
+        : <Equipment key={selectedTab.tab} items={mergedItems} upgrades={upgradesInfo} />
       }
     </div>
   );

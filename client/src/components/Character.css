@@ -72,7 +72,6 @@
 }
 
 .tooltip-container {
-  min-width: 100vw;
   z-index: 5;
   font-weight: 500;
 }

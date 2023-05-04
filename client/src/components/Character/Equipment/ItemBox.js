@@ -2,8 +2,8 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
-function ItemBox({ item }) {
-    //console.log('item ', item)
+function ItemBox({ item, upgrades }) {
+    // console.log('item ', item)
 
     const {
         getArrowProps,
@@ -53,9 +53,9 @@ function ItemBox({ item }) {
 
                         {/* STATS */}
                         {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
-                                <Row key={`attributes-${item.id}-${index}`}>
-                                    <span className='green'>+ {item.stats.attributes[stat]} {stat}</span>
-                                </Row>
+                            <Row key={`attributes-${item.id}-${index}`}>
+                                <span className='green'>+ {item.stats.attributes[stat]} {stat}</span>
+                            </Row>
                         ))}
                         <br />
                         {/* UPGRADES */}
@@ -63,13 +63,13 @@ function ItemBox({ item }) {
                             <Row key={`upgrade-${upgrade.id}-${index}`}>
                                 <img src={upgrade.icon} width="20" alt={upgrade.icon} />
                                 <span className='upgrade-blue'> {upgrade.name}</span>
-                                
+
                                 {/* Runes */}
                                 {
                                     upgrade.details &&
                                     upgrade.details.bonuses &&
                                     upgrade.details.bonuses.map((bonus, index) => {
-                                        const matchingRune = item.runeCount && item.runeCount.find((rune) => rune.name === upgrade.name);
+                                        const matchingRune = upgrades && upgrades.find((rune) => rune.name === upgrade.name);
                                         const bonusCount = matchingRune ? matchingRune.count : 0;
                                         const bonusSpans = [];
                                         if (index < bonusCount) {

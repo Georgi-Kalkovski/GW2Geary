@@ -17,7 +17,7 @@
     padding: 10px;
     white-space: nowrap;
     font-size: smaller;
-    max-width:300px;
+    max-width: 300px;
     width: 80%;
     white-space: pre-wrap;
     text-align: left;
@@ -36,7 +36,7 @@
     color: #5192f2;
 }
 
-.upgrade-gray{
+.upgrade-gray {
     color: #a0a0a0;
 }
 
