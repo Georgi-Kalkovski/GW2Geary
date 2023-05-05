@@ -5,9 +5,7 @@
 }
 
 .build>.dropdown {
-    width: 10%;
     position: absolute;
-    right: 34%;
     z-index: 2;
 }
 

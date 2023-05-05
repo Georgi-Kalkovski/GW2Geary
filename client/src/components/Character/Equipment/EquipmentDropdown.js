@@ -61,7 +61,12 @@ function EquipmentDropdown({ char }) {
           if (matchingIndex !== -1) {
             upgradeInfo[matchingIndex].count += 1;
           } else {
-            upgradeInfo.push({ name: upgrade.name, type: upgrade.details.type, bonuses: upgrade.details.bonuses, count: 1 });
+            upgradeInfo.push({
+              name: upgrade.name,
+              type: upgrade.details.type,
+              bonuses: upgrade.details.bonuses ? upgrade.details.bonuses : [upgrade.details.infix_upgrade.buff.description],
+              count: 1
+            });
           }
       }
 
@@ -130,7 +135,7 @@ function EquipmentDropdown({ char }) {
         )}
       </div>{loading
         ? <div>Loading...</div>
-        : <Equipment key={selectedTab.tab} items={mergedItems} upgrades={upgradesInfo} />
+        : <Equipment key={selectedTab.tab} items={mergedItems} upgrades={upgradesInfo} lvl={char.level} prof={char.profession}/>
       }
     </div>
   );

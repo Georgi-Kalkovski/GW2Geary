@@ -4,8 +4,8 @@ import ItemBox from './ItemBox';
 import './Equipment.css';
 import Attributes from './Attributes';
 
-function Equipment({ items, upgrades }) {
-    // console.log('items', items)
+function Equipment({ items, upgrades, lvl, prof }) {
+      console.log('items', items)
 
     return (<>
         <Container className="equipment-box">
@@ -36,7 +36,7 @@ function Equipment({ items, upgrades }) {
                 <br />
                 <Row>Attributes</Row>
                 <br />
-                <Attributes items={items} upgrades={upgrades} />
+                <Attributes items={items} upgrades={upgrades} lvl={lvl} prof={prof}/>
                 <br />
                 <Col className='flex'>
                     <ItemBox item={items.find(x => x.slot === 'Backpack')} upgrades={upgrades} />

@@ -34,7 +34,7 @@ function BuildDropdown({ char }) {
                                 : (activeBuild.build.name ? activeBuild.build.name : `Build ${activeBuild.tab}`))}
                 </button>
                 {isOpen && (
-                    <ul className="dropdown-menu-right">
+                    <ul className="dropdown-menu">
                         {char.build_tabs.map((build) => (
                             <li
                                 key={build.tab}

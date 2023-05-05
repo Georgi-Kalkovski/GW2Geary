@@ -1,18 +1,12 @@
 .equipment-build-flex {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
   padding-top: 1%;
 }
 
 .equipment {
   width: 50%;
-}
-
-.build {
-  width: 50%;
-  display: flex;
-  justify-content: flex-start;
 }
 
 .equipment-block {
@@ -37,7 +31,6 @@
   top: 100%;
   left: 0;
   background-color: #f1f1f1;
-  min-width: 160px;
   padding: 0;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -74,4 +67,5 @@
 .tooltip-container {
   z-index: 5;
   font-weight: 500;
+  min-width: 15%;
 }

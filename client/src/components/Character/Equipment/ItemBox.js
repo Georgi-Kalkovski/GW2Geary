@@ -16,7 +16,6 @@ function ItemBox({ item, upgrades }) {
     return (
         <>
 
-
             {visible && (
                 <div
                     ref={setTooltipRef}
@@ -32,7 +31,6 @@ function ItemBox({ item, upgrades }) {
                         </Row>
                         <br />
                         {/* DEFENSE */}
-                        Power
                         {item.details.defense !== 0 && item.details.defense &&
                             <>
                                 <Row key={`defense-${item.id}`}>
@@ -54,7 +52,16 @@ function ItemBox({ item, upgrades }) {
                         {/* STATS */}
                         {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
                             <Row key={`attributes-${item.id}-${index}`}>
-                                <span className='green'>+ {item.stats.attributes[stat]} {stat}</span>
+                                <span className='green'>
+                                    + {item.stats.attributes[stat]}
+                                    {(() => {
+                                        if (stat === 'CritDamage') { stat = 'Ferocity' }
+                                        if (stat === 'ConditionDamage') { stat = 'Condition Damage' }
+                                        if (stat === 'ConditionDuration') { stat = 'Expertise' }
+                                        if (stat === 'BoonDuration') { stat = 'Concentration' }
+                                    })()}
+                                    <span> {stat}</span>
+                                </span>
                             </Row>
                         ))}
                         <br />
@@ -92,9 +99,24 @@ function ItemBox({ item, upgrades }) {
                                     upgrade.details.infix_upgrade.buff &&
                                     upgrade.details.infix_upgrade.buff &&
                                     <Row key={`description-${item.id}`}>
-                                        <span className='upgrade-blue'> {upgrade.details.infix_upgrade.buff.description}</span>
+                                        {(() => {
+                                            const [blueText, grayText] = upgrade.details.infix_upgrade.buff.description
+                                                .split('<br><c=@reminder>')
+                                                .slice(0, 2);
+                                            let sanitizedGrayText = ''
+                                            if (upgrade.details.infix_upgrade.buff.description.includes('</c>')) {
+                                                sanitizedGrayText = grayText.replace('</c>', '');
+                                            }
+                                            return (
+                                                <>
+                                                    <span className='upgrade-blue'>{blueText}</span>
+                                                    <span className='upgrade-gray'>{sanitizedGrayText}</span>
+                                                </>
+                                            );
+                                        })()}
                                     </Row>
                                 }
+
                                 <br />
                             </Row>
                         ))

@@ -28,6 +28,25 @@
     font-weight: 500;
 }
 
+.attribute {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+.attribute:hover:before {
+    content: attr(title);
+    position: absolute;
+    background-color: #191919;
+    color: white;
+    padding: 5px;
+}
+
+.attribute img {
+    width: 20px;
+}
+
 .green {
     color: #32e532;
 }
