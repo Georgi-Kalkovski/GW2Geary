@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
 const TraitsTooltip = ({ trait, name, icon, children }) => {
-    console.log(trait)
     let ability = [];
     let reminder = [];
     let description = [];
@@ -32,7 +31,7 @@ const TraitsTooltip = ({ trait, name, icon, children }) => {
         visible,
     } = usePopperTooltip({
         trigger: 'hover',
-        placement: 'right',
+        placement: 'top-start',
         closeOnOutsideClick: false,
     });
 
@@ -69,7 +68,7 @@ const TraitsTooltip = ({ trait, name, icon, children }) => {
                     <br />
                     {trait.skills && trait.skills.length >= 1 && trait.skills && trait.skills.length >= 1 && trait.skills.map((item, index) => (
                         <div className='build-popup'>
-                            <div className='flex flex-centered'><img className="skill-box" src={item.icon} alt={item.name} /> <h3 className='spell-trait-name'>{item.name}</h3></div>
+                            <div className='flex flex-centered'> <h3 className='spell-trait-name'>{item.name}</h3></div>
 
                             <div key={index} className={index % 2 === 1 ? "upgrade-gray" : ""}>
                                 {item.description}
