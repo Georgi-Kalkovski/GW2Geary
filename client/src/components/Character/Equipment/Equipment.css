@@ -28,9 +28,8 @@
     font-weight: 500;
 }
 
-.attribute-container {
-    display: flex;
-
+.attribute {
+    padding: 2px 20px 2px 0;
 }
 
 .attribute-popup {
@@ -46,6 +45,10 @@
 .attribute-popup img {
     width: 20px;
     height: 20px;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .green {

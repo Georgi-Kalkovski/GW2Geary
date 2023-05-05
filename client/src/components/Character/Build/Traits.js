@@ -17,6 +17,7 @@ function Traits({ spec }) {
         };
         fetchSpec();
     }, [spec.id]);
+    
     return (
         <Container className='cropped-spec-img-div'>
             {specialization && traitsMin && traitsMaj && (

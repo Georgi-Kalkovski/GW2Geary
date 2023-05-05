@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-//import Popup from 'reactjs-popup';
+import TraitsTooltip from './TraitsTooltip';
 import fetchData from '../../fetchData';
 
 function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
@@ -27,11 +27,19 @@ function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
     }, [traitsMaj]);
 
     function imageTraitMin(trait) {
-        return <img className='minor-trait-icon' src={trait.icon} alt={trait.name} />;
+        return (
+            <TraitsTooltip trait={trait} icon={trait.icon} name={trait.name}>
+                <img className='minor-trait-icon' src={trait.icon} alt={trait.name} />
+            </TraitsTooltip>
+        );
     }
 
     function imageTraitMaj(trait) {
-        return <img className={traitsActive.includes(trait.id) ? 'major-trait-icon' : 'major-trait-icon inactive-trait'} src={trait.icon} alt={trait.name} />;
+        return (
+            <TraitsTooltip trait={trait} icon={trait.icon} name={trait.name}>
+                <img src={trait.icon} alt={trait.name} className={traitsActive.includes(trait.id) ? 'major-trait-icon' : 'major-trait-icon inactive-trait'} />
+            </TraitsTooltip>
+        );
     }
     return (
         <>

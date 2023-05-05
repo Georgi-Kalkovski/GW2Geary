@@ -201,7 +201,7 @@ function Attributes({ items, upgrades, lvl, prof }) {
     ];
 
     return (
-        <Container className='attribute-container' style={{ display: 'flex', paddingLeft: '20%' }}>
+        <Container className='attribute-container' style={{ display: 'flex', paddingLeft: '10%' }}>
             <Col className="attribute-col-one" style={{ width: "50%", textAlign: "left" }}>
                 {attr.slice(0, 9).map((attribute, index) => (
                     <Row key={index}>

@@ -109,7 +109,6 @@
     cursor: pointer;
 }
 
-
 .build-popup {
     background-color: #000000e0;
     padding: 10px;
@@ -118,4 +117,12 @@
     white-space: pre-wrap;
     text-align: left;
     width: 250px;
+}
+
+.yellow-highlight {
+    color: #ffef89;
+}
+
+.spell-trait-name {
+    color: #ffcd77;
 }
