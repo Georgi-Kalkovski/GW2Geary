@@ -64,8 +64,8 @@
   display: flex;
 }
 
-.flex-centered {
-  align-items: center
+.cursor {
+  cursor: default;
 }
 
 .tooltip-container {

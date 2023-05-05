@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
-const MyTooltip = ({ name, icon, tooltipText, className }) => {
+const SkillsTooltip = ({ name, icon, tooltipText, className }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const {
@@ -18,11 +18,11 @@ const MyTooltip = ({ name, icon, tooltipText, className }) => {
         visible: isVisible,
         onVisibleChange: setIsVisible,
     });
-    
+
     return (
         <>
             <Col ref={setTriggerRef}>
-                <img className="skill-box" src={icon} alt={name} />
+                <img className="skill-box cursor" src={icon} alt={name} />
             </Col>
             {visible && (
                 <div
@@ -40,4 +40,4 @@ const MyTooltip = ({ name, icon, tooltipText, className }) => {
     );
 };
 
-export default MyTooltip;
+export default SkillsTooltip;

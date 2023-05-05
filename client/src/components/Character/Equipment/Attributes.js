@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
+import AttributesTooltip from './AttributesTooltip';
 
 import Power from './img/Power.png';
 import Precision from './img/Precision.png';
@@ -172,28 +173,50 @@ function Attributes({ items, upgrades, lvl, prof }) {
     critDamage += ferocity / 15;
     boonDuration = concentration / 15;
 
+    const AttributesBox = ({ attribute }) => {
+        return (
+            <Container className="attributes-box-container">
+                <AttributesTooltip name={attribute.name} icon={attribute.icon} value={attribute.value} />
+            </Container>
+        );
+    };
+
+    const attr = [
+        { name: "Power", icon: Power, value: power.toLocaleString("en-US")  },
+        { name: "Toughness", icon: Toughness, value: toughness.toLocaleString("en-US")  },
+        { name: "Vitality", icon: Vitality, value: vitality.toLocaleString("en-US")  },
+        { name: "Precision", icon: Precision, value: precision.toLocaleString("en-US")  },
+        { name: "Ferocity", icon: Ferocity, value: ferocity.toLocaleString("en-US")  },
+        { name: "Condition Damage", icon: CondiDamage, value: condiDamage.toLocaleString("en-US") },
+        { name: "Expertise", icon: CondiDuration, value: expertise.toLocaleString("en-US") },
+        { name: "Concentration", icon: BoonDuration, value: concentration.toLocaleString("en-US")  },
+        { name: "Agony Resistance", icon: AgonyResistance, value: agonyResistance.toLocaleString("en-US") },
+        { name: "Armor", icon: Armor, value: armor.toLocaleString("en-US") },
+        { name: "Health", icon: Health, value: health.toLocaleString("en-US") },
+        { name: "Critical Chance", icon: CritChance, value: critChance.toFixed(2) + "%" },
+        { name: "Critical Damage", icon: CritDamage, value: critDamage.toFixed(2) + "%" },
+        { name: "Healing Power", icon: HealingPower, value: healingPower.toLocaleString("en-US")  },
+        { name: "Condition Duration", icon: CondiDuration, value: condiDuration.toFixed(2) + "%" },
+        { name: "Boon Duration", icon: BoonDuration, value: boonDuration.toFixed(2) + "%" }
+    ];
+
     return (
         <Container className='attribute-container' style={{ display: 'flex', paddingLeft: '20%' }}>
-            <Col className='attribute-col-one' style={{ width: '50%', textAlign: 'left' }}>
-                <Row className='attribute' title="Power"><img src={Power} alt="Power" /> {power.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Toughness"><img src={Toughness} alt="Toughness" /> {toughness.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Vitality"><img src={Vitality} alt="Vitality" /> {vitality.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Precision"><img src={Precision} alt="Precision" /> {precision.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Ferocity"><img src={Ferocity} alt="Ferocity" /> {ferocity}</Row>
-                <Row className='attribute' title="Condition Damage"><img src={CondiDamage} alt="CondiDamage" /> {condiDamage}</Row>
-                <Row className='attribute' title="Expertise"><img src={CondiDuration} alt="Expertise" /> {expertise}</Row>
-                <Row className='attribute' title="Concentration"><img src={BoonDuration} alt="Concentration" /> {concentration}</Row>
-                <Row className='attribute' title="Agony Resistance"><img src={AgonyResistance} alt="Agony_Resistance" /> {agonyResistance}</Row>
+            <Col className="attribute-col-one" style={{ width: "50%", textAlign: "left" }}>
+                {attr.slice(0, 9).map((attribute, index) => (
+                    <Row key={index}>
+                        <AttributesBox attribute={attribute} />
+                    </Row>
+                ))}
+
             </Col>
-            <Col className='attribute-col-two' style={{ width: '50%', textAlign: 'left' }}>
+            <Col className="attribute-col-two" style={{ width: "50%", textAlign: "left" }}>
                 <br />
-                <Row className='attribute' title="Armor"><img src={Armor} alt="Armor" /> {armor.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Health"><img src={Health} alt="Health" /> {health.toLocaleString("en-US")}</Row>
-                <Row className='attribute' title="Critical Chance"><img src={CritChance} alt="CritChance" /> {critChance.toFixed(2)}%</Row>
-                <Row className='attribute' title="Critical Damage"><img src={CritDamage} alt="CritDamage" /> {critDamage.toFixed(2)}%</Row>
-                <Row className='attribute' title="Healing Power"><img src={HealingPower} alt="HealingPower" /> {healingPower}</Row>
-                <Row className='attribute' title="Condition Duration"><img src={CondiDuration} alt="CondiDuration" /> {condiDuration.toFixed(2)}%</Row>
-                <Row className='attribute' title="Boon Duration"><img src={BoonDuration} alt="Boon_Duration" /> {boonDuration.toFixed(2)}%</Row>
+                {attr.slice(9).map((attribute, index) => (
+                    <Row key={index}>
+                        <AttributesBox attribute={attribute} />
+                    </Row>
+                ))}
             </Col>
         </Container>);
 }

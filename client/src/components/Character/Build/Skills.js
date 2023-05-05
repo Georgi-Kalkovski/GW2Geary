@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import fetchData from '../../fetchData';
-import MyTooltip from './MyTooltip';
+import SkillsTooltip from './SkillsTooltip';
 
 import Land from './img/land.png';
 import Water from './img/water.png';
@@ -44,14 +44,14 @@ function Skills({ skills, water_skills }) {
         if (skill && skill.name) {
             return (
                 <Container className="skill-box-container">
-                    <MyTooltip name={skill.name} icon={skill.icon} tooltipText={skill.description} />
+                    <SkillsTooltip name={skill.name} icon={skill.icon} tooltipText={skill.description} />
                 </Container>
             );
         } else {
             return <img className="skill-box" alt="" />
         }
     };
-
+    
     return (
         <Container className="skills-center">
             <Row className="flex">

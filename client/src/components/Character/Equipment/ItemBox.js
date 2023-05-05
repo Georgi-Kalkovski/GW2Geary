@@ -19,7 +19,7 @@ function ItemBox({ item, upgrades }) {
             {visible && (
                 <div
                     ref={setTooltipRef}
-                    {...getTooltipProps({ className: 'tooltip-container' })}
+                    {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
                     <Container className='item-popup'>
                         {/* NAME */}
@@ -80,7 +80,14 @@ function ItemBox({ item, upgrades }) {
                                         const bonusCount = matchingRune ? matchingRune.count : 0;
                                         const bonusSpans = [];
                                         if (index < bonusCount) {
-                                            bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
+                                            if (bonus.includes('. <c=@reminder>')) {
+                                                bonus = bonus.replace('</c>', '').split('. <c=@reminder>').slice(0, 2);
+                                                bonusSpans.push(<span key={`bonus-span-${index}-blue`} className='upgrade-blue'>{`(${index + 1}): `}{bonus[0]}</span>);
+                                                bonusSpans.push(<br />);
+                                                bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{bonus[1]}</span>);
+                                            } else {
+                                                bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
+                                            }
                                         } else {
                                             bonusSpans.push(<span key={`bonus-gray-${index}`} className='upgrade-gray'>{`(${index + 1}): `}{bonus}</span>);
                                         }
@@ -97,20 +104,20 @@ function ItemBox({ item, upgrades }) {
                                     upgrade.details &&
                                     upgrade.details.infix_upgrade &&
                                     upgrade.details.infix_upgrade.buff &&
-                                    upgrade.details.infix_upgrade.buff &&
+                                    upgrade.details.infix_upgrade.buff.description &&
                                     <Row key={`description-${item.id}`}>
                                         {(() => {
-                                            const [blueText, grayText] = upgrade.details.infix_upgrade.buff.description
-                                                .split('<br><c=@reminder>')
+                                            const bonus = upgrade.details.infix_upgrade.buff.description
+                                                .replace('</c>', '')
+                                                .replace('</br>', '')
+                                                .replace('<br>', '')
+                                                .split('<c=@reminder>')
                                                 .slice(0, 2);
-                                            let sanitizedGrayText = ''
-                                            if (upgrade.details.infix_upgrade.buff.description.includes('</c>')) {
-                                                sanitizedGrayText = grayText.replace('</c>', '');
-                                            }
                                             return (
                                                 <>
-                                                    <span className='upgrade-blue'>{blueText}</span>
-                                                    <span className='upgrade-gray'>{sanitizedGrayText}</span>
+                                                    <span className='upgrade-blue'>{bonus[0]}</span>
+                                                    <br />
+                                                    <span className='upgrade-gray'>{bonus[1]}</span>
                                                 </>
                                             );
                                         })()}
