@@ -88,7 +88,7 @@
 }
 
 .template-container {
-    width:100%
+    width: 100%
 }
 
 .template-text {
@@ -97,7 +97,7 @@
     padding: 10px;
     font-size: 14px;
     border: none;
-    width:84%;
+    width: 84%;
     margin-right: 6px;
 }
 
@@ -107,4 +107,15 @@
     font-size: 14px;
     border: none;
     cursor: pointer;
+}
+
+
+.build-popup {
+    background-color: #000000e0;
+    padding: 10px;
+    white-space: nowrap;
+    font-size: smaller;
+    white-space: pre-wrap;
+    text-align: left;
+    width: 250px;
 }

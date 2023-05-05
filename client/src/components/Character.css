@@ -64,6 +64,10 @@
   display: flex;
 }
 
+.flex-centered {
+  align-items: center
+}
+
 .tooltip-container {
   z-index: 5;
   font-weight: 500;

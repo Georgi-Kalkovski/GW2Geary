@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-//import Popup from 'reactjs-popup';
 import fetchData from '../../fetchData';
+import MyTooltip from './MyTooltip';
 
 import Land from './img/land.png';
 import Water from './img/water.png';
@@ -40,30 +40,39 @@ function Skills({ skills, water_skills }) {
             .catch(error => console.error('Error loading data:', error));
     }, [skills.elite, skills.heal, skills.utilities, utilities, waterUtilities, water_skills.elite, water_skills.heal, water_skills.utilities]);
 
-    function skillCheck(skill) {
-        return skill && skill.icon ? <img className='skill-box' src={skill.icon} alt={skill.name} /> : <img className="skill-box" alt="" />;
-    }
+    const SkillBox = ({ skill }) => {
+        if (skill && skill.name) {
+            return (
+                <Container className="skill-box-container">
+                    <MyTooltip name={skill.name} icon={skill.icon} tooltipText={skill.description} />
+                </Container>
+            );
+        } else {
+            return <img className="skill-box" alt="" />
+        }
+    };
 
     return (
-        <Container className='skills-center'>
-            <Row className='flex'>
-                <Col className='center-land'><img src={Land} alt="land"/></Col>
-                <Col>{skillCheck(heal)}</Col>
-                <Col>{skillCheck(utilities[0])}</Col>
-                <Col>{skillCheck(utilities[1])}</Col>
-                <Col>{skillCheck(utilities[2])}</Col>
-                <Col>{skillCheck(elite)}</Col>
+        <Container className="skills-center">
+            <Row className="flex">
+                <Col className="center-land"><img src={Land} alt="land" /></Col>
+                <SkillBox skill={heal} />
+                <SkillBox skill={utilities[0]} />
+                <SkillBox skill={utilities[1]} />
+                <SkillBox skill={utilities[2]} />
+                <SkillBox skill={elite} />
             </Row>
-            <Row className='flex'>
-                <Col className='center-water'><img src={Water} alt="water"/></Col>
-                <Col>{skillCheck(waterHeal)}</Col>
-                <Col>{skillCheck(waterUtilities[0])}</Col>
-                <Col>{skillCheck(waterUtilities[1])}</Col>
-                <Col>{skillCheck(waterUtilities[2])}</Col>
-                <Col>{skillCheck(waterElite)}</Col>
+            <Row className="flex">
+                <Col className="center-water"><img src={Water} alt="water" /></Col>
+                <SkillBox skill={waterHeal} />
+                <SkillBox skill={waterUtilities[0]} />
+                <SkillBox skill={waterUtilities[1]} />
+                <SkillBox skill={waterUtilities[2]} />
+                <SkillBox skill={waterElite} />
             </Row>
         </Container>
     );
+
 }
 
 export default Skills;
