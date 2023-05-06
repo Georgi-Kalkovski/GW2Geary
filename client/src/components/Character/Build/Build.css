@@ -1,12 +1,10 @@
-.dropdown-menu-right {
+.dropdown-menu {
     background-color: #f1f1f1;
     padding: 0;
-    z-index: 2;
 }
 
 .build>.dropdown {
     position: absolute;
-    z-index: 2;
 }
 
 .dropdown-menu-right li {
@@ -40,11 +38,14 @@
 
 .traits-box {
     position: absolute;
-    z-index: 1;
     margin: auto;
     width: 30%;
     padding-top: 2.7%;
     padding-left: 10%;
+}
+
+.dropdown-menu {
+    z-index: 5 !important;
 }
 
 .minor-trait-icon {
@@ -125,4 +126,21 @@
 
 .spell-trait-name {
     color: #ffcd77;
+    font-size: medium;
+}
+
+.fact-class {
+    font-size: small;
+}
+
+.fact-class img {
+    width: 25px;
+    height: 25px;
+}
+
+.recharge-class {}
+
+.recharge-class-img {
+    width: 5px;
+    height: 5px;
 }

@@ -27,16 +27,18 @@ function TraitsBox({ traitsMin, traitsMaj, traitsActive }) {
     }, [traitsMaj]);
 
     function imageTraitMin(trait) {
+        console.log(trait)
         return (
-            <TraitsTooltip trait={trait} icon={trait.icon} name={trait.name}>
+            <TraitsTooltip description={trait.description} skills={trait.skills} facts={trait.facts} name={trait.name}>
                 <img className='minor-trait-icon' src={trait.icon} alt={trait.name} />
             </TraitsTooltip>
         );
     }
 
     function imageTraitMaj(trait) {
+        console.log(trait)
         return (
-            <TraitsTooltip trait={trait} icon={trait.icon} name={trait.name}>
+            <TraitsTooltip description={trait.description} skills={trait.skills} facts={trait.facts} name={trait.name}>
                 <img src={trait.icon} alt={trait.name} className={traitsActive.includes(trait.id) ? 'major-trait-icon' : 'major-trait-icon inactive-trait'} />
             </TraitsTooltip>
         );
