@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
-function ItemBox({ item, upgrades }) {
+function ItemBox({ item }) {
     // console.log('item ', item)
 
     const {
@@ -26,7 +26,7 @@ function ItemBox({ item, upgrades }) {
                         <Row key={`name-${item.id}`} className={`name-${item.rarity.toLowerCase()}`}>
                             {item.skin_name
                                 ? <span className='item-name'>{item.skin_name}</span>
-                                : <span className='item-name'>{item.item_name}</span>
+                                : <span className='item-name'>{item.name}</span>
                             }
                         </Row>
                         <br />
@@ -64,7 +64,27 @@ function ItemBox({ item, upgrades }) {
                                 </span>
                             </Row>
                         ))}
+                        {item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes &&
+                            Object.keys(item.details.infix_upgrade.attributes).map((index) => {
+                                let modifier = item.details.infix_upgrade.attributes[index].modifier;
+                                let attribute = item.details.infix_upgrade.attributes[index].attribute;
+                                return (
+                                    <Row key={`attributes-${item.id}-${index}`}>
+                                        <span className='green'>
+                                            {attribute && `+ ${modifier}`}
+                                            {(() => {
+                                                if (attribute === 'CritDamage') { attribute = 'Ferocity' }
+                                                if (attribute === 'ConditionDamage') { attribute = 'Condition Damage' }
+                                                if (attribute === 'ConditionDuration') { attribute = 'Expertise' }
+                                                if (attribute === 'BoonDuration') { attribute = 'Concentration' }
+                                            })()}
+                                            {attribute && <span> {attribute}</span>}
+                                        </span>
+                                    </Row>
+                                );
+                            })}
                         <br />
+                        
                         {/* UPGRADES */}
                         {item.upgrades && item.upgrades.map((upgrade, index) => (
                             <Row key={`upgrade-${upgrade.id}-${index}`}>
@@ -76,20 +96,14 @@ function ItemBox({ item, upgrades }) {
                                     upgrade.details &&
                                     upgrade.details.bonuses &&
                                     upgrade.details.bonuses.map((bonus, index) => {
-                                        const matchingRune = upgrades && upgrades.find((rune) => rune.name === upgrade.name);
-                                        const bonusCount = matchingRune ? matchingRune.count : 0;
                                         const bonusSpans = [];
-                                        if (index < bonusCount) {
-                                            if (bonus.includes('. <c=@reminder>')) {
-                                                bonus = bonus.replace('</c>', '').split('. <c=@reminder>').slice(0, 2);
-                                                bonusSpans.push(<span key={`bonus-span-${index}-blue`} className='upgrade-blue'>{`(${index + 1}): `}{bonus[0]}</span>);
-                                                bonusSpans.push(<br />);
-                                                bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{bonus[1]}</span>);
-                                            } else {
-                                                bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
-                                            }
+                                        if (bonus.includes('. <c=@reminder>')) {
+                                            bonus = bonus.replace('</c>', '').split('. <c=@reminder>').slice(0, 2);
+                                            bonusSpans.push(<span key={`bonus-span-${index}-blue`} className='upgrade-blue'>{`(${index + 1}): `}{bonus[0]}</span>);
+                                            bonusSpans.push(<br />);
+                                            bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{bonus[1]}</span>);
                                         } else {
-                                            bonusSpans.push(<span key={`bonus-gray-${index}`} className='upgrade-gray'>{`(${index + 1}): `}{bonus}</span>);
+                                            bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
                                         }
                                         return (
                                             <Row key={`sigil-bonus-${item.id}-${bonus}`}>
@@ -135,7 +149,7 @@ function ItemBox({ item, upgrades }) {
                         {/* TYPE */}
                         <div>{item.details.type}</div>
                         {/* LEVEL */}
-                        <div>Required level: {item.item_data.level}</div>
+                        <div>Required level: {item.level}</div>
                         {/* TRANSMUTED */}
                         {item.skin_name &&
                             <>
@@ -153,9 +167,9 @@ function ItemBox({ item, upgrades }) {
                 ?
                 <div className='' ref={setTriggerRef}>
                     {/* ITEM ICON */}
-                    {item.skin_icon && item.skin_name
+                    {item.icon && item.skin_name
                         ? <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
-                        : <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.item_icon} alt={item.item_icon} />
+                        : <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.icon} alt={item.icon} />
                     }
                 </div>
                 : <img className="item-box box-gray" alt="" />

@@ -16,7 +16,8 @@ function Traits({ spec }) {
             setTraitsMaj(char.major_traits);
         };
         fetchSpec();
-    }, [spec.id]);
+    }, [spec.id, traitsMaj]);
+    
     
     return (
         <Container className='cropped-spec-img-div'>

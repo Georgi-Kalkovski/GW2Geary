@@ -1,27 +1,19 @@
-const urlBasic = 'http://localhost:3001/api/';
-const urlAccount = urlBasic + 'account/';
-const urlMasteryPoints = urlBasic + 'account/mastery/points/';
-const urlCharacters = urlBasic + 'characters/';
-const urlProfessions = urlBasic + 'professions/';
-const urlWorlds = urlBasic + 'worlds/';
-const urlItems = urlBasic + 'items/';
-const urlItemstats = urlBasic + 'itemstats/';
-const urlSkins = urlBasic + 'skins/';
-const urlSpecs = urlBasic + 'specializations/';
-const urlTraits = urlBasic + 'traits/';
-const urlSkills = urlBasic + 'skills/';
 
-export {
-    urlBasic,
-    urlAccount,
-    urlMasteryPoints,
-    urlCharacters,
-    urlProfessions,
-    urlWorlds,
-    urlItems,
-    urlItemstats,
-    urlSkins,
-    urlSpecs,
-    urlTraits,
-    urlSkills
+const urlBasic = 'http://localhost:3001/api/';
+
+const URLS = {    
+    urlAccount: urlBasic + 'account/',
+    urlMasteryPoints: urlBasic + 'account/mastery/points/',
+    urlCharacters: urlBasic + 'characters/',
+    urlProfessions: urlBasic + 'professions/',
+    urlWorlds: urlBasic + 'worlds/',
+    urlItems: urlBasic + 'items/',
+    urlItem: urlBasic + 'item/',
+    urlItemstats: urlBasic + 'itemstats/',
+    urlSkins: urlBasic + 'skins/',
+    urlSpecs: urlBasic + 'specializations/',
+    urlTraits: urlBasic + 'traits/',
+    urlSkills: urlBasic + 'skills/'
 }
+
+export default URLS;

@@ -9,9 +9,9 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="characters/:name" element={<Character />} />
-           <Route path="*" element={<Home />} /> 
+          <Route exact path="/" Component={Home} />
+          <Route path="characters/:name" Component={Character} />
+          <Route path="*" Component={Home} /> 
         </Routes>
       </div>
     </BrowserRouter>

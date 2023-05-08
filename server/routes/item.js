@@ -3,10 +3,10 @@ const axios = require('axios');
 const router = express.Router();
 const { baseUrl } = require('./config');
 
-router.get('/:items', async (req, res) => {
+router.get('/:item', async (req, res) => {
     try {
-        const { items } = req.params;
-        const response = await axios.get(`${baseUrl}/items?ids=${items}`);
+        const { item } = req.params;
+        const response = await axios.get(`${baseUrl}/items/${item}`);
         if (response) {
             res.json(response.data);
         }

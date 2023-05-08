@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import fetchData from "./fetchData";
 import CharacterBox from './Home/CharacterBox';
-import { loading } from "./functions";
 
 function Home() {
     const [account, setAccount] = useState([]);
@@ -52,7 +51,7 @@ function Home() {
                 <h1>{account.name}</h1>
                 <h5>Fractal Level: {account.fractal_level}</h5>
                 <h5>Mastery Points: {mastery}</h5>
-                <h5>World: {world.name ? world.name : loading}</h5>
+                <h5>World: {world.name}</h5>
                 <h5>WvW Rank: {account.wvw_rank}</h5>
             </span>
             <div className="home-characters">

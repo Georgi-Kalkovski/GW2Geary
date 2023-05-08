@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import fetchData from "../fetchData";
-import { loading } from "../functions";
+import Loader from "../Loader";
 import '../Classes.css';
 
 function CharacterBox({ charName }) {
@@ -27,7 +27,7 @@ function CharacterBox({ charName }) {
                         <div>{character.profession}</div>
                     </div>
                 </>
-                : loading
+                : <Loader />
             }
         </>
     );
