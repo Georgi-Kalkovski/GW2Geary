@@ -8,9 +8,7 @@ const EquipmentDropdown = ({ char }) => {
     char.equipment_tabs.find((equip) => equip.is_active)
   );
   const [mergedItems, setMergedItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [upgradesInfo, setUpgradesInfo] = useState([]);
-  console.log('char', char)
+  // console.log('char', char)
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   }
@@ -26,16 +24,17 @@ const EquipmentDropdown = ({ char }) => {
     }
   }
 
-  console.log('tab', selectedTab)
   useEffect(() => {
     (async () => {
       try {
         const fetchedItems = await fetchData('items', selectedTab.equipment.map(el => el.id).join(','))
-        const fetchedUpgrades = await fetchData('items', selectedTab.equipment.filter(item => item.upgrades).flatMap(el => el.upgrades).join(','))
-        const fetchedInfusions = await fetchData('items', selectedTab.equipment.filter(item => item.infusions).flatMap(el => el.infusions).join(','))
         const fetchedSkins = await fetchData('skins', selectedTab.equipment.filter(item => item.skin).map(item => item.skin).join(','))
+        const fetchedUpgrades = await fetchData('items', selectedTab.equipment.filter(item => item.upgrades).flatMap(el => el.upgrades).join(','))
+        const fetchedInfusions = await fetchData('items', [
+          ...char.equipment.flatMap(el => el.infusions),
+          ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions))
+        ].join(','))
 
-        console.log(fetchedInfusions)
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,
           ...char.equipment.find((fetchedItem => fetchedItem.id === item.id)),
@@ -43,9 +42,20 @@ const EquipmentDropdown = ({ char }) => {
           skin_name: fetchedSkins.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
           upgrades: [
-            ...fetchedUpgrades.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)),
-            ...fetchedInfusions.filter(fetchedInfusions => item.infusions?.includes(fetchedInfusions.id)),
-          ]
+            ...fetchedUpgrades.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
+              ...upgrade,
+              counter: selectedTab.equipment.reduce((count, fetchedItem) => {
+                if (fetchedItem.slot === "HelmAquatic") {
+                  return count;
+                }
+                return count + (fetchedItem.upgrades && fetchedItem.upgrades.includes(upgrade.id) ? 1 : 0);
+              }, 0)
+            })),
+            ...(item.infusions
+              ?? char.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
+              ?? []
+            ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
+          ],
         }))
 
         setMergedItems(mergingItems);
@@ -56,98 +66,7 @@ const EquipmentDropdown = ({ char }) => {
 
   }, [selectedTab, char.equipment])
 
-
-  // useEffect(() => {
-  //   const mergedTabs = [];
-  //   const upgradeInfo = [];
-  //   for (const tab of char.equipment_tabs) {
-  //     for (const tabItem of tab.equipment) {
-  //       for (const equipItem of char.equipment) {
-  //         if (tabItem.id === equipItem.id && tab.tab === selectedTab.tab && equipItem.tabs.includes(selectedTab.tab)) {
-  //           const mergedItems = { ...tabItem, ...equipItem };
-  //           mergedTabs.push(mergedItems);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   const mergedItems = mergedTabs.filter(equip => equip.tabs.includes(selectedTab.tab));
-  //   const equipItemWithDetails = async (equipItem) => {
-
-  //     const itemData = await fetchData('items', equipItem.id);
-
-  //     let skinData = {};
-  //     if (equipItem.skin) {
-  //       skinData = await fetchData('skins', equipItem.skin)
-  //     }
-
-  //     const upgrades = [];
-  //     if (equipItem.upgrades) {
-  //       for (const upgrade of equipItem.upgrades) {
-  //         upgrades.push(await fetchData('items', upgrade));
-  //       }
-  //     }
-
-  //     for (const upgrade of upgrades) {
-  //       const matchingIndex = upgradeInfo.findIndex(elem => elem.name === upgrade.name);
-  //       if (equipItem.slot !== 'HelmAquatic' && equipItem.slot !== 'WeaponAquaticA' && equipItem.slot !== 'WeaponAquaticB')
-  //         if (matchingIndex !== -1) {
-  //           upgradeInfo[matchingIndex].count += 1;
-  //         } else {
-  //           upgradeInfo.push({
-  //             name: upgrade.name,
-  //             type: upgrade.details.type,
-  //             bonuses: upgrade.details.bonuses ? upgrade.details.bonuses : [upgrade.details.infix_upgrade.buff.description],
-  //             count: 1
-  //           });
-  //         }
-  //     }
-
-  //     setUpgradesInfo(upgradeInfo);
-
-  //     if (equipItem.infusions) {
-  //       for (const infusion of equipItem.infusions) {
-  //         upgrades.push(await fetchData('items', infusion));
-  //       }
-  //     }
-
-  //     const itemDetails = itemData ? itemData.details : null;
-  //     const stats = itemDetails?.infix_upgrade;
-  //     const attributesArray = itemDetails?.infix_upgrade?.attributes;
-  //     if (stats && attributesArray) {
-  //       stats.attributes = {};
-  //       for (const attributeObj of attributesArray) {
-  //         stats.attributes[attributeObj.attribute] = attributeObj.modifier;
-  //       }
-  //     }
-
-  //     return {
-  //       ...equipItem,
-  //       rarity: itemData?.rarity,
-  //       item_name: itemData?.name,
-  //       item_icon: itemData?.icon,
-  //       skin_name: skinData?.name,
-  //       skin_icon: skinData?.icon,
-  //       stats: equipItem.stats || stats,
-  //       details: itemDetails,
-  //       item_data: itemData,
-  //       upgrades: upgrades
-  //     };
-  //   };
-
-  //   const setItemsWithDetails = async (items) => {
-  //     const newItems = [];
-  //     for (const item of items) {
-  //       newItems.push(await equipItemWithDetails(item));
-  //     }
-  //     setMergedItems(newItems);
-  //     setLoading(false);
-  //   }
-
-  //   setItemsWithDetails(mergedItems);
-  // }, [char, selectedTab.tab]);
-
-
-  console.log('merged', mergedItems)
+  // console.log(mergedItems)
 
   return (
     <div className='equipment'>

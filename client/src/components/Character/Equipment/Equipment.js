@@ -5,7 +5,7 @@ import './Equipment.css';
 import Attributes from './Attributes';
 
 function Equipment({ items, lvl, prof }) {
-    //   console.log('items', items)
+    // console.log('items', items)
 
     return (<>
         <Container className="equipment-box">
@@ -36,7 +36,7 @@ function Equipment({ items, lvl, prof }) {
                 <br />
                 <Row>Attributes</Row>
                 <br />
-                <Attributes items={items}  lvl={lvl} prof={prof} />
+                <Attributes items={items} lvl={lvl} prof={prof} />
                 <br />
                 <Col className='flex'>
                     <ItemBox item={items.find(x => x.slot === 'Backpack')} />

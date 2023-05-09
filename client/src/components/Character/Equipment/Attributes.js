@@ -16,7 +16,7 @@ import CritDamage from './img/Critical_Damage.png';
 import Health from './img/Health.png';
 import AgonyResistance from './img/Agony_Resistance.png';
 
-function Attributes({ items, upgrades, lvl, prof }) {
+function Attributes({ items, lvl, prof }) {
 
     let power = 1000;
     let precision = 1000;
@@ -123,8 +123,8 @@ function Attributes({ items, upgrades, lvl, prof }) {
     }
 
     // Getting runes from upgrades
-    if (upgrades) {
-        for (const upgrade of upgrades) {
+    if (items.upgrades) {
+        for (const upgrade of items.upgrades) {
             for (let i = 0; i < upgrade.bonuses.length; i++) {
                 if (i <= upgrade.count) {
                     const rune = upgrade.bonuses[i].split('; ')

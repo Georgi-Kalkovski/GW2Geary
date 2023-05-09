@@ -8,7 +8,6 @@ const URLS = {
     urlProfessions: urlBasic + 'professions/',
     urlWorlds: urlBasic + 'worlds/',
     urlItems: urlBasic + 'items/',
-    urlItem: urlBasic + 'item/',
     urlItemstats: urlBasic + 'itemstats/',
     urlSkins: urlBasic + 'skins/',
     urlSpecs: urlBasic + 'specializations/',

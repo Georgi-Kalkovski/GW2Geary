@@ -84,7 +84,7 @@ function ItemBox({ item }) {
                                 );
                             })}
                         <br />
-                        
+
                         {/* UPGRADES */}
                         {item.upgrades && item.upgrades.map((upgrade, index) => (
                             <Row key={`upgrade-${upgrade.id}-${index}`}>
@@ -97,14 +97,23 @@ function ItemBox({ item }) {
                                     upgrade.details.bonuses &&
                                     upgrade.details.bonuses.map((bonus, index) => {
                                         const bonusSpans = [];
-                                        if (bonus.includes('. <c=@reminder>')) {
-                                            bonus = bonus.replace('</c>', '').split('. <c=@reminder>').slice(0, 2);
-                                            bonusSpans.push(<span key={`bonus-span-${index}-blue`} className='upgrade-blue'>{`(${index + 1}): `}{bonus[0]}</span>);
-                                            bonusSpans.push(<br />);
-                                            bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{bonus[1]}</span>);
-                                        } else {
-                                            bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
+                                        if (item.slot == "HelmAquatic") {
+                                            upgrade.counter += 1;
                                         }
+                                        if (index < upgrade.counter) {
+                                            if (bonus.includes('. <c=@reminder>')) {
+                                                bonus = bonus.replace('</c>', '').split('. <c=@reminder>').slice(0, 2);
+                                                bonusSpans.push(<span key={`bonus-span-${index}-blue`} className='upgrade-blue'>{`(${index + 1}): `}{bonus[0]}</span>);
+                                                bonusSpans.push(<br />);
+                                                bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{bonus[1]}</span>);
+                                            } else {
+                                                bonusSpans.push(<span key={`bonus-span-${index}`} className='upgrade-blue'>{`(${index + 1}): `}{bonus}</span>);
+                                            }
+                                        } else {
+                                            bonusSpans.push(<span key={`bonus-span-${index}-gray`} className='upgrade-gray'>{`(${index + 1}): `}{bonus}</span>);
+                                            <br />
+                                        }
+
                                         return (
                                             <Row key={`sigil-bonus-${item.id}-${bonus}`}>
                                                 {bonusSpans}
@@ -155,7 +164,7 @@ function ItemBox({ item }) {
                             <>
                                 <br />
                                 <div>Transmuted</div>
-                                <div>{item.skin_name}</div>
+                                <div>{item.name}</div>
                             </>
                         }
                     </Container>
