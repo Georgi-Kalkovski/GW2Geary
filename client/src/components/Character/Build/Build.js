@@ -4,22 +4,17 @@ import Skills from './Skills';
 import Template from './Template/Template';
 import './Build.css';
 
-function Build({ char, tab }) {
-    const builds = char.build_tabs;
-    let build = builds.find(x => x.is_active === true).build;
-    if (tab) {
-        build = builds[tab - 1].build;
-    }
+function Build({ tab }) {
     return (
         <Container className='spec-box'>
-            {build.specializations && build.skills && build.aquatic_skills &&
+            {tab.specializations && tab.skills && tab.aquatic_skills &&
                 <>
-                    <Skills skills={build.skills} water_skills={build.aquatic_skills} />
-                    <Traits spec={build.specializations[0]} />
-                    <Traits spec={build.specializations[1]} />
-                    <Traits spec={build.specializations[2]} />
-                    <br/>
-                    <Template buildInput={build} />
+                    <Skills skills={tab.skills} water_skills={tab.aquatic_skills} />
+                    <Traits spec={tab.specializations[0]} />
+                    <Traits spec={tab.specializations[1]} />
+                    <Traits spec={tab.specializations[2]} />
+                    <br />
+                    <Template buildInput={tab} />
                 </>
             }
         </Container>

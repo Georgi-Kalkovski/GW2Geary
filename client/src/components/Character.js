@@ -37,8 +37,8 @@ function Character() {
                         <img src={profession.icon} alt={character.profession} />{character.profession}
                     </div>
                     <div className='equipment-build-flex'>
-                        <EquipmentDropdown char={character} />
-                        {/* <BuildDropdown char={character} /> */}
+                        {/* <EquipmentDropdown char={character} /> */}
+                        <BuildDropdown char={character} />
                     </div>
                 </div>
             </>        
