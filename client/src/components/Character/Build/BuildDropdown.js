@@ -30,13 +30,13 @@ function BuildDropdown({ char }) {
                 </button>
                 {isOpen && (
                     <ul className="dropdown-menu">
-                        {char.build_tabs.map((build) => (
+                        {char.build_tabs.map((buildTab) => (
                             <li
-                                key={build.tab}
+                                key={buildTab.tab}
                                 onClick={handleItemClick}
-                                value={build.tab}
+                                value={buildTab.tab}
                             >
-                                {build.build.name ? build.build.name : `Build ${build.tab}`}
+                                {buildTab.build.name ? buildTab.build.name : `Build ${buildTab.tab}`}
                             </li>
                         ))}
                     </ul>

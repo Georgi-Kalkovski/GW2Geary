@@ -5,6 +5,7 @@ import Template from './Template/Template';
 import './Build.css';
 
 function Build({ tab }) {
+    
     return (
         <Container className='spec-box'>
             {tab.specializations && tab.skills && tab.aquatic_skills &&

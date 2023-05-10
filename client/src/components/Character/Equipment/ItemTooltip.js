@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
-function ItemBox({ item }) {
+function ItemTooltip({ item }) {
     // console.log('item ', item)
 
     const {
@@ -187,4 +187,4 @@ function ItemBox({ item }) {
     );
 }
 
-export default ItemBox;
+export default ItemTooltip;

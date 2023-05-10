@@ -15,8 +15,12 @@ function Template({ buildInput }) {
             if (buildInput.specializations) {
                 for (let i = 1; i <= 3; i++) {
                     for (let j = 1; j <= 3; j++) {
-                        const skill = await fetchData('traits', buildInput.specializations[i - 1].traits[j - 1]);
-                        fetchedTraits.push(skill.order + 1);
+                        try {
+                            const skill = await fetchData('traits', buildInput.specializations[i - 1].traits[j - 1]);
+                            fetchedTraits.push(skill.order + 1);
+                        } catch (error) {
+                            console.error(`Error fetching trait ${buildInput.specializations[i - 1].traits[j - 1]}:`, error);
+                        }
                     }
                 };
             }
@@ -27,8 +31,12 @@ function Template({ buildInput }) {
 
     useEffect(() => {
         const fetchProfession = async () => {
-            const prof = await fetchData('professions', buildInput.profession);
-            setProfession(prof);
+            try {
+                const prof = await fetchData('professions', buildInput.profession);
+                setProfession(prof);
+            } catch (error) {
+                console.error(`Error fetching profession ${buildInput.profession}:`, error);
+            }
         };
         fetchProfession();
     }, [buildInput.profession]);
@@ -36,22 +44,19 @@ function Template({ buildInput }) {
     useEffect(() => {
         async function fetchSkillIndex() {
             const skills =
-                [
-                    buildInput.skills.heal,
-                    ...buildInput.skills.utilities,
-                    buildInput.skills.elite,
-                    buildInput.aquatic_skills.heal,
-                    ...buildInput.aquatic_skills.utilities,
-                    buildInput.aquatic_skills.elite,
-                ];
+                [buildInput.skills.heal, ...buildInput.skills.utilities, buildInput.skills.elite, buildInput.aquatic_skills.heal, ...buildInput.aquatic_skills.utilities, buildInput.aquatic_skills.elite,];
 
             if (profession.skills_by_palette) {
-                const skillIndex = await Promise.all(
-                    skills.map(skill =>
-                        profession.skills_by_palette.find(element => element[1] === skill)
-                    )
-                );
-                setSkillIndex(skillIndex.map(skill => skill ? skill[0] : 0));
+                try {
+                    const skillIndex = await Promise.all(
+                        skills.map(skill =>
+                            profession.skills_by_palette.find(element => element[1] === skill)
+                        )
+                    );
+                    setSkillIndex(skillIndex.map(skill => skill ? skill[0] : 0));
+                } catch (error) {
+                    console.error('Error fetching skill index:', error);
+                }
             }
         }
 
