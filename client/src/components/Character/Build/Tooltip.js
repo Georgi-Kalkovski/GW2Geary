@@ -148,6 +148,7 @@ const Tooltip = ({ tooltip, children, className }) => {
                         {tooltip && tooltip.skills && tooltip.skills.length === 1 &&
                             <div>
                                 <TooltipComponent tooltip={tooltip.skills[0]} />
+                                <br />
                             </div>
                         }
 
