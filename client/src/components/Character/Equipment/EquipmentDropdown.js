@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Equipment from './Equipment';
 import fetchData from '../../fetchData';
+import info from '.././info.svg'
 
 const EquipmentDropdown = ({ char }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +31,9 @@ const EquipmentDropdown = ({ char }) => {
         const fetchedItems = await fetchData('items', selectedTab.equipment.map(el => el.id).join(','));
         const fetchedSkins = await fetchData('skins', selectedTab.equipment.filter(item => item.skin).map(item => item.skin).join(','));
         const fetchedUpgrades = await fetchData('items', selectedTab.equipment.filter(item => item.upgrades).flatMap(el => el.upgrades).join(','));
-        let fetchedInfusions = await fetchData('items', [
-          ...char.equipment.flatMap(el => el.infusions),
-          ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions))
+        const fetchedInfusions = await fetchData('items', [
+          ...char.equipment.flatMap(el => el.infusions).filter(item => item !== undefined),
+          ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions)).filter(item => item !== undefined)
         ].join(','));
 
         const mergingItems = selectedTab.equipment.map(item => ({
@@ -74,6 +75,7 @@ const EquipmentDropdown = ({ char }) => {
         <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
           {selectedTab && selectedTab.name ? selectedTab.name : `Equipment ${selectedTab.tab}`}
         </button>
+        <span>  <img className={`${char.profession.toLowerCase()}-filter info-size`} src={info} alt="info-size" /></span>
         {isOpen && (
           <ul className="dropdown-menu">
             {char.equipment_tabs.map((equip) => (

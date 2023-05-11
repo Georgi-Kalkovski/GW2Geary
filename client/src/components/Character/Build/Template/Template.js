@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Profession from './Profession';
 import fetchData from '../../../fetchData';
+import { usePopperTooltip } from 'react-popper-tooltip';
 const BuildTemplate = require('./BuildTemplate');
+import mouseClick from '../img/mouse-click.svg'
 
 function Template({ buildInput }) {
     const [traits, setTraits] = useState([]);
@@ -63,6 +65,14 @@ function Template({ buildInput }) {
         fetchSkillIndex();
     }, [profession.skills_by_palette, buildInput.aquatic_skills.elite, buildInput.aquatic_skills.heal, buildInput.aquatic_skills.utilities, buildInput.skills.elite, buildInput.skills.heal, buildInput.skills.utilities]);
 
+    const {
+        getArrowProps,
+        getTooltipProps,
+        setTooltipRef,
+        setTriggerRef,
+        visible,
+    } = usePopperTooltip({ placement: 'top' });
+
     const build = new BuildTemplate();
     build.profession = Profession(buildInput.profession);
     build.specializations[0].id = buildInput.specializations[0].id;
@@ -100,9 +110,23 @@ function Template({ buildInput }) {
             <button
                 className={`${buildInput.profession.toLowerCase()}-border template-button`}
                 onClick={copyText}
-                style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}>
+                style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
+                ref={setTriggerRef}>
                 Copy
             </button>
+
+            {visible && (
+                <div
+                    ref={setTooltipRef}
+                    {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
+                >
+                    <div>
+                        <img className='mouse-click' src={mouseClick} alt="" /> 
+                        <span>Click</span> to <span className='save'>Save</span> Build (<span className='copy-build'>Traits</span> & <span className='copy-build'>Skills</span>)
+                    </div>
+                    <div {...getArrowProps({ className: 'tooltip-arrow' })} />
+                </div>
+            )}
         </div>
     );
 }

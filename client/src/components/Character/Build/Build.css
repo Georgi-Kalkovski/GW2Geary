@@ -172,8 +172,10 @@
     max-height: 16px;
 }
 
-.lightning-border {
-    border: 1.5px solid rgb(45, 45, 245);
-    box-shadow: 0 0 10px 2px rgba(0,0,255,0.5);
+.copy-build {
+    color: #ffcd77;
+}
 
+.save {
+    color: #088508;
 }

@@ -9,7 +9,7 @@
 
 .equipment {
   width: 40%;
-  margin-right:2%;
+  margin-right: 2%;
 }
 
 
@@ -71,4 +71,8 @@
   font-weight: 500;
   min-width: 15%;
   z-index: 20;
+}
+
+.info-size {
+  height: 20px;
 }

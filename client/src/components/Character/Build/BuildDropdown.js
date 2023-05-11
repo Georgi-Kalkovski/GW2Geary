@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Build from './Build';
+import Build from './Build'
+import info from '.././info.svg';
 
 function BuildDropdown({ char }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ function BuildDropdown({ char }) {
                 <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
                     {selectedTab && selectedTab.build.name ? selectedTab.build.name : `Build ${selectedTab.tab}`}
                 </button>
+                <span>  <img className={`${char.profession.toLowerCase()}-filter info-size`} src={info} alt="info-size" /></span>
                 {isOpen && (
                     <ul className="dropdown-menu">
                         {char.build_tabs.map((buildTab) => (

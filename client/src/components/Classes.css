@@ -16,6 +16,14 @@
   box-shadow: 0 0 10px 2px rgba(152, 105, 44, 0.5);
 }
 
+.engineer-filter {
+  filter: invert(42%) sepia(14%) saturate(2018%) hue-rotate(354deg) brightness(97%) contrast(86%);
+}
+
+.engineer-filter:hover {
+  filter: invert(26%) sepia(51%) saturate(548%) hue-rotate(353deg) brightness(95%) contrast(95%);
+}
+
 .necromancer-text {
   color: #3f5847;
 }
@@ -34,7 +42,15 @@
   box-shadow: 0 0 10px 2px rgba(26, 36, 29, 0.5);
 }
 
-.thief-text {
+.necromancer-filter {
+  filter: invert(30%) sepia(20%) saturate(491%) hue-rotate(87deg) brightness(98%) contrast(93%);
+}
+
+.necromancer-filter {
+  filter: invert(9%) sepia(17%) saturate(801%) hue-rotate(85deg) brightness(95%) contrast(91%);
+}
+
+:hover .thief-text {
   color: #495578;
 }
 
@@ -50,6 +66,14 @@
 .thief-lightning-border {
   border: 1.5px solid rgb(73, 85, 120);
   box-shadow: 0 0 10px 2px rgba(41, 48, 69, 0.5);
+}
+
+.thief-filter {
+  filter: invert(33%) sepia(9%) saturate(1901%) hue-rotate(187deg) brightness(91%) contrast(89%);
+}
+
+.thief-filter:hover {
+  filter: invert(16%) sepia(14%) saturate(1403%) hue-rotate(187deg) brightness(95%) contrast(92%);
 }
 
 .elementalist-text {
@@ -70,6 +94,14 @@
   box-shadow: 0 0 10px 2px rgba(111, 37, 31, 0.5);
 }
 
+.elementalist-filter {
+  filter: invert(33%) sepia(17%) saturate(3257%) hue-rotate(330deg) brightness(89%) contrast(89%);
+}
+
+.elementalist-filter:hover {
+  filter: invert(16%) sepia(29%) saturate(3153%) hue-rotate(334deg) brightness(100%) contrast(94%);
+}
+
 .warrior-text {
   color: #bc8d16;
 }
@@ -88,6 +120,14 @@
   box-shadow: 0 0 10px 2px rgba(137, 102, 16, 0.5);
 }
 
+.warrior-filter {
+  filter: invert(50%) sepia(75%) saturate(471%) hue-rotate(5deg) brightness(96%) contrast(96%);
+}
+
+.warrior-filter:hover {
+  filter: invert(32%) sepia(49%) saturate(3225%) hue-rotate(38deg) brightness(88%) contrast(87%);
+}
+
 .ranger-text {
   color: #8ea53a;
 }
@@ -104,6 +144,14 @@
 .ranger-lightning-border {
   border: 1.5px solid rgb(142, 165, 58);
   box-shadow: 0 0 10px 2px rgba(98, 114, 40, 0.5);
+}
+
+.ranger-filter {
+  filter: invert(56%) sepia(58%) saturate(441%) hue-rotate(32deg) brightness(98%) contrast(86%);
+}
+
+.ranger-filter:hover {
+  filter: invert(38%) sepia(66%) saturate(383%) hue-rotate(32deg) brightness(93%) contrast(92%);
 }
 
 
@@ -125,6 +173,14 @@
   box-shadow: 0 0 10px 2px rgba(74, 42, 94, 0.5);
 }
 
+.mesmer-filter {
+  filter: invert(30%) sepia(11%) saturate(3614%) hue-rotate(235deg) brightness(94%) contrast(87%);
+}
+
+.mesmer-filter:hover {
+  filter: invert(19%) sepia(30%) saturate(1273%) hue-rotate(234deg) brightness(88%) contrast(92%);
+}
+
 .guardian-text {
   color: #67aecb;
 }
@@ -143,6 +199,14 @@
   box-shadow: 0 0 10px 2px rgba(77, 130, 151, 0.5);
 }
 
+.guardian-filter {
+  filter: invert(72%) sepia(41%) saturate(432%) hue-rotate(155deg) brightness(83%) contrast(91%);
+}
+
+.guardian-filter:hover {
+  filter: invert(47%) sepia(21%) saturate(792%) hue-rotate(151deg) brightness(94%) contrast(90%);
+}
+
 .revenant-text {
   color: #572435;
 }
@@ -159,4 +223,12 @@
 .revenant-lightning-border {
   border: 1.5px solid rgb(87, 36, 53);
   box-shadow: 0 0 10px 2px rgba(36, 14, 21, 0.5);
+}
+
+.revenant-filter {
+  filter: invert(14%) sepia(93%) saturate(519%) hue-rotate(291deg) brightness(93%) contrast(89%);
+}
+
+.revenant-filter:hover {
+  filter: invert(6%) sepia(10%) saturate(4148%) hue-rotate(292deg) brightness(94%) contrast(97%);
 }

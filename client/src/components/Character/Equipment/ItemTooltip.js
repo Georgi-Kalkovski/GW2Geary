@@ -21,7 +21,7 @@ function ItemTooltip({ item }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className='item-popup'>
+                    <Container className={`item-popup border-${item.rarity.toLowerCase()}`}>
                         {/* NAME */}
                         <Row key={`name-${item.id}`} className={`name-${item.rarity.toLowerCase()}`}>
                             {item.skin_name
