@@ -122,7 +122,7 @@ function Template({ buildInput }) {
                 >
                     <div>
                         <img className='mouse-click' src={mouseClick} alt="" /> 
-                        <span>Click</span> to <span className='save'>Save</span> Build (<span className='copy-build'>Traits</span> & <span className='copy-build'>Skills</span>)
+                        <span>Click</span> to <span className='save'>Copy</span> Build (<span className='copy-build'>Traits</span> & <span className='copy-build'>Skills</span>)
                     </div>
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
