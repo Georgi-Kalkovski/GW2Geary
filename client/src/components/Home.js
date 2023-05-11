@@ -28,7 +28,6 @@ function Home() {
         }
     }, [account.world]);
 
-
     return (
         <>
             <span className="home-account">
@@ -40,8 +39,8 @@ function Home() {
             </span>
             <div className="home-characters">
                 {charNames.map((charName) => (
-                    <div key={charName} className="home-character">
-                        <Link to={`/characters/${charName}`} className="home-character-link" char={charName}>
+                    <div key={charName.replace(/\s/g, "_")} className="home-character">
+                        <Link to={`/characters/${charName.replace(/\s/g, "_")}`} className="home-character-link" char={charName}>
                             <div><h3>{charName}</h3></div>
                             <CharacterBox charName={charName} />
                         </Link>

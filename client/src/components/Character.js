@@ -8,13 +8,15 @@ import './Character.css';
 
 function Character() {
     const { name } = useParams();
+    
+    const formattedName = name.replaceAll('_', '%20');
     const [character, setCharacter] = useState(null);
     const [profession, setProfession] = useState('');
 
     useEffect(() => {
         (async () => {
             try {            
-                const char = await fetchData('characters', name);
+                const char = await fetchData('characters', formattedName);
                 setCharacter(char);
                 const prof = await fetchData('professions', char.profession);
                 setProfession(prof);

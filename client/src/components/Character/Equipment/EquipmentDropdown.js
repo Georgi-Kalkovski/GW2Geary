@@ -27,13 +27,13 @@ const EquipmentDropdown = ({ char }) => {
   useEffect(() => {
     (async () => {
       try {
-        const fetchedItems = await fetchData('items', selectedTab.equipment.map(el => el.id).join(','))
-        const fetchedSkins = await fetchData('skins', selectedTab.equipment.filter(item => item.skin).map(item => item.skin).join(','))
-        const fetchedUpgrades = await fetchData('items', selectedTab.equipment.filter(item => item.upgrades).flatMap(el => el.upgrades).join(','))
-        const fetchedInfusions = await fetchData('items', [
+        const fetchedItems = await fetchData('items', selectedTab.equipment.map(el => el.id).join(','));
+        const fetchedSkins = await fetchData('skins', selectedTab.equipment.filter(item => item.skin).map(item => item.skin).join(','));
+        const fetchedUpgrades = await fetchData('items', selectedTab.equipment.filter(item => item.upgrades).flatMap(el => el.upgrades).join(','));
+        let fetchedInfusions = await fetchData('items', [
           ...char.equipment.flatMap(el => el.infusions),
           ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions))
-        ].join(','))
+        ].join(','));
 
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,
@@ -56,7 +56,7 @@ const EquipmentDropdown = ({ char }) => {
               ?? []
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
           ],
-        }))
+        }));
 
         setMergedItems(mergingItems);
       } catch (error) {
@@ -66,7 +66,7 @@ const EquipmentDropdown = ({ char }) => {
 
   }, [selectedTab.equipment, char.equipment, char.equipment_tabs])
 
-  // console.log(mergedItems)
+  console.log(mergedItems)
 
   return (
     <div className='equipment'>

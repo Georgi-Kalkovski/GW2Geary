@@ -15,6 +15,7 @@ function Skills({ skills, water_skills, prof }) {
         waterUtilities: [null, null, null],
         waterElite: null
     });
+
     useEffect(() => {
         const skillIds = [
             skills.heal,
@@ -64,8 +65,8 @@ function Skills({ skills, water_skills, prof }) {
                     <img src={Land} alt="land" />
                 </Col>
                 <SkillBox skill={skillsData.heal} />
-                {skillsData.utilities.map((utility, index) => (
-                    <SkillBox key={`utility-${index}`} skill={utility} />
+                {[0, 1, 2].map(index => (
+                    <SkillBox key={`utility-${index}`} skill={skillsData.utilities[index]} />
                 ))}
                 <SkillBox skill={skillsData.elite} />
             </Row>
@@ -74,8 +75,8 @@ function Skills({ skills, water_skills, prof }) {
                     <img src={Water} alt="water" />
                 </Col>
                 <SkillBox skill={skillsData.waterHeal} />
-                {skillsData.waterUtilities.map((utility, index) => (
-                    <SkillBox key={`water-utility-${index}`} skill={utility} />
+                {[0, 1, 2].map(index => (
+                    <SkillBox key={`water-utility-${index}`} skill={skillsData.waterUtilities[index]} />
                 ))}
                 <SkillBox skill={skillsData.waterElite} />
             </Row>

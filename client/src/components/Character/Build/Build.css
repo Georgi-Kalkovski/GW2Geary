@@ -45,7 +45,7 @@
 }
 
 .dropdown-menu {
-    z-index: 5 !important;
+    z-index:5;
 }
 
 .minor-trait-icon {

@@ -94,6 +94,8 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                                                     return `${fact.text}: [[[${fact.dmg_multiplier * 1000}]]]`;
                                                 case 'Unblockable':
                                                     return fact.text;
+                                                    case 'StunBreak':
+                                                    return 'Breaks Stun';
                                                 case 'Time':
                                                     return `${fact.text}: ${fact.duration}`;
                                                 case 'Buff':

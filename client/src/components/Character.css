@@ -1,17 +1,17 @@
 .equipment-build-flex {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   height: 100%;
+  width: 100vw;
   padding-top: 1%;
+  justify-content: center;
 }
 
 .equipment {
-  width: 50%;
+  width: 40%;
+  margin-right:2%;
 }
 
-.equipment-block {
-  display: block;
-}
 
 .dropdown {
   position: relative;

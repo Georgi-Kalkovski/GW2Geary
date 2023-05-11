@@ -1,7 +1,6 @@
 .equipment-box {
     display: flex;
-    margin: 1% 0% 0% 12%;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .item-box {
