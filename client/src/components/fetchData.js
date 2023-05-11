@@ -19,8 +19,7 @@ const fetchData = async (urls, id) => {
   if (id) { url = url + id }
 
   try {
-    const response = await axios.get(url);
-    return response.data;
+    return (await axios.get(url)).data;
   } catch (error) {
     console.error(error);
   }

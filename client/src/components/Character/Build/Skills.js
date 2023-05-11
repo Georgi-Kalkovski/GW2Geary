@@ -6,7 +6,7 @@ import Tooltip from './Tooltip';
 import Land from './img/land.png';
 import Water from './img/water.png';
 
-function Skills({ skills, water_skills }) {
+function Skills({ skills, water_skills, prof }) {
     const [skillsData, setSkillsData] = useState({
         heal: null,
         utilities: [null, null, null],
@@ -16,32 +16,25 @@ function Skills({ skills, water_skills }) {
         waterElite: null
     });
     useEffect(() => {
+        const skillIds = [
+            skills.heal,
+            skills.elite,
+            water_skills.heal,
+            water_skills.elite,
+            ...skills.utilities,
+            ...water_skills.utilities
+        ].filter(id => id !== null);
+
         (async () => {
             try {
-                const promises = [
-                    skills.heal && fetchData('skills', skills.heal),
-                    skills.elite && fetchData('skills', skills.elite),
-                    water_skills.heal && fetchData('skills', water_skills.heal),
-                    water_skills.elite && fetchData('skills', water_skills.elite),
-                    Promise.all(skills.utilities.map(utility => utility && fetchData('skills', utility))),
-                    Promise.all(water_skills.utilities.map(utility => utility && fetchData('skills', utility)))
-                ];
-                const [
-                    healSkill,
-                    eliteSkill,
-                    waterHealSkill,
-                    waterEliteSkill,
-                    utilitySkills,
-                    waterUtilitySkills
-                ] = await Promise.all(promises);
-
+                const skillsData = await fetchData('skills', skillIds.join(','));
                 setSkillsData({
-                    heal: healSkill,
-                    utilities: utilitySkills.slice(0, 3),
-                    elite: eliteSkill,
-                    waterHeal: waterHealSkill,
-                    waterUtilities: waterUtilitySkills.slice(0, 3),
-                    waterElite: waterEliteSkill
+                    heal: skillsData.find(skill => skill.id === skills.heal),
+                    utilities: skillsData.filter(skill => skills.utilities.includes(skill.id)).slice(0, 3),
+                    elite: skillsData.find(skill => skill.id === skills.elite),
+                    waterHeal: skillsData.find(skill => skill.id === water_skills.heal),
+                    waterUtilities: skillsData.filter(skill => water_skills.utilities.includes(skill.id)).slice(0, 3),
+                    waterElite: skillsData.find(skill => skill.id === water_skills.elite)
                 });
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -53,8 +46,8 @@ function Skills({ skills, water_skills }) {
         if (skill && skill.name) {
             return (
                 <Container className="skill-box-container">
-                    {console.log(skill)}
-                    <Tooltip tooltip={skill}>
+                    {/* {console.log(skill)} */}
+                    <Tooltip tooltip={skill} prof={prof}>
                         <img className="skill-box cursor" src={skill.icon} alt={skill.name} />
                     </Tooltip>
                 </Container>

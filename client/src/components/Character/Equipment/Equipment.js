@@ -4,7 +4,7 @@ import ItemTooltip from './ItemTooltip';
 import './Equipment.css';
 import Attributes from './Attributes';
 
-function Equipment({ items, lvl, prof }) {
+function Equipment({ items, prof }) {
     // console.log('items', items)
 
     return (<>
@@ -36,7 +36,7 @@ function Equipment({ items, lvl, prof }) {
                 <br />
                 <Row>Attributes</Row>
                 <br />
-                <Attributes items={items} lvl={lvl} prof={prof} />
+                <Attributes items={items} prof={prof} />
                 <br />
                 <Col className='flex'>
                     <ItemTooltip item={items.find(x => x.slot === 'Backpack')} />

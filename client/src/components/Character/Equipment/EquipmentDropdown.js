@@ -64,7 +64,7 @@ const EquipmentDropdown = ({ char }) => {
       }
     })();
 
-  }, [selectedTab, char.equipment])
+  }, [selectedTab.equipment, char.equipment, char.equipment_tabs])
 
   // console.log(mergedItems)
 
@@ -88,7 +88,7 @@ const EquipmentDropdown = ({ char }) => {
           </ul>
         )}
       </div>
-      <Equipment key={selectedTab.tab} items={mergedItems} lvl={char.level} prof={char.profession} />
+      <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} prof={char.profession} />
     </div>
   );
 }

@@ -16,7 +16,7 @@ import CritDamage from './img/Critical_Damage.png';
 import Health from './img/Health.png';
 import AgonyResistance from './img/Agony_Resistance.png';
 
-function Attributes({ items, lvl, prof }) {
+function Attributes({ items, prof }) {
 
     let power = 1000;
     let precision = 1000;

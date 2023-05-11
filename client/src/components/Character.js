@@ -4,7 +4,6 @@ import fetchData from './fetchData';
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
 import BackButton from './BackButton';
-import Loader from './Loader';
 import './Character.css';
 
 function Character() {
@@ -27,7 +26,7 @@ function Character() {
 
     return (
         character === null 
-        ? <Loader/> 
+        ? <div className='center-items'>Loading...</div>
         : <>
                 <BackButton />
                 <div className='center-items'>
@@ -37,7 +36,7 @@ function Character() {
                         <img src={profession.icon} alt={character.profession} />{character.profession}
                     </div>
                     <div className='equipment-build-flex'>
-                        {/* <EquipmentDropdown char={character} /> */}
+                        <EquipmentDropdown char={character} />
                         <BuildDropdown char={character} />
                     </div>
                 </div>

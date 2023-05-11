@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import fetchData from "../fetchData";
-import Loader from "../Loader";
 import '../Classes.css';
 
 function CharacterBox({ charName }) {
@@ -8,14 +7,17 @@ function CharacterBox({ charName }) {
     const [profession, setProfession] = useState('');
 
     useEffect(() => {
-        const fetchProfession = async () => {
-            const response = await fetchData('characters', charName);
-            const prof = await fetchData('professions', response.profession);
-            setCharacter(response);
-            setProfession(prof);
-        };
-        fetchProfession();
-    }, [charName]);
+        (async () => {
+            try {
+                const char = await fetchData('characters', charName);
+                setCharacter(char);
+                const prof = await fetchData('professions', char.profession)
+                setProfession(prof);
+            } catch (error) {
+                console.error(error);
+            }
+        })();
+    }, [charName, character]);
 
     return (
         <>
@@ -27,7 +29,7 @@ function CharacterBox({ charName }) {
                         <div>{character.profession}</div>
                     </div>
                 </>
-                : <Loader />
+                : <div className='center-items'>Loading...</div>
             }
         </>
     );

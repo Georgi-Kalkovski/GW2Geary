@@ -11,6 +11,11 @@
   background-color: #65451d;
 }
 
+.engineer-lightning-border {
+  border: 1.5px solid rgb(152, 105, 44);
+  box-shadow: 0 0 10px 2px rgba(152, 105, 44, 0.5);
+}
+
 .necromancer-text {
   color: #3f5847;
 }
@@ -22,6 +27,11 @@
 .necromancer-border:hover {
   transition: background-color 0.3s ease-out;
   background-color: #1a241d;
+}
+
+.necromancer-lightning-border {
+  border: 1.5px solid rgb(63, 88, 71);
+  box-shadow: 0 0 10px 2px rgba(26, 36, 29, 0.5);
 }
 
 .thief-text {
@@ -37,6 +47,11 @@
   background-color: #293045;
 }
 
+.thief-lightning-border {
+  border: 1.5px solid rgb(73, 85, 120);
+  box-shadow: 0 0 10px 2px rgba(41, 48, 69, 0.5);
+}
+
 .elementalist-text {
   color: #a3362e;
 }
@@ -48,6 +63,11 @@
 .elementalist-border:hover {
   transition: background-color 0.3s ease-out;
   background-color: #6f251f;
+}
+
+.elementalist-lightning-border {
+  border: 1.5px solid rgb(163, 54, 46);
+  box-shadow: 0 0 10px 2px rgba(111, 37, 31, 0.5);
 }
 
 .warrior-text {
@@ -63,6 +83,11 @@
   background-color: #896610;
 }
 
+.warrior-lightning-border {
+  border: 1.5px solid rgb(188, 141, 22);
+  box-shadow: 0 0 10px 2px rgba(137, 102, 16, 0.5);
+}
+
 .ranger-text {
   color: #8ea53a;
 }
@@ -76,6 +101,12 @@
   background-color: #627228;
 }
 
+.ranger-lightning-border {
+  border: 1.5px solid rgb(142, 165, 58);
+  box-shadow: 0 0 10px 2px rgba(98, 114, 40, 0.5);
+}
+
+
 .mesmer-text {
   color: #724192;
 }
@@ -87,6 +118,11 @@
 .mesmer-border:hover {
   transition: background-color 0.3s ease-out;
   background-color: #4a2a5e;
+}
+
+.mesmer-lightning-border {
+  border: 1.5px solid rgb(114, 65, 146);
+  box-shadow: 0 0 10px 2px rgba(74, 42, 94, 0.5);
 }
 
 .guardian-text {
@@ -102,6 +138,11 @@
   background-color: #4d8297;
 }
 
+.guardian-lightning-border {
+  border: 1.5px solid rgb(103, 174, 203);
+  box-shadow: 0 0 10px 2px rgba(77, 130, 151, 0.5);
+}
+
 .revenant-text {
   color: #572435;
 }
@@ -113,4 +154,9 @@
 .revenant-border:hover {
   transition: background-color 0.3s ease-out;
   background-color: #240e15;
+}
+
+.revenant-lightning-border {
+  border: 1.5px solid rgb(87, 36, 53);
+  box-shadow: 0 0 10px 2px rgba(36, 14, 21, 0.5);
 }

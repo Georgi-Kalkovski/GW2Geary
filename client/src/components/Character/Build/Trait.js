@@ -3,16 +3,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Tooltip from './Tooltip';
 import fetchData from '../../fetchData';
 
-function Trait({ traitsMin, traitsMaj, traitsActive }) {
+function Trait({ traitsMin, traitsMaj, traitsActive, prof }) {
     const [traitMin, setTraitMin] = useState(null);
     const [traitMaj, setTraitMaj] = useState(null);
 
     useEffect(() => {
         (async () => {
             try {
-                const fetchedTraits = await Promise.all(
-                    traitsMin.map((t) => fetchData('traits', t))
-                );
+                const fetchedTraits = await fetchData('traits', traitsMin.join(","));
                 setTraitMin(fetchedTraits);
             } catch (error) {
                 console.error(error);
@@ -23,20 +21,18 @@ function Trait({ traitsMin, traitsMaj, traitsActive }) {
     useEffect(() => {
         (async () => {
             try {
-                const fetchedTraits = await Promise.all(
-                    traitsMaj.map((t) => fetchData('traits', t))
-                );
+                const fetchedTraits = await fetchData('traits', traitsMaj.join(","));
                 setTraitMaj(fetchedTraits);
             } catch (error) {
                 console.error(error);
             }
         })();
     }, [traitsMaj]);
-    
+
     function imageTraitMin(trait) {
         return (
             <Container>
-                <Tooltip tooltip={trait}>
+                <Tooltip tooltip={trait} prof={prof}>
                     <img src={trait.icon} alt={trait.name} className='minor-trait-icon' />
                 </Tooltip>
             </Container>
@@ -45,7 +41,7 @@ function Trait({ traitsMin, traitsMaj, traitsActive }) {
 
     function imageTraitMaj(trait) {
         return (
-            <Tooltip tooltip={trait}>
+            <Tooltip tooltip={trait} prof={prof}>
                 <img src={trait.icon} alt={trait.name}
                     className={traitsActive.includes(trait.id)
                         ? 'major-trait-icon'

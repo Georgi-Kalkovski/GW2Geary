@@ -5,45 +5,29 @@ import CharacterBox from './Home/CharacterBox';
 
 function Home() {
     const [account, setAccount] = useState([]);
-    const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState({});
     const [charNames, setCharNames] = useState([]);
+    const [mastery, setMastery] = useState(null);
 
     useEffect(() => {
-        const fetchAccount = async () => {
-            const response = await fetchData('account');
-            setAccount(response);
-        };
-        fetchAccount();
-    }, []);
-
-    useEffect(() => {
-        const fetchWorld = async () => {
-            if (account.world) {
-                const response = await fetchData('worlds', account.world);
-                setWorld(response[0]);
-            }
-        };
-        fetchWorld();
+        try {
+            (async () => {
+                const acc = await fetchData('account')
+                setAccount(acc);
+                if (account.world) {
+                    const world = (await fetchData('worlds', account.world))[0]
+                    setWorld(world);
+                }
+                const charName = await fetchData('characters', account.world)
+                setCharNames(charName);
+                const { totals } = await fetchData('mastery');
+                setMastery(totals.reduce((acc, x) => acc + x.earned, 0));
+            })();
+        } catch (error) {
+            console.error(error);
+        }
     }, [account.world]);
 
-    useEffect(() => {
-        const fetchMastery = async () => {
-            const response = await fetchData('mastery');
-            const totals = response.totals;
-            const earnedSum = totals.reduce((acc, x) => acc + x.earned, 0)
-            setMastery(earnedSum)
-        };
-        fetchMastery();
-    }, []);
-
-    useEffect(() => {
-        const fetchCharNames = async () => {
-            const response = await fetchData('characters', account.world);
-            setCharNames(response);
-        };
-        fetchCharNames();
-    }, [account.world]);
 
     return (
         <>

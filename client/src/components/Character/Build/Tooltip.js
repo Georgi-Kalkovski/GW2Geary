@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { Container, Row, Col } from 'react-bootstrap';
 import mouseClick from './img/mouse-click.svg'
-const Tooltip = ({ tooltip, children, className }) => {
+const Tooltip = ({ tooltip, prof, children, className }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [tooltipIndex, setTooltipIndex] = useState(0);
 
@@ -164,8 +164,8 @@ const Tooltip = ({ tooltip, children, className }) => {
                                 <br />
                             </div>
                         }
-                        <div className='lightning-border'>
-                            {console.log(tooltip)}
+                        <div className={`${prof.toLowerCase()}-lightning-border`}>
+                            {/* {console.log(tooltip)} */}
                             <TooltipComponent tooltip={tooltip} />
                         </div>
 
