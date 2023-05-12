@@ -108,13 +108,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ce1c1a;
+  background-color: #808080;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 .off-text{
-  color: #ce1c1a;
+  color: #808080;
 }
 
 .slider:before {

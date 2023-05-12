@@ -142,7 +142,7 @@ const EquipmentDropdown = ({ char }) => {
             type="checkbox"
             checked={isSliderOn}
             onChange={toggleSlider} />
-          <span className={`${char.profession.toLowerCase()}-border slider round`}></span>
+          <span className={`${char.profession.toLowerCase()}-switch slider round`}></span>
         </label>
       </div>
       <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} prof={char.profession} slider={isSliderOn} />

@@ -3,7 +3,7 @@
   color: #98692c;
 }
 
-input:checked+.engineer-border,
+input:checked+.engineer-switch,
 .engineer-border {
   background-color: #98692c;
 }
@@ -31,7 +31,7 @@ input:checked+.engineer-border,
   color: #3f5847;
 }
 
-input:checked+.necromancer-border,
+input:checked+.necromancer-switch,
 .necromancer-border {
   background-color: #3f5847;
 }
@@ -63,7 +63,7 @@ input:checked+.necromancer-border,
   color: #495578;
 }
 
-input:checked+.thief-border,
+input:checked+.thief-switch,
 .thief-border {
   background-color: #495578;
 }
@@ -91,7 +91,7 @@ input:checked+.thief-border,
   color: #a3362e;
 }
 
-input:checked+.elementalist-border,
+input:checked+.elementalist-switch,
 .elementalist-border {
   background-color: #a3362e;
 }
@@ -119,7 +119,7 @@ input:checked+.elementalist-border,
   color: #bc8d16;
 }
 
-input:checked+.warrior-border,
+input:checked+.warrior-switch,
 .warrior-border {
   background-color: #bc8d16;
 }
@@ -147,7 +147,7 @@ input:checked+.warrior-border,
   color: #8ea53a;
 }
 
-input:checked+.ranger-border,
+input:checked+.ranger-switch,
 .ranger-border {
   background-color: #8ea53a;
 }
@@ -175,7 +175,7 @@ input:checked+.ranger-border,
   color: #724192;
 }
 
-input:checked+.mesmer-border,
+input:checked+.mesmer-switch,
 .mesmer-border {
   background-color: #724192;
 }
@@ -203,7 +203,7 @@ input:checked+.mesmer-border,
   color: #67aecb;
 }
 
-input:checked+.guardian-border,
+input:checked+.guardian-switch,
 .guardian-border {
   background-color: #67aecb;
 }
@@ -231,7 +231,7 @@ input:checked+.guardian-border,
   color: #572435;
 }
 
-input:checked+.revenant-border,
+input:checked+.revenant-switch,
 .revenant-border {
   background-color: #572435;
 }
