@@ -1,6 +1,9 @@
+.equipment {
+    width: 30%;
+  }
+
 .equipment-box {
     display: flex;
-    justify-content: space-around;
 }
 
 .item-box {
@@ -9,6 +12,11 @@
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
+}
+
+.equipment-col-1 {
+    margin-left: 15%;
+    margin-right: 22%;
 }
 
 .item-popup {
@@ -44,6 +52,16 @@
 .attribute-popup img {
     width: 20px;
     height: 20px;
+}
+
+.equip-tooltip {
+    background-color: #000000e0;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 300px;
+    font-size: small;
+    text-align: center;
 }
 
 .italic {

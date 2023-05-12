@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { Container, Row, Col } from 'react-bootstrap';
-import mouseClick from './img/mouse-click.svg'
+import mouseClick from '.././mouse-click.svg'
+
 const Tooltip = ({ tooltip, prof, children, className }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [tooltipIndex, setTooltipIndex] = useState(0);
@@ -22,8 +23,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
         setTriggerRef,
         visible,
     } = usePopperTooltip({
-        placement: 'top-start',
-        offset: [50],
+        placement: 'right',
         visible: isVisible,
         onVisibleChange: setIsVisible,
     });
@@ -94,7 +94,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                                                     return `${fact.text}: [[[${fact.dmg_multiplier * 1000}]]]`;
                                                 case 'Unblockable':
                                                     return fact.text;
-                                                    case 'StunBreak':
+                                                case 'StunBreak':
                                                     return 'Breaks Stun';
                                                 case 'Time':
                                                     return `${fact.text}: ${fact.duration}`;

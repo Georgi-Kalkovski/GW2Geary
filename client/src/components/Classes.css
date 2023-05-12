@@ -1,7 +1,9 @@
+/* Engineer */
 .engineer-text {
   color: #98692c;
 }
 
+input:checked+.engineer-border,
 .engineer-border {
   background-color: #98692c;
 }
@@ -24,10 +26,12 @@
   filter: invert(26%) sepia(51%) saturate(548%) hue-rotate(353deg) brightness(95%) contrast(95%);
 }
 
+/* Necromancer */
 .necromancer-text {
   color: #3f5847;
 }
 
+input:checked+.necromancer-border,
 .necromancer-border {
   background-color: #3f5847;
 }
@@ -50,10 +54,16 @@
   filter: invert(9%) sepia(17%) saturate(801%) hue-rotate(85deg) brightness(95%) contrast(91%);
 }
 
-:hover .thief-text {
+.thief-text {
   color: #495578;
 }
 
+/* Thief */
+.elementalist-text {
+  color: #495578;
+}
+
+input:checked+.thief-border,
 .thief-border {
   background-color: #495578;
 }
@@ -76,10 +86,12 @@
   filter: invert(16%) sepia(14%) saturate(1403%) hue-rotate(187deg) brightness(95%) contrast(92%);
 }
 
+/* Elementalist */
 .elementalist-text {
   color: #a3362e;
 }
 
+input:checked+.elementalist-border,
 .elementalist-border {
   background-color: #a3362e;
 }
@@ -102,10 +114,12 @@
   filter: invert(16%) sepia(29%) saturate(3153%) hue-rotate(334deg) brightness(100%) contrast(94%);
 }
 
+/* Warrior */
 .warrior-text {
   color: #bc8d16;
 }
 
+input:checked+.warrior-border,
 .warrior-border {
   background-color: #bc8d16;
 }
@@ -128,10 +142,12 @@
   filter: invert(32%) sepia(49%) saturate(3225%) hue-rotate(38deg) brightness(88%) contrast(87%);
 }
 
+/* Ranger */
 .ranger-text {
   color: #8ea53a;
 }
 
+input:checked+.ranger-border,
 .ranger-border {
   background-color: #8ea53a;
 }
@@ -154,11 +170,12 @@
   filter: invert(38%) sepia(66%) saturate(383%) hue-rotate(32deg) brightness(93%) contrast(92%);
 }
 
-
+/* Mesmer */
 .mesmer-text {
   color: #724192;
 }
 
+input:checked+.mesmer-border,
 .mesmer-border {
   background-color: #724192;
 }
@@ -181,10 +198,12 @@
   filter: invert(19%) sepia(30%) saturate(1273%) hue-rotate(234deg) brightness(88%) contrast(92%);
 }
 
+/* Guardian */
 .guardian-text {
   color: #67aecb;
 }
 
+input:checked+.guardian-border,
 .guardian-border {
   background-color: #67aecb;
 }
@@ -207,10 +226,12 @@
   filter: invert(47%) sepia(21%) saturate(792%) hue-rotate(151deg) brightness(94%) contrast(90%);
 }
 
+/* Revenant */
 .revenant-text {
   color: #572435;
 }
 
+input:checked+.revenant-border,
 .revenant-border {
   background-color: #572435;
 }

@@ -15,9 +15,10 @@ app.use(function (req, res, next) {
 // Require routes
 const accountRouter = require('./routes/account');
 const charactersRouter = require('./routes/characters');
+const charactersAllRouter = require('./routes/charactersAll');
 const itemsRouter = require('./routes/items');
-const itemstatsRouter = require('./routes/itemstats');
 const professionsRouter = require('./routes/professions');
+const professionsAllRouter = require('./routes/professionsAll');
 const skillsRouter = require('./routes/skills');
 const skinsRouter = require('./routes/skins');
 const specializationsRouter = require('./routes/specializations');
@@ -27,9 +28,10 @@ const worldsRouter = require('./routes/worlds');
 // Register routes
 app.use('/api/account', accountRouter);
 app.use('/api/characters', charactersRouter);
+app.use('/api/charactersAll', charactersAllRouter);
 app.use('/api/items', itemsRouter);
-app.use('/api/itemstats', itemstatsRouter);
 app.use('/api/professions', professionsRouter);
+app.use('/api/professionsAll', professionsAllRouter);
 app.use('/api/skills', skillsRouter);
 app.use('/api/skins', skinsRouter);
 app.use('/api/specializations', specializationsRouter);

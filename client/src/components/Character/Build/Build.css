@@ -1,29 +1,8 @@
-.dropdown-menu {
-    background-color: #f1f1f1;
-    padding: 0;
-}
-
-.build>.dropdown {
-    position: absolute;
-}
-
-.dropdown-menu-right li {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-menu-right li:hover {
-    background-color: #ddd;
-}
-
 .spec-box {
     display: flex;
     flex-direction: column;
-    margin-top: 7%;
+    margin-top: 2%;
 }
-
 
 .cropped-spec-img-div {
     box-sizing: border-box;
@@ -39,13 +18,13 @@
 .traits-box {
     position: absolute;
     margin: auto;
-    width: 30%;
-    padding-top: 2.7%;
-    padding-left: 10%;
+    width: 515px;
+    padding-top: 48px;
+    padding-left: 200px;
 }
 
 .dropdown-menu {
-    z-index:5;
+    z-index: 5;
 }
 
 .minor-trait-icon {
@@ -172,7 +151,7 @@
     max-height: 16px;
 }
 
-.copy-build {
+.yellow-popup {
     color: #ffcd77;
 }
 

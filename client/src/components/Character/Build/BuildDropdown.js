@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Build from './Build'
+import { usePopperTooltip } from 'react-popper-tooltip';
+import mouseClick from '.././mouse-click.svg'
 import info from '.././info.svg';
+
 
 function BuildDropdown({ char }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedTab, setSelectedTab] = useState(
         char.build_tabs.find((build) => build.is_active)
     );
+
+    // Click outside of dropdown menu logic
+    const wrapperRef = useRef(null);
+    const handleClickOutside = (event) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [wrapperRef]);
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -23,13 +41,34 @@ function BuildDropdown({ char }) {
         }
     }
 
+    const {
+        getArrowProps,
+        getTooltipProps,
+        setTooltipRef,
+        setTriggerRef,
+        visible,
+    } = usePopperTooltip({ placement: 'right' });
+
+
     return (
-        <div className='build'>
+        <div className='build' ref={wrapperRef}>
             <div className="dropdown">
                 <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
                     {selectedTab && selectedTab.build.name ? selectedTab.build.name : `Build ${selectedTab.tab}`}
                 </button>
-                <span>  <img className={`${char.profession.toLowerCase()}-filter info-size`} src={info} alt="info-size" /></span>
+                <span className='info-centered' ref={setTriggerRef}><img className={`${char.profession.toLowerCase()}-filter info-size`} src={info} alt="info-size" /></span>
+                {visible && (
+                    <div
+                        ref={setTooltipRef}
+                        {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
+                    >
+                        <div>
+                            <img className='mouse-click' src={mouseClick} alt="" />
+                            <span className='yellow-popup'>Click</span> the menu to choose <span className='yellow-popup'>Build</span> option
+                        </div>
+                        <div {...getArrowProps({ className: 'tooltip-arrow' })} />
+                    </div>
+                )}
                 {isOpen && (
                     <ul className="dropdown-menu">
                         {char.build_tabs.map((buildTab) => (

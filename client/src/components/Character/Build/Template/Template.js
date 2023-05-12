@@ -3,7 +3,7 @@ import Profession from './Profession';
 import fetchData from '../../../fetchData';
 import { usePopperTooltip } from 'react-popper-tooltip';
 const BuildTemplate = require('./BuildTemplate');
-import mouseClick from '../img/mouse-click.svg'
+import mouseClick from '../../mouse-click.svg'
 
 function Template({ buildInput }) {
     const [traits, setTraits] = useState([]);
@@ -46,7 +46,12 @@ function Template({ buildInput }) {
     useEffect(() => {
         async function fetchSkillIndex() {
             const skills =
-                [buildInput.skills.heal, ...buildInput.skills.utilities, buildInput.skills.elite, buildInput.aquatic_skills.heal, ...buildInput.aquatic_skills.utilities, buildInput.aquatic_skills.elite,];
+                [buildInput.skills.heal,
+                ...buildInput.skills.utilities,
+                buildInput.skills.elite,
+                buildInput.aquatic_skills.heal,
+                ...buildInput.aquatic_skills.utilities,
+                buildInput.aquatic_skills.elite];
 
             if (profession.skills_by_palette) {
                 try {
@@ -63,7 +68,13 @@ function Template({ buildInput }) {
         }
 
         fetchSkillIndex();
-    }, [profession.skills_by_palette, buildInput.aquatic_skills.elite, buildInput.aquatic_skills.heal, buildInput.aquatic_skills.utilities, buildInput.skills.elite, buildInput.skills.heal, buildInput.skills.utilities]);
+    }, [profession.skills_by_palette,
+    buildInput.aquatic_skills.elite,
+    buildInput.aquatic_skills.heal,
+    buildInput.aquatic_skills.utilities,
+    buildInput.skills.elite,
+    buildInput.skills.heal,
+    buildInput.skills.utilities]);
 
     const {
         getArrowProps,
@@ -121,8 +132,8 @@ function Template({ buildInput }) {
                     {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
                 >
                     <div>
-                        <img className='mouse-click' src={mouseClick} alt="" /> 
-                        <span>Click</span> to <span className='save'>Copy</span> Build (<span className='copy-build'>Traits</span> & <span className='copy-build'>Skills</span>)
+                        <img className='mouse-click' src={mouseClick} alt="" />
+                        <span className='yellow-popup'>Click</span> to <span className='save'>Copy</span> Build (<span className='yellow-popup'>Traits</span> & <span className='yellow-popup'>Skills</span>)
                     </div>
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>

@@ -5,17 +5,19 @@ const { apiKey, baseUrl } = require('./config');
 
 router.get('/', async (req, res) => {
     try {
-        const response = await axios.get(`${baseUrl}/characters${apiKey}`);
+        const response = await axios.get(`${baseUrl}/characters?${apiKey}`);
         res.json(response.data);
     } catch (error) {
         //res.status(500).json({ error: 'Error fetching data from API' });
     }
 });
 
+
+
 router.get('/:name', async (req, res) => {
     try {
         const { name } = req.params;
-        const response = await axios.get(`${baseUrl}/characters/${name}${apiKey}&v=latest`);
+        const response = await axios.get(`${baseUrl}/characters/${name}?${apiKey}&v=latest`);
         if (response) {
             res.json(response.data);
         }

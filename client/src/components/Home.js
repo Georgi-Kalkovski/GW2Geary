@@ -1,27 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import fetchData from "./fetchData";
-import CharacterBox from './Home/CharacterBox';
-
+import './Classes.css'
 function Home() {
     const [account, setAccount] = useState([]);
     const [world, setWorld] = useState({});
-    const [charNames, setCharNames] = useState([]);
+    const [characters, setCharacters] = useState([]);
     const [mastery, setMastery] = useState(null);
+    const [professions, setProfessions] = useState([]);
 
     useEffect(() => {
         try {
             (async () => {
-                const acc = await fetchData('account')
-                setAccount(acc);
+                setAccount(await fetchData('account'));
                 if (account.world) {
-                    const world = (await fetchData('worlds', account.world))[0]
-                    setWorld(world);
+                    setWorld((await fetchData('worlds', account.world))[0]);
                 }
-                const charName = await fetchData('characters', account.world)
-                setCharNames(charName);
-                const { totals } = await fetchData('mastery');
-                setMastery(totals.reduce((acc, x) => acc + x.earned, 0));
+                setCharacters(await fetchData('charactersAll'));
+                setProfessions(await fetchData('professionsAll'));
+                setMastery((await fetchData('mastery')).totals.reduce((acc, x) => acc + x.earned, 0));
             })();
         } catch (error) {
             console.error(error);
@@ -38,15 +35,28 @@ function Home() {
                 <h5>WvW Rank: {account.wvw_rank}</h5>
             </span>
             <div className="home-characters">
-                {charNames.map((charName) => (
-                    <div key={charName.replace(/\s/g, "_")} className="home-character">
-                        <Link to={`/characters/${charName.replace(/\s/g, "_")}`} className="home-character-link" char={charName}>
-                            <div><h3>{charName}</h3></div>
-                            <CharacterBox charName={charName} />
-                        </Link>
-                    </div>
-                ))}
+                {professions.length > 0 && characters.length > 0
+                    ? characters.map((character) => {
+                        const prof = professions.find((p) => p.id === character.profession);
+                        return (
+                            <div key={character.name.replace(/\s/g, "_")} className="home-character">
+                                <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
+                                    <div><h3>{character.name}</h3></div>
+                                    <>
+                                        <div className={`${prof.name.toLowerCase()}-border home-box`} >
+                                            <div>{character.level} {character.race}</div>
+                                            <img src={prof.icon_big} key={character.name} alt={character.name} />
+                                            <div>{character.profession}</div>
+                                        </div>
+                                    </>
+                                </Link>
+                            </div>
+                        );
+                    })
+                    : <div className="center-items">Loading...</div>
+                }
             </div>
+
         </>
     );
 }

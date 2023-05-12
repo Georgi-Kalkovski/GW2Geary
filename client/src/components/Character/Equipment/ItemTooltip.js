@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 
-function ItemTooltip({ item }) {
+function ItemTooltip({ item, slider }) {
     // console.log('item ', item)
-
+    console.log(slider)
     const {
         getArrowProps,
         getTooltipProps,
@@ -24,7 +24,7 @@ function ItemTooltip({ item }) {
                     <Container className={`item-popup border-${item.rarity.toLowerCase()}`}>
                         {/* NAME */}
                         <Row key={`name-${item.id}`} className={`name-${item.rarity.toLowerCase()}`}>
-                            {item.skin_name
+                            {item.skin_name && slider
                                 ? <span className='item-name'>{item.skin_name}</span>
                                 : <span className='item-name'>{item.name}</span>
                             }
@@ -161,11 +161,17 @@ function ItemTooltip({ item }) {
                         <div>Required level: {item.level}</div>
                         {/* TRANSMUTED */}
                         {item.skin_name &&
-                            <>
-                                <br />
-                                <div>Transmuted</div>
-                                <div>{item.name}</div>
-                            </>
+                            (slider
+                                ? <>
+                                    <br />
+                                    <div>Original Skin</div>
+                                    <div>{item.name}</div>
+                                </>
+                                : <>
+                                    <br />
+                                    <div>Transmuted Skin</div>
+                                    <div>{item.skin_name}</div>
+                                </>)
                         }
                     </Container>
 
@@ -176,7 +182,7 @@ function ItemTooltip({ item }) {
                 ?
                 <div className='' ref={setTriggerRef}>
                     {/* ITEM ICON */}
-                    {item.icon && item.skin_name
+                    {item.icon && item.skin_name && slider
                         ? <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
                         : <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.icon} alt={item.icon} />
                     }
