@@ -29,10 +29,10 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
     });
 
     const ref = useRef(null);
-    const ability = tooltip?.description.includes('<c=@abilitytype>')
+    const ability = tooltip?.description?.includes('<c=@abilitytype>')
         ? tooltip?.description.split(/(<c=@abilitytype>|<\/c>)/).filter(part => !part.includes('<c=@abilitytype>') && !part.includes('</c>')).map(part => part.replace('<br/>', ''))
         : [];
-    const reminder = tooltip?.description.includes('<c=@reminder>')
+    const reminder = tooltip?.description?.includes('<c=@reminder>')
         ? tooltip?.description.split(/<c=@reminder>(.*?)<\/c>/).filter(part => !part.includes('<c=@reminder>') && !part.includes('</c>') && !part.includes('<c=@reminder>')).map(part => part.replace('<br>', ''))
         : [];
     const descript = !ability.length && !reminder.length ? tooltip?.description : [];
