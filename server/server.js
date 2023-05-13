@@ -14,6 +14,7 @@ app.use(function (req, res, next) {
 
 // Require routes
 const accountRouter = require('./routes/account');
+const accountsRouter = require('./routes/accounts');
 const charactersRouter = require('./routes/characters');
 const charactersAllRouter = require('./routes/charactersAll');
 const itemsRouter = require('./routes/items');
@@ -27,6 +28,7 @@ const worldsRouter = require('./routes/worlds');
 
 // Register routes
 app.use('/api/account', accountRouter);
+app.use('/api/accounts', accountsRouter);
 app.use('/api/characters', charactersRouter);
 app.use('/api/charactersAll', charactersAllRouter);
 app.use('/api/items', itemsRouter);
