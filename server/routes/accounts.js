@@ -4,21 +4,22 @@ const router = express.Router();
 const { apiKeys, baseUrl } = require('./config');
 
 router.get('/', async (req, res) => {
-  const data = [];
+  const accounts = [];
   for (let i = 0; i < apiKeys.length; i++) {
     try {
-      data.push((await axios.get(`${baseUrl}/account?${apiKeys[i]}`)).data)
+      const account = (await axios.get(`${baseUrl}/account?${apiKeys[i]}`)).data;
+      const character = (await axios.get(`${baseUrl}/characters?ids=all&${apiKeys[i]}`)).data;
+      accounts.push({ account: account, chars: character});
     } catch (error) {
       console.log(`Error with API key ${apiKeys[i]}`);
     }
   }
 
-  if (data) {
-    res.json(data);
+  if (accounts.length > 0) {
+    res.json(accounts);
   } else {
     res.status(500).json({ error: 'Error fetching data from API' });
   }
-  return
 });
 
 module.exports = router;
