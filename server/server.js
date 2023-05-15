@@ -1,8 +1,18 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
 const port = process.env.PORT || 3001;
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB', error);
+    });
 
 // Enable CORS
 app.use(express.json())
@@ -13,6 +23,8 @@ app.use(function (req, res, next) {
 });
 
 // Require routes
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 const accountRouter = require('./routes/account');
 const accountsRouter = require('./routes/accounts');
 const charactersRouter = require('./routes/characters');
@@ -27,6 +39,8 @@ const traitsRouter = require('./routes/traits');
 const worldsRouter = require('./routes/worlds');
 
 // Register routes
+app.use('/api/register', registerRouter);
+app.use('/api/login', loginRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/accounts', accountsRouter);
 app.use('/api/characters', charactersRouter);

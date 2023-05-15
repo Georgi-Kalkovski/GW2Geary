@@ -2,6 +2,8 @@
 const urlBasic = 'http://localhost:3001/api/';
 
 const URLS = {    
+    urlRegister: urlBasic + 'register/',
+    urlLogin: urlBasic + 'login/',
     urlAccount: urlBasic + 'account/',
     urlAccounts: urlBasic + 'accounts/',
     urlMasteryPoints: urlBasic + 'account/mastery/points/',
