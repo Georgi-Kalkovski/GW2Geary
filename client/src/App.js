@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import Register from './components/Register';
 import Login from './components/Login';
 import Accounts from './components/Accounts';
 import Character from './components/Character';
 import Logout from './components/Logout';
+// import User from './components/User';
 import './App.css';
 
 function App() {
@@ -20,10 +21,10 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
-        <nav>
-          <ul>
+        <nav className="app-nav">
+          <ul className="app-ul">
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -38,15 +39,20 @@ function App() {
               </>
             )}
             {isLoggedIn && (
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
+              <>
+                {/* <li>
+                  <Link to="/user">User</Link>
+                </li> */}
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
+              </>
             )}
           </ul>
         </nav>
 
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           {!isLoggedIn && (
             <>
               <Route
@@ -57,30 +63,28 @@ function App() {
                 path="/login"
                 element={<Login handleLogin={handleLogin} />}
               />
+              {/* <Route path="/user" element={<Navigate to="/" />} /> */}
               <Route path="*" element={<Home />} />
             </>
           )}
           {isLoggedIn && (
             <>
-              <Route
-                path="/characters/:name"
-                element={<Character />}
-              />
-              <Route
-                path="/accounts"
-                element={<Accounts />}
-              />
+              <Route path="/characters/:name" element={<Character />} />
+              <Route path="/accounts" element={<Accounts />} />
+              {/* <Route
+                path="/user"
+                element={<User isLoggedIn={isLoggedIn} />}
+              /> */}
               <Route
                 path="/logout"
                 element={<Logout handleLogout={handleLogout} />}
               />
-              <Route path="/register" element={<Navigate to="/" />} />
-              <Route path="/login" element={<Navigate to="/" />} />
+              <Route path="*" element={<Home />} />
             </>
           )}
         </Routes>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

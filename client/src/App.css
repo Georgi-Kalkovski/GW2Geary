@@ -44,3 +44,43 @@ body {
 .spec-icon {
   height: 25px;
 }
+
+/* NAV */
+
+.app-nav {}
+
+.app-ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+.app-ul>li {
+  margin-right: 20px;
+}
+
+.app-ul>li>a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Register & Login */
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-box {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.login-box {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid black;
+}

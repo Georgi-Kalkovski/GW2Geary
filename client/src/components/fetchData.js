@@ -5,6 +5,7 @@ const fetchData = async (urls, id) => {
   let url = {
     register: URLS.urlRegister,
     login: URLS.urlLogin,
+    user: URLS.urlUser,
     account: URLS.urlAccount,
     accounts: URLS.urlAccounts,
     mastery: URLS.urlMasteryPoints,

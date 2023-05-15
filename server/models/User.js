@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+const apiKeySchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
+  active: {
+    type: Boolean,
+    required: true,
+    default: true
+  }
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -9,6 +21,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  apikeys: {
+    type: [apiKeySchema],
+    required: false
   }
 });
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { apiKeys, baseUrl } = require('./config');
+const { apiKeys, baseUrl } = require('./config.routes');
 
 router.get('/', async (req, res) => {
   const accounts = [];

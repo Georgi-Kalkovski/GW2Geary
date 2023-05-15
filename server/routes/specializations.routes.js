@@ -1,12 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { baseUrl } = require('./config');
+const { baseUrl } = require('./config.routes');
 
-router.get('/:skills', async (req, res) => {
+router.get('/:spec', async (req, res) => {
     try {
-        const { skills } = req.params;
-        const response = await axios.get(`${baseUrl}/skills?ids=${skills}`);
+        const { spec } = req.params;
+        const response = await axios.get(`${baseUrl}/specializations/${spec}`);
         if (response) {
             res.json(response.data);
         }

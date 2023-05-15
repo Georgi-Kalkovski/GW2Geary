@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { baseUrl } = require('./config');
+const { baseUrl } = require('./config.routes');
 
 router.get('/:items', async (req, res) => {
     try {
