@@ -1,81 +1,159 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { isEmail } from "validator";
+import { useNavigate } from 'react-router-dom';
 
-function Register() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+import AuthService from "../services/auth.service";
 
-  const handleRegister = () => {
-    if (password !== confirmPassword) {
-      setMessage("Passwords don't match");
-      return;
-    }
+const Register = () => {
+  let navigate = useNavigate();
 
-    axios
-      .post('http://localhost:3001/api/register', { username, password })
+  const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+  const [successful, setSuccessful] = useState(false);
+  const [message, setMessage] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const onSubmit = (data) => {
+    setMessage("");
+    setSuccessful(false);
+
+    AuthService.register(data.email, data.password, data.confirmPassword)
       .then((response) => {
         setMessage(response.data.message);
-        login(username, password); // Login user
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 409) {
-          setMessage(error.response.data.error);
-        } else {
-          console.error('Error:', error);
-          setMessage('Error registering user');
-        }
-      });
-  };
+        setSuccessful(true);
+        reset();
 
-  const login = (username, password) => {
-    axios
-      .post('http://localhost:3001/api/login', { username, password })
-      .then((response) => {
-        const { token } = response.data;
-        // Store the authentication token in local storage
-        localStorage.setItem('token', token);
-        navigate('/'); // Redirect to home page
+        AuthService.login(data.email, data.password)
+          .then(() => {
+            navigate("/profile");
+            window.location.reload();
+          })
+          .catch((error) => {
+            const resMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
+
+            setMessage(resMessage);
+            setSuccessful(false);
+          });
       })
       .catch((error) => {
-        console.error('Error:', error);
-        setMessage('Error logging in user');
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setMessage(resMessage);
+        setSuccessful(false);
       });
   };
 
   return (
-    <div className="center-container">
-      <div className="register-box">
-        <h1>Register</h1>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+    <div className="flex center">
+      <div>
+        <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="profile-img-card"
         />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button onClick={handleRegister}>Register</button>
-        <p>{message}</p>
-        <p>
-          Already have an account? <Link to="/">Login</Link>
-        </p>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {!successful && (
+            <div>
+              {/* Email */}
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  {...register("email", { required: true, validate: isEmail })}
+                />
+                {errors.email?.type === "required" && (
+                  <div className="alert alert-danger" role="alert">
+                    This field is required!
+                  </div>
+                )}
+                {errors.email?.type === "validate" && (
+                  <div className="alert alert-danger" role="alert">
+                    This is not a valid email.
+                  </div>
+                )}
+              </div>
+
+              {/* Password */}
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  {...register("password", { required: true, minLength: 6, maxLength: 40 })}
+                />
+                {errors.password?.type === "required" && (
+                  <div className="alert alert-danger" role="alert">
+                    This field is required!
+                  </div>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <div className="alert alert-danger" role="alert">
+                    The password must be between 6 and 40 characters.
+                  </div>
+                )}
+              </div>
+
+              {/* Confirm Password */}
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  {...register("confirmPassword", {
+                    required: true,
+                    validate: (value) => value === watch('password')
+                  })}
+                />
+                {errors.confirmPassword?.type === "required" && (
+                  <div className="alert alert-danger" role="alert">
+                    This field is required!
+                  </div>
+                )}
+                {errors.confirmPassword?.type === "validate" && (
+                  <div className="alert alert-danger" role="alert">
+                    Passwords do not match.
+                  </div>
+                )}
+              </div>
+
+              {/* Sign Up */}
+              <div className="form-group">
+                <button className="btn btn-primary btn-block">Sign Up</button>
+              </div>
+            </div>
+          )}
+
+          {message && (
+            <div className="form-group">
+              <div
+                className={
+                  successful ? "alert alert-success" : "alert alert-danger"
+                }
+                role="alert"
+              >
+                {message}
+              </div>
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );
-}
+};
 
 export default Register;

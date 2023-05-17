@@ -1,38 +1,36 @@
 const express = require('express');
 const router = express.Router();
 
-// Import route handlers
-const registerHandler = require('./register.routes');
-const loginHandler = require('./login.routes');
-const userHandler = require('./user.routes');
+// Import route Routess
+const authRoutes = require('./auth.routes');
+const userRoutes = require('./user.routes');
 const accountRoutes = require('./account.routes');
-const accountsHandler = require('./accounts.routes');
-const charactersHandler = require('./characters.routes');
-const charactersAllHandler = require('./charactersAll.routes');
-const itemsHandler = require('./items.routes');
-const professionsHandler = require('./professions.routes');
-const professionsAllHandler = require('./professionsAll.routes');
-const skillsHandler = require('./skills.routes');
-const skinsHandler = require('./skins.routes');
-const specializationsHandler = require('./specializations.routes');
-const traitsHandler = require('./traits.routes');
-const worldsHandler = require('./worlds.routes');
+const accountsRoutes = require('./accounts.routes');
+const charactersRoutes = require('./characters.routes');
+const charactersAllRoutes = require('./charactersAll.routes');
+const itemsRoutes = require('./items.routes');
+const professionsRoutes = require('./professions.routes');
+const professionsAllRoutes = require('./professionsAll.routes');
+const skillsRoutes = require('./skills.routes');
+const skinsRoutes = require('./skins.routes');
+const specializationsRoutes = require('./specializations.routes');
+const traitsRoutes = require('./traits.routes');
+const worldsRoutes = require('./worlds.routes');
 
 // Register routes
-router.use('/register', registerHandler);
-router.use('/login', loginHandler);
-router.use('/user', userHandler);
+router.use('/auth', authRoutes);
+router.use('/user', userRoutes);
 router.use('/account', accountRoutes);
-router.use('/accounts', accountsHandler);
-router.use('/characters', charactersHandler);
-router.use('/charactersAll', charactersAllHandler);
-router.use('/items', itemsHandler);
-router.use('/professions', professionsHandler);
-router.use('/professionsAll', professionsAllHandler);
-router.use('/skills', skillsHandler);
-router.use('/skins', skinsHandler);
-router.use('/specializations', specializationsHandler);
-router.use('/traits', traitsHandler);
-router.use('/worlds', worldsHandler);
+router.use('/accounts', accountsRoutes);
+router.use('/characters', charactersRoutes);
+router.use('/charactersAll', charactersAllRoutes);
+router.use('/items', itemsRoutes);
+router.use('/professions', professionsRoutes);
+router.use('/professionsAll', professionsAllRoutes);
+router.use('/skills', skillsRoutes);
+router.use('/skins', skinsRoutes);
+router.use('/specializations', specializationsRoutes);
+router.use('/traits', traitsRoutes);
+router.use('/worlds', worldsRoutes);
 
 module.exports = router;

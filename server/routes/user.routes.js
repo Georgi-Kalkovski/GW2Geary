@@ -1,43 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const { authJwt } = require("../middlewares");
+const controller = require("../controllers/user.controller");
 
-// Get user information
-router.get('/:id', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+router.get(
+  "/test/all",
+  controller.allAccess
+);
 
-    const { _id, username, createdAt, apiKeys } = user;
-    res.json({ _id, username, createdAt, apiKeys });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Error retrieving user information' });
-  }
-});
+router.get(
+  "/test/user",
+  [authJwt.verifyToken],
+  controller.userBoard
+);
 
-// Update user information
-router.put('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { username } = req.body;
+router.get(
+  "/test/mod",
+  [authJwt.verifyToken, authJwt.isModerator],
+  controller.moderatorBoard
+);
 
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    user.username = username;
-    await user.save();
-
-    const { _id, username: updatedUsername, createdAt, apiKeys } = user;
-    res.json({ _id, username: updatedUsername, createdAt, apiKeys });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Error updating user information' });
-  }
-});
+router.get(
+  "/test/admin",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  controller.adminBoard
+);
 
 module.exports = router;

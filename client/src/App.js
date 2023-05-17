@@ -1,91 +1,138 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
-import Home from './components/Home';
-import Register from './components/Register';
-import Login from './components/Login';
+import React, { useState, useEffect } from "react";
+import { Route, Routes, Link } from "react-router-dom";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import AuthService from "./services/auth.service";
+
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import BoardUser from "./components/BoardUser";
+import BoardModerator from "./components/BoardModerator";
+import BoardAdmin from "./components/BoardAdmin";
 import Accounts from './components/Accounts';
 import Character from './components/Character';
-import Logout from './components/Logout';
-// import User from './components/User';
-import './App.css';
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+import EventBus from "./common/EventBus";
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+const App = () => {
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+    setShowModeratorBoard(false);
+    setShowAdminBoard(false);
+    setCurrentUser(undefined);
   };
 
   return (
-    <Router>
-      <div className="App">
-        <nav className="app-nav">
-          <ul className="app-ul">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            {!isLoggedIn && (
-              <>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </>
-            )}
-            {isLoggedIn && (
-              <>
-                {/* <li>
-                  <Link to="/user">User</Link>
-                </li> */}
-                <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
+    <div className="App">
+      <nav className="app-nav">
+        <Link to={"/"} className="nav-a">
+          GW2Geary
+        </Link>
+        <div className="flex">
+          <li>
+            <Link to={"/home"} className="nav-a">
+              Home
+            </Link>
+          </li>
 
+          {showModeratorBoard && (
+            <li >
+              <Link to={"/mod"} className="nav-a">
+                Moderator Board
+              </Link>
+            </li>
+          )}
+
+          {showAdminBoard && (
+            <li>
+              <Link to={"/admin"} className="nav-a">
+                Admin Board
+              </Link>
+            </li>
+          )}
+
+          {currentUser && (
+            <li>
+              <Link to={"/profile"} className="nav-a">
+                Profile
+              </Link>
+            </li>
+          )}
+        </div>
+
+        {currentUser ? (
+          <div className="nav-profile-logout">
+            <li>
+              <Link to={"/profile"} className="nav-a">
+                {console.log(currentUser)}
+                {currentUser.username}
+              </Link>
+            </li>
+            <li >
+              <a href="/login" onClick={logOut} className="nav-a">
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="nav-login-register">
+            <li>
+              <Link to={"/login"} className="nav-a">
+                Login
+              </Link>
+            </li>
+
+            <li>
+              <Link to={"/register"} className="nav-a">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+        )}
+      </nav>
+
+      <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
-          {!isLoggedIn && (
-            <>
-              <Route
-                path="/register"
-                element={<Register handleLogin={handleLogin} />}
-              />
-              <Route
-                path="/login"
-                element={<Login handleLogin={handleLogin} />}
-              />
-              {/* <Route path="/user" element={<Navigate to="/" />} /> */}
-              <Route path="*" element={<Home />} />
-            </>
-          )}
-          {isLoggedIn && (
-            <>
-              <Route path="/characters/:name" element={<Character />} />
-              <Route path="/accounts" element={<Accounts />} />
-              {/* <Route
-                path="/user"
-                element={<User isLoggedIn={isLoggedIn} />}
-              /> */}
-              <Route
-                path="/logout"
-                element={<Logout handleLogout={handleLogout} />}
-              />
-              <Route path="*" element={<Home />} />
-            </>
-          )}
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<BoardUser />} />
+          <Route path="/mod" element={<BoardModerator />} />
+          <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/characters/:name" element={<Character />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </div>
-    </Router>
+    </div>
   );
-}
+};
 
 export default App;

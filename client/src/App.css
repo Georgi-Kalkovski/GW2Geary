@@ -1,6 +1,11 @@
 body {
   background-color: #35363a;
   color: #ffffff;
+  margin: 0;
+}
+
+.content {
+  margin-top: 50px;
 }
 
 .home-account {
@@ -45,42 +50,45 @@ body {
   height: 25px;
 }
 
-/* NAV */
-
-.app-nav {}
-
-.app-ul {
-  list-style-type: none;
-  display: flex;
+.center {
   justify-content: center;
 }
 
-.app-ul>li {
-  margin-right: 20px;
+/* Nav */
+
+.app-nav {
+  background-color: #202124;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+  padding: 20px 0;
 }
 
-.app-ul>li>a {
+.app-nav,
+.nav-login-register,
+.nav-profile-logout {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+}
+
+.nav-a {
   color: white;
   text-decoration: none;
+  margin-right: 10px;
 }
 
-/* Register & Login */
+/* Login & Register */
 
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+label {
+  display: block;
+  margin-top: 10px;
 }
 
-.register-box {
-  width: 400px;
-  padding: 20px;
-  border: 1px solid black;
-}
-
-.login-box {
-  width: 400px;
-  padding: 20px;
-  border: 1px solid black;
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }

@@ -4,7 +4,6 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 
 function ItemTooltip({ item, slider }) {
     // console.log('item ', item)
-    console.log(slider)
     const {
         getArrowProps,
         getTooltipProps,
