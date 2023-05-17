@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const response = await axios.get(`${baseUrl}/characters?${apiKey}`);
         res.json(response.data);
     } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
+        res.status(500).json({ error: 'Error fetching data from API' });
     }
 });
 
@@ -22,7 +22,7 @@ router.get('/:name', async (req, res) => {
             res.json(response.data);
         }
     } catch (error) {
-        //res.status(500).json({ error: 'Error fetching data from API' });
+        res.status(500).json({ error: 'Error fetching data from API' });
     }
 });
 

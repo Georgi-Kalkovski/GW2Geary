@@ -3,9 +3,6 @@ import URLS from './urls';
 
 const fetchData = async (urls, id) => {
   let url = {
-    signin: URLS.urlSignin,
-    signup: URLS.urlSignup,
-    user: URLS.urlUser,
     account: URLS.urlAccount,
     accounts: URLS.urlAccounts,
     mastery: URLS.urlMasteryPoints,

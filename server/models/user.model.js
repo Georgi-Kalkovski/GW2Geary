@@ -10,38 +10,19 @@ const User = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
       }
+    ], apiKeys: [
+      {
+        id: {
+          type: String,
+          required: false 
+        },
+        active: {
+          type: Boolean,
+          default: false 
+        }
+      }
     ]
   })
 );
 
 module.exports = User;
-
-
-// const mongoose = require("mongoose");
-
-// const userSchema = new mongoose.Schema({
-//   email: String,
-//   password: String,
-//   roles: [
-//     {
-//       type: mongoose.Schema.Types.ObjectId,
-//       ref: "Role"
-//     }
-//   ],
-//   apiKeys: [
-//     {
-//       id: {
-//         type: String,
-//         required: false // Set required to false to make it optional
-//       },
-//       active: {
-//         type: Boolean,
-//         default: false // Set default value to false
-//       }
-//     }
-//   ]
-// });
-
-// const User = mongoose.model("User", userSchema);
-
-// module.exports = User;
