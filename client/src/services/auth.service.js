@@ -32,11 +32,21 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const createApiKey = (apiKey) => {
+  const currentUser = getCurrentUser();
+  return axios.put(API_URL + `users/${currentUser.id}/apiKey`, { apiKey }, {
+    headers: {
+      'Authorization': `Bearer ${currentUser.accessToken}`,
+    },
+  });
+};
+
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
+  createApiKey,
 };
 
 export default AuthService;

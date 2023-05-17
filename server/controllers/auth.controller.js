@@ -5,7 +5,7 @@ const Role = db.role;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
+// Sign Up
 exports.signup = async (req, res) => {
   try {
     const user = new User({
@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
-
+// Sign In
 exports.signin = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email }).populate(
@@ -73,7 +73,28 @@ exports.signin = async (req, res) => {
       email: user.email,
       roles: authorities,
       accessToken: token,
+      apiKeys: user.apiKeys,
     });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+// create API key
+exports.createApiKey = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { apiKey } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
+
+    user.apiKeys.push({ _id: apiKey, active: true });
+    await user.save();
+
+    res.status(201).send({ message: "API key created successfully!" });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

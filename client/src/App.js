@@ -88,7 +88,6 @@ const App = () => {
           <div className="nav-profile-logout">
             <li>
               <Link to={"/profile"} className="nav-a">
-                {console.log(currentUser)}
                 {currentUser.username}
               </Link>
             </li>

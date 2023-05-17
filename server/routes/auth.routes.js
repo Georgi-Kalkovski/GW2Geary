@@ -14,5 +14,10 @@ router.post(
   controller.signin
 );
 
+router.put(
+  "/users/:userId/apiKey",
+  controller.createApiKey
+);
+
 module.exports = router;
 
