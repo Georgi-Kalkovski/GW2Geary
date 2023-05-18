@@ -1,83 +1,94 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
+import axios from "axios";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
 
+  useEffect(() => {
+    if (currentUser) {
+      const fetchApiKeys = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/api/auth/users/${currentUser.id}/apiKeys`,
+            {
+              headers: {
+                Authorization: `Bearer ${currentUser.accessToken}`,
+              },
+            }
+          );
+          setApiKeys(response.data.user.apiKeys);
+        } catch (error) {
+          console.error("Error retrieving API keys:", error);
+        }
+      };
+
+      fetchApiKeys();
+    }
+  }, [currentUser, setApiKeys]);
+
   const handleApiKeyChange = (e) => {
     setApiKey(e.target.value);
   };
 
-  // Create
   const handleApiKeyCreate = () => {
     const existingApiKey = currentUser.apiKeys.find((key) => key._id === apiKey);
     if (existingApiKey) {
       console.log("API key already exists");
       return;
     }
-    console.log(apiKey)
 
     const pattern = new RegExp(`^[a-zA-Z0-9-]{72}$`);
     if (pattern.test(apiKey)) {
-      console.log('Valid input');
-    } else {
-      console.log('Invalid input');
-      setApiKey("");
-      return;
-    }
+      console.log("Valid input");
 
-    fetch(`http://localhost:3001/api/auth/users/${currentUser.id}/apiKey`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${currentUser.accessToken}`,
-      },
-      body: JSON.stringify({ apiKey }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("API key created successfully");
-          setApiKey("");
-          return response.json();
-        } else {
-          console.error("Failed to create API key");
-          setApiKey("");
-          return response.json();
-        }
-      })
-      .then((data) => {
-        return fetch(
-          `http://localhost:3001/api/auth/users/${currentUser.id}/apiKeys`,
+      axios
+        .put(
+          `http://localhost:3001/api/auth/users/${currentUser.id}/apiKey`,
+          { apiKey },
           {
             headers: {
+              "Content-Type": "application/json",
               Authorization: `Bearer ${currentUser.accessToken}`,
             },
           }
-        );
-      })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to retrieve API keys");
-        }
-      })
-      .then((data) => {
-        setApiKeys(data.user.apiKeys);
-      })
-      .catch((error) => {
-        console.error("Error creating or retrieving API keys:", error);
-      });
+        )
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("API key created successfully");
+            setApiKey("");
+            fetchApiKeys();
+          } else {
+            console.error("Failed to create API key");
+            setApiKey("");
+            throw new Error(response.data);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to create API key:", error);
+        });
+    } else {
+      console.log("Invalid input");
+      setApiKey("");
+    }
   };
 
-  // Update
   const updateApiKeyStatus = (apiKeyId, active) => {
-    AuthService.updateApiKeyStatus(apiKeyId, active)
+    axios
+      .put(
+        `http://localhost:3001/api/auth/apiKeys/${apiKeyId}/status`,
+        { active },
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.accessToken}`,
+          },
+        }
+      )
       .then((response) => {
-        if (response.user && response.user.apiKeys) {
-          setApiKeys(response.user.apiKeys);
+        if (response.data.user && response.data.user.apiKeys) {
+          setApiKeys(response.data.user.apiKeys);
         }
       })
       .catch((error) => {
@@ -85,41 +96,22 @@ const Profile = () => {
       });
   };
 
-  // Delete
   const deleteApiKey = (apiKeyId) => {
-    AuthService.deleteApiKey(apiKeyId)
+    axios
+      .delete(`http://localhost:3001/api/auth/apiKeys/${apiKeyId}`, {
+        headers: {
+          Authorization: `Bearer ${currentUser.accessToken}`,
+        },
+      })
       .then((response) => {
-        if (response.user && response.user.apiKeys) {
-          setApiKeys(response.user.apiKeys);
+        if (response.data.user && response.data.user.apiKeys) {
+          setApiKeys(response.data.user.apiKeys);
         }
       })
       .catch((error) => {
         console.error("Error deleting API key:", error);
       });
   };
-
-  useEffect(() => {
-    if (currentUser) {
-      fetch(`http://localhost:3001/api/auth/users/${currentUser.id}/apiKeys`, {
-        headers: {
-          Authorization: `Bearer ${currentUser.accessToken}`,
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to retrieve API keys");
-          }
-        })
-        .then((data) => {
-          setApiKeys(data.user.apiKeys);
-        })
-        .catch((error) => {
-          console.error("Error retrieving API keys:", error);
-        });
-    }
-  }, [currentUser]);
 
   return (
     <>
@@ -151,9 +143,13 @@ const Profile = () => {
                     <input
                       type="checkbox"
                       defaultChecked={apiKey.active}
-                      onChange={(e) => updateApiKeyStatus(apiKey._id, e.target.checked)}
+                      onChange={(e) =>
+                        updateApiKeyStatus(apiKey._id, e.target.checked)
+                      }
                     />
-                    <button onClick={() => deleteApiKey(apiKey._id)}>Delete</button>
+                    <button onClick={() => deleteApiKey(apiKey._id)}>
+                      Delete
+                    </button>
                   </div>
                 ))}
             </div>

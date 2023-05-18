@@ -58,6 +58,11 @@ const App = () => {
               Home
             </Link>
           </li>
+          <li>
+            <Link to={"/accounts"} className="nav-a">
+              Accounts
+            </Link>
+          </li>
 
           {showModeratorBoard && (
             <li >

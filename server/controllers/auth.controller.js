@@ -128,6 +128,7 @@ exports.getApiKeys = async (req, res) => {
       message: "API keys retrieved successfully!",
       user: user,
     });
+    return;
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -195,5 +196,15 @@ exports.deleteApiKey = async (req, res) => {
   } catch (err) {
     console.error("Error deleting API key:", err);
     res.status(500).send({ message: "Failed to delete API key." });
+  }
+};
+
+// Get Active API Keys
+exports.getActiveApiKeys = async () => {
+  try {
+    const activeApiKeys = await User.distinct("apiKeys._id", { "apiKeys.active": true });
+    return activeApiKeys;
+  } catch (err) {
+    throw new Error(err.message);
   }
 };
