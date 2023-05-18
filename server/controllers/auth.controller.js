@@ -5,6 +5,7 @@ const Role = db.role;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
 // Sign Up
 exports.signup = async (req, res) => {
   try {
@@ -36,6 +37,7 @@ exports.signup = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
 // Sign In
 exports.signin = async (req, res) => {
   try {
@@ -79,6 +81,7 @@ exports.signin = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
 // create API key
 exports.createApiKey = async (req, res) => {
   try {
@@ -91,11 +94,106 @@ exports.createApiKey = async (req, res) => {
       return res.status(404).send({ message: "User Not found." });
     }
 
+    const existingApiKey = user.apiKeys.find((key) => key._id === apiKey);
+    if (existingApiKey) {
+      return res.status(400).send({ message: "API key already exists." });
+    }
+
     user.apiKeys.push({ _id: apiKey, active: true });
     await user.save();
 
-    res.status(201).send({ message: "API key created successfully!" });
+    const updatedUser = await User.findById(userId).populate("apiKeys", "_id active");
+
+    res.status(201).send({
+      message: "API key created successfully!",
+      user: updatedUser,
+    });
   } catch (err) {
     res.status(500).send({ message: err.message });
+  }
+};
+
+// Get Api Keys
+exports.getApiKeys = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findById(userId).populate("apiKeys", "_id active");
+
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
+
+    res.status(200).send({
+      message: "API keys retrieved successfully!",
+      user: user,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Update API key status
+exports.updateApiKeyStatus = async (req, res) => {
+  try {
+    const { userId, apiKeyId } = req.params;
+    const { active } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
+
+    const apiKey = user.apiKeys.id(apiKeyId);
+    if (!apiKey) {
+      return res.status(404).send({ message: "API key Not found." });
+    }
+
+    apiKey.active = active;
+    await user.save();
+
+    const updatedUser = await User.findById(userId).populate("apiKeys", "_id active");
+
+    res.status(200).send({
+      message: "API key status updated successfully!",
+      user: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Delete API key
+exports.deleteApiKey = async (req, res) => {
+  try {
+    const { userId, apiKeyId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    const apiKeyIndex = user.apiKeys.findIndex((key) => key._id === apiKeyId);
+    if (apiKeyIndex === -1) {
+      return res.status(404).send({ message: "API key not found." });
+    }
+
+    // Remove the API key from the array
+    user.apiKeys.splice(apiKeyIndex, 1);
+
+    await user.save();
+
+    const updatedUser = await User.findById(userId).populate(
+      "apiKeys",
+      "_id active"
+    );
+
+    res.status(200).send({
+      message: "API key deleted successfully!",
+      user: updatedUser,
+    });
+  } catch (err) {
+    console.error("Error deleting API key:", err);
+    res.status(500).send({ message: "Failed to delete API key." });
   }
 };

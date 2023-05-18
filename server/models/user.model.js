@@ -21,8 +21,9 @@ const UserSchema = new mongoose.Schema({
         default: false
       }
     }
-  ]
-});
+  ],
+
+}, { versionKey: false });
 
 const User = mongoose.model("User", UserSchema);
 

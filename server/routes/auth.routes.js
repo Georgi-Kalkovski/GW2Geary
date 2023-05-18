@@ -19,5 +19,20 @@ router.put(
   controller.createApiKey
 );
 
+router.get(
+  "/users/:userId/apiKeys",
+  controller.getApiKeys
+);
+
+router.put(
+  "/users/:userId/apiKeys/:apiKeyId",
+  controller.updateApiKeyStatus
+);
+
+router.delete(
+  "/users/:userId/apiKeys/:apiKeyId",
+  controller.deleteApiKey
+);
+
 module.exports = router;
 
