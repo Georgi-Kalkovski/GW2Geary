@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AuthService from "../services/auth.service";
 import axios from "axios";
 
@@ -7,33 +7,11 @@ const Profile = () => {
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
 
-  useEffect(() => {
-    if (currentUser) {
-      const fetchApiKeys = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:3001/api/auth/users/${currentUser.id}/apiKeys`,
-            {
-              headers: {
-                Authorization: `Bearer ${currentUser.accessToken}`,
-              },
-            }
-          );
-          setApiKeys(response.data.user.apiKeys);
-        } catch (error) {
-          console.error("Error retrieving API keys:", error);
-        }
-      };
-
-      fetchApiKeys();
-    }
-  }, [currentUser, setApiKeys]);
-
-  const handleApiKeyChange = (e) => {
+  const handleApiKeyChange = useCallback((e) => {
     setApiKey(e.target.value);
-  };
+  }, []);
 
-  const handleApiKeyCreate = () => {
+  const handleApiKeyCreate = useCallback(() => {
     const existingApiKey = currentUser.apiKeys.find((key) => key._id === apiKey);
     if (existingApiKey) {
       console.log("API key already exists");
@@ -42,74 +20,93 @@ const Profile = () => {
 
     const pattern = new RegExp(`^[a-zA-Z0-9-]{72}$`);
     if (pattern.test(apiKey)) {
-      console.log("Valid input");
-
-      axios
-        .put(
-          `http://localhost:3001/api/auth/users/${currentUser.id}/apiKey`,
-          { apiKey },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${currentUser.accessToken}`,
-            },
-          }
-        )
-        .then((response) => {
-          if (response.status === 200) {
-            console.log("API key created successfully");
-            setApiKey("");
-            fetchApiKeys();
-          } else {
-            console.error("Failed to create API key");
-            setApiKey("");
-            throw new Error(response.data);
-          }
-        })
-        .catch((error) => {
-          console.error("Failed to create API key:", error);
-        });
+      console.log('Valid input');
     } else {
-      console.log("Invalid input");
+      console.log('Invalid input');
       setApiKey("");
+      return;
     }
-  };
 
-  const updateApiKeyStatus = (apiKeyId, active) => {
-    axios
-      .put(
-        `http://localhost:3001/api/auth/apiKeys/${apiKeyId}/status`,
-        { active },
-        {
-          headers: {
-            Authorization: `Bearer ${currentUser.accessToken}`,
-          },
-        }
-      )
+    createApiKey(currentUser.id, currentUser.accessToken, apiKey)
+      .then(() => fetchApiKeys(currentUser.id, currentUser.accessToken))
+      .then((data) => {
+        setApiKeys(data.user.apiKeys);
+      })
+      .catch((error) => {
+        console.error("Error creating or retrieving API keys:", error);
+      });
+  }, [apiKey, currentUser]);
+
+  const updateApiKeyStatus = useCallback((apiKeyId, active) => {
+    AuthService.updateApiKeyStatus(apiKeyId, active)
       .then((response) => {
-        if (response.data.user && response.data.user.apiKeys) {
-          setApiKeys(response.data.user.apiKeys);
+        if (response.user && response.user.apiKeys) {
+          setApiKeys(response.user.apiKeys);
         }
       })
       .catch((error) => {
         console.error("Error updating API key status:", error);
       });
-  };
+  }, []);
 
-  const deleteApiKey = (apiKeyId) => {
-    axios
-      .delete(`http://localhost:3001/api/auth/apiKeys/${apiKeyId}`, {
-        headers: {
-          Authorization: `Bearer ${currentUser.accessToken}`,
-        },
-      })
+  const deleteApiKey = useCallback((apiKeyId) => {
+    AuthService.deleteApiKey(apiKeyId)
       .then((response) => {
-        if (response.data.user && response.data.user.apiKeys) {
-          setApiKeys(response.data.user.apiKeys);
+        if (response.user && response.user.apiKeys) {
+          setApiKeys(response.user.apiKeys);
         }
       })
       .catch((error) => {
         console.error("Error deleting API key:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchApiKeys(currentUser.id, currentUser.accessToken)
+        .then((data) => {
+          setApiKeys(data.user.apiKeys);
+        })
+        .catch((error) => {
+          console.error("Error retrieving API keys:", error);
+        });
+    }
+  }, []);
+
+  const fetchApiKeys = (userId, accessToken) => {
+    return axios.get(`http://localhost:3001/api/auth/users/${userId}/apiKeys`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw new Error("Failed to retrieve API keys");
+      });
+  };
+
+  const createApiKey = (userId, accessToken, apiKey) => {
+    return axios.put(`http://localhost:3001/api/auth/users/${userId}/apiKey`, { apiKey }, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("API key created successfully");
+          setApiKey("");
+          return response.data;
+        } else {
+          console.error("Failed to create API key");
+          setApiKey("");
+          throw new Error(response.data);
+        }
+      })
+      .catch((error) => {
+        throw new Error("Failed to create API key");
       });
   };
 
