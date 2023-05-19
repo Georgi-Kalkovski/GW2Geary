@@ -36,6 +36,11 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+// Users Get Service
+const getAllUsers = () => {
+  return axios.get(API_URL + "allUsers");
+};
+
 // Api Create Service
 const createApiKey = (apiKey) => {
   const currentUser = getCurrentUser();
@@ -85,6 +90,7 @@ const AuthService = {
   login,
   logout,
   getCurrentUser,
+  getAllUsers,
   createApiKey,
   getApiKeys,
   updateApiKeyStatus,

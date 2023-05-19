@@ -13,13 +13,26 @@ const UserSchema = new mongoose.Schema({
     {
       _id: {
         type: String,
-        required: false,
         unique: true,
+        default: false
+      },
+      accountName: {
+        type: String,
+        unique: true,
+        default: false
       },
       active: {
         type: Boolean,
         default: false
-      }
+      },
+      characters: [
+        {
+          name: String,
+          race: String,
+          profession: String,
+          level: Number
+        }
+      ]
     }
   ],
 

@@ -41,9 +41,23 @@ body {
 }
 
 .home-box {
-  border: 2px #ffffff solid;
-  padding: 2%;
   margin: 5%;
+  padding: 5%;
+}
+
+.acccounts-names>h3 {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  height: 50px;
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-size-adjust: auto;
+}
+
+.apis-flex {
+  flex-direction: column;
+  align-items: center;
 }
 
 .spec-icon {

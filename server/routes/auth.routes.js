@@ -24,6 +24,11 @@ router.get(
   controller.getApiKeys
 );
 
+router.get(
+  "/allUsers",
+  controller.getAllUsers
+);
+
 router.put(
   "/users/:userId/apiKeys/:apiKeyId",
   controller.updateApiKeyStatus

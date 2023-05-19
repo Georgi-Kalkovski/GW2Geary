@@ -1,4 +1,5 @@
 const config = require("../config/auth.config");
+const axios = require('axios');
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
@@ -69,7 +70,6 @@ exports.signin = async (req, res) => {
     const authorities = user.roles.map(
       (role) => "ROLE_" + role.name.toUpperCase()
     );
-
     res.status(200).send({
       id: user._id,
       email: user.email,
@@ -88,10 +88,19 @@ exports.createApiKey = async (req, res) => {
     const { userId } = req.params;
     const { apiKey } = req.body;
 
-    const user = await User.findById(userId);
+    const charactersResponse = await axios.get(`https://api.guildwars2.com/v2/characters?ids=all&access_token=${apiKey}`);
+    const accountResponse = await axios.get(`https://api.guildwars2.com/v2/account?access_token=${apiKey}`);
+    const account = accountResponse.data;
+    const characterData = charactersResponse.data.map(character => ({
+      name: character.name,
+      race: character.race,
+      profession: character.profession,
+      level: character.level
+    }));
 
+    const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).send({ message: "User Not found." });
+      return res.status(404).send({ message: "User not found." });
     }
 
     const existingApiKey = user.apiKeys.find((key) => key._id === apiKey);
@@ -99,7 +108,14 @@ exports.createApiKey = async (req, res) => {
       return res.status(400).send({ message: "API key already exists." });
     }
 
-    user.apiKeys.push({ _id: apiKey, active: true });
+    const apiKeyData = {
+      _id: apiKey,
+      active: true,
+      accountName: account.name,
+      characters: characterData
+    };
+
+    user.apiKeys.push(apiKeyData);
     await user.save();
 
     const updatedUser = await User.findById(userId).populate("apiKeys", "_id active");
@@ -158,6 +174,20 @@ exports.updateApiKeyStatus = async (req, res) => {
     res.status(200).send({
       message: "API key status updated successfully!",
       user: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().populate("apiKeys", "_id active");
+
+    res.status(200).send({
+      message: "Users retrieved successfully!",
+      users: users,
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
