@@ -14,13 +14,13 @@ import Thief from './img/Thief.png';
 import Warrior from './img/Warrior.png';
 
 function Accounts() {
-    const [data, setData] = useState([]);
+    const [accounts, setAccounts] = useState([]);
 
     useEffect(() => {
         try {
             (async () => {
-                const response = await AuthService.getAllUsers();
-                setData(response.data.users);
+                const usersRespond = await AuthService.getAllUsers();
+                setAccounts(usersRespond.data.users);
             })();
         } catch (error) {
             console.error(error);
@@ -39,12 +39,10 @@ function Accounts() {
         Warrior: Warrior
     };
 
-    console.log(data)
-
     return (
         <div className="home-characters">
-            {data.length > 0 ? (
-                data.map((user, index) => (
+            {accounts
+                ? accounts.map((user, index) => (
                     <>
                         {user.apiKeys && user.apiKeys.map(apiKey => {
                             if (apiKey.active) {
@@ -54,12 +52,12 @@ function Accounts() {
                                             const Icon = professionIcons[character.profession];
 
                                             return (
-                                                <div key={character.name.replace(/\s/g, "_")} className="home-character">
+                                                <div key={`${character.name}${index}-box`} className="home-character">
                                                     <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
                                                         <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
                                                             <div className="acccounts-names"><h3>{character.name}</h3></div>
                                                             <div>{character.level} {character.race}</div>
-                                                            <img src={Icon} key={character.name} alt={character.name} />
+                                                            <img src={Icon} key={`${character.name}${index}-img`} alt={character.name} />
                                                             <div>{character.profession}</div>
                                                         </div>
                                                     </Link>
@@ -74,9 +72,8 @@ function Accounts() {
                         })}
                     </>
                 ))
-            ) : (
-                <div>Loading data...</div>
-            )}
+                : <div>Loading data...</div>
+            }
         </div>
     );
 }

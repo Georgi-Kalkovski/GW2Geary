@@ -33,6 +33,7 @@
 
 .minor-trait-icon,
 .major-trait-icon {
+    max-width: 64px;
     width: 58%;
 }
 

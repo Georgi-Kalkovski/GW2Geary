@@ -82,12 +82,25 @@ exports.signin = async (req, res) => {
   }
 };
 
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().populate("apiKeys", "_id active");
+
+    res.status(200).send({
+      message: "Users retrieved successfully!",
+      users: users,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 // create API key
 exports.createApiKey = async (req, res) => {
   try {
     const { userId } = req.params;
     const { apiKey } = req.body;
-
     const charactersResponse = await axios.get(`https://api.guildwars2.com/v2/characters?ids=all&access_token=${apiKey}`);
     const accountResponse = await axios.get(`https://api.guildwars2.com/v2/account?access_token=${apiKey}`);
     const account = accountResponse.data;
@@ -174,20 +187,6 @@ exports.updateApiKeyStatus = async (req, res) => {
     res.status(200).send({
       message: "API key status updated successfully!",
       user: updatedUser,
-    });
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-};
-
-// Get all users
-exports.getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find().populate("apiKeys", "_id active");
-
-    res.status(200).send({
-      message: "Users retrieved successfully!",
-      users: users,
     });
   } catch (err) {
     res.status(500).send({ message: err.message });

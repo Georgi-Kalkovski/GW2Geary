@@ -18,20 +18,6 @@ const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
-  const [professions, setProfessions] = useState([]);
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    try {
-      (async () => {
-        const response = await AuthService.getAllUsers();
-        setData(response.data.users);
-      })();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
 
   const professionIcons = {
     Elementalist: Elementalist,
@@ -44,16 +30,6 @@ const Profile = () => {
     Thief: Thief,
     Warrior: Warrior
   };
-
-  useEffect(() => {
-    try {
-      (async () => {
-        setProfessions(await fetchData('professionsAll'));
-      })();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
 
   const handleApiKeyChange = useCallback((e) => {
     setApiKey(e.target.value);

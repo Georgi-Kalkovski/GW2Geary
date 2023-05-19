@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import fetchData from "./fetchData";
 import './Classes.css'
-function Home() {
+function Account() {
     const [account, setAccount] = useState([]);
     const [world, setWorld] = useState({});
     const [characters, setCharacters] = useState([]);
@@ -61,4 +61,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Account;

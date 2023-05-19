@@ -1,7 +1,7 @@
 import axios from 'axios';
 import URLS from './urls';
 
-const fetchData = async (urls, id) => {
+const fetchData = async (urls, id, apiKey) => {
   let url = {
     account: URLS.urlAccount,
     accounts: URLS.urlAccounts,
@@ -19,6 +19,7 @@ const fetchData = async (urls, id) => {
   }[urls] || '';
 
   if (id) { url = url + id }
+  if (apiKey) { url = url + apiKey }
 
   try {
     return (await axios.get(url)).data;

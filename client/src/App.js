@@ -6,7 +6,7 @@ import AuthService from "./services/auth.service";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
+import Account from "./components/Account";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
@@ -54,8 +54,8 @@ const App = () => {
         </Link>
         <div className="flex">
           <li>
-            <Link to={"/home"} className="nav-a">
-              Home
+            <Link to={"/account"} className="nav-a">
+              Account
             </Link>
           </li>
           <li>
@@ -121,8 +121,9 @@ const App = () => {
 
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Accounts />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
@@ -131,7 +132,7 @@ const App = () => {
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/characters/:name" element={<Character />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Accounts />} />
         </Routes>
       </div>
     </div>
