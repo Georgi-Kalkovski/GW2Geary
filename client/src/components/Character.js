@@ -74,7 +74,7 @@ function Character() {
                             <Row >WvW Rank</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column' }}>
-                            <Row style={{ fontSize: '30px' }}>{world}</Row>
+                            <Row style={{ fontSize: '25px', paddingBottom: '6px'}}>{world}</Row>
                             <Row >World</Row>
                         </Col>
                     </Row>
