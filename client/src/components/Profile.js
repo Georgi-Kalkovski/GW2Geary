@@ -1,35 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
-import fetchData from "./fetchData";
 import AuthService from "../services/auth.service";
 import axios from "axios";
-
-import Elementalist from './img/Elementalist.png';
-import Engineer from './img/Engineer.png';
-import Guardian from './img/Guardian.png';
-import Mesmer from './img/Mesmer.png';
-import Necromancer from './img/Necromancer.png';
-import Ranger from './img/Ranger.png';
-import Revenant from './img/Revenant.png';
-import Thief from './img/Thief.png';
-import Warrior from './img/Warrior.png';
+import { wikiBigProfessionIcons } from "./icons";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
-
-  const professionIcons = {
-    Elementalist: Elementalist,
-    Engineer: Engineer,
-    Guardian: Guardian,
-    Mesmer: Mesmer,
-    Necromancer: Necromancer,
-    Ranger: Ranger,
-    Revenant: Revenant,
-    Thief: Thief,
-    Warrior: Warrior
-  };
 
   const handleApiKeyChange = useCallback((e) => {
     setApiKey(e.target.value);
@@ -161,28 +139,30 @@ const Profile = () => {
                 />
                 <button onClick={handleApiKeyCreate}>Create API Key</button>
                 <br /><br />
-                Api Keys:
+                <div className="flex center">Api Keys:</div>
+                <br />
                 {/* Apis */}
                 {apiKeys &&
                   apiKeys.map((apiKey) => (
-                    <div key={apiKey._id}>
-                      <span className="yellow-highlight">{apiKey.accountName}</span> - {apiKey._id}{" "}
-                      <input
-                        type="checkbox"
-                        defaultChecked={apiKey.active}
-                        onChange={(e) =>
-                          updateApiKeyStatus(apiKey._id, e.target.checked)
-                        }
-                      />
-                      <button onClick={() => deleteApiKey(apiKey._id)}>
-                        Delete
-                      </button>
+                    <div key={apiKey._id} >
+                      <div className="yellow-highlight flex center">{apiKey.accountName}</div>
+                      <div>{apiKey._id}{" "}
+                        <input
+                          type="checkbox"
+                          defaultChecked={apiKey.active}
+                          onChange={(e) =>
+                            updateApiKeyStatus(apiKey._id, e.target.checked)
+                          }
+                        />
+                        <button onClick={() => deleteApiKey(apiKey._id)}>
+                          Delete Key
+                        </button>
+                      </div>
+                      <br />
                     </div>
                   ))}
               </div>
             </div>
-
-            <br />
 
             {/* Characters */}
             <div>
@@ -192,7 +172,7 @@ const Profile = () => {
                     <h2 className="flex center yellow-highlight">{apiKey.accountName}</h2>
                     <div className="home-characters">
                       {apiKey.characters && apiKey.characters.map(character => {
-                        const Icon = professionIcons[character.profession];
+                        const Icon = wikiBigProfessionIcons[character.profession];
 
                         return (
                           <div key={character.name.replace(/\s/g, "_")} className="home-character">
@@ -200,7 +180,7 @@ const Profile = () => {
                               <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
                                 <div className="acccounts-names"><h3>{character.name}</h3></div>
                                 <div>{character.level} {character.race}</div>
-                                <img src={Icon} key={character.name} alt={character.name} />
+                                <img src={Icon} key={character.name} alt={character.name} style={{ width: '75px' }} />
                                 <div>{character.profession}</div>
                               </div>
                             </Link>

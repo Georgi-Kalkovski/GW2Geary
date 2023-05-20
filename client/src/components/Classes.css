@@ -23,6 +23,7 @@ input:checked+.engineer-switch,
 }
 
 .engineer-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(26%) sepia(51%) saturate(548%) hue-rotate(353deg) brightness(95%) contrast(95%);
 }
 
@@ -50,16 +51,14 @@ input:checked+.necromancer-switch,
   filter: invert(30%) sepia(20%) saturate(491%) hue-rotate(87deg) brightness(98%) contrast(93%);
 }
 
-.necromancer-filter {
+.necromancer-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(9%) sepia(17%) saturate(801%) hue-rotate(85deg) brightness(95%) contrast(91%);
 }
 
-.thief-text {
-  color: #495578;
-}
 
 /* Thief */
-.elementalist-text {
+.thief-text {
   color: #495578;
 }
 
@@ -83,6 +82,7 @@ input:checked+.thief-switch,
 }
 
 .thief-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(16%) sepia(14%) saturate(1403%) hue-rotate(187deg) brightness(95%) contrast(92%);
 }
 
@@ -111,6 +111,7 @@ input:checked+.elementalist-switch,
 }
 
 .elementalist-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(16%) sepia(29%) saturate(3153%) hue-rotate(334deg) brightness(100%) contrast(94%);
 }
 
@@ -135,10 +136,11 @@ input:checked+.warrior-switch,
 }
 
 .warrior-filter {
-  filter: invert(50%) sepia(75%) saturate(471%) hue-rotate(5deg) brightness(96%) contrast(96%);
+  filter: invert(63%) sepia(34%) saturate(6911%) hue-rotate(19deg) brightness(99%) contrast(83%);
 }
 
 .warrior-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(32%) sepia(49%) saturate(3225%) hue-rotate(38deg) brightness(88%) contrast(87%);
 }
 
@@ -167,6 +169,7 @@ input:checked+.ranger-switch,
 }
 
 .ranger-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(38%) sepia(66%) saturate(383%) hue-rotate(32deg) brightness(93%) contrast(92%);
 }
 
@@ -195,6 +198,7 @@ input:checked+.mesmer-switch,
 }
 
 .mesmer-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(19%) sepia(30%) saturate(1273%) hue-rotate(234deg) brightness(88%) contrast(92%);
 }
 
@@ -223,6 +227,7 @@ input:checked+.guardian-switch,
 }
 
 .guardian-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(47%) sepia(21%) saturate(792%) hue-rotate(151deg) brightness(94%) contrast(90%);
 }
 
@@ -251,5 +256,6 @@ input:checked+.revenant-switch,
 }
 
 .revenant-filter:hover {
+  transition: filter 0.3s ease-out;
   filter: invert(6%) sepia(10%) saturate(4148%) hue-rotate(292deg) brightness(94%) contrast(97%);
 }
