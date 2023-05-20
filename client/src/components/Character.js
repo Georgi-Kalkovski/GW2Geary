@@ -16,6 +16,7 @@ function Character() {
     const [character, setCharacter] = useState(null);
     const [account, setAccount] = useState(null);
     const [mastery, setMastery] = useState(null);
+    const [world, setWorld] = useState(null);
 
     useEffect(() => {
         try {
@@ -29,7 +30,8 @@ function Character() {
                                 setCharacter(charFound)
                                 const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
                                 setAccount(accFound)
-                                setMastery((await fetchData('mastery')).totals.reduce((acc, x) => acc + x.earned, 0));
+                                setMastery(key.mastery_points)
+                                setWorld(key.world)
                             }
                         }
                     }
@@ -39,7 +41,7 @@ function Character() {
             console.error(error);
         }
     }, []);
-    console.log(mastery)
+
     return (
         character === null || account === null
             ? <div className='center-items'>Loading...</div>
@@ -47,29 +49,33 @@ function Character() {
                 <Container className='center-items'>
                     <Row><h1>{character.name}</h1></Row>
                     <Row className='flex center'>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row><img src={wikiBigRacesIcons[character.race]} alt={character.profession} style={{ maxWidth: '30px', filter: 'grayscale(100%) brightness(600%)' }} /></Row>
                             <Row >{character.race} {character.gender}</Row>
                         </Col>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row><img src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '30px' }} /></Row>
                             <Row >{character.profession}</Row>
                         </Col>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{character.level}</Row>
                             <Row >Level </Row>
                         </Col>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{mastery}</Row>
                             <Row >Mastery Points </Row>
                         </Col>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{account.fractal_level}</Row>
                             <Row >Fractal Level</Row>
                         </Col>
-                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '50px' }}>
+                        <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{account.wvw_rank}</Row>
                             <Row >WvW Rank</Row>
+                        </Col>
+                        <Col className='flex center' style={{ flexDirection: 'column' }}>
+                            <Row style={{ fontSize: '30px' }}>{world}</Row>
+                            <Row >World</Row>
                         </Col>
                     </Row>
                     <div className='equipment-build-flex'>
