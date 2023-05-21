@@ -59,15 +59,19 @@ const EquipmentDropdown = ({ char }) => {
           ...char.equipment.flatMap(el => el.infusions).filter(item => item !== undefined),
           ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions)).filter(item => item !== undefined)
         ].join(','));
+        // console.log('fetchedItems', fetchedItems)
+        // console.log('fetchedSkins', fetchedSkins)
+        // console.log('fetchedUpgrades', fetchedUpgrades)
+        // console.log('fetchedUpgrades', fetchedInfusions)
 
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,
           ...char.equipment.find((fetchedItem => fetchedItem.id === item.id)),
-          ...fetchedItems.find(fetchedItem => fetchedItem.id === item.id),
-          skin_name: fetchedSkins.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
-          skin_icon: fetchedSkins.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
+          ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
+          skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
+          skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
           upgrades: [
-            ...fetchedUpgrades.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
+            ...fetchedUpgrades?.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
               ...upgrade,
               counter: selectedTab.equipment.reduce((count, fetchedItem) => {
                 if (fetchedItem.slot === "HelmAquatic") {
