@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import AuthService from "../services/auth.service";
-import fetchData from './fetchData';
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from "./icons";
@@ -48,34 +47,35 @@ function Character() {
             : <>
                 <Container className='center-items'>
                     <Row><h1>{character.name}</h1></Row>
+                    <Row><h3>{account.name}</h3></Row>
                     <Row className='flex center'>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                            <Row><img src={wikiBigRacesIcons[character.race]} alt={character.profession} style={{ maxWidth: '30px', filter: 'grayscale(100%) brightness(600%)' }} /></Row>
-                            <Row >{character.race} {character.gender}</Row>
+                            <Row><img src={wikiBigRacesIcons[character.race]} alt={character.profession} style={{ maxWidth: '30px', filter: 'grayscale(100%) brightness(300%)' }} /></Row>
+                            <Row className='yellow-highlight'>{character.race} {character.gender}</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                            <Row><img src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '30px' }} /></Row>
-                            <Row >{character.profession}</Row>
+                            <Row><img  src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '30px' }} /></Row>
+                            <Row className='yellow-highlight'>{character.profession}</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{character.level}</Row>
-                            <Row >Level </Row>
+                            <Row className='yellow-highlight'>Level </Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{mastery}</Row>
-                            <Row >Mastery Points </Row>
+                            <Row className='yellow-highlight'>Mastery Points </Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{account.fractal_level}</Row>
-                            <Row >Fractal Level</Row>
+                            <Row className='yellow-highlight'>Fractal Level</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row style={{ fontSize: '30px' }}>{account.wvw_rank}</Row>
-                            <Row >WvW Rank</Row>
+                            <Row className='yellow-highlight'>WvW Rank</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column' }}>
-                            <Row style={{ fontSize: '25px', paddingBottom: '6px'}}>{world}</Row>
-                            <Row >World</Row>
+                            <Row style={{ fontSize: '25px', paddingBottom: '6px' }}>{world}</Row>
+                            <Row className='yellow-highlight'>World</Row>
                         </Col>
                     </Row>
                     <div className='equipment-build-flex'>
