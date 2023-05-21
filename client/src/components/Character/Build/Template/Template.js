@@ -19,7 +19,7 @@ function Template({ buildInput }) {
                     for (let j = 1; j <= 3; j++) {
                         try {
                             const skill = await fetchData('traits', buildInput.specializations[i - 1].traits[j - 1]);
-                            fetchedTraits.push(skill.order + 1);
+                            fetchedTraits.push(skill[0].order + 1);
                         } catch (error) {
                             console.error(`Error fetching trait ${buildInput.specializations[i - 1].traits[j - 1]}:`, error);
                         }
