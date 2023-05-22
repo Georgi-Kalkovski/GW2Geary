@@ -39,6 +39,12 @@ const Account = () => {
                   {/* User */}
                   <Container className='center-items'>
                     <h1 className="flex center">{account.accountName}</h1>
+                    
+                    <Col className='flex center' style={{ flexDirection: 'column' }}>
+                        <Row style={{ fontSize: '25px', paddingBottom: '6px' }}>{account.world}</Row>
+                        <Row className='yellow-highlight'>World</Row>
+                      </Col>
+                      <br />
                     <Row className='flex center'>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                         <Row style={{ fontSize: '30px' }}>{account.mastery_points}</Row>
@@ -51,10 +57,6 @@ const Account = () => {
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                         <Row style={{ fontSize: '30px' }}>{account.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
-                      </Col>
-                      <Col className='flex center' style={{ flexDirection: 'column' }}>
-                        <Row style={{ fontSize: '25px', paddingBottom: '6px' }}>{account.world}</Row>
-                        <Row className='yellow-highlight'>World</Row>
                       </Col>
                     </Row>
                   </Container>
