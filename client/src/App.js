@@ -7,12 +7,13 @@ import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Account from "./components/Account";
+import Accounts from "./components/Accounts";
+import Characters from './components/Characters';
+import Character from './components/Character';
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-import Accounts from './components/Accounts';
-import Character from './components/Character';
 
 import EventBus from "./common/EventBus";
 
@@ -54,13 +55,13 @@ const App = () => {
         </Link>
         <div className="flex">
           <li>
-            <Link to={"/account"} className="nav-a">
-              Account
+            <Link to={"/accounts"} className="nav-a">
+              Accounts
             </Link>
           </li>
           <li>
-            <Link to={"/accounts"} className="nav-a">
-              Accounts
+            <Link to={"/characters"} className="nav-a">
+              Characters
             </Link>
           </li>
 
@@ -121,18 +122,18 @@ const App = () => {
 
       <div className="content">
         <Routes>
-          <Route path="/" element={<Accounts />} />
+          <Route path="/" element={<Characters />} />
           <Route path="/accounts" element={<Accounts />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/accounts/:name" element={<Account />} />
+          <Route path="/characters" element={<Characters />} />
+          <Route path="/characters/:name" element={<Character />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="/accounts" element={<Accounts />} />
-          <Route path="/characters/:name" element={<Character />} />
-          <Route path="*" element={<Accounts />} />
+          <Route path="*" element={<Characters />} />
         </Routes>
       </div>
     </div>

@@ -169,7 +169,7 @@ const Profile = () => {
               {apiKeys &&
                 apiKeys.map((apiKey) => (
                   <>
-                    <h2 className="flex center yellow-highlight">{apiKey.accountName}</h2>
+                    <h2 className="flex center">{apiKey.accountName}</h2>
                     <div className="home-characters">
                       {apiKey.characters && apiKey.characters.map(character => {
                         const Icon = wikiBigProfessionIcons[character.profession];
@@ -178,7 +178,7 @@ const Profile = () => {
                           <div key={character.name.replace(/\s/g, "_")} className="home-character">
                             <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
                               <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
-                                <div className="acccounts-names"><h3>{character.name}</h3></div>
+                                <div className="characters-names"><h3>{character.name}</h3></div>
                                 <div>{character.level} {character.race}</div>
                                 <img src={Icon} key={character.name} alt={character.name} style={{ width: '75px' }} />
                                 <div>{character.profession}</div>

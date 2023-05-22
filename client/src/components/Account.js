@@ -1,64 +1,92 @@
-import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import fetchData from "./fetchData";
-import './Classes.css'
-function Account() {
-    const [account, setAccount] = useState([]);
-    const [world, setWorld] = useState({});
-    const [characters, setCharacters] = useState([]);
-    const [mastery, setMastery] = useState(null);
-    const [professions, setProfessions] = useState([]);
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from 'react-router-dom';
+import AuthService from "../services/auth.service";
+import { wikiBigProfessionIcons } from "./icons";
+import { Container, Row, Col } from 'react-bootstrap';
 
-    useEffect(() => {
-        try {
-            (async () => {
-                setAccount(await fetchData('account'));
-                if (account.world) {
-                    setWorld((await fetchData('worlds', account.world))[0]);
-                }
-                setCharacters(await fetchData('charactersAll'));
-                setProfessions(await fetchData('professionsAll'));
-                setMastery((await fetchData('mastery')).totals.reduce((acc, x) => acc + x.earned, 0));
-            })();
-        } catch (error) {
-            console.error(error);
+const Account = () => {
+  const { name } = useParams();
+  const fromattedName = name.replaceAll('_', ' ');
+  const [accounts, setAccounts] = useState([]);
+
+  useEffect(() => {
+    try {
+      (async () => {
+        const usersRespond = await AuthService.getAllUsers();
+        const updatedAccounts = [];
+        for (const user of usersRespond.data.users) {
+          for (const apiKey of user.apiKeys) {
+            if (apiKey && apiKey.active && apiKey.accountName === fromattedName) {
+              updatedAccounts.push(apiKey);
+            }
+          }
         }
-    }, [account.world]);
+        setAccounts(updatedAccounts);
+      })();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-    return (
-        <>
-            <span className="home-account">
-                <h1>{account.name}</h1>
-                <h5>Fractal Level: {account.fractal_level}</h5>
-                <h5>Mastery Points: {mastery}</h5>
-                <h5>World: {world.name}</h5>
-                <h5>WvW Rank: {account.wvw_rank}</h5>
-            </span>
-            <div className="home-characters">
-                {professions.length > 0 && characters.length > 0
-                    ? characters.map((character) => {
-                        const prof = professions.find((p) => p.id === character.profession);
-                        return (
-                            <div key={character.name.replace(/\s/g, "_")} className="home-character">
-                                <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
-                                    <div><h3>{character.name}</h3></div>
-                                    <>
-                                        <div className={`${prof.name.toLowerCase()}-border home-box`} >
-                                            <div>{character.level} {character.race}</div>
-                                            <img src={prof.icon_big} key={character.name} alt={character.name} />
-                                            <div>{character.profession}</div>
-                                        </div>
-                                    </>
-                                </Link>
+  return (
+    <div>
+      <div>
+        <div className="container">
+          <div>
+            {accounts &&
+              accounts.map((account) => (
+                <>
+                  {/* User */}
+                  <Container className='center-items'>
+                    <h1 className="flex center">{account.accountName}</h1>
+                    <Row className='flex center'>
+                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
+                        <Row style={{ fontSize: '30px' }}>{account.mastery_points}</Row>
+                        <Row className='yellow-highlight'>Mastery Points </Row>
+                      </Col>
+                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
+                        <Row style={{ fontSize: '30px' }}>{account.fractal_level}</Row>
+                        <Row className='yellow-highlight'>Fractal Level</Row>
+                      </Col>
+                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
+                        <Row style={{ fontSize: '30px' }}>{account.wvw_rank}</Row>
+                        <Row className='yellow-highlight'>WvW Rank</Row>
+                      </Col>
+                      <Col className='flex center' style={{ flexDirection: 'column' }}>
+                        <Row style={{ fontSize: '25px', paddingBottom: '6px' }}>{account.world}</Row>
+                        <Row className='yellow-highlight'>World</Row>
+                      </Col>
+                    </Row>
+                  </Container>
+
+                  <br />
+
+                  {/* Characters */}
+                  <div className="home-characters">
+                    {account && account.characters.map(character => {
+                      const Icon = wikiBigProfessionIcons[character.profession];
+                      console.log(character)
+                      return (
+                        <div key={character.name.replace(/\s/g, "_")} className="home-character">
+                          <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
+                            <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
+                              <div className="characters-names"><h3>{character.name}</h3></div>
+                              <div>{character.level} {character.race}</div>
+                              <img src={Icon} key={character.name} alt={character.name} style={{ width: '75px' }} />
+                              <div>{character.profession}</div>
                             </div>
-                        );
-                    })
-                    : <div className="center-items">Loading...</div>
-                }
-            </div>
-
-        </>
-    );
-}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Account;

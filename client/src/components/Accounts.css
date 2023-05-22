@@ -1,0 +1,46 @@
+.characters-boxes {
+    cursor: pointer;
+    width: 270px;
+}
+
+.accounts-link {
+    text-decoration: none;
+}
+
+.accounts-box {
+    border: 1.5px solid rgb(255, 255, 255);
+    box-shadow: 0 0 10px 2px rgba(204, 204, 204, 0.5);
+    margin: 5%;
+    padding: 0 5%;
+    color: white;
+}
+
+.accounts-name {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    height: 69px;
+    text-align: center;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.accounts-flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.accounts-col {
+    align-items: center
+}
+
+.accounts-h6 {
+    margin-block-start: 0;
+}
