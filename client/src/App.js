@@ -115,7 +115,7 @@ const App = () => {
             </li>
             <li >
               <a href="/login" onClick={logOut} className="nav-a">
-                LogOut
+                Logout
               </a>
             </li>
           </div>
@@ -123,13 +123,13 @@ const App = () => {
           <div className="nav-login-register">
             <li>
               <Link to={"/login"} className="nav-a">
-                Login
+               Login
               </Link>
             </li>
 
             <li>
               <Link to={"/register"} className="nav-a">
-                Sign Up
+                Register
               </Link>
             </li>
           </div>

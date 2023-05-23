@@ -20,7 +20,7 @@ function AccountTooltip({ account }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container' })}
                 >
-                    <div className='account-popup border-basic  box-basic'>
+                    <div className='account-popup border-basic box-basic'>
                         <div><span className="yellow-highlight">Mastery Points: </span>{account.mastery_points}</div>
                         <div><span className="yellow-highlight">Fractal Level: </span>{account.fractal_level}</div>
                         <div><span className="yellow-highlight">WvW Rank: </span>{account.wvw_rank}</div>
