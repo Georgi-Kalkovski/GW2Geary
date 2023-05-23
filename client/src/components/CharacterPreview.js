@@ -14,7 +14,7 @@ function CharacterPreview({ character }) {
                         <div className="character-name">{character.name}</div>
                     </Row>
                     <Row className='flex space-between'>
-                        <Col>
+                        <Col style={{fontSize:'15px'}}>
                             <Row >
                                 lvl. {character.level}
                             </Row>

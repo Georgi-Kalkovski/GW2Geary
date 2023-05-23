@@ -16,6 +16,9 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 
+import Cog from './cog.svg'
+import Dragon from './dragon.svg'
+
 import EventBus from "./common/EventBus";
 
 const App = () => {
@@ -52,9 +55,21 @@ const App = () => {
     <div className="App">
       <nav className="app-nav">
         <Link to={"/"} className="nav-a">
-          GW2Geary
+          <div className="flex">
+            <div style={{ fontFamily: 'GW2Font',fontSize:'30px',color:'#aa0404' }}>GW2</div>
+            <div className="logo-div">
+              <img src={Dragon} alt="" className="logo-dragon" />
+              <img src={Cog} alt="" className="logo-cog" />
+            </div>
+            <div style={{ fontFamily: 'GW2Font',fontSize:'30px' }}>Geary</div>
+          </div>
         </Link>
-        <div className="flex">
+        <div className="flex nav-center">
+        <li>
+            <Link to={"/home"} className="nav-a">
+              Home
+            </Link>
+          </li>
           <li>
             <Link to={"/accounts"} className="nav-a">
               Accounts

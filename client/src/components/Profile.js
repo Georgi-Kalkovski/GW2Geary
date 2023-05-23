@@ -129,7 +129,7 @@ const Profile = () => {
                 <strong>{currentUser.email}</strong> Profile
               </h3>
               <div>
-                <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#b10026' }} to="https://account.arena.net/applications">Guild Wars 2</Link>:</label>
+                <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#aa0404' }} to="https://account.arena.net/applications">Guild Wars 2</Link>:</label>
                 <input
                   type="text"
                   id="apiKey"
