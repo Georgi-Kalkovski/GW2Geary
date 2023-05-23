@@ -1,6 +1,6 @@
 .characters-boxes {
     cursor: pointer;
-    width: 270px;
+    width: 20%;
 }
 
 .accounts-link {
@@ -10,8 +10,7 @@
 .accounts-box {
     border: 1.5px solid rgb(255, 255, 255);
     box-shadow: 0 0 10px 2px rgba(204, 204, 204, 0.5);
-    margin: 5%;
-    padding: 0 5%;
+    margin: 3%;
     color: white;
 }
 
@@ -25,6 +24,7 @@
     align-items: center;
     justify-content: center;
     word-break: break-all;
+    padding-right: 10px;
 }
 
 .column {
@@ -43,4 +43,18 @@
 
 .accounts-h6 {
     margin-block-start: 0;
+}
+
+.white-info {
+    filter: invert(99%) sepia(100%) saturate(2%) hue-rotate(178deg) brightness(106%) contrast(100%);
+}
+
+.account-popup {
+    background-color: #000000e0;
+    padding: 10px;
+    white-space: nowrap;
+    font-size: smaller;
+    white-space: pre-wrap;
+    text-align: left;
+    max-width: 200px;
 }

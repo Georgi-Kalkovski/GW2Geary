@@ -86,6 +86,41 @@
   flex-wrap: wrap;
 }
 
+/* Character Box */
+
+.characters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 20%;
+}
+
+.character {
+  min-width: 20%;
+}
+
+.character-box {
+  margin: 3%;
+  padding: 5%;
+}
+
+.character-name {
+  font-size: 1.4em;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.character-name-div {
+  height: 50px;
+}
+
+.character-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 /* Toggle Switch */
 .switch {
   position: relative;

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import AuthService from "../services/auth.service";
+import CharacterPreview from "./CharacterPreview";
 import './Classes.css';
-import { wikiBigProfessionIcons } from "./icons";
 
 function Characters() {
     const [accounts, setAccounts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         try {
@@ -18,43 +18,66 @@ function Characters() {
         }
     }, []);
 
-    return (
-        <div className="home-characters">
-            {accounts
-                ? accounts.map((user, index) => (
-                    <>
-                        {user.apiKeys && user.apiKeys.map(apiKey => {
-                            if (apiKey.active) {
-                                return (
-                                    <>
-                                        {apiKey.characters && apiKey.characters.map(character => {
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
-                                            const Icon = wikiBigProfessionIcons[character.profession];
+    const filteredAccounts = accounts.filter((account) =>
+        account &&
+        account.apiKeys &&
+        account.apiKeys.some((apiKey) =>
+            apiKey.active &&
+            apiKey.characters &&
+            apiKey.characters.some((character) =>
+                character.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        )
+    );
 
-                                            return (
-                                                <div key={`${character.name}${index}-box`} className="home-character">
-                                                    <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
-                                                        <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`}>
-                                                            <div className="characters-names"><h3>{character.name}</h3></div>
-                                                            <div>{character.level} {character.race}</div>
-                                                            <img src={Icon} key={`${character.name}${index}-img`} alt={character.name} style={{ width: '75px' }} />
-                                                            <div>{character.profession}</div>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            );
-                                        })}
-                                    </>
-                                );
-                            } else {
-                                return null; // Skip inactive apiKeys
-                            }
-                        })}
-                    </>
-                ))
-                : <div>Loading data...</div>
+    const getMatchingCharacters = (account) => {
+        const matchingCharacters = [];
+        account.apiKeys.forEach((apiKey) => {
+            if (apiKey.active && apiKey.characters) {
+                apiKey.characters.forEach((character) => {
+                    if (character.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        matchingCharacters.push(character);
+                    }
+                });
             }
-        </div>
+        });
+        return matchingCharacters.sort((a, b) => a.name.localeCompare(b.name));
+    };
+
+    return (
+        <>
+            <div className="search-container">
+                <input
+                className='search-input'
+                    type="text"
+                    placeholder="Search character name..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+            </div>
+            <div className="characters">
+                <React.Fragment className="character-list">
+                    {filteredAccounts.length > 0 ? (
+                        filteredAccounts.map((account) => (
+                            <React.Fragment key={account.id}>
+                                {getMatchingCharacters(account).map((character) => (
+                                    <CharacterPreview
+                                        character={character}
+                                        key={character.name}
+                                    />
+                                ))}
+                            </React.Fragment>
+                        ))
+                    ) : (
+                        <div>No matching accounts found.</div>
+                    )}
+                </React.Fragment>
+            </div>
+        </>
     );
 }
 

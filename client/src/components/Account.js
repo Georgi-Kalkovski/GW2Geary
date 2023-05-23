@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import AuthService from "../services/auth.service";
-import { wikiBigProfessionIcons } from "./icons";
 import { Container, Row, Col } from 'react-bootstrap';
+import CharacterPreview from "./CharacterPreview";
 
 const Account = () => {
   const { name } = useParams();
@@ -38,24 +38,24 @@ const Account = () => {
                 <>
                   {/* User */}
                   <Container className='center-items'>
-                    <h1 className="flex center">{account.accountName}</h1>
-                    
+                    <div className="flex center" style={{ fontSize: '30px' }}>{account.accountName}</div>
+                    <br />
                     <Col className='flex center' style={{ flexDirection: 'column' }}>
-                        <Row style={{ fontSize: '25px', paddingBottom: '6px' }}>{account.world}</Row>
-                        <Row className='yellow-highlight'>World</Row>
-                      </Col>
-                      <br />
+                      <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{account.world}</Row>
+                      <Row className='yellow-highlight'>World</Row>
+                    </Col>
+                    <br />
                     <Row className='flex center'>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '30px' }}>{account.mastery_points}</Row>
+                        <Row style={{ fontSize: '25px' }}>{account.mastery_points}</Row>
                         <Row className='yellow-highlight'>Mastery Points </Row>
                       </Col>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '30px' }}>{account.fractal_level}</Row>
+                        <Row style={{ fontSize: '25px' }}>{account.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                       </Col>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '30px' }}>{account.wvw_rank}</Row>
+                        <Row style={{ fontSize: '25px' }}>{account.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                       </Col>
                     </Row>
@@ -64,23 +64,13 @@ const Account = () => {
                   <br />
 
                   {/* Characters */}
-                  <div className="home-characters">
-                    {account && account.characters.map(character => {
-                      const Icon = wikiBigProfessionIcons[character.profession];
-                      console.log(character)
-                      return (
-                        <div key={character.name.replace(/\s/g, "_")} className="home-character">
-                          <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
-                            <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
-                              <div className="characters-names"><h3>{character.name}</h3></div>
-                              <div>{character.level} {character.race}</div>
-                              <img src={Icon} key={character.name} alt={character.name} style={{ width: '75px' }} />
-                              <div>{character.profession}</div>
-                            </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                  <div className="characters">
+                    {account && account.characters.map(character => (
+                      < CharacterPreview
+                        character={character}
+                        key={`${character.name}`}
+                      />
+                    ))}
                   </div>
                 </>
               ))}

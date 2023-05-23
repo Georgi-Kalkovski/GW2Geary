@@ -6,6 +6,7 @@ import AuthService from "./services/auth.service";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Home from "./components/Home";
 import Account from "./components/Account";
 import Accounts from "./components/Accounts";
 import Characters from './components/Characters';
@@ -122,7 +123,8 @@ const App = () => {
 
       <div className="content">
         <Routes>
-          <Route path="/" element={<Characters />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters" element={<Characters />} />
@@ -133,7 +135,7 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="*" element={<Characters />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </div>
     </div>

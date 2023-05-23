@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import AuthService from "../services/auth.service";
 import axios from "axios";
-import { wikiBigProfessionIcons } from "./icons";
+import CharacterPreview from "./CharacterPreview";
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -167,26 +167,17 @@ const Profile = () => {
             {/* Characters */}
             <div>
               {apiKeys &&
-                apiKeys.map((apiKey) => (
+                apiKeys.map((apiKey, index) => (
                   <>
-                    <h2 className="flex center">{apiKey.accountName}</h2>
-                    <div className="home-characters">
-                      {apiKey.characters && apiKey.characters.map(character => {
-                        const Icon = wikiBigProfessionIcons[character.profession];
-
-                        return (
-                          <div key={character.name.replace(/\s/g, "_")} className="home-character">
-                            <Link to={`/characters/${character.name.replace(/\s/g, "_")}`} className="home-character-link">
-                              <div className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border home-box`} >
-                                <div className="characters-names"><h3>{character.name}</h3></div>
-                                <div>{character.level} {character.race}</div>
-                                <img src={Icon} key={character.name} alt={character.name} style={{ width: '75px' }} />
-                                <div>{character.profession}</div>
-                              </div>
-                            </Link>
-                          </div>
-                        );
-                      })}
+                    <br />
+                    <div className="flex center" style={{ fontSize: '30px' }}>{apiKey.accountName}</div>
+                    <div className="characters">
+                      {apiKey.characters && apiKey.characters.map(character => (
+                        <CharacterPreview
+                          character={character}
+                          key={`${character.name}`}
+                        />
+                      ))}
                     </div>
                   </>
                 ))}

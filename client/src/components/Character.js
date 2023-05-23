@@ -24,7 +24,6 @@ function Character() {
                 for (const keys of users.data.users) {
                     for (const key of keys.apiKeys) {
                         for (const char of key.characters) {
-                            console.log(key)
                             if (char.name === formattedName && key.active) {
                                 const charFound = (await axios.get(`https://api.guildwars2.com/v2/characters/${formattedName.replaceAll(' ', '%20')}?access_token=${key._id}&v=latest`)).data;
                                 setCharacter(charFound)
@@ -46,20 +45,21 @@ function Character() {
             ? <div className='center-items'>Loading...</div>
             : <>
                 <Container className='center-items'>
-                    <Row><h1>{character.name}</h1></Row>
-                    <Row><h3>{account.name}</h3></Row>
-                    
+                    <Row><div style={{ fontSize: '30px' }}>{character.name}</div></Row>
+                    <Row><div className='yellow-highlight' style={{ fontSize: '20px' }}>{account.name}</div></Row>
+                    <br />
                     <Col className='flex center' style={{ flexDirection: 'column' }}>
-                            <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                            <Row className='yellow-highlight'>World</Row>
-                        </Col>
+                        <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                        <Row className='yellow-highlight'>World</Row>
+                    </Col>
+                    <br />
                     <Row className='flex center'>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                             <Row><img src={wikiBigRacesIcons[character.race]} alt={character.profession} style={{ maxWidth: '25px', filter: 'grayscale(100%) brightness(300%)' }} /></Row>
                             <Row className='yellow-highlight'>{character.race} {character.gender}</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                            <Row><img  src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '25px' }} /></Row>
+                            <Row><img src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '25px' }} /></Row>
                             <Row className='yellow-highlight'>{character.profession}</Row>
                         </Col>
                         <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
@@ -79,6 +79,7 @@ function Character() {
                             <Row className='yellow-highlight'>WvW Rank</Row>
                         </Col>
                     </Row>
+
                     <div className='equipment-build-flex'>
                         <EquipmentDropdown char={character} />
                         <BuildDropdown char={character} />

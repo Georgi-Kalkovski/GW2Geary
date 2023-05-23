@@ -5,8 +5,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './Classes.css';
 import './Accounts.css';
 
+import AccountTooltip from './AccountTooltip';
+
 function Accounts() {
     const [accounts, setAccounts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         try {
@@ -20,50 +23,52 @@ function Accounts() {
                         }
                     }
                 }
-                setAccounts(updatedAccounts);
+                setAccounts(updatedAccounts.sort((a, b) => a.accountName.localeCompare(b.accountName)));
             })();
         } catch (error) {
             console.error(error);
         }
     }, []);
 
-    return (
-        <Container className="home-characters">
-            {accounts.map(account => (
-                <div key={account.accountName} className="characters-boxes">
-                    <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, "_")}`}>
-                        <Container className="accounts-box">
-                            <Col>
-                                <Row><h3 className="accounts-name">{account.accountName}</h3></Row>
-                                <Row className="accounts-flex">
-                                    <Col className="flex column center accounts-col">
-                                        <Col>{account.mastery_points}</Col>
-                                        <Col><h6 className="yellow-highlight accounts-h6">Mastery Points</h6></Col>
-                                    </Col>
-                                    <Col className="flex column center accounts-col">
-                                        <Col>{account.fractal_level}</Col>
-                                        <Col><h6 className="yellow-highlight accounts-h6">Fractal Level</h6></Col>
-                                    </Col>
-                                </Row>
-                                <Row className="accounts-flex">
-                                    <Col className="flex column center accounts-col">
-                                        <Col>{account.wvw_rank}</Col>
-                                        <Col><h6 className="yellow-highlight accounts-h6">WvW Rank</h6></Col>
-                                    </Col>
-                                    <Col className="flex column center accounts-col">
-                                        <Col>{account.world}</Col>
-                                        <Col><h6 className="yellow-highlight accounts-h6">World</h6></Col>
-                                    </Col>
-                                </Row>
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
-                            </Col>
+    const filteredAccounts = accounts.filter((account) =>
+        account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-
-                        </Container>
-                    </Link>
-                </div>
-            ))}
+    return (<>
+        <div className="search-container">
+            <input
+                className='search-input'
+                type="text"
+                placeholder="Search account name..."
+                value={searchTerm}
+                onChange={handleSearch}
+            />
+        </div>
+        <Container className="characters">
+            {filteredAccounts.length > 0 ? (
+                filteredAccounts.map(account => (
+                    <div key={account.accountName} className="characters-boxes">
+                        <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, "_")}`}>
+                            <Container className="accounts-box">
+                                <Col>
+                                    <Row className="center-class">
+                                        <div className="accounts-name">{account.accountName}</div>
+                                        <AccountTooltip account={account} />
+                                    </Row>
+                                </Col>
+                            </Container>
+                        </Link>
+                    </div>
+                ))
+            ) : (
+                <div>No matching accounts found.</div>
+            )}
         </Container>
+    </>
     );
 }
 
