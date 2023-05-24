@@ -11,6 +11,10 @@ function Accounts() {
     const [accounts, setAccounts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
+    function getRandomSort() {
+        return Math.random() - 0.5;
+    }
+
     useEffect(() => {
         try {
             (async () => {
@@ -23,7 +27,7 @@ function Accounts() {
                         }
                     }
                 }
-                setAccounts(updatedAccounts.sort((a, b) => a.accountName.localeCompare(b.accountName)));
+                setAccounts(updatedAccounts.sort((a, b) => getRandomSort()));
             })();
         } catch (error) {
             console.error(error);

@@ -34,6 +34,10 @@ function Characters() {
         )
     );
 
+    function getRandomSort() {
+        return Math.random() - 0.5;
+    }
+
     const getMatchingCharacters = (account) => {
         const matchingCharacters = [];
         account.apiKeys.forEach((apiKey) => {
@@ -45,14 +49,14 @@ function Characters() {
                 });
             }
         });
-        return matchingCharacters.sort((a, b) => a.name.localeCompare(b.name));
+        return matchingCharacters.sort((a, b) => getRandomSort());
     };
 
     return (
         <>
             <div className="search-container">
                 <input
-                className='search-input'
+                    className='search-input'
                     type="text"
                     placeholder="Search character name..."
                     value={searchTerm}

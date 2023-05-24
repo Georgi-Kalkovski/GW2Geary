@@ -11,6 +11,10 @@ function Home() {
     const [accounts, setAccounts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
+    function getRandomSort() {
+        return Math.random() - 0.5;
+    }
+
     useEffect(() => {
         try {
             (async () => {
@@ -23,7 +27,7 @@ function Home() {
                         }
                     }
                 }
-                setAccounts(updatedAccounts.sort((a, b) => a.accountName.localeCompare(b.accountName)));
+                setAccounts(updatedAccounts.sort((a, b) => getRandomSort()));
             })();
         } catch (error) {
             console.error(error);
@@ -55,7 +59,7 @@ function Home() {
                 }
             });
         }
-        return matchingCharacters.sort((a, b) => a.name.localeCompare(b.name));
+        return matchingCharacters.sort((a, b) => getRandomSort());
     };
 
     return (

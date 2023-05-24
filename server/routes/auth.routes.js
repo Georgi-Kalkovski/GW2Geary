@@ -4,13 +4,13 @@ const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
 
 router.post(
-  "/signup",
+  "/register",
   [verifySignUp.checkDuplicateEmail, verifySignUp.checkRolesExisted],
   controller.signup
 );
 
 router.post(
-  "/signin",
+  "/login",
   controller.signin
 );
 

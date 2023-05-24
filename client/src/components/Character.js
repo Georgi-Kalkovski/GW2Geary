@@ -8,6 +8,9 @@ import BuildDropdown from './Character/Build/BuildDropdown';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from "./icons";
 import './Character.css';
 
+import Cog from '../cog.svg'
+import Dragon from '../dragon.svg'
+
 function Character() {
     const { name } = useParams();
 
@@ -41,8 +44,13 @@ function Character() {
         }
     }, []);
     return (
-        character === null || account === null
-            ? <div className='center-items'>Loading...</div>
+        character === null || account === null 
+            ? <div className="flex center">
+                <div className="logo-loading-div">
+                    <img src={Dragon} alt="" className="logo--loading-dragon" />
+                    <img src={Cog} alt="" className="logo-loading-cog" />
+                </div>
+            </div>
             : <>
                 <Container className='center-items'>
                     <Row><div style={{ fontSize: '30px' }}>{character.name}</div></Row>
