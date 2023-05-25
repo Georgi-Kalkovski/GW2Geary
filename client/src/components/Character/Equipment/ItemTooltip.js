@@ -25,7 +25,6 @@ function ItemTooltip({ item, slider }) {
 
     // Usage
     const rarityValue = findRarity(item);
-    console.log(rarityValue)
 
     const {
         getArrowProps,
@@ -204,8 +203,6 @@ function ItemTooltip({ item, slider }) {
                 ?
                 <div className='' ref={setTriggerRef}>
                     {/* ITEM ICON */}
-                    {console.log(item)}
-                    {console.log(rarityValue)}
                     {item.skin_icon && item.skin_name && slider
                         ? <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
                         : <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.icon} alt={item.icon} />

@@ -5,7 +5,7 @@ import './Equipment.css';
 import Attributes from './Attributes';
 
 function Equipment({ items, prof, slider }) {
-    console.log('items', items)
+    // console.log('items', items)
     return (<>
         <Container className="equipment-box">
             <Col className='equipment-col-1'>
