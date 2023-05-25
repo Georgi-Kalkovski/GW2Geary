@@ -4,6 +4,29 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 
 function ItemTooltip({ item, slider }) {
     // console.log('item ', item)
+
+    function findRarity(item) {
+        if (item && item.rarity) {
+            return item.rarity;
+        }
+
+        if (item && item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes) {
+            for (const attribute of Object.values(item.details.infix_upgrade.attributes)) {
+                if (attribute.rarity) {
+                    return attribute.rarity;
+                }
+            }
+        }
+
+        // Add more checks for other nested objects if needed
+
+        return null;
+    }
+
+    // Usage
+    const rarityValue = findRarity(item);
+    console.log(rarityValue)
+
     const {
         getArrowProps,
         getTooltipProps,
@@ -20,9 +43,9 @@ function ItemTooltip({ item, slider }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className={`item-popup border-${item.rarity.toLowerCase()}`}>
+                    <Container className={`item-popup border-${rarityValue?.toLowerCase()}`}>
                         {/* NAME */}
-                        <Row key={`name-${item.id}`} className={`name-${item.rarity.toLowerCase()}`}>
+                        <Row key={`name-${item.id}`} className={`name-${rarityValue?.toLowerCase()}`}>
                             {item.skin_name && slider
                                 ? <span className='item-name'>{item.skin_name}</span>
                                 : <span className='item-name'>{item.name}</span>
@@ -30,7 +53,7 @@ function ItemTooltip({ item, slider }) {
                         </Row>
                         <br />
                         {/* DEFENSE */}
-                        {item.details.defense !== 0 && item.details.defense &&
+                        {item.details && item.details.defense && item.details.defense !== 0 &&
                             <>
                                 <Row key={`defense-${item.id}`}>
                                     Defense: <span className='green'>{item.details.defense}</span>
@@ -39,7 +62,7 @@ function ItemTooltip({ item, slider }) {
                             </>
                         }
                         {/* POWER */}
-                        {item.details.min_power && item.details.max_power &&
+                        {item.details && item.details.min_power && item.details.max_power &&
                             <>
                                 <Row key={`power-${item.details.min_power}${item.details.max_power}`}>
                                     Weapon Strength: <span className='green'>{item.details.min_power} - {item.details.max_power}</span>
@@ -151,15 +174,15 @@ function ItemTooltip({ item, slider }) {
                         ))
                         }
                         {/* RARITY */}
-                        <div className={`name-${item.rarity.toLowerCase()}`}>{item.rarity}</div>
+                        <div className={`name-${rarityValue?.toLowerCase()}`}>{rarityValue}</div>
                         {/* WEIGHT */}
-                        <div>{item.details.weight_class}</div>
+                        <div>{item.details ? item.details.weight_class : ''}</div>
                         {/* TYPE */}
-                        <div>{item.details.type}</div>
+                        <div>{item.details ? item.details.type : ''}</div>
                         {/* LEVEL */}
-                        <div>Required level: {item.level}</div>
+                        <div>{item.level ? `Required level: ${item.level}`: ''}</div>
                         {/* TRANSMUTED */}
-                        {item.skin_name &&
+                        {item.name && item.skin_name &&
                             (slider
                                 ? <>
                                     <br />
@@ -181,9 +204,11 @@ function ItemTooltip({ item, slider }) {
                 ?
                 <div className='' ref={setTriggerRef}>
                     {/* ITEM ICON */}
-                    {item.icon && item.skin_name && slider
-                        ? <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
-                        : <img className={`item-box box-${item.rarity.toLowerCase()}`} src={item.icon} alt={item.icon} />
+                    {console.log(item)}
+                    {console.log(rarityValue)}
+                    {item.skin_icon && item.skin_name && slider
+                        ? <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
+                        : <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.icon} alt={item.icon} />
                     }
                 </div>
                 : <img className="item-box box-gray" alt="" />

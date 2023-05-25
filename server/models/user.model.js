@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     {
       _id: {
         type: String,
-        unique: true,
+        unique: false,
         default: false
       },
       accountName: {

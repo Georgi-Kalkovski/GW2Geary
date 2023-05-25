@@ -63,14 +63,13 @@ const EquipmentDropdown = ({ char }) => {
         // console.log('fetchedSkins', fetchedSkins)
         // console.log('fetchedUpgrades', fetchedUpgrades)
         // console.log('fetchedUpgrades', fetchedInfusions)
-
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,
           ...char.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
           skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
-          upgrades: [
+          upgrades: fetchedInfusions ? [
             ...fetchedUpgrades?.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
               ...upgrade,
               counter: selectedTab.equipment.reduce((count, fetchedItem) => {
@@ -84,7 +83,7 @@ const EquipmentDropdown = ({ char }) => {
               ?? char.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
               ?? []
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
-          ],
+          ] : '',
         }));
 
         setMergedItems(mergingItems);
