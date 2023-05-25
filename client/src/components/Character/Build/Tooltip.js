@@ -75,54 +75,57 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                 {/* normal description without colored text */}
                 {descript}
 
+                {console.log(tooltip.facts)}
+
                 {/* Body Effects */}
                 {tooltip && tooltip.facts &&
-                    tooltip.facts.map((fact, index) => (
-                        <div key={index} className='upgrade-gray fact-font-size'>
-
-                            {fact.type !== 'Recharge' &&
-                                <div className='flex facts-div'>
-                                    <div>
-                                        <img src={fact.icon} alt={index} /><span> </span>
+                    tooltip.facts
+                        .filter((fact, index, self) => self.findIndex(f => f.text === fact.text) === index) 
+                        .map((fact, index) => (
+                            <div key={index} className='upgrade-gray fact-font-size'>
+                                {fact.type !== 'Recharge' &&
+                                    <div className='flex facts-div'>
+                                        <div>
+                                            <img src={fact.icon} alt={index} /><span> </span>
+                                        </div>
+                                        <div>
+                                            {(() => {
+                                                switch (fact.type) {
+                                                    case 'Distance':
+                                                        return `${fact.text}: ${fact.distance}`;
+                                                    case 'Damage':
+                                                        return `${fact.text}: ${Math.floor((fact.dmg_multiplier * 1000) / 1.53)}`;
+                                                    case 'Unblockable':
+                                                        return fact.text;
+                                                    case 'StunBreak':
+                                                        return 'Breaks Stun';
+                                                    case 'Time':
+                                                        return `${fact.text}: ${fact.duration}`;
+                                                    case 'Buff':
+                                                        return `${fact.status}${fact.duration ? `(${fact.duration}s): ` : ''}${fact.description}`;
+                                                    case 'BuffConversion':
+                                                        return `Gain ${fact.target} Power Based on a Percentage of ${fact.source}: ${fact.percent}%`;
+                                                    case 'Percent':
+                                                        return `${fact.text}: ${fact.percent}%`;
+                                                    case 'AttributeAdjust':
+                                                        return `${fact.text? fact.text: fact.target}: ${fact.value}`;
+                                                    case 'Number':
+                                                        return `${fact.text}: ${fact.value}`;
+                                                    case 'PrefixedBuff':
+                                                        return `${fact.status}${fact.duration ? `(${fact.duration}s): ` : ''}${fact.description}`;
+                                                    case 'Range':
+                                                        return `${fact.text}: ${fact.value}`;
+                                                    case 'NoData':
+                                                        return fact.text;
+                                                    default:
+                                                        return '';
+                                                }
+                                            })()}
+                                        </div>
                                     </div>
-                                    <div>
-                                        {(() => {
-                                            switch (fact.type) {
-                                                case 'Distance':
-                                                    return `${fact.text}: ${fact.distance}`;
-                                                case 'Damage':
-                                                    return `${fact.text}: [[[${fact.dmg_multiplier * 1000}]]]`;
-                                                case 'Unblockable':
-                                                    return fact.text;
-                                                case 'StunBreak':
-                                                    return 'Breaks Stun';
-                                                case 'Time':
-                                                    return `${fact.text}: ${fact.duration}`;
-                                                case 'Buff':
-                                                    return `${fact.status}${fact.duration ? `(${fact.duration}s): ` : ''}${fact.description}`;
-                                                case 'BuffConversion':
-                                                    return `Gain ${fact.target} Power Based on a Percentage of ${fact.source}: ${fact.percent}%`;
-                                                case 'Percent':
-                                                    return `${fact.text}: ${fact.percent}%`;
-                                                case 'AttributeAdjust':
-                                                    return `${fact.target}: ${fact.value}`;
-                                                case 'Number':
-                                                    return `${fact.text}: ${fact.value}`;
-                                                case 'PrefixedBuff':
-                                                    return `${fact.status}${fact.duration ? `(${fact.duration}s): ` : ''}${fact.description}`;
-                                                case 'Range':
-                                                    return `${fact.text}: ${fact.value}`;
-                                                case 'NoData':
-                                                    return fact.text;
-                                                default:
-                                                    return '';
-                                            }
-                                        })()}
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    ))}
+                                }
+                            </div>
+                        ))}
             </div>
         );
     }
@@ -167,7 +170,6 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                             </div>
                         }
                         <div className={`${prof.toLowerCase()}-lightning-border`}>
-                            {/* {console.log(tooltip)} */}
                             <TooltipComponent tooltip={tooltip} />
                         </div>
 
@@ -177,7 +179,6 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
             </Row>
         </Container>
     );
-
 };
 
 export default Tooltip;
