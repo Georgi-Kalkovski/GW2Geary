@@ -64,7 +64,7 @@ function Characters() {
                 />
             </div>
             <div className="characters">
-                <React.Fragment className="character-list">
+                <React.Fragment>
                     {filteredAccounts.length > 0 ? (
                         filteredAccounts.map((account) => (
                             <React.Fragment key={account.id}>

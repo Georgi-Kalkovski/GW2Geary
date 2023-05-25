@@ -75,12 +75,10 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                 {/* normal description without colored text */}
                 {descript}
 
-                {console.log(tooltip.facts)}
-
                 {/* Body Effects */}
                 {tooltip && tooltip.facts &&
                     tooltip.facts
-                        .filter((fact, index, self) => self.findIndex(f => f.text === fact.text) === index) 
+                        .filter((fact, index, self) => self.findIndex(f => f.text === fact.text) === index)
                         .map((fact, index) => (
                             <div key={index} className='upgrade-gray fact-font-size'>
                                 {fact.type !== 'Recharge' &&
@@ -93,6 +91,10 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                                                 switch (fact.type) {
                                                     case 'Distance':
                                                         return `${fact.text}: ${fact.distance}`;
+                                                    case 'Duration':
+                                                        return `${fact.text}`;
+                                                    case 'ComboField':
+                                                        return `${fact.text}: ${fact.field_type}`;
                                                     case 'Damage':
                                                         return `${fact.text}: ${Math.floor((fact.dmg_multiplier * 1000) / 1.53)}`;
                                                     case 'Unblockable':
@@ -108,7 +110,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                                                     case 'Percent':
                                                         return `${fact.text}: ${fact.percent}%`;
                                                     case 'AttributeAdjust':
-                                                        return `${fact.text? fact.text: fact.target}: ${fact.value}`;
+                                                        return `${fact.text ? fact.text : fact.target}: ${fact.value}`;
                                                     case 'Number':
                                                         return `${fact.text}: ${fact.value}`;
                                                     case 'PrefixedBuff':

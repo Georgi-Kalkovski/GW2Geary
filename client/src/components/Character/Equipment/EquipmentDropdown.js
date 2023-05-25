@@ -62,7 +62,8 @@ const EquipmentDropdown = ({ char }) => {
         // console.log('fetchedItems', fetchedItems)
         // console.log('fetchedSkins', fetchedSkins)
         // console.log('fetchedUpgrades', fetchedUpgrades)
-        // console.log('fetchedUpgrades', fetchedInfusions)
+        // console.log('fetchedInfusions', fetchedInfusions)
+
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,
           ...char.equipment.find((fetchedItem => fetchedItem.id === item.id)),
