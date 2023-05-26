@@ -84,6 +84,19 @@
     border: 3px solid gray;
 }
 
+.name-unknown {
+    color: #f30606;
+}
+
+.box-unknown {
+    border: 3px solid #f30606;
+}
+
+.border-unknown {
+    border: 1.5px solid rgb(243, 6, 6);
+    box-shadow: 0 0 10px 2px rgba(192, 4, 4, 0.5);
+}
+
 
 .name-basic {
     color: #ffffff;

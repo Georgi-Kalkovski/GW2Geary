@@ -34,8 +34,8 @@ const Account = () => {
         <div className="container">
           <div>
             {accounts &&
-              accounts.map((account) => (
-                <>
+              accounts.map((account, index) => (
+                <React.Fragment key={index}>
                   {/* User */}
                   <Container className='center-items'>
                     <div className="flex center" style={{ fontSize: '30px' }}>{account.accountName}</div>
@@ -48,7 +48,7 @@ const Account = () => {
                     <Row className='flex center'>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                         <Row style={{ fontSize: '25px' }}>{account.mastery_points}</Row>
-                        <Row className='yellow-highlight'>Mastery Points </Row>
+                        <Row className='yellow-highlight'>Mastery Points</Row>
                       </Col>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
                         <Row style={{ fontSize: '25px' }}>{account.fractal_level}</Row>
@@ -66,13 +66,13 @@ const Account = () => {
                   {/* Characters */}
                   <div className="characters">
                     {account && account.characters.map(character => (
-                      < CharacterPreview
+                      <CharacterPreview
                         character={character}
-                        key={`${character.name}`}
+                        key={`${account.accountName}_${character.name}`}
                       />
                     ))}
                   </div>
-                </>
+                </React.Fragment>
               ))}
           </div>
         </div>

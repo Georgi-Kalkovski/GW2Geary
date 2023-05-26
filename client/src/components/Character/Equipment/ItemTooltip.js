@@ -5,27 +5,6 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 function ItemTooltip({ item, slider }) {
     // console.log('item ', item)
 
-    function findRarity(item) {
-        if (item && item.rarity) {
-            return item.rarity;
-        }
-
-        if (item && item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes) {
-            for (const attribute of Object.values(item.details.infix_upgrade.attributes)) {
-                if (attribute.rarity) {
-                    return attribute.rarity;
-                }
-            }
-        }
-
-        // Add more checks for other nested objects if needed
-
-        return null;
-    }
-
-    // Usage
-    const rarityValue = findRarity(item);
-
     const {
         getArrowProps,
         getTooltipProps,
@@ -42,17 +21,17 @@ function ItemTooltip({ item, slider }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className={`item-popup border-${rarityValue?.toLowerCase()}`}>
+                    <Container className={`item-popup border-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>
                         {/* NAME */}
-                        <Row key={`name-${item.id}`} className={`name-${rarityValue?.toLowerCase()}`}>
+                        <Row key={`name-${item.id}`} className={`name-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>
                             {item.skin_name && slider
                                 ? <span className='item-name'>{item.skin_name}</span>
-                                : <span className='item-name'>{item.name}</span>
+                                : <span className='item-name'>{item.name ? item.name : 'Unknown'}</span>
                             }
                         </Row>
                         <br />
                         {/* DEFENSE */}
-                        {item.details && item.details.defense && item.details.defense !== 0 &&
+                        {item.details && item.details.defense !== 0 && item.details.defense  &&
                             <>
                                 <Row key={`defense-${item.id}`}>
                                     Defense: <span className='green'>{item.details.defense}</span>
@@ -173,21 +152,23 @@ function ItemTooltip({ item, slider }) {
                         ))
                         }
                         {/* RARITY */}
-                        <div className={`name-${rarityValue?.toLowerCase()}`}>{rarityValue}</div>
+                        <div className={`name-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>{item.rarity ? item.rarity : 'Unknown rarity'}</div>
                         {/* WEIGHT */}
                         <div>{item.details ? item.details.weight_class : ''}</div>
                         {/* TYPE */}
                         <div>{item.details ? item.details.type : ''}</div>
                         {/* LEVEL */}
-                        <div>{item.level ? `Required level: ${item.level}`: ''}</div>
+                        <div>{item.level ? `Required level: ${item.level}` : 'Required level: Unknown'}</div>
                         {/* TRANSMUTED */}
-                        {item.name && item.skin_name &&
+                        {item.skin_name &&
                             (slider
-                                ? <>
-                                    <br />
-                                    <div>Original Skin</div>
-                                    <div>{item.name}</div>
-                                </>
+                                ? (item.name &&
+                                    <>
+                                        <br />
+                                        <div>Original Skin</div>
+                                        <div>{item.name}</div>
+                                    </>
+                                )
                                 : <>
                                     <br />
                                     <div>Transmuted Skin</div>
@@ -204,8 +185,8 @@ function ItemTooltip({ item, slider }) {
                 <div className='' ref={setTriggerRef}>
                     {/* ITEM ICON */}
                     {item.skin_icon && item.skin_name && slider
-                        ? <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.skin_icon} alt={item.skin_icon} />
-                        : <img className={`item-box box-${rarityValue?.toLowerCase()}`} src={item.icon} alt={item.icon} />
+                        ? <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.skin_icon} alt={item.skin_icon} />
+                        : <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.icon} alt={item.icon} />
                     }
                 </div>
                 : <img className="item-box box-gray" alt="" />
