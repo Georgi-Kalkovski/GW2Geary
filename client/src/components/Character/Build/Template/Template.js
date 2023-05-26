@@ -108,7 +108,7 @@ function Template({ buildInput }) {
     build.skills.aquatic.elite = skillIndex[9];
 
     const copyText = () => {
-        navigator.clipboard.writeText(build.toString());
+        navigator?.clipboard?.writeText(build.toString());
         setButtonColor('darkgreen');
         setTimeout(() => {
             setButtonColor('');

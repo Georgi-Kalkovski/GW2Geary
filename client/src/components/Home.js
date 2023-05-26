@@ -74,44 +74,50 @@ function Home() {
                     key="search-input"
                 />
             </div>
-            <Container className="characters" key="accounts-container">
-                {filteredAccounts.length > 0 ? (
-                    filteredAccounts.map((account) => (
-                        <div key={account.accountName} className="characters-boxes">
-                            <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, '_')}`}>
-                                <Container className="accounts-box" key={account.accountName}>
-                                    <Col>
-                                        <Row className="center-class">
-                                            <div className="accounts-name">{account.accountName}</div>
-                                            <AccountTooltip account={account} key={account.accountName} />
-                                        </Row>
-                                    </Col>
-                                </Container>
-                            </Link>
-                        </div>
-                    ))
-                ) : (
-                    <div key="no-matching-accounts">No matching accounts or characters found.</div>
-                )}
-            </Container>
-            <div className="characters">
-                <React.Fragment key="characters-fragment">
-                    {filteredAccounts.length > 0 ? (
-                        filteredAccounts.map((account, index) => (
-                            <React.Fragment key={index}>
-                                {getMatchingCharacters(account).map((character) => (
-                                    <CharacterPreview
-                                        character={character}
-                                        key={character.name}
-                                    />
-                                ))}
+            {searchTerm !== ''
+                ? (
+                    <React.Fragment key="home-fragment">
+                        <Container className="characters" key="accounts-container">
+                            {filteredAccounts.length > 0 ? (
+                                filteredAccounts.map((account) => (
+                                    <div key={account.accountName} className="characters-boxes">
+                                        <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, '_')}`}>
+                                            <Container className="accounts-box" key={account.accountName}>
+                                                <Col>
+                                                    <Row className="center-class">
+                                                        <div className="accounts-name">{account.accountName}</div>
+                                                        <AccountTooltip account={account} key={account.accountName} />
+                                                    </Row>
+                                                </Col>
+                                            </Container>
+                                        </Link>
+                                    </div>
+                                ))
+                            ) : (
+                                <div key="no-matching-accounts">No matching accounts or characters found.</div>
+                            )}
+                        </Container>
+                        <div className="characters">
+                            <React.Fragment key="characters-fragment">
+                                {filteredAccounts.length > 0 ? (
+                                    filteredAccounts.map((account, index) => (
+                                        <React.Fragment key={index}>
+                                            {getMatchingCharacters(account).map((character) => (
+                                                <CharacterPreview
+                                                    character={character}
+                                                    key={character.name}
+                                                />
+                                            ))}
+                                        </React.Fragment>
+                                    ))
+                                ) : (
+                                    <div key="no-matching-characters">No matching accounts found.</div>
+                                )}
                             </React.Fragment>
-                        ))
-                    ) : (
-                        <div key="no-matching-characters">No matching accounts found.</div>
-                    )}
-                </React.Fragment>
-            </div>
+                        </div>
+                    </React.Fragment>)
+                : 'Placeholder TODO'
+            }
         </>
     );
 }

@@ -130,7 +130,7 @@ exports.createApiKey = async (req, res) => {
       accountName: account.name,
       fractal_level: account.fractal_level,
       wvw_rank: account.wvw_rank,
-      mastery_points: mastery_points.totals.reduce((acc, x) => acc + x.earned, 0),
+      mastery_points: mastery_points.totals.reduce((acc, x) => acc + x.spent, 0),
       world: world.name,
       characters: characterData
     };

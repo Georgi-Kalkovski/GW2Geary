@@ -139,7 +139,7 @@ const Profile = () => {
           <div className="container" key="profile-container">
             <div className="flex center apis-flex" key="apis-flex">
               <h3>
-                <strong>{currentUser.email}</strong> Profile
+                <strong>{currentUser.email.split('@')[0]}</strong>
               </h3>
               <div key="api-key-section">
                 <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#aa0404' }} to="https://account.arena.net/applications">Guild Wars 2</Link>:</label>

@@ -70,7 +70,7 @@ const App = () => {
               Home
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to={"/accounts"} className="nav-a">
               Accounts
             </Link>
@@ -79,7 +79,7 @@ const App = () => {
             <Link to={"/characters"} className="nav-a">
               Characters
             </Link>
-          </li>
+          </li> */}
 
           {showModeratorBoard && (
             <li >
