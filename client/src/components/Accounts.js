@@ -50,31 +50,27 @@ function Accounts() {
                 placeholder="Search account name..."
                 value={searchTerm}
                 onChange={handleSearch}
-                key="search-input"
             />
         </div>
-
-        <Container className="characters" key="characters-container">
-            {searchTerm !== '' ?
-                ( filteredAccounts.length > 0 ? (
-                    filteredAccounts.map(account => (
-                        <div key={account.accountName} className="characters-boxes">
-                            <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, "_")}`}>
-                                <Container className="accounts-box" key={account.accountName}>
-                                    <Col>
-                                        <Row className="center-class">
-                                            <div className="accounts-name">{account.accountName}</div>
-                                            <AccountTooltip account={account} key={account.accountName} />
-                                        </Row>
-                                    </Col>
-                                </Container>
-                            </Link>
-                        </div>
-                    ))
-                ) : (
-                    <div key="no-matching-accounts">No matching accounts found.</div>
+        <Container className="characters">
+            {filteredAccounts.length > 0 ? (
+                filteredAccounts.map(account => (
+                    <div key={account.accountName} className="characters-boxes">
+                        <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, "_")}`}>
+                            <Container className="accounts-box">
+                                <Col>
+                                    <Row className="center-class">
+                                        <div className="accounts-name">{account.accountName}</div>
+                                        <AccountTooltip account={account} />
+                                    </Row>
+                                </Col>
+                            </Container>
+                        </Link>
+                    </div>
                 ))
-            : 'Ama Geh'} 
+            ) : (
+                <div>No matching accounts found.</div>
+            )}
         </Container>
     </>
     );
