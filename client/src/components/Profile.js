@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AuthService from "../services/auth.service";
 import axios from "axios";
 import CharacterPreview from "./CharacterPreview";
+import upArrow from './up-arrow.svg';
+import downArrow from './down-arrow.svg';
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
@@ -118,17 +120,28 @@ const Profile = () => {
       });
   };
 
+  const [expandedIndices, setExpandedIndices] = useState([]);
+
+  const toggleExpansion = (index) => {
+    if (isExpanded(index)) {
+      setExpandedIndices(expandedIndices.filter((i) => i !== index));
+    } else {
+      setExpandedIndices([...expandedIndices, index]);
+    }
+  };
+
+  const isExpanded = (index) => expandedIndices.includes(index);
 
   return (
     <div>
       {currentUser && (
         <div>
-          <div className="container">
-            <div className="flex center apis-flex">
+          <div className="container" key="profile-container">
+            <div className="flex center apis-flex" key="apis-flex">
               <h3>
                 <strong>{currentUser.email}</strong> Profile
               </h3>
-              <div>
+              <div key="api-key-section">
                 <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#aa0404' }} to="https://account.arena.net/applications">Guild Wars 2</Link>:</label>
                 <input
                   type="text"
@@ -136,50 +149,62 @@ const Profile = () => {
                   size="75"
                   value={apiKey}
                   onChange={handleApiKeyChange}
+                  key="api-key-input"
                 />
-                <button onClick={handleApiKeyCreate}>Create API Key</button>
+                <button onClick={handleApiKeyCreate} key="create-api-key-button">Create API Key</button>
                 <br /><br />
-                <div className="flex center">Api Keys:</div>
+                <div className="flex center" key="api-keys-label">Api Keys:</div>
                 <br />
                 {/* Apis */}
                 {apiKeys &&
                   apiKeys.map((apiKey) => (
                     <div key={apiKey._id} >
-                      <div className="yellow-highlight flex center">{apiKey.accountName}</div>
-                      <div>{apiKey._id}{" "}
+                      <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
+                      <div key={`api-key-details-${apiKey._id}`}>{apiKey._id}{" "}
                         <input
                           type="checkbox"
                           defaultChecked={apiKey.active}
                           onChange={(e) =>
                             updateApiKeyStatus(apiKey._id, e.target.checked)
                           }
+                          key={`api-key-checkbox-${apiKey._id}`}
                         />
-                        <button onClick={() => deleteApiKey(apiKey._id)}>
+                        <button onClick={() => deleteApiKey(apiKey._id)} key={`api-key-delete-button-${apiKey._id}`}>
                           Delete Key
                         </button>
                       </div>
-                      <br />
+                      <br key={`api-key-break-${apiKey._id}`} />
                     </div>
                   ))}
               </div>
             </div>
 
             {/* Characters */}
-            <div>
+            <div key="characters-section">
               {apiKeys &&
                 apiKeys.map((apiKey, index) => (
-                  <>
-                    <br />
-                    <div className="flex center" style={{ fontSize: '30px' }}>{apiKey.accountName}</div>
-                    <div className="characters">
-                      {apiKey.characters && apiKey.characters.map(character => (
-                        <CharacterPreview
-                          character={character}
-                          key={`${character.name}`}
-                        />
-                      ))}
+                  <React.Fragment key={`characters-fragment-${index}`}>
+                    <br key={`characters-break-${index}`} />
+                    <div className="flex center" style={{ fontSize: '30px' }} key={`account-name-${index}`}>
+                      {apiKey.accountName}
                     </div>
-                  </>
+                    <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
+                      <div className="flex center">
+                        <div className="profile-line"></div>{isExpanded(index)? <img src={upArrow} alt="up-arrow" />: <img src={downArrow} alt="down-arrow" />}
+                      </div>
+                    </div>
+                    {isExpanded(index) && (
+                      <div className="characters" key={`character-preview-${index}`}>
+                        {apiKey.characters &&
+                          apiKey.characters.map((character, characterIndex) => (
+                            <CharacterPreview
+                              character={character}
+                              key={`${character.name}-${characterIndex}`}
+                            />
+                          ))}
+                      </div>
+                    )}
+                  </React.Fragment>
                 ))}
             </div>
           </div>

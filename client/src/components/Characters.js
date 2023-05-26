@@ -61,13 +61,14 @@ function Characters() {
                     placeholder="Search character name..."
                     value={searchTerm}
                     onChange={handleSearch}
+                    key="search-input"
                 />
             </div>
             <div className="characters">
-                <React.Fragment>
+                <React.Fragment key="characters-fragment">
                     {filteredAccounts.length > 0 ? (
-                        filteredAccounts.map((account) => (
-                            <React.Fragment key={account.id}>
+                        filteredAccounts.map((account, index) => (
+                            <React.Fragment key={index}>
                                 {getMatchingCharacters(account).map((character) => (
                                     <CharacterPreview
                                         character={character}
@@ -77,7 +78,7 @@ function Characters() {
                             </React.Fragment>
                         ))
                     ) : (
-                        <div>No matching accounts found.</div>
+                        <div key="no-matching-accounts">No matching accounts found.</div>
                     )}
                 </React.Fragment>
             </div>

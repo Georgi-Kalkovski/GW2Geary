@@ -39,16 +39,16 @@ function Home() {
     };
 
     const filteredAccounts = accounts.filter((account) =>
-    account.accountName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (account.apiKeys && account.apiKeys.some((apiKey) =>
-        apiKey.active && apiKey.characters && apiKey.characters.some((character) =>
+        account.accountName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (account.apiKeys && account.apiKeys.some((apiKey) =>
+            apiKey.active && apiKey.characters && apiKey.characters.some((character) =>
+                character.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        )) ||
+        (account.characters && account.characters.some((character) =>
             character.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    )) ||
-    (account.characters && account.characters.some((character) =>
-        character.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ))
-);
+        ))
+    );
 
     const getMatchingCharacters = (account) => {
         const matchingCharacters = [];
@@ -71,18 +71,19 @@ function Home() {
                     placeholder="Search account or character name..."
                     value={searchTerm}
                     onChange={handleSearch}
+                    key="search-input"
                 />
             </div>
-            <Container className="characters">
+            <Container className="characters" key="accounts-container">
                 {filteredAccounts.length > 0 ? (
                     filteredAccounts.map((account) => (
                         <div key={account.accountName} className="characters-boxes">
                             <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, '_')}`}>
-                                <Container className="accounts-box">
+                                <Container className="accounts-box" key={account.accountName}>
                                     <Col>
                                         <Row className="center-class">
                                             <div className="accounts-name">{account.accountName}</div>
-                                            <AccountTooltip account={account} />
+                                            <AccountTooltip account={account} key={account.accountName} />
                                         </Row>
                                     </Col>
                                 </Container>
@@ -90,14 +91,14 @@ function Home() {
                         </div>
                     ))
                 ) : (
-                    <div>No matching accounts or characters found.</div>
+                    <div key="no-matching-accounts">No matching accounts or characters found.</div>
                 )}
             </Container>
             <div className="characters">
-                <React.Fragment>
+                <React.Fragment key="characters-fragment">
                     {filteredAccounts.length > 0 ? (
-                        filteredAccounts.map((account) => (
-                            <React.Fragment key={account.id}>
+                        filteredAccounts.map((account, index) => (
+                            <React.Fragment key={index}>
                                 {getMatchingCharacters(account).map((character) => (
                                     <CharacterPreview
                                         character={character}
@@ -107,7 +108,7 @@ function Home() {
                             </React.Fragment>
                         ))
                     ) : (
-                        <div>No matching accounts found.</div>
+                        <div key="no-matching-characters">No matching accounts found.</div>
                     )}
                 </React.Fragment>
             </div>

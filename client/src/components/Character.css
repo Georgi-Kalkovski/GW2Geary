@@ -178,3 +178,14 @@ input:checked+.slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* Profile */
+
+.profile-line {
+  cursor: pointer;
+  margin-bottom: 9px;
+  border-bottom: 2px solid white;
+  margin-left: 0 40%;
+  width: 100px;
+  margin-right: 4px;
+}
