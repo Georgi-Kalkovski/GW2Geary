@@ -173,6 +173,8 @@ const Profile = () => {
                 />
                 <button className="basic-button" onClick={handleApiKeyCreate} key="add-api-key-button">Add API Key</button>
                 <br /><br />
+
+                {/* Loader */}
                 {loading &&
                   <div className="flex center">
                     <div className="logo-loading-div">
@@ -180,6 +182,7 @@ const Profile = () => {
                       <img src={Cog} alt="" className="logo-loading-cog" />
                     </div>
                   </div>}
+
                 {/* Apis */}
                 {apiKeys &&
                   apiKeys.map((apiKey) => (
@@ -216,6 +219,7 @@ const Profile = () => {
                   ))}
               </div>
             </div>
+
             {/* Characters */}
             <div key="characters-section">
               {apiKeys &&
