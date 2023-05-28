@@ -138,9 +138,6 @@ const Profile = () => {
         <div>
           <div className="container" key="profile-container">
             <div className="flex center apis-flex" key="apis-flex">
-              <h3>
-                <strong>{currentUser.email.split('@')[0]}</strong>
-              </h3>
               <div key="api-key-section">
                 <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#aa0404' }} to="https://account.arena.net/applications">Guild Wars 2</Link>:</label>
                 <input
@@ -151,10 +148,8 @@ const Profile = () => {
                   onChange={handleApiKeyChange}
                   key="api-key-input"
                 />
-                <button onClick={handleApiKeyCreate} key="create-api-key-button">Create API Key</button>
+                <button className="basic-button" onClick={handleApiKeyCreate} key="add-api-key-button">Add API Key</button>
                 <br /><br />
-                <div className="flex center" key="api-keys-label">Api Keys:</div>
-                <br />
                 {/* Apis */}
                 {apiKeys &&
                   apiKeys.map((apiKey) => (
@@ -190,7 +185,7 @@ const Profile = () => {
                     </div>
                     <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
                       <div className="flex center">
-                        <div className="profile-line"></div>{isExpanded(index)? <img src={upArrow} alt="up-arrow" />: <img src={downArrow} alt="down-arrow" />}
+                        <div className="profile-line"></div>{isExpanded(index) ? <img src={upArrow} alt="up-arrow" /> : <img src={downArrow} alt="down-arrow" />}
                       </div>
                     </div>
                     {isExpanded(index) && (

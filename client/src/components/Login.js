@@ -15,7 +15,7 @@ const Login = () => {
     setMessage("");
     setLoading(true);
 
-    AuthService.login(data.email, data.password).then(
+    AuthService.login(data.username, data.password).then(
       () => {
         navigate("/profile");
         window.location.reload();
@@ -42,17 +42,16 @@ const Login = () => {
           alt="profile-img"
           className="profile-img-card"
         />
-        <h1>Login</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               className="form-control"
-              name="email"
-              {...register("email", { required: true })}
+              name="username"
+              {...register("username", { required: true })}
             />
-            {errors.email && (
+            {errors.username && (
               <div className="alert alert-danger" role="alert">
                 This field is required!
               </div>
@@ -74,8 +73,8 @@ const Login = () => {
             )}
           </div>
 
-          <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+          <div className="form-group  flex center">
+            <button className="basic-button" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

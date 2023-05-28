@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { isEmail } from "validator";
 import { useNavigate } from 'react-router-dom';
 
 import AuthService from "../services/auth.service";
@@ -17,13 +16,13 @@ const Register = () => {
     setMessage("");
     setSuccessful(false);
 
-    AuthService.register(data.email, data.password, data.confirmPassword)
+    AuthService.register(data.username, data.password, data.confirmPassword)
       .then((response) => {
         setMessage(response.data.message);
         setSuccessful(true);
         reset();
 
-        AuthService.login(data.email, data.password)
+        AuthService.login(data.username, data.password)
           .then(() => {
             navigate("/profile");
             window.location.reload();
@@ -65,23 +64,23 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {!successful && (
             <div>
-              {/* Email */}
+              {/* Username */}
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="username">Username</label>
                 <input
-                  type="email"
+                  type="username"
                   className="form-control"
-                  name="email"
-                  {...register("email", { required: true, validate: isEmail })}
+                  name="username"
+                  {...register("username", { required: true })}
                 />
-                {errors.email?.type === "required" && (
+                {errors.username?.type === "required" && (
                   <div className="alert alert-danger" role="alert">
                     This field is required!
                   </div>
                 )}
-                {errors.email?.type === "validate" && (
+                {errors.username?.type === "validate" && (
                   <div className="alert alert-danger" role="alert">
-                    This is not a valid email.
+                    This is not a valid username.
                   </div>
                 )}
               </div>
@@ -132,8 +131,8 @@ const Register = () => {
               </div>
 
               {/* Sign Up */}
-              <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+              <div className="form-group flex center">
+                <button className="basic-button">Register</button>
               </div>
             </div>
           )}

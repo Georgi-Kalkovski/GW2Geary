@@ -11,7 +11,7 @@ const bcrypt = require("bcryptjs");
 exports.signup = async (req, res) => {
   try {
     const user = new User({
-      email: req.body.email,
+      username: req.body.username,
       password: bcrypt.hashSync(req.body.password, 8),
     });
 
@@ -42,7 +42,7 @@ exports.signup = async (req, res) => {
 // Sign In
 exports.signin = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email }).populate(
+    const user = await User.findOne({ username: req.body.username }).populate(
       "roles",
       "-__v"
     );
@@ -72,7 +72,7 @@ exports.signin = async (req, res) => {
     );
     res.status(200).send({
       id: user._id,
-      email: user.email,
+      username: user.username,
       roles: authorities,
       accessToken: token,
       apiKeys: user.apiKeys,

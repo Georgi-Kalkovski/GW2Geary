@@ -6,6 +6,7 @@ import './Classes.css';
 import './Accounts.css';
 import AccountTooltip from './AccountTooltip';
 import CharacterPreview from './CharacterPreview';
+import './Home.css'
 
 function Home() {
     const [accounts, setAccounts] = useState([]);
@@ -99,24 +100,30 @@ function Home() {
                         </Container>
                         <div className="characters">
                             <React.Fragment key="characters-fragment">
-                                {filteredAccounts.length > 0 ? (
-                                    filteredAccounts.map((account, index) => (
-                                        <React.Fragment key={index}>
-                                            {getMatchingCharacters(account).map((character) => (
-                                                <CharacterPreview
-                                                    character={character}
-                                                    key={character.name}
-                                                />
-                                            ))}
-                                        </React.Fragment>
-                                    ))
-                                ) : (
-                                    <div key="no-matching-characters">No matching accounts found.</div>
-                                )}
+                                {filteredAccounts.length > 0 &&
+                                    (
+                                        filteredAccounts.map((account, index) => (
+                                            <React.Fragment key={index}>
+                                                {getMatchingCharacters(account).map((character) => (
+                                                    <CharacterPreview
+                                                        character={character}
+                                                        key={character.name}
+                                                    />
+                                                ))}
+                                            </React.Fragment>
+                                        ))
+                                    )}
                             </React.Fragment>
                         </div>
                     </React.Fragment>)
-                : 'Placeholder TODO'
+                : <Container className='flex center'>
+                    <Col className='home-empty-search-box'>
+                        <Row style={{fontSize: '1.5em'}}>Welcome to <span className='gw2-logo-style'>GW2</span><span className='geary-logo-style'>Geary</span> !</Row>
+                        <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
+                        <Row>If someone has registered a valid <Link to="https://account.arena.net/applications" style={{ color: '#aa0404' }}>GW2 API key</Link> with us and granted access, you'll be able to find and inspect them.</Row>
+
+                    </Col>
+                </Container>
             }
         </>
     );

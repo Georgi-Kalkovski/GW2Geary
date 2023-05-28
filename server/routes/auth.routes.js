@@ -5,7 +5,7 @@ const controller = require("../controllers/auth.controller");
 
 router.post(
   "/register",
-  [verifySignUp.checkDuplicateEmail, verifySignUp.checkRolesExisted],
+  [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
   controller.signup
 );
 

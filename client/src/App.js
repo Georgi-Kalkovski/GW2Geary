@@ -56,16 +56,16 @@ const App = () => {
       <nav className="app-nav">
         <Link to={"/"} className="nav-a">
           <div className="flex">
-            <div style={{ fontFamily: 'GW2Font',fontSize:'30px',color:'#aa0404' }}>GW2</div>
+            <div style={{ fontFamily: 'GW2Font', fontSize: '30px', color: '#aa0404' }}>GW2</div>
             <div className="logo-div">
               <img src={Dragon} alt="" className="logo-dragon" />
               <img src={Cog} alt="" className="logo-cog" />
             </div>
-            <div style={{ fontFamily: 'GW2Font',fontSize:'30px' }}>Geary</div>
+            <div style={{ fontFamily: 'GW2Font', fontSize: '30px' }}>Geary</div>
           </div>
         </Link>
         <div className="flex nav-center">
-        <li>
+          <li>
             <Link to={"/home"} className="nav-a">
               Home
             </Link>
@@ -108,9 +108,10 @@ const App = () => {
 
         {currentUser ? (
           <div className="nav-profile-logout">
-            <li>
+            <li style={{ paddingRight: '10px' }}>
+              Welcome,
               <Link to={"/profile"} className="nav-a">
-                {currentUser.username}
+                {` ${currentUser.username}`}
               </Link>
             </li>
             <li >
@@ -123,7 +124,7 @@ const App = () => {
           <div className="nav-login-register">
             <li>
               <Link to={"/login"} className="nav-a">
-               Login
+                Login
               </Link>
             </li>
 
