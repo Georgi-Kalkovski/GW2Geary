@@ -108,7 +108,7 @@ const App = () => {
           <div className="nav-profile-logout">
             <li style={{ paddingRight: '10px' }}>
               Welcome,
-              <Link to={"/profile"} className="nav-a">
+              <Link to={"/profile"} className="nav-a yellow-highlight">
                 {` ${currentUser.username}`}
               </Link>
             </li>
