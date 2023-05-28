@@ -23,17 +23,17 @@ const Account = () => {
             if (key && key.active && key.accountName === fromattedName) {
               updatedCharacters.push(key);
               const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
-              setAccount(accFound)
+              setAccount(accFound);
               const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${key._id}`)).data;
               let world;
               if (accFound && accFound.world) {
                 world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
               }
-              setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
-              setWorld(world.name)
+              setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+              setWorld(world.name);
             }
           }
-          setCharacters(updatedCharacters)
+          setCharacters(updatedCharacters);
         }
       })();
     } catch (error) {
@@ -64,11 +64,11 @@ const Account = () => {
                         <Row className='yellow-highlight'>Mastery Points</Row>
                       </Col>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account.fractal_level}</Row>
+                        <Row style={{ fontSize: '25px' }}>{account?.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                       </Col>
                       <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account.wvw_rank}</Row>
+                        <Row style={{ fontSize: '25px' }}>{account?.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                       </Col>
                     </Row>
