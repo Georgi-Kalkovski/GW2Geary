@@ -7,10 +7,12 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [tooltipIndex, setTooltipIndex] = useState(0);
 
-    // Handle click event to cycle through tooltips
     const handleClick = () => {
-        setTooltipIndex((tooltipIndex + 1) % tooltip.skills.length);
+        if (tooltip && tooltip.skills && tooltip.skills.length > 1) {
+            setTooltipIndex((tooltipIndex + 1) % tooltip.skills.length);
+        }
     };
+
     let currentTooltip;
     if (tooltip && tooltip.skills) {
         currentTooltip = tooltip.skills[tooltipIndex];

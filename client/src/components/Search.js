@@ -4,11 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import './Classes.css';
 import './Accounts.css';
-import AccountTooltip from './AccountTooltip';
 import CharacterPreview from './CharacterPreview';
 import './Home.css'
 
-function Home() {
+function Search() {
     const [accounts, setAccounts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -87,7 +86,6 @@ function Home() {
                                                 <Col>
                                                     <Row className="center-class">
                                                         <div className="accounts-name">{account.accountName}</div>
-                                                        <AccountTooltip account={account} key={account.accountName} />
                                                     </Row>
                                                 </Col>
                                             </Container>
@@ -129,4 +127,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Search;

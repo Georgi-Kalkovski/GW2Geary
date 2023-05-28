@@ -101,14 +101,9 @@ exports.createApiKey = async (req, res) => {
   try {
     const { userId } = req.params;
     const { apiKey } = req.body;
-    let world;
     const charactersResponse = await axios.get(`https://api.guildwars2.com/v2/characters?ids=all&access_token=${apiKey}`);
     const accountResponse = await axios.get(`https://api.guildwars2.com/v2/account?access_token=${apiKey}`);
     const account = accountResponse.data;
-    if(account && account.world){
-    world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${account.world}`)).data;
-    }
-    const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${apiKey}`)).data;
     const characterData = charactersResponse.data.map(character => ({
       name: character.name,
       race: character.race,
@@ -128,10 +123,6 @@ exports.createApiKey = async (req, res) => {
       _id: apiKey,
       active: true,
       accountName: account.name,
-      fractal_level: account.fractal_level,
-      wvw_rank: account.wvw_rank,
-      mastery_points: mastery_points.totals.reduce((acc, x) => acc + x.spent, 0),
-      world: world.name,
       characters: characterData
     };
 

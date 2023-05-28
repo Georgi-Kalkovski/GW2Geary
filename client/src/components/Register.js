@@ -10,7 +10,6 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onSubmit = (data) => {
     setMessage("");

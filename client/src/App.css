@@ -158,13 +158,12 @@ label {
   color: #d9d9d9;
   border: none;
   padding: 5px 10px;
-  font-size: 1em;
+  font-size: 0.94em;
 }
 
 input:-webkit-autofill, input:focus:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px #202124 inset;
   -webkit-text-fill-color: #d9d9d9;
-  -webkit-text-size: 1em !important;
 }
 
 .basic-button {

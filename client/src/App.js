@@ -6,10 +6,8 @@ import AuthService from "./services/auth.service";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
+import Search from "./components/Search";
 import Account from "./components/Account";
-import Accounts from "./components/Accounts";
-import Characters from './components/Characters';
 import Character from './components/Character';
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
@@ -54,7 +52,7 @@ const App = () => {
   return (
     <div className="App">
       <nav className="app-nav">
-        <Link to={"/"} className="nav-a">
+        <Link to={"/search"} className="nav-a">
           <div className="flex">
             <div style={{ fontFamily: 'GW2Font', fontSize: '30px', color: '#aa0404' }}>GW2</div>
             <div className="logo-div">
@@ -66,8 +64,8 @@ const App = () => {
         </Link>
         <div className="flex nav-center">
           <li>
-            <Link to={"/home"} className="nav-a">
-              Home
+            <Link to={"/search"} className="nav-a">
+              Search
             </Link>
           </li>
           {/* <li>
@@ -139,11 +137,9 @@ const App = () => {
 
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/" element={<Search />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/accounts/:name" element={<Account />} />
-          <Route path="/characters" element={<Characters />} />
           <Route path="/characters/:name" element={<Character />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -151,7 +147,7 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Search />} />
         </Routes>
       </div>
     </div>

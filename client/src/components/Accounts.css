@@ -17,14 +17,13 @@
 .accounts-name {
     margin-block-start: 0em;
     margin-block-end: 0em;
-    height: 69px;
+    height: 50px;
     text-align: center;
     font-size: larger;
     display: flex;
     align-items: center;
     justify-content: center;
     word-break: break-all;
-    padding-right: 10px;
 }
 
 .column {

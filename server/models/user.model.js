@@ -21,22 +21,6 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         default: false
       },
-      fractal_level: {
-        type: Number,
-        default: false
-      },
-      mastery_points: {
-        type: Number,
-        default: false
-      },
-      world: {
-        type: String,
-        default: false
-      },
-      wvw_rank: {
-        type: Number,
-        default: false
-      },
       active: {
         type: Boolean,
         default: false

@@ -2,20 +2,27 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import AuthService from "../services/auth.service";
 import axios from "axios";
+import { usePopperTooltip } from 'react-popper-tooltip';
 import CharacterPreview from "./CharacterPreview";
 import upArrow from './up-arrow.svg';
 import downArrow from './down-arrow.svg';
+
+import Cog from '../cog.svg'
+import Dragon from '../dragon.svg'
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleApiKeyChange = useCallback((e) => {
     setApiKey(e.target.value);
   }, []);
 
   const handleApiKeyCreate = useCallback(() => {
+    setLoading(true);
     const existingApiKey = currentUser.apiKeys.find((key) => key._id === apiKey);
     if (existingApiKey) {
       console.log("API key already exists");
@@ -35,9 +42,11 @@ const Profile = () => {
       .then(() => fetchApiKeys(currentUser.id, currentUser.accessToken))
       .then((data) => {
         setApiKeys(data.user.apiKeys);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error creating or retrieving API keys:", error);
+        setLoading(false);
       });
   }, [apiKey, currentUser]);
 
@@ -54,16 +63,20 @@ const Profile = () => {
   }, []);
 
   const deleteApiKey = useCallback((apiKeyId) => {
-    AuthService.deleteApiKey(apiKeyId)
-      .then((response) => {
-        if (response.user && response.user.apiKeys) {
-          setApiKeys(response.user.apiKeys);
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting API key:", error);
-      });
-  }, []);
+  AuthService.deleteApiKey(apiKeyId)
+    .then((response) => {
+      if (response.user && response.user.apiKeys) {
+        setApiKeys(response.user.apiKeys);
+      }
+    })
+    .then(() => {
+      // Remove the deleted API key from the state
+      setApiKeys(apiKeys.filter((apiKey) => apiKey._id !== apiKeyId));
+    })
+    .catch((error) => {
+      console.error("Error deleting API key:", error);
+    });
+}, [apiKeys]);
 
   useEffect(() => {
     if (currentUser) {
@@ -132,6 +145,14 @@ const Profile = () => {
 
   const isExpanded = (index) => expandedIndices.includes(index);
 
+  const {
+    getArrowProps,
+    getTooltipProps,
+    setTooltipRef,
+    setTriggerRef,
+    visible,
+  } = usePopperTooltip({ placement: 'top' });
+
   return (
     <div>
       {currentUser && (
@@ -144,18 +165,28 @@ const Profile = () => {
                   type="text"
                   id="apiKey"
                   size="75"
+                  className="form-control"
+                  placeholder="Add API Key here..."
                   value={apiKey}
                   onChange={handleApiKeyChange}
                   key="api-key-input"
                 />
                 <button className="basic-button" onClick={handleApiKeyCreate} key="add-api-key-button">Add API Key</button>
                 <br /><br />
+                {loading &&
+                  <div className="flex center">
+                    <div className="logo-loading-div">
+                      <img src={Dragon} alt="" className="logo--loading-dragon" />
+                      <img src={Cog} alt="" className="logo-loading-cog" />
+                    </div>
+                  </div>}
                 {/* Apis */}
                 {apiKeys &&
                   apiKeys.map((apiKey) => (
                     <div key={apiKey._id} >
                       <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
                       <div key={`api-key-details-${apiKey._id}`}>{apiKey._id}{" "}
+
                         <input
                           type="checkbox"
                           defaultChecked={apiKey.active}
@@ -163,8 +194,20 @@ const Profile = () => {
                             updateApiKeyStatus(apiKey._id, e.target.checked)
                           }
                           key={`api-key-checkbox-${apiKey._id}`}
+                          ref={setTriggerRef}
                         />
-                        <button onClick={() => deleteApiKey(apiKey._id)} key={`api-key-delete-button-${apiKey._id}`}>
+                        {visible && (
+                          <div
+                            ref={setTooltipRef}
+                            {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
+                          >
+                            <div style={{ fontSize: '14px' }}>
+                              <span className='yellow-popup'>Check/Uncheck</span> the checkbox to <span className='yellow-popup'>Show/Hide </span>accounts & characters
+                            </div>
+                            <div {...getArrowProps({ className: 'tooltip-arrow' })} />
+                          </div>
+                        )}
+                        <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button" key={`api-key-delete-button-${apiKey._id}`}>
                           Delete Key
                         </button>
                       </div>
@@ -173,14 +216,13 @@ const Profile = () => {
                   ))}
               </div>
             </div>
-
             {/* Characters */}
             <div key="characters-section">
               {apiKeys &&
                 apiKeys.map((apiKey, index) => (
                   <React.Fragment key={`characters-fragment-${index}`}>
                     <br key={`characters-break-${index}`} />
-                    <div className="flex center" style={{ fontSize: '30px' }} key={`account-name-${index}`}>
+                    <div className="flex center" style={{ fontSize: '25px' }} key={`account-name-${index}`}>
                       {apiKey.accountName}
                     </div>
                     <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
