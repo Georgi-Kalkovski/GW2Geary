@@ -7,13 +7,11 @@ import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from "./icons";
 import './Character.css';
-
 import Cog from '../cog.svg'
 import Dragon from '../dragon.svg'
 
 function Character() {
     const { name } = useParams();
-
     const formattedName = name.replaceAll('_', ' ');
     const [character, setCharacter] = useState(null);
     const [account, setAccount] = useState(null);
@@ -57,37 +55,56 @@ function Character() {
                 </div>
             </div>
             : <Container className='center-items'>
+                {/* Name */}
                 <Row><div style={{ fontSize: '30px' }}>{character.name}</div></Row>
                 <Row><div className='yellow-highlight' style={{ fontSize: '20px' }}>{account.name}</div></Row>
                 <br />
+                {/* World */}
                 <Col className='flex center' style={{ flexDirection: 'column' }}>
                     <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
                     <Row className='yellow-highlight'>World</Row>
                 </Col>
                 <br />
                 <Row className='flex center'>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row><img src={wikiBigRacesIcons[character.race]} alt={character.profession} style={{ maxWidth: '25px', filter: 'grayscale(100%) brightness(300%)' }} /></Row>
+                    {/* Race & Gender */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>
+                            <img
+                                src={wikiBigRacesIcons[character.race]} alt={character.profession}
+                                style={{ maxWidth: '25px', filter: 'grayscale(100%) brightness(300%)' }}
+                            />
+                        </Row>
                         <Row className='yellow-highlight'>{character.race} {character.gender}</Row>
                     </Col>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row><img src={wikiSmallProfessionIcons[character.profession]} alt={character.profession} style={{ maxWidth: '25px' }} /></Row>
+                    {/* Profession */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>
+                            <img
+                                src={wikiSmallProfessionIcons[character.profession]}
+                                style={{ maxWidth: '25px' }}
+                                alt={character.profession}
+                            />
+                        </Row>
                         <Row className='yellow-highlight'>{character.profession}</Row>
                     </Col>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{character.level}</Row>
+                    {/* Level */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>{character.level}</Row>
                         <Row className='yellow-highlight'>Level </Row>
                     </Col>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{mastery}</Row>
+                    {/* Mastery Points */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>{mastery}</Row>
                         <Row className='yellow-highlight'>Mastery Points </Row>
                     </Col>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account.fractal_level}</Row>
+                    {/* Fractal Level */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>{account.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                     </Col>
-                    <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account.wvw_rank}</Row>
+                    {/* WvW Rank */}
+                    <Col className='character-col'>
+                        <Row className='font-size-25px'>{account.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                     </Col>
                 </Row>

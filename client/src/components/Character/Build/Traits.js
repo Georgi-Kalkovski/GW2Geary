@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Col } from 'react-bootstrap';
-import Trait from './Trait';
 import fetchData from '../../fetchData';
+import Trait from './Trait';
 
 function Traits({ spec, prof }) {
     const [specialization, setSpecialization] = useState(null);

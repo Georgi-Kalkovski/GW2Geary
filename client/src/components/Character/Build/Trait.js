@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Tooltip from './Tooltip';
 import fetchData from '../../fetchData';
+import Tooltip from './Tooltip';
 
 function Trait({ traitsMin, traitsMaj, traitsActive, prof }) {
     const [traitMin, setTraitMin] = useState(null);

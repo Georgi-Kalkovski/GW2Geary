@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
-import './Classes.css';
-import './Accounts.css';
 import CharacterPreview from './CharacterPreview';
-import './Home.css'
+import './Classes.css';
+import './Search.css';
 
 function Search() {
     const [accounts, setAccounts] = useState([]);

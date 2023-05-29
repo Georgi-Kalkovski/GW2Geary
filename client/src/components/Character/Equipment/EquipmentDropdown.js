@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { usePopperTooltip } from 'react-popper-tooltip';
 import Equipment from './Equipment';
 import fetchData from '../../fetchData';
-import { usePopperTooltip } from 'react-popper-tooltip';
 import mouseClick from '.././mouse-click.svg'
 import info from '.././info.svg'
 
@@ -59,10 +59,6 @@ const EquipmentDropdown = ({ char }) => {
           ...char.equipment.flatMap(el => el.infusions).filter(item => item !== undefined),
           ...char.equipment_tabs.flatMap(tab => tab.equipment.flatMap(item => item.infusions)).filter(item => item !== undefined)
         ].join(','));
-        // console.log('fetchedItems', fetchedItems)
-        // console.log('fetchedSkins', fetchedSkins)
-        // console.log('fetchedUpgrades', fetchedUpgrades)
-        // console.log('fetchedInfusions', fetchedInfusions)
 
         const mergingItems = selectedTab.equipment.map(item => ({
           ...item,

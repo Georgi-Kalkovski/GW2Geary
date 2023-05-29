@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from 'react-router-dom';
-import AuthService from "../services/auth.service";
 import axios from "axios";
+import AuthService from "../services/auth.service";
 import { usePopperTooltip } from 'react-popper-tooltip';
 import CharacterPreview from "./CharacterPreview";
 import upArrow from './up-arrow.svg';
 import downArrow from './down-arrow.svg';
-
 import Cog from '../cog.svg'
 import Dragon from '../dragon.svg'
 
@@ -63,20 +62,20 @@ const Profile = () => {
   }, []);
 
   const deleteApiKey = useCallback((apiKeyId) => {
-  AuthService.deleteApiKey(apiKeyId)
-    .then((response) => {
-      if (response.user && response.user.apiKeys) {
-        setApiKeys(response.user.apiKeys);
-      }
-    })
-    .then(() => {
-      // Remove the deleted API key from the state
-      setApiKeys(apiKeys.filter((apiKey) => apiKey._id !== apiKeyId));
-    })
-    .catch((error) => {
-      console.error("Error deleting API key:", error);
-    });
-}, [apiKeys]);
+    AuthService.deleteApiKey(apiKeyId)
+      .then((response) => {
+        if (response.user && response.user.apiKeys) {
+          setApiKeys(response.user.apiKeys);
+        }
+      })
+      .then(() => {
+        // Remove the deleted API key from the state
+        setApiKeys(apiKeys.filter((apiKey) => apiKey._id !== apiKeyId));
+      })
+      .catch((error) => {
+        console.error("Error deleting API key:", error);
+      });
+  }, [apiKeys]);
 
   useEffect(() => {
     if (currentUser) {
@@ -188,28 +187,37 @@ const Profile = () => {
                   apiKeys.map((apiKey) => (
                     <div key={apiKey._id} >
                       <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
-                      <div key={`api-key-details-${apiKey._id}`}>{apiKey._id}{" "}
+                      <div className="facts-div" key={`api-key-details-${apiKey._id}`}>{apiKey._id}{" "}
 
-                        <input
-                          type="checkbox"
-                          defaultChecked={apiKey.active}
-                          onChange={(e) =>
-                            updateApiKeyStatus(apiKey._id, e.target.checked)
-                          }
-                          key={`api-key-checkbox-${apiKey._id}`}
-                          ref={setTriggerRef}
-                        />
+                        {/* Checkbox */}
+                        <label className="custom-checkbox" 
+                            ref={setTriggerRef}>
+                          <input
+                            type="checkbox"
+                            className="api-checkbox "
+                            defaultChecked={apiKey.active}
+                            onChange={(e) => updateApiKeyStatus(apiKey._id, e.target.checked)}
+                            key={`api-key-checkbox-${apiKey._id}`}
+                          />
+                          <span className="checkmark"></span>
+                        </label>
                         {visible && (
                           <div
                             ref={setTooltipRef}
                             {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
                           >
                             <div style={{ fontSize: '14px' }}>
-                              <span className='yellow-popup'>Check/Uncheck</span> the checkbox to <span className='yellow-popup'>Show/Hide </span>accounts & characters
+                              <span style={{color:'darkgreen'}}>Check</span>
+                              /<span style={{color:'#aa0404'}}>Uncheck</span> the checkbox to
+                              <span style={{color:'darkgreen'}}> Show</span>
+                              /<span style={{color:'#aa0404'}}>Hide </span>
+                              accounts & characters
                             </div>
                             <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                           </div>
                         )}
+
+                        {/* Delete Key */}
                         <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button" key={`api-key-delete-button-${apiKey._id}`}>
                           Delete Key
                         </button>
@@ -217,41 +225,42 @@ const Profile = () => {
                       <br key={`api-key-break-${apiKey._id}`} />
                     </div>
                   ))}
-              </div>
-            </div>
-
-            {/* Characters */}
-            <div key="characters-section">
-              {apiKeys &&
-                apiKeys.map((apiKey, index) => (
-                  <React.Fragment key={`characters-fragment-${index}`}>
-                    <br key={`characters-break-${index}`} />
-                    <div className="flex center" style={{ fontSize: '25px' }} key={`account-name-${index}`}>
-                      {apiKey.accountName}
-                    </div>
-                    <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
-                      <div className="flex center">
-                        <div className="profile-line"></div>{isExpanded(index) ? <img src={upArrow} alt="up-arrow" /> : <img src={downArrow} alt="down-arrow" />}
-                      </div>
-                    </div>
-                    {isExpanded(index) && (
-                      <div className="characters" key={`character-preview-${index}`}>
-                        {apiKey.characters &&
-                          apiKey.characters.map((character, characterIndex) => (
-                            <CharacterPreview
-                              character={character}
-                              key={`${character.name}-${characterIndex}`}
-                            />
-                          ))}
-                      </div>
-                    )}
-                  </React.Fragment>
-                ))}
             </div>
           </div>
+
+          {/* Characters */}
+          <div key="characters-section">
+            {apiKeys &&
+              apiKeys.map((apiKey, index) => (
+                <React.Fragment key={`characters-fragment-${index}`}>
+                  <br key={`characters-break-${index}`} />
+                  <div className="flex center font-size-25px" key={`account-name-${index}`}>
+                    {apiKey.accountName}
+                  </div>
+                  <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
+                    <div className="flex center">
+                      <div className="profile-line"></div>{isExpanded(index) ? <img src={upArrow} alt="up-arrow" /> : <img src={downArrow} alt="down-arrow" />}
+                    </div>
+                  </div>
+                  {isExpanded(index) && (
+                    <div className="characters" key={`character-preview-${index}`}>
+                      {apiKey.characters &&
+                        apiKey.characters.map((character, characterIndex) => (
+                          <CharacterPreview
+                            character={character}
+                            key={`${character.name}-${characterIndex}`}
+                          />
+                        ))}
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+          </div>
         </div>
-      )}
-    </div>
+        </div>
+  )
+}
+    </div >
   );
 };
 

@@ -218,3 +218,7 @@ input:-webkit-autofill, input:focus:-webkit-autofill {
   font-family: 'GW2Font';
   font-size: 25px;
 }
+
+@media only screen and (max-device-width: 480px) {
+
+}

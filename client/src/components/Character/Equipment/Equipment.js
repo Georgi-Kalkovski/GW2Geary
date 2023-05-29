@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ItemTooltip from './ItemTooltip';
-import './Equipment.css';
 import Attributes from './Attributes';
+import './Equipment.css';
 
 function Equipment({ items, prof, slider }) {
     // console.log('items', items)

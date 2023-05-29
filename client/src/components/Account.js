@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import AuthService from "../services/auth.service";
 import { Container, Row, Col } from 'react-bootstrap';
+import AuthService from "../services/auth.service";
 import CharacterPreview from "./CharacterPreview";
 
 const Account = () => {
@@ -49,6 +49,7 @@ const Account = () => {
             {characters &&
               characters.map((character, index) => (
                 <React.Fragment key={index}>
+                  
                   {/* User */}
                   <Container className='center-items'>
                     <div className="flex center" style={{ fontSize: '30px' }}>{character.accountName}</div>
@@ -59,16 +60,16 @@ const Account = () => {
                     </Col>
                     <br />
                     <Row className='flex center'>
-                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{mastery}</Row>
+                      <Col className='character-col'>
+                        <Row className="font-size-25px">{mastery}</Row>
                         <Row className='yellow-highlight'>Mastery Points</Row>
                       </Col>
-                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account?.fractal_level}</Row>
+                      <Col className='character-col'>
+                        <Row className="font-size-25px">{account?.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                       </Col>
-                      <Col className='flex center' style={{ flexDirection: 'column', marginRight: '20px' }}>
-                        <Row style={{ fontSize: '25px' }}>{account?.wvw_rank}</Row>
+                      <Col className='character-col'>
+                        <Row className="font-size-25px">{account?.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                       </Col>
                     </Row>

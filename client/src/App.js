@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
+import EventBus from "./common/EventBus";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -16,8 +17,6 @@ import BoardAdmin from "./components/BoardAdmin";
 
 import Cog from './cog.svg'
 import Dragon from './dragon.svg'
-
-import EventBus from "./common/EventBus";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -68,16 +67,6 @@ const App = () => {
               Search
             </Link>
           </li>
-          {/* <li>
-            <Link to={"/accounts"} className="nav-a">
-              Accounts
-            </Link>
-          </li>
-          <li>
-            <Link to={"/characters"} className="nav-a">
-              Characters
-            </Link>
-          </li> */}
 
           {showModeratorBoard && (
             <li >

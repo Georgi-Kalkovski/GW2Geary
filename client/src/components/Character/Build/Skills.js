@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import fetchData from '../../fetchData';
 import Tooltip from './Tooltip';
-
 import Land from './img/land.png';
 import Water from './img/water.png';
 

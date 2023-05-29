@@ -86,6 +86,34 @@
   flex-wrap: wrap;
 }
 
+
+/* Checkbox */
+.api-checkbox {
+  display: none;
+}
+
+.custom-checkbox {
+  margin: 0;
+  margin-left: 15px;
+}
+
+.custom-checkbox .checkmark {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #202124;
+  background-color: #aa0404;
+}
+
+.custom-checkbox .api-checkbox:checked+.checkmark {
+  background-color: darkgreen;
+}
+
+.custom-checkbox .checkmark {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
 /* Character Box */
 
 .characters {
@@ -188,4 +216,17 @@ input:checked+.slider:before {
   margin-left: 0 40%;
   width: 100px;
   margin-right: 4px;
+}
+
+/* Character */
+
+.character-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.font-size-25px {
+  font-size: 25px;
 }
