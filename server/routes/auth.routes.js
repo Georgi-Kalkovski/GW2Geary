@@ -15,6 +15,21 @@ router.post(
 );
 
 router.put(
+  "/users/:userId/username",
+  controller.changeUsername
+);
+
+router.put(
+  "/users/:userId/password",
+  controller.changePassword
+);
+
+router.delete(
+  "/users/:userId",
+  controller.deleteUser
+);
+
+router.put(
   "/users/:userId/apiKey",
   controller.createApiKey
 );

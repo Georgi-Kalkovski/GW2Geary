@@ -82,6 +82,62 @@ exports.signin = async (req, res) => {
   }
 };
 
+// Change Username
+exports.changeUsername = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { newUsername } = req.body;
+
+    const user = await User.findByIdAndUpdate(userId, { username: newUsername }, { new: true });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    res.status(200).send({ message: "Username changed successfully!", user });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Change Password
+exports.changePassword = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { newPassword } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    user.password = bcrypt.hashSync(newPassword, 8);
+    await user.save();
+
+    res.status(200).send({ message: "Password changed successfully!", user });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Delete User
+exports.deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    res.status(200).send({ message: "User deleted successfully!" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {

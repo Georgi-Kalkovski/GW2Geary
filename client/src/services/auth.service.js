@@ -31,9 +31,38 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+// Change Username Service
+const changeUsername = (newUsername) => {
+  const currentUser = getCurrentUser();
+  return axios.put(
+    API_URL + `users/${currentUser.id}/username`,
+    { newUsername }
+  );
+};
+
+// Change Password Service
+const changePassword = (newPassword) => {
+  const currentUser = getCurrentUser();
+  return axios.put(
+    API_URL + `users/${currentUser.id}/password`,
+    { newPassword }
+  );
+};
+
+// User Delete Service
+const deleteCurrentUser = () => {
+  const currentUser = getCurrentUser();
+  return axios.delete(API_URL + `users/${currentUser.id}`, {
+    headers: {
+      Authorization: `Bearer ${currentUser.accessToken}`,
+    },
+  });
+};
+
 // User Get Service
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"));
+  return user;
 };
 
 // Users Get Service
@@ -89,6 +118,9 @@ const AuthService = {
   register,
   login,
   logout,
+  changeUsername,
+  changePassword,
+  deleteCurrentUser,
   getCurrentUser,
   getAllUsers,
   createApiKey,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Link } from "react-router-dom";
 import EventBus from "./common/EventBus";
+import { Route, Routes, Link, useParams } from "react-router-dom";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -22,10 +22,10 @@ const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [newUsername, setNewUsername] = useState("");
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-
     if (user) {
       setCurrentUser(user);
       setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
@@ -36,8 +36,13 @@ const App = () => {
       logOut();
     });
 
+    EventBus.on("usernameChanged", (newUsername) => {
+      setNewUsername(newUsername);
+    });
+
     return () => {
       EventBus.remove("logout");
+      EventBus.remove("usernameChanged");
     };
   }, []);
 
@@ -98,17 +103,17 @@ const App = () => {
             <li style={{ paddingRight: '10px' }}>
               Welcome,
               <Link to={"/profile"} className="nav-a yellow-highlight">
-                {` ${currentUser.username}`}
+                {` ${newUsername ? newUsername : currentUser.username}`}
               </Link>
             </li>
-            <li >
-              <a href="/login" onClick={logOut} className="nav-a">
-                Logout
+            <li>
+              <a href="/login" className="nav-a" onClick={logOut}>
+                LogOut
               </a>
             </li>
           </div>
         ) : (
-          <div className="nav-login-register">
+          <div className="nav-profile-logout">
             <li>
               <Link to={"/login"} className="nav-a">
                 Login
@@ -117,26 +122,29 @@ const App = () => {
 
             <li>
               <Link to={"/register"} className="nav-a">
-                Register
+                Sign Up
               </Link>
             </li>
           </div>
         )}
       </nav>
 
-      <div className="content">
+      <div className="app-body">
         <Routes>
-          <Route path="/" element={<Search />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/accounts/:name" element={<Account />} />
-          <Route path="/characters/:name" element={<Character />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/character/:id" element={<Character />} />
+          <Route path="/profile" element={<Profile />} />
+          {showModeratorBoard && (
+            <Route path="/mod" element={<BoardModerator />} />
+          )}
+          {showAdminBoard && (
+            <Route path="/admin" element={<BoardAdmin />} />
+          )}
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/user" element={<BoardUser />} />
-          <Route path="/mod" element={<BoardModerator />} />
-          <Route path="/admin" element={<BoardAdmin />} />
-          <Route path="*" element={<Search />} />
         </Routes>
       </div>
     </div>
