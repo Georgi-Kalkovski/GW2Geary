@@ -132,8 +132,8 @@ const App = () => {
       <div className="app-body content">
         <Routes>
           <Route path="/search" element={<Search />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/character/:id" element={<Character />} />
+          <Route path="/accounts/:name" element={<Account />} />
+          <Route path="/characters/:name" element={<Character />} />
           <Route path="/profile" element={<Profile />} />
           {showModeratorBoard && (
             <Route path="/mod" element={<BoardModerator />} />
