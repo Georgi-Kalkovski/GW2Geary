@@ -107,8 +107,8 @@ const App = () => {
               </Link>
             </li>
             <li>
-              <a href="/login" className="nav-a" onClick={logOut}>
-                LogOut
+              <a href="/search" className="nav-a" onClick={logOut}>
+                Logout
               </a>
             </li>
           </div>
@@ -122,14 +122,14 @@ const App = () => {
 
             <li>
               <Link to={"/register"} className="nav-a">
-                Sign Up
+                Register
               </Link>
             </li>
           </div>
         )}
       </nav>
 
-      <div className="app-body">
+      <div className="app-body content">
         <Routes>
           <Route path="/search" element={<Search />} />
           <Route path="/account" element={<Account />} />

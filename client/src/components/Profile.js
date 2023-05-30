@@ -12,55 +12,106 @@ import Dragon from '../dragon.svg'
 
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
+  const [users, setUsers] = useState([]);
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const [apiKey, setApiKey] = useState("");
   const [apiKeys, setApiKeys] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [usernameInput, setUsernameInput] = useState("");
+  const [isInputValid, setIsInputValid] = useState(false);
+
+  useEffect(() => {
+    AuthService.getAllUsers()
+      .then(response => {
+        const users = response.data.users;
+        setUsers(users);
+      })
+      .catch(error => {
+        console.error("Error retrieving users:", error);
+        setUsernameError("Failed to retrieve users. Please try again.");
+      });
+  }, []);
+
+
   const handleChangeUsername = useCallback(() => {
     setUsernameError("");
-    AuthService.changeUsername(newUsername)
-      .then((response) => {
-        console.log(response.data.message);
 
-        // Emit an event with the new username
-        EventBus.emit("usernameChanged", newUsername);
+    AuthService.getAllUsers()
+      .then(response => {
+        const users = response.data.users; // Make sure the users variable is defined
 
-        // Update the user info in localStorage
-        const userInfoJSON = localStorage.getItem("user");
-        const userInfo = JSON.parse(userInfoJSON);
-        userInfo.username = newUsername;
-        const updatedUserInfoJSON = JSON.stringify(userInfo);
-        localStorage.setItem("user", updatedUserInfoJSON);
+        const userExists = users.some(u => u.username === newUsername);
+
+        if (userExists || newUsername === null || newUsername.length < 4) {
+          return;
+        }
+
+        AuthService.changeUsername(newUsername)
+          .then(response => {
+            console.log(response.data.message);
+
+            // Emit an event with the new username
+            EventBus.emit("usernameChanged", newUsername);
+
+            // Update the user info in localStorage
+            const userInfoJSON = localStorage.getItem("user");
+            const userInfo = JSON.parse(userInfoJSON);
+            userInfo.username = newUsername;
+            const updatedUserInfoJSON = JSON.stringify(userInfo);
+            localStorage.setItem("user", updatedUserInfoJSON);
+          })
+          .catch(error => {
+            console.error("Error changing username:", error);
+            setUsernameError("Failed to change username. Please try again.");
+          });
       })
-      .catch((error) => {
-        console.error("Error changing username:", error);
-        setUsernameError("Failed to change username. Please try again.");
+      .catch(error => {
+        console.error("Error retrieving users:", error);
+        setUsernameError("Failed to retrieve users. Please try again.");
       });
   }, [newUsername]);
 
 
+
+
   const handleChangePassword = useCallback(() => {
     setPasswordError("");
+    setConfirmPasswordError("");
+
+    // Validate password and confirm password
+    if (newPassword !== confirmPassword) {
+      setConfirmPasswordError("Password and confirm password do not match.");
+      return;
+    }
+
     AuthService.changePassword(newPassword)
       .then((response) => {
         console.log(response.data.message);
 
         // Emit an event with the password change status
-        eventBus.emit("passwordChanged", true);
-  
+        EventBus.emit("passwordChanged", true);
+
         // Perform any additional actions after successful password change
       })
       .catch((error) => {
         console.error("Error changing password:", error);
         setPasswordError("Failed to change password. Please try again.");
       });
-  }, [newPassword]);
+  }, [newPassword, confirmPassword]);
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setUsernameInput(value);
+    setIsInputValid(value === currentUser.username);
+  };
 
   const deleteCurrentUser = useCallback(() => {
     AuthService.deleteCurrentUser()
@@ -201,6 +252,35 @@ const Profile = () => {
 
   const isExpanded = (index) => expandedIndices.includes(index);
 
+  function changeUsernameColor(button) {
+    button && button.classList.add("darkgreen");
+    button.innerText = 'Username Changed';
+    setTimeout(function () {
+      button && button.classList.remove("darkgreen");
+      button.innerText = 'Change Username';
+    }, 2000); // 5000 milliseconds = 5 seconds
+  }
+
+  function changePasswordColor(button) {
+    button && button.classList.add("darkgreen");
+    button.innerText = 'Password Changed';
+    setTimeout(function () {
+      button && button.classList.remove("darkgreen");
+      button.innerText = 'Change Password';
+    }, 2000); // 5000 milliseconds = 5 seconds
+  }
+  function handleCombinedUsernameClick(event) {
+    const button = event.target;
+    changeUsernameColor(button);
+    handleChangeUsername();
+  }
+
+  function handleCombinedPasswordClick(event) {
+    const button = event.target;
+    changePasswordColor(button);
+    handleChangePassword();
+  }
+
   const {
     getArrowProps,
     getTooltipProps,
@@ -213,44 +293,91 @@ const Profile = () => {
     <div>
       {currentUser && (
         <div>
-          <div className="flex apis-flex">
-            {/* Change Username */}
-          <div>
-            <label htmlFor="newUsername">New Username:</label>
-            <input
-              type="text"
-              id="newUsername"
-              className="form-control"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-            />
-            {usernameError && <div className="error">{usernameError}</div>}
-            <button onClick={handleChangeUsername} className="basic-button">
-              Change Username
-            </button>
+          <div className="flex-row-center">
+
+            <div>
+              {/* Change Username */}
+              <div>
+                <input
+                  type="text"
+                  id="newUsername"
+                  className="form-control"
+                  placeholder="New username..."
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                />
+                {usernameError && <div className="error">{usernameError}</div>}
+                <button
+                  onClick={handleCombinedUsernameClick}
+                  className="basic-button disabled-button"
+                  disabled={newUsername === "" || newUsername.length < 4 || users.some(u => u.username === newUsername)}
+                >
+                  Change Username
+                </button>
+              </div>
+
+
+              <div>
+                {/* Repeat the current user's username */}
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder={`Write '${currentUser.username}' to delete user...`}
+                  value={usernameInput}
+                  onChange={handleInputChange}
+                />
+                {/* Delete User */}
+                <button
+                  onClick={deleteCurrentUser}
+                  className="disabled-button delete-button"
+                  disabled={!isInputValid}
+                >
+                  Delete User
+                </button>
+              </div>
+            </div>
+
+
+            {/* Change Password */}
+            <div className="flex-row-center">
+              <div>
+                <div>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    className="form-control"
+                    placeholder="New password..."
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                  {passwordError && <div className="error">{passwordError}</div>}
+                </div>
+                <div>
+
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    className="form-control"
+                    placeholder="Confirm password..."
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
+                </div>
+              </div>
+              <div>
+                <button
+                  onClick={handleCombinedPasswordClick}
+                  className="disabled-button basic-button"
+                  disabled={newPassword.length < 4 || newPassword !== confirmPassword || newPassword === currentUser.password || !newPassword || !confirmPassword}
+                >
+                  Change Password
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Change Password */}
-          <div>
-            <label htmlFor="newPassword">New Password:</label>
-            <input
-              type="password"
-              id="newPassword"
-              className="form-control"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            {passwordError && <div className="error">{passwordError}</div>}
-            <button onClick={handleChangePassword} className="basic-button">
-              Change Password
-            </button>
-          </div>
-          {/* Delete User */}
-          <button onClick={deleteCurrentUser} className="basic-button">
-            Delete User
-          </button>
-          </div>
-
+          {/* API Keys Section */}
           <div className="container" key="profile-container">
             <div className="flex center apis-flex" key="apis-flex">
               <div key="api-key-section">

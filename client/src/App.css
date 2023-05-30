@@ -41,6 +41,13 @@ body {
   justify-content: space-between;
 }
 
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
 /* Nav */
 
 .app-nav {
@@ -159,9 +166,11 @@ label {
   border: none;
   padding: 5px 10px;
   font-size: 0.94em;
+  margin: 3px;
 }
 
-input:-webkit-autofill, input:focus:-webkit-autofill {
+input:-webkit-autofill,
+input:focus:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px #202124 inset;
   -webkit-text-fill-color: #d9d9d9;
 }
@@ -169,6 +178,26 @@ input:-webkit-autofill, input:focus:-webkit-autofill {
 .basic-button {
   cursor: pointer;
   background-color: #202124;
+  color: #d9d9d9;
+  border: none;
+  margin: 10px;
+  padding: 5px 10px;
+  font-size: 1em;
+}
+
+.disabled-button:disabled {
+  cursor:default;
+  background-color: #202124;
+  color: #757575;
+  border: none;
+  margin: 10px;
+  padding: 5px 10px;
+  font-size: 1em;
+}
+
+.delete-button {
+  cursor: pointer;
+  background-color: #aa0404;
   color: #d9d9d9;
   border: none;
   margin: 10px;
@@ -217,8 +246,4 @@ input:-webkit-autofill, input:focus:-webkit-autofill {
 .geary-logo-style {
   font-family: 'GW2Font';
   font-size: 25px;
-}
-
-@media only screen and (max-device-width: 480px) {
-
 }

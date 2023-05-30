@@ -105,7 +105,7 @@
   background-color: #aa0404;
 }
 
-.custom-checkbox .api-checkbox:checked+.checkmark {
+.custom-checkbox .api-checkbox:checked+.checkmark, .darkgreen {
   background-color: darkgreen;
 }
 
