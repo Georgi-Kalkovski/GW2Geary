@@ -201,10 +201,8 @@ function ProfileApis({ currentUser, AuthService }) {
                                                 {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
                                             >
                                                 <div style={{ fontSize: '14px' }}>
-                                                    <span style={{ color: 'darkgreen' }}>Check</span>
-                                                    /<span style={{ color: '#aa0404' }}>Uncheck</span> the checkbox to
-                                                    <span style={{ color: 'darkgreen' }}> Show</span>
-                                                    /<span style={{ color: '#aa0404' }}>Hide </span>
+                                                    <span style={{ color: 'darkgreen' }}> Show </span>
+                                                    /<span style={{ color: '#aa0404' }}> Hide </span>
                                                     accounts & characters
                                                 </div>
                                                 <div {...getArrowProps({ className: 'tooltip-arrow' })} />
