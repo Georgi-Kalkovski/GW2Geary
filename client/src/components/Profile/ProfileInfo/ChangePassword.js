@@ -18,7 +18,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
       return;
     }
     if (newPassword.length < 4 || confirmPassword.length < 4) {
-      setErrorMessage("Password should be more than 4 letters long.");
+      setErrorMessage("Password should be more than 3 letters long.");
       return;
     }
     if (!/^[A-Za-z0-9]+$/.test(newPassword) || !/^[A-Za-z0-9]+$/.test(confirmPassword)) {

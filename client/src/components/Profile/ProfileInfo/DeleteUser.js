@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-
+import { Link } from "react-router-dom";
 function DeleteUser({ AuthService }) {
     const [showPopup, setShowPopup] = useState(false);
 
@@ -40,9 +40,11 @@ function DeleteUser({ AuthService }) {
                         <h4 style={{ marginTop: 0, marginBottom: 0 }}>Confirm Delete</h4>
                         <div>Are you sure you want to delete the user?</div>
                         <div className="popup-buttons">
-                            <button onClick={deleteCurrentUser} className="delete-button" style={{ marginLeft: '3px' }}>
+
+                            <Link to="/search"><button onClick={deleteCurrentUser} className="delete-button" style={{ marginLeft: '3px' }}>
                                 Yes, Delete
                             </button>
+                            </Link>
                             <button onClick={togglePopup} className="basic-button">
                                 Cancel
                             </button>
