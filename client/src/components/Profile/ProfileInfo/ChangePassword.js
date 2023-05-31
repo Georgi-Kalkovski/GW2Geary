@@ -63,6 +63,15 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
     return () => clearTimeout(errorTimer);
   }, [errorMessage]);
 
+  const handleKeyPress = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        handleChangePassword();
+      }
+    },
+    [handleChangePassword]
+  );
+
   return (
     <>
       {/* Change Password */}
@@ -76,6 +85,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
               placeholder="New password..."
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
           <div>
@@ -86,6 +96,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
               placeholder="Confirm password..."
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
         </div>

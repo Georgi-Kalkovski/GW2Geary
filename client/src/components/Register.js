@@ -53,6 +53,7 @@ const Register = () => {
   return (
     <div className="flex center">
       <div>
+      <h2 style={{ textAlign: 'center' }}>Register</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {!successful && (
             <div>

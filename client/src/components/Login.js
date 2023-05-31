@@ -36,6 +36,7 @@ const Login = () => {
   return (
     <div className="flex center">
       <div>
+        <h2 style={{textAlign: 'center'}}>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="username">Username</label>

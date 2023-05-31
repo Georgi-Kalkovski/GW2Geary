@@ -71,6 +71,14 @@ function ChangeUsername({ AuthService, EventBus }) {
             });
     }, [newUsername]);
 
+    const handleKeyPress = useCallback(
+        (e) => {
+            if (e.key === "Enter") {
+                handleChangeUsername();
+            }
+        },
+        [handleChangeUsername]
+    );
 
     return (
         <>
@@ -82,6 +90,7 @@ function ChangeUsername({ AuthService, EventBus }) {
                     className="form-control"
                     placeholder="New username..."
                     onChange={(e) => setNewUsername(e.target.value)}
+                    onKeyDown={handleKeyPress}
                 />
                 {usernameError && <div className="error">{usernameError}</div>}
                 <button onClick={handleChangeUsername} className="basic-button">

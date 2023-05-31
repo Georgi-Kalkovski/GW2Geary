@@ -138,6 +138,15 @@ function ProfileApis({ currentUser, AuthService }) {
             });
     }, [apiKeys]);
 
+    const handleKeyPress = useCallback(
+        (e) => {
+            if (e.key === "Enter") {
+                handleApiKeyCreate();
+            }
+        },
+        [handleApiKeyCreate]
+    );
+
     const {
         getArrowProps,
         getTooltipProps,
@@ -162,6 +171,7 @@ function ProfileApis({ currentUser, AuthService }) {
                             value={apiKey}
                             onChange={handleApiKeyChange}
                             key="api-key-input"
+                            onKeyDown={handleKeyPress}
                         />
                         <button className="basic-button" onClick={handleApiKeyCreate} key="add-api-key-button">Add API Key</button>
                         <br /><br />
