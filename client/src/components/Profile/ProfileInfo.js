@@ -11,6 +11,7 @@ function ProfileInfo({ currentUser, AuthService }) {
             <div className="flex-row-center">
                 <div>
                     <ChangeUsername AuthService={AuthService} EventBus={EventBus} />
+                    {/* TODO: Add email for forgoten username? or password */}
                     <ChangePassword currentUser={currentUser} AuthService={AuthService} EventBus={EventBus} />
                     <DeleteUser currentUser={currentUser} AuthService={AuthService} />
                 </div>
