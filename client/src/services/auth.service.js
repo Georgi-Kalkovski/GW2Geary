@@ -40,6 +40,15 @@ const changeUsername = (newUsername) => {
   );
 };
 
+// Change Email Service
+const changeEmail = (newEmail) => {
+  const currentUser = getCurrentUser();
+  return axios.put(
+    API_URL + `users/${currentUser.id}/email`,
+    { newEmail }
+  );
+};
+
 // Change Password Service
 const changePassword = (newPassword) => {
   const currentUser = getCurrentUser();
@@ -123,6 +132,7 @@ const AuthService = {
   deleteCurrentUser,
   getCurrentUser,
   getAllUsers,
+  changeEmail,
   createApiKey,
   getApiKeys,
   updateApiKeyStatus,

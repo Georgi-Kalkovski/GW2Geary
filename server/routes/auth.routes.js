@@ -20,6 +20,11 @@ router.put(
 );
 
 router.put(
+  "/users/:userId/email",
+  controller.changeEmail
+);
+
+router.put(
   "/users/:userId/password",
   controller.changePassword
 );

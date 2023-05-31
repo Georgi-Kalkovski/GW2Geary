@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  email: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -14,12 +19,12 @@ const UserSchema = new mongoose.Schema({
       _id: {
         type: String,
         unique: false,
-        default: false
+        sparse: true
       },
       accountName: {
         type: String,
         unique: true,
-        default: false
+        sparse: true
       },
       active: {
         type: Boolean,

@@ -73,6 +73,7 @@ exports.signin = async (req, res) => {
     res.status(200).send({
       id: user._id,
       username: user.username,
+      email: user.email,
       roles: authorities,
       accessToken: token,
       apiKeys: user.apiKeys,
@@ -95,6 +96,24 @@ exports.changeUsername = async (req, res) => {
     }
 
     res.status(200).send({ message: "Username changed successfully!", user });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Change Email
+exports.changeEmail = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { newEmail } = req.body;
+
+    const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    res.status(200).send({ message: "Email changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
