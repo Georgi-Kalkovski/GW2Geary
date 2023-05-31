@@ -14,7 +14,6 @@ function ProfileApis({ currentUser, AuthService }) {
     const [loading, setLoading] = useState(false);
     const [expandedIndexes, setExpandedIndexes] = useState([]);
 
-
     const fetchApiKeys = (userId, accessToken) => {
         return axios.get(`http://localhost:3001/api/auth/users/${userId}/apiKeys`, {
             headers: {

@@ -1,16 +1,12 @@
 import React, { useState, useCallback } from "react";
 
-function DeleteUser({ currentUser, AuthService }) {
-    const [usernameInput, setUsernameInput] = useState("");
-    const [isInputValid, setIsInputValid] = useState(false);
+function DeleteUser({ AuthService }) {
+    const [showPopup, setShowPopup] = useState(false);
 
-    // Delete Logic
-    const confirmUserBeforeDelete = (event) => {
-        const { value } = event.target;
-        setUsernameInput(value);
-        setIsInputValid(value === currentUser.username);
+    const confirmUserBeforeDelete = () => {
+        togglePopup();
     };
-    
+
     const deleteCurrentUser = useCallback(() => {
         AuthService.deleteCurrentUser()
             .then(() => {
@@ -22,28 +18,39 @@ function DeleteUser({ currentUser, AuthService }) {
             });
     }, []);
 
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
+
     return (
-        <>
-            {/* Delete User */}
-            <div>
-                {/* Repeat the current user's username */}
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder={`Write '${currentUser.username}' to delete user...`}
-                    value={usernameInput}
-                    onChange={confirmUserBeforeDelete}
-                />
-                {/* Delete User Button */}
-                <button
-                    onClick={deleteCurrentUser}
-                    className="disabled-button delete-button"
-                    disabled={!isInputValid}
-                >
-                    Delete User
-                </button>
-            </div>
-        </>
+        <div className="flex-row column">
+            {/* Delete User Button */}
+            <button
+                onClick={confirmUserBeforeDelete}
+                className="basic-button"
+                style={{ marginLeft: '3px' }}
+            >
+                Delete User
+            </button>
+
+            {/* Popup */}
+            {showPopup && (
+                <div className="popup flex center">
+                    <div className="popup-content">
+                        <h4 style={{ marginTop: 0, marginBottom: 0 }}>Confirm Delete</h4>
+                        <div>Are you sure you want to delete the user?</div>
+                        <div className="popup-buttons">
+                            <button onClick={deleteCurrentUser} className="delete-button" style={{ marginLeft: '3px' }}>
+                                Yes, Delete
+                            </button>
+                            <button onClick={togglePopup} className="cancel-button">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 

@@ -9,7 +9,6 @@ function ProfileInfo({ currentUser, AuthService }) {
         <>
             {/* User */}
             <div className="flex-row-center">
-
                 <div>
                     <ChangeUsername AuthService={AuthService} EventBus={EventBus} />
                     <ChangePassword currentUser={currentUser} AuthService={AuthService} EventBus={EventBus} />

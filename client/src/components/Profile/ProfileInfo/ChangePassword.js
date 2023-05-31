@@ -1,90 +1,113 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 function ChangePassword({ currentUser, AuthService, EventBus }) {
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
 
-    // Change Password Logic
-    const handleChangePassword = useCallback(() => {
-        setPasswordError("");
-        setConfirmPasswordError("");
-        if (newPassword !== confirmPassword) {
-            setConfirmPasswordError("Password and confirm password do not match.");
-            return;
-        }
-        AuthService.changePassword(newPassword)
-            .then((response) => {
-                console.log(response.data.message);
-                EventBus.emit("passwordChanged", true);
-            })
-            .catch((error) => {
-                console.error("Error changing password:", error);
-                setPasswordError("Failed to change password. Please try again.");
-            });
-    }, [newPassword, confirmPassword]);
-
-    function handleCombinedPasswordClick(event) {
-        const button = event.target;
-        changePasswordColor(button);
-        handleChangePassword();
+  // Change Password Logic
+  const handleChangePassword = useCallback(() => {
+    setErrorMessage("");
+    if (!newPassword || !confirmPassword) {
+      setErrorMessage("Both fields should be filled.");
+      return;
     }
-
-    function changePasswordColor(button) {
-        button && button.classList.add("darkgreen");
-        button.innerText = 'Password Changed';
-        setTimeout(function () {
-            button && button.classList.remove("darkgreen");
-            button.innerText = 'Change Password';
-        }, 2000);
+    if (newPassword !== confirmPassword) {
+      setErrorMessage("Password and confirm password do not match.");
+      return;
     }
-    return (
-        <>
-            {/* Change Password */}
-            <div className="flex-row-center">
-                <div>
-                    <div>
-                        <input
-                            type="password"
-                            id="newPassword"
-                            className="form-control"
-                            placeholder="New password..."
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
-                        {passwordError && <div className="error">{passwordError}</div>}
-                    </div>
-                    <div>
+    if (newPassword.length < 4 || confirmPassword.length < 4) {
+      setErrorMessage("Password should be more than 4 letters long.");
+      return;
+    }
+    if (!/^[A-Za-z0-9]+$/.test(newPassword) || !/^[A-Za-z0-9]+$/.test(confirmPassword)) {
+      setErrorMessage("Password can only contain letters and numbers.");
+      return;
+    }
+    console.log(currentUser.password)
+    AuthService.changePassword(newPassword)
+      .then((response) => {
+        console.log(response.data.message);
+        setShowNotification(true);
+        setNewPassword("");
+        setConfirmPassword("");
+        EventBus.emit("passwordChanged", true);
+      })
+      .catch((error) => {
+        console.error("Error changing password:", error);
+        setErrorMessage("Failed to change password. Please try again.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      });
+  }, [newPassword, confirmPassword]);
 
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            className="form-control"
-                            placeholder="Confirm password..."
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
-                    </div>
-                </div>
-                <div>
-                    <button
-                        onClick={handleCombinedPasswordClick}
-                        className="disabled-button basic-button"
-                        disabled={
-                            newPassword.length < 4
-                            || newPassword !== confirmPassword
-                            || newPassword === currentUser.password
-                            || !newPassword
-                            || !confirmPassword}
-                    >
-                        Change Password
-                    </button>
-                </div>
-            </div>
-        </>
-    );
+  useEffect(() => {
+    let timer;
+    if (showNotification) {
+      timer = setTimeout(() => {
+        setShowNotification(false);
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [showNotification]);
+
+  useEffect(() => {
+    let errorTimer;
+    if (errorMessage) {
+      errorTimer = setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    }
+    return () => clearTimeout(errorTimer);
+  }, [errorMessage]);
+
+  return (
+    <>
+      {/* Change Password */}
+      <div className="flex-row">
+        <div>
+          <div>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="New password..."
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Confirm password..."
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div>
+          <button onClick={handleChangePassword} className="disabled-button basic-button">
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      {/* Notification Area */}
+      {showNotification && (
+        <div className="notification success">
+          <p>Password changed successfully!</p>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="notification error">
+          <p>{errorMessage}</p>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default ChangePassword;

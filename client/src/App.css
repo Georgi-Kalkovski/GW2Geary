@@ -41,6 +41,12 @@ body {
   justify-content: space-between;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}
+
 .flex-row-center {
   display: flex;
   flex-direction: row;
@@ -199,6 +205,16 @@ input:focus:-webkit-autofill {
   cursor: pointer;
   background-color: #aa0404;
   color: #d9d9d9;
+  border: none;
+  margin: 10px;
+  padding: 5px 10px;
+  font-size: 1em;
+}
+
+.cancel-button {
+  cursor: pointer;
+  background-color: #FFCC00;
+  color: #202124;
   border: none;
   margin: 10px;
   padding: 5px 10px;
