@@ -36,11 +36,6 @@ const Login = () => {
   return (
     <div className="flex center">
       <div>
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
