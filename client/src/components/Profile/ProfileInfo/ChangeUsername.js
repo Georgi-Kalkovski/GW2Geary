@@ -41,19 +41,19 @@ function ChangeUsername({ AuthService, EventBus }) {
                     }, 3000);
                     return;
                 }
-    
+
                 AuthService.changeUsername(newUsername)
                     .then((response) => {
                         console.log(response.data.message);
-    
+
                         EventBus.emit("usernameChanged", newUsername);
-    
+
                         const userInfoJSON = localStorage.getItem("user");
                         const userInfo = JSON.parse(userInfoJSON);
                         userInfo.username = newUsername;
                         const updatedUserInfoJSON = JSON.stringify(userInfo);
                         localStorage.setItem("user", updatedUserInfoJSON);
-    
+
                         setPopupMessage(`Username changed to ${newUsername}.`);
                         setShowPopup(true);
                         setTimeout(() => {
@@ -70,18 +70,18 @@ function ChangeUsername({ AuthService, EventBus }) {
                 setUsernameError("Failed to retrieve users. Please try again.");
             });
     }, [newUsername]);
-    
+
 
     return (
         <>
             {/* Change Username */}
             <div>
                 <input
+                    id="addNewUser"
                     type="text"
                     className="form-control"
                     placeholder="New username..."
                     onChange={(e) => setNewUsername(e.target.value)}
-                    name={`username-${Math.random()}`}
                 />
                 {usernameError && <div className="error">{usernameError}</div>}
                 <button onClick={handleChangeUsername} className="basic-button">

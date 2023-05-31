@@ -43,7 +43,7 @@ function DeleteUser({ AuthService }) {
                             <button onClick={deleteCurrentUser} className="delete-button" style={{ marginLeft: '3px' }}>
                                 Yes, Delete
                             </button>
-                            <button onClick={togglePopup} className="cancel-button">
+                            <button onClick={togglePopup} className="basic-button">
                                 Cancel
                             </button>
                         </div>

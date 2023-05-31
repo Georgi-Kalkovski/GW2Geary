@@ -70,6 +70,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
         <div>
           <div>
             <input
+              id="addNewPassword"
               type="password"
               className="form-control"
               placeholder="New password..."
@@ -79,6 +80,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
           </div>
           <div>
             <input
+              id="addNewPasswordConfirm"
               type="password"
               className="form-control"
               placeholder="Confirm password..."
