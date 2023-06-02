@@ -21,9 +21,9 @@ function SendMail({ AuthService }) {
                 .catch((error) => {
                     console.error("Error checking username:", error);
                 });
-            setErrorMessage("Mail sent successfully!");
+            setErrorMessage("Email sent successfully!");
         } else {
-            setErrorMessage("Username doesn't have mail.");
+            setErrorMessage("Username doesn't have email.");
         }
     };
 
