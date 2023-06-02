@@ -2,23 +2,29 @@ import { useState } from "react";
 
 function SendMail({ AuthService }) {
     const [usernameInput, setUsernameInput] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleCheckUsername = async () => {
         const userFound = (await AuthService.getAllUsers()).data.users.find(u => u.username === usernameInput);
-        fetch("http://localhost:3001/reset-password", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user: userFound }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data); // Handle the response from the server
+        if (userFound && userFound.email) {
+            fetch("http://localhost:3001/reset-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ user: userFound }),
             })
-            .catch((error) => {
-                console.error("Error checking username:", error);
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data); // Handle the response from the server
+                })
+                .catch((error) => {
+                    console.error("Error checking username:", error);
+                });
+            setErrorMessage("Mail sent successfully!");
+        } else {
+            setErrorMessage("Username doesn't have mail.");
+        }
     };
 
     return (
@@ -35,6 +41,7 @@ function SendMail({ AuthService }) {
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
                 />
+                {errorMessage && <p style={{ textAlign: 'center' }}>{errorMessage}</p>}
                 <div className="flex center">
                     <button
                         className="basic-button"
