@@ -1,0 +1,80 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+
+const ResetPassword = () => {
+    const { token } = useParams();
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
+    const handleResetPassword = () => {
+        if (!newPassword || !confirmPassword) {
+            setErrorMessage("Both fields should be filled.");
+            return;
+        }
+        if (newPassword !== confirmPassword) {
+            setErrorMessage("Password and confirm password do not match.");
+            return;
+        }
+        if (newPassword.length < 4 || confirmPassword.length < 4) {
+            setErrorMessage("Password should be more than 3 letters long.");
+            return;
+        }
+        if (!/^[A-Za-z0-9]+$/.test(newPassword) || !/^[A-Za-z0-9]+$/.test(confirmPassword)) {
+            setErrorMessage("Password can only contain letters and numbers.");
+            return;
+        }
+        axios
+            .post(`http://localhost:3001/reset-password/${token}`, { newPassword })
+            .then((response) => {
+                console.log(response)
+                // Handle the success response
+                console.log(response?.data?.message);
+
+                // Reset the input fields and error message
+                setNewPassword("");
+                setConfirmPassword("");
+                setErrorMessage("");
+
+                navigate("/login");
+            })
+            .catch((error) => {
+                // Handle the error response
+                console.error(error);
+            });
+    };
+
+    return (
+        <div className="flex center">
+            <div>
+                <h2 style={{ textAlign: 'center' }}>Reset Password</h2>
+                <div>
+                    <label>New Password</label>
+                    <input
+                        type="password"
+                        value={newPassword}
+                        className="form-control"
+                        onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Confirm Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+                {errorMessage && <p>{errorMessage}</p>}
+                <div className="flex center">
+                    <button className="basic-button" onClick={handleResetPassword}>Reset Password</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ResetPassword;

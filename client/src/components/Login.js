@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import AuthService from "../services/auth.service";
+import SendMail from "./SendMail";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -9,6 +10,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const onSubmit = (data) => {
     setMessage("");
@@ -33,10 +35,14 @@ const Login = () => {
     );
   };
 
+  const toggleForgotPassword = () => {
+    setShowForgotPassword(!showForgotPassword);
+  };
+
   return (
     <div className="flex center">
       <div>
-        <h2 style={{textAlign: 'center'}}>Login</h2>
+        <h2 style={{ textAlign: 'center' }}>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -68,7 +74,7 @@ const Login = () => {
             )}
           </div>
 
-          <div className="form-group  flex center">
+          <div className="form-group flex center">
             <button className="basic-button" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
@@ -83,6 +89,18 @@ const Login = () => {
                 {message}
               </div>
             </div>
+          )}
+
+          <div className="form-group flex center">
+            <a className="link-underline"
+              onClick={toggleForgotPassword}
+            >
+              {showForgotPassword ? "Hide Section" : "Forgot my password"}
+            </a>
+          </div>
+
+          {showForgotPassword && (
+            <SendMail AuthService={AuthService} />
           )}
         </form>
       </div>

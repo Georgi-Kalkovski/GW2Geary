@@ -192,7 +192,7 @@ input:focus:-webkit-autofill {
 }
 
 .disabled-button:disabled {
-  cursor:default;
+  cursor: default;
   background-color: #202124;
   color: #757575;
   border: none;
@@ -219,6 +219,15 @@ input:focus:-webkit-autofill {
   margin: 10px;
   padding: 5px 10px;
   font-size: 1em;
+}
+
+.link-underline {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+p span {
+  display: block;
 }
 
 /* Loading Logo */

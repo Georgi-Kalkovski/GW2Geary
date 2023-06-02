@@ -11,6 +11,7 @@ import Search from "./components/Search";
 import Account from "./components/Account";
 import Character from './components/Character';
 import Profile from "./components/Profile";
+import ResetPassword from "./components/ResetPassword";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
@@ -135,6 +136,7 @@ const App = () => {
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           {showModeratorBoard && (
             <Route path="/mod" element={<BoardModerator />} />
           )}
