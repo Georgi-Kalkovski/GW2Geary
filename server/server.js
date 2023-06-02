@@ -29,7 +29,6 @@ mongoose
     process.exit();
   });
 
-// RESET PASSWORD LOGIC
 // Create a transporter with your email service provider's configuration
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -56,14 +55,12 @@ app.post("/reset-password", async (req, res) => {
 
     const token = generateResetToken();
 
-    // Save the token to the user document
     const updatedUser = await User.findOneAndUpdate({ email: user.email }, { resetToken: token });
 
     if (!updatedUser) {
       return res.status(404).json({ error: 'User not found.' });
     }
 
-    // Send the password reset email
     const mailOptions = {
       from: process.env.NODEMAILER_USER,
       to: user.email,
