@@ -240,7 +240,9 @@ function ProfileApis({ currentUser, AuthService }) {
                                 </div>
                                 <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
                                     <div className="flex center">
-                                        <div className="profile-line"></div>{isExpanded(index) ? <img src={upArrow} alt="up-arrow" /> : <img src={downArrow} alt="down-arrow" />}
+                                        <div className="profile-line">
+                                            
+                                            </div>{isExpanded(index) ? <img src={upArrow} className="up-down-arrow" alt="up-arrow"/> : <img src={downArrow} className="up-down-arrow" alt="down-arrow" />}
                                     </div>
                                 </div>
                                 {isExpanded(index) && (

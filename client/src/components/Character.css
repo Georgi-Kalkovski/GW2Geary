@@ -105,7 +105,8 @@
   background-color: #aa0404;
 }
 
-.custom-checkbox .api-checkbox:checked+.checkmark, .darkgreen {
+.custom-checkbox .api-checkbox:checked+.checkmark,
+.darkgreen {
   background-color: darkgreen;
 }
 
@@ -216,6 +217,10 @@ input:checked+.slider:before {
   margin-left: 0 40%;
   width: 100px;
   margin-right: 4px;
+}
+
+.up-down-arrow {
+  cursor: pointer;
 }
 
 /* Character */

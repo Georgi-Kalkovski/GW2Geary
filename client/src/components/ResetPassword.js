@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -45,6 +45,14 @@ const ResetPassword = () => {
                 console.error(error);
             });
     };
+    const handleKeyPress = useCallback(
+        (e) => {
+            if (e.key === "Enter") {
+                handleResetPassword();
+            }
+        },
+        [handleResetPassword]
+    );
 
     return (
         <div className="flex center">
@@ -57,6 +65,7 @@ const ResetPassword = () => {
                         value={newPassword}
                         className="form-control"
                         onChange={(e) => setNewPassword(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
                 <div>
@@ -66,6 +75,7 @@ const ResetPassword = () => {
                         className="form-control"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        onKeyDown={handleKeyPress}
                     />
                 </div>
                 {errorMessage && <p>{errorMessage}</p>}

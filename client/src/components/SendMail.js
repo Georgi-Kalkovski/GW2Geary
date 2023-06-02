@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 function SendMail({ AuthService }) {
     const [usernameInput, setUsernameInput] = useState("");
@@ -27,6 +27,15 @@ function SendMail({ AuthService }) {
         }
     };
 
+    const handleKeyPress = useCallback(
+        (e) => {
+            if (e.key === "Enter") {
+                handleCheckUsername();
+            }
+        },
+        [handleCheckUsername]
+    );
+
     return (
         <>
             {/* New input and button for checking the username */}
@@ -40,6 +49,7 @@ function SendMail({ AuthService }) {
                     name="check-username"
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
+                    onKeyDown={handleKeyPress}
                 />
                 {errorMessage && <p style={{ textAlign: 'center' }}>{errorMessage}</p>}
                 <div className="flex center">
