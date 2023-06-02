@@ -64,7 +64,7 @@ app.post("/reset-password", async (req, res) => {
     const mailOptions = {
       from: process.env.NODEMAILER_USER,
       to: user.email,
-      subject: "Password Reset",
+      subject: "GW2Geary Password Reset",
       html: `<h3>Hi ${user.username},</h3>
              <h4>You have requested to reset your password.</h4>
              <h4 style="display: inline;">Click <h3 style="display: inline;"><a href="http://localhost:3000/reset-password/${token}">here</a></h3> to reset your password.</h4>
