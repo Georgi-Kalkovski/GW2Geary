@@ -49,7 +49,6 @@ function generateResetToken() {
 // Send Mail Logic
 app.post("/reset-password", async (req, res) => {
   const { user } = req.body;
-  console.log(user)
   try {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
