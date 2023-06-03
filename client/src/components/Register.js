@@ -85,7 +85,7 @@ const Register = () => {
                   type="email"
                   className="form-control"
                   name="email"
-                  {...register("email", { required: true })}
+                  {...register("email", { required: false })}
                 />
                 {errors.email?.type === "required" && (
                   <div className="alert alert-danger" role="alert">
