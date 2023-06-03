@@ -3,9 +3,10 @@ import axios from "axios";
 const API_URL = "http://localhost:3001/api/auth/";
 
 // User Register Service
-const register = (username, password) => {
+const register = (username, email, password) => {
   return axios.post(API_URL + "register", {
     username,
+    email,
     password,
   });
 };
@@ -70,7 +71,7 @@ const deleteCurrentUser = () => {
 
 // User Get Service
 const getCurrentUser = () => {
-const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   return user;
 };
 

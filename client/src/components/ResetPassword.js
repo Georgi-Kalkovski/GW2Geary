@@ -15,15 +15,15 @@ const ResetPassword = () => {
             return;
         }
         if (newPassword !== confirmPassword) {
-            setErrorMessage("Password and confirm password do not match.");
+            setErrorMessage("Passwords do not match.");
             return;
         }
         if (newPassword.length < 4 || confirmPassword.length < 4) {
-            setErrorMessage("Password should be more than 3 letters long.");
+            setErrorMessage("Password is less than 4.");
             return;
         }
         if (!/^[A-Za-z0-9]+$/.test(newPassword) || !/^[A-Za-z0-9]+$/.test(confirmPassword)) {
-            setErrorMessage("Password can only contain letters and numbers.");
+            setErrorMessage("Invalid password.");
             return;
         }
         axios

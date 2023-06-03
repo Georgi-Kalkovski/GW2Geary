@@ -12,6 +12,7 @@ exports.signup = async (req, res) => {
   try {
     const user = new User({
       username: req.body.username,
+      email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
 

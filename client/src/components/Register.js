@@ -14,7 +14,7 @@ const Register = () => {
     setMessage("");
     setSuccessful(false);
 
-    AuthService.register(data.username, data.password, data.confirmPassword)
+    AuthService.register(data.username,data.email, data.password, data.confirmPassword)
       .then((response) => {
         setMessage(response.data.message);
         setSuccessful(true);
@@ -59,7 +59,7 @@ const Register = () => {
             <div>
               {/* Username */}
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Username <spam style={{color:'#aa0404',fontSize: '20px'}}>*</spam></label>
                 <input
                   type="username"
                   className="form-control"
@@ -78,9 +78,30 @@ const Register = () => {
                 )}
               </div>
 
+              {/* Email */}
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  {...register("email", { required: true })}
+                />
+                {errors.email?.type === "required" && (
+                  <div className="alert alert-danger" role="alert">
+                    This field is required!
+                  </div>
+                )}
+                {errors.email?.type === "validate" && (
+                  <div className="alert alert-danger" role="alert">
+                    This is not a valid email.
+                  </div>
+                )}
+              </div>
+
               {/* Password */}
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password <spam style={{color:'#aa0404',fontSize: '20px'}}>*</spam></label>
                 <input
                   type="password"
                   className="form-control"
@@ -101,7 +122,7 @@ const Register = () => {
 
               {/* Confirm Password */}
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">Confirm Password <spam style={{color:'#aa0404',fontSize: '20px'}}>*</spam></label>
                 <input
                   type="password"
                   className="form-control"
