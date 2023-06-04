@@ -4,11 +4,12 @@
   height: 100%;
   padding-top: 1%;
   margin: 0 7%;
+  justify-content: center;
 }
 
 .equipment,
 .build {
-  margin: 0 5%;
+  margin: 0% 5% 0% 5%;
 }
 
 .dropdown {
@@ -126,7 +127,8 @@
 }
 
 .character {
-  min-width: 20%;
+  min-width: 228px;
+  max-width: 228px;
 }
 
 .character-box {

@@ -1,6 +1,7 @@
 .characters-boxes {
     cursor: pointer;
-    width: 20%;
+    min-width: 228px;
+    max-width: 228px;
 }
 
 .accounts-link {
@@ -12,6 +13,11 @@
     box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
     margin: 3%;
     color: white;
+}
+
+.accounts-hover:hover {
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.5);
+    background-color: #35363a;
 }
 
 .accounts-name {

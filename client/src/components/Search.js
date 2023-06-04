@@ -294,7 +294,7 @@ function Search() {
                   <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, '_')}`}>
                     <Container className="accounts-box" key={account.accountName}>
                       <Col>
-                        <Row className="center-class">
+                        <Row className="center-class accounts-hover">
                           <div className="accounts-name">{account.accountName}</div>
                         </Row>
                       </Col>
