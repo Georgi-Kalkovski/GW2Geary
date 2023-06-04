@@ -15,7 +15,7 @@ function ProfileApis({ currentUser, AuthService }) {
     const [expandedIndexes, setExpandedIndexes] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {
-        return axios.get(`http://localhost:3001/api/auth/users/${userId}/apiKeys`, {
+        return axios.get(`http://46.55.197.57:3001/api/auth/users/${userId}/apiKeys`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
@@ -84,7 +84,7 @@ function ProfileApis({ currentUser, AuthService }) {
     const createApiKey = (userId, accessToken, apiKey) => {
         return axios
             .put(
-                `http://localhost:3001/api/auth/users/${userId}/apiKey`,
+                `http://46.55.197.57:3001/api/auth/users/${userId}/apiKey`,
                 { apiKey },
                 {
                     headers: {

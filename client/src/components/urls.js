@@ -1,5 +1,5 @@
 
-const urlBasic = 'http://localhost:3001/api/';
+const urlBasic = 'http://46.55.197.57:3001/api/';
 
 const URLS = {
     urlAccount: urlBasic + 'account/',

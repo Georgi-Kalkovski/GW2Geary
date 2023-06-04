@@ -9,7 +9,7 @@
 
 .accounts-box {
     border: 1.5px solid rgb(255, 255, 255);
-    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.5);
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
     margin: 3%;
     color: white;
 }
@@ -64,10 +64,44 @@
     background-color: #202124;
     color: #d3d3d3;
     width: 50em;
-    display:flex;
+    display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     font-size: 1.2em;
 }
 
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination-item {
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1.5px solid white;
+    color: white;
+    background-color: #202124;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: larger;
+}
+
+.pagination-item:hover {
+    background-color: #aa0404;
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+}
+
+.pagination-item:disabled {
+    background-color: #35363a;
+    cursor: default;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.pagination-item.active {
+    background-color: #aa0404;
+    color: white;
+}

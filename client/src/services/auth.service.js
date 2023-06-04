@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/auth/";
+const API_URL = "http://46.55.197.57:3001/api/auth/";
 
 // User Register Service
 const register = (username, email, password) => {

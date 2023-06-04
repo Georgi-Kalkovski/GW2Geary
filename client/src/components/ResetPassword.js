@@ -27,7 +27,7 @@ const ResetPassword = () => {
             return;
         }
         axios
-            .post(`http://localhost:3001/reset-password/${token}`, { newPassword })
+            .post(`http://46.55.197.57:3001/reset-password/${token}`, { newPassword })
             .then((response) => {
                 console.log(response)
                 // Handle the success response
