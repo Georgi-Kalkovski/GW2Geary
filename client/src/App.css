@@ -233,9 +233,8 @@ p span {
 /* Loading Logo */
 
 .logo-loading-div {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  position: relative;
+  top: 250px;
   transform: translate(-50%, -50%);
 }
 

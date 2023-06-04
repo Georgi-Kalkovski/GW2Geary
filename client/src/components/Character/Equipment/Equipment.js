@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ItemTooltip from './ItemTooltip';
 import Attributes from './Attributes';
 import './Equipment.css';
+import Cog from '../../../cog.svg'
+import Dragon from '../../../dragon.svg'
 
 function Equipment({ items, prof, slider }) {
     // console.log('items', items)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setIsLoading(true);
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+    }, [items]);
+
+    if (isLoading) {
+        return (
+            <div className="flex center">
+                <div className="logo-loading-div">
+                    <img src={Dragon} alt="" className="logo--loading-dragon" />
+                    <img src={Cog} alt="" className="logo-loading-cog" />
+                </div>
+            </div>);
+    }
     return (<>
         <Container className="equipment-box">
             <Col className='equipment-col-1'>
