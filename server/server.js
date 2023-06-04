@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const routes = require("./routes/routes");
 const nodemailer = require("nodemailer");
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
 
@@ -40,8 +41,7 @@ const transporter = nodemailer.createTransport({
 
 // Helper function to generate a random token
 function generateResetToken() {
-  const salt = bcrypt.genSaltSync(8);
-  const token = bcrypt.hashSync(salt);
+  const token = crypto.randomBytes(20).toString('hex');
   return token;
 }
 
@@ -65,11 +65,11 @@ app.post("/reset-password", async (req, res) => {
       from: process.env.NODEMAILER_USER,
       to: user.email,
       subject: "GW2Geary Password Reset",
-      html: `<h3>Hi ${user.username},</h3>
-             <h4>You have requested to reset your password.</h4>
-             <h4 style="display: inline;">Click <h3 style="display: inline;"><a href="http://localhost:3000/reset-password/${token}">here</a></h3> to reset your password.</h4>
-             <h4>If you did not request this, please ignore this email.</h4>
-             <h3>GW2Geary team.</h3>`,
+      html: `<h4>Hi ${user.username},</h4>
+             <p>You have requested to reset your password.</p>
+             <p style="display: inline;">Click <h4 style="display: inline;"><a href="http://localhost:3000/reset-password/${token}">here</a></h4> to reset your password.</p>
+             <p>If you did not request this, please ignore this email.</p>
+             <h4>GW2Geary team.</h4>`,
     };
 
     await transporter.sendMail(mailOptions);
