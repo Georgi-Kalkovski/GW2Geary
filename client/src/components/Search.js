@@ -145,7 +145,7 @@ function Search() {
             <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
             <Row>
               If someone has registered a valid{' '}
-              <Link to="https://account.arena.net/applications" style={{ color: '#aa0404' }}>
+              <Link to="https://account.arena.net/applications" style={{ color: '#aa0404' }} target="_blank">
                 GW2 API key
               </Link>{' '}
               with us and granted access, you'll be able to find and inspect them.
