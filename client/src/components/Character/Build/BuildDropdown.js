@@ -47,16 +47,15 @@ function BuildDropdown({ char }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({ placement: 'right' });
+    } = usePopperTooltip({ placement: 'top' });
 
 
     return (
         <div className='build' ref={wrapperRef}>
             <div className="dropdown">
-                <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
+                <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setTriggerRef}>
                     {selectedTab && selectedTab.build.name ? selectedTab.build.name : `Build ${selectedTab.tab}`}
                 </button>
-                <span className='info-centered' ref={setTriggerRef}><img className={`${char.profession.toLowerCase()}-filter info-size`} src={info} alt="info-size" /></span>
                 {visible && (
                     <div
                         ref={setTooltipRef}

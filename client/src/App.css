@@ -148,7 +148,6 @@ label {
 }
 
 /* Logo */
-
 .logo-div {
   position: relative;
   width: 53px;
@@ -183,12 +182,15 @@ label {
   position: absolute;
   top: -26%;
   left: 4%;
-  transform: translate(-50%, -50%) rotate(0deg);
   z-index: 1;
   width: 50px;
   height: 50px;
-  animation: spin 50s linear infinite;
+}
+
+.logo-spin:hover .logo-cog {
+  animation: spin 15s linear infinite;
   animation-iteration-count: infinite;
+  transform: translate(-50%, -50%) rotate(0deg);
 }
 
 .form-control {

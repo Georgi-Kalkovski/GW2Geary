@@ -19,6 +19,21 @@
   justify-content: center;
 }
 
+.dropdown>ul>li {
+  background-color: #202124;
+  color: white;
+}
+
+.dropdown>ul {
+  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+}
+
+.dropdown>ul>li:hover {
+  cursor: pointer;
+  background-color: #35363a;
+  color: white;
+}
+
 .dropdown-button {
   color: white;
   padding: 10px;

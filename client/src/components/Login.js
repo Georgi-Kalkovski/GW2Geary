@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import AuthService from "../services/auth.service";
-import SendMail from "./SendMail";
+import SendMail from "./Login/SendMail";
 
 const Login = () => {
   let navigate = useNavigate();

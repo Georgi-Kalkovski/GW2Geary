@@ -12,9 +12,9 @@ import Account from "./components/Account";
 import Character from './components/Character';
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
-import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
+import BoardUser from "./components/Board/BoardUser";
+import BoardModerator from "./components/Board/BoardModerator";
+import BoardAdmin from "./components/Board/BoardAdmin";
 
 import Cog from './cog.svg'
 import Dragon from './dragon.svg'
@@ -58,7 +58,7 @@ const App = () => {
     <div className="App">
       <nav className="app-nav">
         <Link to={"/search"} className="nav-a">
-          <div className="flex">
+          <div className="flex logo-spin">
             <div style={{ fontFamily: 'GW2Font', fontSize: '30px', color: '#aa0404' }}>GW2</div>
             <div className="logo-div">
               <img src={Dragon} alt="" className="logo-dragon" />
@@ -102,9 +102,9 @@ const App = () => {
         {currentUser ? (
           <div className="nav-profile-logout">
             <li style={{ paddingRight: '10px' }}>
-              Welcome,
+              {`Welcome, `}
               <Link to={"/profile"} className="nav-a yellow-highlight">
-                {` ${newUsername ? newUsername : currentUser.username}`}
+                {`${newUsername ? newUsername : currentUser.username}`}
               </Link>
             </li>
             <li>

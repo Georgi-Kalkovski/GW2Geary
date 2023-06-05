@@ -183,7 +183,7 @@ input:checked+.mesmer-switch,
   background-color: #724192;
 }
 
-.mesmer-border:hover {
+.mesmer-border:hover{
   transition: background-color 0.3s ease-out;
   background-color: #4a2a5e;
 }

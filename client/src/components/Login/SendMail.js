@@ -16,7 +16,7 @@ function SendMail({ AuthService }) {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data); // Handle the response from the server
+                    console.log(data);
                 })
                 .catch((error) => {
                     console.error("Error checking username:", error);

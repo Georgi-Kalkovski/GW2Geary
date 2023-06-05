@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
+import Pagination from './Search/Pagination';
 import './Classes.css';
 import './Search.css';
 
@@ -91,188 +92,6 @@ function Search() {
   const totalPagesAccounts = Math.ceil(filteredAccounts.length / itemsPerPage);
   const totalPagesCharacters = Math.ceil(filteredCharacters.length / itemsPerPage);
 
-  // Account Pagination
-  const renderAccountsPagination = () => {
-    if (filteredAccounts.length < itemsPerPage) {
-      return null;
-    }
-  
-    const renderPageNumbers = [];
-    const totalPagesToShow = 15;
-  
-    let startPage, endPage;
-    if (totalPagesAccounts <= totalPagesToShow) {
-      startPage = 1;
-      endPage = totalPagesAccounts;
-    } else {
-      const middlePage = Math.floor(totalPagesToShow / 2);
-      let leftOffset = Math.min(middlePage, Math.floor(totalPagesToShow / 2));
-      let rightOffset = Math.min(middlePage, totalPagesAccounts - totalPagesToShow + 1) - 1;
-  
-      if (accountsPage <= middlePage) {
-        startPage = 1;
-        endPage = totalPagesToShow;
-      } else if (accountsPage >= totalPagesAccounts - middlePage) {
-        startPage = totalPagesAccounts - totalPagesToShow + 1;
-        endPage = totalPagesAccounts;
-      } else {
-        startPage = accountsPage - leftOffset;
-        endPage = accountsPage + rightOffset;
-      }
-    }
-  
-    for (let i = startPage; i <= endPage; i++) {
-      renderPageNumbers.push(
-        <button
-          key={i}
-          className={i === accountsPage ? 'pagination-item active' : 'pagination-item'}
-          onClick={() => setAccountsPage(i)}
-          disabled={i === accountsPage}
-        >
-          {i}
-        </button>
-      );
-    }
-  
-    return (
-      <div className="pagination-container">
-        <button
-          className="pagination-item"
-          onClick={() => setAccountsPage(accountsPage - 1)}
-          disabled={accountsPage <= 1}
-        >
-          &lt;
-        </button>
-        {startPage > 1 && (
-          <>
-            <button
-              className="pagination-item"
-              onClick={() => setAccountsPage(1)}
-            >
-              1
-            </button>
-            {startPage > 2 && (
-              <span className="pagination-ellipsis">...</span>
-            )}
-          </>
-        )}
-        {renderPageNumbers}
-        {endPage < totalPagesAccounts && (
-          <>
-            {endPage < totalPagesAccounts - 1 && (
-              <span className="pagination-ellipsis">...</span>
-            )}
-            <button
-              className="pagination-item"
-              onClick={() => setAccountsPage(totalPagesAccounts)}
-            >
-              {totalPagesAccounts}
-            </button>
-          </>
-        )}
-        <button
-          className="pagination-item"
-          onClick={() => setAccountsPage(accountsPage + 1)}
-          disabled={accountsPage >= totalPagesAccounts}
-        >
-          &gt;
-        </button>
-      </div>
-    );
-  };
-  
-  const renderCharactersPagination = () => {
-    if (filteredCharacters.length < itemsPerPage) {
-      return null;
-    }
-  
-    const renderPageNumbers = [];
-    const totalPagesToShow = 15;
-  
-    // Calculate the start and end page numbers to display
-    let startPage, endPage;
-    if (totalPagesCharacters <= totalPagesToShow) {
-      startPage = 1;
-      endPage = totalPagesCharacters;
-    } else {
-      const middlePage = Math.floor(totalPagesToShow / 2);
-      let leftOffset = Math.min(middlePage, Math.floor(totalPagesToShow / 2));
-      let rightOffset = Math.min(middlePage, totalPagesCharacters - totalPagesToShow + 1) - 1;
-  
-      if (charactersPage <= middlePage) {
-        startPage = 1;
-        endPage = totalPagesToShow;
-      } else if (charactersPage >= totalPagesCharacters - middlePage) {
-        startPage = totalPagesCharacters - totalPagesToShow + 1;
-        endPage = totalPagesCharacters;
-      } else {
-        startPage = charactersPage - leftOffset;
-        endPage = charactersPage + rightOffset;
-      }
-    }
-  
-    for (let i = startPage; i <= endPage; i++) {
-      renderPageNumbers.push(
-        <button
-          key={i}
-          className={i === charactersPage ? 'pagination-item active' : 'pagination-item'}
-          onClick={() => setCharactersPage(i)}
-          disabled={i === charactersPage}
-        >
-          {i}
-        </button>
-      );
-    }
-  
-    return (
-      <div className="pagination-container">
-        <button
-          className="pagination-item"
-          onClick={() => setCharactersPage(charactersPage - 1)}
-          disabled={charactersPage <= 1}
-        >
-          &lt;
-        </button>
-        {startPage > 1 && (
-          <>
-            <button
-              className="pagination-item"
-              onClick={() => setCharactersPage(1)}
-            >
-              1
-            </button>
-            {startPage > 2 && (
-              <span className="pagination-ellipsis">...</span>
-            )}
-          </>
-        )}
-        {renderPageNumbers}
-        {endPage < totalPagesCharacters && (
-          <>
-            {endPage < totalPagesCharacters - 1 && (
-              <span className="pagination-ellipsis">...</span>
-            )}
-            <button
-              className="pagination-item"
-              onClick={() => setCharactersPage(totalPagesCharacters)}
-            >
-              {totalPagesCharacters}
-            </button>
-          </>
-        )}
-        <button
-          className="pagination-item"
-          onClick={() => setCharactersPage(charactersPage + 1)}
-          disabled={charactersPage >= totalPagesCharacters}
-        >
-          &gt;
-        </button>
-      </div>
-    );
-  };
-  
-  
-
   return (
     <>
       <div className="search-container">
@@ -303,10 +122,10 @@ function Search() {
                 </div>
               ))
             ) : (
-              <div key="no-matching-accounts">No matching accounts found.</div>
+              <div key="no-matching-accounts">No matching accounts & characters found.</div>
             )}
           </Container>
-          {renderAccountsPagination()}
+          <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
           <div className="characters">
             <React.Fragment key="characters-fragment">
               {displayedCharacters.map((character) => (
@@ -314,7 +133,7 @@ function Search() {
               ))}
             </React.Fragment>
           </div>
-          {renderCharactersPagination()}
+          <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
         </React.Fragment>
       ) : (
         <Container className="flex center">
