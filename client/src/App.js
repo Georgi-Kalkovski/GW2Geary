@@ -18,12 +18,14 @@ import BoardAdmin from "./components/Board/BoardAdmin";
 
 import Cog from './cog.svg'
 import Dragon from './dragon.svg'
+import HamburgerMenu from './hamburger-menu.svg'
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [newUsername, setNewUsername] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -52,6 +54,10 @@ const App = () => {
     setShowModeratorBoard(false);
     setShowAdminBoard(false);
     setCurrentUser(undefined);
+  };
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
