@@ -103,6 +103,27 @@
 }
 
 
+.api-key-profile {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Hide the API key on small screens */
+@media (max-width: 850px) {
+  .api-key-fact {
+    justify-content: center;
+  }
+
+  .api-key-profile {
+    display: none;
+  }
+
+  .api-form-control {
+    width: 200px;
+  }
+}
+
 /* Checkbox */
 .api-checkbox {
   display: none;
@@ -239,6 +260,22 @@ input:checked+.slider:before {
 .up-down-arrow {
   cursor: pointer;
 }
+
+.show-hide-button {
+  cursor: pointer;
+  background-color: #35363a;
+  border: none;
+  color: white;
+}
+
+.show-hide-button:hover img {
+  filter: invert(91%) sepia(65%) saturate(6000%) hue-rotate(-1deg) brightness(103%) contrast(94%)
+}
+
+.show-hide-button:hover {
+  color: #aa0404;
+}
+
 
 /* Character */
 

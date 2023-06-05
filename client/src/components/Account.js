@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from "../services/auth.service";
@@ -49,7 +49,17 @@ const Account = () => {
             {characters &&
               characters.map((character, index) => (
                 <React.Fragment key={index}>
-                  
+                  {/* Breadcrumb */}
+                  <nav aria-label="breadcrumb">
+                    <div style={{ listStyleType: "none" }}  className='flex center'>
+                      <li>
+                        <Link className='nav-a' to="/search">Search</Link>
+                      </li>
+                      <li style={{ cursor: "default" }} aria-current="page">
+                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#aa0404" }}>Account</span>
+                        </li>
+                    </div>
+                  </nav>
                   {/* User */}
                   <Container className='center-items'>
                     <div className="flex center" style={{ fontSize: '30px' }}>{character.accountName}</div>

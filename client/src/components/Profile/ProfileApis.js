@@ -166,7 +166,7 @@ function ProfileApis({ currentUser, AuthService }) {
                             type="text"
                             id="apiKey"
                             size="75"
-                            className="form-control"
+                            className="form-control api-form-control"
                             placeholder="Add API Key here..."
                             value={apiKey}
                             onChange={handleApiKeyChange}
@@ -190,7 +190,7 @@ function ProfileApis({ currentUser, AuthService }) {
                             apiKeys.map((apiKey) => (
                                 <div key={apiKey._id} >
                                     <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
-                                    <div className="facts-div" key={`api-key-details-${apiKey._id}`}>{apiKey._id}{" "}
+                                    <div className="facts-div api-key-fact" key={`api-key-details-${apiKey._id}`}><span className="api-key-profile">{apiKey._id}{" "}</span>
 
                                         {/* Checkbox */}
                                         <label className="custom-checkbox"

@@ -68,6 +68,7 @@
     margin-top: 1em;
     padding: 1em 0;
     background-color: #202124;
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
     color: #d3d3d3;
     width: 50em;
     display: flex;
