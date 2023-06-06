@@ -12,9 +12,6 @@ import Account from "./components/Account";
 import Character from './components/Character';
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
-import BoardUser from "./components/Board/BoardUser";
-import BoardModerator from "./components/Board/BoardModerator";
-import BoardAdmin from "./components/Board/BoardAdmin";
 
 import Cog from './cog.svg'
 import Dragon from './dragon.svg'
