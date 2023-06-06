@@ -44,7 +44,8 @@ body {
 .flex-row {
   display: flex;
   flex-direction: row;
-  align-items: center
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .flex-row-center {
@@ -68,8 +69,10 @@ body {
 .nav-profile-logout {
   display: flex;
   list-style-type: none;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
 }
 
 .nav-center {
@@ -103,6 +106,14 @@ li a.nav-a:hover:after {
 
 li a.nav-a:hover {
   color: #aa0404;
+}
+
+.left-nav {
+  margin-right: 150px;
+}
+
+.right-nav {
+  margin-left: 150px;
 }
 
 
@@ -306,4 +317,8 @@ p span {
 .geary-logo-style {
   font-family: 'GW2Font';
   font-size: 25px;
+}
+
+.add-api-key-button {
+  margin-left: 20px;
 }

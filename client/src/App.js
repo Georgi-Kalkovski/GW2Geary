@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EventBus from "./common/EventBus";
-import { Route, Routes, Link, useParams } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -13,9 +13,8 @@ import Character from './components/Character';
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
 
-import Cog from './cog.svg'
-import Dragon from './dragon.svg'
-import HamburgerMenu from './hamburger-menu.svg'
+import Cog from './cog.svg';
+import Dragon from './dragon.svg';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -48,7 +47,7 @@ const App = () => {
   return (
     <div className="App">
       <nav className="app-nav">
-        <Link to={"/search"} className="nav-a">
+        <Link to={"/search"} className="nav-a left-nav">
           <div className="flex logo-spin">
             <div style={{ fontFamily: 'GW2Font', fontSize: '30px', color: '#aa0404' }}>GW2</div>
             <div className="logo-div">
@@ -60,7 +59,7 @@ const App = () => {
         </Link>
 
         {currentUser ? (
-          <div className="nav-profile-logout">
+          <div className="nav-profile-logout right-nav">
             <li style={{ paddingRight: '10px' }}>
               {`Welcome, `}
               <Link to={"/profile"} className="nav-a yellow-highlight">
@@ -74,7 +73,7 @@ const App = () => {
             </li>
           </div>
         ) : (
-          <div className="nav-profile-logout">
+          <div className="nav-profile-logout right-nav">
             <li>
               <Link to={"/login"} className="nav-a">
                 Login

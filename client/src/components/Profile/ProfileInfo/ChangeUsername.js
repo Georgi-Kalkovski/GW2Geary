@@ -42,6 +42,15 @@ function ChangeUsername({ AuthService, EventBus }) {
                     return;
                 }
 
+                if (newUsername.length > 20) {
+                    setPopupMessage("Username cannot be more than 20 characters long.");
+                    setShowPopup(true);
+                    setTimeout(() => {
+                        setShowPopup(false);
+                    }, 3000);
+                    return;
+                }
+
                 AuthService.changeUsername(newUsername)
                     .then((response) => {
                         console.log(response.data.message);

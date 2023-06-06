@@ -122,6 +122,11 @@
   .api-form-control {
     width: 200px;
   }
+
+  .right-nav,
+  .left-nav {
+    margin: 0 20px;
+  }
 }
 
 /* Checkbox */

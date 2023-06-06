@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
+import Legend from './Search/Legend';
 import './Classes.css';
 import './Search.css';
 
@@ -136,22 +137,29 @@ function Search() {
           <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
         </React.Fragment>
       ) : (
-        <Container className="flex center">
-          <Col className="home-empty-search-box">
-            <Row style={{ fontSize: '1.5em' }}>
-              Welcome to <span className="gw2-logo-style">GW2</span>
-              <span className="geary-logo-style">Geary</span> !
-            </Row>
-            <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
-            <Row>
-              If someone has registered a valid{' '}
-              <Link to="https://account.arena.net/applications" style={{ color: '#aa0404' }} target="_blank">
-                GW2 API key
-              </Link>{' '}
-              with us and granted access, you'll be able to find and inspect them.
-            </Row>
-          </Col>
-        </Container>
+        <>
+          <Container className="flex center">
+            <Col className="home-empty-search-box">
+              <Row style={{ fontSize: '1.5em' }}>
+                Welcome to <span className="gw2-logo-style">GW2</span>
+                <span className="geary-logo-style">Geary</span> !
+              </Row>
+              <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
+              <Row>
+                If someone has registered a valid{' '}
+                <Link to="https://account.arena.net/applications" style={{ color: '#aa0404' }} target="_blank">
+                  GW2 API key
+                </Link>{' '}
+                with us and granted access, you'll be able to find and inspect them.
+              </Row>
+            </Col>
+          </Container>
+
+          <Container className="flex center">
+            <Legend />
+          </Container>
+
+        </>
       )}
     </>
   );

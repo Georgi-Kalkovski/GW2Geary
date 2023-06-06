@@ -143,6 +143,10 @@
     max-height: 16px;
 }
 
+.api-right{
+    justify-content: flex-end;
+}
+
 .facts-div {
     display: flex;
     align-items: center;
