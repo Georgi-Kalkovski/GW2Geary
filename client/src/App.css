@@ -68,7 +68,7 @@ body {
 .nav-profile-logout {
   display: flex;
   list-style-type: none;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 

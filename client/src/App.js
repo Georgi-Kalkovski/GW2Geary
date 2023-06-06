@@ -21,18 +21,13 @@ import Dragon from './dragon.svg'
 import HamburgerMenu from './hamburger-menu.svg'
 
 const App = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [newUsername, setNewUsername] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
     EventBus.on("logout", () => {
@@ -51,15 +46,8 @@ const App = () => {
 
   const logOut = () => {
     AuthService.logout();
-    setShowModeratorBoard(false);
-    setShowAdminBoard(false);
     setCurrentUser(undefined);
   };
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <div className="App">
       <nav className="app-nav">
@@ -73,37 +61,6 @@ const App = () => {
             <div style={{ fontFamily: 'GW2Font', fontSize: '30px' }}>Geary</div>
           </div>
         </Link>
-        <div className="flex nav-center">
-          <li>
-            <Link to={"/search"} className="nav-a">
-              Search
-            </Link>
-          </li>
-
-          {showModeratorBoard && (
-            <li >
-              <Link to={"/mod"} className="nav-a">
-                Moderator Board
-              </Link>
-            </li>
-          )}
-
-          {showAdminBoard && (
-            <li>
-              <Link to={"/admin"} className="nav-a">
-                Admin Board
-              </Link>
-            </li>
-          )}
-
-          {currentUser && (
-            <li>
-              <Link to={"/profile"} className="nav-a">
-                Profile
-              </Link>
-            </li>
-          )}
-        </div>
 
         {currentUser ? (
           <div className="nav-profile-logout">
@@ -138,21 +95,15 @@ const App = () => {
 
       <div className="app-body content">
         <Routes>
+          <Route path="/" element={<Search />} />
           <Route path="/search" element={<Search />} />
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          {showModeratorBoard && (
-            <Route path="/mod" element={<BoardModerator />} />
-          )}
-          {showAdminBoard && (
-            <Route path="/admin" element={<BoardAdmin />} />
-          )}
-          <Route path="/" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/user" element={<BoardUser />} />
+          <Route path="*" element={<Search />} />
         </Routes>
       </div>
     </div>
