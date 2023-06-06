@@ -105,7 +105,7 @@ function Legend() {
                 {/* Profile Logout Legend */}
                 <div className='flex' style={{ alignItems: 'center', flexWrap: 'nowrap' }}>
 
-                    <div className="nav-profile-logout" style={{ width: '60%' }}>
+                    <div className="nav-profile-logout" style={{ width: '68%' }}>
                         {currentUser ? (
                             <>
                                 <li style={{ paddingRight: '2%' }}>
