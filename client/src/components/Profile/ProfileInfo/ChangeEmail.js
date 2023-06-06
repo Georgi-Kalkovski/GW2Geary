@@ -102,7 +102,7 @@ function ChangeEmail({ currentUser, AuthService, EventBus }) {
           onKeyDown={handleKeyPress}
         />
         {emailError && <div className="error">{emailError}</div>}
-        <button onClick={handleChangeEmail} className="basic-button">
+        <button onClick={handleChangeEmail} className="basic-button info-button">
           {buttonLabel}
         </button>
       </div>

@@ -229,6 +229,10 @@ input:focus:-webkit-autofill {
   font-size: 1em;
 }
 
+.info-button {
+  width: 160px;
+}
+
 .basic-button.active {
   box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.3);
 }

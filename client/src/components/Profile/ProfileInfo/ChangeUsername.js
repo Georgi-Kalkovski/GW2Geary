@@ -102,7 +102,7 @@ function ChangeUsername({ AuthService, EventBus }) {
                     onKeyDown={handleKeyPress}
                 />
                 {usernameError && <div className="error">{usernameError}</div>}
-                <button onClick={handleChangeUsername} className="basic-button">
+                <button onClick={handleChangeUsername} className="basic-button info-button">
                     Change Username
                 </button>
             </div>

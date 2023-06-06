@@ -101,7 +101,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
           </div>
         </div>
         <div>
-          <button onClick={handleChangePassword} className="disabled-button basic-button">
+          <button onClick={handleChangePassword} className="basic-button info-button">
             Change Password
           </button>
         </div>
