@@ -149,7 +149,7 @@ const App = () => {
           {showAdminBoard && (
             <Route path="/admin" element={<BoardAdmin />} />
           )}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<BoardUser />} />
