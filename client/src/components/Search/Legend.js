@@ -39,8 +39,8 @@ function Legend() {
     return (
         <>
             <div className='home-empty-legend-box'>
-                <div style={{ fontSize: '1.4em' }}>Navigation</div>
-                <br />
+                {/* <div style={{ fontSize: '1.4em' }}>Navigation</div>
+                <br /> */}
                 {/* Logo Legend */}
                 <div className='flex' style={{ paddingLeft: '2%', flexWrap: 'wrap' }}>
                     {/* Logo */}
