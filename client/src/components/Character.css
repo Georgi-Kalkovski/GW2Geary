@@ -109,26 +109,6 @@
   white-space: nowrap;
 }
 
-/* Hide the API key on small screens */
-@media (max-width: 850px) {
-  .api-key-fact {
-    justify-content: center;
-  }
-
-  .api-key-profile {
-    display: none;
-  }
-
-  .api-form-control {
-    width: 200px;
-  }
-
-  .right-nav,
-  .left-nav {
-    margin: 0 20px;
-  }
-}
-
 /* Checkbox */
 .api-checkbox {
   display: none;
@@ -293,4 +273,65 @@ input:checked+.slider:before {
 
 .font-size-25px {
   font-size: 25px;
+}
+
+/* Hide the API key on small screens */
+@media (max-width: 550px) {
+  .api-key-fact {
+    justify-content: center;
+  }
+
+  .api-key-profile {
+    display: none;
+  }
+
+  .api-form-control {
+    width: 200px;
+  }
+
+  .right-nav,
+  .left-nav {
+    margin: 0 20px;
+  }
+
+  .equipment {
+    width: 0%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .equipment-col-1 {
+    margin: 0;
+  }
+
+
+  .template-text {
+    display: none;
+  }
+
+  .switch {
+    width: 69px;
+  }
+
+  .traits-box {
+    width: 300px;
+    padding-top: 36px;
+    padding-left: 0;
+  }
+
+  .cropped-spec-img {
+    margin-top: -40%;
+    margin-left: -23%;
+  }
+
+  .build {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .tooltip-container {
+    transform: none;
+  }
 }
