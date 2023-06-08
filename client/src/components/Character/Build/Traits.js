@@ -22,21 +22,19 @@ function Traits({ spec, prof }) {
     }, [spec.id]);
 
 
-    return (<>
-        <Container>
+    return (
+        <>
             {specialization && traitsMin && traitsMaj && (
-                <Col className='traits-box'>
-                    <Trait traitsMin={traitsMin} traitsMaj={traitsMaj} traitsActive={spec.traits} prof={prof} />
-                </Col>
-
+                <>
+                    <Col className='traits-box'>
+                        <Trait traitsMin={traitsMin} traitsMaj={traitsMaj} traitsActive={spec.traits} prof={prof} />
+                    </Col>
+                    <Container className='cropped-spec-img-div'>
+                        <img className='cropped-spec-img' src={specialization.background} alt={specialization.name} />
+                    </Container>
+                </>
             )}
-        </Container>
-        <Container className='cropped-spec-img-div'>
-            {specialization &&
-                <img className='cropped-spec-img' src={specialization.background} alt={specialization.name} />
-            }
-        </Container>
-    </>
+        </>
     );
 }
 
