@@ -39,8 +39,41 @@ function Legend() {
     return (
         <>
             <div className='home-empty-legend-box'>
-                {/* <div style={{ fontSize: '1.4em' }}>Navigation</div>
-                <br /> */}
+
+                {/* Variant 1 */}
+
+                {/* Logo Text */}
+                <div style={{ color: '#d3d3d3' }}>
+                    The <span className='yellow-highlight'>logo</span> directs to <span className='yellow-highlight'>Search</span>, this page.
+                </div>
+
+                {/* Login Register Text */}
+                <div style={{ color: '#d3d3d3' }}>
+                    <span className='yellow-highlight'>Non logged </span>
+                    users can use
+                    <span className='yellow-highlight'> Search</span>
+                    ,  <span className='yellow-highlight'>Login</span>
+                    , <span className='yellow-highlight'>Register</span>.
+                </div>
+
+                {/* Profile Text */}
+                <div>
+                    <span className='yellow-highlight'>Logged in</span> users can use
+                    <span className='yellow-highlight'> Search</span>,
+                    <span className='yellow-highlight'> Profile</span>.
+                </div>
+
+                <div>
+                    The <span className='yellow-highlight'> Profile</span> allows the users to manipulate the
+                    <span className='yellow-highlight'> User</span>'s information
+                    and register their
+                    <span className='yellow-highlight'> API keys</span>.
+                </div>
+
+                {/* Variant 2 */}
+
+                <div style={{ fontSize: '1.4em' }}>Navigation</div>
+                <br />
                 {/* Logo Legend */}
                 <div className='flex' style={{ paddingLeft: '2%', flexWrap: 'wrap' }}>
                     {/* Logo */}
@@ -62,9 +95,9 @@ function Legend() {
                 <br />
 
                 {/* Login Register Legend */}
-                <div className='flex' style={{ alignItems: 'center', paddingLeft:'5.5%'}}>
+                <div className='flex' style={{ alignItems: 'center', paddingLeft: '5.5%' }}>
                     {currentUser ? (
-                        <div className="nav-profile-logout" style={{ paddingRight:'5.5%'}}>
+                        <div className="nav-profile-logout" style={{ paddingRight: '5.5%' }}>
                             <li>
                                 <Link to={"/search"} className="nav-a">
                                     Login
@@ -141,6 +174,7 @@ function Legend() {
                         <span className='yellow-highlight'> API keys</span>
                         , that can be hidden and deleted.</div>
                 </div >
+
             </div>
         </>
     );

@@ -155,9 +155,9 @@ function Search() {
             </Col>
           </Container>
 
-          <Container className="flex center">
+          {/* <Container className="flex center">
             <Legend />
-          </Container>
+          </Container> */}
 
         </>
       )}

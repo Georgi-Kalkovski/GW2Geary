@@ -31,16 +31,18 @@ function Build({ tab }) {
 
     return (
         <Container className='spec-box'>
-            {tab.specializations && tab.skills && tab.aquatic_skills &&
+            {tab.specializations && tab.skills && tab.aquatic_skills && (
                 <>
                     <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                    <Traits spec={tab.specializations[0]} prof={tab.profession} />
-                    <Traits spec={tab.specializations[1]} prof={tab.profession} />
-                    <Traits spec={tab.specializations[2]} prof={tab.profession} />
+                    {tab.specializations.map((spec, index) => (
+                        <div key={index}>
+                            <Traits spec={spec} prof={tab.profession} />
+                        </div>
+                    ))}
                     <br />
                     <Template buildInput={tab} />
                 </>
-            }
+            )}
         </Container>
     );
 }

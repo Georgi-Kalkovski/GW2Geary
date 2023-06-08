@@ -21,7 +21,6 @@ function Character() {
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
     const [showDiv, setShowDiv] = useState(false);
-    const [expandedCharacters, setExpandedCharacters] = useState([]);
 
     useEffect(() => {
         try {
@@ -56,14 +55,6 @@ function Character() {
         setShowDiv(!showDiv);
     };
 
-    const toggleExpansion = (index) => {
-        if (isCharacterExpanded(index)) {
-            setExpandedCharacters(expandedCharacters.filter((i) => i !== index));
-        } else {
-            setExpandedCharacters([...expandedCharacters, index]);
-        }
-    };
-    const isCharacterExpanded = (index) => expandedCharacters.includes(index);
     return (
         character === null || account === null
             ? <div className="flex center">
