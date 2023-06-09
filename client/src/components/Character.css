@@ -6,9 +6,11 @@
   justify-content: center;
 }
 
-.equipment,
 .build {
-  margin: 0% 4% 0% 4%;
+  min-width: 350px;
+  padding: 20px;
+  background-color: #202124;
+  margin: 1%;
 }
 
 .dropdown {
@@ -19,7 +21,7 @@
 }
 
 .dropdown>ul>li {
-  background-color: #202124;
+  background-color: #191919;
   color: white;
 }
 
@@ -294,11 +296,7 @@ input:checked+.slider:before {
   }
 
   .equipment {
-    width: 0%;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin-bottom: 20px;
   }
 
   .equipment-col-1 {
@@ -311,7 +309,7 @@ input:checked+.slider:before {
   }
 
   .switch {
-    width: 69px;
+    width: 45px;
   }
 
   .traits-box {

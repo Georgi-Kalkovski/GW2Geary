@@ -51,7 +51,7 @@ function BuildDropdown({ char }) {
 
 
     return (
-        <div className='build' ref={wrapperRef}>
+        <div className={`build ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
             <div className="dropdown">
                 <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setTriggerRef}>
                     {selectedTab && selectedTab.build.name ? selectedTab.build.name : `Build ${selectedTab.tab}`}
@@ -69,7 +69,7 @@ function BuildDropdown({ char }) {
                     </div>
                 )}
                 {isOpen && (
-                    <ul className="dropdown-menu">
+                    <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border`}>
                         {char.build_tabs.map((buildTab) => (
                             <li
                                 key={buildTab.tab}

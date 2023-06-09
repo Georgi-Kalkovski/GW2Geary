@@ -112,7 +112,7 @@ const EquipmentDropdown = ({ char }) => {
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
   return (
-    <div className='equipment' ref={wrapperRef}>
+    <div className={`equipment ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
       <div className="dropdown">
         <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setDropdownTriggerRef}>
           {selectedTab && selectedTab.name ? selectedTab.name : `Equipment ${selectedTab.tab}`}
@@ -131,7 +131,7 @@ const EquipmentDropdown = ({ char }) => {
           </div>
         )}
         {isOpen && (
-          <ul className="dropdown-menu">
+          <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border`}>
             {char.equipment_tabs.map((equip) => (
               <li
                 key={equip.tab}
@@ -167,7 +167,7 @@ const EquipmentDropdown = ({ char }) => {
       <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} prof={char.profession} slider={isSliderOn} />
     </div>
   );
-  
+
 }
 
 export default EquipmentDropdown;

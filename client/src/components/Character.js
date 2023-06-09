@@ -74,7 +74,7 @@ function Character() {
                             <span>{`/ `} </span><Link className='nav-a' to={`/accounts/${account.name.replaceAll(' ', '_')}`}>Account</Link>
                         </li>
                         <li style={{ cursor: "default" }} aria-current="page">
-                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#aa0404" }}>Character</span>
+                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Character</span>
                         </li>
                     </ul>
                 </nav>

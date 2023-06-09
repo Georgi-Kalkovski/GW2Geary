@@ -56,7 +56,7 @@ const Account = () => {
                         <Link className='nav-a' to="/search">Search</Link>
                       </li>
                       <li style={{ cursor: "default" }} aria-current="page">
-                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#aa0404" }}>Account</span>
+                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
                         </li>
                     </div>
                   </nav>

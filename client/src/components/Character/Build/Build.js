@@ -18,32 +18,31 @@ function Build({ tab }) {
         }, 2000);
     }, [tab]);
 
-    if (isLoading) {
-        return (
-            <div className="flex center">
-                <div className="logo-loading-div">
-                    <img src={Dragon} alt="" className="logo--loading-dragon" />
-                    <img src={Cog} alt="" className="logo-loading-cog" />
-                </div>
-            </div>
-        );
-    }
-
-    return (
-        <Container className='spec-box'>
-            {tab.specializations && tab.skills && tab.aquatic_skills && (
-                <>
-                    <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                    {tab.specializations.map((spec, index) => (
-                        <div key={index}>
-                            <Traits spec={spec} prof={tab.profession} />
-                        </div>
-                    ))}
-                    <br />
-                    <Template buildInput={tab} />
-                </>
-            )}
-        </Container>
+    return (<>
+        {
+            isLoading
+                ? <div className="flex center">
+                    < div className="logo-loading-div" >
+                        <img src={Dragon} alt="" className="logo--loading-dragon" />
+                        <img src={Cog} alt="" className="logo-loading-cog" />
+                    </div >
+                </div >
+                : <Container className='spec-box'>
+                    {tab.specializations && tab.skills && tab.aquatic_skills && (
+                        <>
+                            <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
+                            {tab.specializations.map((spec, index) => (
+                                <div key={index}>
+                                    <Traits spec={spec} prof={tab.profession} />
+                                </div>
+                            ))}
+                            <br />
+                            <Template buildInput={tab} />
+                        </>
+                    )}
+                </Container>
+        }
+    </>
     );
 }
 

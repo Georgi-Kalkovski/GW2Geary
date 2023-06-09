@@ -161,7 +161,7 @@ function ProfileApis({ currentUser, AuthService }) {
             <div className="container" key="profile-container">
                 <div className="flex center apis-flex" key="apis-flex">
                     <div key="api-key-section">
-                        <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#aa0404' }} to="https://account.arena.net/applications" target="_blank">Guild Wars 2</Link>:</label>
+                        <label htmlFor="apiKey">Enter a valid API key created from <Link style={{ color: '#d70000' }} to="https://account.arena.net/applications" target="_blank">Guild Wars 2</Link>:</label>
                         <input
                             type="text"
                             id="apiKey"

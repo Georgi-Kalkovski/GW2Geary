@@ -96,7 +96,7 @@ li a.nav-a:after {
   left: 0;
   width: 0%;
   height: 1px;
-  background: #aa0404;
+  background: #d70000;
   transition: width 0.3s ease;
 }
 
@@ -105,7 +105,7 @@ li a.nav-a:hover:after {
 }
 
 li a.nav-a:hover {
-  color: #aa0404;
+  color: #d70000;
 }
 
 .left-nav {
@@ -287,6 +287,14 @@ p span {
   position: relative;
   top: 250px;
   transform: translate(-50%, -50%);
+}
+
+.logo-loading-equipment {
+  left: 136px;
+}
+
+.logo-loading-build {
+  right: 136px;
 }
 
 .logo--loading-dragon {
