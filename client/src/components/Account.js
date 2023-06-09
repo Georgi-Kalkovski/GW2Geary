@@ -64,7 +64,7 @@ const Account = () => {
                     <Row className={`flex center acc-info accounts-box`}>
                       {/* Name */}
                       <Col className='character-col'>
-                        <Row style={{ fontSize: '30px' }}>{account.name}</Row>
+                        <Row style={{ fontSize: '30px' }}>{account?.name}</Row>
                       </Col>
                       {/* World */}
                       <Col className='character-col'>
@@ -78,12 +78,12 @@ const Account = () => {
                       </Col>
                       {/* Fractal Level */}
                       <Col className='character-col'>
-                        <Row className='font-size-25px'>{account.fractal_level}</Row>
+                        <Row className='font-size-25px'>{account?.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                       </Col>
                       {/* WvW Rank */}
                       <Col className='character-col'>
-                        <Row className='font-size-25px'>{account.wvw_rank}</Row>
+                        <Row className='font-size-25px'>{account?.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                       </Col>
                     </Row>

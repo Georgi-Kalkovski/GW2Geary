@@ -3,12 +3,38 @@ import { Container } from 'react-bootstrap';
 import Traits from './Traits';
 import Skills from './Skills';
 import Template from './Template/Template';
+import fetchData from '../../fetchData';
 import './Build.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 
 function Build({ tab }) {
     const [isLoading, setIsLoading] = useState(true);
+    const [specializations, setSpecializations] = useState([]);
+
+    useEffect(() => {
+        const fetchSpecializations = async () => {
+            try {
+                const specializationData = await Promise.all(
+                    tab.specializations.map(async (spec) => {
+                        const sp = await fetchData('specializations', spec.id);
+                        const [min, maj] = await Promise.all([
+                            fetchData('traits', sp[0].minor_traits.join(',')),
+                            fetchData('traits', sp[0].major_traits.join(','))
+                        ]);
+                        return { specialization: sp[0], traits: { min, maj }, activeTraits: spec?.traits };
+                    })
+                );
+
+                setSpecializations(specializationData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchSpecializations();
+    }, [tab.specializations]);
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -24,17 +50,17 @@ function Build({ tab }) {
                 ?
                 <div className='logo-build-width'>
                     <div className="flex center">
-                        < div className="logo-loading-div" >
+                        < div className="logo-loading-div-build" >
                             <img src={Dragon} alt="" className="logo--loading-dragon" />
                             <img src={Cog} alt="" className="logo-loading-cog" />
                         </div >
                     </div >
                 </div>
                 : <Container className='spec-box logo-build-width'>
-                    {tab.specializations && tab.skills && tab.aquatic_skills && (
+                    {specializations && tab.skills && tab.aquatic_skills && (
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                            <Traits specs={tab.specializations} prof={tab.profession} />
+                            <Traits specializations={specializations} prof={tab.profession} />
                             <br />
                             <Template buildInput={tab} />
                         </>

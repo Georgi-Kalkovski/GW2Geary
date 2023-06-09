@@ -292,6 +292,12 @@ p span {
   transform: translate(-50%, -50%);
 }
 
+.logo-loading-div-build {
+  position: relative;
+  top:287px;
+  transform: translate(-50%, -50%);
+}
+
 .logo-equipment-width {
   width: 546px;
 }
