@@ -51,40 +51,43 @@ const Account = () => {
                 <React.Fragment key={index}>
                   {/* Breadcrumb */}
                   <nav aria-label="breadcrumb">
-                    <div style={{ listStyleType: "none" }}  className='flex center'>
+                    <div style={{ listStyleType: "none" }} className='flex center'>
                       <li>
                         <Link className='nav-a' to="/search">Search</Link>
                       </li>
                       <li style={{ cursor: "default" }} aria-current="page">
-                            <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
-                        </li>
+                        <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
+                      </li>
                     </div>
                   </nav>
-                  {/* User */}
-                  <Container className='center-items'>
-                    <div className="flex center" style={{ fontSize: '30px' }}>{character.accountName}</div>
-                    <br />
-                    <Col className='flex center' style={{ flexDirection: 'column' }}>
-                      <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                      <Row className='yellow-highlight'>World</Row>
-                    </Col>
-                    <br />
-                    <Row className='flex center'>
+                  <Container className="flex center center-items">
+                    <Row className={`flex center acc-info accounts-box`}>
+                      {/* Name */}
                       <Col className='character-col'>
-                        <Row className="font-size-25px">{mastery}</Row>
-                        <Row className='yellow-highlight'>Mastery Points</Row>
+                        <Row style={{ fontSize: '30px' }}>{account.name}</Row>
                       </Col>
+                      {/* World */}
                       <Col className='character-col'>
-                        <Row className="font-size-25px">{account?.fractal_level}</Row>
+                        <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                        <Row className='yellow-highlight'>World</Row>
+                      </Col>
+                      {/* Mastery Points */}
+                      <Col className='character-col'>
+                        <Row className='font-size-25px'>{mastery}</Row>
+                        <Row className='yellow-highlight'>Mastery Points </Row>
+                      </Col>
+                      {/* Fractal Level */}
+                      <Col className='character-col'>
+                        <Row className='font-size-25px'>{account.fractal_level}</Row>
                         <Row className='yellow-highlight'>Fractal Level</Row>
                       </Col>
+                      {/* WvW Rank */}
                       <Col className='character-col'>
-                        <Row className="font-size-25px">{account?.wvw_rank}</Row>
+                        <Row className='font-size-25px'>{account.wvw_rank}</Row>
                         <Row className='yellow-highlight'>WvW Rank</Row>
                       </Col>
                     </Row>
                   </Container>
-
                   <br />
 
                   {/* Characters */}

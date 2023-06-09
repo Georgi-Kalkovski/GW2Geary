@@ -116,6 +116,9 @@ li a.nav-a:hover {
   margin-left: 150px;
 }
 
+.right-nav>li {
+  font-weight: 500;
+}
 
 /* Login & Register */
 

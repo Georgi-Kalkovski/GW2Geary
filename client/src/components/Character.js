@@ -6,12 +6,10 @@ import axios from 'axios';
 import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
-import { wikiSmallProfessionIcons, wikiBigRacesIcons } from "./icons";
+import CharacterInfo from './Character/Info/CharacterInfo';
 import './Character.css';
-import Cog from '../cog.svg';
 import Dragon from '../dragon.svg';
-import upArrow from './Profile/up-arrow.svg'
-import downArrow from './Profile/down-arrow.svg'
+import Cog from '../cog.svg';
 
 function Character() {
     const { name } = useParams();
@@ -20,7 +18,6 @@ function Character() {
     const [account, setAccount] = useState(null);
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
-    const [showDiv, setShowDiv] = useState(false);
 
     useEffect(() => {
         try {
@@ -51,10 +48,6 @@ function Character() {
         }
     }, []);
 
-    const toggleDiv = () => {
-        setShowDiv(!showDiv);
-    };
-
     return (
         character === null || account === null
             ? <div className="flex center">
@@ -78,78 +71,7 @@ function Character() {
                         </li>
                     </ul>
                 </nav>
-                {/* Name */}
-                <Row><div style={{ fontSize: '30px' }}>{character.name}</div></Row>
-                <Row><div className='yellow-highlight' style={{ fontSize: '20px' }}>{account.name}</div></Row>
-                {/* Show/Hide Info */}
-                <div>
-                    <button className='show-hide-button' onClick={toggleDiv}>
-                        {showDiv
-                            ? <div style={{ display: 'flex', alignItems: 'center',fontSize:'500' }}>
-                                <span>HIDE INFO</span><img src={upArrow} className="up-down-arrow" alt="up-arrow" />
-                            </div>
-                            : <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <span>SHOW INFO</span><img src={downArrow} className="up-down-arrow" alt="down-arrow" />
-                            </div>
-                        }
-                    </button>
-                    {showDiv && (
-                        <div>
-                            {/* World */}
-                            <Col className='flex center' style={{ flexDirection: 'column' }}>
-                                <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                                <Row className='yellow-highlight'>World</Row>
-                            </Col>
-                            <br />
-                            <Row className='flex center'>
-                                {/* Race & Gender */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>
-                                        <img
-                                            src={wikiBigRacesIcons[character.race]}
-                                            alt={character.profession}
-                                            style={{ maxWidth: '25px', filter: 'grayscale(100%) brightness(300%)' }}
-                                        />
-                                    </Row>
-                                    <Row className='yellow-highlight'>
-                                        {character.race} {character.gender}
-                                    </Row>
-                                </Col>
-                                {/* Profession */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>
-                                        <img
-                                            src={wikiSmallProfessionIcons[character.profession]}
-                                            style={{ maxWidth: '25px' }}
-                                            alt={character.profession}
-                                        />
-                                    </Row>
-                                    <Row className='yellow-highlight'>{character.profession}</Row>
-                                </Col>
-                                {/* Level */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>{character.level}</Row>
-                                    <Row className='yellow-highlight'>Level </Row>
-                                </Col>
-                                {/* Mastery Points */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>{mastery}</Row>
-                                    <Row className='yellow-highlight'>Mastery Points </Row>
-                                </Col>
-                                {/* Fractal Level */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>{account.fractal_level}</Row>
-                                    <Row className='yellow-highlight'>Fractal Level</Row>
-                                </Col>
-                                {/* WvW Rank */}
-                                <Col className='character-col'>
-                                    <Row className='font-size-25px'>{account.wvw_rank}</Row>
-                                    <Row className='yellow-highlight'>WvW Rank</Row>
-                                </Col>
-                            </Row>
-                        </div>
-                    )}
-                </div>
+                <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
 
                 <div className='equipment-build-flex'>
                     <EquipmentDropdown char={character} />
