@@ -289,9 +289,15 @@ p span {
   transform: translate(-50%, -50%);
 }
 
-.logo-loading-equipment {
-  left: 136px;
+.logo-equipment-width {
+  width: 546px;
 }
+
+.logo-build-width {
+  width: 643px;
+}
+
+
 
 .logo-loading-build {
   right: 136px;

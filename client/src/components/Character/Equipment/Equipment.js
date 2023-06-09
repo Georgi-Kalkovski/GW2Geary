@@ -22,10 +22,12 @@ function Equipment({ items, prof, slider }) {
         <Container className="equipment-box">
             {isLoading
                 ? (
-                    <div className="flex center">
-                        <div className="logo-loading-div logo-loading-equipment">
-                            <img src={Dragon} alt="" className="logo--loading-dragon" />
-                            <img src={Cog} alt="" className="logo-loading-cog" />
+                    <div className='logo-equipment-width'>
+                        <div className="flex center">
+                            <div className="logo-loading-div">
+                                <img src={Dragon} alt="" className="logo--loading-dragon" />
+                                <img src={Cog} alt="" className="logo-loading-cog" />
+                            </div>
                         </div>
                     </div>
                 ) : (

@@ -21,13 +21,16 @@ function Build({ tab }) {
     return (<>
         {
             isLoading
-                ? <div className="flex center">
-                    < div className="logo-loading-div" >
-                        <img src={Dragon} alt="" className="logo--loading-dragon" />
-                        <img src={Cog} alt="" className="logo-loading-cog" />
+                ?
+                <div className='logo-build-width'>
+                    <div className="flex center">
+                        < div className="logo-loading-div" >
+                            <img src={Dragon} alt="" className="logo--loading-dragon" />
+                            <img src={Cog} alt="" className="logo-loading-cog" />
+                        </div >
                     </div >
-                </div >
-                : <Container className='spec-box'>
+                </div>
+                : <Container className='spec-box logo-build-width'>
                     {tab.specializations && tab.skills && tab.aquatic_skills && (
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
