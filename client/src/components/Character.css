@@ -324,11 +324,15 @@ input:checked+.slider:before {
   }
 
   .build {
-    margin: 0;
+    margin: 1% 10%;
     overflow: hidden;
   }
 
   .tooltip-container {
     transform: none;
+  }
+
+  .logo-build-width {
+    max-width: 350px;
   }
 }

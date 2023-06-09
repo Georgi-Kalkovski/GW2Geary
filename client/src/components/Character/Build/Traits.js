@@ -3,49 +3,57 @@ import { Container, Col } from 'react-bootstrap';
 import fetchData from '../../fetchData';
 import Trait from './Trait';
 
-function Traits({ spec, prof }) {
-  const [specialization, setSpecialization] = useState(null);
-  const [traits, setTraits] = useState({ min: null, maj: null });
+function Traits({ specs, prof }) {
+    const [specializations, setSpecializations] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const char = await fetchData('specializations', spec.id);
-        const [min, maj] = await Promise.all([
-          fetchData('traits', char.minor_traits.join(',')),
-          fetchData('traits', char.major_traits.join(','))
-        ]);
-        setSpecialization(char);
-        setTraits({ min, maj });
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, [spec.id]);
+    useEffect(() => {
+        const fetchSpecializations = async () => {
+            try {
+                const specializationData = await Promise.all(
+                    specs.map(async (spec) => {
+                        const sp = await fetchData('specializations', spec.id);
+                        const [min, maj] = await Promise.all([
+                            fetchData('traits', sp[0].minor_traits.join(',')),
+                            fetchData('traits', sp[0].major_traits.join(','))
+                        ]);
+                        return { specialization: sp[0], traits: { min, maj }, activeTraits: spec?.traits };
+                    })
+                );
 
-  return (
-    <>
-      {specialization && traits.min && traits.maj && (
+                setSpecializations(specializationData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchSpecializations();
+    }, [specs]);
+
+    return (
         <>
-          <Col className="traits-box">
-            <Trait
-              traitMin={traits.min}
-              traitMaj={traits.maj}
-              traitsActive={spec.traits}
-              prof={prof}
-            />
-          </Col>
-          <Container className="cropped-spec-img-div">
-            <img
-              className="cropped-spec-img"
-              src={specialization.background}
-              alt={specialization.name}
-            />
-          </Container>
+            {specializations.length > 0 && (
+                specializations.map((specializationData, index) => (
+                    <div key={index}>
+                        <Col className="traits-box">
+                            <Trait
+                                traitMin={specializationData.traits.min}
+                                traitMaj={specializationData.traits.maj}
+                                traitsActive={specializationData.activeTraits}
+                                prof={prof}
+                            />
+                        </Col>
+                        <Container className="cropped-spec-img-div">
+                            <img
+                                className="cropped-spec-img"
+                                src={specializationData.specialization.background}
+                                alt={specializationData.specialization.name}
+                            />
+                        </Container>
+                    </div>
+                ))
+            )}
         </>
-      )}
-    </>
-  );
+    );
 }
 
 export default Traits;

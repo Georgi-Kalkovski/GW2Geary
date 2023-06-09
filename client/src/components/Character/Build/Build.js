@@ -34,11 +34,7 @@ function Build({ tab }) {
                     {tab.specializations && tab.skills && tab.aquatic_skills && (
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                            {tab.specializations.map((spec, index) => (
-                                <div key={index}>
-                                    <Traits spec={spec} prof={tab.profession} />
-                                </div>
-                            ))}
+                            <Traits specs={tab.specializations} prof={tab.profession} />
                             <br />
                             <Template buildInput={tab} />
                         </>

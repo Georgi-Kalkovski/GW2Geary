@@ -6,7 +6,7 @@ const { baseUrl } = require('./config.routes');
 router.get('/:spec', async (req, res) => {
     try {
         const { spec } = req.params;
-        const response = await axios.get(`${baseUrl}/specializations/${spec}`);
+        const response = await axios.get(`${baseUrl}/specializations?ids=${spec}`);
         if (response) {
             res.json(response.data);
         }

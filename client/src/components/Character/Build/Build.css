@@ -143,7 +143,7 @@
     max-height: 16px;
 }
 
-.api-right{
+.api-right {
     justify-content: flex-end;
 }
 
@@ -162,4 +162,11 @@
 
 .save {
     color: #088508;
+}
+
+@media (max-width: 550px) {
+    .build {
+        min-width: 350px !important;
+        padding: 5px !important;
+    }
 }
