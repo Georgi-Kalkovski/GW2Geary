@@ -1,33 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import fetchData from '../../fetchData';
 import Tooltip from './Tooltip';
 
-function Trait({ traitsMin, traitsMaj, traitsActive, prof }) {
-    const [traitMin, setTraitMin] = useState(null);
-    const [traitMaj, setTraitMaj] = useState(null);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const fetchedTraits = await fetchData('traits', traitsMin.join(","));
-                setTraitMin(fetchedTraits);
-            } catch (error) {
-                console.error(error);
-            }
-        })();
-    }, [traitsMin]);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const fetchedTraits = await fetchData('traits', traitsMaj.join(","));
-                setTraitMaj(fetchedTraits);
-            } catch (error) {
-                console.error(error);
-            }
-        })();
-    }, [traitsMaj]);
+function Trait({ traitMin, traitMaj, traitsActive, prof }) {
 
     function imageTraitMin(trait) {
         return (

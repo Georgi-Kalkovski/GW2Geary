@@ -5,29 +5,29 @@ import Trait from './Trait';
 
 function Traits({ spec, prof }) {
     const [specialization, setSpecialization] = useState(null);
-    const [traitsMin, setTraitsMin] = useState(null);
-    const [traitsMaj, setTraitsMaj] = useState(null);
-
+    const [traitMin, setTraitMin] = useState(null);
+    const [traitMaj, setTraitMaj] = useState(null);
     useEffect(() => {
         (async () => {
             try {
                 const char = await fetchData('specializations', spec.id);
                 setSpecialization(char);
-                setTraitsMin(char.minor_traits);
-                setTraitsMaj(char.major_traits);
+                const min = await fetchData('traits', char.minor_traits.join(","));
+                const maj = await fetchData('traits', char.major_traits.join(","));
+                setTraitMin(min);
+                setTraitMaj(maj);
             } catch (error) {
                 console.error(error);
             }
         })();
     }, [spec.id]);
 
-
     return (
         <>
-            {specialization && traitsMin && traitsMaj && (
+            {specialization && traitMin && traitMaj && (
                 <>
                     <Col className='traits-box'>
-                        <Trait traitsMin={traitsMin} traitsMaj={traitsMaj} traitsActive={spec.traits} prof={prof} />
+                        <Trait traitMin={traitMin} traitMaj={traitMaj} traitsActive={spec.traits} prof={prof} />
                     </Col>
                     <Container className='cropped-spec-img-div'>
                         <img className='cropped-spec-img' src={specialization.background} alt={specialization.name} />
