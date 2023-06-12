@@ -5,7 +5,7 @@ function Pagination({ filtered, itemsPerPage, totalPages, page, setPage }) {
     }
 
     const renderPageNumbers = [];
-    const totalPagesToShow = 5;
+    const totalPagesToShow = 4;
 
     let startPage, endPage;
     if (totalPages <= totalPagesToShow) {
