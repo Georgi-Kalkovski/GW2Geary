@@ -32,29 +32,30 @@ function Equipment({ items, prof, slider }) {
                     </div>
                 ) : (
                     <>
-                        <Col className='equipment-col-1'>
+                        <Col>
                             <br />
-                            <ItemTooltip item={items.find(x => x.slot === 'Helm')} slider={slider} />
-                            <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} slider={slider} />
-                            <ItemTooltip item={items.find(x => x.slot === 'Coat')} slider={slider} />
-                            <ItemTooltip item={items.find(x => x.slot === 'Gloves')} slider={slider} />
-                            <ItemTooltip item={items.find(x => x.slot === 'Leggings')} slider={slider} />
-                            <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
+                            <Col className='equipment-col-1'>
+                                <ItemTooltip item={items.find(x => x.slot === 'Helm')} slider={slider} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} slider={slider} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Coat')} slider={slider} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Gloves')} slider={slider} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Leggings')} slider={slider} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
+
+                            </Col>
                             <br />
                             <Row className='flex'>
-                                <Col >
-                                    <span>E1</span>
+                                <Col>
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} slider={slider} />
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} slider={slider} />
                                 </Col>
-                                <Col>
-                                    <span>E2</span>
+                                <Col style={{ marginLeft: '15px' }}>
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} slider={slider} />
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} slider={slider} />
                                 </Col>
                             </Row>
-                            <br />
                         </Col>
+
                         <Col className='equipment-col-2'>
                             <br />
                             <Row>Attributes</Row>
