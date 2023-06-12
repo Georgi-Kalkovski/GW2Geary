@@ -117,81 +117,81 @@
 }
 
 .name-fine {
-    color: #5fbdff;
+    color: #62a4e1;
 }
 
 .box-fine {
-    border: 3px solid #5fbdff;
+    border: 3px solid #62a4e1;
 }
 
 .border-fine {
-    border: 1.5px solid rgb(95, 189, 255);
-    box-shadow: 0 0 10px 2px rgba(76, 151, 204, 0.5);
+    border: 1.5px solid rgb(98, 164, 225);
+    box-shadow: 0 0 10px 2px rgba(75, 126, 174, 0.5);
 }
 
 .name-masterwork {
-    color: #32e532;
+    color: #1a9306;
 }
 
 
 .box-masterwork {
-    border: 3px solid #32e532;
+    border: 3px solid #1a9306;
 }
 
 .border-masterwork {
-    border: 1.5px solid rgb(50, 229, 50);
-    box-shadow: 0 0 10px 2px rgba(38, 178, 38, 0.5);
+    border: 1.5px solid rgb(26, 147, 6);
+    box-shadow: 0 0 10px 2px rgba(16, 95, 3, 0.5);
 }
 
 .name-rare {
-    color: #d5b737;
+    color: #fcd00b;
 }
 
 .box-rare {
-    border: 3px solid #d5b737;
+    border: 3px solid #fcd00b;
 }
 
 .border-rare {
-    border: 1.5px solid rgb(213, 183, 55);
-    box-shadow: 0 0 10px 2px rgba(162, 139, 41, 0.5);
+    border: 1.5px solid rgb(252, 208, 11);
+    box-shadow: 0 0 10px 2px rgba(201, 165, 8, 0.5);
 }
 
 .name-exotic {
-    color: #d87e00;
+    color: #ffa405;
 }
 
 .box-exotic {
-    border: 3px solid #d87e00;
+    border: 3px solid #ffa405;
 }
 
 .border-exotic {
-    border: 1.5px solid rgb(216, 126, 0);
-    box-shadow: 0 0 10px 2px rgba(164, 96, 0, 0.5);
+    border: 1.5px solid rgb(255, 164, 5);
+    box-shadow: 0 0 10px 2px rgba(204, 131, 4, 0.5);
 }
 
 .name-ascended {
-    color: #ff61b4;
+    color: #fb3e8d;
 }
 
 .box-ascended {
-    border: 3px solid #ff61b4;
+    border: 3px solid #fb3e8d;
 }
 
 .border-ascended {
-    border: 1.5px solid rgb(255, 97, 180);
-    box-shadow: 0 0 10px 2px rgba(204, 77, 143, 0.5);
+    border: 1.5px solid rgb(251, 62, 141);
+    box-shadow: 0 0 10px 2px rgba(199, 49, 112, 0.5);
 }
 
 
 .name-legendary {
-    color: #ce45da;
+    color: #5d17cf;
 }
 
 .box-legendary {
-    border: 3px solid #ce45da;
+    border: 3px solid #5d17cf;
 }
 
 .border-legendary {
-    border: 1.5px solid rgb(206, 69, 218);
-    box-shadow: 0 0 10px 2px rgba(157, 52, 166, 0.5);
+    border: 1.5px solid rgb(93, 23, 207);
+    box-shadow: 0 0 10px 2px rgba(76, 19, 169, 0.5);
 }

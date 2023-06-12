@@ -172,10 +172,6 @@ label {
     transform: rotate(0deg);
   }
 
-  50% {
-    transform: rotate(360deg);
-  }
-
   100% {
     transform: rotate(360deg);
   }
@@ -328,11 +324,36 @@ p span {
   top: -74px;
   right: -77px;
   transform: translate(-50%, -50%) rotate(0deg);
+  filter: drop-shadow(4px 2px 0px rgba(0, 0, 0, 1));
   z-index: 1;
   width: 150px;
   height: 150px;
   animation: spin 50s linear infinite;
   animation-iteration-count: infinite;
+}
+
+.logo-loading-googly {
+  position: absolute;
+  top: -9px;
+  right: 5px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  animation: spin2 1s linear infinite;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .gw2-logo-style {

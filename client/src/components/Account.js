@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from "../services/auth.service";
 import CharacterPreview from "./CharacterPreview";
+import Dragon from '../dragon.svg';
+import Cog from '../cog.svg';
 
 const Account = () => {
   const { name } = useParams();
@@ -46,20 +48,28 @@ const Account = () => {
       <div>
         <div className="container">
           <div>
-            {characters &&
-              characters.map((character, index) => (
+            {/* Breadcrumb */}
+            <nav aria-label="breadcrumb">
+              <div style={{ listStyleType: "none" }} className='flex center'>
+                <li>
+                  <Link className='nav-a' to="/search">Search</Link>
+                </li>
+                <li style={{ cursor: "default" }} aria-current="page">
+                  <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
+                </li>
+              </div>
+            </nav>
+
+            {/* Account */}
+            {!characters
+              ? <div className="flex center">
+                <div className="logo-loading-div">
+                  <img src={Dragon} alt="" className="logo--loading-dragon" />
+                  <img src={Cog} alt="" className="logo-loading-cog" />
+                </div>
+              </div>
+              : characters.map((character, index) => (
                 <React.Fragment key={index}>
-                  {/* Breadcrumb */}
-                  <nav aria-label="breadcrumb">
-                    <div style={{ listStyleType: "none" }} className='flex center'>
-                      <li>
-                        <Link className='nav-a' to="/search">Search</Link>
-                      </li>
-                      <li style={{ cursor: "default" }} aria-current="page">
-                        <span style={{ color: "#ffffff" }}>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
-                      </li>
-                    </div>
-                  </nav>
                   <Container className="flex center center-items">
                     <Row className={`flex center acc-info accounts-box`}>
                       {/* Name */}
@@ -99,7 +109,8 @@ const Account = () => {
                     ))}
                   </div>
                 </React.Fragment>
-              ))}
+              ))
+            }
           </div>
         </div>
       </div>
