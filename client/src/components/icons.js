@@ -1,9 +1,9 @@
 // Wiki Big Races Icon
-import Asura_Big from './img/120px-Asura_tango_icon_200px.png';
-import Charr_Big from './img/120px-Charr_tango_icon_200px.png';
-import Sylvari_Big from './img/120px-Sylvari_tango_icon_200px.png';
-import Norn_Big from './img/120px-Norn_tango_icon_200px.png';
-import Human_Big from './img/120px-Human_tango_icon_200px.png';
+import Asura_Big from './img/_asura.png';
+import Charr_Big from './img/_charr.png';
+import Sylvari_Big from './img/_sylvari.png';
+import Norn_Big from './img/_norn.png';
+import Human_Big from './img/_human.png';
 
 const wikiBigRacesIcons = {
     Asura: Asura_Big,
@@ -11,29 +11,6 @@ const wikiBigRacesIcons = {
     Sylvari: Sylvari_Big,
     Norn: Norn_Big,
     Human: Human_Big,
-};
-
-// API Big Profession Icons
-import Elementalist from './img/Elementalist.png';
-import Engineer from './img/Engineer.png';
-import Guardian from './img/Guardian.png';
-import Mesmer from './img/Mesmer.png';
-import Necromancer from './img/Necromancer.png';
-import Ranger from './img/Ranger.png';
-import Revenant from './img/Revenant.png';
-import Thief from './img/Thief.png';
-import Warrior from './img/Warrior.png';
-
-const apiBigProfessionIcons = {
-    Elementalist: Elementalist,
-    Engineer: Engineer,
-    Guardian: Guardian,
-    Mesmer: Mesmer,
-    Necromancer: Necromancer,
-    Ranger: Ranger,
-    Revenant: Revenant,
-    Thief: Thief,
-    Warrior: Warrior
 };
 
 // Wiki Big Profession Icons
@@ -87,7 +64,6 @@ const wikiSmallProfessionIcons = {
 
 export {
     wikiBigRacesIcons,
-    apiBigProfessionIcons,
     wikiBigProfessionIcons,
     wikiSmallProfessionIcons,
 };

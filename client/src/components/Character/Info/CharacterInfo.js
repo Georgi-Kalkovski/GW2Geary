@@ -17,18 +17,10 @@ function CharacterInfo({ char, acc, mastery, world }) {
                     <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
                     <Row className='yellow-highlight'>World</Row>
                 </Col>
-                {/* Race & Gender */}
+                {/* Level */}
                 <Col className='character-col'>
-                    <Row className='font-size-25px'>
-                        <img
-                            src={wikiBigRacesIcons[char.race]}
-                            alt={char.profession}
-                            style={{ maxWidth: '25px', filter: 'grayscale(100%) brightness(300%)' }}
-                        />
-                    </Row>
-                    <Row className='yellow-highlight'>
-                        {char.race} {char.gender}
-                    </Row>
+                    <Row className='font-size-25px'>{char.level}</Row>
+                    <Row className='yellow-highlight'>Level </Row>
                 </Col>
                 {/* Profession */}
                 <Col className='character-col'>
@@ -41,10 +33,18 @@ function CharacterInfo({ char, acc, mastery, world }) {
                     </Row>
                     <Row className='yellow-highlight'>{char.profession}</Row>
                 </Col>
-                {/* Level */}
+                {/* Race & Gender */}
                 <Col className='character-col'>
-                    <Row className='font-size-25px'>{char.level}</Row>
-                    <Row className='yellow-highlight'>Level </Row>
+                    <Row className='font-size-25px'>
+                        <img
+                            src={wikiBigRacesIcons[char.race]}
+                            alt={char.profession}
+                            style={{ maxWidth: '25px'}}
+                        />
+                    </Row>
+                    <Row className='yellow-highlight'>
+                        {char.race} {char.gender}
+                    </Row>
                 </Col>
                 {/* Mastery Points */}
                 <Col className='character-col'>

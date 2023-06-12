@@ -88,7 +88,6 @@ const Account = () => {
                       </Col>
                     </Row>
                   </Container>
-                  <br />
 
                   {/* Characters */}
                   <div className="characters">
