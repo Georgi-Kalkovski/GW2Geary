@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AuthService from "../services/auth.service";
@@ -14,10 +14,12 @@ import Cog from '../cog.svg';
 function Character() {
     const { name } = useParams();
     const formattedName = name.replaceAll('_', ' ');
+    const currentUser = AuthService.getCurrentUser();
     const [character, setCharacter] = useState(null);
     const [account, setAccount] = useState(null);
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
+    const [isPrivate, setIsPrivate] = useState(false)
 
     useEffect(() => {
         try {
@@ -26,7 +28,16 @@ function Character() {
                 for (const keys of users.data.users) {
                     for (const key of keys.apiKeys) {
                         for (const char of key.characters) {
-                            if (char.name === formattedName && key.active) {
+                            if (char.name === formattedName
+                                && key.active
+                                || char.name === formattedName
+                                && currentUser?.apiKeys.find(k => k._id === key._id)) {
+                                if (!key.active
+                                    && char.name === formattedName
+                                    && currentUser.apiKeys.find(k => k._id === key._id)) {
+                                    setIsPrivate(true)
+                                }
+
                                 const charFound = (await axios.get(`https://api.guildwars2.com/v2/characters/${formattedName.replaceAll(' ', '%20')}?access_token=${key._id}&v=latest`)).data;
                                 setCharacter(charFound)
                                 const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
@@ -71,6 +82,13 @@ function Character() {
                         </li>
                     </ul>
                 </nav>
+
+                {/* Private Character */}
+                {isPrivate === true
+                    ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
+                    : ''
+                }
+
                 <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
 
                 <div className='equipment-build-flex'>
