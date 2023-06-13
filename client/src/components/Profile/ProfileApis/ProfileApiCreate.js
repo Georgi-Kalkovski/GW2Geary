@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import Dragon from '../../../dragon.svg';
 import Cog from '../../../cog.svg';
 
-function ProfileApiCreate({ currentUser, fetchApiKeys,setApiKeys }) {
+function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
   const [apiKey, setApiKey] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [text, setText] = useState(null);
   const handleApiKeyChange = useCallback((e) => {
     setApiKey(e.target.value);
   }, []);
@@ -17,14 +17,16 @@ function ProfileApiCreate({ currentUser, fetchApiKeys,setApiKeys }) {
     setLoading(true);
     const existingApiKey = currentUser.apiKeys.find((key) => key._id === apiKey);
     if (existingApiKey) {
-      console.log("API key already exists");
+      setText('API key already exists');
+      setLoading(false);
       return;
     }
 
     const pattern = new RegExp(`^[a-zA-Z0-9-]{72}$`);
     if (!pattern.test(apiKey)) {
-      console.log('Invalid input');
+      setText('Invalid input');
       setApiKey("");
+      setLoading(false);
       return;
     }
 
@@ -54,18 +56,16 @@ function ProfileApiCreate({ currentUser, fetchApiKeys,setApiKeys }) {
       )
       .then((response) => {
         if (response.status === 201) {
-          console.log("API key created successfully");
+          setText('API key created successfully');
           setApiKey("");
           return response.data;
         } else {
-          console.error("Failed to create API key");
+          setText('Failed to create API key');
           setApiKey("");
-          throw new Error(response.data.message);
         }
       })
       .catch((error) => {
-        console.error("Failed to create API key", error);
-        throw new Error("Failed to create API key");
+        setText('Failed to create API key');
       });
   };
 
@@ -102,7 +102,10 @@ function ProfileApiCreate({ currentUser, fetchApiKeys,setApiKeys }) {
         Add API Key
       </button>
       <br /><br />
-
+      {text !== null
+        ? <span>{text}</span>
+        : ''
+      }
       {/* Loader */}
       {loading && (
         <div className="flex center">

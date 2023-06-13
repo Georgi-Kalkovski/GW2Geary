@@ -104,7 +104,7 @@ const App = () => {
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="*" element={<Search />} />
         </Routes>
       </div>
     </div>
