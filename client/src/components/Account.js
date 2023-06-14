@@ -16,6 +16,7 @@ const Account = () => {
   const [mastery, setMastery] = useState(null);
   const [world, setWorld] = useState(null);
   const [active, setActive] = useState(false)
+
   useEffect(() => {
     try {
       (async () => {
@@ -51,6 +52,7 @@ const Account = () => {
       console.error(error);
     }
   }, []);
+  
   return (
     <div>
       <div>
