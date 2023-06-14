@@ -37,6 +37,8 @@ function Attributes({ items, prof }) {
 
     let defense = 0;
 
+    const uniqueRunes = [];
+
     if (prof === 'Warrior' || prof === 'Necromancer') {
         health += 9212
     } else if (prof === 'Revenant' || prof === 'Engineer' || prof === 'Ranger' || prof === 'Mesmer') {
@@ -54,89 +56,62 @@ function Attributes({ items, prof }) {
             }
         }
     }
-
     for (const item of items) {
-        if (item.slot !== 'HelmAquatic' && item.slot !== 'WeaponAquaticA' && item.slot !== 'WeaponAquaticB') {
-
+        if (item.slot !== 'HelmAquatic' && item.slot !== 'WeaponAquaticA' && item.slot !== 'WeaponAquaticB' && item.slot !== 'WeaponB1' && item.slot !== 'WeaponB2') {
 
             // Getting attributes from items
+            let attributes;
             if (item.stats && item.stats.attributes) {
+                attributes = item.stats.attributes;
 
-                const attributes = item.stats.attributes;
-
-                for (const attribute in attributes) {
-
-                    const number = attributes[attribute];
-                    switch (attribute) {
-                        case 'Power': power += number; break;
-                        case 'Precision': precision += number; break;
-                        case 'Toughness': toughness += number; break;
-                        case 'Vitality': vitality += number; break;
-                        case 'BoonDuration': concentration += number; break;
-                        case 'ConditionDamage': condiDamage += number; break;
-                        case 'Concentration': concentration += number; break;
-                        case 'Expertise': expertise += number; break;
-                        case 'ConditionDuration': expertise += number; break;
-                        case 'Ferocity': ferocity += number; break;
-                        case 'Healing': healingPower += number; break;
-                        case 'Armor': armor += number; break;
-                        case 'CritDamage': ferocity += number; break;
-                        case 'Health': health += number; break;
-                        case 'CritChance': critChance += number; break;
-                        case 'Agony Resistance': agonyResistance += number; break;
-                    }
+            } else if (item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes) {
+                const attr = item.details.infix_upgrade.attributes;
+                attributes = attr.reduce((obj, item) => {
+                    obj[item.attribute] = item.modifier;
+                    return obj;
+                }, {});
+            }
+            for (const attribute in attributes) {
+                const number = attributes[attribute];
+                switch (attribute) {
+                    case 'Power': power += number; break;
+                    case 'Precision': precision += number; break;
+                    case 'Toughness': toughness += number; break;
+                    case 'Vitality': vitality += number; break;
+                    case 'BoonDuration': concentration += number; break;
+                    case 'ConditionDamage': condiDamage += number; break;
+                    case 'Concentration': concentration += number; break;
+                    case 'Expertise': expertise += number; break;
+                    case 'ConditionDuration': expertise += number; break;
+                    case 'Ferocity': ferocity += number; break;
+                    case 'Healing': healingPower += number; break;
+                    case 'Armor': armor += number; break;
+                    case 'CritDamage': ferocity += number; break;
+                    case 'Health': health += number; break;
+                    case 'CritChance': critChance += number; break;
+                    case 'Agony Resistance': agonyResistance += number; break;
                 }
             }
 
-            // Getting attributes from infusions
             if (item.upgrades) {
+
+                // Pulling unique runes
                 for (const upgrade of item.upgrades) {
-                    if (upgrade.details && upgrade.details.infix_upgrade && upgrade.details.infix_upgrade.attributes) {
-
-                        const attributes = upgrade.details.infix_upgrade.attributes;
-
-                        for (const attribute of attributes) {
-                            switch (attribute.attribute) {
-                                case 'Power': power += attribute.modifier; break;
-                                case 'Precision': precision += attribute.modifier; break;
-                                case 'Toughness': toughness += attribute.modifier; break;
-                                case 'Vitality': vitality += attribute.modifier; break;
-                                case 'BoonDuration': boonDuration += attribute.modifier; break;
-                                case 'ConditionDamage': condiDamage += attribute.modifier; break;
-                                case 'Concentration': concentration += attribute.modifier; break;
-                                case 'Expertise': expertise += attribute.modifier; break;
-                                case 'ConditionDuration': condiDuration += attribute.modifier; break;
-                                case 'Ferocity': ferocity += attribute.modifier; break;
-                                case 'HealingPower': healingPower += attribute.modifier; break;
-                                case 'Armor': armor += attribute.modifier; break;
-                                case 'CriticalDamage': critDamage += attribute.modifier; break;
-                                case 'Health': health += attribute.modifier; break;
-                                case 'CriticalChance': critChance += attribute.modifier; break;
-                                case 'AgonyResistance': agonyResistance += attribute.modifier; break;
-                            }
+                    if (upgrade.details.type === 'Rune') {
+                        const hasDuplicate = uniqueRunes.some(rune => rune.name === upgrade.name);
+                        if (!hasDuplicate) {
+                            uniqueRunes.push(upgrade);
                         }
-
                     }
                 }
-            }
-        }
-    }
 
-    // Getting runes from upgrades
-    if (items.upgrades) {
-        for (const upgrade of items.upgrades) {
-            for (let i = 0; i < upgrade.bonuses.length; i++) {
-                if (i <= upgrade.count) {
-                    const rune = upgrade.bonuses[i].split('; ')
-                    for (const bonus of rune) {
-
-                        // Define the regular expression pattern to match the string
+                // Getting attributes from sigils
+                for (const upgrade of item.upgrades) {
+                    if (upgrade.details.type === 'Sigil') {
+                        const bonus = upgrade.details.infix_upgrade.buff.description;
                         let pattern = /^([-+])?(\d+)(?=%?)?\s?(%?)\s+(\S+(?:\s+\S+)?)/;
-
-                        // Match the pattern against the input string
                         let match = bonus.match(pattern);
 
-                        // Extract the variables from the match object
                         if (match) {
                             let number = parseInt(match[1] + match[2]);  // +65 or -65
                             let percentage = match[3] ? match[3] + '%' : '';  // '%' or ''
@@ -153,7 +128,7 @@ function Attributes({ items, prof }) {
                                 case 'Expertise': expertise += number; break;
                                 case 'Condition Duration': condiDuration += number; break;
                                 case 'Ferocity': ferocity += number; break;
-                                case 'Healing Power': healingPower += number; break;
+                                case 'Healing': healingPower += number; break;
                                 case 'Armor': armor += number; break;
                                 case 'Critical Damage': critDamage += number; break;
                                 case 'Health': health += number; break;
@@ -161,6 +136,74 @@ function Attributes({ items, prof }) {
                                 case 'Agony Resistance': agonyResistance += number; break;
                             }
                         }
+                    }
+                }
+
+                // Getting attributes from infusions
+                for (const upgrade of item.upgrades) {
+                    if (upgrade.details.type === 'Default') {
+                        const attr = upgrade.details.infix_upgrade.attributes;
+                        attributes = attr.reduce((obj, item) => {
+                            obj[item.attribute] = item.modifier;
+                            return obj;
+                        }, {});
+                        for (const attribute in attributes) {
+                            const number = attributes[attribute];
+                            switch (attribute) {
+                                case 'Power': power += number; break;
+                                case 'Precision': precision += number; break;
+                                case 'Toughness': toughness += number; break;
+                                case 'Vitality': vitality += number; break;
+                                case 'BoonDuration': concentration += number; break;
+                                case 'ConditionDamage': condiDamage += number; break;
+                                case 'Concentration': concentration += number; break;
+                                case 'Expertise': expertise += number; break;
+                                case 'ConditionDuration': expertise += number; break;
+                                case 'Ferocity': ferocity += number; break;
+                                case 'Healing': healingPower += number; break;
+                                case 'Armor': armor += number; break;
+                                case 'CritDamage': ferocity += number; break;
+                                case 'Health': health += number; break;
+                                case 'CritChance': critChance += number; break;
+                                case 'AgonyResistance': agonyResistance += number; break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Getting attributes from unique runes
+    for (const rune of uniqueRunes) {
+        for (let i = 0; i < rune.counter; i++) {
+            const r = rune.details.bonuses[i].split('; ')
+            for (const bonus of r) {
+                let pattern = /^([-+])?(\d+)(?=%?)?\s?(%?)\s+(\S+(?:\s+\S+)?)/;
+                let match = bonus.match(pattern);
+
+                if (match) {
+                    let number = parseInt(match[1] + match[2]);  // +65 or -65
+                    let percentage = match[3] ? match[3] + '%' : '';  // '%' or ''
+                    let attribute = match[4];   // 'Attribute'
+
+                    switch (attribute) {
+                        case 'Power': power += number; break;
+                        case 'Precision': precision += number; break;
+                        case 'Toughness': toughness += number; break;
+                        case 'Vitality': vitality += number; break;
+                        case 'Boon Duration': boonDuration += number; break;
+                        case 'Condition Damage': condiDamage += number; break;
+                        case 'Concentration': concentration += number; break;
+                        case 'Expertise': expertise += number; break;
+                        case 'Condition Duration': condiDuration += number; break;
+                        case 'Ferocity': ferocity += number; break;
+                        case 'Healing': healingPower += number; break;
+                        case 'Armor': armor += number; break;
+                        case 'Critical Damage': critDamage += number; break;
+                        case 'Health': health += number; break;
+                        case 'Critical Chance': critChance += number; break;
+                        case 'Agony Resistance': agonyResistance += number; break;
                     }
                 }
             }
@@ -171,7 +214,8 @@ function Attributes({ items, prof }) {
     health += vitality * 10;
     critChance += 5 + ((precision - 1000) / 21);
     critDamage += ferocity / 15;
-    boonDuration = concentration / 15;
+    condiDuration += expertise / 15;
+    boonDuration = concentration / 15 + boonDuration;
 
     const AttributesBox = ({ attribute }) => {
         return (
@@ -182,20 +226,20 @@ function Attributes({ items, prof }) {
     };
 
     const attr = [
-        { name: "Power", icon: Power, value: power.toLocaleString("en-US")  },
-        { name: "Toughness", icon: Toughness, value: toughness.toLocaleString("en-US")  },
-        { name: "Vitality", icon: Vitality, value: vitality.toLocaleString("en-US")  },
-        { name: "Precision", icon: Precision, value: precision.toLocaleString("en-US")  },
-        { name: "Ferocity", icon: Ferocity, value: ferocity.toLocaleString("en-US")  },
+        { name: "Power", icon: Power, value: power.toLocaleString("en-US") },
+        { name: "Toughness", icon: Toughness, value: toughness.toLocaleString("en-US") },
+        { name: "Vitality", icon: Vitality, value: vitality.toLocaleString("en-US") },
+        { name: "Precision", icon: Precision, value: precision.toLocaleString("en-US") },
+        { name: "Ferocity", icon: Ferocity, value: ferocity.toLocaleString("en-US") },
         { name: "Condition Damage", icon: CondiDamage, value: condiDamage.toLocaleString("en-US") },
         { name: "Expertise", icon: CondiDuration, value: expertise.toLocaleString("en-US") },
-        { name: "Concentration", icon: BoonDuration, value: concentration.toLocaleString("en-US")  },
+        { name: "Concentration", icon: BoonDuration, value: concentration.toLocaleString("en-US") },
         { name: "Agony Resistance", icon: AgonyResistance, value: agonyResistance.toLocaleString("en-US") },
         { name: "Armor", icon: Armor, value: armor.toLocaleString("en-US") },
         { name: "Health", icon: Health, value: health.toLocaleString("en-US") },
         { name: "Critical Chance", icon: CritChance, value: critChance.toFixed(2) + "%" },
-        { name: "Critical Damage", icon: CritDamage, value: critDamage.toFixed(2) + "%" },
-        { name: "Healing Power", icon: HealingPower, value: healingPower.toLocaleString("en-US")  },
+        { name: "Critical Damage", icon: CritDamage, value: critDamage.toFixed(1) + "%" },
+        { name: "Healing Power", icon: HealingPower, value: healingPower.toLocaleString("en-US") },
         { name: "Condition Duration", icon: CondiDuration, value: condiDuration.toFixed(2) + "%" },
         { name: "Boon Duration", icon: BoonDuration, value: boonDuration.toFixed(2) + "%" }
     ];
