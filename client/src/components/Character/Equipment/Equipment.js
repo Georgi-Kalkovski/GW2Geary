@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ItemTooltip from './ItemTooltip';
-import Attributes from './Attributes';
+import Attributes from '../Attributes/Attributes';
 import './Equipment.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
