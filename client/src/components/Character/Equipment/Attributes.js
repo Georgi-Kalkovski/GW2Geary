@@ -36,9 +36,7 @@ function Attributes({ items, prof }) {
     let agonyResistance = 0;
 
     let defense = 0;
-
-    const uniqueRunes = [];
-
+    
     if (prof === 'Warrior' || prof === 'Necromancer') {
         health += 9212
     } else if (prof === 'Revenant' || prof === 'Engineer' || prof === 'Ranger' || prof === 'Mesmer') {
@@ -46,21 +44,69 @@ function Attributes({ items, prof }) {
     } else if (prof === 'Guardian' || prof === 'Thief' || prof === 'Elementalist') {
         health += 1645
     }
+    
+    const uniqueRunes = [];
 
+    function applyAttributeSpacing(attribute, number) {
+        switch (attribute) {
+            case 'Power': power += number; break;
+            case 'Precision': precision += number; break;
+            case 'Toughness': toughness += number; break;
+            case 'Vitality': vitality += number; break;
+            case 'Boon Duration': boonDuration += number; break;
+            case 'Condition Damage': condiDamage += number; break;
+            case 'Concentration': concentration += number; break;
+            case 'Expertise': expertise += number; break;
+            case 'Condition Duration': condiDuration += number; break;
+            case 'Ferocity': ferocity += number; break;
+            case 'Healing': healingPower += number; break;
+            case 'Armor': armor += number; break;
+            case 'Critical Damage': critDamage += number; break;
+            case 'Health': health += number; break;
+            case 'Critical Chance': critChance += number; break;
+            case 'Agony Resistance': agonyResistance += number; break;
+        }
+    }
 
-    // Getting defense
+    function applyAttributeNoSpacing(attribute, number) {
+        switch (attribute) {
+            case 'Power': power += number; break;
+            case 'Precision': precision += number; break;
+            case 'Toughness': toughness += number; break;
+            case 'Vitality': vitality += number; break;
+            case 'BoonDuration': concentration += number; break;
+            case 'ConditionDamage': condiDamage += number; break;
+            case 'Concentration': concentration += number; break;
+            case 'Expertise': expertise += number; break;
+            case 'ConditionDuration': expertise += number; break;
+            case 'Ferocity': ferocity += number; break;
+            case 'Healing': healingPower += number; break;
+            case 'Armor': armor += number; break;
+            case 'CritDamage': ferocity += number; break;
+            case 'Health': health += number; break;
+            case 'CritChance': critChance += number; break;
+            case 'Agony Resistance': agonyResistance += number; break;
+        }
+    }
+
+    // Looking items
     for (const item of items) {
+        // Getting defense
         if (item.slot !== 'HelmAquatic') {
             if (item.details && item.details.defense) {
                 defense += item.details.defense;
             }
         }
-    }
-    for (const item of items) {
-        if (item.slot !== 'HelmAquatic' && item.slot !== 'WeaponAquaticA' && item.slot !== 'WeaponAquaticB' && item.slot !== 'WeaponB1' && item.slot !== 'WeaponB2') {
+
+        if (item.slot !== 'HelmAquatic'
+            && item.slot !== 'WeaponAquaticA'
+            && item.slot !== 'WeaponAquaticB'
+            && item.slot !== 'WeaponB1'
+            && item.slot !== 'WeaponB2') {
 
             // Getting attributes from items
             let attributes;
+
             if (item.stats && item.stats.attributes) {
                 attributes = item.stats.attributes;
 
@@ -73,40 +119,21 @@ function Attributes({ items, prof }) {
             }
             for (const attribute in attributes) {
                 const number = attributes[attribute];
-                switch (attribute) {
-                    case 'Power': power += number; break;
-                    case 'Precision': precision += number; break;
-                    case 'Toughness': toughness += number; break;
-                    case 'Vitality': vitality += number; break;
-                    case 'BoonDuration': concentration += number; break;
-                    case 'ConditionDamage': condiDamage += number; break;
-                    case 'Concentration': concentration += number; break;
-                    case 'Expertise': expertise += number; break;
-                    case 'ConditionDuration': expertise += number; break;
-                    case 'Ferocity': ferocity += number; break;
-                    case 'Healing': healingPower += number; break;
-                    case 'Armor': armor += number; break;
-                    case 'CritDamage': ferocity += number; break;
-                    case 'Health': health += number; break;
-                    case 'CritChance': critChance += number; break;
-                    case 'Agony Resistance': agonyResistance += number; break;
-                }
+                applyAttributeNoSpacing(attribute, number);
             }
 
+            // Looking upgrades
             if (item.upgrades) {
-
-                // Pulling unique runes
                 for (const upgrade of item.upgrades) {
+                    // Pulling unique runes
                     if (upgrade.details.type === 'Rune') {
                         const hasDuplicate = uniqueRunes.some(rune => rune.name === upgrade.name);
                         if (!hasDuplicate) {
                             uniqueRunes.push(upgrade);
                         }
                     }
-                }
 
-                // Getting attributes from sigils
-                for (const upgrade of item.upgrades) {
+                    // Getting attributes from sigils
                     if (upgrade.details.type === 'Sigil') {
                         const bonus = upgrade.details.infix_upgrade.buff.description;
                         let pattern = /^([-+])?(\d+)(?=%?)?\s?(%?)\s+(\S+(?:\s+\S+)?)/;
@@ -117,30 +144,11 @@ function Attributes({ items, prof }) {
                             let percentage = match[3] ? match[3] + '%' : '';  // '%' or ''
                             let attribute = match[4];   // 'Attribute'
 
-                            switch (attribute) {
-                                case 'Power': power += number; break;
-                                case 'Precision': precision += number; break;
-                                case 'Toughness': toughness += number; break;
-                                case 'Vitality': vitality += number; break;
-                                case 'Boon Duration': boonDuration += number; break;
-                                case 'Condition Damage': condiDamage += number; break;
-                                case 'Concentration': concentration += number; break;
-                                case 'Expertise': expertise += number; break;
-                                case 'Condition Duration': condiDuration += number; break;
-                                case 'Ferocity': ferocity += number; break;
-                                case 'Healing': healingPower += number; break;
-                                case 'Armor': armor += number; break;
-                                case 'Critical Damage': critDamage += number; break;
-                                case 'Health': health += number; break;
-                                case 'Critical Chance': critChance += number; break;
-                                case 'Agony Resistance': agonyResistance += number; break;
-                            }
+                            applyAttributeSpacing(attribute, number);
                         }
                     }
-                }
 
-                // Getting attributes from infusions
-                for (const upgrade of item.upgrades) {
+                    // Getting attributes from infusions
                     if (upgrade.details.type === 'Default') {
                         const attr = upgrade.details.infix_upgrade.attributes;
                         attributes = attr.reduce((obj, item) => {
@@ -149,24 +157,7 @@ function Attributes({ items, prof }) {
                         }, {});
                         for (const attribute in attributes) {
                             const number = attributes[attribute];
-                            switch (attribute) {
-                                case 'Power': power += number; break;
-                                case 'Precision': precision += number; break;
-                                case 'Toughness': toughness += number; break;
-                                case 'Vitality': vitality += number; break;
-                                case 'BoonDuration': concentration += number; break;
-                                case 'ConditionDamage': condiDamage += number; break;
-                                case 'Concentration': concentration += number; break;
-                                case 'Expertise': expertise += number; break;
-                                case 'ConditionDuration': expertise += number; break;
-                                case 'Ferocity': ferocity += number; break;
-                                case 'Healing': healingPower += number; break;
-                                case 'Armor': armor += number; break;
-                                case 'CritDamage': ferocity += number; break;
-                                case 'Health': health += number; break;
-                                case 'CritChance': critChance += number; break;
-                                case 'AgonyResistance': agonyResistance += number; break;
-                            }
+                            applyAttributeNoSpacing(attribute, number);
                         }
                     }
                 }
@@ -187,24 +178,7 @@ function Attributes({ items, prof }) {
                     let percentage = match[3] ? match[3] + '%' : '';  // '%' or ''
                     let attribute = match[4];   // 'Attribute'
 
-                    switch (attribute) {
-                        case 'Power': power += number; break;
-                        case 'Precision': precision += number; break;
-                        case 'Toughness': toughness += number; break;
-                        case 'Vitality': vitality += number; break;
-                        case 'Boon Duration': boonDuration += number; break;
-                        case 'Condition Damage': condiDamage += number; break;
-                        case 'Concentration': concentration += number; break;
-                        case 'Expertise': expertise += number; break;
-                        case 'Condition Duration': condiDuration += number; break;
-                        case 'Ferocity': ferocity += number; break;
-                        case 'Healing': healingPower += number; break;
-                        case 'Armor': armor += number; break;
-                        case 'Critical Damage': critDamage += number; break;
-                        case 'Health': health += number; break;
-                        case 'Critical Chance': critChance += number; break;
-                        case 'Agony Resistance': agonyResistance += number; break;
-                    }
+                    applyAttributeSpacing(attribute, number);
                 }
             }
         }
