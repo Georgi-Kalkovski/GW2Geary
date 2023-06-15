@@ -8,10 +8,13 @@ import './Build.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 
-function Build({ tab }) {
+function Build({ setBuild, tab }) {
     const [isLoading, setIsLoading] = useState(true);
     const [specializations, setSpecializations] = useState([]);
 
+    const [traits, setTraits] = useState([]);
+    setBuild(traits);
+    
     useEffect(() => {
         const fetchSpecializations = async () => {
             try {
@@ -60,7 +63,7 @@ function Build({ tab }) {
                     {specializations && tab.skills && tab.aquatic_skills && (
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                            <Traits specializations={specializations} prof={tab.profession} />
+                            <Traits setTraits={setTraits} specializations={specializations} prof={tab.profession} />
                             <br />
                             <Template buildInput={tab} />
                         </>

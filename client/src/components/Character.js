@@ -21,6 +21,8 @@ function Character() {
     const [world, setWorld] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false)
 
+    const [selectedBuild, setSelectedBuild] = useState([]);
+
     useEffect(() => {
         try {
             (async () => {
@@ -92,8 +94,8 @@ function Character() {
                 <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
 
                 <div className='equipment-build-flex'>
-                    <EquipmentDropdown char={character} />
-                    <BuildDropdown char={character} />
+                    <EquipmentDropdown char={character} build={selectedBuild}/>
+                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild}/>
                 </div>
             </Container>
     );

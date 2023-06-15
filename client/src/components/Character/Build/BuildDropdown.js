@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Build from './Build'
+import Build from './Build';
 import { usePopperTooltip } from 'react-popper-tooltip';
-import mouseClick from '.././mouse-click.svg'
-import info from '.././info.svg';
+import mouseClick from '.././mouse-click.svg';
 
 
-function BuildDropdown({ char }) {
+function BuildDropdown({ setSelectedBuild, char }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedTab, setSelectedTab] = useState(
         char.build_tabs.find((build) => build.is_active)
     );
 
+    const [build, setBuild] = useState([]);
+    setSelectedBuild(build);
+    
     // Click outside of dropdown menu logic
     const wrapperRef = useRef(null);
     const handleClickOutside = (event) => {
@@ -82,7 +84,7 @@ function BuildDropdown({ char }) {
                     </ul>
                 )}
             </div>
-            {<Build tab={selectedTab.build} key={selectedTab.tab} />}
+            {<Build tab={selectedTab.build} setBuild={setBuild} key={selectedTab.tab} />}
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Tooltip from './Tooltip';
 
-function Trait({ traitMin, traitMaj, traitsActive, prof }) {
+function Trait({  traitMin, traitMaj, traitsActive, prof }) {
 
     function imageTraitMin(trait) {
         return (

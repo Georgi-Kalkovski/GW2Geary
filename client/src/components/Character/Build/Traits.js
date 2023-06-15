@@ -1,7 +1,11 @@
 import { Container, Col } from 'react-bootstrap';
 import Trait from './Trait';
+import { useState } from 'react';
 
-function Traits({ specializations, prof }) {
+function Traits({ setTraits, specializations, prof }) {
+
+    setTraits(specializations);
+
     return (
         <>
             {specializations && specializations.length > 0 && (

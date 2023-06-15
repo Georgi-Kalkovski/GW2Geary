@@ -16,8 +16,7 @@ import CritDamage from './img/Critical_Damage.png';
 import Health from './img/Health.png';
 import AgonyResistance from './img/Agony_Resistance.png';
 
-function Attributes({ items, prof }) {
-
+function Attributes({ items, prof, build }) {
     let power = 1000;
     let precision = 1000;
     let toughness = 1000;
@@ -36,7 +35,7 @@ function Attributes({ items, prof }) {
     let agonyResistance = 0;
 
     let defense = 0;
-    
+
     if (prof === 'Warrior' || prof === 'Necromancer') {
         health += 9212
     } else if (prof === 'Revenant' || prof === 'Engineer' || prof === 'Ranger' || prof === 'Mesmer') {
@@ -44,7 +43,7 @@ function Attributes({ items, prof }) {
     } else if (prof === 'Guardian' || prof === 'Thief' || prof === 'Elementalist') {
         health += 1645
     }
-    
+
     const uniqueRunes = [];
 
     function applyAttributeSpacing(attribute, number) {
@@ -86,6 +85,23 @@ function Attributes({ items, prof }) {
             case 'Health': health += number; break;
             case 'CritChance': critChance += number; break;
             case 'Agony Resistance': agonyResistance += number; break;
+        }
+    }
+
+    // Traits logic
+    for (const specs of build) {
+        const mins = specs.traits.min;
+        const majs = specs.traits.maj.filter(maj => specs.activeTraits.includes(maj.id));
+        const specsArr = mins.concat(majs);
+
+        for (const spec of specsArr) {
+            if (spec && spec.facts) {
+                if (spec.facts[0].target && spec.facts[0].value) {
+                    if (spec.facts[0].target) {
+                        applyAttributeNoSpacing(spec.facts[0].target, spec.facts[0].value)
+                    }
+                }
+            }
         }
     }
 

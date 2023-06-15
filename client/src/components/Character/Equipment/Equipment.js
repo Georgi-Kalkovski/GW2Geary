@@ -6,7 +6,7 @@ import './Equipment.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 
-function Equipment({ items, prof, slider }) {
+function Equipment({ items, prof, slider, build }) {
     // console.log('items', items)
     const [isLoading, setIsLoading] = useState(true);
 
@@ -60,7 +60,7 @@ function Equipment({ items, prof, slider }) {
                             <br />
                             <Row>Attributes</Row>
                             <br />
-                            <Attributes items={items} prof={prof} />
+                            <Attributes items={items} build={build} prof={prof} />
                             <br />
                             <Col className='flex'>
                                 <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />

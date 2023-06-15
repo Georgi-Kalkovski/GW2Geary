@@ -4,7 +4,7 @@ import Equipment from './Equipment';
 import fetchData from '../../fetchData';
 import mouseClick from '.././mouse-click.svg';
 
-const EquipmentDropdown = ({ char }) => {
+const EquipmentDropdown = ({ char, build }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(
     char.equipment_tabs.find((equip) => equip.is_active)
@@ -164,7 +164,7 @@ const EquipmentDropdown = ({ char }) => {
           </div>
         )}
       </div>
-      <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} prof={char.profession} slider={isSliderOn} />
+      <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} build={build} prof={char.profession} slider={isSliderOn} />
     </div>
   );
 
