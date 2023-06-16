@@ -89,21 +89,49 @@ function Attributes({ items, prof, build }) {
     }
 
     // Traits logic
+
+    /*
+    const oneHandWeapons = ['axe', 'dagger', 'mace', 'pistol', 'sword', 'scepter', 'focus', 'shield', 'torch', 'warhorn'];
+    const twoHandWeapons = ['greatsword', 'hammer', 'longbow', 'rifle', 'short bow', 'staff']
     for (const specs of build) {
         const mins = specs.traits.min;
         const majs = specs.traits.maj.filter(maj => specs.activeTraits.includes(maj.id));
         const specsArr = mins.concat(majs);
-
+        let weapon1 = items.find(i => i.slot === 'WeaponA1')?.details.type.toLowerCase();
+        let weapon2 = items.find(i => i.slot === 'WeaponA2')?.details.type.toLowerCase();
+        console.log('wep1', weapon1)
+        console.log('wep2', weapon2)
         for (const spec of specsArr) {
-            if (spec && spec.facts) {
-                if (spec.facts[0].target && spec.facts[0].value) {
-                    if (spec.facts[0].target) {
-                        applyAttributeNoSpacing(spec.facts[0].target, spec.facts[0].value)
+            if (spec && spec.facts && spec.facts[0]) {
+                const fact = spec.facts[0];
+                if (fact.target && fact.value) {
+                    const target = fact.target;
+                    const value = fact.value;
+                    const description = spec.description;
+                    const wieldingRegex = /wielding a (\w+)?/i;
+                    const wieldingMatch = description?.match(wieldingRegex);
+                    if (wieldingMatch) {
+                        const wordAfterWielding = wieldingMatch[1];
+                        if (wordAfterWielding === 'one-handed') {
+                            if (oneHandWeapons.includes(weapon1) || oneHandWeapons.includes(weapon2)) {
+                                applyAttributeNoSpacing(target, value);
+                            }
+                        } else if (wordAfterWielding === 'two-handed') {
+                            if (twoHandWeapons.includes(weapon1) || twoHandWeapons.includes(weapon2)) {
+                                applyAttributeNoSpacing(target, value);
+                            }
+                        } else {
+
+                        }
+
+                        console.log("Word after 'wielding a':", wordAfterWielding);
+                    } else {
+                        applyAttributeNoSpacing(target, value);
                     }
                 }
             }
         }
-    }
+    } */
 
     // Looking items
     for (const item of items) {
