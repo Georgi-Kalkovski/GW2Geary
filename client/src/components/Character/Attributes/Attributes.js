@@ -261,25 +261,31 @@ function Attributes({ items, prof, build }) {
         { name: "Condition Duration", icon: CondiDuration, value: condiDuration.toFixed(2) + "%" },
         { name: "Boon Duration", icon: BoonDuration, value: boonDuration.toFixed(2) + "%" }
     ];
-
     return (
-        <Container className='attribute-container' style={{ display: 'flex', paddingLeft: '10%' }}>
-            <Col className="attribute-col-one" style={{ width: "50%", textAlign: "left" }}>
-                {attr.slice(0, 9).map((attribute, index) => (
-                    <Row key={index}>
-                        <AttributesBox attribute={attribute} />
-                    </Row>
-                ))}
+        <div className={`${prof.toLowerCase()}-lightning-border`} style={{ boxShadow: 'none', background:'#191919', borderWidth: '3px', paddingBottom: '5px', marginBottom: '10px' }}>
+            <Row  style={{ borderWidth: '0 0 0px 0', padding: '5px 0 5px 0' }}>
+                Attributes
+            </Row>
 
-            </Col>
-            <Col className="attribute-col-two" style={{ width: "50%", textAlign: "left" }}>
-                <br />
-                {attr.slice(9).map((attribute, index) => (
-                    <Row key={index}>
-                        <AttributesBox attribute={attribute} />
-                    </Row>
-                ))}
-            </Col>
-        </Container>);
+            <Container className='attribute-container' style={{ display: 'flex', padding: '5px 5% 0 5%' }}>
+                <Col className="attribute-col-one" style={{ textAlign: "left" }}>
+                    {attr.slice(0, 9).map((attribute, index) => (
+                        <Row key={index}>
+                            <AttributesBox attribute={attribute} />
+                        </Row>
+                    ))}
+
+                </Col>
+                <Col className="attribute-col-two" style={{ width: "100%", textAlign: "left" }}>
+                    <br />
+                    {attr.slice(9).map((attribute, index) => (
+                        <Row key={index}>
+                            <AttributesBox attribute={attribute} />
+                        </Row>
+                    ))}
+                </Col>
+            </Container>
+            <span style={{ color: '#f16565', fontSize: '10px' }}>Traits & Skills not implemented!</span>
+        </div>);
 }
 export default Attributes

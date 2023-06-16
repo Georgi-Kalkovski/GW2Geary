@@ -58,22 +58,18 @@ function Equipment({ items, prof, slider, build }) {
 
                         <Col className='equipment-col-2'>
                             <br />
-                            <Row>Attributes</Row>
-                            <br />
-                            <Attributes items={items} build={build} prof={prof} />
-                            <br />
+                            <Attributes items={items} build={build} prof={prof}/>
                             <Col className='flex'>
                                 <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} slider={slider} />
                             </Col>
-                            <Col className='flex'>
+                            <Col className='flex' style={{marginBottom: '10px'}}>
                                 <ItemTooltip item={items.find(x => x.slot === 'Amulet')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Ring1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} slider={slider} />
                             </Col>
-                            <br />
-                            <Col className='flex'>
+                            <Col className='flex' >
                                 <ItemTooltip item={items.find(x => x.slot === 'HelmAquatic')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticA')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticB')} slider={slider} />

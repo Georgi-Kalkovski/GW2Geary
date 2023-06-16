@@ -22,7 +22,7 @@ const AttributesTooltip = ({ name, icon, value, className }) => {
     return (
         <>
             <Col ref={setTriggerRef}>
-                <Row className="flex cursor attribute" ><img src={icon} alt={name} /> {value}</Row>
+                <Row className="flex cursor attribute" ><img src={icon} alt={name} style={{paddingRight: '5px', width:'20px'}}/> {value}</Row>
             </Col>
             {visible && (
                 <div
