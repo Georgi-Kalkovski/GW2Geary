@@ -4,10 +4,11 @@ import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
 function ProfileApis({ currentUser, AuthService }) {
+    const ip = process.env.IP || "localhost";
     const [apiKeys, setApiKeys] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {
-        return axios.get(`http://localhost:3001/api/auth/users/${userId}/apiKeys`, {
+        return axios.get(`http://${ip}:3001/api/auth/users/${userId}/apiKeys`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
