@@ -434,11 +434,14 @@ body.light-theme .pagination-item:hover,
 body.light-theme .center-class:hover,
 body.light-theme .basic-button:hover,
 body.light-theme .dropdown>ul>li:hover {
-  background-color: #ffc6c6;
+  background-color: #b9b9b9;
   transition: background-color 0.2s;
 }
 
 
-body.light-theme .yellow-highlight {
+body.light-theme .red-highlight {
   color: #c53737;
+}
+body.light-theme .yellow-highlight {
+  color: #b59d00;
 }

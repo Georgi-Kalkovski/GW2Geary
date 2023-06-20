@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="App">
       <nav className="app-nav">
-        <Link to={"/search"} className="nav-a left-nav">
+        <Link to={"/"} className="nav-a left-nav">
           <div className="flex logo-spin">
             <div style={{ fontFamily: 'GW2Font', fontSize: '30px', color: '#aa0404' }}>GW2</div>
             <div className="logo-div">
