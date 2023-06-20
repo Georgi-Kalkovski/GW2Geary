@@ -195,6 +195,7 @@ label {
   z-index: 1;
   width: 50px;
   height: 50px;
+  filter: drop-shadow(1.5px 2px 0px rgba(0, 0, 0, 1));
 }
 
 .logo-spin:hover .logo-cog {
@@ -290,7 +291,7 @@ p span {
 
 .logo-loading-div-build {
   position: relative;
-  top:287px;
+  top: 287px;
   transform: translate(-50%, -50%);
 }
 
@@ -369,4 +370,75 @@ p span {
 
 .add-api-key-button {
   margin-left: 20px;
+}
+
+.red-highlight {
+  color: #e91d25;
+}
+.sun-moon:hover {
+  filter: invert(87%) sepia(61%) saturate(5291%) hue-rotate(356deg) brightness(98%) contrast(115%);
+}
+/* Light Mode */
+
+body.light-theme {
+  background-color: #e7e6e6;
+  color: #35363a;
+}
+
+body.light-theme .app-nav,
+body.light-theme .home-empty-search-box,
+body.light-theme .search-input,
+body.light-theme ::placeholder,
+body.light-theme .center-class,
+body.light-theme .pagination-item:not(.active),
+body.light-theme .acc-info,
+body.light-theme .char-info,
+body.light-theme .equipment,
+body.light-theme .build,
+body.light-theme .template-text,
+body.light-theme .basic-button,
+body.light-theme .dropdown>ul>li,
+body.light-theme .form-control {
+  background-color: rgb(255, 255, 255);
+  color: #35363a;
+  -webkit-text-fill-color: #35363a;
+}
+
+body.light-theme .sun-moon:hover {
+  filter: invert(0%) sepia(33%) saturate(5291%) hue-rotate(339deg) brightness(98%) contrast(115%);
+}
+
+body.light-theme .tooltip-container {
+  color: #ffffff;
+}
+
+
+body.light-theme .nav-a {
+  color: #35363a;
+}
+
+body.light-theme .basic-button,
+body.light-theme .form-control {
+  box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.3);
+}
+
+body.light-theme .arrow-line>div>div {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.48);
+}
+
+body.light-theme .up-down-arrow {
+  filter: invert(75%) sepia(97%) saturate(4%) hue-rotate(28deg) brightness(103%) contrast(100%);
+}
+
+body.light-theme .pagination-item:hover,
+body.light-theme .center-class:hover,
+body.light-theme .basic-button:hover,
+body.light-theme .dropdown>ul>li:hover {
+  background-color: #ffc6c6;
+  transition: background-color 0.2s;
+}
+
+
+body.light-theme .yellow-highlight {
+  color: #c53737;
 }

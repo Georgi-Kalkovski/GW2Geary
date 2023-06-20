@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EventBus from "./common/EventBus";
 import { Route, Routes, Link } from "react-router-dom";
+import ToggleLightMode from "./ToggleLightMode";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -61,9 +62,11 @@ const App = () => {
 
         {currentUser ? (
           <div className="nav-profile-logout right-nav">
+
+            <ToggleLightMode />
             <li style={{ paddingRight: '10px' }}>
               {`Welcome, `}
-              <Link to={"/profile"} className="nav-a yellow-highlight">
+              <Link to={"/profile"} className="nav-a red-highlight">
                 {`${newUsername ? newUsername : currentUser.username}`}
               </Link>
             </li>
@@ -75,6 +78,8 @@ const App = () => {
           </div>
         ) : (
           <div className="nav-profile-logout right-nav">
+
+            <ToggleLightMode />
             <li>
               <Link to={"/login"} className="nav-a">
                 Login
