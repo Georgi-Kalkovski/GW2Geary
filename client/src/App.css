@@ -361,6 +361,7 @@ p span {
   font-family: 'GW2Font';
   font-size: 25px;
   color: #aa0404;
+  -webkit-text-fill-color: #aa0404;
 }
 
 .geary-logo-style {
@@ -437,7 +438,6 @@ body.light-theme .dropdown>ul>li:hover {
   background-color: #b9b9b9;
   transition: background-color 0.2s;
 }
-
 
 body.light-theme .red-highlight {
   color: #c53737;
