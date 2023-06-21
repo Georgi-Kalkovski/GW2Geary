@@ -373,9 +373,6 @@ p span {
   margin-left: 20px;
 }
 
-.red-highlight {
-  color: #e91d25;
-}
 .sun-moon:hover {
   filter: invert(87%) sepia(61%) saturate(5291%) hue-rotate(356deg) brightness(98%) contrast(115%);
 }
@@ -439,9 +436,7 @@ body.light-theme .dropdown>ul>li:hover {
   transition: background-color 0.2s;
 }
 
-body.light-theme .red-highlight {
-  color: #c53737;
-}
 body.light-theme .yellow-highlight {
-  color: #b59d00;
+  color: #aa0404;
+  -webkit-text-fill-color: #aa0404;
 }

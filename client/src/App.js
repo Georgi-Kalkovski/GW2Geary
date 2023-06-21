@@ -66,7 +66,7 @@ const App = () => {
             <ToggleLightMode />
             <li style={{ paddingRight: '10px' }}>
               {`Welcome, `}
-              <Link to={"/profile"} className="nav-a red-highlight">
+              <Link to={"/profile"} className="nav-a yellow-highlight">
                 {`${newUsername ? newUsername : currentUser.username}`}
               </Link>
             </li>
