@@ -399,7 +399,6 @@ body.light-theme .dropdown>ul>li,
 body.light-theme .form-control {
   background-color: rgb(255, 255, 255);
   color: #35363a;
-  -webkit-text-fill-color: #35363a;
 }
 
 body.light-theme .sun-moon:hover {
@@ -409,7 +408,6 @@ body.light-theme .sun-moon:hover {
 body.light-theme .tooltip-container {
   color: #ffffff;
 }
-
 
 body.light-theme .nav-a {
   color: #35363a;
@@ -439,4 +437,9 @@ body.light-theme .dropdown>ul>li:hover {
 body.light-theme .yellow-highlight {
   color: #aa0404;
   -webkit-text-fill-color: #aa0404;
+}
+
+body.light-theme input:-webkit-autofill {
+  -webkit-text-fill-color: #35363a;
+  -webkit-box-shadow: 0 0 0 100px #ffffff inset;
 }
