@@ -10,7 +10,7 @@ const User = require('./models/user.model');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const ip = process.env.IP || 'localhost';
+const ip = 'localhost';
 
 // Enable CORS
 app.use(cors());

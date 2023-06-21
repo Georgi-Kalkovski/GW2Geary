@@ -1,6 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const ip = process.env.IP || "localhost";
+const ip = 'localhost';
 const API_URL = `http://${ip}:3001/api/test/`;
 
 const getPublicContent = () => {

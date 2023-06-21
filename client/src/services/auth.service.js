@@ -1,5 +1,5 @@
 import axios from "axios";
-const ip = process.env.IP || "localhost";
+const ip = 'localhost';
 const API_URL = `http://${ip}:3001/api/auth/`;
 
 // User Register Service

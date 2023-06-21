@@ -4,7 +4,7 @@ import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
 function ProfileApis({ currentUser, AuthService }) {
-    const ip = process.env.IP || "localhost";
+    const ip = 'localhost';
     const [apiKeys, setApiKeys] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {

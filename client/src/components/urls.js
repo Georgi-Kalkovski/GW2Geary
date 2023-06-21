@@ -1,5 +1,5 @@
 
-const ip = process.env.IP || "localhost";
+const ip = 'localhost';
 const urlBasic = `http://${ip}:3001/api/`;
 
 const URLS = {
