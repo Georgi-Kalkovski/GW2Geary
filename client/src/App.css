@@ -376,6 +376,7 @@ p span {
 .sun-moon:hover {
   filter: invert(87%) sepia(61%) saturate(5291%) hue-rotate(356deg) brightness(98%) contrast(115%);
 }
+
 /* Light Mode */
 
 body.light-theme {
