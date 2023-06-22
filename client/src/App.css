@@ -444,3 +444,9 @@ body.light-theme input:-webkit-autofill {
   -webkit-text-fill-color: #35363a;
   -webkit-box-shadow: 0 0 0 100px #ffffff inset;
 }
+
+body.light-theme .pagination-item:hover {
+  background-color: #aa0404;
+  color: white;
+  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+}
