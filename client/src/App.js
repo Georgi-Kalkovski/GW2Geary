@@ -13,6 +13,7 @@ import Account from "./components/Account";
 import Character from './components/Character';
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
+import Footer from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
 
 import Cog from './cog.svg';
@@ -112,6 +113,7 @@ const App = () => {
           <Route path="*" element={<Search />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
