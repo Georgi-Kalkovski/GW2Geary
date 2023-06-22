@@ -58,7 +58,7 @@ function Contacts() {
     return (
         <div className="flex center">
             <div>
-                <h2 style={{ textAlign: 'center' }}>Send us a message</h2>
+                <h2 style={{ textAlign: 'center' }}>Send a message</h2>
                 <h5 style={{ textAlign: 'center',marginTop:'-20px',marginBottom:'-5px' }}>or contact me in-game (<span className='yellow-highlight'>Terter.4125</span>)</h5>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

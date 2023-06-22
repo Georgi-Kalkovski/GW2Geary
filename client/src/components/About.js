@@ -6,9 +6,10 @@ function About() {
     return (
         <div className='flex center column'>
             <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
-            <h3>Privacy Notice</h3>
-            TODO....
-            <h3>Acknowledgements</h3>
+                <h3>Privacy Notice</h3>
+                <div className="line"></div>
+                TODO....
+                <h3>Acknowledgements</h3>
                 <div className="line"></div>
                 © ArenaNet LLC. All rights reserved.
                 NCSOFT, ArenaNet, Guild Wars, Guild Wars 2: Heart of Thorns, Guild Wars 2: Path of Fire, and Guild Wars 2: End of Dragons
