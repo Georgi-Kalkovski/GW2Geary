@@ -13,7 +13,7 @@ function Pagination({ filtered, itemsPerPage, totalPages, page, setPage }) {
         endPage = totalPages;
     } else {
         const middlePage = Math.floor(totalPagesToShow / 2);
-        let leftOffset = Math.min(middlePage, Math.floor(totalPagesToShow / 2));
+        let leftOffset = Math.min(middlePage, Math.floor(totalPagesToShow / 2) - 1);
         let rightOffset = Math.min(middlePage, totalPages - totalPagesToShow + 1) - 1;
 
         if (page <= middlePage) {

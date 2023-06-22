@@ -380,8 +380,24 @@ p span {
   margin-left: 20px;
 }
 
-.sun-moon:hover {
+.contact-svg {
+  width: 35px;
+  margin-right: 10px;
+}
+
+.sun-moon:hover,
+.contact-svg img:hover {
   filter: invert(87%) sepia(61%) saturate(5291%) hue-rotate(356deg) brightness(98%) contrast(115%);
+}
+
+.form-group label {
+  margin-left: 5px;
+}
+
+.form-button:disabled {
+  cursor: default;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .footer {
@@ -395,16 +411,42 @@ p span {
 
 .footer-left {
   text-align: left;
-  margin-bottom: 10px;
+  margin: -20px 0px 12px 15px;
 }
 
 .footer-middle {
   display: flex;
   justify-content: center;
+  margin-block-end: 0;
 }
 
 .footer-middle a {
   margin: 0 10px;
+}
+
+.about-box {
+  margin-top: 1em;
+  padding: 0em 1em 2em 1em;
+  background-color: #202124;
+  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+  color: #d3d3d3;
+  margin: 0 25%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.news-box {
+  margin: 0 30%;
+}
+
+.line {
+  width: 250px;
+  border-top: 1px solid rgb(255, 255, 255);
+  margin-bottom: 10px;
+  margin-top: -15px;
 }
 
 /* Light Mode */
@@ -416,6 +458,7 @@ body.light-theme {
 
 body.light-theme .app-nav,
 body.light-theme .home-empty-search-box,
+body.light-theme .about-box,
 body.light-theme .search-input,
 body.light-theme ::placeholder,
 body.light-theme .center-class,
@@ -428,13 +471,26 @@ body.light-theme .template-text,
 body.light-theme .basic-button,
 body.light-theme .dropdown>ul>li,
 body.light-theme .form-control,
-body.light-theme .footer {
+body.light-theme .footer,
+body.light-theme .form-button:disabled {
   background-color: rgb(255, 255, 255);
   color: #35363a;
 }
 
+body.light-theme .line {
+  border-top: 1px solid rgb(0, 0, 0);
+}
+
 body.light-theme .sun-moon:hover {
   filter: invert(0%) sepia(33%) saturate(5291%) hue-rotate(339deg) brightness(98%) contrast(115%);
+}
+
+body.light-theme .contact-svg img {
+  filter: invert(80%) sepia(2%) saturate(4015%) hue-rotate(188deg) brightness(102%) contrast(83%);
+}
+
+body.light-theme .contact-svg img:hover {
+  filter: invert(80%) sepia(33%) saturate(5291%) hue-rotate(339deg) brightness(98%) contrast(115%);
 }
 
 body.light-theme .tooltip-container {

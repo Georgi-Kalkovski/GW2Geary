@@ -14,6 +14,10 @@ import Character from './components/Character';
 import Profile from "./components/Profile";
 import ResetPassword from "./components/ResetPassword";
 import Footer from "./components/Footer";
+import About from "./components/About";
+import Contacts from "./components/Contacts";
+import News from "./components/News";
+import Support from "./components/Support";
 import ErrorPage from "./components/ErrorPage";
 
 import Cog from './cog.svg';
@@ -110,6 +114,10 @@ const App = () => {
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/support" element={<Support />} />
           <Route path="*" element={<Search />} />
         </Routes>
       </div>

@@ -105,6 +105,33 @@ app.post('/reset-password/:token', (req, res) => {
     });
 });
 
+app.post('/contacts', async (req, res) => {
+  const { email, subject, message } = req.body;
+
+  try {
+    // Compose the email
+    const mailOptions = {
+      from: email,
+      to: 'gw2geary@gmail.com',
+      subject: subject,
+      text: `
+      From: ${email}
+      Subject: ${subject}
+      Message: ${message}
+      `,
+    };
+
+    // Send the email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.response);
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.sendStatus(500);
+  }
+});
+
 // Consolidated routes
 app.use("/api", routes);
 

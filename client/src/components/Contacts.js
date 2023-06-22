@@ -1,5 +1,110 @@
+import React, { useState } from 'react';
+import AuthService from '../services/auth.service';
+
 function Contacts() {
-    return(<></>);
+    const ip = 'localhost';
+    const user = AuthService.getCurrentUser();
+    const [email, setEmail] = useState(user?.email || '');
+    const [subject, setSubject] = useState('');
+    const [message, setMessage] = useState('');
+    const [submissionMessage, setSubmissionMessage] = useState('');
+
+    const isButtonDisabled = subject === '' || message === '' || email === '';
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    const handleSubjectChange = (event) => {
+        setSubject(event.target.value);
+    };
+
+    const handleMessageChange = (event) => {
+        setMessage(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (subject && message && email) {
+            try {
+                const response = await fetch(`http://${ip}:3001/contacts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        subject: subject,
+                        message: message,
+                    }),
+                });
+
+                if (response.ok) {
+                    setSubmissionMessage('Success! Email sent successfully.');
+                    // Reset the form fields
+                    setSubject('');
+                    setMessage('');
+                    setEmail('');
+                } else {
+                    setSubmissionMessage('Error sending email: ' + response.statusText);
+                }
+            } catch (error) {
+                setSubmissionMessage('Error sending email: ' + error.message);
+            }
+        }
+    };
+
+    return (
+        <div className="flex center">
+            <div>
+                <h2 style={{ textAlign: 'center' }}>Send us a message</h2>
+                <h5 style={{ textAlign: 'center',marginTop:'-20px',marginBottom:'-5px' }}>or contact me in-game (<span className='yellow-highlight'>Terter.4125</span>)</h5>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="subject">Subject:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="subject"
+                            value={subject}
+                            onChange={handleSubjectChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message">Message:</label>
+                        <textarea
+                            className="form-control"
+                            id="message"
+                            value={message}
+                            onChange={handleMessageChange}
+                            style={{ minWidth: '193px', height: '100px' }}
+                        />
+                    </div>
+                    <div className="form-group flex center">
+                        <button
+                            type="submit"
+                            className="basic-button form-button"
+                            disabled={isButtonDisabled}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                {submissionMessage && <p>{submissionMessage}</p>}
+            </div>
+        </div>
+    );
 }
 
 export default Contacts;

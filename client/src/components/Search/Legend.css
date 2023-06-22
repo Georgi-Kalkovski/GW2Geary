@@ -25,4 +25,8 @@
     .home-empty-legend-box > div {
         padding:0
     }
+    .footer-left {
+        text-align: left;
+        margin: 0px;
+      }
 }
