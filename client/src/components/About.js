@@ -14,7 +14,7 @@ function About() {
                 <ul>
                     <li><span className='yellow-highlight'>Username</span>: The name you choose to identify yourself on our website.</li>
                     <li><span className='yellow-highlight'>Password</span>: Rest assured, your password is securely encrypted and stored in our database.</li>
-                    <li><span className='yellow-highlight'>Email</span>: If you provide it, we may collect your email address for communication purposes such as an email for password reset.</li>
+                    <li><span className='yellow-highlight'>Email</span>: If you provide it, we may collect your email address for communication purposes such as sendiong you a message for password reset.</li>
                     <li><span className='yellow-highlight'>API Keys</span>: If you share your API keys with us, we can access account information such as character equipment, builds, traits, and skills.</li>
                 </ul>
                 <h4><span className='yellow-highlight'>How We Use Your Information</span></h4>
