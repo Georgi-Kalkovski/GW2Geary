@@ -28,8 +28,8 @@ function About() {
                 <h4><span className='yellow-highlight'>Sharing Your Information</span></h4>
                 <div>We respect your privacy and do not sell, trade, or transfer your personal information to third parties without your explicit consent. However, there are a few exceptions:</div>
                 <ul>
-                    <li>Service Providers: We may engage trusted third-party service providers to help us operate GW2Geary and deliver our services. These providers are obligated to keep your information secure and confidential.</li>
-                    <li>Legal Requirements: If required by law or in response to a valid legal request, we may disclose your information.</li>
+                    <li><span className='yellow-highlight'>Service Providers</span>: We may engage trusted third-party service providers to help us operate GW2Geary and deliver our services. These providers are obligated to keep your information secure and confidential.</li>
+                    <li><span className='yellow-highlight'>Legal Requirements</span>: If required by law or in response to a valid legal request, we may disclose your information.</li>
                 </ul>
                 <h4><span className='yellow-highlight'>Data Retention and Deletion</span></h4>
                 <div>We retain your personal information only as long as necessary for the purposes stated in this Privacy Notice or as required by law. If you decide to delete your account and associated data, including API keys, you have the right to do so.</div>
