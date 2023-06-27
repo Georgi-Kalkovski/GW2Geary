@@ -84,7 +84,7 @@ function Attributes({ items, prof, build }) {
             case 'CritDamage': ferocity += number; break;
             case 'Health': health += number; break;
             case 'CritChance': critChance += number; break;
-            case 'Agony Resistance': agonyResistance += number; break;
+            case 'AgonyResistance': agonyResistance += number; break;
         }
     }
 
