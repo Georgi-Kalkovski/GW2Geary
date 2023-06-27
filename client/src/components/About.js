@@ -39,10 +39,10 @@ function About() {
                 <div>To enhance your experience on GW2Geary, we may use cookies and other tracking technologies. These tools help us understand your browsing patterns, analyze trends, administer the website, and gather demographic information.</div>
                 <h4><span className='yellow-highlight'>Links to Third-Party Websites</span></h4>
                 <div>GW2Geary may contain links to third-party websites. Please be aware that we are not responsible for their privacy practices or content. Before providing any personal information, we encourage you to review the privacy policies of those websites.</div>
-                {/* <li>
-      <h4><span className='yellow-highlight'>Children's Privacy</span></h4>
-      <p>GW2Geary is intended for users aged 16 and above. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such information, please contact us immediately.</p>
-    </li> */}
+                {/* 
+                <h4><span className='yellow-highlight'>Children's Privacy</span></h4>
+                <div>GW2Geary is intended for users aged 16 and above. We do not knowingly collect personal information from children. If you believe we have inadvertently collected such information, please contact us immediately.</div>
+                */}
                 <h4><span className='yellow-highlight'>Changes to this Privacy Notice</span></h4>
                 <div>We may update or modify this Privacy Notice as needed. Any changes will be effective upon posting the revised Privacy Notice on GW2Geary. We recommend checking this Privacy Notice periodically for updates.</div>
                 <p>If you have any questions, concerns, or requests about this Privacy Notice or the processing of your personal information, please reach out to us through the provided channels on GW2Geary.</p>
