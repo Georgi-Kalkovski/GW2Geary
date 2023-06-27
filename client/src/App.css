@@ -436,6 +436,7 @@ p span {
   flex-direction: column;
   text-align: center;
   font-size: 1.2em;
+  margin-bottom: 20px;
 }
 
 .news-box {
