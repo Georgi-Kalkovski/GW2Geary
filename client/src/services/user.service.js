@@ -1,6 +1,6 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const ip = 'localhost';
+const ip = 'gw2geary.com';
 const API_URL = `https://${ip}:3001/api/test/`;
 
 const getPublicContent = () => {

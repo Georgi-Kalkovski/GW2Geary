@@ -1,5 +1,5 @@
 import axios from "axios";
-const ip = 'localhost';
+const ip = 'gw2geary.com';
 const API_URL = `https://${ip}:3001/api/auth/`;
 
 // User Register Service
