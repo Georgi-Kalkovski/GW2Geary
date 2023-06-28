@@ -9,8 +9,8 @@ const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
 
 const app = express();
-const host = '0.0.0.0';
 const port = process.env.PORT || 3001;
+const host = 'localhost';
 
 // Enable CORS
 app.use(cors());
@@ -145,8 +145,8 @@ app.get("/", (req, res) => {
 //   console.log(`Server running on port ${port}`);
 // });
 
-app.listen(port, host, () => {
-  console.log(`Server running on host ${host}`);
+app.listen(port, () => {
+  // console.log(`Server running on host ${host}`);
   console.log(`Server running on port ${port}`);
 });
 
