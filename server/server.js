@@ -10,14 +10,13 @@ const User = require('./models/user.model');
 const http = require("http");
 
 const app = express();
-const ip = 'gw2geary.com';
-const port = 3001;
+const host = 'gw2geary.com';
+const port = process.env.PORT || 3001;
 
 const requestListener = function (req, res) {};
 
-const server = http.createServer(requestListener);
-server.listen(port, ip, () => {
-    console.log(`Server is running on http://${ip}:${port}`);
+app.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
 });
 
 // Enable CORS
@@ -76,7 +75,7 @@ app.post("/reset-password", async (req, res) => {
       subject: "GW2Geary Password Reset",
       html: `<h4>Hi ${user.username},</h4>
              <p>You have requested to reset your password.</p>
-             <p style="display: inline;">Click <h4 style="display: inline;"><a href="https://${ip}:3000/reset-password/${token}">here</a></h4> to reset your password.</p>
+             <p style="display: inline;">Click <h4 style="display: inline;"><a href="https://${host}:3000/reset-password/${token}">here</a></h4> to reset your password.</p>
              <p>If you did not request this, please ignore this email.</p>
              <h4>GW2Geary team.</h4>`,
     };
