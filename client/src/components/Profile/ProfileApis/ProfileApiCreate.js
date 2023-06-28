@@ -5,7 +5,7 @@ import Dragon from '../../../dragon.svg';
 import Cog from '../../../cog.svg';
 
 function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
-  const ip = 'gw2geary.com';
+  const ip = 'localhost';
   const [apiKey, setApiKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState(null);
