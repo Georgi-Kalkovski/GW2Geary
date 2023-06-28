@@ -4,11 +4,11 @@ import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
 function ProfileApis({ currentUser, AuthService }) {
-    const ip = 'localhost';
+    const ip = 'gw2geary.com';
     const [apiKeys, setApiKeys] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {
-        return axios.get(`http://${ip}:3001/api/auth/users/${userId}/apiKeys`, {
+        return axios.get(`http://${ip}/api/auth/users/${userId}/apiKeys`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },

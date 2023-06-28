@@ -5,7 +5,7 @@ import Dragon from '../../../dragon.svg';
 import Cog from '../../../cog.svg';
 
 function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
-  const ip = 'localhost';
+  const ip = 'gw2geary.com';
   const [apiKey, setApiKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState(null);
@@ -46,7 +46,7 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
   const createApiKey = (userId, accessToken, apiKey) => {
     return axios
       .put(
-        `http://${ip}:3001/api/auth/users/${userId}/apiKey`,
+        `http://${ip}/api/auth/users/${userId}/apiKey`,
         { apiKey },
         {
           headers: {

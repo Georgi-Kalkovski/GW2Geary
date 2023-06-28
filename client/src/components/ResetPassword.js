@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
     const { token } = useParams();
-    const ip = 'localhost';
+    const ip = 'gw2geary.com';
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -28,7 +28,7 @@ const ResetPassword = () => {
             return;
         }
         axios
-            .post(`http://${ip}:3001/reset-password/${token}`, { newPassword })
+            .post(`http://${ip}/reset-password/${token}`, { newPassword })
             .then((response) => {
                 console.log(response)
                 // Handle the success response
