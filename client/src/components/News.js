@@ -4,7 +4,7 @@ function News() {
     <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
         <h3>28.06.2023</h3>
         <div className="line"></div>
-        <span style={{color: 'rgb(215, 0, 0)'}}>GW2</span>GEARY IS LIVE!!!
+        <div ><span className="gw2-logo-style" style={{fontSize:'20px'}}>GW2</span><span className="geary-logo-style" style={{fontSize:'20px'}}>GEARY</span> IS LIVE!!!</div>
     </div>
 </div>);
 }
