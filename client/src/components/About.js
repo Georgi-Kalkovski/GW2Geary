@@ -46,7 +46,7 @@ function About() {
                 <h4><span className='yellow-highlight'>Changes to this Privacy Notice</span></h4>
                 <div>We may update or modify this Privacy Notice as needed. Any changes will be effective upon posting the revised Privacy Notice on GW2Geary. We recommend checking this Privacy Notice periodically for updates.</div>
                 <p>If you have any questions, concerns, or requests about this Privacy Notice or the processing of your personal information, please reach out to us through the provided channels on GW2Geary.</p>
-                <div>Last Updated: <span className='yellow-highlight'>26.06.2023</span></div>
+                <div>Last Updated: <span className='yellow-highlight'>28.06.2023</span></div>
 
                 {/* Acknowledgements */}
                 <h2><span className='yellow-highlight'>Acknowledgements</span></h2>
