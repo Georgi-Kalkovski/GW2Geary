@@ -28,7 +28,7 @@ function Contacts() {
 
         if (subject && message && email) {
             try {
-                const response = await fetch(`http://${ip}:3001/contacts`, {
+                const response = await fetch(`https://${ip}:3001/contacts`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

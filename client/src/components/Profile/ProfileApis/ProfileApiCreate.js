@@ -46,7 +46,7 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
   const createApiKey = (userId, accessToken, apiKey) => {
     return axios
       .put(
-        `http://${ip}:3001/api/auth/users/${userId}/apiKey`,
+        `https://${ip}:3001/api/auth/users/${userId}/apiKey`,
         { apiKey },
         {
           headers: {
