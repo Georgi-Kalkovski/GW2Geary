@@ -1,14 +1,14 @@
 import { useState, useCallback } from "react";
 
 function SendMail({ AuthService }) {
-    const ip = 'gw2geary.com';
+    const ip = 'https://gw2geary.com';
     const [usernameInput, setUsernameInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleCheckUsername = async () => {
         const userFound = (await AuthService.getAllUsers()).data.users.find(u => u.username === usernameInput);
         if (userFound && userFound.email) {
-            fetch(`http://${ip}/reset-password`, {
+            fetch(`${ip}/reset-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

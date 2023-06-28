@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AuthService from '../services/auth.service';
 
 function Contacts() {
-    const ip = 'gw2geary.com';
+    const ip = 'https://gw2geary.com';
     const user = AuthService.getCurrentUser();
     const [email, setEmail] = useState(user?.email || '');
     const [subject, setSubject] = useState('');
@@ -28,7 +28,7 @@ function Contacts() {
 
         if (subject && message && email) {
             try {
-                const response = await fetch(`http://${ip}/contacts`, {
+                const response = await fetch(`${ip}/contacts`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

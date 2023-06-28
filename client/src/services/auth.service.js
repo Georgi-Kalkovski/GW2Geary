@@ -1,6 +1,6 @@
 import axios from "axios";
-const ip = 'gw2geary.com';
-const API_URL = `http://${ip}/api/auth/`;
+const ip = 'https://gw2geary.com';
+const API_URL = `${ip}/api/auth/`;
 
 // User Register Service
 const register = (username, email, password) => {

@@ -1,6 +1,6 @@
 
-const ip = 'gw2geary.com';
-const urlBasic = `http://${ip}/api/`;
+const ip = 'https://gw2geary.com';
+const urlBasic = `${ip}/api/`;
 
 const URLS = {
     urlAccount: urlBasic + 'account/',
