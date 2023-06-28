@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AuthService from '../services/auth.service';
 
 function Contacts() {
-    const ip = 'localhost';
+    const ip = 'gw2geary.com';
     const user = AuthService.getCurrentUser();
     const [email, setEmail] = useState(user?.email || '');
     const [subject, setSubject] = useState('');

@@ -1,5 +1,5 @@
 
-const ip = 'localhost';
+const ip = 'gw2geary.com';
 const urlBasic = `http://${ip}:3001/api/`;
 
 const URLS = {
