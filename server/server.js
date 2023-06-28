@@ -7,10 +7,18 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
+const http = require("http");
 
 const app = express();
-const port = process.env.PORT || 3001;
 const ip = 'gw2geary.com';
+const port = 3001;
+
+const requestListener = function (req, res) {};
+
+const server = http.createServer(requestListener);
+server.listen(port, ip, () => {
+    console.log(`Server is running on http://${ip}:${port}`);
+});
 
 // Enable CORS
 app.use(cors());
@@ -140,10 +148,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Terter application." });
 });
 
-// Set port and listen for requests
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// // Set port and listen for requests
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
 
 // Function to initialize roles
 async function initial() {
