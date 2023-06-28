@@ -2,12 +2,9 @@ function News() {
     return( 
     <div className='flex center column'>
     <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
-        <h3>XX.XX.XXXX</h3>
+        <h3>28.06.2023</h3>
         <div className="line"></div>
-        GW2GEARY IS LIVE!!!
-        <h3>XX.XX.XXXX</h3>
-        <div className="line"></div>
-        GW2GEARY IS LIVE!!!
+        <span style={{color: 'rgb(215, 0, 0)'}}>GW2</span>GEARY IS LIVE!!!
     </div>
 </div>);
 }
