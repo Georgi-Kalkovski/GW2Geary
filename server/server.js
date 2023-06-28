@@ -140,9 +140,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Terter application." });
 });
 
-// // Set port/host and listen for requests
-app.listen(port, host, () => {
-  console.log(`Server running on host ${host}`);
+// // Set port and listen for requests
+app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
