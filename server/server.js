@@ -68,7 +68,7 @@ app.post("/reset-password", async (req, res) => {
       subject: "GW2Geary Password Reset",
       html: `<h4>Hi ${user.username},</h4>
              <p>You have requested to reset your password.</p>
-             <p style="display: inline;">Click <h4 style="display: inline;"><a href="https://${ip}:3000/reset-password/${token}">here</a></h4> to reset your password.</p>
+             <p style="display: inline;">Click <h4 style="display: inline;"><a href="https://gw2geary.com:3000/reset-password/${token}">here</a></h4> to reset your password.</p>
              <p>If you did not request this, please ignore this email.</p>
              <h4>GW2Geary team.</h4>`,
     };
