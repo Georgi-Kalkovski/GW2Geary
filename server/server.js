@@ -150,7 +150,6 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-
 // Function to initialize roles
 async function initial() {
   const db = require("./models");

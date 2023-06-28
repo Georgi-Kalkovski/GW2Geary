@@ -28,7 +28,7 @@ const ResetPassword = () => {
             return;
         }
         axios
-            .post(`https://${ip}:3001/reset-password/${token}`, { newPassword })
+            .post(`http://${ip}:3001/reset-password/${token}`, { newPassword })
             .then((response) => {
                 console.log(response)
                 // Handle the success response

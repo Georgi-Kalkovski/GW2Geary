@@ -8,7 +8,7 @@ function ProfileApis({ currentUser, AuthService }) {
     const [apiKeys, setApiKeys] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {
-        return axios.get(`https://${ip}:3001/api/auth/users/${userId}/apiKeys`, {
+        return axios.get(`http://${ip}:3001/api/auth/users/${userId}/apiKeys`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },

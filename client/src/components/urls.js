@@ -1,6 +1,6 @@
 
 const ip = 'localhost';
-const urlBasic = `https://${ip}:3001/api/`;
+const urlBasic = `http://${ip}:3001/api/`;
 
 const URLS = {
     urlAccount: urlBasic + 'account/',

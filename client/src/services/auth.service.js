@@ -1,6 +1,6 @@
 import axios from "axios";
 const ip = 'localhost';
-const API_URL = `https://${ip}:3001/api/auth/`;
+const API_URL = `http://${ip}:3001/api/auth/`;
 
 // User Register Service
 const register = (username, email, password) => {
