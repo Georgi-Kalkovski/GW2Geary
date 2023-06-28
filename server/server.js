@@ -10,7 +10,7 @@ const User = require('./models/user.model');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const ip = 'gw2geary.com';
+const ip = 'localhost';
 
 // Enable CORS
 app.use(cors());
