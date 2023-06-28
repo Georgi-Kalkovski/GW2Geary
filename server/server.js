@@ -10,7 +10,7 @@ const User = require('./models/user.model');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const host = 'localhost';
+const host = 'gw2geary.com';
 
 // Enable CORS
 app.use(cors());
@@ -140,12 +140,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Terter application." });
 });
 
-// // Set port and listen for requests
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
-
-app.listen(port,host, () => {
+// // Set port/host and listen for requests
+app.listen(port, host, () => {
   console.log(`Server running on host ${host}`);
   console.log(`Server running on port ${port}`);
 });
