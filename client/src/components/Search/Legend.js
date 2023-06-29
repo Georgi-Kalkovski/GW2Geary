@@ -40,8 +40,6 @@ function Legend() {
         <>
             <div className='home-empty-legend-box'>
 
-                {/* Variant 1 */}
-
                 {/* Logo Text */}
                 <div style={{ color: '#d3d3d3' }}>
                     The <span className='yellow-highlight'>logo</span> directs to <span className='yellow-highlight'>Search</span>, this page.

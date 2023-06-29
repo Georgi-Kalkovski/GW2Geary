@@ -88,7 +88,7 @@ function Contacts() {
                             id="message"
                             value={message}
                             onChange={handleMessageChange}
-                            style={{ minWidth: '193px', height: '100px' }}
+                            style={{ minWidth: '193px', height: '100px',fontSize:'15px' }}
                         />
                     </div>
                     <div className="form-group flex center">

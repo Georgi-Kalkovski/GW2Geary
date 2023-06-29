@@ -20,7 +20,7 @@ function About() {
                 <h4><span className='yellow-highlight'>How We Use Your Information</span></h4>
                 <div>We use the collected information for the following purposes:</div>
                 <ul>
-                    <li><span className='yellow-highlight'>Account Inspection</span>: You can search and inspect accounts and characters using our website's features.</li>
+                    <li><span className='yellow-highlight'>Account & Character Inspection</span>: You can search and inspect accounts and characters using our website's features.</li>
                     <li><span className='yellow-highlight'>Communication</span>: We may reach out to you regarding your account, important updates, and notifications.</li>
                     <li><span className='yellow-highlight'>Personalization</span>: We want to provide you with the best user experience, so we may personalize content and offer recommendations.</li>
                     <li><span className='yellow-highlight'>Statistical Analysis</span>: We analyze aggregated and anonymized data to improve our services, including utilizing Google Analytics.</li>
