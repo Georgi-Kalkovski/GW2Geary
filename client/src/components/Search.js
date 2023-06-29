@@ -4,7 +4,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
-import ReactGA from 'react-ga4';
 import './Classes.css';
 import './Search.css';
 
@@ -19,13 +18,6 @@ function Search() {
   function getRandomSort() {
     return Math.random() - 0.5;
   }
-  useEffect(() => {
-      ReactGA.initialize('G-H9RMM8EN19');
-  }, []);
-
-  useEffect(() => {
-    ReactGA.send({ hitType: 'pageview' });
-  }, []);
 
   useEffect(() => {
     try {
