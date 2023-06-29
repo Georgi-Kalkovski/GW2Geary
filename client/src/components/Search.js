@@ -19,11 +19,14 @@ function Search() {
   function getRandomSort() {
     return Math.random() - 0.5;
   }
-
   useEffect(() => {
-    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+    console.log(process.env.REACT_APP_GA_TRACKING_ID)
+    if (process.env.REACT_APP_GA_TRACKING_ID) {
+      console.log(process.env.REACT_APP_GA_TRACKING_ID)
+      ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+    }
   }, []);
-  
+
   useEffect(() => {
     ReactGA.send({ hitType: 'pageview' });
   }, []);
