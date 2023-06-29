@@ -20,8 +20,12 @@
       </p>" />
   <title>GW2Geary</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script src="ga.js"></script>
+  <script type="module">
+    import { loadGoogleTagManager, initializeGoogleTag } from './ga.js';
+
+    loadGoogleTagManager();
+    initializeGoogleTag();
+  </script>
 </head>
 
 <body>
