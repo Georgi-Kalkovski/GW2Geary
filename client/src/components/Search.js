@@ -20,11 +20,7 @@ function Search() {
     return Math.random() - 0.5;
   }
   useEffect(() => {
-    console.log(process.env.REACT_APP_GA_TRACKING_ID)
-    if (process.env.REACT_APP_GA_TRACKING_ID) {
-      console.log(process.env.REACT_APP_GA_TRACKING_ID)
-      ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
-    }
+      ReactGA.initialize('G-H9RMM8EN19');
   }, []);
 
   useEffect(() => {
