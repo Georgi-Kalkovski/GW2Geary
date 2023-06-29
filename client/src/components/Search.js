@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
-import { initializeGA, pageview } from 'react-ga4';
+import ReactGA from 'react-ga4';
 import './Classes.css';
 import './Search.css';
 
@@ -21,11 +21,11 @@ function Search() {
   }
 
   useEffect(() => {
-    initializeGA(process.env.REACT_APP_GA_TRACKING_ID);
+    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
   }, []);
-
+  
   useEffect(() => {
-    pageview();
+    ReactGA.send({ hitType: 'pageview' });
   }, []);
 
   useEffect(() => {
