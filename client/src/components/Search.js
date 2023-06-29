@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
-import Legend from './Search/Legend';
+import { initializeGA, pageview } from 'react-ga4';
 import './Classes.css';
 import './Search.css';
 
@@ -19,6 +19,14 @@ function Search() {
   function getRandomSort() {
     return Math.random() - 0.5;
   }
+
+  useEffect(() => {
+    initializeGA(process.env.REACT_APP_GA_TRACKING_ID);
+  }, []);
+
+  useEffect(() => {
+    pageview();
+  }, []);
 
   useEffect(() => {
     try {
@@ -154,11 +162,6 @@ function Search() {
               </Row>
             </Col>
           </Container>
-
-          {/* <Container className="flex center">
-            <Legend />
-          </Container> */}
-
         </>
       )}
     </>
