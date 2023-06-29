@@ -37,10 +37,10 @@ GW2Geary is a web application built with React that allows users to explore and 
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/4dab924b-0bc0-48d8-b38e-a6583f33be49)
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cdc8dabd-f863-4552-a232-720b7da6ac41)
 
-5. **Profile Page - Profile Apis, Profile Info**
+5. **Profile Page - Profile Info, Profile Apis**
 
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/ede9e6d0-fd39-487c-bb9d-529942382029)
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/afc4700a-23a8-4542-bd39-207af6551663)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/861b61fb-43e0-4c0b-8955-4dc93ae1ca6d)
 
 ## Acknowledgements
 
