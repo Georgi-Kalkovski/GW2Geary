@@ -67,9 +67,10 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                             {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
                         >
                             <div style={{ fontSize: '14px' }}>
-                                <span style={{ color: 'darkgreen' }}> Show </span>
-                                /<span style={{ color: '#aa0404' }}> Hide </span>
-                                accounts & characters
+                                Make accounts & characters
+                                <span style={{ color: 'darkgreen' }}> Public </span>
+                                /<span style={{ color: '#aa0404' }}> Private </span>
+                                
                             </div>
                             <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                         </div>

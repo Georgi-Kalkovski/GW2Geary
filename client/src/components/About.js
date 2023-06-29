@@ -62,7 +62,7 @@ function About() {
                 <div className='flex'>
                     <a className="contact-svg" href='https://discord.com/users/242250226545590274'><img src={discord} /></a>
                     <a className="contact-svg" href='https://www.linkedin.com/in/georgi-kalkovski/'><img src={linkedin} /></a>
-                    <a className="contact-svg" href='https://github.com/Georgi-Kalkovski'><img src={github} /></a>
+                    <a className="contact-svg" href='https://github.com/Georgi-Kalkovski/GW2Geary'><img src={github} /></a>
                 </div>
             </div>
         </div>);
