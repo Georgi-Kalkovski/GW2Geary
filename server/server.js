@@ -32,8 +32,8 @@ mongoose
 
 // Create a transporter with your email service provider's configuration
 const transporter = nodemailer.createTransport({
-  host: "gw2geary.com",
-  secure: true,
+  host: 'smtp.gmail.com',
+  port: 465,
   service: "gmail",
   auth: {
     user: process.env.NODEMAILER_USER,
