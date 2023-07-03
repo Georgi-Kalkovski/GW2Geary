@@ -22,7 +22,9 @@ function Footer() {
                     </li> */}
                 </p>
                 <div className='footer-left'>
-                    <span>{`© GW2Geary ${year}`}</span>
+                    <li>
+                        <Link className='nav-a' to='https://github.com/Georgi-Kalkovski/GW2Geary'>{`© GW2Geary ${year}`}</Link>
+                    </li>
                 </div>
             </footer>
 
