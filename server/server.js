@@ -7,7 +7,6 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
-require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3001;
