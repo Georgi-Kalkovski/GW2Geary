@@ -359,4 +359,23 @@ input:checked+.slider:before {
     flex-direction: column;
     min-width: 214px !important;
   }
+
+  .footer-left {
+    margin: 0;
+    text-align: center;
+  }
+
+  .equipment {
+    height: 583px;
+  }
+
+  .build {
+    height: 596.5px;
+  }
+
+  .equipment,
+  .build,
+  .char-ifno {
+    min-width: 401px !important;
+  }
 }
