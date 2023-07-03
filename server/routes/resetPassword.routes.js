@@ -3,7 +3,7 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-const User = require('./models/user.model');
+const User = require('../models/user.model');
 
 // Create a transporter with your email service provider's configuration
 const transporter = nodemailer.createTransport({
