@@ -291,6 +291,10 @@ input:checked+.slider:before {
 
 /* Hide the API key on small screens */
 @media (max-width: 550px) {
+  .content {
+    margin-top: 1em;
+  }
+
   .api-key-fact {
     justify-content: center;
   }
@@ -392,6 +396,6 @@ input:checked+.slider:before {
   }
 
   .flex-row-center {
-    margin: 0 25%;;
+    margin: 0 25%;
   }
 }
