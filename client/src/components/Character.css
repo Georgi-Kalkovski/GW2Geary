@@ -361,6 +361,7 @@ input:checked+.slider:before {
 
   .footer-left {
     margin: 0;
+    padding: 10px 0;
     text-align: center;
   }
 
@@ -382,5 +383,13 @@ input:checked+.slider:before {
   .about-box {
     margin: 0 10px;
     margin-bottom: 20px;
+  }
+
+  .api-info-field {
+    display: table-caption;
+  }
+
+  .flex-row-center {
+    margin: 0 25%;;
   }
 }

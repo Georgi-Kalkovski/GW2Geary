@@ -80,7 +80,7 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
     [handleApiKeyCreate]
   );
   return (
-    <>
+    <div className="api-info-field">
       <label htmlFor="apiKey">
         Enter a valid API key created from{" "}
         <Link style={{ color: '#d70000' }} to="https://account.arena.net/applications" target="_blank">
@@ -116,7 +116,7 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

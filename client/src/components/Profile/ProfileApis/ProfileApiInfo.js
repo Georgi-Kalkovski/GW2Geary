@@ -45,7 +45,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
 
     return (
         <>
-            <div key={apiKey._id} >
+            <div key={apiKey._id}>
                 <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
                 <div className="facts-div api-key-fact api-right" key={`api-key-details-${apiKey._id}`}><span className="api-key-profile">{apiKey._id}{" "}</span>
 
@@ -70,7 +70,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                                 Make accounts & characters
                                 <span style={{ color: 'darkgreen' }}> Public </span>
                                 /<span style={{ color: '#aa0404' }}> Private </span>
-                                
+
                             </div>
                             <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                         </div>
