@@ -327,13 +327,12 @@ input:checked+.slider:before {
 
   .traits-box {
     width: 300px;
-    padding-top: 36px;
     padding-left: 0;
   }
 
   .cropped-spec-img {
-    margin-top: -40%;
-    margin-left: -23%;
+    margin-top: -120px;
+    margin-left: -62px;
   }
 
   .build {
@@ -352,12 +351,12 @@ input:checked+.slider:before {
   .char-info,
   .acc-info {
     flex-direction: column;
-    min-width: 350px !important;
+    min-width: 330px !important;
   }
 
   .acc-info {
     flex-direction: column;
-    min-width: 214px !important;
+    min-width: 188px !important;
   }
 
   .footer-left {
@@ -370,12 +369,13 @@ input:checked+.slider:before {
   }
 
   .build {
-    height: 596.5px;
+    height: 640.5px;
+    padding: 20px 0 !important;
   }
 
   .equipment,
   .build,
   .char-ifno {
-    min-width: 401px !important;
+    width: 355px !important;
   }
 }
