@@ -378,4 +378,9 @@ input:checked+.slider:before {
   .char-ifno {
     width: 355px !important;
   }
+
+  .about-box {
+    margin: 0 10px;
+    margin-bottom: 20px;
+  }
 }
