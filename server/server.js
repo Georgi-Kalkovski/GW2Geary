@@ -7,7 +7,6 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
-const enforce = require('express-sslify');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,7 +15,6 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // Connect to MongoDB
 mongoose
