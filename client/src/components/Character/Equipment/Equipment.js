@@ -64,7 +64,7 @@ function Equipment({ items, prof, slider, build }) {
                                 <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} slider={slider} />
                             </Col>
-                            <Col className='flex' style={{marginBottom: '10px'}}>
+                            <Col className='flex' style={{marginBottom: '12px'}}>
                                 <ItemTooltip item={items.find(x => x.slot === 'Amulet')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Ring1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} slider={slider} />
