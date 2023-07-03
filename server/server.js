@@ -48,7 +48,7 @@ function generateResetToken() {
 }
 
 // Send Mail Logic
-app.post("/reset-password", async (req, res) => {
+app.post("/api/reset-password", async (req, res) => {
   const { user } = req.body;
   try {
     if (!user) {
@@ -85,7 +85,7 @@ app.post("/reset-password", async (req, res) => {
 
 
 // Reset Password Logic
-app.post('/reset-password/:token', (req, res) => {
+app.post('/api/reset-password/:token', (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
   const encryptedPassword = bcrypt.hashSync(newPassword, 8);
@@ -106,7 +106,7 @@ app.post('/reset-password/:token', (req, res) => {
     });
 });
 
-app.post('/contacts', async (req, res) => {
+app.post('/api/contacts', async (req, res) => {
   const { email, subject, message } = req.body;
 
   try {
