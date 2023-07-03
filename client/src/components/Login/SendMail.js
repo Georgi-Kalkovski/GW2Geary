@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 function SendMail({ AuthService }) {
-    const ip = 'https://gw2geary.com';
+    const ip = 'https://www.gw2geary.com';
     const [usernameInput, setUsernameInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
