@@ -113,7 +113,7 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/resetPassword/:token" element={<ResetPassword />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/news" element={<News />} />

@@ -28,7 +28,7 @@ const ResetPassword = () => {
             return;
         }
         axios
-            .post(`${ip}/reset-password/${token}`, { newPassword })
+            .post(`${ip}/resetPassword/${token}`, { newPassword })
             .then((response) => {
                 console.log(response)
                 // Handle the success response

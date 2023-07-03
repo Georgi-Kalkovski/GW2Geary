@@ -19,7 +19,7 @@ const traitsRoutes = require('./traits.routes');
 const worldsRoutes = require('./worlds.routes');
 
 // Register routes
-router.use('/reset-password', resetPasswordRoutes);
+router.use('/resetPassword', resetPasswordRoutes);
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
 router.use('/account', accountRoutes);
