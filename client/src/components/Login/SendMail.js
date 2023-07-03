@@ -12,7 +12,7 @@ function SendMail({ AuthService }) {
     );
     if (userFound && userFound.email) {
       axios
-        .post(`${ip}/resetPassword`, { user: userFound }, { headers: { "Content-Type": "application/json" } })
+        .post(`${ip}/reset-password`, { user: userFound }, { headers: { "Content-Type": "application/json" } })
         .then((response) => {
           console.log(response.data);
           setErrorMessage("Email sent successfully!");
