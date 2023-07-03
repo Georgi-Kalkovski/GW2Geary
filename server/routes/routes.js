@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 // Import route Routess
-const resetPasswordRoutes = require('./resetPassword.routes');
 const authRoutes = require('./auth.routes');
 const userRoutes = require('./user.routes');
 const accountRoutes = require('./account.routes');
@@ -19,7 +18,6 @@ const traitsRoutes = require('./traits.routes');
 const worldsRoutes = require('./worlds.routes');
 
 // Register routes
-router.use('/resetPassword', resetPasswordRoutes);
 router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
 router.use('/account', accountRoutes);
