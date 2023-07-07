@@ -141,7 +141,7 @@ function Search() {
             <Col className="home-empty-search-box">
               <Row style={{ fontSize: '1.5em' }}>
                 Welcome to <span className="gw2-logo-style">GW2</span>
-                <span className="geary-logo-style">Geary</span> !
+                <span className="geary-logo-style">Geary</span>!
               </Row>
               <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
               <Row>
