@@ -14,8 +14,7 @@ function Search() {
   const [charactersPage, setCharactersPage] = useState(1);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
-  console.log(accounts.length)
-  console.log(accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0))
+  
   function getRandomSort() {
     return Math.random() - 0.5;
   }
