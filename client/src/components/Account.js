@@ -113,7 +113,7 @@ const Account = () => {
                         {window.innerWidth < 550 && !showMenu && (
                           <button
                             className={`basic-button`}
-                            style={{ marginTop: '5px', marginBottom: '-3px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
                             onClick={() => setShowMenu(true)}
                           >
                             Show More
@@ -122,7 +122,7 @@ const Account = () => {
                         {window.innerWidth < 550 && showMenu && (
                           <button
                             className={`basic-button`}
-                            style={{ marginTop: '5px', marginBottom: '-3px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
                             onClick={() => setShowMenu(false)}
                           >
                             Hide More
