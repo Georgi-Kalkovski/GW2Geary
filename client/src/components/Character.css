@@ -295,6 +295,9 @@ input:checked+.slider:before {
 
 /* Hide the API key on small screens */
 @media (max-width: 550px) {
+  .character-col {
+    margin-right: 0;
+  }
 
   .search-input,
   .home-empty-search-box {
