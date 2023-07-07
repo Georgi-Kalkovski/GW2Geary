@@ -17,7 +17,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
     if (tooltip && tooltip.skills) {
         currentTooltip = tooltip.skills[tooltipIndex];
     }
-
+    
     const {
         getArrowProps,
         getTooltipProps,
@@ -97,6 +97,8 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
                                                         return `${fact.text}`;
                                                     case 'ComboField':
                                                         return `${fact.text}: ${fact.field_type}`;
+                                                    case 'ComboFinisher':
+                                                        return `${fact.text}: ${fact.finisher_type}`;
                                                     case 'Damage':
                                                         return `${fact.text}: ${Math.floor((fact.dmg_multiplier * 1000) / 1.53)}`;
                                                     case 'Unblockable':
