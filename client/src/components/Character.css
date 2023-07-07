@@ -289,8 +289,27 @@ input:checked+.slider:before {
   font-size: 25px;
 }
 
+.home-welcome {
+  font-size: 1.5em;
+}
+
 /* Hide the API key on small screens */
 @media (max-width: 550px) {
+
+  .search-input,
+  .home-empty-search-box {
+    font-size: 1em;
+  }
+
+  .home-welcome {
+    font-size: 1.3em;
+  }
+
+  .gw2-logo-style,
+  .geary-logo-style {
+    font-size: 20px;
+  }
+
   .content {
     margin-top: 1em;
   }
