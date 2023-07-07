@@ -15,7 +15,14 @@ function About() {
                     <li><span className='yellow-highlight'>Username</span>: The name you choose to identify yourself on our website.</li>
                     <li><span className='yellow-highlight'>Password</span>: Rest assured, your password is securely encrypted and stored in our database.</li>
                     <li><span className='yellow-highlight'>Email</span>: If you provide it, we may collect your email address for communication purposes such as sendiong you a message for password reset.</li>
-                    <li><span className='yellow-highlight'>API Keys</span>: If you share your API keys with us, we can access account information such as character equipment, builds, traits, and skills.</li>
+                    <li><span className='yellow-highlight'>API Keys</span>: If you share your API keys with us, we can access account information such as character equipment, builds, traits, and skills.
+                        <div style={{ fontSize: '15px' }}>-<span className='yellow-highlight'> Required permissions </span>
+                            : <span style={{ borderBottom: '1px dotted' }}>account</span>
+                            , <span style={{ borderBottom: '1px dotted' }}>characters</span>
+                            , <span style={{ borderBottom: '1px dotted' }}>builds</span>
+                            , <span style={{ borderBottom: '1px dotted' }}>progression</span>
+                        </div>
+                    </li>
                 </ul>
                 <h4><span className='yellow-highlight'>How We Use Your Information</span></h4>
                 <div>We use the collected information for the following purposes:</div>
