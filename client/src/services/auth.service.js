@@ -137,7 +137,7 @@ const AuthService = {
   createApiKey,
   getApiKeys,
   updateApiKeyStatus,
-  deleteApiKey,
+  deleteApiKey
 };
 
 export default AuthService;
