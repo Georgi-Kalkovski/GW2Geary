@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const ip = 'https://gw2geary.com';
-const API_URL = `${ip}/api/test/`;
+const ip = 'https://gw2geary.com/api';
+const API_URL = `${ip}/test/`;
 
 const getPublicContent = () => {
   return axios.get(API_URL + "all");
