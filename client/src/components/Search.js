@@ -14,7 +14,8 @@ function Search() {
   const [charactersPage, setCharactersPage] = useState(1);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
-
+  console.log(accounts.length)
+  console.log(accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0))
   function getRandomSort() {
     return Math.random() - 0.5;
   }
@@ -151,6 +152,11 @@ function Search() {
                 </Link>{' '}
                 with us and granted access, you'll be able to find and inspect them.
               </Row>
+            </Col>
+          </Container>
+          <Container className="flex center">
+            <Col className="home-empty-search-box" style={{ width: 'auto', padding: '10px 10px' }}>
+              <Row>Аccounts: <span className='yellow-highlight'>{accounts.length}</span> | Characters: <span className='yellow-highlight'>{accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0)}</span></Row>
             </Col>
           </Container>
         </>
