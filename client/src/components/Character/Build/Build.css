@@ -164,9 +164,24 @@
     color: #088508;
 }
 
+.spec-name {
+    position: relative;
+    text-align: left;
+    right: -22px;
+    bottom: -125px;
+    font-weight: 500;
+    margin-top: -19px;
+    filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 1));
+}
+
 @media (max-width: 550px) {
     .build {
         min-width: 350px !important;
         padding: 5px !important;
+    }
+    .spec-name {
+        position: initial;
+        text-align: center;
+        margin-top: 0;
     }
 }

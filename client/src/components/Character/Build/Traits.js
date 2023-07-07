@@ -1,16 +1,16 @@
 import { Container, Col } from 'react-bootstrap';
 import Trait from './Trait';
-import { useState } from 'react';
+import React from 'react';
 
 function Traits({ setTraits, specializations, prof }) {
-
     setTraits(specializations);
-
     return (
         <>
             {specializations && specializations.length > 0 && (
                 specializations.map((specializationData, index) => (
                     <div key={index}>
+                        {console.log(specializationData)}
+                        <div className='spec-name'>{specializationData.specialization.name}</div>
                         <Col className="traits-box">
                             <Trait
                                 traitMin={specializationData.traits.min}
