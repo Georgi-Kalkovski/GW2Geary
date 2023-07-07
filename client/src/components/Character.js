@@ -10,7 +10,6 @@ import CharacterInfo from './Character/Info/CharacterInfo';
 import './Character.css';
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
-import fetchData from './fetchData';
 
 function Character() {
     const { name } = useParams();
@@ -26,26 +25,41 @@ function Character() {
 
     useEffect(() => {
         try {
-          (async () => {
-            const response = await axios.get(`https:/gw2geary.com/api/characters/${formattedName}`);
-            console.log(response)
-            const data = response.data;
-    
-            if (data.character && data.account) {
-              setCharacter(data.character);
-              setAccount(data.account);
-              setMastery(data.mastery);
-              setWorld(data.world);
-            }
-    
-            if (!data.account.active && data.character && currentUser?.apiKeys.find(k => k._id === data.account._id)) {
-              setIsPrivate(true);
-            }
-          })();
+            (async () => {
+                const users = await AuthService.getAllUsers();
+                for (const keys of users.data.users) {
+                    for (const key of keys.apiKeys) {
+                        for (const char of key.characters) {
+                            if (char.name === formattedName
+                                && key.active
+                                || char.name === formattedName
+                                && currentUser?.apiKeys.find(k => k._id === key._id)) {
+                                if (!key.active
+                                    && char.name === formattedName
+                                    && currentUser.apiKeys.find(k => k._id === key._id)) {
+                                    setIsPrivate(true)
+                                }
+
+                                const charFound = (await axios.get(`https://api.guildwars2.com/v2/characters/${formattedName.replaceAll(' ', '%20')}?access_token=${key._id}&v=latest`)).data;
+                                setCharacter(charFound)
+                                const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
+                                const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${key._id}`)).data;
+                                let world;
+                                if (accFound && accFound.world) {
+                                    world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+                                }
+                                setAccount(accFound)
+                                setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
+                                setWorld(world.name)
+                            }
+                        }
+                    }
+                }
+            })();
         } catch (error) {
-          console.error(error);
+            // console.error(error);
         }
-      }, [formattedName, currentUser]);
+    }, []);
 
     return (
         character === null || account === null
@@ -80,8 +94,8 @@ function Character() {
                 <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
 
                 <div className='equipment-build-flex'>
-                    <EquipmentDropdown char={character} build={selectedBuild} />
-                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild} />
+                    <EquipmentDropdown char={character} build={selectedBuild}/>
+                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild}/>
                 </div>
             </Container>
     );
