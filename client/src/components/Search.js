@@ -139,7 +139,7 @@ function Search() {
         <>
           <Container className="flex center">
             <Col className="home-empty-search-box">
-              <Row style={{ fontSize: '1.5em' }}>
+              <Row className='home-welcome'>
                 Welcome to <span className="gw2-logo-style">GW2</span>
                 <span className="geary-logo-style">Geary</span>!
               </Row>
