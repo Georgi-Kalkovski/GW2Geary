@@ -17,7 +17,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
     if (tooltip && tooltip.skills) {
         currentTooltip = tooltip.skills[tooltipIndex];
     }
-    
+
     const {
         getArrowProps,
         getTooltipProps,
