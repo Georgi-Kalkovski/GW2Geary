@@ -16,6 +16,23 @@ const Account = () => {
   const [mastery, setMastery] = useState(null);
   const [world, setWorld] = useState(null);
   const [active, setActive] = useState(false)
+  const [showMenu, setShowMenu] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowMenu(windowWidth >= 550);
+  }, [windowWidth]);
 
   useEffect(() => {
     try {
@@ -52,7 +69,7 @@ const Account = () => {
       // console.error(error);
     }
   }, []);
-  
+
   return (
     <div>
       <div>
@@ -92,26 +109,54 @@ const Account = () => {
                       <Col className='character-col'>
                         <Row style={{ fontSize: '30px' }}>{account.name}</Row>
                       </Col>
+                      <div className='flex center'>
+                        {window.innerWidth < 550 && !showMenu && (
+                          <button
+                            className={`basic-button`}
+                            style={{ marginTop: '5px', marginBottom: '-3px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                            onClick={() => setShowMenu(true)}
+                          >
+                            Show More
+                          </button>
+                        )}
+                        {window.innerWidth < 550 && showMenu && (
+                          <button
+                            className={`basic-button`}
+                            style={{ marginTop: '5px', marginBottom: '-3px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                            onClick={() => setShowMenu(false)}
+                          >
+                            Hide More
+                          </button>
+                        )}
+                      </div>
                       {/* World */}
-                      <Col className='character-col'>
-                        <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                        <Row className='yellow-highlight'>World</Row>
-                      </Col>
+                      {showMenu && (
+                        <Col className='character-col'>
+                          <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                          <Row className='yellow-highlight'>World</Row>
+                        </Col>
+                      )}
                       {/* Mastery Points */}
-                      <Col className='character-col'>
-                        <Row className='font-size-25px'>{mastery}</Row>
-                        <Row className='yellow-highlight'>Mastery Points </Row>
-                      </Col>
+                      {showMenu && (
+                        <Col className="character-col">
+                          <Row className="font-size-25px">{mastery}</Row>
+                          <Row className="yellow-highlight">Mastery Points </Row>
+                        </Col>
+                      )}
                       {/* Fractal Level */}
-                      <Col className='character-col'>
-                        <Row className='font-size-25px'>{account.fractal_level}</Row>
-                        <Row className='yellow-highlight'>Fractal Level</Row>
-                      </Col>
+                      {showMenu && (
+                        <Col className="character-col">
+                          <Row className="font-size-25px">{account?.fractal_level}</Row>
+                          <Row className="yellow-highlight">Fractal Level</Row>
+                        </Col>
+                      )}
                       {/* WvW Rank */}
-                      <Col className='character-col'>
-                        <Row className='font-size-25px'>{account?.wvw_rank}</Row>
-                        <Row className='yellow-highlight'>WvW Rank</Row>
-                      </Col>
+                      {showMenu && (
+                        <Col className="character-col">
+                          <Row className="font-size-25px">{account?.wvw_rank}</Row>
+                          <Row className="yellow-highlight">WvW Rank</Row>
+                        </Col>
+                      )}
                     </Row>
                   </Container>
 
