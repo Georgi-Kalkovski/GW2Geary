@@ -3,10 +3,9 @@ const axios = require('axios');
 const router = express.Router();
 const { apiKey, baseUrl } = require('./config.routes');
 
-router.get('/:name', async (req, res) => {
-    const { name } = req.params;
+router.get('/', async (req, res) => {
     try {
-        const response = await axios.get(`${baseUrl}/account/${name}`);
+        const response = await axios.get(`${baseUrl}/account?${apiKey}`);
         res.json(response.data);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching data from API' });
