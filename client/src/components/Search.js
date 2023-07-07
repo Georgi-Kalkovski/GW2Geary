@@ -110,7 +110,7 @@ function Search() {
             {displayedAccounts.length > 0 ? (
               displayedAccounts.map((account) => (
                 <div key={account.accountName} className="characters-boxes">
-                  <Link className="accounts-link" to={`/accounts/${account.accountName.replace(/\s/g, '_')}`}>
+                  <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
                     <Container className="accounts-box" key={account.accountName}>
                       <Col>
                         <Row className="center-class accounts-hover">
