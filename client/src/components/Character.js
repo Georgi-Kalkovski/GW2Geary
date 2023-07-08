@@ -77,7 +77,7 @@ function Character() {
                             <Link className='nav-a' to="/search">Search</Link>
                         </li>
                         <li className="breadcrumb-item">
-                            <span>{`/ `} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
+                            <span>{`/ `} </span><Link className='nav-a' to={`/a/${account?.name.replaceAll(' ', '_')}`}>Account</Link>
                         </li>
                         <li style={{ cursor: "default" }} aria-current="page">
                             <span>{`/ `} </span><span style={{ color: "#d70000" }}>Character</span>
