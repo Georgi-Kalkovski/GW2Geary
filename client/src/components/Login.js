@@ -83,14 +83,6 @@ const Login = () => {
             </button>
           </div>
 
-          {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
-            </div>
-          )}
-
           <div className="form-group flex center">
             <a className="link-underline"
               onClick={toggleForgotPassword}
