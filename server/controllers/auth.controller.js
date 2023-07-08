@@ -164,8 +164,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find().populate("apiKeys", "_id active");
 
     res.status(200).send({
-      message: "Users retrieved successfully!",
-      users: users,
+      message: "Users retrieved successfully!"
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
