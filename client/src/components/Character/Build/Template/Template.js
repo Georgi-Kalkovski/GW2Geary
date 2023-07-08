@@ -53,11 +53,11 @@ function Template({ buildInput }) {
                 ...buildInput.aquatic_skills.utilities,
                 buildInput.aquatic_skills.elite];
 
-            if (profession && profession.skills_by_palette) {
+            if (profession.skills_by_palette) {
                 try {
                     const skillIndex = await Promise.all(
                         skills.map(skill =>
-                            profession?.skills_by_palette.find(element => element[1] === skill)
+                            profession.skills_by_palette.find(element => element[1] === skill)
                         )
                     );
                     setSkillIndex(skillIndex.map(skill => skill ? skill[0] : 0));

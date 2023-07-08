@@ -159,6 +159,7 @@ const Register = () => {
                 }
                 role="alert"
               >
+                {message}
               </div>
             </div>
           )}
