@@ -1,6 +1,6 @@
 ![logo](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/30a6e048-02c5-4003-9d1d-8053cac76d23)
 
-Try the site ➜ [gw2geary.com](http://localhost:3001/ "gw2geary.com")
+Try the site ➜ [gw2geary.com](https://gw2geary.com/ "gw2geary.com")
 
 GW2Geary is a web application built with React that allows users to explore and inspect Guild Wars 2 accounts and characters. It provides a comprehensive set of features to help players optimize their gameplay experience.
 
