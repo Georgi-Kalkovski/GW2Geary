@@ -6,11 +6,12 @@ import AuthService from "../services/auth.service";
 import CharacterPreview from "./CharacterPreview";
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
+import fetchData from "./fetchData";
 
 const Account = () => {
   const { name } = useParams();
   const currentUser = AuthService.getCurrentUser();
-  const fromattedName = name.replaceAll('_', ' ');
+  const formattedName = name.replaceAll('_', ' ');
   const [characters, setCharacters] = useState(null);
   const [account, setAccount] = useState(null);
   const [mastery, setMastery] = useState(null);
@@ -42,18 +43,18 @@ const Account = () => {
         for (const user of usersRespond.data.users) {
           for (const key of user.apiKeys) {
             if (key.active
-              && key.accountName === fromattedName
-              || key && key.accountName === fromattedName
+              && key.accountName === formattedName
+              || key && key.accountName === formattedName
               && currentUser?.apiKeys.find(k => k._id === key._id)) {
               if (!key.active
-                && key.accountName === fromattedName
+                && key.accountName === formattedName
                 && currentUser.apiKeys.find(k => k._id === key._id)) {
                 setActive(true)
               }
               updatedCharacters.push(key);
-              const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
+              const accFound = await fetchData('account', formattedName);
               setAccount(accFound);
-              const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${key._id}`)).data;
+              const mastery_points = await fetchData('mastery', formattedName);
               let world;
               if (accFound && accFound.world) {
                 world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;

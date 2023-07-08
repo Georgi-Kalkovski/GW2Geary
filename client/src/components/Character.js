@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import fetchData from './fetchData';
 import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
@@ -39,16 +40,15 @@ function Character() {
                                     && currentUser.apiKeys.find(k => k._id === key._id)) {
                                     setIsPrivate(true)
                                 }
-
-                                const charFound = (await axios.get(`https://api.guildwars2.com/v2/characters/${formattedName.replaceAll(' ', '%20')}?access_token=${key._id}&v=latest`)).data;
+                                const charFound = await fetchData('characters', formattedName.replaceAll(' ', '_'));
                                 setCharacter(charFound)
                                 const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
+                                setAccount(accFound)
                                 const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${key._id}`)).data;
                                 let world;
                                 if (accFound && accFound.world) {
                                     world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
                                 }
-                                setAccount(accFound)
                                 setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
                                 setWorld(world.name)
                             }
@@ -94,8 +94,8 @@ function Character() {
                 <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
 
                 <div className='equipment-build-flex'>
-                    <EquipmentDropdown char={character} build={selectedBuild}/>
-                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild}/>
+                    <EquipmentDropdown char={character} build={selectedBuild} />
+                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild} />
                 </div>
             </Container>
     );
