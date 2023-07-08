@@ -6,6 +6,7 @@ const User = require('../models/user.model');
 
 router.get('/:name', async (req, res) => {
   const { name } = req.params;
+  console.log(name)
   const user = await User.find(
     { 'apiKeys.characters.name': name },
     { 'apiKeys.$': 1 }

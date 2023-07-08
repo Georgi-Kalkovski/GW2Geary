@@ -40,11 +40,11 @@ function Character() {
                                     && currentUser.apiKeys.find(k => k._id === key._id)) {
                                     setIsPrivate(true)
                                 }
-                                const charFound = await fetchData('characters', formattedName.replaceAll(' ', '_'));
+                                const charFound = await fetchData('characters', formattedName);
                                 setCharacter(charFound)
-                                const accFound = (await axios.get(`https://api.guildwars2.com/v2/account?access_token=${key._id}&v=latest`)).data;
+                                const accFound = await fetchData('account', key.accountName);
                                 setAccount(accFound)
-                                const mastery_points = (await axios.get(`https://api.guildwars2.com/v2/account/mastery/points?access_token=${key._id}`)).data;
+                                const mastery_points = await fetchData('mastery', key.accountName);
                                 let world;
                                 if (accFound && accFound.world) {
                                     world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
@@ -57,7 +57,7 @@ function Character() {
                 }
             })();
         } catch (error) {
-            // console.error(error);
+            console.error(error);
         }
     }, []);
 
