@@ -92,7 +92,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                             />
                         </Row>
                         <Row className="yellow-highlight">
-                            {char.race} {char?.gender}
+                            {char?.race} {char?.gender}
                         </Row>
                     </Col>
                 )}
