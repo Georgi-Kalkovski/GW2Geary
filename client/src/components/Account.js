@@ -163,10 +163,10 @@ const Account = () => {
 
                   {/* Characters */}
                   <div className="characters">
-                    {character && character.characters.map(character => (
+                    {character && character?.characters.map(character => (
                       <CharacterPreview
                         character={character}
-                        key={`${character.accountName}_${character.name}`}
+                        key={`${character?.accountName}_${character?.name}`}
                       />
                     ))}
                   </div>
