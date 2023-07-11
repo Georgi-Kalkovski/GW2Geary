@@ -35,7 +35,13 @@ const UserSchema = new mongoose.Schema({
           name: String,
           race: String,
           profession: String,
-          level: Number
+          level: Number,
+          active: {
+            type: Boolean,
+            default: true,
+            unique: false,
+            sparse: true
+          },
         }
       ]
     }

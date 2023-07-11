@@ -124,6 +124,20 @@ const deleteApiKey = (apiKeyId) => {
   });
 };
 
+// Api Update Service
+const updateCharacterStatus = (apiKeyId, characterId, active) => {
+  const currentUser = getCurrentUser();
+  return axios.put(
+    API_URL + `users/${currentUser.id}/apiKeys/${apiKeyId}/characters/${characterId}`,
+    { active },
+    {
+      headers: {
+        Authorization: `Bearer ${currentUser.accessToken}`,
+      },
+    }
+  );
+};
+
 const AuthService = {
   register,
   login,
@@ -138,6 +152,7 @@ const AuthService = {
   getApiKeys,
   updateApiKeyStatus,
   deleteApiKey,
+  updateCharacterStatus,
 };
 
 export default AuthService;

@@ -37,6 +37,7 @@ function ProfileApiCharacters({ apiKeys }) {
                                     apiKey.characters.map((character, characterIndex) => (
                                         <CharacterPreview
                                             character={character}
+                                            apiKey={apiKey}
                                             key={`${character.name}-${characterIndex}`}
                                         />
                                     ))}

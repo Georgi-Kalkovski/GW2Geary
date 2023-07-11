@@ -34,6 +34,7 @@ function Character() {
                             if (char.name === formattedName
                                 && key.active
                                 || char.name === formattedName
+                                && !char.active || char.active === true
                                 && currentUser?.apiKeys.find(k => k._id === key._id)) {
                                 if (!key.active
                                     && char.name === formattedName

@@ -59,5 +59,10 @@ router.delete(
   controller.deleteApiKey
 );
 
+router.put(
+  "/users/:userId/apiKeys/:apiKeyId/characters/:characterId",
+  controller.updateCharacterStatus
+);
+
 module.exports = router;
 

@@ -14,7 +14,7 @@ function Search() {
   const [charactersPage, setCharactersPage] = useState(1);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
-  
+
   function getRandomSort() {
     return Math.random() - 0.5;
   }
@@ -129,7 +129,11 @@ function Search() {
           <div className="characters">
             <React.Fragment key="characters-fragment">
               {displayedCharacters.map((character) => (
-                <CharacterPreview character={character} key={character.name} />
+                <>
+                  {character.active != false &&
+                    <CharacterPreview character={character} key={character.name} />
+                  }
+                </>
               ))}
             </React.Fragment>
           </div>
@@ -153,6 +157,21 @@ function Search() {
               </Row>
             </Col>
           </Container>
+
+          <Container className="flex center">
+            <Col className="home-empty-search-box">
+              <Row className='home-welcome'>
+                Latest News
+              </Row>
+              <div>
+                <h3 style={{marginBlockEnd: '0em', marginBlockStart:'0.4em'}}>11.07.2023</h3>
+                <div >Added an option for each character to be
+                  <span style={{ color: 'darkgreen' }}> Public </span>
+                  /<span style={{ color: '#aa0404' }}> Private </span></div>
+              </div>
+            </Col>
+          </Container>
+
           <Container className="flex center">
             <Col className="home-empty-search-box" style={{ width: 'auto', padding: '10px 10px' }}>
               <Row>Аccounts: <span className='yellow-highlight'>{accounts.length}</span> | Characters: <span className='yellow-highlight'>{accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0)}</span></Row>

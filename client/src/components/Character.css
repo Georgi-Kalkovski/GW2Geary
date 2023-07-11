@@ -131,6 +131,13 @@
 .custom-checkbox {
   margin: 0;
   margin-left: 15px;
+  cursor: pointer;
+}
+
+.character-checkbox {
+  position: relative;
+  right: -182px;
+  top: 31px;
 }
 
 .custom-checkbox .checkmark {

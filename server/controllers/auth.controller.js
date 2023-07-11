@@ -311,3 +311,30 @@ exports.getActiveApiKeys = async () => {
     throw new Error(err.message);
   }
 };
+
+// Update API key status
+exports.updateCharacterStatus = async (req, res) => {
+  try {
+    const { userId, apiKeyId, characterId } = req.params;
+    const { active } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User Not found." });
+    }
+    const apiKey = user.apiKeys.id(apiKeyId);
+    if (!apiKey) {
+      return res.status(404).send({ message: "API key Not found." });
+    }
+    apiKey.characters.find(x => x._id.toString() === characterId).active = active;
+    await user.save();
+
+    const updatedUser = await User.findById(userId).populate("apiKeys", "_id active");
+
+    res.status(200).send({
+      message: "API key status updated successfully!",
+      user: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
