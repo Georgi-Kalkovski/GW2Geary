@@ -161,7 +161,7 @@ exports.deleteUser = async (req, res) => {
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().populate("apiKeys", "_id active").select("-roles -email -username -password -_id -apiKeys._id -resetToken");
+    const users = await User.find().populate("apiKeys", "_id active").select("-roles -email -username -password -_id -apiKeys._id -resetToken -_id");
 
     res.status(200).send({
       message: "Users retrieved successfully!",
