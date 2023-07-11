@@ -160,11 +160,11 @@ function Search() {
 
           <Container className="flex center">
             <Col className="home-empty-search-box">
-              <Row className='home-welcome'>
+              <Row className='home-welcome' style={{fontSize: '25px'}}>
                 Latest News
               </Row>
               <div>
-                <h3 style={{marginBlockEnd: '0em', marginBlockStart:'0.4em'}}>11.07.2023</h3>
+                <h4 style={{marginBlockEnd: '0em', marginBlockStart:'0.4em'}}>11.07.2023</h4>
                 <div >Added an option for each character to be
                   <span style={{ color: 'darkgreen' }}> Public </span>
                   /<span style={{ color: '#aa0404' }}> Private </span></div>
