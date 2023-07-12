@@ -76,7 +76,7 @@ const App = () => {
               </Link>
             </li>
             <li>
-              <a href="/search" className="nav-a" onClick={logOut}>
+              <a href="/" className="nav-a" onClick={logOut}>
                 Logout
               </a>
             </li>
@@ -110,7 +110,6 @@ const App = () => {
             </>
           }
           <Route path="/" element={<Search />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/a/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />

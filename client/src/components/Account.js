@@ -80,7 +80,7 @@ const Account = () => {
             <nav aria-label="breadcrumb">
               <div style={{ listStyleType: "none" }} className='flex center'>
                 <li>
-                  <Link className='nav-a' to="/search">Search</Link>
+                  <Link className='nav-a' to="/">Search</Link>
                 </li>
                 <li style={{ cursor: "default" }} aria-current="page">
                   <span>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
