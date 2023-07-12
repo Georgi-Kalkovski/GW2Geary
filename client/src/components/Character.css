@@ -136,7 +136,7 @@
 
 .character-checkbox {
   position: relative;
-  right: -182px;
+  margin-left: 182px;
   top: 31px;
   margin-top: -25px;
 }
