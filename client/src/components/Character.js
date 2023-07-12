@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -24,37 +24,33 @@ function Character() {
 
     const [selectedBuild, setSelectedBuild] = useState([]);
 
+    let navigate = useNavigate();
     useEffect(() => {
         try {
             (async () => {
                 const users = await AuthService.getAllUsers();
-                for (const keys of users.data.users) {
-                    for (const key of keys.apiKeys) {
-                        for (const char of key.characters) {
-                            if (char.name === formattedName
-                                && key.active
-                                || char.name === formattedName
-                                && !char.active || char.active === true
-                                && currentUser?.apiKeys.find(k => k._id === key._id)) {
-                                if (!key.active
-                                    && char.name === formattedName
-                                    && currentUser.apiKeys.find(k => k._id === key._id)) {
-                                    setIsPrivate(true)
-                                }
-                                const charFound = await fetchData('characters', formattedName);
-                                setCharacter(charFound)
-                                const accFound = await fetchData('account', key.accountName);
-                                setAccount(accFound)
-                                const mastery_points = await fetchData('mastery', key.accountName);
-                                let world;
-                                if (accFound && accFound.world) {
-                                    world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
-                                }
-                                setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
-                                setWorld(world.name)
-                            }
-                        }
+                const apis = users.data?.users?.find(accs => accs.apiKeys.find(chars => chars.characters.find(char => char.name === formattedName)))
+                const account = apis?.apiKeys?.find(chars => chars.characters.find(char => char.name === formattedName))
+                const character = account?.characters.find(char => char.name === formattedName);
+                if (!account.active || !character.active) {
+                    if (!currentUser || currentUser?.apiKeys.includes(api => api?.accountName === account.accountName)) {
+                        navigate("/");
                     }
+                    setIsPrivate(true)
+                } else {
+                }
+                if (account) {
+                    const charFound = await fetchData('characters', formattedName);
+                    setCharacter(charFound)
+                    const accFound = await fetchData('account', account.accountName);
+                    setAccount(accFound)
+                    const mastery_points = await fetchData('mastery', account.accountName);
+                    let world;
+                    if (accFound && accFound.world) {
+                        world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+                    }
+                    setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
+                    setWorld(world.name)
                 }
             })();
         } catch (error) {
@@ -75,7 +71,7 @@ function Character() {
                 <nav aria-label="breadcrumb">
                     <ul style={{ listStyleType: "none" }} className='flex center'>
                         <li>
-                            <Link className='nav-a' to="/">Search</Link>
+                            <Link className='nav-a' to="/search">Search</Link>
                         </li>
                         <li className="breadcrumb-item">
                             <span>{`/ `} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>

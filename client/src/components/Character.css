@@ -138,6 +138,7 @@
   position: relative;
   right: -182px;
   top: 31px;
+  margin-top: -25px;
 }
 
 .custom-checkbox .checkmark {

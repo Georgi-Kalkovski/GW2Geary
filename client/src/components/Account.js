@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from "../services/auth.service";
@@ -20,6 +20,8 @@ const Account = () => {
   const [showMenu, setShowMenu] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  let navigate = useNavigate();
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -38,33 +40,30 @@ const Account = () => {
   useEffect(() => {
     try {
       (async () => {
-        const usersRespond = await AuthService.getAllUsers();
+        const users = await AuthService.getAllUsers();
         const updatedCharacters = [];
-        for (const user of usersRespond.data.users) {
-          for (const key of user.apiKeys) {
-            if (key.active
-              && key.accountName === formattedName
-              || key && key.accountName === formattedName
-              && currentUser?.apiKeys.find(k => k._id === key._id)) {
-              if (!key.active
-                && key.accountName === formattedName
-                && currentUser.apiKeys.find(k => k._id === key._id)) {
-                setActive(true)
-              }
-              updatedCharacters.push(key);
-              const accFound = await fetchData('account', formattedName);
-              setAccount(accFound);
-              const mastery_points = await fetchData('mastery', formattedName);
-              let world;
-              if (accFound && accFound.world) {
-                world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
-              }
-              setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
-              setWorld(world.name);
-            }
+        const apis = users.data?.users?.find(accs => accs?.apiKeys.find(acc => acc.accountName === formattedName));
+        const account = apis?.apiKeys?.find(chars => chars.accountName === formattedName);
+        if (!account.active) {
+          if (!currentUser || currentUser?.apiKeys.includes(api => api?.accountName === account.accountName)) {
+            navigate("/");
           }
-          setCharacters(updatedCharacters);
+          setActive(true)
+        } else {
         }
+        if (account) {
+          updatedCharacters.push(account);
+          const accFound = await fetchData('account', formattedName);
+          setAccount(accFound);
+          const mastery_points = await fetchData('mastery', formattedName);
+          let world;
+          if (accFound && accFound.world) {
+            world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+          }
+          setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+          setWorld(world.name);
+        }
+        setCharacters(updatedCharacters);
       })();
     } catch (error) {
       // console.error(error);
@@ -83,7 +82,7 @@ const Account = () => {
                   <Link className='nav-a' to="/">Search</Link>
                 </li>
                 <li style={{ cursor: "default" }} aria-current="page">
-                  <span>{`/ `} </span><span style={{ color: "#d70000" }}>Account</span>
+                  <span>{`/`} </span><span style={{ color: "#d70000" }}>Account</span>
                 </li>
               </div>
             </nav>
@@ -162,18 +161,23 @@ const Account = () => {
                   </Container>
 
                   {/* Characters */}
-                  <div className="characters">
-                    {character && character.characters.map(character => (
-                      <>
-                        {character.active !== false &&
-                          <CharacterPreview
-                            character={character}
-                            key={`${character.accountName}_${character.name}`}
-                          />
-                        }
-                      </>
+                    {characters && characters.map((character, index) => (
+                      <React.Fragment key={index}>
+                        <div className="characters">
+                          {character &&
+                            character.characters.map((char, charIndex) => (
+                              <React.Fragment key={charIndex}>
+                                {char.active !== false && (
+                                  <CharacterPreview
+                                    character={char}
+                                    key={`${char.accountName}_${char.name}`}
+                                  />
+                                )}
+                              </React.Fragment>
+                            ))}
+                        </div>
+                      </React.Fragment>
                     ))}
-                  </div>
                 </React.Fragment>
               ))
             }
