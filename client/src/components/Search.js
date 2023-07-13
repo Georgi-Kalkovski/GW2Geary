@@ -164,6 +164,12 @@ function Search() {
                 Latest News
               </Row>
               <div className='flex center'>
+                <h4 style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</h4>
+                <span style={{ marginLeft: '5px', marginRight: '5px' }}> - Added an option to copy specific </span>
+                <span className='yellow-highlight' style={{ marginRight: '5px' }}> equipment </span>
+                &<span className='yellow-highlight' style={{ marginLeft: '5px' }}> build </span>
+              </div>
+              <div className='flex center'>
                 <h4 style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>11.07.2023</h4>
                 <span style={{ marginLeft: '5px', marginRight: '5px' }}> - Added an option for each character to be</span>
                 <span style={{ color: 'darkgreen', marginRight: '5px' }}> Public </span>
