@@ -70,6 +70,16 @@ const Account = () => {
     }
   }, []);
 
+  const [buttonColor, setButtonColor] = useState('');
+
+  const copyText = () => {
+    navigator?.clipboard?.writeText(window.location.href);
+    setButtonColor('darkgreen');
+    setTimeout(() => {
+      setButtonColor('');
+    }, 250);
+  };
+
   return (
     <div>
       <div>
@@ -128,6 +138,15 @@ const Account = () => {
                             Hide More
                           </button>
                         )}
+                        {window.innerWidth < 550 && (
+                          <button
+                            className={`basic-button`}
+                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
+                            onClick={copyText}
+                          >
+                            Copy Account
+                          </button>
+                        )}
                       </div>
                       {/* World */}
                       {showMenu && (
@@ -157,27 +176,36 @@ const Account = () => {
                           <Row className="yellow-highlight">WvW Rank</Row>
                         </Col>
                       )}
+                      {window.innerWidth >= 550 && (
+                        <button
+                          className={`basic-button`}
+                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
+                          onClick={copyText}
+                        >
+                          Copy Account
+                        </button>
+                      )}
                     </Row>
                   </Container>
 
                   {/* Characters */}
-                    {characters && characters.map((character, index) => (
-                      <React.Fragment key={index}>
-                        <div className="characters">
-                          {character &&
-                            character.characters.map((char, charIndex) => (
-                              <React.Fragment key={charIndex}>
-                                {char.active !== false && (
-                                  <CharacterPreview
-                                    character={char}
-                                    key={`${char.accountName}_${char.name}`}
-                                  />
-                                )}
-                              </React.Fragment>
-                            ))}
-                        </div>
-                      </React.Fragment>
-                    ))}
+                  {characters && characters.map((character, index) => (
+                    <React.Fragment key={index}>
+                      <div className="characters">
+                        {character &&
+                          character.characters.map((char, charIndex) => (
+                            <React.Fragment key={charIndex}>
+                              {char.active !== false && (
+                                <CharacterPreview
+                                  character={char}
+                                  key={`${char.accountName}_${char.name}`}
+                                />
+                              )}
+                            </React.Fragment>
+                          ))}
+                      </div>
+                    </React.Fragment>
+                  ))}
                 </React.Fragment>
               ))
             }

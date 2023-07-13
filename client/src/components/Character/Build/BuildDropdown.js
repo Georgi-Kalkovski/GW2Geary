@@ -4,16 +4,31 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import mouseClick from '.././mouse-click.svg';
 
 
-function BuildDropdown({ setSelectedBuild, char }) {
+function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedTab, setSelectedTab] = useState(
-        char.build_tabs.find((build) => build.is_active)
-    );
-
     const [build, setBuild] = useState([]);
-    setSelectedBuild(build);
-    
-    // Click outside of dropdown menu logic
+    const [selectedBldTab, setSelectedBldTab] = useState(() => {
+        if (initial && char?.build_tabs) {
+            const found = char.build_tabs.find((build) => build.tab === parseInt(initial));
+            if (found) {
+                return found;
+            } else {
+                return char.build_tabs.find((build) => build.is_active);
+            }
+        } else if (char && char.build_tabs) {
+            return char.build_tabs.find((build) => build.is_active);
+        }
+    });
+
+    useEffect(() => {
+        if (!initial || initial !== selectedBldTab.tab) {
+            setBuildState(selectedBldTab?.tab);
+        }
+    }, []);
+
+    useEffect(() => {
+        setSelectedBuild(build);
+    }, [build]);
     const wrapperRef = useRef(null);
     const handleClickOutside = (event) => {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -35,10 +50,11 @@ function BuildDropdown({ setSelectedBuild, char }) {
     const handleItemClick = (event) => {
         const clickedItem = event.target;
         const tab = parseInt(clickedItem.getAttribute('value'));
-        if (tab === selectedTab.tab) {
+        if (tab === selectedBldTab.tab) {
             setIsOpen(false);
         } else {
-            setSelectedTab(char.build_tabs[tab - 1]);
+            setSelectedBldTab(char.build_tabs[tab - 1]);
+            setBuildState(char.build_tabs[tab - 1].tab);
             setIsOpen(false);
         }
     }
@@ -56,7 +72,7 @@ function BuildDropdown({ setSelectedBuild, char }) {
         <div className={`build ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
             <div className="dropdown">
                 <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setTriggerRef}>
-                    {selectedTab && selectedTab.build.name ? selectedTab.build.name : `Build ${selectedTab.tab}`}
+                    {selectedBldTab && selectedBldTab.build.name ? selectedBldTab.build.name : `Build ${selectedBldTab.tab}`}
                 </button>
                 {visible && (
                     <div
@@ -84,7 +100,7 @@ function BuildDropdown({ setSelectedBuild, char }) {
                     </ul>
                 )}
             </div>
-            {<Build tab={selectedTab.build} setBuild={setBuild} key={selectedTab.tab} />}
+            {<Build tab={selectedBldTab.build} setBuild={setBuild} key={selectedBldTab.tab} />}
         </div>
     );
 }

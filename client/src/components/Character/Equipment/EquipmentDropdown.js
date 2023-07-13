@@ -4,21 +4,31 @@ import Equipment from './Equipment';
 import fetchData from '../../fetchData';
 import mouseClick from '.././mouse-click.svg';
 
-const EquipmentDropdown = ({ char, build }) => {
+const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(
-    char.equipment_tabs.find((equip) => equip.is_active)
-  );
   const [mergedItems, setMergedItems] = useState([]);
   const [isSliderOn, setIsSliderOn] = useState(true);
+  const [selectedEqTab, setSelectedEqTab] = useState(() => {
+    if (initial && char?.equipment_tabs) {
+      const found = char.equipment_tabs.find((equip) => equip.tab === parseInt(initial));
+      if (found) {
+        return found;
+      } else {
+        return char.equipment_tabs.find((equip) => equip.is_active);
+      }
+    } else if (char && char.equipment_tabs) {
+      return char.equipment_tabs.find((equip) => equip.is_active);
+    }
+  });
 
-  const toggleSlider = () => {
-    setIsSliderOn(!isSliderOn);
-  };
+  useEffect(() => {
+    if (!initial || initial !== selectedEqTab.tab) {
+      setEquip(selectedEqTab?.tab);
+    }
+  }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleSlider = () => setIsSliderOn(!isSliderOn);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   const wrapperRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -37,10 +47,11 @@ const EquipmentDropdown = ({ char, build }) => {
   const handleItemClick = (event) => {
     const clickedItem = event.target;
     const tab = parseInt(clickedItem.getAttribute('value'));
-    if (tab === selectedTab.tab) {
+    if (tab === selectedEqTab?.tab) {
       setIsOpen(false);
     } else {
-      setSelectedTab(char.equipment_tabs[tab - 1]);
+      setSelectedEqTab(char?.equipment_tabs[tab - 1]);
+      setEquip(char?.equipment_tabs[tab - 1].tab);
       setIsOpen(false);
     }
   };
@@ -48,32 +59,32 @@ const EquipmentDropdown = ({ char, build }) => {
   useEffect(() => {
     (async () => {
       try {
-        if (selectedTab.equipment.length === 0) {
+        if (selectedEqTab?.equipment.length === 0) {
           setMergedItems([]);
           return;
         }
-        const itemIds = selectedTab.equipment.map((el) => el.id).join(',');
+        const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
         const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
-        const skinIds = selectedTab.equipment.filter((item) => item.skin).map((item) => item.skin).join(',');
+        const skinIds = selectedEqTab?.equipment.filter((item) => item.skin).map((item) => item.skin).join(',');
         const fetchedSkins = skinIds ? await fetchData('skins', skinIds) : [];
-        const upgradeIds = selectedTab.equipment.filter((item) => item.upgrades).flatMap((el) => el.upgrades).join(',');
+        const upgradeIds = selectedEqTab?.equipment.filter((item) => item.upgrades).flatMap((el) => el.upgrades).join(',');
         const fetchedUpgrades = upgradeIds ? await fetchData('items', upgradeIds) : [];
         const infusionIds = [
-          ...char.equipment.flatMap((el) => el.infusions).filter((item) => item !== undefined),
-          ...char.equipment_tabs.flatMap((tab) => tab.equipment.flatMap((item) => item.infusions)).filter((item) => item !== undefined),
+          ...char?.equipment.flatMap((el) => el.infusions).filter((item) => item !== undefined),
+          ...char?.equipment_tabs.flatMap((tab) => tab.equipment.flatMap((item) => item.infusions)).filter((item) => item !== undefined),
         ].join(',');
         const fetchedInfusions = infusionIds ? await fetchData('items', infusionIds) : [];
 
-        const mergingItems = selectedTab.equipment.map(item => ({
+        const mergingItems = selectedEqTab?.equipment.map(item => ({
           ...item,
-          ...char.equipment.find((fetchedItem => fetchedItem.id === item.id)),
+          ...char?.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
           skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
           upgrades: fetchedInfusions ? [
             ...fetchedUpgrades?.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
               ...upgrade,
-              counter: selectedTab.equipment.reduce((count, fetchedItem) => {
+              counter: selectedEqTab?.equipment.reduce((count, fetchedItem) => {
                 if (fetchedItem.slot === "HelmAquatic") {
                   return count;
                 }
@@ -81,7 +92,7 @@ const EquipmentDropdown = ({ char, build }) => {
               }, 0)
             })),
             ...(item.infusions
-              ?? char.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
+              ?? char?.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
               ?? []
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
           ] : '',
@@ -92,8 +103,7 @@ const EquipmentDropdown = ({ char, build }) => {
         console.log(error)
       }
     })();
-
-  }, [selectedTab.equipment, char.equipment, char.equipment_tabs])
+  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs]);
 
   const {
     getArrowProps: getDropdownArrowProps,
@@ -112,10 +122,10 @@ const EquipmentDropdown = ({ char, build }) => {
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
   return (
-    <div className={`equipment ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
+    <div className={`equipment ${char?.profession?.toLowerCase()}-lightning-border`} ref={wrapperRef}>
       <div className="dropdown">
-        <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setDropdownTriggerRef}>
-          {selectedTab && selectedTab.name ? selectedTab.name : `Equipment ${selectedTab.tab}`}
+        <button className={`${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setDropdownTriggerRef}>
+          {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         {dropdownVisible && (
           <div
@@ -131,8 +141,8 @@ const EquipmentDropdown = ({ char, build }) => {
           </div>
         )}
         {isOpen && (
-          <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border`}>
-            {char.equipment_tabs.map((equip) => (
+          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`}>
+            {char?.equipment_tabs.map((equip) => (
               <li
                 key={equip.tab}
                 onClick={handleItemClick}
@@ -148,7 +158,7 @@ const EquipmentDropdown = ({ char, build }) => {
             type="checkbox"
             checked={isSliderOn}
             onChange={toggleSlider} />
-          <span className={`${char.profession.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
+          <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
         </label>
         {switchVisible && (
           <div
@@ -157,17 +167,16 @@ const EquipmentDropdown = ({ char, build }) => {
           >
             <div>
               <div>
-                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char.profession.toLowerCase()}-text`}>on</span>
+                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
               </div>
             </div>
             <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
           </div>
         )}
       </div>
-      <Equipment key={selectedTab.tab + selectedTab.name} items={mergedItems} build={build} prof={char.profession} slider={isSliderOn} />
+      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} build={build} prof={char?.profession} slider={isSliderOn} />
     </div>
   );
-
 }
 
 export default EquipmentDropdown;

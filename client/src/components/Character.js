@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -8,11 +8,13 @@ import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
 import CharacterInfo from './Character/Info/CharacterInfo';
+import CharacterShareLink from './Character/Info/CharacterShareLink';
 import './Character.css';
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
 
 function Character() {
+    let [searchParams, setSearchParams] = useSearchParams();
     const { name } = useParams();
     const formattedName = name.replaceAll('_', ' ');
     const currentUser = AuthService.getCurrentUser();
@@ -21,10 +23,24 @@ function Character() {
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false)
-
     const [selectedBuild, setSelectedBuild] = useState([]);
-
+    const [shareLink, setShareLink] = useState(window.location.href);
+    const [eqUp, setEqUp] = useState(searchParams.get('eq'));
+    const [bldUp, setBldUp] = useState(searchParams.get('bld'));
     let navigate = useNavigate();
+
+    useEffect(() => {
+        let params = {};
+        if (eqUp) {
+            params.eq = eqUp;
+        }
+        if (bldUp) {
+            params.bld = bldUp;
+        }
+        setSearchParams(params);
+        setShareLink(window.location.href);
+    }, [eqUp, bldUp]);
+
     useEffect(() => {
         try {
             (async () => {
@@ -74,10 +90,10 @@ function Character() {
                             <Link className='nav-a' to="/search">Search</Link>
                         </li>
                         <li className="breadcrumb-item">
-                            <span>{`/ `} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
+                            <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
                         </li>
                         <li style={{ cursor: "default" }} aria-current="page">
-                            <span>{`/ `} </span><span style={{ color: "#d70000" }}>Character</span>
+                            <span>{`/`} </span><span style={{ color: "#d70000" }}>Character</span>
                         </li>
                     </ul>
                 </nav>
@@ -87,12 +103,10 @@ function Character() {
                     ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
                     : ''
                 }
-
-                <CharacterInfo char={character} acc={account} mastery={mastery} world={world} />
-
+                <CharacterInfo char={character} acc={account} mastery={mastery} world={world} shareLink={shareLink} />
                 <div className='equipment-build-flex'>
-                    <EquipmentDropdown char={character} build={selectedBuild} />
-                    <BuildDropdown char={character} setSelectedBuild={setSelectedBuild} />
+                    <EquipmentDropdown char={character} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
+                    <BuildDropdown char={character} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />
                 </div>
             </Container>
     );

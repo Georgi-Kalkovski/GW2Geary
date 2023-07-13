@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from '../../icons';
-
-function CharacterInfo({ char, acc, mastery, world }) {
+import CharacterShareLink from './CharacterShareLink';
+function CharacterInfo({ char, acc, mastery, world, shareLink }) {
     const [showMenu, setShowMenu] = useState(true);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -35,24 +35,30 @@ function CharacterInfo({ char, acc, mastery, world }) {
                     </Row>
                 </Col>
                 <div className='flex center'>
-                        {window.innerWidth < 550 && !showMenu && (
-                    <button
-                        className={`${char.profession.toLowerCase()}-border dropdown-button show-menu-button`}
-                        style={{ marginTop: '5px', padding: '2px 0', width: '100px' }}
-                        onClick={() => setShowMenu(true)}
-                    >
-                        Show More
-                    </button>
+                    {window.innerWidth < 550 && !showMenu && (
+                        <button
+                            className={`${char.profession.toLowerCase()}-border dropdown-button show-menu-button`}
+                            style={{ padding: '2px 0', width: '100px' }}
+                            onClick={() => setShowMenu(true)}
+                        >
+                            Show More
+                        </button>
                     )}
-                    {window.innerWidth < 550 &&  showMenu && (
+                    {window.innerWidth < 550 && showMenu && (
                         <button
                             className={`${char.profession.toLowerCase()}-border dropdown-button`}
-                            style={{ marginTop: '5px', padding: '2px 0', width: '100px' }}
+                            style={{ padding: '2px 0', width: '100px' }}
                             onClick={() => setShowMenu(false)}
                         >
                             Hide More
                         </button>
                     )}
+                    {window.innerWidth < 550 &&
+                        <Col className="character-col">
+                            <CharacterShareLink buildInput={char.profession} shareLink={shareLink} style={{ width: 0 }} />
+                        </Col>
+                    }
+
                 </div>
                 {/* World */}
                 {showMenu && (
@@ -117,6 +123,11 @@ function CharacterInfo({ char, acc, mastery, world }) {
                         <Row className="yellow-highlight">WvW Rank</Row>
                     </Col>
                 )}
+                {window.innerWidth >= 550 &&
+                    <Col className="character-col">
+                        <CharacterShareLink className='copy-character' buildInput={char.profession} shareLink={shareLink} style={{ width: 0 }} />
+                    </Col>
+                }
             </Row>
         </Container >
     );

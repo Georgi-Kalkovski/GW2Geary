@@ -22,4 +22,26 @@ router.get('/:name', async (req, res) => {
   }
 });
 
+router.get('/:name/:eq/:bld', async (req, res) => {
+  const { name } = req.params;
+  const { eq } = req.params;
+  const { bld } = req.params;
+  console.log(eq)
+  console.log(bld)
+  const user = await User.find(
+    { 'apiKeys.characters.name': name },
+    { 'apiKeys.$': 1 }
+  );
+  if (user && user.length > 0) {
+    const apiKey = user[0].apiKeys[0];
+    const apiKeyId = apiKey._id;
+    try {
+      const response = await axios.get(`${baseUrl}/characters/${name.replace('_', '%20')}?access_token=${apiKeyId}&v=latest`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching data from API' });
+    }
+  }
+});
+
 module.exports = router;

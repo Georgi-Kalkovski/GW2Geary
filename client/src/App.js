@@ -113,7 +113,9 @@ const App = () => {
           <Route path="/accounts/:name" element={<Account />} />
           <Route path="/a/:name" element={<Account />} />
           <Route path="/characters/:name" element={<Character />} />
+          <Route path="/characters/:name/:eq/:bld" element={<Character />} />
           <Route path="/c/:name" element={<Character />} />
+          <Route path="/c/:name/:eq/:bld" element={<Character />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />

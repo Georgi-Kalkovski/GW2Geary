@@ -307,6 +307,10 @@ input:checked+.slider:before {
     margin-right: 0;
   }
 
+  .copy-character {
+    margin-top: 5px;
+  }
+
   .search-input,
   .home-empty-search-box {
     font-size: 1em;
