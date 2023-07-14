@@ -100,7 +100,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
                     </ul>
                 )}
             </div>
-            {<Build tab={selectedBldTab.build} setBuild={setBuild} key={selectedBldTab.tab} />}
+            {<Build tab={selectedBldTab.build} setBuild={() => setBuild} key={selectedBldTab.tab} />}
         </div>
     );
 }

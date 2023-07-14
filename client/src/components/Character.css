@@ -432,4 +432,8 @@ input:checked+.slider:before {
   .flex-row-center {
     margin: 0 25%;
   }
+
+  .search-news {
+    padding: 1% 5% 0% 5%;
+  }
 }

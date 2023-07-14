@@ -105,13 +105,13 @@ function Search() {
         />
       </div>
       {searchTerm !== '' ? (
-        <React.Fragment key="home-fragment">
-          <Container className="characters" key="accounts-container">
+        <React.Fragment key={`home-fragment-${searchTerm}`}>
+          <Container className="characters" key={`accounts-container-${searchTerm}`}>
             {displayedAccounts.length > 0 ? (
-              displayedAccounts.map((account) => (
-                <div key={account.accountName} className="characters-boxes">
+              displayedAccounts.map((account, index) => (
+                <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
                   <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
-                    <Container className="accounts-box" key={account.accountName}>
+                    <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
                       <Col>
                         <Row className="center-class accounts-hover">
                           <div className="accounts-name">{account.accountName}</div>
@@ -126,14 +126,14 @@ function Search() {
             )}
           </Container>
           <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
-          <div className="characters">
-            <React.Fragment key="characters-fragment">
-              {displayedCharacters.map((character) => (
-                <>
+          <div className="characters" key={`character-div-${searchTerm}`}>
+            <React.Fragment key={`character-fragment-${searchTerm}`}>
+              {displayedCharacters.map((character, index) => (
+                <React.Fragment key={`character-fragment-${character.name}-${index}`}>
                   {character.active != false &&
-                    <CharacterPreview character={character} key={character.name} />
+                    <CharacterPreview character={character} key={`character-name-${character.name}-${index}`} />
                   }
-                </>
+                </React.Fragment>
               ))}
             </React.Fragment>
           </div>
@@ -142,7 +142,7 @@ function Search() {
       ) : (
         <>
           <Container className="flex center">
-            <Col className="home-empty-search-box">
+            <Col className="home-empty-search-box" style={{ padding: '1% 1%' }}>
               <Row className='home-welcome'>
                 Welcome to <span className="gw2-logo-style">GW2</span>
                 <span className="geary-logo-style">Geary</span>!
@@ -163,18 +163,20 @@ function Search() {
               <Row className='home-welcome' style={{ fontSize: '25px' }}>
                 Latest News
               </Row>
-              <div className='flex center'>
-                <h4 style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</h4>
-                <span style={{ marginLeft: '5px', marginRight: '5px' }}> - Added an option to copy specific </span>
-                <span className='yellow-highlight' style={{ marginRight: '5px' }}> equipment </span>
-                &<span className='yellow-highlight' style={{ marginLeft: '5px' }}> build </span>
-              </div>
-              <div className='flex center'>
-                <h4 style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>11.07.2023</h4>
-                <span style={{ marginLeft: '5px', marginRight: '5px' }}> - Added an option for each character to be</span>
-                <span style={{ color: 'darkgreen', marginRight: '5px' }}> Public </span>
-                /<span style={{ color: '#aa0404', marginLeft: '5px' }}> Private </span>
-              </div>
+              <Row className='search-news'>
+                <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</span>
+                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option to copy specific</span>
+                  <span className='yellow-highlight' style={{ marginRight: '5px' }}>equipment</span>
+                  &<span className='yellow-highlight' style={{ marginLeft: '5px' }}>build</span>.
+                </div>
+                <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>11.07.2023</span>
+                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option for each character to be</span>
+                  <span style={{ color: 'darkgreen', marginRight: '5px' }}>Public</span>
+                  /<span style={{ color: '#aa0404', marginLeft: '5px' }}>Private</span>.
+                </div>
+              </Row>
             </Col>
           </Container>
 
@@ -183,6 +185,7 @@ function Search() {
               <Row>Аccounts: <span className='yellow-highlight'>{accounts.length}</span> | Characters: <span className='yellow-highlight'>{accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0)}</span></Row>
             </Col>
           </Container>
+          <br />
         </>
       )}
     </>

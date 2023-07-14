@@ -14,7 +14,7 @@ function Build({ setBuild, tab }) {
 
     const [traits, setTraits] = useState([]);
     setBuild(traits);
-    
+
     useEffect(() => {
         const fetchSpecializations = async () => {
             try {
@@ -63,7 +63,7 @@ function Build({ setBuild, tab }) {
                     {specializations && tab.skills && tab.aquatic_skills && (
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                            <Traits setTraits={setTraits} specializations={specializations} prof={tab.profession} />
+                            <Traits setTraits={() => setTraits} specializations={specializations} prof={tab.profession} />
                             <br />
                             <Template buildInput={tab} />
                         </>

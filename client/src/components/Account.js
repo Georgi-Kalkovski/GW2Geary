@@ -212,6 +212,7 @@ const Account = () => {
           </div>
         </div>
       </div>
+      <br />
     </div>
   );
 };

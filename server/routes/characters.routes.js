@@ -24,10 +24,6 @@ router.get('/:name', async (req, res) => {
 
 router.get('/:name/:eq/:bld', async (req, res) => {
   const { name } = req.params;
-  const { eq } = req.params;
-  const { bld } = req.params;
-  console.log(eq)
-  console.log(bld)
   const user = await User.find(
     { 'apiKeys.characters.name': name },
     { 'apiKeys.$': 1 }

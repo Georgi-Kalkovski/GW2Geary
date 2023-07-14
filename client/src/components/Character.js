@@ -108,6 +108,7 @@ function Character() {
                     <EquipmentDropdown char={character} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
                     <BuildDropdown char={character} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />
                 </div>
+                <br />
             </Container>
     );
 }
