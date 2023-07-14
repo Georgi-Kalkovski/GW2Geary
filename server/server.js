@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -15,6 +16,16 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.get('/set-cookie', (req, res) => {
+  const cookieId = process.env.JWT_SECRET;
+  res.cookie('cookieId', cookieId, {
+    sameSite: 'none',
+    secure: true
+  });
+  res.send('Cookie set successfully');
+});
 
 // Connect to MongoDB
 mongoose
