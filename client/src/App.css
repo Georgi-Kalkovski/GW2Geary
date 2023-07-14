@@ -17,7 +17,7 @@ body {
 }
 
 .content {
-  margin-top: 2.5em;
+  margin-top: 1em;
 }
 
 .center-class {
@@ -159,7 +159,6 @@ label {
   padding: 5px 10px;
   margin: 5px;
   font-size: 1.5em;
-  margin-bottom: 20px;
 }
 
 .search-input::placeholder {
