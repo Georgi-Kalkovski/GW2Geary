@@ -8,6 +8,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mergedItems, setMergedItems] = useState([]);
   const [isSliderOn, setIsSliderOn] = useState(true);
+  const [itemstatsOutput, setItemstatsOutput] = useState([]);
   const [selectedEqTab, setSelectedEqTab] = useState(() => {
     if (initial && char?.equipment_tabs) {
       const found = char.equipment_tabs.find((equip) => equip.tab === parseInt(initial));
@@ -65,6 +66,13 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         }
         const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
         const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
+        const itemstats = [
+          ...selectedEqTab?.equipment.filter((item) => item.stats?.id).map((item) => item.stats?.id),
+          ...char.equipment.filter((item) => item.stats?.id).map((item) => item.stats?.id),
+          ...fetchedItems.filter((item) => item.details?.infix_upgrade?.id).map((item) => item.details?.infix_upgrade?.id),
+          ...char.equipment.filter((item) => item.details?.infix_upgrade?.id).map((item) => item.details?.infix_upgrade?.id)
+        ].join(',');
+        const fetchedItemstats = itemstats ? await fetchData('itemstats', itemstats) : [];
         const skinIds = selectedEqTab?.equipment.filter((item) => item.skin).map((item) => item.skin).join(',');
         const fetchedSkins = skinIds ? await fetchData('skins', skinIds) : [];
         const upgradeIds = selectedEqTab?.equipment.filter((item) => item.upgrades).flatMap((el) => el.upgrades).join(',');
@@ -74,8 +82,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           ...char?.equipment_tabs.flatMap((tab) => tab.equipment.flatMap((item) => item.infusions)).filter((item) => item !== undefined),
         ].join(',');
         const fetchedInfusions = infusionIds ? await fetchData('items', infusionIds) : [];
-
         const mergingItems = selectedEqTab?.equipment.map(item => ({
+
           ...char?.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
           ...item,
@@ -96,6 +104,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               ?? []
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
           ] : '',
+          itemstats: fetchedItemstats
         }));
 
         setMergedItems(mergingItems);
@@ -103,7 +112,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         console.log(error)
       }
     })();
-  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs]);
+  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs, itemstatsOutput]);
 
   const {
     getArrowProps: getDropdownArrowProps,

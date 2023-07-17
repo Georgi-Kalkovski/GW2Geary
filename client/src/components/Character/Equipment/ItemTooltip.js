@@ -29,9 +29,10 @@ function ItemTooltip({ item, slider }) {
                                 : <span className='item-name'>{item.name ? item.name : 'Unknown'}</span>
                             }
                         </Row>
+
                         <br />
                         {/* DEFENSE */}
-                        {item.details && item.details.defense !== 0 && item.details.defense  &&
+                        {item.details && item.details.defense !== 0 && item.details.defense &&
                             <>
                                 <Row key={`defense-${item.id}`}>
                                     Defense: <span className='green'>{item.details.defense}</span>
@@ -50,6 +51,12 @@ function ItemTooltip({ item, slider }) {
                         }
 
                         {/* STATS */}
+                        {item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + `:`}
+                        {item.itemstats
+                            && item.details
+                            && item.details.infix_upgrade
+                            && item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0] + `:`
+                        }
                         {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
                             <Row key={`attributes-${item.id}-${index}`}>
                                 <span className='green'>

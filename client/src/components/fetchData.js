@@ -12,6 +12,7 @@ const fetchData = async (urls, id, apiKey) => {
     professionsAll: URLS.urlProfessionsAll,
     worlds: URLS.urlWorlds,
     items: URLS.urlItems,
+    itemstats: URLS.urlItemstats,
     skins: URLS.urlSkins,
     specializations: URLS.urlSpecs,
     traits: URLS.urlTraits,
