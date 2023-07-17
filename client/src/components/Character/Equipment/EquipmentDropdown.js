@@ -76,9 +76,9 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         const fetchedInfusions = infusionIds ? await fetchData('items', infusionIds) : [];
 
         const mergingItems = selectedEqTab?.equipment.map(item => ({
-          ...item,
           ...char?.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
+          ...item,
           skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
           upgrades: fetchedInfusions ? [
