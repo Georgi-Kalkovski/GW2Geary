@@ -51,7 +51,7 @@ function ItemTooltip({ item, slider }) {
                         }
 
                         {/* STATS */}
-                        {item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + `:`}
+                        {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + `:`}
                         {item.itemstats
                             && item.details
                             && item.details.infix_upgrade
