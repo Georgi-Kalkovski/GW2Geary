@@ -34,7 +34,7 @@ function Equipment({ items, prof, slider, build }) {
                     <>
                         <Col>
                             <br />
-                            <Col className='equipment-col-1'>
+                            <Col className='flex column equipment-col-1'>
                                 <ItemTooltip item={items.find(x => x.slot === 'Helm')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Coat')} slider={slider} />
@@ -43,13 +43,21 @@ function Equipment({ items, prof, slider, build }) {
                                 <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
 
                             </Col>
-                            <br />
-                            <Row className='flex'>
-                                <Col>
+                            <Row className='flex' style={{ marginTop: '3px' }}>
+                                <Col className={`flex column ${prof ? prof.toLowerCase() : ''}-lightning-border`}
+                                    style={{
+                                        borderWidth: '2px',
+                                        boxShadow: 'none',
+                                        borderLeft: 'none',
+                                        borderTop: 'none',
+                                        borderBottom: 'none',
+                                        paddingRight: '5px',
+                                        marginRight: '5px'
+                                    }}>
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} slider={slider} />
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} slider={slider} />
                                 </Col>
-                                <Col style={{ marginLeft: '15px' }}>
+                                <Col className='flex column'>
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} slider={slider} />
                                     <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} slider={slider} />
                                 </Col>
@@ -58,13 +66,13 @@ function Equipment({ items, prof, slider, build }) {
 
                         <Col className='equipment-col-2'>
                             <br />
-                            <Attributes items={items} build={build} prof={prof}/>
+                            <Attributes items={items} build={build} prof={prof} />
                             <Col className='flex'>
                                 <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} slider={slider} />
                             </Col>
-                            <Col className='flex' style={{marginBottom: '12px'}}>
+                            <Col className='flex' style={{ marginBottom: '12px' }}>
                                 <ItemTooltip item={items.find(x => x.slot === 'Amulet')} slider={slider} />
                                 <ItemTooltip item={items.find(x => x.slot === 'Ring1')} slider={slider} />
                                 <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} slider={slider} />
