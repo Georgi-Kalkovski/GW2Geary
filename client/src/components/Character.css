@@ -436,4 +436,12 @@ input:checked+.slider:before {
   .search-news {
     padding: 1% 5% 0% 5%;
   }
+
+  .itemstats {
+    width: 307px;
+  }
+
+  .logo-equipment-width {
+    width: 350px;
+  }
 }

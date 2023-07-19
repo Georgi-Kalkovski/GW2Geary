@@ -51,11 +51,12 @@ function ItemTooltip({ item, slider }) {
                         }
 
                         {/* STATS */}
-                        {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + `:`}
+                        {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
                         {item.itemstats
                             && item.details
                             && item.details.infix_upgrade
-                            && item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0] + `:`
+                            && item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0] &&
+                            <span> {item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0]}:</span>
                         }
                         {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
                             <Row key={`attributes-${item.id}-${index}`}>

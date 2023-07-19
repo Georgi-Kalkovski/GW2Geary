@@ -3,6 +3,13 @@ function News() {
         <div className='flex center column'>
 
             <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                <h3>19.07.2023</h3>
+                <div className="line"></div>
+                <div >Added a switch to <span className="off-text">hide</span>/<span className="yellow-highlight">show</span> <span className="yellow-highlight">prefixes</span>, <span className="yellow-highlight">runes</span> and <span className="yellow-highlight">sigils</span></div>
+            </div>
+
+            <br />
+            <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                 <h3>13.07.2023</h3>
                 <div className="line"></div>
                 <div >Added an option to copy specific <span className="yellow-highlight">equipment</span> & <span className="yellow-highlight">build</span></div>

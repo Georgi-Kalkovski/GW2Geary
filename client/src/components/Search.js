@@ -165,6 +165,16 @@ function Search() {
               </Row>
               <Row className='search-news'>
                 <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>19.07.2023</span> -
+                  <span > Added a switch to <span className="off-text">hide</span>
+                    /<span className="yellow-highlight">show </span>
+                    <span className="yellow-highlight">prefixes</span>
+                    , <span className="yellow-highlight">runes </span>
+                    and <span className="yellow-highlight">sigils</span>.
+                  </span>
+
+                </div>
+                <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</span>
                   <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option to copy specific</span>
                   <span className='yellow-highlight' style={{ marginRight: '5px' }}>equipment</span>

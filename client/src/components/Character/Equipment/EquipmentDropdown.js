@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Equipment from './Equipment';
+import EquipmentStats from './EquipmentStats';
 import fetchData from '../../fetchData';
 import mouseClick from '.././mouse-click.svg';
 
 const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mergedItems, setMergedItems] = useState([]);
-  const [isSliderOn, setIsSliderOn] = useState(true);
+  const [isSliderOn, setIsSliderOn] = useState(() => {
+    const storedValue = localStorage.getItem('isSliderOn');
+    return storedValue !== null ? JSON.parse(storedValue) : true;
+  });
+  const [isPrefixesOn, setIsPrefixesOn] = useState(() => {
+    const storedValue = localStorage.getItem('isPrefixesOn');
+    return storedValue !== null ? JSON.parse(storedValue) : false;
+  });
   const [itemstatsOutput, setItemstatsOutput] = useState([]);
   const [selectedEqTab, setSelectedEqTab] = useState(() => {
     if (initial && char?.equipment_tabs) {
@@ -29,6 +37,15 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   }, []);
 
   const toggleSlider = () => setIsSliderOn(!isSliderOn);
+  useEffect(() => {
+    localStorage.setItem('isSliderOn', JSON.stringify(isSliderOn));
+  }, [isSliderOn]);
+
+  const togglePrefixes = () => setIsPrefixesOn(!isPrefixesOn);
+  useEffect(() => {
+    localStorage.setItem('isPrefixesOn', JSON.stringify(isPrefixesOn));
+  }, [isPrefixesOn]);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const wrapperRef = useRef(null);
@@ -130,6 +147,14 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
     visible: switchVisible,
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
+  const {
+    getArrowProps: getSwitch2ArrowProps,
+    getTooltipProps: getSwitch2TooltipProps,
+    setTooltipRef: setSwitch2TooltipRef,
+    setTriggerRef: setSwitch2TriggerRef,
+    visible: switch2Visible,
+  } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
+
   return (
     <div className={`equipment ${char?.profession?.toLowerCase()}-lightning-border`} ref={wrapperRef}>
       <div className="dropdown">
@@ -165,8 +190,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         <label className="switch">
           <input
             type="checkbox"
-            checked={isSliderOn}
-            onChange={toggleSlider} />
+            checked={isPrefixesOn}
+            onChange={togglePrefixes} />
           <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
         </label>
         {switchVisible && (
@@ -176,14 +201,34 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           >
             <div>
               <div>
-                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
+                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
               </div>
             </div>
             <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
           </div>
         )}
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isSliderOn}
+            onChange={toggleSlider} />
+          <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
+        </label>
+        {switch2Visible && (
+          <div
+            ref={setSwitch2TooltipRef}
+            {...getSwitch2TooltipProps({ className: 'tooltip-container equip-tooltip' })}
+          >
+            <div>
+              <div>
+                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
+              </div>
+            </div>
+            <div {...getSwitch2ArrowProps({ className: 'tooltip-arrow' })} />
+          </div>
+        )}
       </div>
-      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} build={build} prof={char?.profession} slider={isSliderOn} />
+      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} build={build} prof={char?.profession} slider={isSliderOn} prefixSlider={isPrefixesOn} />
     </div>
   );
 }

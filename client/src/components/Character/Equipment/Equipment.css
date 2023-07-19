@@ -71,6 +71,20 @@
     text-align: center;
 }
 
+.itemstats {
+    position: absolute;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 10px;
+    background: #202124;
+    width: 441px;
+    text-align: left;
+}
+
+.itemstat {
+    margin-top:10px;
+}
+
 .italic {
     font-style: italic;
 }

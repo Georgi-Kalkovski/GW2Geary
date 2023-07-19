@@ -124,7 +124,7 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                     </Col>
                 )}
                 {window.innerWidth >= 550 &&
-                    <Col className="character-col">
+                    <Col className="character-col" style={{ marginRight: '10px' }}>
                         <CharacterShareLink className='copy-character' buildInput={char.profession} shareLink={shareLink} style={{ width: 0 }} />
                     </Col>
                 }

@@ -302,7 +302,7 @@ p span {
 }
 
 .logo-equipment-width {
-  width: 546px;
+  width: 484px;
 }
 
 .logo-build-width {
@@ -472,7 +472,8 @@ body.light-theme .basic-button,
 body.light-theme .dropdown>ul>li,
 body.light-theme .form-control,
 body.light-theme .footer,
-body.light-theme .form-button:disabled {
+body.light-theme .form-button:disabled,
+body.light-theme .itemstats {
   background-color: rgb(255, 255, 255);
   color: #35363a;
 }
