@@ -164,7 +164,7 @@ function ItemTooltip({ item, slider }) {
                         {/* WEIGHT */}
                         <div>{item.details ? item.details.weight_class : ''}</div>
                         {/* TYPE */}
-                        <div>{item.details ? item.details.type : ''}</div>
+                        <div>{item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
                         {/* LEVEL */}
                         <div>{item.level ? `Required level: ${item.level}` : 'Required level: Unknown'}</div>
                         {/* TRANSMUTED */}

@@ -4,7 +4,7 @@ function EquipmentStats({ prof, items }) {
     const stats = [];
     const upgrades = [];
     const finishedItemstats = [];
-    const itemstats = items[0]?.itemstats;
+    let itemstats = items[0]?.itemstats;
 
     if (items) {
         for (const item of items) {
@@ -39,7 +39,7 @@ function EquipmentStats({ prof, items }) {
                         id: item.stats.id,
                         name: item.name,
                         attributes: item.stats.attributes,
-                        type: item.details.type,
+                        type: item.details.type || item.slot,
                     };
                     stats.push(statsObject);
                 }
@@ -48,7 +48,7 @@ function EquipmentStats({ prof, items }) {
                         name: item.name,
                         id: item.details.infix_upgrade.id,
                         attributes: item.details.infix_upgrade.attributes,
-                        type: item.details.type,
+                        type: item.details.type || item.slot,
                     };
                     stats.push(infixObject);
                 }
@@ -56,26 +56,28 @@ function EquipmentStats({ prof, items }) {
         }
 
         // Itemstats Logic
-        for (const itemstat of itemstats) {
-            for (const stat of stats) {
-                if (itemstat.id === stat.id) {
-                    const existingItem = finishedItemstats.find(
-                        (item) => item.name === itemstat.name
-                    );
+        if (itemstats) {
+            for (const itemstat of itemstats) {
+                for (const stat of stats) {
+                    if (itemstat.id === stat.id) {
+                        const existingItem = finishedItemstats.find(
+                            (item) => item.name === itemstat.name
+                        );
 
-                    if (existingItem) {
-                        existingItem.items.push({
-                            name: stat.name,
-                            type: stat.type,
-                        });
-                    } else {
-                        const result = {
-                            name: itemstat.name,
-                            items: [
-                                { name: stat.name, type: stat.type },
-                            ],
-                        };
-                        finishedItemstats.push(result);
+                        if (existingItem) {
+                            existingItem.items.push({
+                                name: stat.name,
+                                type: stat.type,
+                            });
+                        } else {
+                            const result = {
+                                name: itemstat.name,
+                                items: [
+                                    { name: stat.name, type: stat.type },
+                                ],
+                            };
+                            finishedItemstats.push(result);
+                        }
                     }
                 }
             }
@@ -95,7 +97,7 @@ function EquipmentStats({ prof, items }) {
                             {itemstat.items.length}x {itemstat.name.split("'")[0]}
                             <div
                                 className="flex"
-                                style={{ fontSize: "12px", color: "#aa0404" }}
+                                style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
                             >
                                 - {itemstat.items.map((x, i) => x.type).join(", ")}
                             </div>
@@ -118,7 +120,7 @@ function EquipmentStats({ prof, items }) {
                                     </div>
                                     <div
                                         className="flex"
-                                        style={{ fontSize: "12px", color: "#aa0404" }}
+                                        style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
                                     >
                                         - {upgrade.items.map((x, i) => x.type).join(", ")}
                                     </div>
@@ -142,7 +144,7 @@ function EquipmentStats({ prof, items }) {
                                 </div>
                                 <div
                                     className="flex"
-                                    style={{ fontSize: "12px", color: "#aa0404" }}
+                                    style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
                                 >
                                     - {upgrade.items.map((x, i) => x.type).join(", ")}
                                 </div>
