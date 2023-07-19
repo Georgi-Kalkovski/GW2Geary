@@ -82,7 +82,15 @@
 }
 
 .itemstat {
-    margin-top:10px;
+    margin-top: 10px;
+}
+
+.itemtypes {
+    font-size: 12px;
+}
+
+.itemname {
+    color:#5192f2;
 }
 
 .italic {

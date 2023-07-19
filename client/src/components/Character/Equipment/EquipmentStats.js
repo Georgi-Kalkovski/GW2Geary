@@ -4,6 +4,7 @@ function EquipmentStats({ prof, items }) {
     const stats = [];
     const upgrades = [];
     const finishedItemstats = [];
+    const infusions = [];
     let itemstats = items[0]?.itemstats;
 
     if (items) {
@@ -20,7 +21,7 @@ function EquipmentStats({ prof, items }) {
                     if (existingUpgrade) {
                         existingUpgrade.items.push({
                             name: item.name,
-                            type: item.details.type,
+                            type: item.details.type || item.slot,
                         });
                     } else {
                         upgrades.push({
@@ -28,7 +29,7 @@ function EquipmentStats({ prof, items }) {
                             items: [
                                 { name: item.name, type: item.details.type },
                             ],
-                            type: upgrade.details.type,
+                            type: upgrade.details.type || item.slot,
                         });
                     }
                 }
@@ -51,6 +52,46 @@ function EquipmentStats({ prof, items }) {
                         type: item.details.type || item.slot,
                     };
                     stats.push(infixObject);
+                }
+
+                // Infusions
+                for (const infusion of item.upgrades) {
+                    if (infusion.details.type === 'Default') {
+                        const attributes = infusion.details?.infix_upgrade?.attributes;
+                        let itemOutput = '';
+                        if (attributes && attributes.length > 0) {
+                            for (let i = 0; i < attributes.length; i++) {
+                                const attribute = attributes[i].attribute;
+                                if (item.upgrades?.find(x => x.details?.infix_upgrade?.attributes.find(x => x.attribute === attribute))) {
+                                    itemOutput = item.details.type || item.slot;
+                                }
+                                const modifier = attributes[i].modifier;
+
+                                if (attribute !== undefined) {
+                                    const existingInfusion = infusions.find(
+                                        (i) =>
+                                            i.attribute === attribute &&
+                                            i.modifier === modifier
+                                    );
+
+                                    if (existingInfusion) {
+                                        existingInfusion.count++;
+                                        if (!existingInfusion.items.includes(itemOutput)) {
+                                            existingInfusion.items.push(itemOutput);
+                                        }
+                                    } else {
+                                        const newInfusion = {
+                                            attribute,
+                                            modifier,
+                                            count: 1,
+                                            items: [itemOutput],
+                                        };
+                                        infusions.push(newInfusion);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -83,7 +124,6 @@ function EquipmentStats({ prof, items }) {
             }
         }
     }
-
     return (
         <div className={`flex column itemstats ${prof.toLowerCase()}-lightning-border`}>
             {/* Prefixes */}
@@ -94,13 +134,8 @@ function EquipmentStats({ prof, items }) {
                 {finishedItemstats &&
                     finishedItemstats.map((itemstat, index) => (
                         <div key={index}>
-                            {itemstat.items.length}x {itemstat.name.split("'")[0]}
-                            <div
-                                className="flex"
-                                style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
-                            >
-                                - {itemstat.items.map((x, i) => x.type).join(", ")}
-                            </div>
+                            <span className="itemname">{itemstat.items.length}x {itemstat.name.split("'")[0]} </span>
+                            <span className="itemtypes">- {itemstat.items.map((x, i) => x.type).join(", ")}</span>
                         </div>
                     ))}
             </div>
@@ -114,17 +149,10 @@ function EquipmentStats({ prof, items }) {
                     upgrades.map((upgrade, index) => (
                         <React.Fragment key={index}>
                             {upgrade.type === "Rune" && (
-                                <React.Fragment key={index}>
-                                    <div>
-                                        {upgrade.items.length}x {upgrade.name}
-                                    </div>
-                                    <div
-                                        className="flex"
-                                        style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
-                                    >
-                                        - {upgrade.items.map((x, i) => x.type).join(", ")}
-                                    </div>
-                                </React.Fragment>
+                                <div key={index}>
+                                    <span className="itemname">{upgrade.items.length}x {upgrade.name} </span>
+                                    <span className="itemtypes">- {upgrade.items.map((x, i) => x.type).join(", ")}</span>
+                                </div>
                             )}
                         </React.Fragment>
                     ))}
@@ -136,21 +164,35 @@ function EquipmentStats({ prof, items }) {
             </div>
             {upgrades &&
                 upgrades.map((upgrade, index) => (
-                    <React.Fragment key={index}>
+                    <div key={index}>
                         {upgrade.type == "Sigil" && (
                             <React.Fragment key={index}>
-                                <div>
-                                    {upgrade.items.length}x {upgrade.name}
-                                </div>
-                                <div
-                                    className="flex"
-                                    style={{ fontSize: "12px", color: "rgb(215, 0, 0)" }}
-                                >
-                                    - {upgrade.items.map((x, i) => x.type).join(", ")}
-                                </div>
+                                <span className="itemname">{upgrade.items.length}x {upgrade.name} </span>
+                                <span className="itemtypes">- {upgrade.items.map((x, i) => x.type).join(", ")}</span>
                             </React.Fragment>
                         )}
-                    </React.Fragment>
+                    </div>
+                ))}
+
+            {/* Infusions */}
+            <div className="itemstat">
+                <span className="yellow-highlight">Infusions</span>:
+            </div>
+            {infusions &&
+                infusions.map((infusion, index) => (
+                    <div key={index}>
+                        {(() => {
+                            if (infusion.attribute === 'CritDamage') { infusion.attribute = 'Ferocity' }
+                            if (infusion.attribute === 'ConditionDamage') { infusion.attribute = 'Condition Damage' }
+                            if (infusion.attribute === 'ConditionDuration') { infusion.attribute = 'Expertise' }
+                            if (infusion.attribute === 'BoonDuration') { infusion.attribute = 'Concentration' }
+                            if (infusion.attribute === 'AgonyResistance') { infusion.attribute = 'Agony Resistance' }
+                        })()}
+                        <span className="yellow-highlight itemtypes">{infusion.count}x</span>
+                        <span className="itemname"> +{infusion.modifier} {infusion.attribute} </span>
+                        <span className="yellow-highlight itemtypes">(+{infusion.count * infusion.modifier}) </span>
+                        <span className="itemtypes">- {infusion.items.join(", ")}</span>
+                    </div>
                 ))}
         </div>
     );
