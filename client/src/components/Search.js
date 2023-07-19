@@ -170,7 +170,8 @@ function Search() {
                     /<span className="yellow-highlight">show </span>
                     character's <span className="yellow-highlight">prefixes</span>
                     , <span className="yellow-highlight">runes </span>
-                    and <span className="yellow-highlight">sigils</span>.
+                    , <span className="yellow-highlight">sigils </span>
+                    and <span className="yellow-highlight">infusions</span>.
                   </span>
 
                 </div>

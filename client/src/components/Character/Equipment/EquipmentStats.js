@@ -190,7 +190,7 @@ function EquipmentStats({ prof, items }) {
                         })()}
                         <span className="yellow-highlight itemtypes">{infusion.count}x</span>
                         <span className="itemname"> +{infusion.modifier} {infusion.attribute} </span>
-                        <span className="yellow-highlight itemtypes">(+{infusion.count * infusion.modifier}) </span>
+                        <span className="off-text itemtypes">(+{infusion.count * infusion.modifier}) </span>
                         <span className="itemtypes">- {infusion.items.join(", ")}</span>
                     </div>
                 ))}
