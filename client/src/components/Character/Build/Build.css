@@ -179,9 +179,17 @@
         min-width: 350px !important;
         padding: 5px !important;
     }
+
     .spec-name {
         position: initial;
         text-align: center;
         margin-top: 0;
+        filter: none;
+    }
+}
+
+@media (min-width: 551px) {
+    .spec-name {
+        color: white;
     }
 }

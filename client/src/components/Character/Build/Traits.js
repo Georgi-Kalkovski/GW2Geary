@@ -9,7 +9,7 @@ function Traits({ setTraits, specializations, prof }) {
             {specializations && specializations.length > 0 && (
                 specializations.map((specializationData, index) => (
                     <div key={index}>
-                        <div className='spec-name' style={{color:'#ffffff'}}>{specializationData.specialization.name}</div>
+                        <div className='spec-name'>{specializationData.specialization.name}</div>
                         <Col className="traits-box">
                             <Trait
                                 traitMin={specializationData.traits.min}
