@@ -168,7 +168,7 @@ function Search() {
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>19.07.2023</span> -
                   <span > Added a switch to <span className="off-text">hide</span>
                     /<span className="yellow-highlight">show </span>
-                    <span className="yellow-highlight">prefixes</span>
+                    character's <span className="yellow-highlight">prefixes</span>
                     , <span className="yellow-highlight">runes </span>
                     and <span className="yellow-highlight">sigils</span>.
                   </span>
