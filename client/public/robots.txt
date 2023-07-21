@@ -1,10 +1,10 @@
 User-agent: *
 Allow: /$
-Allow: /accounts/
 Allow: /login
 Allow: /register
 Allow: /about
 Allow: /news
+Disallow: /accounts/
 Disallow: /characters/
 Disallow: /profile/
 Disallow: /reset-password/
