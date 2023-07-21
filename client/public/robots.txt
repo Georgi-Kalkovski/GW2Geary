@@ -1,0 +1,55 @@
+User-agent: *
+Allow: /$
+Allow: /accounts/
+Allow: /login
+Allow: /register
+Allow: /about
+Allow: /news
+Disallow: /characters/
+Disallow: /profile/
+Disallow: /reset-password/
+Disallow: /contacts
+Disallow: /support
+
+# Allow crawling of necessary static assets
+Allow: /favicon.ico
+Allow: /static/
+Allow: /assets/
+
+# Block some specific file types
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.xls$
+Disallow: /*.xlsx$
+Disallow: /*.ppt$
+Disallow: /*.pptx$
+Disallow: /*.xml$
+Disallow: /*.json$
+Disallow: /*.rss$
+
+# Block URLs with query parameters to avoid duplicate content
+Disallow: /*?
+
+# Block URLs with session IDs
+Disallow: /*;jsessionid
+
+# Block specific search parameters
+Disallow: /search/
+
+# Block specific user account URLs (if applicable)
+Disallow: /users/
+
+# Block URLs with sensitive or irrelevant content
+Disallow: /private/
+Disallow: /admin/
+Disallow: /backup/
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /cache/
+
+# Crawlers should wait at least 5 seconds between requests
+Crawl-delay: 5
+
+# Sitemap location
+Sitemap: https://gw2geary.com/sitemap.xml
