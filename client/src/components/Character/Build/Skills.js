@@ -4,6 +4,7 @@ import fetchData from '../../fetchData';
 import Tooltip from './Tooltip';
 import Land from './img/land.png';
 import Water from './img/water.png';
+import Link from '../link.svg';
 
 function Skills({ skills, water_skills, prof }) {
     const [skillsData, setSkillsData] = useState({
@@ -43,12 +44,30 @@ function Skills({ skills, water_skills, prof }) {
     }, [skills, water_skills]);
 
     const SkillBox = ({ skill }) => {
+        const [showWikiButton, setShowWikiButton] = useState(false);
+
+        const handleButtonClick = (event) => {
+            event.preventDefault();
+
+            window.open(`https://wiki.guildwars2.com/wiki/${skill.name}`, '_blank');
+        };
+
+        const handleLeftClick = (event) => {
+            setShowWikiButton(true);
+        };
+
         if (skill && skill.name) {
             return (
-                <Container className="skill-box-container">
-                    {/* {console.log(skill)} */}
+                <Container
+                    className="skill-box-container"
+                    onClick={handleLeftClick}
+                    onMouseLeave={() => setShowWikiButton(false)}>
+                    {showWikiButton &&
+                        <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={Link} alt="" /></button>
+                    }
                     <Tooltip tooltip={skill} prof={prof}>
-                        <img className="skill-box cursor" src={skill.icon} alt={skill.name} />
+                        <img 
+                    style={{cursor: 'pointer'}} className="skill-box cursor" src={skill.icon} alt={skill.name} />
                     </Tooltip>
                 </Container>
             );
@@ -56,6 +75,7 @@ function Skills({ skills, water_skills, prof }) {
             return <img className="skill-box" alt="" />;
         }
     };
+
 
     return (
         <Container className="skills-center">

@@ -283,6 +283,23 @@ input:checked+.slider:before {
   color: #aa0404;
 }
 
+.wiki-button {
+  position: absolute;
+  margin-left: 0px;
+  margin-top: 15px;
+  padding: 3px;
+  font-size: 16px;
+  border: 1px solid;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.wiki-button img {
+  padding-left: 5px;
+  width: 15px;
+}
 
 /* Character */
 
@@ -443,5 +460,9 @@ input:checked+.slider:before {
 
   .logo-equipment-width {
     width: 350px;
+  }
+
+  .wiki-button {
+    visibility: hidden;
   }
 }

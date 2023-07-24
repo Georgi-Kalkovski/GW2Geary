@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
+import Link from '../link.svg';
 
 function ItemTooltip({ item, slider }) {
     // console.log('item ', item)
@@ -12,6 +13,24 @@ function ItemTooltip({ item, slider }) {
         setTriggerRef,
         visible,
     } = usePopperTooltip({ placement: 'right' });
+
+    const [showWikiButton, setShowWikiButton] = useState(false);
+
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+
+        window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+    };
+
+    const handleButtonSkinClick = (event) => {
+        event.preventDefault();
+
+        window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name}`, '_blank');
+    };
+
+    const handleLeftClick = (event) => {
+        setShowWikiButton(true);
+    };
 
     return (
         <>
@@ -190,11 +209,30 @@ function ItemTooltip({ item, slider }) {
             )}
             {item
                 ?
-                <div className='' ref={setTriggerRef}>
+                <div ref={setTriggerRef}
+                    onClick={handleLeftClick}
+                    onMouseLeave={() => setShowWikiButton(false)}>
+                    {showWikiButton &&
+                        <div className='flex column' style={{ marginLeft: '-25px' }}>
+                            {!item.skin_name &&
+                                <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+
+                            }
+                            {item.skin_name &&
+                                <div>
+                                    <button className='wiki-button basic-button' style={{ marginTop: '5px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+                                    <button className='wiki-button basic-button' style={{ marginTop: '32px' }} onClick={handleButtonSkinClick}>Wiki Skin<img src={Link} alt="" /></button>
+
+                                </div>
+                            }
+                        </div>
+                    }
                     {/* ITEM ICON */}
                     {item.skin_icon && item.skin_name && slider
-                        ? <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.skin_icon} alt={item.skin_icon} />
-                        : <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.icon} alt={item.icon} />
+                        ? <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.skin_icon} alt={item.skin_icon}
+                            style={{ cursor: 'pointer' }} />
+                        : <img className={`item-box box-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`} src={item.icon} alt={item.icon}
+                            style={{ cursor: 'pointer' }} />
                     }
                 </div>
                 : <img className="item-box box-gray" alt="" />

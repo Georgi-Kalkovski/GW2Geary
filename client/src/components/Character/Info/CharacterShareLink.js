@@ -29,7 +29,7 @@ function CharacterShareLink({ buildInput, shareLink }) {
                     onClick={copyText}
                     style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                     ref={setTriggerRef}>
-                    Copy Character
+                    Copy Link
                 </button>
 
                 {visible && (

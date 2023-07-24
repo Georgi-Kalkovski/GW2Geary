@@ -1,8 +1,22 @@
 function News() {
     return (
         <div className='flex center column'>
-           <h2 style={{ textAlign: 'center' }}>News</h2>
+            <h2 style={{ textAlign: 'center' }}>News</h2>
             <div>
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>24.07.2023</h3>
+                    <div className="line"></div>
+                    <div >
+                        Now the user can have direct link to
+                        <span className="yellow-highlight"> GW2 Wiki </span>
+                        by clicking on the character's
+                        <span className="yellow-highlight"> item</span>
+                        , <span className="yellow-highlight">skill </span>
+                        or <span className="yellow-highlight">trait</span>.
+                    </div>
+                </div>
+
+                <br />
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>19.07.2023</h3>
                     <div className="line"></div>
@@ -39,6 +53,8 @@ function News() {
                         <span className="geary-logo-style" style={{ fontSize: '20px' }}>GEARY</span> IS LIVE!!!
                     </div>
                 </div>
+
+                <br />
             </div>
 
         </div>);

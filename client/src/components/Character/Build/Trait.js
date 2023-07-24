@@ -1,27 +1,70 @@
+import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Tooltip from './Tooltip';
+import Link from '../link.svg';
 
-function Trait({  traitMin, traitMaj, traitsActive, prof }) {
+function Trait({ traitMin, traitMaj, traitsActive, prof }) {
 
     function imageTraitMin(trait) {
+        const [showWikiButton, setShowWikiButton] = useState(false);
+
+        const handleButtonClick = (event) => {
+            event.preventDefault();
+
+            window.open(`https://wiki.guildwars2.com/wiki/${trait.name}`, '_blank');
+        };
+
+        const handleLeftClick = (event) => {
+            setShowWikiButton(true);
+        };
         return (
-            <Container>
+            <Container
+                onClick={handleLeftClick}
+                onMouseLeave={() => setShowWikiButton(false)}>
+                {showWikiButton &&
+                    <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={Link} alt="" /></button>
+                }
                 <Tooltip tooltip={trait} prof={prof}>
-                    <img src={trait.icon} alt={trait.name} className='minor-trait-icon' />
+                    <img
+                        src={trait.icon}
+                        alt={trait.name}
+                        className='minor-trait-icon'
+                        style={{ cursor: 'pointer' }} />
                 </Tooltip>
             </Container>
         );
     }
 
     function imageTraitMaj(trait) {
+        const [showWikiButton, setShowWikiButton] = useState(false);
+
+        const handleButtonClick = (event) => {
+            event.preventDefault();
+
+            window.open(`https://wiki.guildwars2.com/wiki/${trait.name}`, '_blank');
+        };
+
+        const handleLeftClick = (event) => {
+            setShowWikiButton(true);
+        };
         return (
-            <Tooltip tooltip={trait} prof={prof}>
-                <img src={trait.icon} alt={trait.name}
-                    className={traitsActive.includes(trait.id)
-                        ? 'major-trait-icon'
-                        : 'major-trait-icon inactive-trait'}
-                />
-            </Tooltip>
+            <Container
+                onClick={handleLeftClick}
+                onMouseLeave={() => setShowWikiButton(false)}>
+                {showWikiButton &&
+                    <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={Link} alt="" /></button>
+                }
+                <Tooltip tooltip={trait} prof={prof}>
+                    <img
+                        src={trait.icon}
+                        alt={trait.name}
+                        className={traitsActive.includes(trait.id)
+                            ? 'major-trait-icon'
+                            : 'major-trait-icon inactive-trait'}
+                        style={{ cursor: 'pointer' }}
+                    />
+                </Tooltip>
+            </Container>
         );
     }
     return (

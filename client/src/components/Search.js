@@ -164,7 +164,18 @@ function Search() {
                 Latest News
               </Row>
               <Row className='search-news'>
+
                 <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>24.07.2023</span> -
+                  Now the user can have direct link to
+                  <span className="yellow-highlight"> GW2 Wiki </span>
+                  by clicking on the character's
+                  <span className="yellow-highlight"> item</span>
+                  , <span className="yellow-highlight">skill </span>
+                  or <span className="yellow-highlight">trait</span>.
+                </div>
+
+                <div >
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>19.07.2023</span> -
                   <span > Added a switch to <span className="off-text">hide</span>
                     /<span className="yellow-highlight">show </span>
@@ -173,20 +184,22 @@ function Search() {
                     , <span className="yellow-highlight">sigils </span>
                     and <span className="yellow-highlight">infusions</span>.
                   </span>
-
                 </div>
+
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</span>
                   <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option to copy specific</span>
                   <span className='yellow-highlight' style={{ marginRight: '5px' }}>equipment</span>
                   &<span className='yellow-highlight' style={{ marginLeft: '5px' }}>build</span>.
                 </div>
+
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>11.07.2023</span>
                   <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option for each character to be</span>
                   <span style={{ color: 'darkgreen', marginRight: '5px' }}>Public</span>
                   /<span style={{ color: '#aa0404', marginLeft: '5px' }}>Private</span>.
                 </div>
+
               </Row>
             </Col>
           </Container>

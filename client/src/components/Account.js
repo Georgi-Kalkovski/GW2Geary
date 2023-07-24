@@ -144,7 +144,7 @@ const Account = () => {
                             style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                             onClick={copyText}
                           >
-                            Copy Account
+                            Copy Link
                           </button>
                         )}
                       </div>
@@ -182,7 +182,7 @@ const Account = () => {
                           style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                           onClick={copyText}
                         >
-                          Copy Account
+                          Copy Link
                         </button>
                       )}
                     </Row>
