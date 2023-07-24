@@ -49,8 +49,9 @@ function News() {
                     <h3>28.06.2023</h3>
                     <div className="line"></div>
                     <div >
-                        <span className="gw2-logo-style" style={{ fontSize: '20px' }}>GW2</span>
-                        <span className="geary-logo-style" style={{ fontSize: '20px' }}>GEARY</span> IS LIVE!!!
+                    The Guild Wars 2 Armory is here!
+                        <span className="gw2-logo-style" style={{ fontSize: '20px' }}> GW2</span>
+                        <span className="geary-logo-style" style={{ fontSize: '20px' }}>GEARY</span> IS LIVE!!! 
                     </div>
                 </div>
 
