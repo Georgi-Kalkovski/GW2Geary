@@ -147,7 +147,7 @@ function Search() {
                 Welcome to <span className="gw2-logo-style">GW2</span>
                 <span className="geary-logo-style">Geary</span>!
               </Row>
-              <Row>A place where you can inspect equipment and builds of registered accounts and their characters.</Row>
+              <Row>A place where you can inspect or share equipment and builds of registered accounts and their characters.</Row>
               <Row>
                 If someone has registered a valid{' '}
                 <Link to="https://account.arena.net/applications" style={{ color: '#d70000' }} target="_blank">
