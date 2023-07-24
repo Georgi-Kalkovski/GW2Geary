@@ -461,8 +461,4 @@ input:checked+.slider:before {
   .logo-equipment-width {
     width: 350px;
   }
-
-  .wiki-button {
-    visibility: hidden;
-  }
 }
