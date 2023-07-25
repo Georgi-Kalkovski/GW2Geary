@@ -185,7 +185,7 @@ function Search() {
                   <span > Added a switch to <span className="off-text">hide</span>
                     /<span className="yellow-highlight">show </span>
                     character's <span className="yellow-highlight">prefixes</span>
-                    , <span className="yellow-highlight">runes </span>
+                    , <span className="yellow-highlight">runes</span>
                     , <span className="yellow-highlight">sigils </span>
                     and <span className="yellow-highlight">infusions</span>.
                   </span>
