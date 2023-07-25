@@ -104,11 +104,11 @@ function EquipmentStats({ prof, items }) {
                         const existingItem = finishedItemstats.find(
                             (item) => item.name === itemstat.name
                         );
-
                         if (existingItem) {
                             existingItem.items.push({
                                 name: stat.name,
                                 type: stat.type,
+                                attributes: stat.attributes
                             });
                         } else {
                             const result = {

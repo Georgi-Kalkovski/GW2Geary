@@ -10,13 +10,13 @@
 
 .accounts-box {
     border: 1.5px solid rgb(255, 255, 255);
-    box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.3);
+    box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.2);
     margin: 3%;
     color: white;
 }
 
 .accounts-hover:hover {
-    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.5);
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
     background-color: #35363a;
 }
 
@@ -69,7 +69,7 @@
     margin-top: 1em;
     padding: 1em 0.6em;
     background-color: #202124;
-    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.2);
     color: #d3d3d3;
     width: 44em;
     display: flex;
@@ -105,7 +105,7 @@
 
 .pagination-item:hover {
     background-color: #aa0404;
-    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+    box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.2);
 }
 
 .pagination-item:disabled {

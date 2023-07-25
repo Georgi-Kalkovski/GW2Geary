@@ -86,13 +86,13 @@ const Account = () => {
         <div className="container">
           <div>
             {/* Breadcrumb */}
-            <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb" className="breadcrumb">
               <div style={{ listStyleType: "none" }} className='flex center'>
                 <li>
                   <Link className='nav-a' to="/">Search</Link>
                 </li>
                 <li style={{ cursor: "default" }} aria-current="page">
-                  <span>{`/`} </span><span style={{ color: "#d70000" }}>Account</span>
+                  <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101)" }}>Account</span>
                 </li>
               </div>
             </nav>

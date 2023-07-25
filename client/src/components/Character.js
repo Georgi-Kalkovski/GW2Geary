@@ -84,7 +84,7 @@ function Character() {
             </div>
             : <Container className='center-items'>
                 {/* Breadcrumb */}
-                <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb" className="breadcrumb">
                     <ul style={{ listStyleType: "none" }} className='flex center'>
                         <li>
                             <Link className='nav-a' to="/search">Search</Link>
@@ -93,7 +93,7 @@ function Character() {
                             <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
                         </li>
                         <li style={{ cursor: "default" }} aria-current="page">
-                            <span>{`/`} </span><span style={{ color: "#d70000" }}>Character</span>
+                            <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
                         </li>
                     </ul>
                 </nav>

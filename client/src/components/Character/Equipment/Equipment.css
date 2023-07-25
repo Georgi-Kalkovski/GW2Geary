@@ -5,7 +5,7 @@
     height: 652px;
     padding: 20px 0;
     background-color: #202124;
-    margin: 1%;
+    margin: 5px;
 }
 
 .equipment-box {
@@ -123,7 +123,7 @@
 
 .border-unknown {
     border: 1.5px solid rgb(243, 6, 6);
-    box-shadow: 0 0 10px 2px rgba(192, 4, 4, 0.5);
+    box-shadow: 0 0 10px 2px rgba(192, 4, 4, 0.3);
 }
 
 
@@ -137,7 +137,7 @@
 
 .border-basic {
     border: 1.5px solid rgb(255, 255, 255);
-    box-shadow: 0 0 10px 2px rgba(204, 204, 204, 0.5);
+    box-shadow: 0 0 10px 2px rgba(204, 204, 204, 0.3);
 }
 
 .name-fine {
@@ -150,7 +150,7 @@
 
 .border-fine {
     border: 1.5px solid rgb(98, 164, 225);
-    box-shadow: 0 0 10px 2px rgba(75, 126, 174, 0.5);
+    box-shadow: 0 0 10px 2px rgba(75, 126, 174, 0.3);
 }
 
 .name-masterwork {
@@ -164,7 +164,7 @@
 
 .border-masterwork {
     border: 1.5px solid rgb(26, 147, 6);
-    box-shadow: 0 0 10px 2px rgba(16, 95, 3, 0.5);
+    box-shadow: 0 0 10px 2px rgba(16, 95, 3, 0.3);
 }
 
 .name-rare {
@@ -177,7 +177,7 @@
 
 .border-rare {
     border: 1.5px solid rgb(252, 208, 11);
-    box-shadow: 0 0 10px 2px rgba(201, 165, 8, 0.5);
+    box-shadow: 0 0 10px 2px rgba(201, 165, 8, 0.3);
 }
 
 .name-exotic {
@@ -190,7 +190,7 @@
 
 .border-exotic {
     border: 1.5px solid rgb(255, 164, 5);
-    box-shadow: 0 0 10px 2px rgba(204, 131, 4, 0.5);
+    box-shadow: 0 0 10px 2px rgba(204, 131, 4, 0.3);
 }
 
 .name-ascended {
@@ -203,7 +203,7 @@
 
 .border-ascended {
     border: 1.5px solid rgb(251, 62, 141);
-    box-shadow: 0 0 10px 2px rgba(199, 49, 112, 0.5);
+    box-shadow: 0 0 10px 2px rgba(199, 49, 112, 0.3);
 }
 
 
@@ -217,5 +217,5 @@
 
 .border-legendary {
     border: 1.5px solid rgb(93, 23, 207);
-    box-shadow: 0 0 10px 2px rgba(76, 19, 169, 0.5);
+    box-shadow: 0 0 10px 2px rgba(76, 19, 169, 0.3);
 }
