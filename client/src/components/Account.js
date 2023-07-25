@@ -126,7 +126,7 @@ const Account = () => {
                             style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
                             onClick={() => setShowMenu(true)}
                           >
-                            Show More
+                            Show Details
                           </button>
                         )}
                         {window.innerWidth < 550 && showMenu && (
@@ -135,7 +135,7 @@ const Account = () => {
                             style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
                             onClick={() => setShowMenu(false)}
                           >
-                            Hide More
+                            Hide Details
                           </button>
                         )}
                         {window.innerWidth < 550 && (
@@ -150,28 +150,28 @@ const Account = () => {
                       </div>
                       {/* World */}
                       {showMenu && (
-                        <Col className='character-col'>
+                        <Col className='character-col padding-top'>
                           <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
                           <Row className='yellow-highlight'>World</Row>
                         </Col>
                       )}
                       {/* Mastery Points */}
                       {showMenu && (
-                        <Col className="character-col">
+                        <Col className="character-col padding-top">
                           <Row className="font-size-25px">{mastery}</Row>
                           <Row className="yellow-highlight">Mastery Points </Row>
                         </Col>
                       )}
                       {/* Fractal Level */}
                       {showMenu && (
-                        <Col className="character-col">
+                        <Col className="character-col padding-top">
                           <Row className="font-size-25px">{account?.fractal_level}</Row>
                           <Row className="yellow-highlight">Fractal Level</Row>
                         </Col>
                       )}
                       {/* WvW Rank */}
                       {showMenu && (
-                        <Col className="character-col">
+                        <Col className="character-col padding-top">
                           <Row className="font-size-25px">{account?.wvw_rank}</Row>
                           <Row className="yellow-highlight">WvW Rank</Row>
                         </Col>

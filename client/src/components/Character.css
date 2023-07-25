@@ -465,7 +465,12 @@ input:checked+.slider:before {
   .traits-box {
     padding-left: 50px;
   }
+
   .cropped-spec-img {
     margin-left: -95px;
-}
+  }
+
+  .padding-top {
+    padding-top: 10px;
+  }
 }
