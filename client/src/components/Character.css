@@ -461,4 +461,11 @@ input:checked+.slider:before {
   .logo-equipment-width {
     width: 350px;
   }
+
+  .traits-box {
+    padding-left: 50px;
+  }
+  .cropped-spec-img {
+    margin-left: -95px;
+}
 }
