@@ -55,4 +55,3 @@ Crawl-delay: 5
 
 # Sitemap location
 Sitemap: https://gw2geary.com/sitemap.xml
-Sitemap: https://www.gw2geary.com/sitemap.xml
