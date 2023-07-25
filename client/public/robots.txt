@@ -1,9 +1,10 @@
 User-agent: *
 Allow: /
-Allow: /login/
-Allow: /register/
-Allow: /about/
-Allow: /news/
+Allow: /?
+Allow: /login
+Allow: /register
+Allow: /about
+Allow: /news
 Disallow: /accounts/
 Disallow: /characters/
 Disallow: /profile/
