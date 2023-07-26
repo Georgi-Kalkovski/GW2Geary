@@ -11,7 +11,7 @@
 .accounts-box {
     border: 1.5px solid rgb(255, 255, 255);
     box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.2);
-    margin: 3%;
+    margin: 1%;
     color: white;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .pagination-item {
-    margin: 0 5px;
+    margin: 0 2px;
     cursor: pointer;
     border: 1.5px solid white;
     color: white;
