@@ -64,7 +64,6 @@ function Build({ setBuild, tab }) {
                         <>
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
                             <Traits setTraits={() => setTraits} specializations={specializations} prof={tab.profession} />
-                            <br />
                             <Template buildInput={tab} />
                         </>
                     )}
