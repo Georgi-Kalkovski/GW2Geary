@@ -23,7 +23,7 @@ function CharacterShareLink({ buildInput, shareLink }) {
 
     return (<>
         {buildInput &&
-            <div className='template-container' >
+            <div>
                 <button
                     className={`${buildInput.toLowerCase()}-border template-button`}
                     onClick={copyText}

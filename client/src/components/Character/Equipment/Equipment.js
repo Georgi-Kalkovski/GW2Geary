@@ -48,7 +48,7 @@ function Equipment({ items, prof, slider, build, prefixSlider }) {
                                     <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
 
                                 </Col>
-                                <Row className='flex' style={{ marginTop: '3px' }}>
+                                <Row className='flex' style={{ marginTop: '7px' }}>
                                     <Col className={`flex column ${prof ? prof.toLowerCase() : ''}-lightning-border`}
                                         style={{
                                             borderWidth: '2px',
