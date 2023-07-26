@@ -142,7 +142,7 @@ function Search() {
       ) : (
         <>
           <Container className="flex center">
-            <Col className="home-empty-search-box" style={{ padding: '1% 1%' }}>
+            <Col className="home-empty-search-box">
               <Row className='home-welcome'>
                 Welcome to <span className="gw2-logo-style">GW2</span>
                 <span className="geary-logo-style">Geary</span>!
