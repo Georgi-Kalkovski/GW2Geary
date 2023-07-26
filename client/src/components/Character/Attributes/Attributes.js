@@ -267,7 +267,7 @@ function Attributes({ items, prof, build }) {
                 Attributes
             </Row>
 
-            <Container className='attribute-container' style={{ display: 'flex', padding: '5px 5% 0 5%' }}>
+            <Container className='attribute-container' style={{ fontSize: '14.5px', display: 'flex', padding: '5px 5% 0 5%' }}>
                 <Col className="attribute-col-one" style={{ textAlign: "left" }}>
                     {attr.slice(0, 9).map((attribute, index) => (
                         <Row key={index}>
