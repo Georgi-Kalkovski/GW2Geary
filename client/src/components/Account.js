@@ -86,7 +86,7 @@ const Account = () => {
         <div className="container">
           <div>
             {/* Breadcrumb */}
-            <nav aria-label="breadcrumb" className="breadcrumb">
+            <nav aria-label="breadcrumb" className="breadcrumb" style={{marginTop:'15px'}}>
               <div style={{ listStyleType: "none" }} className='flex center'>
                 <li>
                   <Link className='nav-a' to="/">Search</Link>
