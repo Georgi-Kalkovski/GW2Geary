@@ -178,7 +178,6 @@ exports.getEmail = async (req, res) => {
   try {
     const user = (await User.find(email).select("-roles -password -_id -apiKeys -_id"));
     if (user) {
-      console.log(user)
       res.status(200).send({
         message: "Users retrieved successfully!",
         user: user
