@@ -172,6 +172,26 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+// Get all users
+exports.getEmail = async (req, res) => {
+  const { username, email } = req.body;
+  console.log(username)
+  console.log(email)
+  try {
+    const user = (await User.find(username, email).select("-roles -password -_id -apiKeys -_id"));
+    if (user) {
+      console.log(user)
+      res.status(200).send({
+        message: "Users retrieved successfully!",
+        user: user
+      });
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).send({ message: err.message });
+  }
+};
+
 // create API key
 exports.createApiKey = async (req, res) => {
   try {

@@ -49,6 +49,11 @@ router.get(
   controller.getAllUsers
 );
 
+router.post(
+  "/getEmail",
+  controller.getEmail
+);
+
 router.put(
   "/users/:userId/apiKeys/:apiKeyId",
   controller.updateApiKeyStatus

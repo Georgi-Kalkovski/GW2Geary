@@ -80,6 +80,16 @@ const getAllUsers = () => {
   return axios.get(API_URL + "allUsers");
 };
 
+// Users Get Service
+const getEmail = (username, email) => {
+  return axios.post(API_URL + "getEmail",
+    {
+      username,
+      email
+    }
+  );
+};
+
 // Api Create Service
 const createApiKey = (apiKey) => {
   const currentUser = getCurrentUser();
@@ -147,6 +157,7 @@ const AuthService = {
   deleteCurrentUser,
   getCurrentUser,
   getAllUsers,
+  getEmail,
   changeEmail,
   createApiKey,
   getApiKeys,

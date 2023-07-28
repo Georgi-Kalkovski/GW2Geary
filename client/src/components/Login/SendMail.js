@@ -4,11 +4,12 @@ import axios from "axios";
 function SendMail({ AuthService }) {
   const ip = "https://gw2geary.com/api";
   const [usernameInput, setUsernameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCheckUsername = async () => {
-    const userFound = (await AuthService.getAllUsers()).data.users.find(
-      (u) => u.username === usernameInput
+    const userFound = (await AuthService.getEmail({ username: usernameInput, email: emailInput })).data.user.find(
+      (u) => u.username === usernameInput && u.email === emailInput
     );
     if (userFound && userFound.email) {
       axios
@@ -45,17 +46,27 @@ function SendMail({ AuthService }) {
           <span>Enter your Username and we </span>{" "}
           <span> will send you an email.</span>
         </p>
-        <label htmlFor="check-username">Username</label>
-        <input
-          type="text"
-          className="form-control"
-          name="check-username"
-          value={usernameInput}
-          onChange={(e) => setUsernameInput(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        {errorMessage && <p style={{ textAlign: "center" }}>{errorMessage}</p>}
-        <div className="flex center">
+        <div className="flex column center">
+          <label htmlFor="check-username">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            name="check-username"
+            value={usernameInput}
+            onChange={(e) => setUsernameInput(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          <label htmlFor="check-email">Email</label>
+
+          <input
+            type="email"
+            className="form-control"
+            name="check-email"
+            value={emailInput}
+            onChange={(e) => setEmailInput(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          {errorMessage && <p style={{ textAlign: "center" }}>{errorMessage}</p>}
           <button
             className="basic-button"
             type="button"
