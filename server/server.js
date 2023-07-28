@@ -60,8 +60,7 @@ function generateResetToken() {
 
 // Send Mail Logic
 app.post("/api/reset-password", async (req, res) => {
-  const { email } = req.body;
-  const user = (await User.find(email).select("-roles -username -resetToken -password -_id -apiKeys -_id"));;
+  const { user } = req.body;
   try {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
