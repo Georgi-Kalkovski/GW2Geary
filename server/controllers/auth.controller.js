@@ -172,14 +172,15 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// Get email
+// Get all users
 exports.getEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    if (email) {
+    const user = (await User.find(email).select("-roles -username -resetToken -password -_id -apiKeys -_id"));
+    if (user) {
       res.status(200).send({
         message: "Users retrieved successfully!",
-        email: email
+        user: user
       });
     }
   } catch (err) {
