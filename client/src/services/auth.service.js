@@ -81,12 +81,9 @@ const getAllUsers = () => {
 };
 
 // Users Get Service
-const getEmail = (username, email) => {
+const getEmail = (email) => {
   return axios.post(API_URL + "getEmail",
-    {
-      username,
-      email
-    }
+    { email }
   );
 };
 

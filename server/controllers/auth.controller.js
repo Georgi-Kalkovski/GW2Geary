@@ -174,11 +174,9 @@ exports.getAllUsers = async (req, res) => {
 
 // Get all users
 exports.getEmail = async (req, res) => {
-  const { username, email } = req.body;
-  console.log(username)
-  console.log(email)
+  const { email } = req.body;
   try {
-    const user = (await User.find(username, email).select("-roles -password -_id -apiKeys -_id"));
+    const user = (await User.find(email).select("-roles -password -_id -apiKeys -_id"));
     if (user) {
       console.log(user)
       res.status(200).send({

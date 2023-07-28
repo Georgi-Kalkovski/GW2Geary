@@ -3,13 +3,13 @@ import axios from "axios";
 
 function SendMail({ AuthService }) {
   const ip = "https://gw2geary.com/api";
-  const [usernameInput, setUsernameInput] = useState("");
+  // const [usernameInput, setUsernameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCheckUsername = async () => {
-    const userFound = (await AuthService.getEmail({ username: usernameInput, email: emailInput })).data.user.find(
-      (u) => u.username === usernameInput && u.email === emailInput
+    const userFound = (await AuthService.getEmail({ email: emailInput })).data.user.find(
+      (u) => u.email === emailInput
     );
     if (userFound && userFound.email) {
       axios
@@ -43,11 +43,12 @@ function SendMail({ AuthService }) {
           Reset password
         </h2>
         <p style={{ textAlign: "center" }}>
-          <span>Enter your Username and we </span>{" "}
-          <span> will send you an email.</span>
+          <span>Enter your Email and we </span>{" "}
+          <span> will send you</span>
+          <span> reset password email.</span>
         </p>
         <div className="flex column center">
-          <label htmlFor="check-username">Username</label>
+          {/* <label htmlFor="check-username">Username</label>
           <input
             type="text"
             className="form-control"
@@ -55,9 +56,9 @@ function SendMail({ AuthService }) {
             value={usernameInput}
             onChange={(e) => setUsernameInput(e.target.value)}
             onKeyDown={handleKeyPress}
-          />
-          <label htmlFor="check-email">Email</label>
+          /> */}
 
+          <label htmlFor="check-email">Email</label>
           <input
             type="email"
             className="form-control"
@@ -67,13 +68,15 @@ function SendMail({ AuthService }) {
             onKeyDown={handleKeyPress}
           />
           {errorMessage && <p style={{ textAlign: "center" }}>{errorMessage}</p>}
-          <button
-            className="basic-button"
-            type="button"
-            onClick={handleCheckUsername}
-          >
-            Send an Email
-          </button>
+          <div className="flex center">
+            <button
+              className="basic-button"
+              type="button"
+              onClick={handleCheckUsername}
+            >
+              Send an Email
+            </button>
+          </div>
         </div>
       </div>
     </>
