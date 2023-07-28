@@ -80,7 +80,7 @@ const getAllUsers = () => {
   return axios.get(API_URL + "allUsers");
 };
 
-// Users Get Service
+// Email Get Service
 const getEmail = (email) => {
   return axios.post(API_URL + "getEmail",
     { email }
