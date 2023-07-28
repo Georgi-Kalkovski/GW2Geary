@@ -176,7 +176,7 @@ exports.getAllUsers = async (req, res) => {
 exports.getEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = (await User.find(email).select("-roles -resetToken -password -_id -apiKeys -_id"));
+    const user = (await User.find(email).select("-roles -username -resetToken -password -_id -apiKeys -_id"));
     if (user) {
       res.status(200).send({
         message: "Users retrieved successfully!",
