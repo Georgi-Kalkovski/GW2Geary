@@ -4,10 +4,13 @@ Allow: /login
 Allow: /register
 Allow: /about
 Allow: /news
+Disallow: /static/
 Disallow: /accounts/
 Disallow: /characters/
+Disallow: /a/
+Disallow: /c/
 Disallow: /profile/
-Disallow: /search/
+Disallow: /search
 Disallow: /reset-password/
 Disallow: /contacts
 Disallow: /support
