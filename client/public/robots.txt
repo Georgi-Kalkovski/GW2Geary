@@ -4,7 +4,6 @@ Allow: /login
 Allow: /register
 Allow: /about
 Allow: /news
-Disallow: /static/
 Disallow: /accounts/
 Disallow: /characters/
 Disallow: /a/
