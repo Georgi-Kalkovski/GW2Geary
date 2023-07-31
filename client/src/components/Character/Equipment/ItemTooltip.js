@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
@@ -69,47 +69,74 @@ function ItemTooltip({ item, slider }) {
                             </>
                         }
 
-                        {/* STATS */}
-                        {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
-                        {item.itemstats
-                            && item.details
-                            && item.details.infix_upgrade
-                            && item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0] &&
-                            <span> {item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0]}:</span>
-                        }
-                        {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
-                            <Row key={`attributes-${item.id}-${index}`}>
-                                <span className='green'>
-                                    + {item.stats.attributes[stat]}
-                                    {(() => {
-                                        if (stat === 'CritDamage') { stat = 'Ferocity' }
-                                        if (stat === 'ConditionDamage') { stat = 'Condition Damage' }
-                                        if (stat === 'ConditionDuration') { stat = 'Expertise' }
-                                        if (stat === 'BoonDuration') { stat = 'Concentration' }
-                                    })()}
-                                    <span> {stat}</span>
-                                </span>
-                            </Row>
-                        ))}
-                        {item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes &&
-                            Object.keys(item.details.infix_upgrade.attributes).map((index) => {
-                                let modifier = item.details.infix_upgrade.attributes[index].modifier;
-                                let attribute = item.details.infix_upgrade.attributes[index].attribute;
-                                return (
+                        <Container className='flex'>
+                            {/* STATS */}
+                            <Col>
+                                {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
+                                {item.itemstats
+                                    && item.details
+                                    && item.details.infix_upgrade
+                                    && item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0] &&
+                                    <span> {item.itemstats.find(is => is.id === item.details.infix_upgrade.id)?.name.split('\'')[0]}:</span>
+                                }
+                                {item.stats && Object.keys(item.stats.attributes).map((stat, index) => (
                                     <Row key={`attributes-${item.id}-${index}`}>
                                         <span className='green'>
-                                            {attribute && `+ ${modifier}`}
+                                            + {item.stats.attributes[stat]}
                                             {(() => {
-                                                if (attribute === 'CritDamage') { attribute = 'Ferocity' }
-                                                if (attribute === 'ConditionDamage') { attribute = 'Condition Damage' }
-                                                if (attribute === 'ConditionDuration') { attribute = 'Expertise' }
-                                                if (attribute === 'BoonDuration') { attribute = 'Concentration' }
+                                                if (stat === 'CritDamage') { stat = 'Ferocity' }
+                                                if (stat === 'ConditionDamage') { stat = 'Condition Damage' }
+                                                if (stat === 'ConditionDuration') { stat = 'Expertise' }
+                                                if (stat === 'BoonDuration') { stat = 'Concentration' }
                                             })()}
-                                            {attribute && <span> {attribute}</span>}
+                                            <span> {stat}</span>
                                         </span>
                                     </Row>
-                                );
-                            })}
+                                ))}
+                                {item.details && item.details.infix_upgrade && item.details.infix_upgrade.attributes &&
+                                    Object.keys(item.details.infix_upgrade.attributes).map((index) => {
+                                        let modifier = item.details.infix_upgrade.attributes[index].modifier;
+                                        let attribute = item.details.infix_upgrade.attributes[index].attribute;
+                                        return (
+                                            <Row key={`attributes-${item.id}-${index}`}>
+                                                <span className='green'>
+                                                    {attribute && `+ ${modifier}`}
+                                                    {(() => {
+                                                        if (attribute === 'CritDamage') { attribute = 'Ferocity' }
+                                                        if (attribute === 'ConditionDamage') { attribute = 'Condition Damage' }
+                                                        if (attribute === 'ConditionDuration') { attribute = 'Expertise' }
+                                                        if (attribute === 'BoonDuration') { attribute = 'Concentration' }
+                                                    })()}
+                                                    {attribute && <span> {attribute}</span>}
+                                                </span>
+                                            </Row>
+                                        );
+                                    })}
+                            </Col>
+
+                            {/* Dyes */}
+                            {item.dyes && (
+                                <Col >
+                                    {item.dyes.map((dye, index) => (
+                                        <Row key={index} >
+                                            {dye != null
+                                                ? <div className='flex'>
+                                                    <div style={{
+                                                        margin: '1px 5px 1px 15px',
+                                                        height: '15px',
+                                                        width: '15px',
+                                                        border: '0.2px solid gray',
+                                                        backgroundColor: `rgb(${dye.cloth.rgb[0]}, ${dye.cloth.rgb[1]}, ${dye.cloth.rgb[2]})`
+                                                    }}>
+                                                    </div>
+                                                    <span>{dye.name}</span>
+                                                </div>
+                                                : ''
+                                            }</Row>
+                                    ))}
+                                </Col>
+                            )}
+                        </Container>
                         <br />
 
                         {/* UPGRADES */}

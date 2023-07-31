@@ -16,7 +16,8 @@ const URLS = {
     urlSkins: urlBasic + 'skins/',
     urlSpecs: urlBasic + 'specializations/',
     urlTraits: urlBasic + 'traits/',
-    urlSkills: urlBasic + 'skills/'
+    urlSkills: urlBasic + 'skills/',
+    urlColors: urlBasic + 'colors/',
 }
 
 export default URLS;

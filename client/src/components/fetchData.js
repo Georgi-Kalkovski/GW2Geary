@@ -16,7 +16,8 @@ const fetchData = async (urls, id, apiKey) => {
     skins: URLS.urlSkins,
     specializations: URLS.urlSpecs,
     traits: URLS.urlTraits,
-    skills: URLS.urlSkills
+    skills: URLS.urlSkills,
+    colors: URLS.urlColors
   }[urls] || '';
 
   if (id) { url = url + id }

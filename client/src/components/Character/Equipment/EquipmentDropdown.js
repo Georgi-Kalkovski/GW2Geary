@@ -94,6 +94,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         const fetchedSkins = skinIds ? await fetchData('skins', skinIds) : [];
         const upgradeIds = selectedEqTab?.equipment.filter((item) => item.upgrades).flatMap((el) => el.upgrades).join(',');
         const fetchedUpgrades = upgradeIds ? await fetchData('items', upgradeIds) : [];
+        const dyesIds = selectedEqTab?.equipment.filter((item) => item.dyes).flatMap((el) => el.dyes).join(',');
+        const fetchedColors = dyesIds ? await fetchData('colors', dyesIds) : [];
         const infusionIds = [
           ...char?.equipment.flatMap((el) => el.infusions).filter((item) => item !== undefined),
           ...char?.equipment_tabs.flatMap((tab) => tab.equipment.flatMap((item) => item.infusions)).filter((item) => item !== undefined),
@@ -104,6 +106,12 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           ...char?.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
           ...item,
+          dyes: [
+            item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[0]),
+            item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[1]),
+            item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[2]),
+            item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[3]),
+          ],
           skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
           upgrades: fetchedInfusions ? [
