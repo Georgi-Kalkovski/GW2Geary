@@ -6,6 +6,13 @@ function About() {
     return (
         <div className='flex center column'>
             <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                <h2><span className='yellow-highlight'>About</span></h2>
+                <div className="line"></div>
+                <p>
+                    Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
+                    With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
+                    Want to show your gear(armour & weapons) to others? Use GW2Geary!
+                </p>
                 <h2><span className='yellow-highlight'>Privacy Notice</span></h2>
                 <div className="line"></div>
                 <p>At GW2Geary, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Notice explains how we collect, use, disclose, and protect the information you provide to us when using our website. By accessing and using our website, you acknowledge that you have read and understood this Privacy Notice.</p>
