@@ -181,7 +181,7 @@
 
 .character-name {
   font-size: 1.4em;
-  max-width: 200px;
+  max-width: 210px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

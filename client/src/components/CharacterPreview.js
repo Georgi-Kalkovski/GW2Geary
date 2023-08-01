@@ -82,7 +82,7 @@ function CharacterPreview({ character, apiKey }) {
                         </Col>
                         <Col className='flex column'>
                             <Row>
-                                <img src={Icon} key={`${character.name}-img`} alt={character.name} style={{ width: '55px' }} />
+                                <img src={Icon} key={`${character.name}-img`} alt={character.name} style={{ width: '55px', marginTop: '5px' }} />
                             </Row>
                         </Col>
                     </Row>
