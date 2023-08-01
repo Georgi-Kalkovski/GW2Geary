@@ -12,7 +12,7 @@ function Footer() {
                         <Link className='nav-a' to='/news'>News</Link>
                     </li>
                     <li>
-                        <Link className='nav-a' to='/about'>Legal & About</Link>
+                        <Link className='nav-a' to='/about'>About & Legal</Link>
                     </li>
                     <li>
                         <Link className='nav-a' to='/contacts'>Contacts</Link>
