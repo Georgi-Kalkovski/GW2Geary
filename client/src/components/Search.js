@@ -62,22 +62,47 @@ function Search() {
             character.name.toLowerCase().includes(searchTerm.toLowerCase())
           ))
     );
-    setFilteredAccounts(filteredAccounts);
-  }, [accounts, searchTerm]);
-
-  useEffect(() => {
-    const filteredCharacters = [];
-    filteredAccounts.forEach((account) => {
-      if (account.characters && account.characters.length > 0 && account.active) {
-        account.characters.forEach((character) => {
-          if (character.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-            filteredCharacters.push(character);
-          }
-        });
+  
+    // Custom sorting function for accounts
+    const customSortAccounts = (a, b) => {
+      const aName = a.accountName.toLowerCase();
+      const bName = b.accountName.toLowerCase();
+      if (aName.startsWith(searchTerm.toLowerCase()) && !bName.startsWith(searchTerm.toLowerCase())) {
+        return -1;
+      } else if (!aName.startsWith(searchTerm.toLowerCase()) && bName.startsWith(searchTerm.toLowerCase())) {
+        return 1;
+      } else {
+        return aName.localeCompare(bName);
       }
-    });
-    setFilteredCharacters(filteredCharacters);
-  }, [filteredAccounts, searchTerm]);
+    };
+  
+    setFilteredAccounts(filteredAccounts.sort(customSortAccounts));
+  
+    // Custom sorting function for characters
+    const customSortCharacters = (a, b) => {
+      const aName = a.name.toLowerCase();
+      const bName = b.name.toLowerCase();
+      if (aName.startsWith(searchTerm.toLowerCase()) && !bName.startsWith(searchTerm.toLowerCase())) {
+        return -1;
+      } else if (!aName.startsWith(searchTerm.toLowerCase()) && bName.startsWith(searchTerm.toLowerCase())) {
+        return 1;
+      } else {
+        return aName.localeCompare(bName);
+      }
+    };
+  
+    const filteredCharacters = filteredAccounts.reduce((acc, account) => {
+      if (account.characters && account.characters.length > 0 && account.active) {
+        const charactersWithMatchingNames = account.characters.filter((character) =>
+          character.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        acc.push(...charactersWithMatchingNames);
+      }
+      return acc;
+    }, []);
+  
+    setFilteredCharacters(filteredCharacters.sort(customSortCharacters));
+  }, [accounts, searchTerm]);
 
   const itemsPerPage = 15;
 
@@ -141,6 +166,7 @@ function Search() {
         </React.Fragment>
       ) : (
         <>
+        {/* Empty Search Text */}
           <Container className="flex center">
             <Col className="home-empty-search-box">
               <Row className='home-welcome'>
