@@ -86,7 +86,7 @@ const Account = () => {
         <div className="container">
           <div>
             {/* Breadcrumb */}
-            <nav aria-label="breadcrumb" className="breadcrumb" style={{marginTop:'15px'}}>
+            <nav aria-label="breadcrumb" className="breadcrumb" style={{ marginTop: '15px' }}>
               <div style={{ listStyleType: "none" }} className='flex center'>
                 <li>
                   <Link className='nav-a' to="/">Search</Link>
@@ -189,23 +189,25 @@ const Account = () => {
                   </Container>
 
                   {/* Characters */}
-                  {characters && characters.map((character, index) => (
-                    <React.Fragment key={index}>
-                      <div className="characters">
-                        {character &&
-                          character.characters.map((char, charIndex) => (
-                            <React.Fragment key={charIndex}>
-                              {char.active !== false && (
-                                <CharacterPreview
-                                  character={char}
-                                  key={`${char.accountName}_${char.name}`}
-                                />
-                              )}
-                            </React.Fragment>
-                          ))}
-                      </div>
-                    </React.Fragment>
-                  ))}
+                  {characters &&
+                    characters.map((character, index) => (
+                      <React.Fragment key={index}>
+                        <div className="characters">
+                          {character &&
+                            character.characters
+                              .filter((char) => char.active !== false)
+                              .sort((a, b) => a.name.localeCompare(b.name))
+                              .map((char, charIndex) => (
+                                <React.Fragment key={charIndex}>
+                                  <CharacterPreview
+                                    character={char}
+                                    key={`${char.accountName}_${char.name}`}
+                                  />
+                                </React.Fragment>
+                              ))}
+                        </div>
+                      </React.Fragment>
+                    ))}
                 </React.Fragment>
               ))
             }
