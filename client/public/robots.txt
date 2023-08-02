@@ -13,10 +13,10 @@ Disallow: /search
 Disallow: /reset-password/
 Disallow: /contacts
 Disallow: /support
+Disallow: /static/
 
 # Allow crawling of necessary static assets
 Allow: /favicon.ico
-Allow: /static/
 Allow: /assets/
 
 # Block some specific file types
