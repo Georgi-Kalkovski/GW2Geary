@@ -37,9 +37,6 @@ Disallow: /*?
 # Block URLs with session IDs
 Disallow: /*;jsessionid
 
-# Block specific search parameters
-Disallow: /search/
-
 # Block specific user account URLs (if applicable)
 Disallow: /users/
 
