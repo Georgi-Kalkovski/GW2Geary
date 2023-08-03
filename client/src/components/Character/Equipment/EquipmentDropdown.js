@@ -172,7 +172,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         {dropdownVisible && (
           <div
             ref={setDropdownTooltipRef}
-            {...getDropdownTooltipProps({ className: 'tooltip-container equip-tooltip' })}
+            {...getDropdownTooltipProps({ className: 'tooltip-container equip-tooltip dropdown-popup' })}
           >
             <div>
               <div>

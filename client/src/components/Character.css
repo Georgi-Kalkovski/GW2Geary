@@ -469,4 +469,8 @@ input:checked+.slider:before {
   .padding-top {
     padding-top: 10px;
   }
+
+  .dropdown-popup {
+    visibility: hidden;
+  }
 }

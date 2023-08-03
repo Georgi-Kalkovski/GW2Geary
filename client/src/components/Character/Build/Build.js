@@ -8,8 +8,9 @@ import './Build.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 
-function Build({ setBuild, tab }) {
+function Build({ setBuild, setSpec, tab }) {
     const [isLoading, setIsLoading] = useState(true);
+
     const [specializations, setSpecializations] = useState([]);
 
     const [traits, setTraits] = useState([]);
@@ -28,7 +29,6 @@ function Build({ setBuild, tab }) {
                         return { specialization: sp[0], traits: { min, maj }, activeTraits: spec?.traits };
                     })
                 );
-
                 setSpecializations(specializationData);
             } catch (error) {
                 console.error(error);
@@ -46,6 +46,11 @@ function Build({ setBuild, tab }) {
             setIsLoading(false);
         }, 2000);
     }, [tab]);
+
+    useEffect(() => {
+        if(specializations && specializations[2])
+        setSpec(specializations[2].specialization.name);
+    }), [specializations];
 
     return (<>
         {

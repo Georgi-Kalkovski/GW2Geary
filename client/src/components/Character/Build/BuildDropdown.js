@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Build from './Build';
 import { usePopperTooltip } from 'react-popper-tooltip';
+import { Link } from 'react-router-dom';
+import Build from './Build';
 import mouseClick from '.././mouse-click.svg';
-
+import Spec from './Spec';
+import { specIcons } from './specIcons';
+import LinkSVG from '../link.svg';
 
 function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
     const [isOpen, setIsOpen] = useState(false);
     const [build, setBuild] = useState([]);
+    const [spec, setSpec] = useState(null);
     const [selectedBldTab, setSelectedBldTab] = useState(() => {
         if (initial && char?.build_tabs) {
             const found = char.build_tabs.find((build) => build.tab === parseInt(initial));
@@ -67,17 +71,45 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
         visible,
     } = usePopperTooltip({ placement: 'top' });
 
+    const [showWikiButton, setShowWikiButton] = useState(false);
+
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+
+        window.open(`https://wiki.guildwars2.com/wiki/${spec !== null && specIcons.hasOwnProperty(spec.toLowerCase())
+            ? spec
+            : char.profession}`,
+            '_blank');
+    };
+
+    const handleLeftClick = (event) => {
+        setShowWikiButton(true);
+    };
 
     return (
         <div className={`build ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
+
+            {/* Dropdown menu */}
             <div className="dropdown">
                 <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setTriggerRef}>
                     {selectedBldTab && selectedBldTab.build.name ? selectedBldTab.build.name : `Build ${selectedBldTab.tab}`}
                 </button>
+
+                {/* Specialization icon */}
+                <div
+                    className="skill-box-container"
+                    onClick={handleLeftClick}
+                    onMouseLeave={() => setShowWikiButton(false)}>
+                    {showWikiButton &&
+                        <button style={{ marginTop: '10px' }} className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={LinkSVG} alt="" /></button>
+                    }
+                    <Spec spec={spec} prof={char.profession} />
+                </div>
+
                 {visible && (
                     <div
                         ref={setTooltipRef}
-                        {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
+                        {...getTooltipProps({ className: 'tooltip-container attribute-popup dropdown-popup' })}
                     >
                         <div>
                             <img className='mouse-click' src={mouseClick} alt="" />
@@ -100,7 +132,9 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
                     </ul>
                 )}
             </div>
-            {<Build tab={selectedBldTab.build} setBuild={() => setBuild} key={selectedBldTab.tab} />}
+
+            {/* Build Content */}
+            {<Build tab={selectedBldTab.build} setBuild={() => setBuild} setSpec={setSpec} key={selectedBldTab.tab} />}
         </div>
     );
 }
