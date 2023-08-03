@@ -71,7 +71,7 @@ function ItemTooltip({ item, slider }) {
 
                         <Container className='flex'>
                             {/* STATS */}
-                            <Col style={{width:'100px'}}>
+                            <Col style={{width:'90px'}}>
                                 {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
                                 {item.itemstats
                                     && item.details

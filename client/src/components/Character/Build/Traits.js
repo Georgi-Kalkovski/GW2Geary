@@ -18,7 +18,8 @@ function Traits({ setTraits, specializations, prof }) {
                                 prof={prof}
                             />
                         </Col>
-                        <Container className="cropped-spec-img-div">
+                        <Container className={`cropped-spec-img-div`}>
+                        {/* <Container className={`cropped-spec-img-div ${prof.toLowerCase()}-lightning-border`}> */}
                             <img
                                 className="cropped-spec-img"
                                 src={specializationData.specialization.background}
