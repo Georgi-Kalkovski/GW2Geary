@@ -5,6 +5,11 @@ function EquipmentStats({ prof, items }) {
     const upgrades = [];
     const finishedItemstats = [];
     const infusions = [];
+    const emptyPrefixes = [];
+    const emptyRunes = [];
+    const emptySigils = [];
+    const emptyInfusions = [];
+
     let itemstats = items[0]?.itemstats;
 
     if (items) {
@@ -14,6 +19,44 @@ function EquipmentStats({ prof, items }) {
                 item.slot != "WeaponAquaticA" &&
                 item.slot != "WeaponAquaticB"
             ) {
+                // Check if empty
+
+                // Empty Prefixes
+                if (!item.details.infix_upgrade && !item.stats) {
+                    emptyPrefixes.push(item.details.type)
+                }
+                //console.log(item)
+                // Empty Runes
+                const nonRuneCount = item.upgrades.filter(x => x.details.type !== 'Rune').length;
+                if (item.details.defense
+                    && item.details.defense > 0
+                    && item.upgrades.length - nonRuneCount < item.details.infusion_slots.length) {
+                    emptyRunes.push({
+                        type: item.details.type,
+                        amount: item.details.infusion_slots.length - item.upgrades.length
+                    });
+                }
+                // Empty Sigils
+                const nonSigilCount = item.upgrades.filter(x => x.details.type !== 'Sigil').length;
+                if (item.details.min_power
+                    && item.details.max_power
+                    && item.upgrades.length - nonSigilCount < item.details.infusion_slots.length) {
+                    emptySigils.push({
+                        type: item.details.type,
+                        amount: item.details.infusion_slots.length - item.upgrades.length
+                    });
+                }
+
+                // Empty Infusions
+                const nonInfusionCount = item.upgrades.filter(x => x.details.type !== 'Default').length;
+                if (item.upgrades.length - nonInfusionCount < item.details.infusion_slots.length) {
+                    emptyInfusions.push({
+                        type: item.details.type || item.slot,
+                        amount: item.details.infusion_slots.length - item.upgrades.length
+                    });
+                }
+
+
                 // Upgrades Logic
                 for (const upgrade of item.upgrades) {
                     const existingUpgrade = upgrades.find((u) => u.name === upgrade.name);
@@ -127,23 +170,38 @@ function EquipmentStats({ prof, items }) {
     return (
         <div className={`flex column itemstats ${prof.toLowerCase()}-lightning-border`}>
             {/* Prefixes */}
-            <div>
-                <div>
-                    <span className="yellow-highlight">Prefixes</span>:
-                </div>
-                {finishedItemstats &&
-                    finishedItemstats.map((itemstat, index) => (
-                        <div key={index}>
-                            <span className="itemname">{itemstat.items.length}x {itemstat.name.split("'")[0]} </span>
-                            <span className="itemtypes">- {itemstat.items.map((x, i) => x.type).join(", ")}</span>
+            {finishedItemstats &&
+                (<div>
+                    <div>
+                        <span className="yellow-highlight">Prefixes</span>:
+                    </div>
+                    {
+                        finishedItemstats &&
+                        finishedItemstats.map((itemstat, index) => (
+                            <>
+                                {itemstat.name !== '' &&
+                                    <div key={index}>
+                                        <span className="itemname">{itemstat.items.length}x {itemstat.name.split("'")[0]} </span>
+                                        <span className="itemtypes">- {itemstat.items.map((x, i) => x.type).join(", ")}</span>
+                                    </div>
+                                }
+                            </>
+                        ))
+                    }
+                    {
+                        emptyPrefixes && emptyPrefixes.length !== 0 &&
+                        <div>
+                            <span className="itemname" style={{ color: '#ff1e1e' }}>Missing prefixes </span>
+                            <span className="itemtypes">- {emptyPrefixes}</span>
                         </div>
-                    ))}
-            </div>
+                    }
+
+                </div>)}
 
             {/* Runes */}
-            <div className="itemstat">
+            < div className="itemstat" >
                 <span className="yellow-highlight">Runes</span>:
-            </div>
+            </div >
             <div>
                 {upgrades &&
                     upgrades.map((upgrade, index) => (
@@ -155,14 +213,22 @@ function EquipmentStats({ prof, items }) {
                                 </div>
                             )}
                         </React.Fragment>
-                    ))}
+                    ))
+                }
+                {emptyRunes && emptyRunes.length !== 0 &&
+                    <div>
+                        <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing runes </span>
+                        <span className="itemtypes">- {emptyRunes.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
+                    </div>
+                }
             </div>
 
             {/* Sigils */}
             <div className="itemstat">
                 <span className="yellow-highlight">Sigils</span>:
             </div>
-            {upgrades &&
+            {
+                upgrades &&
                 upgrades.map((upgrade, index) => (
                     <div key={index}>
                         {upgrade.type == "Sigil" && (
@@ -172,13 +238,21 @@ function EquipmentStats({ prof, items }) {
                             </React.Fragment>
                         )}
                     </div>
-                ))}
+                ))
+            }
+            {emptySigils && emptySigils.length !== 0 &&
+                <div>
+                    <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing sigils </span>
+                    <span className="itemtypes">- {emptySigils.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
+                </div>
+            }
 
             {/* Infusions */}
             <div className="itemstat">
                 <span className="yellow-highlight">Infusions</span>:
             </div>
-            {infusions &&
+            {
+                infusions &&
                 infusions.map((infusion, index) => (
                     <div key={index}>
                         {(() => {
@@ -193,8 +267,15 @@ function EquipmentStats({ prof, items }) {
                         <span className="off-text itemtypes">(+{infusion.count * infusion.modifier}) </span>
                         <span className="itemtypes">- {infusion.items.join(", ")}</span>
                     </div>
-                ))}
-        </div>
+                ))
+            }
+            {emptyInfusions && emptyInfusions.length !== 0 &&
+                <div>
+                    <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing infusions </span>
+                    <span className="itemtypes">- {emptyInfusions.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
+                </div>
+            }
+        </div >
     );
 }
 

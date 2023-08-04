@@ -62,7 +62,7 @@ function Search() {
             character.name.toLowerCase().includes(searchTerm.toLowerCase())
           ))
     );
-  
+
     // Custom sorting function for accounts
     const customSortAccounts = (a, b) => {
       const aName = a.accountName.toLowerCase();
@@ -75,9 +75,9 @@ function Search() {
         return aName.localeCompare(bName);
       }
     };
-  
+
     setFilteredAccounts(filteredAccounts.sort(customSortAccounts));
-  
+
     // Custom sorting function for characters
     const customSortCharacters = (a, b) => {
       const aName = a.name.toLowerCase();
@@ -90,7 +90,7 @@ function Search() {
         return aName.localeCompare(bName);
       }
     };
-  
+
     const filteredCharacters = filteredAccounts.reduce((acc, account) => {
       if (account.characters && account.characters.length > 0 && account.active) {
         const charactersWithMatchingNames = account.characters.filter((character) =>
@@ -100,7 +100,7 @@ function Search() {
       }
       return acc;
     }, []);
-  
+
     setFilteredCharacters(filteredCharacters.sort(customSortCharacters));
   }, [accounts, searchTerm]);
 
@@ -166,7 +166,7 @@ function Search() {
         </React.Fragment>
       ) : (
         <>
-        {/* Empty Search Text */}
+          {/* Empty Search Text */}
           <Container className="flex center">
             <Col className="home-empty-search-box">
               <Row className='home-welcome'>
@@ -194,6 +194,15 @@ function Search() {
                 Latest News
               </Row>
               <Row className='search-news'>
+
+                <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>04.08.2023</span> -
+                  Added information about the <span style={{ color: '#ff1e1e' }}>missing prefixes</span>,
+                  <span style={{ color: '#ff1e1e' }}> runes</span>,
+                  <span style={{ color: '#ff1e1e' }}> sigils</span> and
+                  <span style={{ color: '#ff1e1e' }}> infusions </span>
+                  to the <span className="yellow-highlight"> Stats </span> menu.
+                </div>
 
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>31.07.2023</span> -

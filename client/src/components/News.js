@@ -5,6 +5,19 @@ function News() {
 
             <div>
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>04.08.2023</h3>
+                    <div className="line"></div>
+                    <div >
+                        Added information about the <span style={{ color: '#ff1e1e' }}>missing prefixes</span>,
+                        <span style={{ color: '#ff1e1e' }}> runes</span>,
+                        <span style={{ color: '#ff1e1e' }}> sigils</span> and
+                         <span style={{ color: '#ff1e1e' }}> infusions </span>
+                         to the <span className="yellow-highlight"> Stats </span> menu.
+                    </div>
+                </div>
+
+                <br />
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>31.07.2023</h3>
                     <div className="line"></div>
                     <div >
