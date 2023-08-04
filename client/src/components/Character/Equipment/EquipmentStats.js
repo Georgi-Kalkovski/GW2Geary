@@ -136,6 +136,8 @@ function EquipmentStats({ prof, items }) {
                         }
                     }
                 }
+            } else {
+
             }
         }
 
@@ -167,6 +169,10 @@ function EquipmentStats({ prof, items }) {
             }
         }
     }
+
+    const aquaticHelm = items.find(x => x.slot == 'HelmAquatic');
+    const WeaponAquaticA = items.find(x => x.slot == 'WeaponAquaticA');
+    const WeaponAquaticB = items.find(x => x.slot == 'WeaponAquaticB');
     return (
         <div className={`flex column itemstats ${prof.toLowerCase()}-lightning-border`}>
             {/* Prefixes */}
@@ -275,6 +281,167 @@ function EquipmentStats({ prof, items }) {
                     <span className="itemtypes">- {emptyInfusions.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
                 </div>
             }
+
+            {/* Underwater Content */}
+            <div className="itemstat" style={{ fontSize: '12px' }}>
+                {/* Aquatic Helm */}
+                {aquaticHelm
+                    ? <div>
+                        {/* Name */}
+                        <span className="yellow-highlight ">Aquatic Headgear </span>
+                        - <span>
+                            {/* Prefix */}
+                            <span className="itemname">
+                                {aquaticHelm.itemstats.find(
+                                    (x) =>
+                                        x.id === aquaticHelm.stats?.id ||
+                                        x.id === aquaticHelm.details.infix_upgrade.id
+                                )?.name.split("'")[0] || aquaticHelm.details.infix_upgrade.name}
+                            </span>
+                            {/* Rune */}
+                            , <span className="itemname">
+                                {aquaticHelm.upgrades?.find((x) => x.details.type === 'Rune')?.name || (
+                                    <span style={{ color: '#ff1e1e' }}>Missing rune</span>
+                                )}
+                            </span>
+                            {/* Infusion */}
+                            {aquaticHelm.rarity === 'Legendary' || aquaticHelm.rarity === 'Ascended' &&
+                                <>
+                                    , <span className="itemname">
+                                        {aquaticHelm.upgrades?.find((x) => x.details.type === 'Default')?.name || (
+                                            <span style={{ color: '#ff1e1e' }}>Missing infusion</span>
+                                        )}
+                                    </span>
+                                </>
+                            }
+                        </span>
+                    </div>
+                    : ''
+                }
+
+                {/* Aquatic Weapon A */}
+                {WeaponAquaticA
+                    ? <div>
+                        <span className="yellow-highlight ">Aquatic {WeaponAquaticA.details.type} </span>
+                        - <span>
+                            <span className="itemname">
+                                {WeaponAquaticA.itemstats.find(x =>
+                                    x.id === WeaponAquaticA.stats?.id
+                                    || x.id === WeaponAquaticA.details.infix_upgrade.id
+                                )?.name.split("'")[0]
+                                    || WeaponAquaticA.details.infix_upgrade.name
+                                }
+                            </span>
+                            {/* Sigils */}
+                            <span>
+                                {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Sigil').map((upgrade, index) => (
+                                    <>
+                                        , <span key={index} className="itemname">
+                                            {upgrade.name}
+                                        </span>
+                                    </>
+                                ))}
+                                {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Sigil').length < 2 ? (
+                                    <>
+                                        , <span className="itemname">
+                                            {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Sigil').length === 0
+                                                ? <span style={{ color: '#ff1e1e' }}>2x Missing sigils</span>
+                                                : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
+                                        </span>
+                                    </>
+                                ) : null}
+                            </span>
+
+                            {/* Infusion */}
+                            {WeaponAquaticA.rarity === 'Legendary' || WeaponAquaticA.rarity === 'Ascended' &&
+                                <>
+                                    <span>
+                                        {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Default').map((upgrade, index) => (
+                                            <>
+                                                , <span key={index} className="itemname">
+                                                    {upgrade.name}
+                                                </span>
+                                            </>
+                                        ))}
+                                        {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Default').length < 2 ? (
+                                            <>
+                                                , <span className="itemname">
+                                                    {WeaponAquaticA.upgrades?.filter(x => x.details.type === 'Default').length === 0
+                                                        ? <span style={{ color: '#ff1e1e' }}>2x Missing infusions</span>
+                                                        : <span style={{ color: '#ff1e1e' }}>Infusion Missing</span>}
+                                                </span>
+                                            </>
+                                        ) : null}
+                                    </span>
+                                </>
+                            }
+                        </span>
+                    </div>
+                    : ''
+                }
+
+                {/* Aquatic Weapon B */}
+                {WeaponAquaticB
+                    ? <div>
+                        <span className="yellow-highlight ">Aquatic {WeaponAquaticB.details.type} </span>
+                        - <span>
+                            <span className="itemname">
+                                {WeaponAquaticB.itemstats.find(x =>
+                                    x.id === WeaponAquaticB.stats?.id
+                                    || x.id === WeaponAquaticB.details.infix_upgrade.id
+                                )?.name.split("'")[0]
+                                    || WeaponAquaticB.details.infix_upgrade.name
+                                }
+                            </span>
+                            {/* Sigils */}
+                            <span>
+                                {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Sigil').map((upgrade, index) => (
+                                    <>
+                                        , <span key={index} className="itemname">
+                                            {upgrade.name}
+                                        </span>
+                                    </>
+                                ))}
+                                {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Sigil').length < 2 ? (
+                                    <>
+                                        , <span className="itemname">
+                                            {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Sigil').length === 0
+                                                ? <span style={{ color: '#ff1e1e' }}>2x Missing sigils</span>
+                                                : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
+                                        </span>
+                                    </>
+                                ) : null}
+                            </span>
+
+                            {/* Infusion */}
+                            {WeaponAquaticB.rarity === 'Legendary' || WeaponAquaticB.rarity === 'Ascended' &&
+                                <>
+                                    <span>
+                                        {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Default').map((upgrade, index) => (
+                                            <>
+                                                , <span key={index} className="itemname">
+                                                    {upgrade.name}
+                                                </span>
+                                            </>
+                                        ))}
+                                        {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Default').length < 2 ? (
+                                            <>
+                                                , <span className="itemname">
+                                                    {WeaponAquaticB.upgrades?.filter(x => x.details.type === 'Default').length === 0
+                                                        ? <span style={{ color: '#ff1e1e' }}>2x Missing infusions</span>
+                                                        : <span style={{ color: '#ff1e1e' }}>Infusion Missing</span>}
+                                                </span>
+                                            </>
+                                        ) : null}
+                                    </span>
+                                </>
+                            }
+
+                        </span>
+                    </div>
+                    : ''
+                }
+            </div>
         </div >
     );
 }

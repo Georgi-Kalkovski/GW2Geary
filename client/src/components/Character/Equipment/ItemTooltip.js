@@ -33,8 +33,7 @@ function ItemTooltip({ item, slider }) {
     };
 
     return (
-        <>
-
+        <React.Fragment key={item?.id}>
             {visible && (
                 <div
                     ref={setTooltipRef}
@@ -71,7 +70,7 @@ function ItemTooltip({ item, slider }) {
 
                         <Container className='flex'>
                             {/* STATS */}
-                            <Col style={{width:'90px'}}>
+                            <Col style={{width:'110px'}}>
                                 {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
                                 {item.itemstats
                                     && item.details
@@ -264,7 +263,7 @@ function ItemTooltip({ item, slider }) {
                 </div>
                 : <img className="item-box box-gray" alt="" />
             }
-        </>
+        </React.Fragment>
     );
 }
 
