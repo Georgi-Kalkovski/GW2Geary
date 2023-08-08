@@ -1,4 +1,9 @@
 import React from "react";
+import Aquatic from "./Stats/Aquatic";
+import Prefixes from "./Stats/Prefixes";
+import Runes from "./Stats/Runes";
+import Sigils from "./Stats/Sigils";
+import Infusions from "./Stats/Infusions";
 
 function EquipmentStats({ prof, items }) {
     const stats = [];
@@ -14,18 +19,15 @@ function EquipmentStats({ prof, items }) {
 
     if (items) {
         for (const item of items) {
-            if (
-                item.slot != "HelmAquatic" &&
+            if (item.slot != "HelmAquatic" &&
                 item.slot != "WeaponAquaticA" &&
-                item.slot != "WeaponAquaticB"
-            ) {
-                // Check if empty
+                item.slot != "WeaponAquaticB") {
 
                 // Empty Prefixes
                 if (!item.details.infix_upgrade && !item.stats) {
                     emptyPrefixes.push(item.details.type)
                 }
-                //console.log(item)
+
                 // Empty Runes
                 const nonRuneCount = item.upgrades.filter(x => x.details.type !== 'Rune').length;
                 if (item.details.defense
@@ -36,6 +38,7 @@ function EquipmentStats({ prof, items }) {
                         amount: item.details.infusion_slots.length - item.upgrades.length
                     });
                 }
+
                 // Empty Sigils
                 const nonSigilCount = item.upgrades.filter(x => x.details.type !== 'Sigil').length;
                 if (item.details.min_power
@@ -55,7 +58,6 @@ function EquipmentStats({ prof, items }) {
                         amount: item.details.infusion_slots.length - item.upgrades.length
                     });
                 }
-
 
                 // Upgrades Logic
                 for (const upgrade of item.upgrades) {
@@ -136,8 +138,6 @@ function EquipmentStats({ prof, items }) {
                         }
                     }
                 }
-            } else {
-
             }
         }
 
@@ -170,329 +170,23 @@ function EquipmentStats({ prof, items }) {
         }
     }
 
-    const aquaticHelm = items.find(x => x.slot == 'HelmAquatic');
-    const WeaponAquaticA = items.find(x => x.slot == 'WeaponAquaticA');
-    const WeaponAquaticB = items.find(x => x.slot == 'WeaponAquaticB');
-    const WeaponAquaticASigils = WeaponAquaticA?.upgrades?.filter(x => x.details.type === 'Sigil');
-    const WeaponAquaticAInfusions = WeaponAquaticA?.upgrades?.filter(x => x.details.type === 'Default');
-    const WeaponAquaticBSigils = WeaponAquaticB?.upgrades?.filter(x => x.details.type === 'Sigil');
-    const WeaponAquaticBInfusions = WeaponAquaticB?.upgrades?.filter(x => x.details.type === 'Default');
-
     return (
         <div className={`flex column itemstats ${prof.toLowerCase()}-lightning-border`}>
-            {/* Prefixes */}
-            {finishedItemstats &&
-                (<div>
-                    <div>
-                        <span className="yellow-highlight">Prefixes</span>:
-                    </div>
-                    {
-                        finishedItemstats &&
-                        finishedItemstats.map((itemstat, index) => (
-                            <>
-                                {itemstat.name !== '' &&
-                                    <div key={index}>
-                                        <span className="itemname">{itemstat.items.length}x {itemstat.name.split("'")[0]} </span>
-                                        <span className="itemtypes">- {itemstat.items.map((x, i) => x.type).join(", ")}</span>
-                                    </div>
-                                }
-                            </>
-                        ))
-                    }
-                    {
-                        emptyPrefixes && emptyPrefixes.length !== 0 &&
-                        <div>
-                            <span className="itemname" style={{ color: '#ff1e1e' }}>Missing prefixes </span>
-                            <span className="itemtypes">- {emptyPrefixes}</span>
-                        </div>
-                    }
 
-                </div>)}
+            {/* Prefixes */}
+            <Prefixes finishedItemstats={finishedItemstats} emptyPrefixes={emptyPrefixes} />
 
             {/* Runes */}
-            < div className="itemstat" >
-                <span className="yellow-highlight">Runes</span>:
-            </div >
-            <div>
-                {upgrades &&
-                    upgrades.map((upgrade, index) => (
-                        <React.Fragment key={index}>
-                            {upgrade.type === "Rune" && (
-                                <div key={index}>
-                                    <span className="itemname">{upgrade.items.length}x {upgrade.name} </span>
-                                    <span className="itemtypes">- {upgrade.items.map((x, i) => x.type).join(", ")}</span>
-                                </div>
-                            )}
-                        </React.Fragment>
-                    ))
-                }
-                {emptyRunes && emptyRunes.length !== 0 &&
-                    <div>
-                        <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing runes </span>
-                        <span className="itemtypes">- {emptyRunes.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
-                    </div>
-                }
-            </div>
+            <Runes upgrades={upgrades} emptyRunes={emptyRunes} />
 
             {/* Sigils */}
-            <div className="itemstat">
-                <span className="yellow-highlight">Sigils</span>:
-            </div>
-            {
-                upgrades &&
-                upgrades.map((upgrade, index) => (
-                    <div key={index}>
-                        {upgrade.type == "Sigil" && (
-                            <React.Fragment key={index}>
-                                <span className="itemname">{upgrade.items.length}x {upgrade.name} </span>
-                                <span className="itemtypes">- {upgrade.items.map((x, i) => x.type).join(", ")}</span>
-                            </React.Fragment>
-                        )}
-                    </div>
-                ))
-            }
-            {emptySigils && emptySigils.length !== 0 &&
-                <div>
-                    <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing sigils </span>
-                    <span className="itemtypes">- {emptySigils.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
-                </div>
-            }
+            <Sigils upgrades={upgrades} emptySigils={emptySigils} />
 
             {/* Infusions */}
-            <div className="itemstat">
-                <span className="yellow-highlight">Infusions</span>:
-            </div>
-            {
-                infusions &&
-                infusions.map((infusion, index) => (
-                    <div key={index}>
-                        {(() => {
-                            if (infusion.attribute === 'CritDamage') { infusion.attribute = 'Ferocity' }
-                            if (infusion.attribute === 'ConditionDamage') { infusion.attribute = 'Condition Damage' }
-                            if (infusion.attribute === 'ConditionDuration') { infusion.attribute = 'Expertise' }
-                            if (infusion.attribute === 'BoonDuration') { infusion.attribute = 'Concentration' }
-                            if (infusion.attribute === 'AgonyResistance') { infusion.attribute = 'Agony Resistance' }
-                        })()}
-                        <span className="yellow-highlight itemtypes">{infusion.count}x</span>
-                        <span className="itemname"> +{infusion.modifier} {infusion.attribute} </span>
-                        <span className="off-text itemtypes">(+{infusion.count * infusion.modifier}) </span>
-                        <span className="itemtypes">- {infusion.items.join(", ")}</span>
-                    </div>
-                ))
-            }
-            {emptyInfusions && emptyInfusions.length !== 0 &&
-                <div>
-                    <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing infusions </span>
-                    <span className="itemtypes">- {emptyInfusions.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
-                </div>
-            }
+            <Infusions infusions={infusions} emptyInfusions={emptyInfusions} />
 
             {/* Underwater Content */}
-            <div className="itemstat" style={{ fontSize: '14px' }}>
-                {/* Aquatic Helm */}
-                {aquaticHelm
-                    ? <div>
-                        {/* Name */}
-                        <span className="yellow-highlight ">Aquatic Headgear </span>
-                        {aquaticHelm.rarity !== 'Basic' && (
-                            <>
-                                - <span>
-                                    {/* Prefix */}
-                                    <span className="itemname">
-                                        {aquaticHelm.itemstats.find((x) =>
-                                            x.id === aquaticHelm.stats?.id
-                                            || x.id === aquaticHelm.details.infix_upgrade?.id
-                                        )?.name.split("'")[0]
-                                            || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
-                                        }
-                                    </span>
-                                    {/* Rune */}
-                                    {aquaticHelm.rarity !== 'Basic' && aquaticHelm.rarity !== 'Fine' &&
-                                        <>
-                                            , <span className="itemname">
-                                                {aquaticHelm.upgrades?.find((x) => x.details.type === 'Rune')?.name || (
-                                                    <span style={{ color: '#ff1e1e' }}>Missing rune</span>
-                                                )}
-                                            </span>
-                                        </>
-                                    }
-                                    {/* Infusion */}
-                                    {aquaticHelm.rarity === 'Legendary' || aquaticHelm.rarity === 'Ascended' &&
-                                        <>
-                                            , <span className="itemname">
-                                                {aquaticHelm.upgrades?.find((x) => x.details.type === 'Default')?.name || (
-                                                    <span style={{ color: '#ff1e1e' }}>Missing infusion</span>
-                                                )}
-                                            </span>
-                                        </>
-                                    }
-                                </span>
-                            </>
-                        )}
-                    </div>
-                    : ''
-                }
-
-                {/* Aquatic Weapon A */}
-                {WeaponAquaticA
-                    ? <div>
-                        {/* Name */}
-                        <span className="yellow-highlight ">Aquatic {WeaponAquaticA.details.type} </span>
-                        {WeaponAquaticA.rarity !== 'Basic' &&
-                            <>
-                                - <span>
-                                    {/* Prefix */}
-                                    <span className="itemname">
-                                        {WeaponAquaticA.itemstats.find(x =>
-                                            x.id === WeaponAquaticA.stats?.id
-                                            || x.id === WeaponAquaticA.details.infix_upgrade?.id
-                                        )?.name.split("'")[0]
-                                            || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
-                                        }
-                                    </span>
-                                    {/* Sigils */}
-                                    {WeaponAquaticA.rarity !== 'Basic' && WeaponAquaticA.rarity !== 'Fine' &&
-                                        <span>
-                                            {['Masterwork', 'Rare'].includes(WeaponAquaticA.rarity) ? (
-                                                <span>
-                                                    {(!WeaponAquaticASigils[0]?.name) ? (
-                                                        <>
-                                                            , <span style={{ color: '#ff1e1e' }}>Missing sigil</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticASigils[0]?.name}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </span>
-                                            ) : (
-                                                <span>
-                                                    {(!WeaponAquaticASigils[0]?.name && !WeaponAquaticASigils[1]?.name) ? (
-                                                        <>
-                                                            , <span style={{ color: '#ff1e1e' }}>2x Missing sigils</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticASigils[0]?.name ? WeaponAquaticASigils[0].name : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
-                                                            </span>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticASigils[1]?.name ? WeaponAquaticASigils[1].name : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </span>
-                                            )}
-                                        </span>
-                                    }
-
-                                    {/* Infusion */}
-                                    {WeaponAquaticA.rarity === 'Legendary' || WeaponAquaticA.rarity === 'Ascended' ?
-                                        <span>
-                                            {(!WeaponAquaticAInfusions[0]?.name && !WeaponAquaticAInfusions[1]?.name)
-                                                ? <>
-                                                    , <span style={{ color: '#ff1e1e' }}>2x Missing infusions</span>
-                                                </>
-                                                : <>
-                                                    ,  <span className="itemname">
-                                                        {WeaponAquaticAInfusions[0]?.name ? WeaponAquaticAInfusions[0].name : <span style={{ color: '#ff1e1e' }}>Missing infusion</span>}
-                                                    </span>
-                                                    , <span className="itemname">
-                                                        {WeaponAquaticAInfusions[1]?.name ? WeaponAquaticAInfusions[1].name : <span style={{ color: '#ff1e1e' }}>Missing infusion</span>}
-                                                    </span>
-                                                </>
-                                            }
-                                        </span>
-                                        : ''
-                                    }
-                                </span>
-                            </>}
-                    </div>
-                    : ''
-                }
-
-                {/* Aquatic Weapon B */}
-                {WeaponAquaticB
-                    ? <div>
-                        {/* Name */}
-                        <span className="yellow-highlight ">Aquatic {WeaponAquaticB.details.type} </span>
-                        {WeaponAquaticB.rarity !== 'Basic' &&
-                            <>
-                                - <span>
-                                    {/* Prefix */}
-                                    <span className="itemname">
-                                        {WeaponAquaticB.itemstats.find(x =>
-                                            x.id === WeaponAquaticB.stats?.id
-                                            || x.id === WeaponAquaticB.details.infix_upgrade?.id
-                                        )?.name.split("'")[0]
-                                            || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
-                                        }
-                                    </span>
-                                    {/* Sigils */}
-                                    {WeaponAquaticB.rarity !== 'Basic' && WeaponAquaticB.rarity !== 'Fine' &&
-                                        <span>
-                                            {['Masterwork', 'Rare'].includes(WeaponAquaticB.rarity) ? (
-                                                <span>
-                                                    {(!WeaponAquaticBSigils[0]?.name) ? (
-                                                        <>
-                                                            , <span style={{ color: '#ff1e1e' }}>Missing sigil</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticBSigils[0]?.name}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </span>
-                                            ) : (
-                                                <span>
-                                                    {(!WeaponAquaticBSigils[0]?.name && !WeaponAquaticBSigils[1]?.name) ? (
-                                                        <>
-                                                            , <span style={{ color: '#ff1e1e' }}>2x Missing sigils</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticBSigils[0]?.name ? WeaponAquaticBSigils[0].name : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
-                                                            </span>
-                                                            , <span className="itemname">
-                                                                {WeaponAquaticBSigils[1]?.name ? WeaponAquaticBSigils[1].name : <span style={{ color: '#ff1e1e' }}>Missing sigil</span>}
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </span>
-                                            )}
-                                        </span>
-                                    }
-                                    {/* Infusion */}
-                                    {WeaponAquaticB.rarity === 'Legendary' || WeaponAquaticB.rarity === 'Ascended' ?
-                                        <span>
-                                            {(!WeaponAquaticBInfusions[0]?.name && !WeaponAquaticBInfusions[1]?.name)
-                                                ? <>
-                                                    , <span style={{ color: '#ff1e1e' }}>2x Missing infusions</span>
-                                                </>
-                                                : <>
-                                                    ,  <span className="itemname">
-                                                        {WeaponAquaticBInfusions[0]?.name ? WeaponAquaticBInfusions[0].name : <span style={{ color: '#ff1e1e' }}>Missing infusion</span>}
-                                                    </span>
-                                                    , <span className="itemname">
-                                                        {WeaponAquaticBInfusions[1]?.name ? WeaponAquaticBInfusions[1].name : <span style={{ color: '#ff1e1e' }}>Missing infusion</span>}
-                                                    </span>
-                                                </>
-                                            }
-                                        </span>
-                                        : ''
-                                    }
-
-                                </span>
-                            </>}
-                    </div>
-                    : ''
-                }
-            </div>
+            <Aquatic items={items} />
         </div >
     );
 }
