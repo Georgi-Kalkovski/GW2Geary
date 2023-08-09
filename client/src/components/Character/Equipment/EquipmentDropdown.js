@@ -183,7 +183,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           </div>
         )}
         {isOpen && (
-          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`}>
+          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`} style={{ zIndex: '7' }}>
             {char?.equipment_tabs.map((equip) => (
               <li
                 key={equip.tab}

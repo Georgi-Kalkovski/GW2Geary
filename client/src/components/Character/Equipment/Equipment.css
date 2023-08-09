@@ -79,6 +79,7 @@
     background: #202124;
     width: 441px;
     text-align: left;
+    z-index:6;
 }
 
 .itemstat {
