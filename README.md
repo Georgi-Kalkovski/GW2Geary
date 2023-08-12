@@ -22,22 +22,20 @@ GW2Geary is a web application built with React that allows users to explore and 
 
 2. **Search Page**
 
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/b9581b78-f98b-46a7-9e8c-b77a25426241)
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/5a0f3a4e-7f74-4f0a-8ec3-7a46910bde9f)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/caa81d1e-1ba2-4b75-a81b-ff6457240ac8)
+
 
 3. **Account Page**
 
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/4427535f-a32b-42f8-90ab-b94df5f4d5b3)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/e0900ed5-a05d-427d-b32d-5e7b95fbd290)
 
-4. **Character Page**
-
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/4f17401c-de72-4f02-a345-e436cad4ea47)
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/36fb6369-d680-4ab8-aab8-78347d72cf7f)
-
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/4dab924b-0bc0-48d8-b38e-a6583f33be49)
+5. **Character Page**
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/57a755e9-f200-41bb-a9ce-5e8eaa0555d3)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cd3888e2-5d24-4e04-8acc-907641ac502b)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/7a231a41-8b0f-479f-9182-a5479b86cc47)
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cdc8dabd-f863-4552-a232-720b7da6ac41)
 
-5. **Profile Page - Profile Info, Profile Apis**
+6. **Profile Page - Profile Info, Profile Apis**
 
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/ede9e6d0-fd39-487c-bb9d-529942382029)
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/861b61fb-43e0-4c0b-8955-4dc93ae1ca6d)
@@ -46,7 +44,9 @@ GW2Geary is a web application built with React that allows users to explore and 
 
 - This project was created using [Create React App](https://create-react-app.dev/).
 - The Guild Wars 2 API integration is based on the [GW2API](https://wiki.guildwars2.com/wiki/API:Main).
-
+- Database on [MongoDB](https://www.mongodb.com/)
+- Domain from [NameCheap](https://www.namecheap.com/)
+- Hosted on [DigitalOcean](https://www.digitalocean.com/)
 ---
 
 We hope you find GW2Geary useful for exploring Guild Wars 2 accounts and characters. Enjoy optimizing your builds and discovering new strategies! If you have any questions or need assistance, feel free to reach out.
