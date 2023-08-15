@@ -68,7 +68,7 @@ app.post("/api/reset-password", async (req, res) => {
 
     const token = generateResetToken();
 
-    const updatedUser = await User.findOneAndUpdate({ email: user.email }, { resetToken: token });
+    const updatedUser = await User.findOneAndUpdate({ email: user.email, username: user.username }, { resetToken: token });
 
     if (!updatedUser) {
       return res.status(404).json({ error: 'User not found.' });
