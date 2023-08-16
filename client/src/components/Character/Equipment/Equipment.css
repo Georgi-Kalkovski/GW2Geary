@@ -8,6 +8,15 @@
     margin: 5px;
 }
 
+.equipment-fashion {
+    min-width: 200px;
+    width: 0px;
+    height: 652px;
+    padding: 20px 0;
+    background-color: #202124;
+    margin: 5px;
+}
+
 .equipment-box {
     display: flex;
     justify-content: center;

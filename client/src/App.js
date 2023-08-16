@@ -18,6 +18,7 @@ import About from "./components/About";
 import Contacts from "./components/Contacts";
 import News from "./components/News";
 import Support from "./components/Support";
+import CharacterFashion from "./components/CharacterFashion";
 import ErrorPage from "./components/ErrorPage";
 
 import Cog from './cog.svg';
@@ -116,6 +117,10 @@ const App = () => {
           <Route path="/characters/:name/:eq/:bld" element={<Character />} />
           <Route path="/c/:name" element={<Character />} />
           <Route path="/c/:name/:eq/:bld" element={<Character />} />
+          <Route path="/fashion/:name" element={<CharacterFashion />} />
+          <Route path="/fashion/:name/:eq/:bld" element={<CharacterFashion />} />
+          <Route path="/f/:name" element={<CharacterFashion />} />
+          <Route path="/f/:name/:eq/:bld" element={<CharacterFashion />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />
