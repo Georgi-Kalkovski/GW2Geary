@@ -50,32 +50,6 @@ function ItemTooltip({ item, slider }) {
 
                         <br />
 
-                        <Container className='flex'>
-                            {/* Dyes */}
-                            {item.dyes && (
-                                <Col >
-                                    {item.dyes.map((dye, index) => (
-                                        <Row key={index} >
-                                            {dye != null
-                                                ? <div className='flex'>
-                                                    <div style={{
-                                                        margin: '1px 5px 1px 1px',
-                                                        height: '15px',
-                                                        width: '15px',
-                                                        border: '0.2px solid gray',
-                                                        backgroundColor: `rgb(${dye.cloth.rgb[0]}, ${dye.cloth.rgb[1]}, ${dye.cloth.rgb[2]})`
-                                                    }}>
-                                                    </div>
-                                                    <span>{dye.name}</span>
-                                                </div>
-                                                : ''
-                                            }</Row>
-                                    ))}
-                                </Col>
-                            )}
-                        </Container>
-                        <br />
-
                         {/* WEIGHT & TYPE */}
                         <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
 

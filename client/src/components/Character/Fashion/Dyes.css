@@ -1,0 +1,17 @@
+.box {
+    width: 21px;
+    height: 21px;
+    margin: 2px;
+}
+
+.box-long {
+    width: 47px;
+    height: 21px;
+    margin: 2px;
+}
+
+.box-big {
+    width: 46px;
+    height: 46px;
+    margin: 2px;
+}
