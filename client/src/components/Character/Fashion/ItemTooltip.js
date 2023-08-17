@@ -12,7 +12,7 @@ function ItemTooltip({ item, slider }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({ placement: 'right' });
+    } = usePopperTooltip({ placement: 'top' });
 
     const [showWikiButton, setShowWikiButton] = useState(false);
 
