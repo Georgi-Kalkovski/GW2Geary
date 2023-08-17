@@ -49,10 +49,16 @@ function Equipment({ items }) {
                     <Col className='flex column'>
                         <Dyes item={items.find(x => x.slot === 'Backpack')} />
                         <ItemTooltip item={items.find(x => x.slot === 'Accessory1' && x.name === 'Aurora' || x.name === 'Vision')} />
-                        <ItemTooltip item={items.find(x => x.slot === 'Accessory2' && x.name === 'Aurora' || x.name === 'Vision')} />
+                        <ItemTooltip item={items.find(x =>
+                            (x.slot === 'Accessory2' && (x.name === 'Aurora' || x.name === 'Vision')) ||
+                            (x.slot === 'Accessory1' && items.filter(y => y.slot === 'Accessory1').length === 2))}
+                        />
                         <ItemTooltip item={items.find(x => x.slot === 'Amulet' && x.name === `Prismatic Champion's Regalia` || x.name === 'Transcendence')} />
                         <ItemTooltip item={items.find(x => x.slot === 'Ring1' && x.name === 'Coalescence' || x.name === 'Conflux')} />
-                        <ItemTooltip item={items.find(x => x.slot === 'Ring2' && x.name === 'Coalescence' || x.name === 'Conflux')} />
+                        <ItemTooltip item={items.find(x =>
+                            (x.slot === 'Ring2' && (x.name === 'Coalescence' || x.name === 'Conflux')) ||
+                            (x.slot === 'Ring1' && items.filter(y => y.slot === 'Ring1').length === 2))}
+                        />
                     </Col>
                 </Col>
             </Container>
