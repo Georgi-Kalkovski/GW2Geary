@@ -3,9 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
-function ItemTooltip({ item, slider }) {
+function ItemTooltip({ item, embed }) {
     // console.log('item ', item)
-
     const {
         getArrowProps,
         getTooltipProps,
@@ -39,7 +38,7 @@ function ItemTooltip({ item, slider }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)'}}>
+                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
                         {/* NAME */}
                         <Row key={`name-${item.id}`}>
                             {item.skin_name
@@ -63,10 +62,10 @@ function ItemTooltip({ item, slider }) {
                 <div ref={setTriggerRef}
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
-                    {showWikiButton &&
+                    {showWikiButton && embed !== true &&
                         <div className='flex column' style={{ marginLeft: '2px' }}>
                             {!item.skin_name &&
-                                <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
+                                <button className='wiki-button basic-button' style={{ marginTop: '20px' }} onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
 
                             }
                             {item.skin_name &&

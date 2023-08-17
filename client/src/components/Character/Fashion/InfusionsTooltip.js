@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
-function ItemTooltip({ infusion, leng }) {
+function ItemTooltip({ infusion, leng, embed }) {
     // console.log('item ', item)
 
     const {
@@ -58,7 +58,7 @@ function ItemTooltip({ infusion, leng }) {
                 <div ref={setTriggerRef}
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
-                    {showWikiButton &&
+                    {showWikiButton && embed !== true &&
                         <div className='flex column' style={{ marginLeft: '2px' }}>
                             {!infusion.skin_name &&
                                 <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>

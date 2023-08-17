@@ -3,7 +3,7 @@ import Equipment from './Equipment';
 import fetchData from '../../fetchData';
 import InfusionsName from './InfusionsName';
 
-const EquipmentDropdown = ({ char, setEquip, initial }) => {
+const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mergedItems, setMergedItems] = useState([]);
   const [itemstatsOutput, setItemstatsOutput] = useState([]);
@@ -126,7 +126,7 @@ const EquipmentDropdown = ({ char, setEquip, initial }) => {
           </ul>
         )}
       </div>
-      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} prof={char?.profession} />
+      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} prof={char?.profession} embed={embed}/>
     </div>
   );
 }

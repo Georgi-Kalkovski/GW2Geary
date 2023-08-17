@@ -71,7 +71,7 @@ function CharacterFashionEmbed() {
                     : ''
                 }
                 <div style={{ margin: '-75px 0 -5px -36px' }}>
-                    <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} />
+                    <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} embed={true}/>
                 </div>
             </Container>
     );
