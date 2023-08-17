@@ -8,7 +8,6 @@ import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Equipment/EquipmentDropdown';
 import BuildDropdown from './Character/Build/BuildDropdown';
 import CharacterInfo from './Character/Info/CharacterInfo';
-import CharacterShareLink from './Character/Info/CharacterShareLink';
 import './Character.css';
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
