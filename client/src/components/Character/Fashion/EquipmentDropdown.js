@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Equipment from './Equipment';
 import fetchData from '../../fetchData';
+import InfusionsName from './InfusionsName';
 
 const EquipmentDropdown = ({ char, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,6 +67,12 @@ const EquipmentDropdown = ({ char, setEquip, initial }) => {
         const fetchedSkins = skinIds ? await fetchData('skins', skinIds) : [];
         const dyesIds = selectedEqTab?.equipment.filter((item) => item.dyes).flatMap((el) => el.dyes).join(',');
         const fetchedColors = dyesIds ? await fetchData('colors', dyesIds) : [];
+        const infusionIds = [
+          ...char?.equipment.flatMap((el) => el.infusions).filter((item) => item !== undefined),
+          ...char?.equipment_tabs.flatMap((tab) => tab.equipment.flatMap((item) => item.infusions)).filter((item) => item !== undefined),
+        ].join(',');
+        const fetchedInfusions = infusionIds ? await fetchData('items', infusionIds) : [];
+
         const mergingItems = selectedEqTab?.equipment.map(item => ({
           ...char?.equipment.find((fetchedItem => fetchedItem.id === item.id)),
           ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
@@ -76,6 +83,16 @@ const EquipmentDropdown = ({ char, setEquip, initial }) => {
             item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[2]),
             item.dyes && fetchedColors?.find(fetchedDyes => fetchedDyes.id === item.dyes[3]),
           ],
+          infusions: fetchedInfusions ? (item.infusions
+            ?? char?.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
+            ?? []
+          ).map(infusionId => {
+            const fetchedInfusion = fetchedInfusions.find(fetchedInfusion => fetchedInfusion.id === infusionId);
+            if (fetchedInfusion && InfusionsName(fetchedInfusion.name)) {
+              return fetchedInfusion;
+            }
+            return null; // or handle non-matching cases as needed
+          }).filter(infusion => infusion !== null) : [],
           skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
           skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon
         }));
@@ -90,12 +107,9 @@ const EquipmentDropdown = ({ char, setEquip, initial }) => {
   return (
     <div
       className={`equipment equipment-fashion`}
-      style={{
-        height: '432px'
-      }}
       ref={wrapperRef}>
       <div className="dropdown">
-        <button className={`accounts-box basic-button dropdown-button`} style={{background: '#191919'}} onClick={toggleMenu}>
+        <button className={`accounts-box basic-button dropdown-button`} style={{ background: '#191919' }} onClick={toggleMenu}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         {isOpen && (

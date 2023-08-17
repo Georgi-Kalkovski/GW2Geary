@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
-function ItemTooltip({ item, slider }) {
+function ItemTooltip({ infusion, leng }) {
     // console.log('item ', item)
 
     const {
@@ -19,13 +19,13 @@ function ItemTooltip({ item, slider }) {
     const handleButtonClick = (event) => {
         event.preventDefault();
 
-        window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+        window.open(`https://wiki.guildwars2.com/wiki/${infusion.name}`, '_blank');
     };
 
     const handleButtonSkinClick = (event) => {
         event.preventDefault();
 
-        window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name}`, '_blank');
+        window.open(`https://wiki.guildwars2.com/wiki/${infusion.skin_name}`, '_blank');
     };
 
     const handleLeftClick = (event) => {
@@ -33,43 +33,38 @@ function ItemTooltip({ item, slider }) {
     };
 
     return (
-        <React.Fragment key={item?.id}>
+        <React.Fragment key={infusion?.id}>
             {visible && (
                 <div
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)'}}>
+                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
                         {/* NAME */}
-                        <Row key={`name-${item.id}`}>
-                            {item.skin_name
-                                ? <span className='item-name'>{item.skin_name}</span>
-                                : <span className='item-name'>{item.name ? item.name : 'Unknown'}</span>
+                        <Row key={`name-${infusion.id}`}>
+                            {infusion.skin_name
+                                ? <span className='item-name'>{infusion.skin_name}</span>
+                                : <span className='item-name'>{infusion.name ? infusion.name : 'Unknown'}</span>
                             }
                         </Row>
-
-                        <br />
-
-                        {/* WEIGHT & TYPE */}
-                        <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
 
                     </Container>
 
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
             )}
-            {item
+            {infusion
                 ?
                 <div ref={setTriggerRef}
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
                     {showWikiButton &&
                         <div className='flex column' style={{ marginLeft: '2px' }}>
-                            {!item.skin_name &&
+                            {!infusion.skin_name &&
                                 <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
 
                             }
-                            {item.skin_name &&
+                            {infusion.skin_name &&
                                 <div>
                                     <button className='wiki-button basic-button' style={{ marginTop: '20px' }} onClick={handleButtonSkinClick}>Wiki<img src={Link} alt="" /></button>
                                 </div>
@@ -77,11 +72,17 @@ function ItemTooltip({ item, slider }) {
                         </div>
                     }
                     {/* ITEM ICON */}
-                    {item.skin_icon && item.skin_name
-                        ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
-                            style={{ cursor: 'pointer' }} />
-                        : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
-                            style={{ cursor: 'pointer' }} />
+                    {leng > 7
+                        ? (infusion.skin_icon && infusion.skin_name
+                            ? <img className={`infusion-box box-infusion`} src={infusion.skin_icon} alt={infusion.skin_icon}
+                                style={{ cursor: 'pointer' }} />
+                            : <img className={`infusion-box box-infusion`} src={infusion.icon} alt={infusion.icon}
+                                style={{ cursor: 'pointer' }} />
+                        ) : (infusion.skin_icon && infusion.skin_name
+                            ? <img className={`infusion-box-big box-infusion`} src={infusion.skin_icon} alt={infusion.skin_icon}
+                                style={{ cursor: 'pointer' }} />
+                            : <img className={`infusion-box-big box-infusion`} src={infusion.icon} alt={infusion.icon}
+                                style={{ cursor: 'pointer' }} />)
                     }
                 </div>
                 : ''

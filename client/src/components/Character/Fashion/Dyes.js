@@ -1,6 +1,6 @@
 import { Container, Col, Row } from "react-bootstrap";
 import DyesTooltip from "./DyesTooltip";
-import './Dyes.css';
+import './Fashion.css';
 
 function Dyes({ item }) {
     const nonNullDyes = item?.dyes?.filter(dye => dye !== undefined);
