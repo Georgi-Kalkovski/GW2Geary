@@ -58,7 +58,7 @@ function CharacterFashionEmbed() {
             ?
             <Container className='center-items equipment equipment-fashion'>
                 <div className="flex">
-                    <div className="logo-loading-div" style={{ top: '200px', left: '150px' }}>
+                    <div className="logo-loading-div" style={{ top: '200px', left: '130px' }}>
                         <img src={Dragon} alt="" className="logo--loading-dragon" />
                         <img src={Cog} alt="" className="logo-loading-cog" />
                     </div>
