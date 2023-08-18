@@ -374,10 +374,6 @@ input:checked+.slider:before {
     display: none;
   }
 
-  .switch {
-    width: 45px;
-  }
-
   .traits-box {
     width: 300px;
     padding-left: 0;
@@ -419,7 +415,7 @@ input:checked+.slider:before {
   }
 
   .equipment {
-    height: 583px;
+    height: auto;
   }
 
   .build {
@@ -472,5 +468,15 @@ input:checked+.slider:before {
 
   .dropdown-popup {
     visibility: hidden;
+  }
+
+  .switch-size-left {
+    font-size: 13px;
+    padding: 15px 5px 5px 0px;
+  }
+
+  .switch-size-right {
+    font-size: 13px;
+    padding: 5px 5px 0px 0px;
   }
 }

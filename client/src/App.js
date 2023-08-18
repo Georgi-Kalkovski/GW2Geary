@@ -28,9 +28,10 @@ import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [newUsername, setNewUsername] = useState("");
-
+  const storedFashion = localStorage.getItem('isFashionOn');
+  const isFashionOn = storedFashion === 'true';
   const { pathname } = useLocation();
-  const isEmbed = matchPath('/fw/*', pathname);
+  const isEmbed = matchPath('/f/*', pathname);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -64,9 +65,9 @@ const App = () => {
     <>
       {isEmbed
         ? <Routes>
-          <Route path="/fw/:name" element={<CharacterFashionEmbed />} />
-          <Route path="/fw/:name/:eq" element={<CharacterFashionEmbed />} />
-          <Route path="/fw/:name/:eq/:bld" element={<CharacterFashionEmbed />} />
+          <Route path="/f/:name" element={<CharacterFashionEmbed />} />
+          <Route path="/f/:name/:eq" element={<CharacterFashionEmbed />} />
+          <Route path="/f/:name/:eq/:bld" element={<CharacterFashionEmbed />} />
         </Routes>
         : <div className="App">
           <nav className="app-nav">
@@ -128,14 +129,21 @@ const App = () => {
               <Route path="/" element={<Search />} />
               <Route path="/accounts/:name" element={<Account />} />
               <Route path="/a/:name" element={<Account />} />
-              <Route path="/characters/:name" element={<Character />} />
-              <Route path="/characters/:name/:eq/:bld" element={<Character />} />
-              <Route path="/c/:name" element={<Character />} />
-              <Route path="/c/:name/:eq/:bld" element={<Character />} />
-              <Route path="/fashion/:name" element={<CharacterFashion />} />
-              <Route path="/fashion/:name/:eq/:bld" element={<CharacterFashion />} />
-              <Route path="/f/:name" element={<CharacterFashion />} />
-              <Route path="/f/:name/:eq/:bld" element={<CharacterFashion />} />
+              {isFashionOn ? (
+                <>
+                  <Route path="/characters/:name" element={<CharacterFashion />} />
+                  <Route path="/characters/:name/:eq/:bld" element={<CharacterFashion />} />
+                  <Route path="/c/:name" element={<CharacterFashion />} />
+                  <Route path="/c/:name/:eq/:bld" element={<CharacterFashion />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/characters/:name" element={<Character />} />
+                  <Route path="/characters/:name/:eq/:bld" element={<Character />} />
+                  <Route path="/c/:name" element={<Character />} />
+                  <Route path="/c/:name/:eq/:bld" element={<Character />} />
+                </>
+              )}
               <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />

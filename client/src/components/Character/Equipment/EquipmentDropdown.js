@@ -16,6 +16,11 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
     const storedValue = localStorage.getItem('isPrefixesOn');
     return storedValue !== null ? JSON.parse(storedValue) : false;
   });
+
+  const [isFashionOn, setIsFashionOn] = useState(() => {
+    const storedValue = localStorage.getItem('isFashionOn');
+    return storedValue !== null ? JSON.parse(storedValue) : false;
+  });
   const [itemstatsOutput, setItemstatsOutput] = useState([]);
   const [selectedEqTab, setSelectedEqTab] = useState(() => {
     if (initial && char?.equipment_tabs) {
@@ -45,6 +50,16 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   useEffect(() => {
     localStorage.setItem('isPrefixesOn', JSON.stringify(isPrefixesOn));
   }, [isPrefixesOn]);
+
+  const toggleFashion = () => {
+    setIsFashionOn(!isFashionOn);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    localStorage.setItem('isFashionOn', JSON.stringify(isFashionOn));
+  }, [isFashionOn]);
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -195,64 +210,91 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             ))}
           </ul>
         )}
-
-        {/* Equipment Switches */}
+      </div>
+      {/* Switches */}
+      <div className='flex center' style={{ margin: '15px' }}>
+        {/* Fashion Switch */}
+        <div className='flex' style={{ marginRight: '20px' }}>
+          <div style={{ marginRight: '5px' }}>Fashion:</div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={isFashionOn}
+              onChange={toggleFashion} />
+            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
+          </label>
+          {switchVisible && (
+            <div
+              ref={setSwitchTooltipRef}
+              {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
+            >
+              <div>
+                <div>
+                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
+                </div>
+              </div>
+              <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
+            </div>
+          )}
+        </div>
+        {/* Prefixes Switch */}
+        <div className='flex' style={{ marginRight: '20px' }}>
+          <div style={{ marginRight: '5px' }}>Stats:</div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={isPrefixesOn}
+              onChange={togglePrefixes} />
+            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
+          </label>
+          {switchVisible && (
+            <div
+              ref={setSwitchTooltipRef}
+              {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
+            >
+              <div>
+                <div>
+                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
+                </div>
+              </div>
+              <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
+            </div>
+          )}
+        </div>
+        {/* Skins Switch */}
         <div className='flex'>
-          <div className='column' style={{ textAlign: 'left', padding: '0 5px 0 10px' }}>
-            <div>Stats:</div>
-            <div>Skins:</div>
-          </div>
-          <div className='column'>
-            {/* Prefixes Switch */}
-            <div>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  checked={isPrefixesOn}
-                  onChange={togglePrefixes} />
-                <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
-              </label>
-              {switchVisible && (
-                <div
-                  ref={setSwitchTooltipRef}
-                  {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
-                >
-                  <div>
-                    <div>
-                      <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
-                    </div>
-                  </div>
-                  <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
+          <div style={{ marginRight: '5px' }}>Skins:</div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={isSliderOn}
+              onChange={toggleSlider} />
+            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
+          </label>
+          {switch2Visible && (
+            <div
+              ref={setSwitch2TooltipRef}
+              {...getSwitch2TooltipProps({ className: 'tooltip-container equip-tooltip' })}
+            >
+              <div>
+                <div>
+                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
                 </div>
-              )}
+              </div>
+              <div {...getSwitch2ArrowProps({ className: 'tooltip-arrow' })} />
             </div>
-            {/* Skins Switch */}
-            <div>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  checked={isSliderOn}
-                  onChange={toggleSlider} />
-                <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
-              </label>
-              {switch2Visible && (
-                <div
-                  ref={setSwitch2TooltipRef}
-                  {...getSwitch2TooltipProps({ className: 'tooltip-container equip-tooltip' })}
-                >
-                  <div>
-                    <div>
-                      <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
-                    </div>
-                  </div>
-                  <div {...getSwitch2ArrowProps({ className: 'tooltip-arrow' })} />
-                </div>
-              )}
-            </div>
-          </div>
+          )}
         </div>
       </div>
-      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} build={build} prof={char?.profession} slider={isSliderOn} prefixSlider={isPrefixesOn} />
+      <Equipment
+        key={selectedEqTab?.tab + selectedEqTab?.name}
+        items={mergedItems}
+        build={build}
+        prof={char?.profession}
+        slider={isSliderOn}
+        prefixSlider={isPrefixesOn}
+        fashionSlider={isFashionOn}
+      />
     </div>
   );
 }

@@ -11,7 +11,17 @@
 .equipment-box {
     display: flex;
     justify-content: center;
-    margin-top: 35px;
+    margin-top: 10px;
+}
+
+.switch-size-left {
+    text-align: left;
+    padding: 10px 10px 5px 0px;
+}
+
+.switch-size-right {
+    text-align: left;
+    padding: 0px 5px 0px 0px;
 }
 
 .item-box {
@@ -79,7 +89,8 @@
     background: #202124;
     width: 441px;
     text-align: left;
-    z-index:6;
+    z-index: 6;
+    margin-top: 0px;
 }
 
 .itemstat {
@@ -91,7 +102,7 @@
 }
 
 .itemname {
-    color:#5192f2;
+    color: #5192f2;
 }
 
 .italic {
