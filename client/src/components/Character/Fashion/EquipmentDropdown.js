@@ -106,14 +106,14 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
 
   return (
     <div
-      className={`equipment equipment-fashion`}
+      className={`equipment equipment-fashion ${embed === true ? '' : char?.profession?.toLowerCase()}-lightning-border`}
       ref={wrapperRef}>
       <div className="dropdown">
-        <button className={`accounts-box basic-button dropdown-button`} style={{ background: '#191919' }} onClick={toggleMenu}>
+        <button className={`${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         {isOpen && (
-          <ul className={`dropdown-menu `} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
+          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
             {char?.equipment_tabs.map((equip) => (
               <li
                 key={equip.tab}
