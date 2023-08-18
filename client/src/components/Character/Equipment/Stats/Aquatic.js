@@ -22,9 +22,9 @@ function Aquatic({ items }) {
                             - <span>
                                 {/* Prefix */}
                                 <span className="itemname">
-                                    {aquaticHelm.itemstats.find((x) =>
+                                    {aquaticHelm?.itemstats.find((x) =>
                                         x.id === aquaticHelm.stats?.id
-                                        || x.id === aquaticHelm.details.infix_upgrade?.id
+                                        || x.id === aquaticHelm.details?.infix_upgrade?.id
                                     )?.name.split("'")[0]
                                         || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
                                     }
@@ -60,15 +60,15 @@ function Aquatic({ items }) {
             {WeaponAquaticA
                 ? <div>
                     {/* Name */}
-                    <span className="yellow-highlight ">Aquatic {WeaponAquaticA.details.type} </span>
+                    <span className="yellow-highlight ">Aquatic {WeaponAquaticA.details?.type} </span>
                     {WeaponAquaticA.rarity !== 'Basic' &&
                         <>
                             - <span>
                                 {/* Prefix */}
                                 <span className="itemname">
-                                    {WeaponAquaticA.itemstats.find(x =>
+                                    {WeaponAquaticA?.itemstats.find(x =>
                                         x.id === WeaponAquaticA.stats?.id
-                                        || x.id === WeaponAquaticA.details.infix_upgrade?.id
+                                        || x.id === WeaponAquaticA.details?.infix_upgrade?.id
                                     )?.name.split("'")[0]
                                         || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
                                     }
@@ -140,7 +140,7 @@ function Aquatic({ items }) {
             {WeaponAquaticB
                 ? <div>
                     {/* Name */}
-                    <span className="yellow-highlight ">Aquatic {WeaponAquaticB.details.type} </span>
+                    <span className="yellow-highlight ">Aquatic {WeaponAquaticB.details?.type} </span>
                     {WeaponAquaticB.rarity !== 'Basic' &&
                         <>
                             - <span>
@@ -148,7 +148,7 @@ function Aquatic({ items }) {
                                 <span className="itemname">
                                     {WeaponAquaticB.itemstats.find(x =>
                                         x.id === WeaponAquaticB.stats?.id
-                                        || x.id === WeaponAquaticB.details.infix_upgrade?.id
+                                        || x.id === WeaponAquaticB.details?.infix_upgrade?.id
                                     )?.name.split("'")[0]
                                         || <span style={{ color: '#ff1e1e' }}>Missing prefix</span>
                                     }

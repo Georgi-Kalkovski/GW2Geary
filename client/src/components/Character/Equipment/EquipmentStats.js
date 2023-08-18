@@ -24,13 +24,13 @@ function EquipmentStats({ prof, items }) {
                 item.slot != "WeaponAquaticB") {
 
                 // Empty Prefixes
-                if (!item.details.infix_upgrade && !item.stats) {
-                    emptyPrefixes.push(item.details.type)
+                if (!item.details?.infix_upgrade && !item.stats) {
+                    emptyPrefixes.push(item.details?.type)
                 }
 
                 // Empty Runes
                 const nonRuneCount = item.upgrades.filter(x => x.details.type !== 'Rune').length;
-                if (item.details.defense
+                if (item.details?.defense
                     && item.details.defense > 0
                     && item.upgrades.length - nonRuneCount < item.details.infusion_slots.length) {
                     emptyRunes.push({
@@ -41,7 +41,7 @@ function EquipmentStats({ prof, items }) {
 
                 // Empty Sigils
                 const nonSigilCount = item.upgrades.filter(x => x.details.type !== 'Sigil').length;
-                if (item.details.min_power
+                if (item.details?.min_power
                     && item.details.max_power
                     && item.upgrades.length - nonSigilCount < item.details.infusion_slots.length) {
                     emptySigils.push({
@@ -52,7 +52,7 @@ function EquipmentStats({ prof, items }) {
 
                 // Empty Infusions
                 const nonInfusionCount = item.upgrades.filter(x => x.details.type !== 'Default').length;
-                if (item.upgrades.length - nonInfusionCount < item.details.infusion_slots.length) {
+                if (item.upgrades?.length - nonInfusionCount < item.details?.infusion_slots?.length) {
                     emptyInfusions.push({
                         type: item.details.type || item.slot,
                         amount: item.details.infusion_slots.length - item.upgrades.length
@@ -66,13 +66,13 @@ function EquipmentStats({ prof, items }) {
                     if (existingUpgrade) {
                         existingUpgrade.items.push({
                             name: item.name,
-                            type: item.details.type || item.slot,
+                            type: item.details?.type || item.slot,
                         });
                     } else {
                         upgrades.push({
                             name: upgrade.name,
                             items: [
-                                { name: item.name, type: item.details.type },
+                                { name: item.name, type: item.details?.type },
                             ],
                             type: upgrade.details.type || item.slot,
                         });
