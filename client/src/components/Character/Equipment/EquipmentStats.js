@@ -14,6 +14,7 @@ function EquipmentStats({ prof, items }) {
     const emptyRunes = [];
     const emptySigils = [];
     const emptyInfusions = [];
+    let enrichment = {};
 
     let itemstats = items[0]?.itemstats;
 
@@ -135,6 +136,8 @@ function EquipmentStats({ prof, items }) {
                                     }
                                 }
                             }
+                        } else {
+                            enrichment = infusion
                         }
                     }
                 }
@@ -183,7 +186,7 @@ function EquipmentStats({ prof, items }) {
             <Sigils upgrades={upgrades} emptySigils={emptySigils} />
 
             {/* Infusions */}
-            <Infusions infusions={infusions} emptyInfusions={emptyInfusions} />
+            <Infusions infusions={infusions} emptyInfusions={emptyInfusions} enrichment={enrichment}/>
 
             {/* Underwater Content */}
             <Aquatic items={items} />

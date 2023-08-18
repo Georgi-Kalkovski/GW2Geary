@@ -1,12 +1,13 @@
-function Infusions({ infusions, emptyInfusions }) {
-
+function Infusions({ infusions, emptyInfusions, enrichment }) {
+    console.log(enrichment)
     return (<>
+        {/* Infusions */}
         <div className="itemstat">
             <span className="yellow-highlight">Infusions</span>:
         </div>
         {
             infusions &&
-            infusions.map((infusion, index) => (
+            infusions.filter(infusion => infusion.type !== "Amulet").map((infusion, index) => (
                 <div key={index}>
                     {(() => {
                         if (infusion.attribute === 'CritDamage') { infusion.attribute = 'Ferocity' }
@@ -22,10 +23,31 @@ function Infusions({ infusions, emptyInfusions }) {
                 </div>
             ))
         }
-        {emptyInfusions && emptyInfusions.length !== 0 &&
+        {/* Enrichment */}
+        {enrichment?.details?.infix_upgrade?.buff?.description &&
+            <div className="itemstat">
+                <span className="yellow-highlight">Enrichment </span>:
+                <span className="itemtypes itemname"> {enrichment.details?.infix_upgrade?.buff?.description}</span>
+            </div>
+        }
+        {/* Missing Infusions */}
+        {emptyInfusions && emptyInfusions.filter(infusion => infusion.type !== "Amulet").length !== 0 &&
             <div>
                 <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing infusions </span>
-                <span className="itemtypes">- {emptyInfusions.map((x, i) => x.amount > 1 ? `${x.amount}x ${x.type}` : x.type).join(", ")}</span>
+                <span className="itemtypes">- {emptyInfusions.filter(infusion => infusion.type !== "Amulet").map(
+                    (infusion, i) =>
+                        infusion.amount > 0 ? `${infusion.amount}x ${infusion.type}` : infusion.type)
+                    .join(", ")
+                }</span>
+            </div>
+        }
+        {/* Missing Enrichment */}
+        {emptyInfusions && emptyInfusions.filter(infusion => infusion.type === "Amulet").length !== 0 &&
+            <div>
+                <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing enrichment </span>
+                <span className="itemtypes">- {emptyInfusions.filter(infusion => infusion.type === "Amulet").map(
+                    (infusion, i) => infusion.type)
+                }</span>
             </div>
         }
     </>)
