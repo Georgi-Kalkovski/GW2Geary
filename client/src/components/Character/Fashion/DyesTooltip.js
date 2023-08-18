@@ -21,7 +21,7 @@ const DyesTooltip = ({ dye, box, className }) => {
 
     return (
         <>
-            <Col ref={setTriggerRef}>
+            <Col ref={setTriggerRef} >
                 <Row className={box}
                     style={{
                         backgroundColor: `rgb(${dye.cloth.rgb[0]}, ${dye.cloth.rgb[1]}, ${dye.cloth.rgb[2]})`
@@ -33,7 +33,7 @@ const DyesTooltip = ({ dye, box, className }) => {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: `tooltip-container ${className}` })}
                 >
-                    <div className='attribute-popup'>
+                    <div className='attribute-popup' style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
                         <Row className='flex'>{dye.name}</Row>
                     </div>
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
