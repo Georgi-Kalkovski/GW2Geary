@@ -441,6 +441,11 @@ p span {
   margin-bottom: 20px;
 }
 
+iframe
+{
+    display: none;
+}
+
 .news-box {
   margin: 0 30%;
 }
