@@ -196,6 +196,19 @@ function Search() {
               <Row className='search-news'>
 
                 <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
+                  <span style={{ color: 'red' }}> !!! Guild Wars 2 API Disabled from August 18-24 !!! </span>
+                  <div>With the launch of Secrets of the Obscure the API will be temporarily disabled. As with previous expansions, this is to prevent spoilers
+                  from escaping into the wild.</div>
+                </div>
+
+                <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
+                  Now the user can choose between fashion mode or normal mode preview on the characters.
+                  Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
+                </div>
+
+                <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>04.08.2023</span> -
                   Added information about the <span style={{ color: '#ff1e1e' }}>missing prefixes</span>,
                   <span style={{ color: '#ff1e1e' }}> runes</span>,
@@ -228,20 +241,6 @@ function Search() {
                     , <span className="yellow-highlight">sigils </span>
                     and <span className="yellow-highlight">infusions</span>.
                   </span>
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>13.07.2023</span>
-                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option to copy specific</span>
-                  <span className='yellow-highlight' style={{ marginRight: '5px' }}>equipment</span>
-                  &<span className='yellow-highlight' style={{ marginLeft: '5px' }}>build</span>.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>11.07.2023</span>
-                  <span style={{ marginLeft: '5px', marginRight: '5px' }}>- Added an option for each character to be</span>
-                  <span style={{ color: 'darkgreen', marginRight: '5px' }}>Public</span>
-                  /<span style={{ color: '#aa0404', marginLeft: '5px' }}>Private</span>.
                 </div>
 
               </Row>

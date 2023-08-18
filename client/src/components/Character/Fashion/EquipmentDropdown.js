@@ -129,9 +129,9 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         <div className='flex' style={{ textAlign: 'left', padding: '5px 0px 0px 5px' }}>
-          <div>Fashion:</div>
+          <div style={{ marginRight: '5px' }}>Fashion:</div>
           {/* Fashion Switch */}
-          <label className="switch" style={{ width: '43px', marginLeft: '5px' }}>
+          <label className="switch" >
             <input
               type="checkbox"
               checked={isFashionOn}
