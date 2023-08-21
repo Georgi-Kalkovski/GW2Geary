@@ -19,11 +19,12 @@ import Contacts from "./components/Contacts";
 import News from "./components/News";
 import Support from "./components/Support";
 import CharacterFashion from "./components/CharacterFashion";
-import ErrorPage from "./components/ErrorPage";
+import ErrorBoundary from "./ErrorBoundary";
 
 import Cog from './cog.svg';
 import Dragon from './dragon.svg';
 import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
+import ErrorPage from "./components/ErrorPage";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -65,9 +66,9 @@ const App = () => {
     <>
       {isEmbed
         ? <Routes>
-          <Route path="/f/:name" element={<CharacterFashionEmbed />} />
-          <Route path="/f/:name/:eq" element={<CharacterFashionEmbed />} />
-          <Route path="/f/:name/:eq/:bld" element={<CharacterFashionEmbed />} />
+          <Route path="/f/:name" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
+          <Route path="/f/:name/:eq" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
+          <Route path="/f/:name/:eq/:bld" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
         </Routes>
         : <div className="App">
           <nav className="app-nav">
@@ -127,21 +128,16 @@ const App = () => {
                 </>
               }
               <Route path="/" element={<Search />} />
-              <Route path="/accounts/:name" element={<Account />} />
-              <Route path="/a/:name" element={<Account />} />
+              <Route path="/a/:name" element={<ErrorBoundary><Account /></ErrorBoundary>} />
               {isFashionOn ? (
                 <>
-                  <Route path="/characters/:name" element={<CharacterFashion />} />
-                  <Route path="/characters/:name/:eq/:bld" element={<CharacterFashion />} />
-                  <Route path="/c/:name" element={<CharacterFashion />} />
-                  <Route path="/c/:name/:eq/:bld" element={<CharacterFashion />} />
+                  <Route path="/c/:name" element={<ErrorBoundary><CharacterFashion /></ErrorBoundary>} />
+                  <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><CharacterFashion /></ErrorBoundary>} />
                 </>
               ) : (
                 <>
-                  <Route path="/characters/:name" element={<Character />} />
-                  <Route path="/characters/:name/:eq/:bld" element={<Character />} />
-                  <Route path="/c/:name" element={<Character />} />
-                  <Route path="/c/:name/:eq/:bld" element={<Character />} />
+                  <Route path="/c/:name" element={<ErrorBoundary><Character /></ErrorBoundary>} />
+                  <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><Character /></ErrorBoundary>} />
                 </>
               )}
               <Route path="/reset-password/:token" element={<ResetPassword />} />
@@ -149,7 +145,7 @@ const App = () => {
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/news" element={<News />} />
               <Route path="/support" element={<Support />} />
-              <Route path="*" element={<Search />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </div>
           <Footer />
