@@ -5,7 +5,7 @@ import React from 'react';
 
 function ApiErrorPage({ isErrorPage }) {
     return (
-        <div style={isErrorPage ? { position: 'absolute', transform: 'translate(0%, -75%)', marginTop: '-50px', marginLeft: '10px' } : {}}>
+        <div style={isErrorPage ? { position: 'absolute', transform: 'translate(0%, -75%)', marginTop: '-50px', marginLeft: '25px' } : {}}>
 
             <div className="flex center">
                 <div style={isErrorPage
