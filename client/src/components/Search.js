@@ -197,13 +197,6 @@ function Search() {
 
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
-                  <span style={{ color: 'red' }}> !!! Guild Wars 2 API Disabled from August 18-24 !!! </span>
-                  <div>With the launch of Secrets of the Obscure the API will be temporarily disabled. As with previous expansions, this is to prevent spoilers
-                  from escaping into the wild.</div>
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
                   Now the user can choose between fashion mode or normal mode preview on the characters.
                   Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
                 </div>

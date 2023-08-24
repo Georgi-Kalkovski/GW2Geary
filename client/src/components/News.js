@@ -8,17 +8,6 @@ function News() {
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>18.08.2023</h3>
                     <div className="line"></div>
-                    <div>
-                        <span style={{ color: 'red' }}>Guild Wars 2 API Disabled from August 18-24. </span>
-                        With the launch of Secrets of the Obscure the API will be temporarily disabled. As with previous expansions, this is to prevent spoilers
-                        from escaping into the wild.
-                    </div>
-                </div>
-
-                <br />
-                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
-                    <h3>18.08.2023</h3>
-                    <div className="line"></div>
                     <div>Now the user can choose between fashion mode or normal mode preview on the characters.
                         Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
                     </div>
