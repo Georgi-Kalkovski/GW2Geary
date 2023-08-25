@@ -13,7 +13,7 @@ function ItemTooltip({ item, embed }) {
     useEffect(() => {
         const fetchImageUrl = async () => {
             try {
-                const proxyUrl = 'http://localhost:3001/fetch-url';
+                const proxyUrl = 'https://gw2geary.com/api/fetch-url';
                 const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(item.skin_name ? item.skin_name : item.name)}`;
 
                 const response = await axios.get(proxyUrl, {
@@ -89,7 +89,9 @@ function ItemTooltip({ item, embed }) {
                         <br />
 
                         {/* WikiImage HERE */}
-                        <WikiImage imageUrl={imageUrl} />
+                        {embed !== true &&
+                            <WikiImage imageUrl={imageUrl} />
+                        }
 
                         {/* WEIGHT & TYPE */}
                         <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>

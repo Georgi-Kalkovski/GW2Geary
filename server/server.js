@@ -59,7 +59,7 @@ function generateResetToken() {
   return token;
 }
 
-app.get('/fetch-url', async (req, res) => {
+app.get('/api/fetch-url', async (req, res) => {
   const url = req.query.url;
   console.log(url);
 
