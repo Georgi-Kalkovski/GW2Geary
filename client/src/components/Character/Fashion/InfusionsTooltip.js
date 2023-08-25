@@ -1,10 +1,48 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
+import WikiImage from './WikiImage';
+import axios from 'axios';
 
 function ItemTooltip({ infusion, leng, embed }) {
     // console.log('item ', item)
+
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        const fetchImageUrl = async () => {
+            try {
+                const proxyUrl = 'http://localhost:3001/fetch-url';
+                const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(infusion.skin_name ? infusion.skin_name : infusion.name)}`;
+
+                const response = await axios.get(proxyUrl, {
+                    params: {
+                        url: targetUrl
+                    }
+                });
+
+                const html = response.data;
+                // Regular expression to match <a> with class="image" and <img> tag inside
+                const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
+
+                // Get all matches
+                const matches = [...html.matchAll(regex)];
+
+                if (matches.length >= 2) {
+                    const secondMatch = matches[1];
+                    const imgSrc = secondMatch[1];
+                    setImageUrl(`https://wiki.guildwars2.com` + imgSrc)
+                } else {
+                }
+            } catch (error) {
+                console.error('Error fetching HTML:', error);
+            }
+        };
+
+        fetchImageUrl();
+    }, [infusion]);
+
 
     const {
         getArrowProps,
@@ -47,6 +85,8 @@ function ItemTooltip({ infusion, leng, embed }) {
                                 : <span className='item-name'>{infusion.name ? infusion.name : 'Unknown'}</span>
                             }
                         </Row>
+
+                        <WikiImage imageUrl={imageUrl} />
 
                     </Container>
 

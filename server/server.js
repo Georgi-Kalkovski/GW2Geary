@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
 const cookieParser = require('cookie-parser');
+const axios = require('axios');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -57,6 +58,26 @@ function generateResetToken() {
   const token = crypto.randomBytes(20).toString('hex');
   return token;
 }
+
+app.get('/fetch-url', async (req, res) => {
+  const url = req.query.url;
+  console.log(url);
+
+  try {
+    const response = await axios.get(url);
+    res.send(response.data);
+  } catch (error) {
+    console.error('Error fetching URL:', error.message);
+    try {
+      const updatedUrl = url + '_Skin';
+      const response = await axios.get(updatedUrl);
+      res.send(response.data);
+    } catch (retryError) {
+      console.error('Error retrying URL with "_Skin":', retryError.message);
+      res.status(500).send('Error fetching URL');
+    }
+  }
+});
 
 // Send Mail Logic
 app.post("/api/reset-password", async (req, res) => {
