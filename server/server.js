@@ -59,7 +59,7 @@ function generateResetToken() {
   return token;
 }
 
-app.get('/api/fetch-url', async (req, res) => {
+app.get('/fetch-url', async (req, res) => {
   const url = req.query.url;
   try {
     const response = await axios.get(url);
