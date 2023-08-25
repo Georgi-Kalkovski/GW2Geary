@@ -61,13 +61,10 @@ function generateResetToken() {
 
 app.get('/api/fetch-url', async (req, res) => {
   const url = req.query.url;
-  console.log(url);
-
   try {
     const response = await axios.get(url);
     res.send(response.data);
   } catch (error) {
-    console.error('Error fetching URL:', error.message);
     try {
       const updatedUrl = url + '_Skin';
       const response = await axios.get(updatedUrl);
