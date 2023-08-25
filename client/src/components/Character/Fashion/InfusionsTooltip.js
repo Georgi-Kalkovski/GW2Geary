@@ -3,7 +3,6 @@ import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 import WikiImage from './WikiImage';
-import axios from 'axios';
 
 function ItemTooltip({ infusion, leng, embed }) {
     // console.log('item ', item)
@@ -12,23 +11,25 @@ function ItemTooltip({ infusion, leng, embed }) {
 
     useEffect(() => {
         const fetchImageUrl = async () => {
-            try {
-                const proxyUrl = 'https://gw2geary.com/api/fetch-url';
-                const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(infusion.skin_name ? infusion.skin_name : infusion.name)}`;
+            if (infusion) {
+                try {
+                    const proxyUrl = 'https://gw2geary/api/fetch-url';
+                    const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(infusion.skin_name ? infusion.skin_name : infusion.name)}`;
 
-                const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
-                const html = await response.text();
+                    const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
+                    const html = await response.text();
 
-                const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
-                const matches = [...html.matchAll(regex)];
+                    const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
+                    const matches = [...html.matchAll(regex)];
 
-                if (matches.length >= 2) {
-                    const secondMatch = matches[1];
-                    const imgSrc = secondMatch[1];
-                    setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
+                    if (matches.length >= 2) {
+                        const secondMatch = matches[1];
+                        const imgSrc = secondMatch[1];
+                        setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
+                    }
+                } catch (error) {
+                    console.error('Error fetching HTML:', error);
                 }
-            } catch (error) {
-                console.error('Error fetching HTML:', error);
             }
         };
 
