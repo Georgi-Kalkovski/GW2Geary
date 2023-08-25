@@ -59,7 +59,7 @@ function generateResetToken() {
   return token;
 }
 
-app.get('/fetch-url', async (req, res) => {
+app.get('/api/fetch-url', async (req, res) => {
   const url = req.query.url;
   try {
     const response = await axios.get(url);
@@ -75,6 +75,7 @@ app.get('/fetch-url', async (req, res) => {
     }
   }
 });
+
 
 // Send Mail Logic
 app.post("/api/reset-password", async (req, res) => {

@@ -13,27 +13,19 @@ function ItemTooltip({ infusion, leng, embed }) {
     useEffect(() => {
         const fetchImageUrl = async () => {
             try {
-                const proxyUrl = 'https://gw2geary.com/fetch-url';
+                const proxyUrl = 'https://gw2geary.com/api/fetch-url';
                 const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(infusion.skin_name ? infusion.skin_name : infusion.name)}`;
 
-                const response = await axios.get(proxyUrl, {
-                    params: {
-                        url: targetUrl
-                    }
-                });
+                const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
+                const html = await response.text();
 
-                const html = response.data;
-                // Regular expression to match <a> with class="image" and <img> tag inside
                 const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
-
-                // Get all matches
                 const matches = [...html.matchAll(regex)];
 
                 if (matches.length >= 2) {
                     const secondMatch = matches[1];
                     const imgSrc = secondMatch[1];
-                    setImageUrl(`https://wiki.guildwars2.com` + imgSrc)
-                } else {
+                    setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
                 }
             } catch (error) {
                 console.error('Error fetching HTML:', error);
