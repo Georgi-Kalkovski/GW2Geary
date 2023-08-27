@@ -18,6 +18,7 @@ const skinsRoutes = require('./skins.routes');
 const specializationsRoutes = require('./specializations.routes');
 const traitsRoutes = require('./traits.routes');
 const worldsRoutes = require('./worlds.routes');
+const wikiImageRoutes = require('./wikiImage.routes');
 
 // Register routes
 router.use('/auth', authRoutes);
@@ -38,5 +39,6 @@ router.use('/skins', skinsRoutes);
 router.use('/specializations', specializationsRoutes);
 router.use('/traits', traitsRoutes);
 router.use('/worlds', worldsRoutes);
+router.use('/wikiImage', wikiImageRoutes);
 
 module.exports = router;

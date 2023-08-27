@@ -7,35 +7,35 @@ import WikiImage from './WikiImage';
 function ItemTooltip({ item, embed }) {
     // console.log('item ', item)
 
-    // const [imageUrl, setImageUrl] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
 
-    // useEffect(() => {
-    //     const fetchImageUrl = async () => {
-    //         if (item) {
-    //             try {
-    //                 const proxyUrl = 'https://gw2geary.com/api/fetch-url';
-    //                 const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(item.skin_name ? item.skin_name : item.name)}`;
+    useEffect(() => {
+        const fetchImageUrl = async () => {
+            if (item) {
+                try {
+                    const proxyUrl = 'https://gw2geary.com/api/wikiImage';
+                    const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(item.skin_name ? item.skin_name : item.name)}`;
                     
-    //                 const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
+                    const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
 
-    //                 const html = await response.text();
+                    const html = await response.text();
 
-    //                 const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
-    //                 const matches = [...html.matchAll(regex)];
+                    const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
+                    const matches = [...html.matchAll(regex)];
 
-    //                 if (matches.length >= 2) {
-    //                     const secondMatch = matches[1];
-    //                     const imgSrc = secondMatch[1];
-    //                     setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Error fetching HTML:', error);
-    //             }
-    //         }
-    //     };
+                    if (matches.length >= 2) {
+                        const secondMatch = matches[1];
+                        const imgSrc = secondMatch[1];
+                        setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
+                    }
+                } catch (error) {
+                    console.error('Error fetching HTML:', error);
+                }
+            }
+        };
 
-    //     fetchImageUrl();
-    // }, [item]);
+        fetchImageUrl();
+    }, [item]);
 
     const {
         getArrowProps,
@@ -83,9 +83,9 @@ function ItemTooltip({ item, embed }) {
                         <br />
 
                         {/* WikiImage HERE */}
-                        {/* {embed !== true &&
+                        {embed !== true &&
                             <WikiImage imageUrl={imageUrl} />
-                        } */}
+                        }
 
                         {/* WEIGHT & TYPE */}
                         <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
