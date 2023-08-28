@@ -124,7 +124,9 @@ function ItemTooltip({ item, embed }) {
                         <br />
 
                         {/* WikiImage HERE */}
-                        <WikiImage imageUrl={imageUrl} />
+                        {embed !== true &&
+                            <WikiImage imageUrl={imageUrl} />
+                        }
 
                         {/* WEIGHT & TYPE */}
                         <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
