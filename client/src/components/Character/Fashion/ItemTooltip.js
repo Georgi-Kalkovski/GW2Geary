@@ -13,24 +13,38 @@ function ItemTooltip({ item, embed }) {
     useEffect(() => {
         const fetchWikiContent = async () => {
             try {
-                const response = await axios.get('/api/wikiImage', {
-                    params: {
-                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}&prop=pageimages&pithumbsize=300&origin=*`
+                if (item) {
+                    const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+                        params: {
+                            action: 'query',
+                            format: 'json',
+                            prop: 'revisions',
+                            titles: item.skin_name ? item.skin_name : item.name,
+                            'prop': 'pageimages',
+                            'pithumbsize': 300,
+                            origin: '*'
+                        }
+                    });
+                    const pageData = response.data.query.pages;
+                    const pageId = Object.keys(pageData)[0];
+                    const thumbnail = pageData[pageId].thumbnail;
+                    const image = thumbnail.source;
+                    if (image) {
+                        setImageUrl(image);
                     }
-                });
-                const pageData = response.data.query.pages;
-                const pageId = Object.keys(pageData)[0];
-                const thumbnail = pageData[pageId].thumbnail;
-                const image = thumbnail.source;
-                if (image) {
-                    setImageUrl(image);
                 }
             } catch (error) {
                 console.error('Error fetching wiki content:', error);
                 try {
-                    const response = await axios.get('/api/wikiImage', {
+                    const response = await axios.get('https://wiki.guildwars2.com/api.php', {
                         params: {
-                            url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}_Skin&prop=pageimages&pithumbsize=300`
+                            action: 'query',
+                            format: 'json',
+                            prop: 'revisions',
+                            titles: item.skin_name ? item.skin_name : item.name,
+                            'prop': 'pageimages',
+                            'pithumbsize': 300,
+                            origin: '*'
                         }
                     });
                     const pageData = response.data.query.pages;
@@ -42,6 +56,28 @@ function ItemTooltip({ item, embed }) {
                     }
                 } catch (error) {
                     console.error('Error fetching wiki content:', error);
+                    try {
+                        const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+                            params: {
+                                action: 'query',
+                                format: 'json',
+                                prop: 'revisions',
+                                titles: (item.skin_name ? item.skin_name : item.name) + '_Skin',
+                                'prop': 'pageimages',
+                                'pithumbsize': 300,
+                                origin: '*'
+                            }
+                        });
+                        const pageData = response.data.query.pages;
+                        const pageId = Object.keys(pageData)[0];
+                        const thumbnail = pageData[pageId].thumbnail;
+                        const image = thumbnail.source;
+                        if (image) {
+                            setImageUrl(image);
+                        }
+                    } catch (error) {
+                        console.error('Error fetching wiki content:', error);
+                    }
                 }
             }
         };

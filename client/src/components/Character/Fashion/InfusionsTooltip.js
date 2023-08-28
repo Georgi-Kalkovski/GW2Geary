@@ -13,17 +13,25 @@ function InfusionTooltip({ infusion, leng, embed }) {
     useEffect(() => {
         const fetchWikiContent = async () => {
             try {
-                const response = await axios.get('/api/wikiImage', {
-                    params: {
-                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${infusion.skin_name ? infusion.skin_name : infusion.name}&prop=pageimages&pithumbsize=300&origin=*`
+                if (infusion) {
+                    const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+                        params: {
+                            action: 'query',
+                            format: 'json',
+                            prop: 'revisions',
+                            titles: infusion.skin_name ? infusion.skin_name : infusion.name,
+                            'prop': 'pageimages',
+                            'pithumbsize': 300,
+                            origin: '*'
+                        }
+                    });
+                    const pageData = response.data.query.pages;
+                    const pageId = Object.keys(pageData)[0];
+                    const thumbnail = pageData[pageId].thumbnail;
+                    const image = thumbnail.source;
+                    if (image) {
+                        setImageUrl(image);
                     }
-                });
-                const pageData = response.data.query.pages;
-                const pageId = Object.keys(pageData)[0];
-                const thumbnail = pageData[pageId].thumbnail;
-                const image = thumbnail.source;
-                if (image) {
-                    setImageUrl(image);
                 }
             } catch (error) {
                 console.error('Error fetching wiki content:', error);
@@ -59,7 +67,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
     const handleLeftClick = (event) => {
         setShowWikiButton(true);
     };
-    
+
     return (
         <React.Fragment key={infusion?.id}>
             {visible && (
@@ -82,6 +90,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
                         }
 
                     </Container>
+
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
             )}
