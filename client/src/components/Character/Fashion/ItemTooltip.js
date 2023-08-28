@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 import WikiImage from './WikiImage';
+import axios from 'axios';
 
 function ItemTooltip({ item, embed }) {
     // console.log('item ', item)
@@ -10,32 +11,43 @@ function ItemTooltip({ item, embed }) {
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
-        const fetchImageUrl = async () => {
-            if (item) {
+        const fetchWikiContent = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/wikiImage', {
+                    params: {
+                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}&prop=pageimages&pithumbsize=300`
+                    }
+                });
+                const pageData = response.data.query.pages;
+                const pageId = Object.keys(pageData)[0];
+                const thumbnail = pageData[pageId].thumbnail;
+                const image = thumbnail.source;
+                if (image) {
+                    setImageUrl(image);
+                }
+            } catch (error) {
+                console.error('Error fetching wiki content:', error);
                 try {
-                    const proxyUrl = 'https://gw2geary.com/api/wikiImage';
-                    const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(item.skin_name ? item.skin_name : item.name)}`;
-                    
-                    const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
-
-                    const html = await response.text();
-
-                    const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
-                    const matches = [...html.matchAll(regex)];
-
-                    if (matches.length >= 2) {
-                        const secondMatch = matches[1];
-                        const imgSrc = secondMatch[1];
-                        setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
+                    const response = await axios.get('http://localhost:3001/api/wikiImage', {
+                        params: {
+                            url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}_Skin&prop=pageimages&pithumbsize=300`
+                        }
+                    });
+                    const pageData = response.data.query.pages;
+                    const pageId = Object.keys(pageData)[0];
+                    const thumbnail = pageData[pageId].thumbnail;
+                    const image = thumbnail.source;
+                    if (image) {
+                        setImageUrl(image);
                     }
                 } catch (error) {
-                    console.error('Error fetching HTML:', error);
+                    console.error('Error fetching wiki content:', error);
                 }
             }
         };
 
-        fetchImageUrl();
-    }, [item]);
+        fetchWikiContent();
+    }, [item?.skin_name, item?.name]);
 
     const {
         getArrowProps,

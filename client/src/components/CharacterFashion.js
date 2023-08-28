@@ -68,7 +68,7 @@ function CharacterFashion() {
                 <nav aria-label="breadcrumb" className="breadcrumb">
                     <ul style={{ listStyleType: "none" }} className='flex center'>
                         <li>
-                            <Link className='nav-a' to="/search">Search</Link>
+                            <Link className='nav-a' to="/">Search</Link>
                         </li>
                         <li className="breadcrumb-item">
                             <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>

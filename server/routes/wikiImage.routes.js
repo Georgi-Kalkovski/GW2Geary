@@ -3,20 +3,14 @@ const axios = require('axios');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const url = req.query.url;
-    try {
-      const response = await axios.get(url);
-      res.send(response.data);
-    } catch (error) {
-      try {
-        const updatedUrl = url + '_Skin';
-        const response = await axios.get(updatedUrl);
-        res.send(response.data);
-      } catch (retryError) {
-        console.error('Error retrying URL with "_Skin":', retryError.message);
-        res.status(500).send('Error fetching URL');
-      }
-    }
-  });
+  try {
+    const apiUrl = req.query.url;
+    const response = await axios.get(apiUrl);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error in proxy server:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
 
 module.exports = router;

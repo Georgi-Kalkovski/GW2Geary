@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 import WikiImage from './WikiImage';
+import axios from 'axios';
 
 function InfusionTooltip({ infusion, leng, embed }) {
     // console.log('item ', item)
@@ -10,32 +11,27 @@ function InfusionTooltip({ infusion, leng, embed }) {
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
-        const fetchImageUrl = async () => {
-            if (infusion) {
-                try {
-                    const proxyUrl = 'https://gw2geary.com/api/wikiImage';
-                    const targetUrl = `https://wiki.guildwars2.com/wiki/${encodeURIComponent(infusion.skin_name ? infusion.skin_name : infusion.name)}`;
-                    console.log(targetUrl)
-                    const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(targetUrl)}`);
-                    console.log(response)
-                    const html = await response.text();
-
-                    const regex = /<a[^>]*class=["']image["'][^>]*>.*?<img[^>]*src=["'](.*?)["'][^>]*>.*?<\/a>/ig;
-                    const matches = [...html.matchAll(regex)];
-
-                    if (matches.length >= 2) {
-                        const secondMatch = matches[1];
-                        const imgSrc = secondMatch[1];
-                        setImageUrl(`https://wiki.guildwars2.com` + imgSrc);
+        const fetchWikiContent = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/wikiImage', {
+                    params: {
+                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${infusion.skin_name ? infusion.skin_name : infusion.name}&prop=pageimages&pithumbsize=300`
                     }
-                } catch (error) {
-                    console.error('Error fetching HTML:', error);
+                });
+                const pageData = response.data.query.pages;
+                const pageId = Object.keys(pageData)[0];
+                const thumbnail = pageData[pageId].thumbnail;
+                const image = thumbnail.source;
+                if (image) {
+                    setImageUrl(image);
                 }
+            } catch (error) {
+                console.error('Error fetching wiki content:', error);
             }
         };
 
-        fetchImageUrl();
-    }, [infusion]);
+        fetchWikiContent();
+    }, [infusion?.skin_name, infusion?.name]);
 
 
     const {
@@ -63,7 +59,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
     const handleLeftClick = (event) => {
         setShowWikiButton(true);
     };
-
+    
     return (
         <React.Fragment key={infusion?.id}>
             {visible && (
@@ -86,7 +82,6 @@ function InfusionTooltip({ infusion, leng, embed }) {
                         }
 
                     </Container>
-
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
             )}
