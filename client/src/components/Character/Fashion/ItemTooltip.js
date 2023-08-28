@@ -13,9 +13,9 @@ function ItemTooltip({ item, embed }) {
     useEffect(() => {
         const fetchWikiContent = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/wikiImage', {
+                const response = await axios.get('/api/wikiImage', {
                     params: {
-                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}&prop=pageimages&pithumbsize=300`
+                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}&prop=pageimages&pithumbsize=300&origin=*`
                     }
                 });
                 const pageData = response.data.query.pages;

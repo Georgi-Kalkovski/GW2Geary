@@ -15,7 +15,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
             try {
                 const response = await axios.get('/api/wikiImage', {
                     params: {
-                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${infusion.skin_name ? infusion.skin_name : infusion.name}&prop=pageimages&pithumbsize=300`
+                        url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${infusion.skin_name ? infusion.skin_name : infusion.name}&prop=pageimages&pithumbsize=300&origin=*`
                     }
                 });
                 const pageData = response.data.query.pages;
