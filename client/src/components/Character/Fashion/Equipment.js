@@ -25,7 +25,7 @@ function Equipment({ items, embed }) {
     }, [items]);
 
     return (<>
-        {isLoading
+        {isLoading && embed !== true
             ? (
                 <div className='logo-equipment-width'>
                     <div className="flex center">
