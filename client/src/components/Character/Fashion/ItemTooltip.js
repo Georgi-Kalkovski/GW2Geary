@@ -11,78 +11,71 @@ function ItemTooltip({ item, embed }) {
     const [imageUrl, setImageUrl] = useState('');
 
     useEffect(() => {
-        const fetchWikiContent = async () => {
+        const fetchWikiImage = async (title) => {
             try {
-                if (item) {
-                    const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                        params: {
-                            action: 'query',
-                            format: 'json',
-                            prop: 'revisions',
-                            titles: item.skin_name ? item.skin_name : item.name,
-                            'prop': 'pageimages',
-                            'pithumbsize': 300,
-                            origin: '*'
-                        }
-                    });
-                    const pageData = response.data.query.pages;
-                    const pageId = Object.keys(pageData)[0];
-                    const thumbnail = pageData[pageId].thumbnail;
-                    const image = thumbnail.source;
-                    if (image) {
-                        setImageUrl(image);
+                const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+                    params: {
+                        action: 'query',
+                        format: 'json',
+                        prop: 'revisions',
+                        titles: title,
+                        prop: 'pageimages',
+                        pithumbsize: 300,
+                        origin: '*'
                     }
+                });
+                const pageData = response.data.query.pages;
+                const pageId = Object.keys(pageData)[0];
+                const thumbnail = pageData[pageId].thumbnail;
+                if (thumbnail.source) {
+                    setImageUrl(thumbnail.source);
                 }
             } catch (error) {
-                console.error('Error fetching wiki content:', error);
-                try {
-                    const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                        params: {
-                            action: 'query',
-                            format: 'json',
-                            prop: 'revisions',
-                            titles: item.skin_name ? item.skin_name : item.name,
-                            'prop': 'pageimages',
-                            'pithumbsize': 300,
-                            origin: '*'
-                        }
-                    });
-                    const pageData = response.data.query.pages;
-                    const pageId = Object.keys(pageData)[0];
-                    const thumbnail = pageData[pageId].thumbnail;
-                    const image = thumbnail.source;
-                    if (image) {
-                        setImageUrl(image);
-                    }
-                } catch (error) {
-                    console.error('Error fetching wiki content:', error);
-                    try {
-                        const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                            params: {
-                                action: 'query',
-                                format: 'json',
-                                prop: 'revisions',
-                                titles: (item.skin_name ? item.skin_name : item.name) + '_Skin',
-                                'prop': 'pageimages',
-                                'pithumbsize': 300,
-                                origin: '*'
-                            }
-                        });
-                        const pageData = response.data.query.pages;
-                        const pageId = Object.keys(pageData)[0];
-                        const thumbnail = pageData[pageId].thumbnail;
-                        const image = thumbnail.source;
-                        if (image) {
-                            setImageUrl(image);
-                        }
-                    } catch (error) {
-                        console.error('Error fetching wiki content:', error);
-                    }
-                }
+                // Handle errors here
             }
         };
 
-        fetchWikiContent();
+        const fetchItemImage = async (title) => {
+
+            try {
+                const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+                    params: {
+                        action: 'query',
+                        format: 'json',
+                        prop: 'revisions',
+                        titles: title,
+                        prop: 'images',
+                        pithumbsize: 300,
+                        origin: '*'
+                    }
+                });
+                const pageData = response.data.query.pages;
+                const image = Object.values(pageData)[0].images?.find(x => x.title.includes('armor') || x.title.includes('weapon')).title;
+                if (image) {
+                    await fetchWikiImage(image);
+                }
+            } catch (error) {
+                // Handle errors here
+            }
+        };
+
+        const fetchItemImages = async () => {
+            if (item) {
+                const skinTitle = item.skin_name || item.name;
+                const skinImageTitle = `${skinTitle} Skin`;
+                const heavyImageTitle = `${skinTitle} (heavy)`;
+
+                await fetchWikiImage(skinTitle);
+                await fetchWikiImage(skinImageTitle);
+                await fetchWikiImage(heavyImageTitle);
+
+                await fetchItemImage(skinTitle);
+                await fetchItemImage(skinImageTitle);
+                await fetchItemImage(heavyImageTitle);
+            }
+        };
+
+        fetchItemImages();
     }, [item?.skin_name, item?.name]);
 
     const {

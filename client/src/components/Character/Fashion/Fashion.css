@@ -1,6 +1,7 @@
 .equipment-fashion {
     min-width: 355px;
     width: 0px;
+    min-height: 565px;
     height: auto;
     padding: 20px 0;
     background-color: #202124;
