@@ -85,9 +85,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
                         </Row>
 
                         {/* WikiImage HERE */}
-                        {embed !== true &&
-                            <WikiImage imageUrl={imageUrl} />
-                        }
+                        <WikiImage imageUrl={imageUrl} />
 
                     </Container>
 
