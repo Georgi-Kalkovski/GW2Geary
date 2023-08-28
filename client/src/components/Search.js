@@ -196,6 +196,11 @@ function Search() {
               <Row className='search-news'>
 
                 <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>28.08.2023</span> -
+                  Now the <span className="yellow-highlight"> fashion mode </span> can preview <span className="yellow-highlight"> wiki images</span>.
+                </div>
+
+                <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
                   Now the user can choose between fashion mode or normal mode preview on the characters.
                   Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
@@ -223,17 +228,6 @@ function Search() {
                   <span className="yellow-highlight"> item</span>
                   , <span className="yellow-highlight">skill </span>
                   or <span className="yellow-highlight">trait</span>.
-                </div>
-
-                <div >
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>19.07.2023</span> -
-                  <span > Added a switch to <span className="off-text">hide</span>
-                    /<span className="yellow-highlight">show </span>
-                    character's <span className="yellow-highlight">prefixes</span>
-                    , <span className="yellow-highlight">runes</span>
-                    , <span className="yellow-highlight">sigils </span>
-                    and <span className="yellow-highlight">infusions</span>.
-                  </span>
                 </div>
 
               </Row>

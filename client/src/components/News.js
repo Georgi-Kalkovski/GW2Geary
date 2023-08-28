@@ -6,6 +6,14 @@ function News() {
             <div>
 
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>28.08.2023</h3>
+                    <div className="line"></div>
+                    <div>Now the <span className="yellow-highlight"> fashion mode </span> can preview <span className="yellow-highlight"> wiki images</span>.
+                    </div>
+                </div>
+
+                <br />
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>18.08.2023</h3>
                     <div className="line"></div>
                     <div>Now the user can choose between fashion mode or normal mode preview on the characters.
