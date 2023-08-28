@@ -28,7 +28,7 @@ function ItemTooltip({ item, embed }) {
             } catch (error) {
                 console.error('Error fetching wiki content:', error);
                 try {
-                    const response = await axios.get('https://gw2geary.com/api/wikiImage', {
+                    const response = await axios.get('/api/wikiImage', {
                         params: {
                             url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${item.skin_name ? item.skin_name : item.name}_Skin&prop=pageimages&pithumbsize=300`
                         }

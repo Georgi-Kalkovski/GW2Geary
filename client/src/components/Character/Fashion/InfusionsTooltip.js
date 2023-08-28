@@ -13,7 +13,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
     useEffect(() => {
         const fetchWikiContent = async () => {
             try {
-                const response = await axios.get('https://gw2geary.com/api/wikiImage', {
+                const response = await axios.get('/api/wikiImage', {
                     params: {
                         url: `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&titles=${infusion.skin_name ? infusion.skin_name : infusion.name}&prop=pageimages&pithumbsize=300`
                     }
