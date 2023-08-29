@@ -6,8 +6,9 @@ import InfusionsTooltip from './InfusionsTooltip';
 import '../Equipment/Equipment.css';
 import Cog from '../../../cog.svg';
 import Dragon from '../../../dragon.svg';
+import ChatLinks from './ChatLinks';
 
-function Equipment({ items, embed }) {
+function Equipment({ items, embed, prof }) {
     const infusions = [];
     for (const item of items) {
         if (item.infusions.length > 0) {
@@ -98,6 +99,9 @@ function Equipment({ items, embed }) {
                             ))}
                         </Col>
                     </Container>
+                    {/* {!embed &&
+                        <ChatLinks items={items} prof={prof} />
+                    } */}
                 </Container>
             )
         }
