@@ -184,7 +184,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         <button className={`${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setDropdownTriggerRef}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
-        {dropdownVisible && (
+        {/* {dropdownVisible && (
           <div
             ref={setDropdownTooltipRef}
             {...getDropdownTooltipProps({ className: 'tooltip-container equip-tooltip dropdown-popup' })}
@@ -196,7 +196,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             </div>
             <div {...getDropdownArrowProps({ className: 'tooltip-arrow' })} />
           </div>
-        )}
+        )} */}
         {isOpen && (
           <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`} style={{ zIndex: '7' }}>
             {char?.equipment_tabs.map((equip) => (
@@ -223,7 +223,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               onChange={toggleFashion} />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
-          {switchVisible && (
+          {/* {switchVisible && (
             <div
               ref={setSwitchTooltipRef}
               {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
@@ -235,7 +235,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               </div>
               <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
             </div>
-          )}
+          )} */}
         </div>
         {/* Prefixes Switch */}
         <div className='flex' style={{ marginRight: '20px' }}>
@@ -247,7 +247,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               onChange={togglePrefixes} />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
-          {switchVisible && (
+          {/* {switchVisible && (
             <div
               ref={setSwitchTooltipRef}
               {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
@@ -259,7 +259,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               </div>
               <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
             </div>
-          )}
+          )} */}
         </div>
         {/* Skins Switch */}
         <div className='flex'>
@@ -271,7 +271,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               onChange={toggleSlider} />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
           </label>
-          {switch2Visible && (
+          {/* {switch2Visible && (
             <div
               ref={setSwitch2TooltipRef}
               {...getSwitch2TooltipProps({ className: 'tooltip-container equip-tooltip' })}
@@ -283,7 +283,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               </div>
               <div {...getSwitch2ArrowProps({ className: 'tooltip-arrow' })} />
             </div>
-          )}
+          )} */}
         </div>
       </div>
       <Equipment

@@ -32,7 +32,7 @@ function CharacterShareLink({ buildInput, shareLink }) {
                     Copy Link
                 </button>
 
-                {visible && (
+                {/* {visible && (
                     <div
                         ref={setTooltipRef}
                         {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
@@ -43,7 +43,7 @@ function CharacterShareLink({ buildInput, shareLink }) {
                         </div>
                         <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                     </div>
-                )}
+                )} */}
             </div>
         }
     </>)

@@ -106,7 +106,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
                     <Spec spec={spec} prof={char.profession} />
                 </div>
 
-                {visible && (
+                {/* {visible && (
                     <div
                         ref={setTooltipRef}
                         {...getTooltipProps({ className: 'tooltip-container attribute-popup dropdown-popup' })}
@@ -117,7 +117,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
                         </div>
                         <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                     </div>
-                )}
+                )} */}
                 {isOpen && (
                     <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border`}>
                         {char.build_tabs.map((buildTab) => (

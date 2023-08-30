@@ -126,7 +126,7 @@ function Template({ buildInput }) {
                 Copy Build
             </button>
 
-            {visible && (
+            {/* {visible && (
                 <div
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container attribute-popup' })}
@@ -137,7 +137,7 @@ function Template({ buildInput }) {
                     </div>
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
-            )}
+            )} */}
         </div>
     );
 }
