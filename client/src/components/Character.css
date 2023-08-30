@@ -419,7 +419,7 @@ input:checked+.slider:before {
   }
 
   .build {
-    height: 690px;
+    height: 700px;
     padding: 20px 0 !important;
   }
 

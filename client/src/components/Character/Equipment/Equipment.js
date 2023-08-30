@@ -6,6 +6,7 @@ import './Equipment.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 import EquipmentStats from './EquipmentStats';
+import ChatLinks from './ChatLinks';
 
 function Equipment({ items, prof, slider, build, prefixSlider }) {
     // console.log('items', items)
@@ -32,9 +33,9 @@ function Equipment({ items, prof, slider, build, prefixSlider }) {
                 </div>
             ) : (
                 <>
-                {prefixSlider && 
-                <EquipmentStats items={items} prof={prof} />
-                }
+                    {prefixSlider &&
+                        <EquipmentStats items={items} prof={prof} />
+                    }
                     <Container className="equipment-box">
 
                         <>
@@ -90,6 +91,7 @@ function Equipment({ items, prof, slider, build, prefixSlider }) {
                         </>
 
                     </Container>
+                    <ChatLinks items={items} prof={prof} fashion={false} slider={slider} />
                 </>
             )
         }

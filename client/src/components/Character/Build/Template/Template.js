@@ -123,7 +123,7 @@ function Template({ buildInput }) {
                 onClick={copyText}
                 style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                 ref={setTriggerRef}>
-                Copy
+                Copy Build
             </button>
 
             {visible && (

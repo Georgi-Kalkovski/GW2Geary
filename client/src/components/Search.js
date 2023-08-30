@@ -196,6 +196,15 @@ function Search() {
               <Row className='search-news'>
 
                 <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>30.08.2023</span> -
+                  Added a button/s allowing the users to
+                  <span className="yellow-highlight"> copy</span> the
+                  <span className="yellow-highlight"> chat codes</span> of the
+                  <span className="yellow-highlight"> items</span> or their
+                  <span className="yellow-highlight"> skins</span>.
+                </div>
+
+                <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>28.08.2023</span> -
                   Now the <span className="yellow-highlight"> fashion mode </span> can preview <span className="yellow-highlight"> wiki images</span>.
                 </div>
@@ -218,16 +227,6 @@ function Search() {
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>31.07.2023</span> -
                   Now the user can preview the dyes of an item.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>24.07.2023</span> -
-                  Now the user can have direct link to
-                  <span className="yellow-highlight"> GW2 Wiki </span>
-                  by clicking on the character's
-                  <span className="yellow-highlight"> item</span>
-                  , <span className="yellow-highlight">skill </span>
-                  or <span className="yellow-highlight">trait</span>.
                 </div>
 
               </Row>

@@ -6,7 +6,7 @@ import InfusionsTooltip from './InfusionsTooltip';
 import '../Equipment/Equipment.css';
 import Cog from '../../../cog.svg';
 import Dragon from '../../../dragon.svg';
-import ChatLinks from './ChatLinks';
+import ChatLinks from '../Equipment/ChatLinks';
 
 function Equipment({ items, embed, prof }) {
     const infusions = [];
@@ -99,9 +99,9 @@ function Equipment({ items, embed, prof }) {
                             ))}
                         </Col>
                     </Container>
-                    {/* {!embed &&
-                        <ChatLinks items={items} prof={prof} />
-                    } */}
+                    {!embed &&
+                        <ChatLinks items={items} prof={prof} fashion={true} />
+                    }
                 </Container>
             )
         }
