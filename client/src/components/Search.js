@@ -215,20 +215,6 @@ function Search() {
                   Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
                 </div>
 
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>04.08.2023</span> -
-                  Added information about the <span style={{ color: '#ff1e1e' }}>missing prefixes</span>,
-                  <span style={{ color: '#ff1e1e' }}> runes</span>,
-                  <span style={{ color: '#ff1e1e' }}> sigils</span> and
-                  <span style={{ color: '#ff1e1e' }}> infusions </span>
-                  to the <span className="yellow-highlight"> Stats </span> menu.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>31.07.2023</span> -
-                  Now the user can preview the dyes of an item.
-                </div>
-
               </Row>
             </Col>
           </Container>
