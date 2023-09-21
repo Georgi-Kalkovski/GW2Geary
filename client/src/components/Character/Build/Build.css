@@ -43,6 +43,7 @@
 
 .inactive-trait {
     opacity: 0.5;
+    filter: brightness(50%);
 }
 
 .skills-center {
