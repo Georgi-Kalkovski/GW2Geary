@@ -180,6 +180,7 @@
 
 .selected-span {
     margin-right: 10px;
+    margin-left: 10px;
     cursor: pointer;
     position: relative;
 }
