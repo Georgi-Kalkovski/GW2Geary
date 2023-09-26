@@ -198,8 +198,6 @@ function Search() {
         }
       </div>
 
-      
-
       {/* Search Button Menu*/}
       {isOpen && (
         <SearchButton
@@ -209,7 +207,6 @@ function Search() {
           selectedProfessionUp={handleProfessionSelection}
         />
       )}
-
 
       <div className='flex center' style={{ marginTop: '0px', marginBottom: '5px' }}>
         {selectedGender && (
