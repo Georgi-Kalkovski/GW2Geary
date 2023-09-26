@@ -10,6 +10,22 @@ body {
   padding: 0;
 }
 
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -154,16 +170,18 @@ label {
 }
 
 .search-input {
+  font-family: 'Jost';
   width: 16em;
   background-color: #202124;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 0px 10px;
   margin: 5px;
   font-size: 1.5em;
 }
 
 .search-input::placeholder {
+  font-family: 'Jost';
   color: rgb(163, 163, 163);
   font-size: 0.9em;
   /* Change the color to your desired color */
@@ -441,9 +459,8 @@ p span {
   margin-bottom: 20px;
 }
 
-iframe
-{
-    display: none;
+iframe {
+  display: none;
 }
 
 .news-box {
@@ -481,6 +498,7 @@ body.light-theme .equipment,
 body.light-theme .build,
 body.light-theme .template-text,
 body.light-theme .basic-button,
+body.light-theme .basic-button-search,
 body.light-theme .dropdown>ul>li,
 body.light-theme .form-control,
 body.light-theme .footer,
@@ -530,6 +548,7 @@ body.light-theme .up-down-arrow {
 body.light-theme .pagination-item:hover,
 body.light-theme .center-class:hover,
 body.light-theme .basic-button:hover,
+body.light-theme .basic-button-search:hover,
 body.light-theme .dropdown>ul>li:hover {
   background-color: #b9b9b9;
   transition: background-color 0.2s;

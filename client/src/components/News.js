@@ -6,12 +6,25 @@ function News() {
             <div>
 
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>26.09.2023</h3>
+                    <div className="line"></div>
+                    <div>
+                        Added a <span className="yellow-highlight"> button </span>
+                        on the right of the <span className="yellow-highlight"> search bar </span>
+                        allowing the users to search by
+                        <span className="yellow-highlight"> race</span> and
+                        <span className="yellow-highlight"> profession</span>.
+                    </div>
+                </div>
+
+                <br />
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>30.08.2023</h3>
                     <div className="line"></div>
-                    <div>Added a button/s allowing the users to 
-                        <span className="yellow-highlight"> copy</span> the 
-                        <span className="yellow-highlight"> chat codes</span> of the 
-                        <span className="yellow-highlight"> items </span> 
+                    <div>Added a button/s allowing the users to
+                        <span className="yellow-highlight"> copy</span> the
+                        <span className="yellow-highlight"> chat codes</span> of the
+                        <span className="yellow-highlight"> items </span>
                         or their <span className="yellow-highlight">skins</span>.
                     </div>
                 </div>

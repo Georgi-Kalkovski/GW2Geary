@@ -6,17 +6,34 @@ import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
 import './Classes.css';
 import './Search.css';
+import SearchButton from './Search/SearchButton';
 
 function Search() {
   const [accounts, setAccounts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [accountsPage, setAccountsPage] = useState(1);
   const [charactersPage, setCharactersPage] = useState(1);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
 
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedRace, setSelectedRace] = useState('');
+  const [selectedProfession, setSelectedProfession] = useState('');
+
   function getRandomSort() {
     return Math.random() - 0.5;
+  }
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const toggleX = () => {
+    setSearchTerm('');
+    setSelectedGender('');
+    setSelectedRace('');
+    setSelectedProfession('');
   }
 
   useEffect(() => {
@@ -96,13 +113,25 @@ function Search() {
         const charactersWithMatchingNames = account.characters.filter((character) =>
           character.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        acc.push(...charactersWithMatchingNames);
+        const filteredCharacters = charactersWithMatchingNames.filter((character) => {
+          if (selectedGender && character.gender !== selectedGender) {
+            return false;
+          }
+          if (selectedRace && character.race !== selectedRace) {
+            return false;
+          }
+          if (selectedProfession && character.profession !== selectedProfession) {
+            return false;
+          }
+          return true;
+        });
+        acc.push(...filteredCharacters);
       }
       return acc;
     }, []);
 
     setFilteredCharacters(filteredCharacters.sort(customSortCharacters));
-  }, [accounts, searchTerm]);
+  }, [accounts, searchTerm, selectedGender, selectedRace, selectedProfession]);
 
   const itemsPerPage = 15;
 
@@ -117,9 +146,22 @@ function Search() {
   const totalPagesAccounts = Math.ceil(filteredAccounts.length / itemsPerPage);
   const totalPagesCharacters = Math.ceil(filteredCharacters.length / itemsPerPage);
 
+  const handleGenderSelection = (gender) => {
+    setSelectedGender(gender);
+  };
+
+  const handleRaceSelection = (race) => {
+    setSelectedRace(race);
+  };
+
+  const handleProfessionSelection = (profession) => {
+    setSelectedProfession(profession);
+  };
+
   return (
     <>
       <div className="search-container">
+        {/* Search Input */}
         <input
           className="search-input"
           type="text"
@@ -128,29 +170,92 @@ function Search() {
           onChange={handleSearch}
           key="search-input"
         />
+        {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ?
+          <button className='basic-button x-button' onClick={toggleX} >
+            X
+          </button> :
+          <button className='basic-button x-button' style={{ visibility: 'hidden' }} onClick={toggleX} >
+            X
+          </button>
+        }
+        {/* Search Button */}
+        {!isOpen
+          ? (
+            <button className='basic-button plus-minus-button' onClick={toggleMenu} >
+              +
+            </button>
+          ) : (
+            <button className='basic-button plus-minus-button' onClick={toggleMenu} >
+              -
+            </button>
+          )
+        }
       </div>
-      {searchTerm !== '' ? (
+
+      <div className='flex center' style={{ marginTop: '-10px', marginBottom: '5px' }}>
+        {selectedGender && (
+          <span
+            className="selected-span nav-a"
+            onClick={() => setSelectedGender('')}
+          >
+            {selectedGender}
+          </span>
+        )}
+        {selectedRace && (
+          <span
+            className="selected-span"
+            onClick={() => setSelectedRace('')}
+          >
+            {selectedRace}
+          </span>
+        )}
+        {selectedProfession && (
+          <span
+            className="selected-span"
+            onClick={() => setSelectedProfession('')}
+          >
+            {selectedProfession}
+          </span>
+        )}
+      </div>
+
+      {/* Search Button Menu*/}
+      {isOpen && (
+        <SearchButton
+          isOpen={isOpen}
+          selectedGenderUp={handleGenderSelection}
+          selectedRaceUp={handleRaceSelection}
+          selectedProfessionUp={handleProfessionSelection}
+        />
+      )}
+
+      {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
         <React.Fragment key={`home-fragment-${searchTerm}`}>
-          <Container className="characters" key={`accounts-container-${searchTerm}`}>
-            {displayedAccounts.length > 0 ? (
-              displayedAccounts.map((account, index) => (
-                <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
-                  <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
-                    <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
-                      <Col>
-                        <Row className="center-class accounts-hover">
-                          <div className="accounts-name">{account.accountName}</div>
-                        </Row>
-                      </Col>
-                    </Container>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <div key="no-matching-accounts">No matching accounts & characters found.</div>
-            )}
-          </Container>
-          <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
+          {searchTerm !== '' && (
+            <>
+              <Container className="characters" key={`accounts-container-${searchTerm}`}>
+                {displayedAccounts.length > 0 ? (
+                  displayedAccounts.map((account, index) => (
+                    <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
+                      <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
+                        <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
+                          <Col>
+                            <Row className="center-class accounts-hover">
+                              <div className="accounts-name">{account.accountName}</div>
+                            </Row>
+                          </Col>
+                        </Container>
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <div key="no-matching-accounts">No matching accounts & characters found.</div>
+                )}
+              </Container>
+              <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
+
+            </>
+          )}
           <div className="characters" key={`character-div-${searchTerm}`}>
             <React.Fragment key={`character-fragment-${searchTerm}`}>
               {displayedCharacters.map((character, index) => (
@@ -187,13 +292,21 @@ function Search() {
               </Row>
             </Col>
           </Container>
-
           <Container className="flex center">
             <Col className="home-empty-search-box">
               <Row className='home-welcome' style={{ fontSize: '25px' }}>
                 Latest News
               </Row>
               <Row className='search-news'>
+
+                <div>
+                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>26.09.2023</span> -
+                  Added a <span className="yellow-highlight"> button </span>
+                  on the right of the <span className="yellow-highlight"> search bar </span>
+                  allowing the users to search by
+                  <span className="yellow-highlight"> race</span> and
+                  <span className="yellow-highlight"> profession</span>.
+                </div>
 
                 <div>
                   <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>30.08.2023</span> -
@@ -218,7 +331,6 @@ function Search() {
               </Row>
             </Col>
           </Container>
-
           <Container className="flex center">
             <Col className="home-empty-search-box" style={{ width: 'auto', padding: '10px 10px' }}>
               <Row>Аccounts: <span className='yellow-highlight'>{accounts.length}</span> | Characters: <span className='yellow-highlight'>{accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0)}</span></Row>
