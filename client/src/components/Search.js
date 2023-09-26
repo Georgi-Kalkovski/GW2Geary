@@ -148,14 +148,20 @@ function Search() {
 
   const handleGenderSelection = (gender) => {
     setSelectedGender(gender);
+    setAccountsPage(1);
+    setCharactersPage(1);
   };
 
   const handleRaceSelection = (race) => {
     setSelectedRace(race);
+    setAccountsPage(1);
+    setCharactersPage(1);
   };
 
   const handleProfessionSelection = (profession) => {
     setSelectedProfession(profession);
+    setAccountsPage(1);
+    setCharactersPage(1);
   };
 
   return (
@@ -192,7 +198,20 @@ function Search() {
         }
       </div>
 
-      <div className='flex center' style={{ marginTop: '-10px', marginBottom: '5px' }}>
+      
+
+      {/* Search Button Menu*/}
+      {isOpen && (
+        <SearchButton
+          isOpen={isOpen}
+          selectedGenderUp={handleGenderSelection}
+          selectedRaceUp={handleRaceSelection}
+          selectedProfessionUp={handleProfessionSelection}
+        />
+      )}
+
+
+      <div className='flex center' style={{ marginTop: '0px', marginBottom: '5px' }}>
         {selectedGender && (
           <span
             className="selected-span nav-a"
@@ -218,16 +237,6 @@ function Search() {
           </span>
         )}
       </div>
-
-      {/* Search Button Menu*/}
-      {isOpen && (
-        <SearchButton
-          isOpen={isOpen}
-          selectedGenderUp={handleGenderSelection}
-          selectedRaceUp={handleRaceSelection}
-          selectedProfessionUp={handleProfessionSelection}
-        />
-      )}
 
       {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
         <React.Fragment key={`home-fragment-${searchTerm}`}>
