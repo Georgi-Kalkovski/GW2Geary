@@ -18,14 +18,14 @@ function SearchSubbutton({ active, img, text, onClick }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {isHovered && active === text
+            {/* {isHovered && active === text
                 ? <div style={{fontSize:'35px'}}>✖</div>
-                : (
-                    <div>
-                        <div><img src={img} alt="" /></div>
-                        <div>{text}</div>
-                    </div>
-                )}
+                : ( */}
+            <div>
+                <div><img src={img} alt="" /></div>
+                <div>{text}</div>
+            </div>
+            {/* )} */}
         </button>
     );
 }
