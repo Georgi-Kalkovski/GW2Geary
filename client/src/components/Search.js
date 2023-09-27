@@ -4,9 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
 import CharacterPreview from './CharacterPreview';
 import Pagination from './Search/Pagination';
+import SearchMenu from './Search/SearchMenu';
 import './Classes.css';
 import './Search.css';
-import SearchButton from './Search/SearchButton';
 
 function Search() {
   const [accounts, setAccounts] = useState([]);
@@ -147,21 +147,39 @@ function Search() {
   const totalPagesCharacters = Math.ceil(filteredCharacters.length / itemsPerPage);
 
   const handleGenderSelection = (gender) => {
-    setSelectedGender(gender);
-    setAccountsPage(1);
-    setCharactersPage(1);
+    if (gender === selectedGender) {
+      setSelectedGender('');
+      setAccountsPage(1);
+      setCharactersPage(1);
+    } else {
+      setSelectedGender(gender);
+      setAccountsPage(1);
+      setCharactersPage(1);
+    }
   };
 
   const handleRaceSelection = (race) => {
-    setSelectedRace(race);
-    setAccountsPage(1);
-    setCharactersPage(1);
+    if (race === selectedRace) {
+      setSelectedRace('');
+      setAccountsPage(1);
+      setCharactersPage(1);
+    } else {
+      setSelectedRace(race);
+      setAccountsPage(1);
+      setCharactersPage(1);
+    }
   };
 
   const handleProfessionSelection = (profession) => {
-    setSelectedProfession(profession);
-    setAccountsPage(1);
-    setCharactersPage(1);
+    if (profession === selectedProfession) {
+      setSelectedProfession('');
+      setAccountsPage(1);
+      setCharactersPage(1);
+    } else {
+      setSelectedProfession(profession);
+      setAccountsPage(1);
+      setCharactersPage(1);
+    }
   };
 
   return (
@@ -187,24 +205,26 @@ function Search() {
         {/* Search Button */}
         {!isOpen
           ? (
-            <button className='basic-button plus-minus-button' onClick={toggleMenu} >
+            <button className='basic-button-search plus-minus-button' onClick={toggleMenu} >
               +
             </button>
           ) : (
-            <button className='basic-button plus-minus-button' onClick={toggleMenu} >
+            <button className='basic-button-search plus-minus-button active' onClick={toggleMenu} >
               -
             </button>
           )
         }
       </div>
-
       {/* Search Button Menu*/}
       {isOpen && (
-        <SearchButton
+        <SearchMenu
           isOpen={isOpen}
           selectedGenderUp={handleGenderSelection}
           selectedRaceUp={handleRaceSelection}
           selectedProfessionUp={handleProfessionSelection}
+          selectedGender={selectedGender}
+          selectedRace={selectedRace}
+          selectedProfession={selectedProfession}
         />
       )}
 
@@ -217,7 +237,7 @@ function Search() {
             {selectedGender}
           </span>
         )}
-        {selectedRace && (
+        {selectedRace && !isOpen && (
           <span
             className="selected-span"
             onClick={() => setSelectedRace('')}
@@ -225,7 +245,7 @@ function Search() {
             {selectedRace}
           </span>
         )}
-        {selectedProfession && (
+        {selectedProfession && !isOpen && (
           <span
             className="selected-span"
             onClick={() => setSelectedProfession('')}

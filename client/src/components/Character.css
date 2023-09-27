@@ -65,6 +65,7 @@
 
 .dropdown-menu li:hover {
   background-color: #ddd;
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .go-back-button {
