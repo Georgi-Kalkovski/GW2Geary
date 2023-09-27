@@ -480,4 +480,7 @@ input:checked+.slider:before {
     font-size: 13px;
     padding: 5px 5px 0px 0px;
   }
+  .thin-hr {
+    top: 40%;
+}
 }

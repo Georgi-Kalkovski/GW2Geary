@@ -7,6 +7,8 @@ import Pagination from './Search/Pagination';
 import SearchMenu from './Search/SearchMenu';
 import './Classes.css';
 import './Search.css';
+import SearchAdd from './Search/search-add.svg';
+import SearchAddWhite from './Search/search-add-white.svg';
 
 function Search() {
   const [accounts, setAccounts] = useState([]);
@@ -206,11 +208,11 @@ function Search() {
         {!isOpen
           ? (
             <button className='basic-button-search plus-minus-button' onClick={toggleMenu} >
-              +
+              <img src={SearchAddWhite} style={{ width: "25px", display: "flex" }} alt="" />
             </button>
           ) : (
             <button className='basic-button-search plus-minus-button active' onClick={toggleMenu} >
-              -
+              <img src={SearchAddWhite} style={{ width: "25px", display: "flex" }} alt="" />
             </button>
           )
         }
@@ -237,7 +239,7 @@ function Search() {
             {selectedGender}
           </span>
         )}
-        {selectedRace && (
+        {selectedRace && !isOpen && (
           <span
             className="selected-span"
             onClick={() => setSelectedRace('')}
@@ -245,7 +247,7 @@ function Search() {
             {selectedRace}
           </span>
         )}
-        {selectedProfession && (
+        {selectedProfession && !isOpen && (
           <span
             className="selected-span"
             onClick={() => setSelectedProfession('')}
