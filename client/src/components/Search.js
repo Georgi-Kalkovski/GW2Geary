@@ -237,7 +237,7 @@ function Search() {
             {selectedGender}
           </span>
         )}
-        {selectedRace && !isOpen && (
+        {selectedRace && (
           <span
             className="selected-span"
             onClick={() => setSelectedRace('')}
@@ -245,7 +245,7 @@ function Search() {
             {selectedRace}
           </span>
         )}
-        {selectedProfession && !isOpen && (
+        {selectedProfession && (
           <span
             className="selected-span"
             onClick={() => setSelectedProfession('')}
