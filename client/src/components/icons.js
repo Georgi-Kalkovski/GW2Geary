@@ -13,6 +13,21 @@ const wikiBigRacesIcons = {
     Human: Human_Big,
 };
 
+// Wiki Big Races Colored Icon
+import Asura from './img/asura.png';
+import Charr from './img/charr.png';
+import Sylvari from './img/sylvari.png';
+import Norn from './img/norn.png';
+import Human from './img/human.png';
+
+const wikiBigRacesColoredIcons = {
+    Asura: Asura,
+    Charr: Charr,
+    Sylvari: Sylvari,
+    Norn: Norn,
+    Human: Human,
+};
+
 // Wiki Big Profession Icons
 
 import Elementalist_Icon from './img/Elementalist_icon.png';
@@ -66,4 +81,5 @@ export {
     wikiBigRacesIcons,
     wikiBigProfessionIcons,
     wikiSmallProfessionIcons,
+    wikiBigRacesColoredIcons,
 };
