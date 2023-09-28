@@ -294,12 +294,12 @@ exports.updateApiKeyStatus = async (req, res) => {
 
 //     let startProcessing = false;
 //     for (let user of users) {
-//       if (user.username === 'cynni') {
-//         startProcessing = true;
-//       }
-//       if (!startProcessing) {
-//         continue;
-//       }
+//       // if (user.username === 'cynni') {
+//       //   startProcessing = true;
+//       // }
+//       // if (!startProcessing) {
+//       //   continue;
+//       // }
 
 //       // Loop over each API key of the user
 //       for (let apiKeyData of user.apiKeys) {
@@ -323,6 +323,7 @@ exports.updateApiKeyStatus = async (req, res) => {
 //         const characterData = charactersResponse.data.map(character => ({
 //           name: character.name,
 //           profession: character.profession,
+//           race:character.race,
 //           level: character.level,
 //           gender: character.gender,
 //         }));
@@ -346,7 +347,6 @@ exports.updateApiKeyStatus = async (req, res) => {
 //     res.status(500).send({ message: err.message });
 //   }
 // };
-
 
 // Delete API key
 exports.deleteApiKey = async (req, res) => {

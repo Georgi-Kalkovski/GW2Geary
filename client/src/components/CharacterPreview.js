@@ -5,6 +5,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import AuthService from '../services/auth.service';
 
+import Male from './img/male.png';
+import Female from './img/female.png';
+
 function CharacterPreview({ character, apiKey }) {
     const Icon = wikiBigProfessionIcons[character.profession];
     const [isVisible, setIsVisible] = useState(null);
@@ -72,11 +75,13 @@ function CharacterPreview({ character, apiKey }) {
                     </Row>
                     <Row className='flex space-between'>
                         <Col style={{ fontSize: '15px' }}>
-                            <Row >
+                            <Row className='flex'>
                                 lvl. {character.level}
+                                {/* lvl. {character.level} {character.gender.toLowerCase()} */}
+                                {/* lvl. {character.level} <img style={{ width: '20px', height: '20px', marginTop: '1px', marginLeft: '4px' }} src={character.gender === 'Male' ? Male : Female} alt="" /> */}
                             </Row>
                             <Row >
-                                {character.race}
+                            {character.gender} {character.race}
                             </Row>
                             <Row>{character.profession}</Row>
                         </Col>
