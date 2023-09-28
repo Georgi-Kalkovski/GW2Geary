@@ -69,5 +69,10 @@ router.put(
   controller.updateCharacterStatus
 );
 
+// router.get(
+//   "/refreshAllUserData",
+//   controller.refreshAllUserData
+// );
+
 module.exports = router;
 

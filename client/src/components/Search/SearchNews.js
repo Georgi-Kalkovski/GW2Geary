@@ -9,6 +9,12 @@ function SearchNews() {
                 <Row className='search-news'>
 
                     <div>
+                        <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>28.09.2023</span> -
+                        <span style={{ color: '#aa0404' }}> Removed invalid old API keys</span>.
+                        If anyone is affected please register a new API key.
+                    </div>
+
+                    <div>
                         <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>26.09.2023</span> -
                         Added a <span className="yellow-highlight"> button </span>
                         on the right of the <span className="yellow-highlight"> search bar </span>

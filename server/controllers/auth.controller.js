@@ -285,6 +285,69 @@ exports.updateApiKeyStatus = async (req, res) => {
   }
 };
 
+// Refresh all user data
+// exports.refreshAllUserData = async (req, res) => {
+//   try {
+//     // Fetch all users
+//     const users = await User.find({});
+//     // Loop over each user
+
+//     let startProcessing = false;
+//     for (let user of users) {
+//       if (user.username === 'cynni') {
+//         startProcessing = true;
+//       }
+//       if (!startProcessing) {
+//         continue;
+//       }
+
+//       // Loop over each API key of the user
+//       for (let apiKeyData of user.apiKeys) {
+
+//         // Fetch character data
+//         await new Promise(resolve => setTimeout(resolve, 1000)); // Add timeout here
+//         const charactersResponse = await axios.get(`https://api.guildwars2.com/v2/characters?ids=all&access_token=${apiKeyData._id}`);
+//         if (charactersResponse.status !== 200 || charactersResponse.data.text === "invalid key") {
+//           console.error(`Error fetching character data for user ${user.username}: ${charactersResponse.status} - ${charactersResponse.statusText}`);
+//           console.error(charactersResponse.data); // Log the error response
+//           continue; // Skip to the next API key if this one is invalid
+//         }
+//         await new Promise(resolve => setTimeout(resolve, 1000)); // Add timeout here
+//         const accountResponse = await axios.get(`https://api.guildwars2.com/v2/account?access_token=${apiKeyData._id}`);
+//         if (accountResponse.status !== 200 || accountResponse.data.text === "invalid key") {
+//           console.error(`Error fetching account data for user ${user.username}: ${accountResponse.status} - ${accountResponse.statusText}`);
+//           console.error(accountResponse.data); // Log the error response
+//           continue; // Skip to the next API key if this one is invalid
+//         }
+//         const account = accountResponse.data;
+//         const characterData = charactersResponse.data.map(character => ({
+//           name: character.name,
+//           profession: character.profession,
+//           level: character.level,
+//           gender: character.gender,
+//         }));
+
+//         // Update API key data
+//         apiKeyData.accountName = account.name;
+//         apiKeyData.characters = characterData;
+
+//         // console.log the result of the save
+//         console.log("Updated user data:", user.username, account.name);
+//       }
+//       // Save the updated user data outside the inner loop
+//       await user.save();
+//     }
+
+//     // Send response
+//     res.status(200).send({
+//       message: "All user data refreshed successfully!"
+//     });
+//   } catch (err) {
+//     res.status(500).send({ message: err.message });
+//   }
+// };
+
+
 // Delete API key
 exports.deleteApiKey = async (req, res) => {
   try {

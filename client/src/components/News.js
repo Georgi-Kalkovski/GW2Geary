@@ -6,6 +6,15 @@ function News() {
             <div>
 
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>28.09.2023</h3>
+                    <div className="line"></div>
+                    <div>
+                        <span style={{ color: '#aa0404' }}> Removed invalid old API keys</span>.
+                        If anyone is affected please register a new API key.
+                    </div>
+                </div>
+
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>26.09.2023</h3>
                     <div className="line"></div>
                     <div>
