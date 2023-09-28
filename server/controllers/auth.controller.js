@@ -201,7 +201,8 @@ exports.createApiKey = async (req, res) => {
       name: character.name,
       race: character.race,
       profession: character.profession,
-      level: character.level
+      level: character.level,
+      gender: character.gender
     }));
     const user = await User.findById(userId);
     if (!user) {

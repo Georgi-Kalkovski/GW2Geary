@@ -36,6 +36,7 @@ const UserSchema = new mongoose.Schema({
           race: String,
           profession: String,
           level: Number,
+          gender: String,
           active: {
             type: Boolean,
             default: true,
