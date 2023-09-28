@@ -1,9 +1,8 @@
 import React from 'react';
-import { wikiBigProfessionIcons } from "../icons";
-import { wikiBigRacesColoredIcons } from "../icons";
+import { wikiBigProfessionIcons, wikiBigRacesColoredIcons, genderIcons } from "../icons";
 
 function SearchSubbutton({ active, text, onClick }) {
-    const Icon = wikiBigProfessionIcons[text] ? wikiBigProfessionIcons[text] : wikiBigRacesColoredIcons[text];
+    const Icon = wikiBigProfessionIcons[text] || wikiBigRacesColoredIcons[text] ? (wikiBigProfessionIcons[text] ? wikiBigProfessionIcons[text] : wikiBigRacesColoredIcons[text]) : genderIcons[text];
     return (
         <button
             className={`${active === text ? 'active' : ''} basic-button-search`}

@@ -224,14 +224,18 @@
 .thin-hr {
     height: 1px;
     background-color: #a3a3a3;
-    position: absolute;
-    top: 50%;
-    left: 10%;
+    margin-left: 10%;
     right: 0;
     transform: scaleY(0.5);
     transform-origin: top;
     width: 80%;
     box-shadow: 0 0 5px 2px rgba(204, 204, 204, 0.2);
+}
+
+.thin-hr-vertical {
+    border-left: 1px #a3a3a3;
+    transform: scaleY(0.7);
+    box-shadow: 0 0 3px 1px rgba(204, 204, 204, 0.5);
 }
 
 /* 

@@ -1,7 +1,15 @@
 import React from 'react';
 import SearchSubbutton from './SearchSubbutton';
 
-function SearchMenu({ isOpen, selectedRaceUp, selectedProfessionUp, selectedRace, selectedProfession }) {
+function SearchMenu({ isOpen, selectedGenderUp, selectedRaceUp, selectedProfessionUp, selectedGender, selectedRace, selectedProfession }) {
+
+    const handleGenderSelection = (gender) => {
+        if (selectedGender === gender) {
+            selectedGenderUp('');
+        } else {
+            selectedGenderUp(gender);
+        }
+    };
 
     const handleRaceSelection = (race) => {
         if (selectedRace === race) {
@@ -26,6 +34,9 @@ function SearchMenu({ isOpen, selectedRaceUp, selectedProfessionUp, selectedRace
                 {isOpen && (
                     <div className='hr-container' style={{ marginTop: '-10px' }}>
                         <div className='flex cursor search-menu-flex'>
+                            <SearchSubbutton active={selectedGender} text='Male' onClick={() => handleGenderSelection('Male')} />
+                            <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />
+                            <span className="thin-hr-vertical"></span>
                             <SearchSubbutton active={selectedRace} text='Asura' onClick={() => handleRaceSelection('Asura')} />
                             <SearchSubbutton active={selectedRace} text='Sylvari' onClick={() => handleRaceSelection('Sylvari')} />
                             <SearchSubbutton active={selectedRace} text='Human' onClick={() => handleRaceSelection('Human')} />

@@ -15,6 +15,7 @@ import SearchCounter from './Search/SearchCounter';
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
   const [selectedRace, setSelectedRace] = useState('');
   const [selectedProfession, setSelectedProfession] = useState('');
 
@@ -106,6 +107,9 @@ function Search() {
           character.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         const filteredCharacters = charactersWithMatchingNames.filter((character) => {
+          if (selectedGender && character.gender !== selectedGender) {
+            return false;
+          }
           if (selectedRace && character.race !== selectedRace) {
             return false;
           }
@@ -120,7 +124,7 @@ function Search() {
     }, []);
 
     setFilteredCharacters(filteredCharacters.sort(customSortCharacters));
-  }, [accounts, searchTerm, selectedRace, selectedProfession]);
+  }, [accounts, searchTerm, selectedGender, selectedRace, selectedProfession]);
 
   const itemsPerPage = 15;
 
@@ -134,6 +138,18 @@ function Search() {
 
   const totalPagesAccounts = Math.ceil(filteredAccounts.length / itemsPerPage);
   const totalPagesCharacters = Math.ceil(filteredCharacters.length / itemsPerPage);
+
+  const handleGenderSelection = (gender) => {
+    if (gender === selectedGender) {
+      setSelectedGender('');
+      setAccountsPage(1);
+      setCharactersPage(1);
+    } else {
+      setSelectedGender(gender);
+      setAccountsPage(1);
+      setCharactersPage(1);
+    }
+  };
 
   const handleRaceSelection = (race) => {
     if (race === selectedRace) {
@@ -165,6 +181,7 @@ function Search() {
 
   const toggleX = () => {
     setSearchTerm('');
+    setSelectedGender('');
     setSelectedRace('');
     setSelectedProfession('');
   }
@@ -181,7 +198,7 @@ function Search() {
           onChange={handleSearch}
           key="search-input"
         />
-        {searchTerm !== '' || selectedRace !== '' || selectedProfession !== '' ?
+        {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ?
           <button className='basic-button x-button' onClick={toggleX} >
             X
           </button> :
@@ -206,6 +223,8 @@ function Search() {
       {isOpen && (
         <SearchMenu
           isOpen={isOpen}
+          selectedGenderUp={handleGenderSelection}
+          selectedGender={selectedGender}
           selectedRaceUp={handleRaceSelection}
           selectedRace={selectedRace}
           selectedProfessionUp={handleProfessionSelection}
@@ -214,6 +233,14 @@ function Search() {
       )}
 
       <div className='flex center' style={{ marginTop: '0px', marginBottom: '5px' }}>
+        {selectedGender && !isOpen && (
+          <span
+            className="selected-span"
+            onClick={() => setSelectedGender('')}
+          >
+            {selectedGender}
+          </span>
+        )}
         {selectedRace && !isOpen && (
           <span
             className="selected-span"
@@ -232,7 +259,7 @@ function Search() {
         )}
       </div>
 
-      {searchTerm !== '' || selectedRace !== '' || selectedProfession !== '' ? (
+      {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
         <React.Fragment key={`home-fragment-${searchTerm}`}>
           {searchTerm !== '' && (
             <>

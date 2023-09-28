@@ -76,10 +76,19 @@ const wikiSmallProfessionIcons = {
     Warrior: Warrior_icon_white
 };
 
+// Gender Icons
+import Male from './img/male.png';
+import Female from './img/female.png';
+
+const genderIcons = {
+    Male: Male,
+    Female: Female
+};
 
 export {
     wikiBigRacesIcons,
     wikiBigProfessionIcons,
     wikiSmallProfessionIcons,
     wikiBigRacesColoredIcons,
+    genderIcons,
 };

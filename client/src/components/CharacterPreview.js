@@ -5,9 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import AuthService from '../services/auth.service';
 
-import Male from './img/male.png';
-import Female from './img/female.png';
-
 function CharacterPreview({ character, apiKey }) {
     const Icon = wikiBigProfessionIcons[character.profession];
     const [isVisible, setIsVisible] = useState(null);
