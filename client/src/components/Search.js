@@ -8,33 +8,24 @@ import SearchMenu from './Search/SearchMenu';
 import './Classes.css';
 import './Search.css';
 import SearchAdd from './Search/search-add.svg';
+import SearchWelcome from './Search/SearchWelcome';
+import SearchNews from './Search/SearchNews';
+import SearchCounter from './Search/SearchCounter';
 
 function Search() {
-  const [accounts, setAccounts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [accountsPage, setAccountsPage] = useState(1);
-  const [charactersPage, setCharactersPage] = useState(1);
-  const [filteredAccounts, setFilteredAccounts] = useState([]);
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
-
-  const [selectedGender, setSelectedGender] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedRace, setSelectedRace] = useState('');
   const [selectedProfession, setSelectedProfession] = useState('');
 
+  const [accounts, setAccounts] = useState([]);
+  const [filteredAccounts, setFilteredAccounts] = useState([]);
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [accountsPage, setAccountsPage] = useState(1);
+  const [charactersPage, setCharactersPage] = useState(1);
+
   function getRandomSort() {
     return Math.random() - 0.5;
-  }
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  }
-
-  const toggleX = () => {
-    setSearchTerm('');
-    setSelectedGender('');
-    setSelectedRace('');
-    setSelectedProfession('');
   }
 
   useEffect(() => {
@@ -115,9 +106,6 @@ function Search() {
           character.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         const filteredCharacters = charactersWithMatchingNames.filter((character) => {
-          if (selectedGender && character.gender !== selectedGender) {
-            return false;
-          }
           if (selectedRace && character.race !== selectedRace) {
             return false;
           }
@@ -132,7 +120,7 @@ function Search() {
     }, []);
 
     setFilteredCharacters(filteredCharacters.sort(customSortCharacters));
-  }, [accounts, searchTerm, selectedGender, selectedRace, selectedProfession]);
+  }, [accounts, searchTerm, selectedRace, selectedProfession]);
 
   const itemsPerPage = 15;
 
@@ -146,18 +134,6 @@ function Search() {
 
   const totalPagesAccounts = Math.ceil(filteredAccounts.length / itemsPerPage);
   const totalPagesCharacters = Math.ceil(filteredCharacters.length / itemsPerPage);
-
-  const handleGenderSelection = (gender) => {
-    if (gender === selectedGender) {
-      setSelectedGender('');
-      setAccountsPage(1);
-      setCharactersPage(1);
-    } else {
-      setSelectedGender(gender);
-      setAccountsPage(1);
-      setCharactersPage(1);
-    }
-  };
 
   const handleRaceSelection = (race) => {
     if (race === selectedRace) {
@@ -183,6 +159,16 @@ function Search() {
     }
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const toggleX = () => {
+    setSearchTerm('');
+    setSelectedRace('');
+    setSelectedProfession('');
+  }
+
   return (
     <>
       <div className="search-container">
@@ -195,7 +181,7 @@ function Search() {
           onChange={handleSearch}
           key="search-input"
         />
-        {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ?
+        {searchTerm !== '' || selectedRace !== '' || selectedProfession !== '' ?
           <button className='basic-button x-button' onClick={toggleX} >
             X
           </button> :
@@ -206,11 +192,11 @@ function Search() {
         {/* Search Button */}
         {!isOpen
           ? (
-            <button className='basic-button-search plus-minus-button' onClick={toggleMenu} >
+            <button onClick={toggleMenu} className='basic-button-search plus-minus-button'  >
               <img src={SearchAdd} style={{ width: "25px", display: "flex" }} alt="" />
             </button>
           ) : (
-            <button className='basic-button-search plus-minus-button active' onClick={toggleMenu} >
+            <button onClick={toggleMenu} className='basic-button-search plus-minus-button active'  >
               <img src={SearchAdd} style={{ width: "25px", display: "flex" }} alt="" />
             </button>
           )
@@ -220,24 +206,14 @@ function Search() {
       {isOpen && (
         <SearchMenu
           isOpen={isOpen}
-          selectedGenderUp={handleGenderSelection}
           selectedRaceUp={handleRaceSelection}
-          selectedProfessionUp={handleProfessionSelection}
-          selectedGender={selectedGender}
           selectedRace={selectedRace}
+          selectedProfessionUp={handleProfessionSelection}
           selectedProfession={selectedProfession}
         />
       )}
 
       <div className='flex center' style={{ marginTop: '0px', marginBottom: '5px' }}>
-        {selectedGender && (
-          <span
-            className="selected-span nav-a"
-            onClick={() => setSelectedGender('')}
-          >
-            {selectedGender}
-          </span>
-        )}
         {selectedRace && !isOpen && (
           <span
             className="selected-span"
@@ -256,7 +232,7 @@ function Search() {
         )}
       </div>
 
-      {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
+      {searchTerm !== '' || selectedRace !== '' || selectedProfession !== '' ? (
         <React.Fragment key={`home-fragment-${searchTerm}`}>
           {searchTerm !== '' && (
             <>
@@ -280,7 +256,6 @@ function Search() {
                 )}
               </Container>
               <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
-
             </>
           )}
           <div className="characters" key={`character-div-${searchTerm}`}>
@@ -299,70 +274,9 @@ function Search() {
       ) : (
         <>
           {/* Empty Search Text */}
-          <Container className="flex center">
-            <Col className="home-empty-search-box">
-              <Row className='home-welcome'>
-                Welcome to <span className="gw2-logo-style">GW2</span>
-                <span className="geary-logo-style">Geary</span>!
-              </Row>
-              <Row>A place where you can inspect or share equipment and builds of registered accounts and their characters.
-                If someone adds a valid{' '}
-                <Link to="https://account.arena.net/applications" style={{ color: '#d70000' }} target="_blank">
-                  GW2 API key
-                </Link>
-                <span style={{ fontSize: '15px' }}>(<span className='yellow-highlight'></span>
-                  <span style={{ borderBottom: '1px dotted' }}>account</span>
-                  , <span style={{ borderBottom: '1px dotted' }}>characters</span>
-                  , <span style={{ borderBottom: '1px dotted' }}>builds</span>
-                  , <span style={{ borderBottom: '1px dotted' }}>progression</span>) </span>
-                with us and grants access, you'll be able to find and inspect them.
-              </Row>
-            </Col>
-          </Container>
-          <Container className="flex center">
-            <Col className="home-empty-search-box">
-              <Row className='home-welcome' style={{ fontSize: '25px' }}>
-                Latest News
-              </Row>
-              <Row className='search-news'>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>26.09.2023</span> -
-                  Added a <span className="yellow-highlight"> button </span>
-                  on the right of the <span className="yellow-highlight"> search bar </span>
-                  allowing the users to search by
-                  <span className="yellow-highlight"> race</span> and
-                  <span className="yellow-highlight"> profession</span>.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>30.08.2023</span> -
-                  Added a button/s allowing the users to
-                  <span className="yellow-highlight"> copy</span> the
-                  <span className="yellow-highlight"> chat codes</span> of the
-                  <span className="yellow-highlight"> items</span> or their
-                  <span className="yellow-highlight"> skins</span>.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>28.08.2023</span> -
-                  Now the <span className="yellow-highlight"> fashion mode </span> can preview <span className="yellow-highlight"> wiki images</span>.
-                </div>
-
-                <div>
-                  <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>18.08.2023</span> -
-                  Now the user can choose between fashion mode or normal mode preview on the characters.
-                  Happy Fashion Wars everybody! <span style={{ color: '#9fc3f0' }}>o/</span>
-                </div>
-
-              </Row>
-            </Col>
-          </Container>
-          <Container className="flex center">
-            <Col className="home-empty-search-box" style={{ width: 'auto', padding: '10px 10px' }}>
-              <Row>Аccounts: <span className='yellow-highlight'>{accounts.length}</span> | Characters: <span className='yellow-highlight'>{accounts.map(x => x.characters.length).reduce((partialSum, a) => partialSum + a, 0)}</span></Row>
-            </Col>
-          </Container>
+          <SearchWelcome />
+          <SearchNews />
+          <SearchCounter accounts={accounts} />
           <br />
         </>
       )}
