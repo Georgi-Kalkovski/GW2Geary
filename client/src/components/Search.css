@@ -232,8 +232,9 @@
 }
 
 .thin-hr-vertical {
-    border-left: 1px solid #7f7e7e;
-    transform: scaleY(0.7);
+    border-left: 1px groove #afaeae;
+    transform: scaleY(0.65);
     margin: 0 10px;
-    box-shadow: 0 0 8px 3px rgba(204, 204, 204, 0.1);
+    opacity: 0.6;
+    box-shadow: 0 0 2px 3px rgba(204, 204, 204, 0.1);
 }
