@@ -224,37 +224,16 @@
 .thin-hr {
     height: 1px;
     background-color: #a3a3a3;
-    margin-left: 10%;
     right: 0;
     transform: scaleY(0.5);
     transform-origin: top;
-    width: 80%;
+    width: 90%;
     box-shadow: 0 0 5px 2px rgba(204, 204, 204, 0.2);
 }
 
 .thin-hr-vertical {
-    border-left: 1px #a3a3a3;
+    border-left: 1px solid #7f7e7e;
     transform: scaleY(0.7);
-    box-shadow: 0 0 3px 1px rgba(204, 204, 204, 0.5);
+    margin: 0 10px;
+    box-shadow: 0 0 8px 3px rgba(204, 204, 204, 0.1);
 }
-
-/* 
-.search-menu-flex .basic-button-search.active:hover {
-    background-color: rgb(149, 89, 89);
-    box-shadow: 0 0 7px 1px rgb(199, 136, 136);
-    text-shadow: 0 0 1px #aa0404, 0 0 3px #aa0404, 0 0 3px #aa0404;
-    top: 10px;
-    right: 10px;
-    color: #aa0404;
-    cursor: pointer;
-}
-
-.search-menu-flex .basic-button-search.active:hover {
-    transition: background-color 0.3s, box-shadow 0.3s, top 0.3s, right 0.3s, color 0.3s;
-}
-
-
-.basic-button-search:hover {
-    background-color: #2c2c30;
-    box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.2);
-} */
