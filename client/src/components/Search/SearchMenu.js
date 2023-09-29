@@ -39,7 +39,7 @@ function SearchMenu({ isOpen, selectedGenderUp, selectedRaceUp, selectedProfessi
                                     <SearchSubbutton active={selectedGender} text='Male' onClick={() => handleGenderSelection('Male')} />
                                     <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />
                                 </div>
-                                <div className="thin-hr flex center"></div>
+                                <div className="thin-hr"></div>
                                 <div>
                                     <SearchSubbutton active={selectedRace} text='Asura' onClick={() => handleRaceSelection('Asura')} />
                                     <SearchSubbutton active={selectedRace} text='Sylvari' onClick={() => handleRaceSelection('Sylvari')} />
