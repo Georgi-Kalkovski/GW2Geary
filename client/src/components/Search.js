@@ -261,7 +261,7 @@ function Search() {
 
       {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
         <React.Fragment key={`home-fragment-${searchTerm}`}>
-          {searchTerm !== '' && (
+          {searchTerm !== '' && selectedGender === '' && selectedRace === '' && selectedProfession === '' && (
             <>
               <Container className="characters" key={`accounts-container-${searchTerm}`}>
                 {displayedAccounts.length > 0 ? (
