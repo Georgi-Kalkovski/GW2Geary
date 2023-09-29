@@ -482,6 +482,6 @@ input:checked+.slider:before {
   }
 
   .thin-hr {
-    top: 40%;
+    width: 75%;
   }
 }

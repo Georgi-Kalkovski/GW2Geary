@@ -19,6 +19,7 @@ function SearchNews() {
                         Added a <span className="yellow-highlight"> button </span>
                         on the right of the <span className="yellow-highlight"> search bar </span>
                         allowing the users to search by
+                        <span className="yellow-highlight"> gender</span>,
                         <span className="yellow-highlight"> race</span> and
                         <span className="yellow-highlight"> profession</span>.
                     </div>
