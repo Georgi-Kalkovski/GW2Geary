@@ -7,7 +7,7 @@ import Pagination from './Search/Pagination';
 import SearchMenu from './Search/SearchMenu';
 import './Classes.css';
 import './Search.css';
-import SearchAdd from './Search/search-add.svg';
+import SearchAdd from './Search/search-add.png';
 import SearchWelcome from './Search/SearchWelcome';
 import SearchNews from './Search/SearchNews';
 import SearchCounter from './Search/SearchCounter';
@@ -210,11 +210,11 @@ function Search() {
         {!isOpen
           ? (
             <button onClick={toggleMenu} className='basic-button-search plus-minus-button'  >
-              <img src={SearchAdd} style={{ width: "25px", display: "flex" }} alt="" />
+              <img src={SearchAdd} style={{ width: "35px", display: "flex" }} alt="" />
             </button>
           ) : (
             <button onClick={toggleMenu} className='basic-button-search plus-minus-button active'  >
-              <img src={SearchAdd} style={{ width: "25px", display: "flex" }} alt="" />
+              <img src={SearchAdd} style={{ width: "35px", display: "flex" }} alt="" />
             </button>
           )
         }
