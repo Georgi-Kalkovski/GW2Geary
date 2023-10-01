@@ -16,7 +16,7 @@ import CritDamage from './img/Critical_Damage.png';
 import Health from './img/Health.png';
 import AgonyResistance from './img/Agony_Resistance.png';
 
-function Attributes({ items, prof, build }) {
+function Attributes({ items, prof, build, relic, powerCore }) {
     let power = 1000;
     let precision = 1000;
     let toughness = 1000;
@@ -42,6 +42,13 @@ function Attributes({ items, prof, build }) {
         health += 5922
     } else if (prof === 'Guardian' || prof === 'Thief' || prof === 'Elementalist') {
         health += 1645
+    }
+
+    // Adding vitality from Power Core
+    const powerCoreNum = powerCore.description.toString().match(/\d+/)
+    if (powerCoreNum) {
+        const firstNumbers = parseInt(powerCoreNum[0], 10);
+        vitality += firstNumbers;
     }
 
     const uniqueRunes = [];
@@ -135,6 +142,7 @@ function Attributes({ items, prof, build }) {
 
     // Looking items
     for (const item of items) {
+
         // Getting defense
         if (item.slot !== 'HelmAquatic') {
             if (item.details && item.details.defense) {
@@ -263,7 +271,7 @@ function Attributes({ items, prof, build }) {
     ];
     return (
         <div className={`${prof.toLowerCase()}-lightning-border  attributes-unzoom`} style={{ borderWidth: '2px', paddingBottom: '5px', marginBottom: '10px' }}>
-            <Row  style={{ borderWidth: '0 0 0px 0', padding: '5px 0 5px 0' }}>
+            <Row style={{ borderWidth: '0 0 0px 0', padding: '5px 0 5px 0' }}>
                 Attributes
             </Row>
 

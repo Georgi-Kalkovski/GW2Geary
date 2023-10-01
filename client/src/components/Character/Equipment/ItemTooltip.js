@@ -49,6 +49,9 @@ function ItemTooltip({ item, slider }) {
                         </Row>
 
                         <br />
+                        {/* RELIC & POWER CORE &  */}
+                        {['Relic', 'PowerCore'].includes(item.type) && <div>{item.description}</div>}
+
                         {/* DEFENSE */}
                         {item.details && item.details.defense !== 0 && item.details.defense &&
                             <>
@@ -58,6 +61,7 @@ function ItemTooltip({ item, slider }) {
                                 <br />
                             </>
                         }
+
                         {/* POWER */}
                         {item.details && item.details.min_power && item.details.max_power &&
                             <>
@@ -204,9 +208,6 @@ function ItemTooltip({ item, slider }) {
                             </Row>
                         ))
                         }
-                        {/* RELIC LOGIC */}
-                        {item.type === 'Relic' || item.type === 'PowerCore' &&
-                            <div>{item.description}</div>}
                         {/* RARITY */}
                         <div className={`name-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>{item.rarity ? item.rarity : 'Unknown rarity'}</div>
                         {/* WEIGHT */}

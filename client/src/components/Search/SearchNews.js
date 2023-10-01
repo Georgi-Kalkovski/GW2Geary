@@ -9,6 +9,13 @@ function SearchNews() {
                 <Row className='search-news'>
 
                     <div>
+                        <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>02.10.2023</span> -
+                        Added <span className="yellow-highlight"> Relic </span> and
+                        <span className="yellow-highlight"> Power Core </span>
+                        to the character's preview.
+                    </div>
+
+                    <div>
                         <span className='yellow-highlight' style={{ marginBlockEnd: '0em', marginBlockStart: '0em', }}>28.09.2023</span> -
                         <span style={{ color: '#aa0404' }}> Removed invalid old API keys</span>.
                         If anyone is affected please register a new API key.

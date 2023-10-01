@@ -71,7 +71,7 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                             </Col>
 
                             <Col className='equipment-col-2'>
-                                <Attributes items={items} build={build} prof={prof} />
+                                <Attributes items={items} build={build} prof={prof} relic={relic} powerCore={powerCore[0]} />
                                 <Col className='flex' style={{ marginTop: '-58px', justifyContent: 'center' }}>
                                     <ItemTooltip item={powerCore[0]} slider={slider} />
                                     <ItemTooltip item={relic[0]} slider={slider} />

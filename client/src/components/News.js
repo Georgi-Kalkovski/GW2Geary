@@ -6,6 +6,17 @@ function News() {
             <div>
 
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                    <h3>02.10.2023</h3>
+                    <div className="line"></div>
+                    <div>
+                        Added <span className="yellow-highlight"> Relic </span> and
+                        <span className="yellow-highlight"> Power Core </span>
+                        to the character's preview.
+                    </div>
+                </div>
+                
+                <br />
+                <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>28.09.2023</h3>
                     <div className="line"></div>
                     <div>
@@ -14,6 +25,7 @@ function News() {
                     </div>
                 </div>
 
+                <br />
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right' }}>
                     <h3>26.09.2023</h3>
                     <div className="line"></div>
