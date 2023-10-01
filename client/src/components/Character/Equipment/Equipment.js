@@ -10,7 +10,6 @@ import ChatLinks from './ChatLinks';
 
 function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic }) {
     // console.log('items', items)
-    console.log(powerCore)
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

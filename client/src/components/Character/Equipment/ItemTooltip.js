@@ -4,7 +4,7 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
 function ItemTooltip({ item, slider }) {
-    console.log('item ', item)
+    // console.log('item ', item)
 
     const {
         getArrowProps,
