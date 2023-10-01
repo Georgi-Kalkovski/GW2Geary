@@ -101,6 +101,11 @@
     font-size: 12px;
 }
 
+.attributes-unzoom {
+    transform: scale(0.82);
+    transform-origin: top; 
+}
+
 .itemname {
     color: #5192f2;
 }

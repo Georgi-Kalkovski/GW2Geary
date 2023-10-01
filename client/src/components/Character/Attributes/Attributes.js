@@ -262,7 +262,7 @@ function Attributes({ items, prof, build }) {
         { name: "Boon Duration", icon: BoonDuration, value: boonDuration.toFixed(2) + "%" }
     ];
     return (
-        <div className={`${prof.toLowerCase()}-lightning-border`} style={{ borderWidth: '2px', paddingBottom: '5px', marginBottom: '10px' }}>
+        <div className={`${prof.toLowerCase()}-lightning-border  attributes-unzoom`} style={{ borderWidth: '2px', paddingBottom: '5px', marginBottom: '10px' }}>
             <Row  style={{ borderWidth: '0 0 0px 0', padding: '5px 0 5px 0' }}>
                 Attributes
             </Row>
@@ -285,7 +285,7 @@ function Attributes({ items, prof, build }) {
                     ))}
                 </Col>
             </Container>
-            <span style={{ color: '#f16565', fontSize: '10px' }}>Traits & Skills not implemented!</span>
+            <span style={{ color: '#f16565', fontSize: '12px' }}>Traits & Skills not implemented!</span>
         </div>);
 }
 export default Attributes

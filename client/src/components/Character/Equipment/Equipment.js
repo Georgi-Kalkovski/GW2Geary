@@ -8,8 +8,9 @@ import Dragon from '../../../dragon.svg'
 import EquipmentStats from './EquipmentStats';
 import ChatLinks from './ChatLinks';
 
-function Equipment({ items, prof, slider, build, prefixSlider }) {
+function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic }) {
     // console.log('items', items)
+    console.log(powerCore)
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -49,7 +50,7 @@ function Equipment({ items, prof, slider, build, prefixSlider }) {
                                     <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
 
                                 </Col>
-                                <Row className='flex' style={{ marginTop: '7px' }}>
+                                <Row className='flex' style={{ marginTop: '10px' }}>
                                     <Col className={`flex column ${prof ? prof.toLowerCase() : ''}-lightning-border`}
                                         style={{
                                             borderWidth: '2px',
@@ -72,6 +73,10 @@ function Equipment({ items, prof, slider, build, prefixSlider }) {
 
                             <Col className='equipment-col-2'>
                                 <Attributes items={items} build={build} prof={prof} />
+                                <Col className='flex' style={{ marginTop: '-58px', justifyContent: 'center' }}>
+                                    <ItemTooltip item={powerCore[0]} slider={slider} />
+                                    <ItemTooltip item={relic[0]} slider={slider} />
+                                </Col>
                                 <Col className='flex'>
                                     <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />
                                     <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />

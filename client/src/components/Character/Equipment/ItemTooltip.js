@@ -4,7 +4,7 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 
 function ItemTooltip({ item, slider }) {
-    // console.log('item ', item)
+    console.log('item ', item)
 
     const {
         getArrowProps,
@@ -70,7 +70,7 @@ function ItemTooltip({ item, slider }) {
 
                         <Container className='flex'>
                             {/* STATS */}
-                            <Col style={{width:'110px'}}>
+                            <Col style={{ width: '110px' }}>
                                 {item.stats && item.itemstats?.find(is => is.id === item.stats?.id)?.name.split('\'')[0] + ':'}
                                 {item.itemstats
                                     && item.details
@@ -204,6 +204,9 @@ function ItemTooltip({ item, slider }) {
                             </Row>
                         ))
                         }
+                        {/* RELIC LOGIC */}
+                        {item.type === 'Relic' || item.type === 'PowerCore' &&
+                            <div>{item.description}</div>}
                         {/* RARITY */}
                         <div className={`name-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>{item.rarity ? item.rarity : 'Unknown rarity'}</div>
                         {/* WEIGHT */}

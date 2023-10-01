@@ -22,6 +22,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
     return storedValue !== null ? JSON.parse(storedValue) : false;
   });
   const [itemstatsOutput, setItemstatsOutput] = useState([]);
+  const [relic, setRelic] = useState(null);
+  const [powerCore, setPowerCore] = useState(null);
   const [selectedEqTab, setSelectedEqTab] = useState(() => {
     if (initial && char?.equipment_tabs) {
       const found = char.equipment_tabs.find((equip) => equip.tab === parseInt(initial));
@@ -96,6 +98,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           setMergedItems([]);
           return;
         }
+        setRelic(await fetchData('items', char.equipment.find((equip) => equip.slot === 'Relic').id))
+        setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore').id))
         const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
         const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
         const itemstats = [
@@ -144,7 +148,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
               ?? []
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
           ] : '',
-          itemstats: fetchedItemstats
+          itemstats: fetchedItemstats,
+          powerCore: fetchedItems.find(item => item.type === 'PowerCore')
         }));
 
         setMergedItems(mergingItems);
@@ -294,6 +299,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         slider={isSliderOn}
         prefixSlider={isPrefixesOn}
         fashionSlider={isFashionOn}
+        powerCore={powerCore}
+        relic={relic}
       />
     </div>
   );
