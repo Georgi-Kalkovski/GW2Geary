@@ -45,7 +45,7 @@ function Attributes({ items, prof, build, relic, powerCore }) {
     }
 
     // Adding vitality from Power Core
-    const powerCoreNum = powerCore.description.toString().match(/\d+/)
+    const powerCoreNum = powerCore?.description?.toString().match(/\d+/)
     if (powerCoreNum) {
         const firstNumbers = parseInt(powerCoreNum[0], 10);
         vitality += firstNumbers;

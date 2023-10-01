@@ -98,8 +98,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           setMergedItems([]);
           return;
         }
-        setRelic(await fetchData('items', char.equipment.find((equip) => equip.slot === 'Relic').id))
-        setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore').id))
+        setRelic(await fetchData('items', char.equipment.find((equip) => equip.slot === 'Relic')?.id))
+        setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore')?.id))
         const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
         const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
         const itemstats = [
