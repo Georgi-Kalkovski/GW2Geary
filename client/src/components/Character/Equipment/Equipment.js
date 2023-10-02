@@ -38,9 +38,7 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                             <EquipmentStats items={items} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
                         ) : (
                             <>
-
                                 <Container className="equipment-box">
-
                                     <>
                                         <Col>
                                             <Col className='flex column equipment-col-1'>
@@ -96,7 +94,6 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                                             </Col>
                                         </Col>
                                     </>
-
                                 </Container>
                                 <ChatLinks items={items} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} prof={prof} fashion={false} slider={slider} />
                             </>
