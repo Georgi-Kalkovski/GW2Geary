@@ -4,8 +4,10 @@ import Prefixes from "./Stats/Prefixes";
 import Runes from "./Stats/Runes";
 import Sigils from "./Stats/Sigils";
 import Infusions from "./Stats/Infusions";
+import Relic from "./Stats/Relic";
+import PowerCore from "./Stats/PowerCore";
 
-function EquipmentStats({ prof, items }) {
+function EquipmentStats({ prof, items, relic, powerCore }) {
     const stats = [];
     const upgrades = [];
     const finishedItemstats = [];
@@ -174,19 +176,25 @@ function EquipmentStats({ prof, items }) {
     }
 
     return (
-        <div className={`flex column itemstats ${prof.toLowerCase()}-lightning-border`}>
+        <div className={`flex column itemstats`}>
 
             {/* Prefixes */}
             <Prefixes finishedItemstats={finishedItemstats} emptyPrefixes={emptyPrefixes} />
 
+            {/* Power Core */}
+            <PowerCore powerCore={powerCore} />
+
             {/* Runes */}
             <Runes upgrades={upgrades} emptyRunes={emptyRunes} />
+
+            {/* Relic */}
+            <Relic relic={relic} />
 
             {/* Sigils */}
             <Sigils upgrades={upgrades} emptySigils={emptySigils} />
 
             {/* Infusions */}
-            <Infusions infusions={infusions} emptyInfusions={emptyInfusions} enrichment={enrichment}/>
+            <Infusions infusions={infusions} emptyInfusions={emptyInfusions} enrichment={enrichment} />
 
             {/* Underwater Content */}
             <Aquatic items={items} />

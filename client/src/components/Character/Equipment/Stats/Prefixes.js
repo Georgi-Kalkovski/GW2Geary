@@ -8,7 +8,7 @@ function Prefixes({ finishedItemstats, emptyPrefixes }) {
                     </div>
                     {finishedItemstats.map((itemstat, index) => (
                         itemstat.name !== '' && (
-                            <div key={itemstat.id + index}>
+                            <div key={itemstat.name + itemstat.id + index}>
                                 <span className="itemname">
                                     {itemstat.items.length}x {itemstat.name.split("'")[0]}{' '}
                                 </span>

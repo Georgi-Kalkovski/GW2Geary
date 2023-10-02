@@ -187,6 +187,19 @@
         margin-top: 0;
         filter: none;
     }
+
+    .minor-trait-icon {
+        margin-top: 12px;
+    }
+
+    .minor-trait-icon,
+    .major-trait-icon {
+        width: 70%;
+    }
+
+    .traits-box {
+        margin-top: -12px;
+    }
 }
 
 @media (min-width: 551px) {

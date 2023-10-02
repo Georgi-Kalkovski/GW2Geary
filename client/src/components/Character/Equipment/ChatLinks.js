@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-function ChatLinks({ items, prof, fashion }) {
-
+function ChatLinks({ items, prof, fashion, relic, powerCore }) {
     const [buttonColor1, setButtonColor1] = useState('');
     const [buttonColor2, setButtonColor2] = useState('');
 
@@ -50,8 +49,9 @@ function ChatLinks({ items, prof, fashion }) {
                 !['HelmAquatic', 'WeaponAquaticA', 'WeaponAquaticB']
                     .includes(x.slot)
             )
+            .concat([relic, powerCore])
             .map(x => x.chat_link)
-            .join(', '))
+            .join(''))
             .then(() => {
                 setButtonColor1('darkgreen');
                 setTimeout(() => {

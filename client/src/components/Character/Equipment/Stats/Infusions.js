@@ -1,5 +1,4 @@
 function Infusions({ infusions, emptyInfusions, enrichment }) {
-    console.log(enrichment)
     return (<>
         {/* Infusions */}
         <div className="itemstat">

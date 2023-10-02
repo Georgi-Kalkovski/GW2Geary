@@ -33,69 +33,74 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                 </div>
             ) : (
                 <>
-                    {prefixSlider &&
-                        <EquipmentStats items={items} prof={prof} />
-                    }
-                    <Container className="equipment-box">
+                    {prefixSlider
+                        ? (
+                            <EquipmentStats items={items} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
+                        ) : (
+                            <>
 
-                        <>
-                            <Col>
-                                <Col className='flex column equipment-col-1'>
-                                    <ItemTooltip item={items.find(x => x.slot === 'Helm')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Coat')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Gloves')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Leggings')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
+                                <Container className="equipment-box">
 
-                                </Col>
-                                <Row className='flex' style={{ marginTop: '10px' }}>
-                                    <Col className={`flex column ${prof ? prof.toLowerCase() : ''}-lightning-border`}
-                                        style={{
-                                            borderWidth: '2px',
-                                            boxShadow: 'none',
-                                            borderLeft: 'none',
-                                            borderTop: 'none',
-                                            borderBottom: 'none',
-                                            paddingRight: '5px',
-                                            marginRight: '5px'
-                                        }}>
-                                        <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} slider={slider} />
-                                        <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} slider={slider} />
-                                    </Col>
-                                    <Col className='flex column'>
-                                        <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} slider={slider} />
-                                        <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} slider={slider} />
-                                    </Col>
-                                </Row>
-                            </Col>
+                                    <>
+                                        <Col>
+                                            <Col className='flex column equipment-col-1'>
+                                                <ItemTooltip item={items.find(x => x.slot === 'Helm')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Coat')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Gloves')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Leggings')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Boots')} slider={slider} />
 
-                            <Col className='equipment-col-2'>
-                                <Attributes items={items} build={build} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
-                                <Col className='flex' style={{ marginTop: '-58px', justifyContent: 'center' }}>
-                                    <ItemTooltip item={powerCore ? powerCore[0] : ''} slider={slider} />
-                                    <ItemTooltip item={relic ? relic[0] : ''} slider={slider} />
-                                </Col>
-                                <Col className='flex'>
-                                    <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />
-                                    <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} slider={slider} />
-                                </Col>
-                                <Col className='flex' style={{ marginBottom: '12px' }}>
-                                    <ItemTooltip item={items.find(x => x.slot === 'Amulet')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'Ring1')} slider={slider} />
-                                    <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} slider={slider} />
-                                </Col>
-                                <Col className='flex' >
-                                    <ItemTooltip item={items.find(x => x.slot === 'HelmAquatic')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticA')} slider={slider} />
-                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticB')} slider={slider} />
-                                </Col>
-                            </Col>
-                        </>
+                                            </Col>
+                                            <Row className='flex' style={{ marginTop: '10px' }}>
+                                                <Col className={`flex column ${prof ? prof.toLowerCase() : ''}-lightning-border`}
+                                                    style={{
+                                                        borderWidth: '2px',
+                                                        boxShadow: 'none',
+                                                        borderLeft: 'none',
+                                                        borderTop: 'none',
+                                                        borderBottom: 'none',
+                                                        paddingRight: '5px',
+                                                        marginRight: '5px'
+                                                    }}>
+                                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} slider={slider} />
+                                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} slider={slider} />
+                                                </Col>
+                                                <Col className='flex column'>
+                                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} slider={slider} />
+                                                    <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} slider={slider} />
+                                                </Col>
+                                            </Row>
+                                        </Col>
 
-                    </Container>
-                    <ChatLinks items={items} prof={prof} fashion={false} slider={slider} />
+                                        <Col className='equipment-col-2'>
+                                            <Attributes items={items} build={build} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
+                                            <Col className='flex' style={{ marginTop: '-58px', justifyContent: 'center' }}>
+                                                <ItemTooltip item={powerCore ? powerCore[0] : ''} slider={slider} />
+                                                <ItemTooltip item={relic ? relic[0] : ''} slider={slider} />
+                                            </Col>
+                                            <Col className='flex'>
+                                                <ItemTooltip item={items.find(x => x.slot === 'Backpack')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Accessory1')} slider={slider} />
+                                                <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} slider={slider} />
+                                            </Col>
+                                            <Col className='flex' style={{ marginBottom: '12px' }}>
+                                                <ItemTooltip item={items.find(x => x.slot === 'Amulet')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Ring1')} slider={slider} />
+                                                <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} slider={slider} />
+                                            </Col>
+                                            <Col className='flex' >
+                                                <ItemTooltip item={items.find(x => x.slot === 'HelmAquatic')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticA')} slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticB')} slider={slider} />
+                                            </Col>
+                                        </Col>
+                                    </>
+
+                                </Container>
+                                <ChatLinks items={items} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} prof={prof} fashion={false} slider={slider} />
+                            </>
+                        )}
                 </>
             )
         }
