@@ -19,7 +19,7 @@ function EquipmentStats({ prof, items, relic, powerCore }) {
     let enrichment = {};
 
     let itemstats = items[0]?.itemstats;
-
+console.log(emptyRunes)
     if (items) {
         for (const item of items) {
             if (item.slot != "HelmAquatic" &&
@@ -33,8 +33,10 @@ function EquipmentStats({ prof, items, relic, powerCore }) {
 
                 // Empty Runes
                 const nonRuneCount = item.upgrades.filter(x => x.details.type !== 'Rune').length;
+                console.log(item)
                 if (item.details?.defense
                     && item.details.defense > 0
+                    && item.type !== 'Weapon'
                     && item.upgrades.length - nonRuneCount < item.details.infusion_slots.length) {
                     emptyRunes.push({
                         type: item.details.type,
