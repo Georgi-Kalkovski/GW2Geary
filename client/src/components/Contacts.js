@@ -61,7 +61,7 @@ function Contacts() {
             <Helmet>
                 <title>GW2Geary - Contacts</title>
                 <meta
-                    name="GW2Geary - Contacts"
+                    name="description"
                     content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
                 />
             </Helmet>

@@ -28,7 +28,7 @@ const Profile = () => {
       <Helmet>
         <title>GW2Geary - Profile</title>
         <meta
-          name="GW2Geary - Profile"
+          name="description"
           content="The Profile page.The place to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
                    You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
         />

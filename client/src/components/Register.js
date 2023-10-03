@@ -56,7 +56,7 @@ const Register = () => {
       <Helmet>
         <title>GW2Geary - Register</title>
         <meta
-          name="GW2Geary - Register"
+          name="description"
           content="Register/Sign up to create a profile's information.
                    By signing up you'll be able to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
                    You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."

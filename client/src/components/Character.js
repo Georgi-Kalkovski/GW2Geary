@@ -72,7 +72,7 @@ function Character() {
             console.error(error);
         }
     }, []);
-    
+
     return (
         character === null || account === null
             ? <div className="flex center">
@@ -85,7 +85,7 @@ function Character() {
                 <Helmet>
                     <title>GW2Geary - {character ? character?.name : 'Character'}</title>
                     <meta
-                        name={`GW2Geary - ${character ? character?.name : 'Character'}`}
+                        name="description"
                         content={
                             `Character info: 
                              ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}

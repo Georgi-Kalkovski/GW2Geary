@@ -85,7 +85,7 @@ const Account = () => {
       <Helmet>
         <title>GW2Geary - {account ? account?.name : 'Account'}</title>
         <meta
-          name={`GW2Geary - ${account ? ` ${account?.name}` : 'Account'}`}
+          name="description"
           content={
             `Account info: 
              ${world ? `world: ${world}` : ''}
