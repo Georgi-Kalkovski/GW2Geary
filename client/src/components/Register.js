@@ -70,7 +70,7 @@ const Register = () => {
               <div>
                 {/* Username */}
                 <div className="form-group">
-                  <label htmlFor="username">Username <spam style={{ color: '#aa0404', fontSize: '20px' }}>*</spam></label>
+                  <label htmlFor="username">Username <span style={{ color: '#aa0404', fontSize: '20px' }}>*</span></label>
                   <input
                     type="username"
                     className="form-control"
