@@ -72,7 +72,7 @@ function Character() {
             console.error(error);
         }
     }, []);
-console.log(character)
+    
     return (
         character === null || account === null
             ? <div className="flex center">
