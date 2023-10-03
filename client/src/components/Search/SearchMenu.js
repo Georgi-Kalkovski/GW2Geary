@@ -34,16 +34,23 @@ function SearchMenu({ isOpen, selectedGenderUp, selectedRaceUp, selectedProfessi
                 {isOpen && (
                     <div className='hr-container' style={{ marginTop: '-10px' }}>
                         <div className='flex cursor search-menu-flex'>
-                            <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />
-                            <SearchSubbutton active={selectedGender} text='Male' onClick={() => handleGenderSelection('Male')} />
-                            <span className="thin-hr-vertical"></span>
-                            <SearchSubbutton active={selectedRace} text='Asura' onClick={() => handleRaceSelection('Asura')} />
-                            <SearchSubbutton active={selectedRace} text='Charr' onClick={() => handleRaceSelection('Charr')} />
-                            <SearchSubbutton active={selectedRace} text='Human' onClick={() => handleRaceSelection('Human')} />
-                            <SearchSubbutton active={selectedRace} text='Norn' onClick={() => handleRaceSelection('Norn')} />
-                            <SearchSubbutton active={selectedRace} text='Sylvari' onClick={() => handleRaceSelection('Sylvari')} />
+                            <div>
+                                <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />
+                                <SearchSubbutton active={selectedGender} text='Male' onClick={() => handleGenderSelection('Male')} />
+                            </div>
+                            {window.innerWidth > 550
+                                ? <span className="thin-hr-vertical"></span>
+                                : <span className="thin-hr"></span>
+                            }
+                            <div>
+                                <SearchSubbutton active={selectedRace} text='Asura' onClick={() => handleRaceSelection('Asura')} />
+                                <SearchSubbutton active={selectedRace} text='Charr' onClick={() => handleRaceSelection('Charr')} />
+                                <SearchSubbutton active={selectedRace} text='Human' onClick={() => handleRaceSelection('Human')} />
+                                <SearchSubbutton active={selectedRace} text='Norn' onClick={() => handleRaceSelection('Norn')} />
+                                <SearchSubbutton active={selectedRace} text='Sylvari' onClick={() => handleRaceSelection('Sylvari')} />
+                            </div>
+                            <div className="thin-hr"></div>
                         </div>
-                        <div className="thin-hr"></div>
                         <div className='flex cursor search-menu-flex'>
                             <SearchSubbutton active={selectedProfession} text='Elementalist' onClick={() => handleProfessionSelection('Elementalist')} />
                             <SearchSubbutton active={selectedProfession} text='Engineer' onClick={() => handleProfessionSelection('Engineer')} />
