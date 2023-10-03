@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -81,6 +82,20 @@ const Account = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>GW2Geary - {account ? account?.name : 'Account'}</title>
+        <meta
+          name={`GW2Geary - ${account ? ` ${account?.name}` : 'Account'}`}
+          content={
+            `Account info: 
+             ${world ? `world: ${world}` : ''}
+             ${mastery ? `mastery points: ${mastery}` : ''}
+             ${account ? `fractal level: ${account?.fractal}` : ''}
+             ${account ? `wvw rank: ${account?.wvw_rank}` : ''}
+             ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}
+             `}
+        />
+      </Helmet>
       <div>
         <div className="container">
           <div>

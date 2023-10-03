@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import AuthService from "../services/auth.service";
 import ProfileInfo from "./Profile/ProfileInfo";
 import ProfileApis from "./Profile/ProfileApis";
@@ -23,7 +24,15 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <div>
+      <Helmet>
+        <title>GW2Geary - Profile</title>
+        <meta
+          name="GW2Geary - Profile"
+          content="The Profile page.The place to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
+                   You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
+        />
+      </Helmet>
       {currentUser && (
         <>
           <div className="flex center">
@@ -48,7 +57,7 @@ const Profile = () => {
           <br />
         </>
       )}
-    </>
+    </div>
   );
 };
 

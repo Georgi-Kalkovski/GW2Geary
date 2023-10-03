@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from "react-helmet";
 import AuthService from '../services/auth.service';
 
 function Contacts() {
@@ -56,52 +57,61 @@ function Contacts() {
     };
 
     return (
-        <div className="flex center">
-            <div>
-                <h2 style={{ textAlign: 'center' }}>Send a message</h2>
-                <h5 style={{ textAlign: 'center',marginTop:'-20px',marginBottom:'-5px' }}>or contact me in-game (<span className='yellow-highlight'>Terter.4125</span>)</h5>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="subject">Subject:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="subject"
-                            value={subject}
-                            onChange={handleSubjectChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="message">Message:</label>
-                        <textarea
-                            className="form-control"
-                            id="message"
-                            value={message}
-                            onChange={handleMessageChange}
-                            style={{ minWidth: '193px', height: '100px',fontSize:'15px' }}
-                        />
-                    </div>
-                    <div className="form-group flex center">
-                        <button
-                            type="submit"
-                            className="basic-button form-button"
-                            disabled={isButtonDisabled}
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </form>
-                {submissionMessage && <p>{submissionMessage}</p>}
+        <div>
+            <Helmet>
+                <title>GW2Geary - Contacts</title>
+                <meta
+                    name="GW2Geary - Contacts"
+                    content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
+                />
+            </Helmet>
+            <div className="flex center">
+                <div>
+                    <h2 style={{ textAlign: 'center' }}>Send a message</h2>
+                    <h5 style={{ textAlign: 'center', marginTop: '-20px', marginBottom: '-5px' }}>or contact me in-game (<span className='yellow-highlight'>Terter.4125</span>)</h5>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="email"
+                                value={email}
+                                onChange={handleEmailChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="subject">Subject:</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="subject"
+                                value={subject}
+                                onChange={handleSubjectChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="message">Message:</label>
+                            <textarea
+                                className="form-control"
+                                id="message"
+                                value={message}
+                                onChange={handleMessageChange}
+                                style={{ minWidth: '193px', height: '100px', fontSize: '15px' }}
+                            />
+                        </div>
+                        <div className="form-group flex center">
+                            <button
+                                type="submit"
+                                className="basic-button form-button"
+                                disabled={isButtonDisabled}
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                    {submissionMessage && <p>{submissionMessage}</p>}
+                </div>
             </div>
         </div>
     );

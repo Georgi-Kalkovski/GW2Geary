@@ -138,7 +138,6 @@ function NewsList({ isSearchNews, limit }) {
     ];
 
     const truncatedNewsData = limit ? newsData.slice(0, limit) : newsData;
-
     return (
         <div>
             {truncatedNewsData.map((newsItem) => (
