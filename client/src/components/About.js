@@ -8,6 +8,7 @@ function About() {
         <div>
             <Helmet>
                 <title>GW2Geary - About</title>
+                <meta property="og:title" content="GW2Geary - About" />
                 <meta
                     name="og:description"
                     content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.

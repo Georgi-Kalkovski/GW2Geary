@@ -27,6 +27,7 @@ const Profile = () => {
     <div>
       <Helmet>
         <title>GW2Geary - Profile</title>
+        <meta property="og:title" content="GW2Geary - Profile" />
         <meta
           name="og:description"
           content="The Profile page.The place to register API Keys, hide/show/delete them, as well as hide/show your characters separately.

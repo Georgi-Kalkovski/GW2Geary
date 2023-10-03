@@ -44,6 +44,7 @@ const Login = () => {
     <div>
       <Helmet>
         <title>GW2Geary - Login</title>
+        <meta property="og:title" content="GW2Geary - Login" />
         <meta
           name="og:description"
           content="Login/Sign in to access your profile's information or reset password using your email.

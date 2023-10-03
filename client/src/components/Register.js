@@ -55,6 +55,7 @@ const Register = () => {
     <div>
       <Helmet>
         <title>GW2Geary - Register</title>
+        <meta property="og:title" content="GW2Geary - Register" />
         <meta
           name="og:description"
           content="Register/Sign up to create a profile's information.

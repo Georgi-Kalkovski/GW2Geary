@@ -60,6 +60,7 @@ function Contacts() {
         <div>
             <Helmet>
                 <title>GW2Geary - Contacts</title>
+                <meta property="og:title" content="GW2Geary - Contacts" />
                 <meta
                     name="og:description"
                     content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."

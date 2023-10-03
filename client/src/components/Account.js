@@ -84,6 +84,7 @@ const Account = () => {
     <div>
       <Helmet>
         <title>GW2Geary - {account ? account?.name : 'Account'}</title>
+        <meta property="og:title" content={`GW2Geary - ${account ? account?.name : 'Account'}`} />
         <meta
           name="og:description"
           content={

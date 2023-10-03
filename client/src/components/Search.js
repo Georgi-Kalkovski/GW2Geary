@@ -191,6 +191,7 @@ function Search() {
     <div>
       <Helmet>
         <title>GW2Geary - Search</title>
+        <meta property="og:title" content="GW2Geary - Search" />
         <meta
           name="og:description"
           content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.

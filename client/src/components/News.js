@@ -7,6 +7,7 @@ function News() {
         <div>
             <Helmet>
                 <title>GW2Geary - News</title>
+                <meta property="og:title" content="GW2Geary - News" />
                 <meta
                     name="og:description"
                     content="All the News about GW2Geary are here! 

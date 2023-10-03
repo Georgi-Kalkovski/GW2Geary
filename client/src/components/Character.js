@@ -84,6 +84,7 @@ function Character() {
             : <div>
                 <Helmet>
                     <title>GW2Geary - {character ? character?.name : 'Character'}</title>
+                    <meta property="og:title" content={`GW2Geary - ${character ? character?.name : 'Character'}`} />
                     <meta
                         name="og:description"
                         content={
