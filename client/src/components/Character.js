@@ -85,7 +85,7 @@ function Character() {
                 <Helmet>
                     <title>GW2Geary - {character ? character?.name : 'Character'}</title>
                     <meta
-                        name="description"
+                        name="og:description"
                         content={
                             `Character info: 
                              ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
