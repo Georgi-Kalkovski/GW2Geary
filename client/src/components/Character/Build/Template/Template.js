@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Profession from './Profession';
 import fetchData from '../../../fetchData';
 import { usePopperTooltip } from 'react-popper-tooltip';
-const BuildTemplate = require('./BuildTemplate');
+import BuildTemplate from './BuildTemplate';
 import mouseClick from '../../mouse-click.svg'
 
 function Template({ buildInput }) {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import { usePopperTooltip } from 'react-popper-tooltip';
 import mouseClick from '../mouse-click.svg'

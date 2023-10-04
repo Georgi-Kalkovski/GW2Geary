@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Pagination({ filtered, itemsPerPage, totalPages, page, setPage }) {
     if (filtered.length < itemsPerPage) {
         return null;

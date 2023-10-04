@@ -1,3 +1,4 @@
+import React from 'react';
 import EventBus from "../../common/EventBus";
 import ChangeUsername from "./ProfileInfo/ChangeUsername";
 import ChangeEmail from "./ProfileInfo/ChangeEmail";

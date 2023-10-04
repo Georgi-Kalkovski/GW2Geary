@@ -48,9 +48,9 @@ function Build({ setBuild, setSpec, tab }) {
     }, [tab]);
 
     useEffect(() => {
-        if(specializations && specializations[2])
-        setSpec(specializations[2].specialization.name);
-    }), [specializations];
+        if (specializations && specializations[2])
+            setSpec(specializations[2].specialization.name);
+    }, [specializations]);
 
     return (<>
         {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Relic({ relic }) {
     return (<>
         <div className="itemstat">

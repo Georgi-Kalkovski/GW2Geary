@@ -11,7 +11,6 @@ function CharacterPreview({ character, apiKey }) {
     const updateCharacterStatus = useCallback((active) => {
         AuthService.updateCharacterStatus(apiKey._id, character._id, active)
             .then((response) => {
-                console.log(repsponse)
                 if (response.user && response.user.apiKey) {
                     //setIsActive(response.user.apiKey);
                 }

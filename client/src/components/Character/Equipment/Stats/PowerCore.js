@@ -1,3 +1,5 @@
+import React from 'react';
+
 function PowerCore({ powerCore }) {
     return (<>
         <div className="itemstat">

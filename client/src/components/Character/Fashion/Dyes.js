@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Col, Row } from "react-bootstrap";
 import DyesTooltip from "./DyesTooltip";
 import './Fashion.css';

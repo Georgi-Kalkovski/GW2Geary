@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Infusions({ infusions, emptyInfusions, enrichment }) {
     return (<>
         {/* Infusions */}

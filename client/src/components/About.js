@@ -1,3 +1,4 @@
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import github from './img/github.svg';
 import discord from './img/discord.svg';
