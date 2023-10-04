@@ -10,6 +10,29 @@ const User = require('./models/user.model');
 const cookieParser = require('cookie-parser');
 const axios = require('axios');
 
+// Start of Next.js
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
+
+const dev = process.env.NODE_ENV !== 'production';
+const appnext = next({ dev });
+const handle = appnext.getRequestHandler();
+
+appnext.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
+
+    handle(req, res, parsedUrl);
+  }).listen(3001, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3001');
+  });
+});
+
+// End of Next.js
+
 const app = express();
 const port = process.env.PORT || 3001;
 
