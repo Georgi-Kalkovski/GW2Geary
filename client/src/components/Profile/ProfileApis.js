@@ -39,7 +39,7 @@ function ProfileApis({ currentUser, AuthService }) {
             {/* API Keys Section */}
             <div className="container" key="profile-container">
                 <div className="flex center apis-flex" key="apis-flex">
-                    <div>
+                    <div className="flex column" >
                         <ProfileApiCreate
                             currentUser={currentUser}
                             fetchApiKeys={fetchApiKeys}

@@ -3,48 +3,43 @@ import CharacterPreview from "../../CharacterPreview";
 import upArrow from '../up-arrow.svg';
 import downArrow from '../down-arrow.svg';
 
-function ProfileApiCharacters({ apiKeys }) {
+function ProfileApiCharacters({ apiKey }) {
     const [expandedIndexes, setExpandedIndexes] = useState([]);
 
-    const isExpanded = (index) => expandedIndexes.includes(index);
+    const isExpanded = (apiKey) => expandedIndexes.includes(apiKey?._id);
 
-    const toggleExpansion = (index) => {
-        if (isExpanded(index)) {
-            setExpandedIndexes(expandedIndexes.filter((i) => i !== index));
+    const toggleExpansion = (apiKey) => {
+        if (isExpanded(apiKey?._id)) {
+            setExpandedIndexes(expandedIndexes.filter((i) => i !== apiKey?._id));
         } else {
-            setExpandedIndexes([...expandedIndexes, index]);
+            setExpandedIndexes([...expandedIndexes, apiKey?._id]);
         }
     };
     return (<>
         <div key="characters-section">
-            {apiKeys &&
-                apiKeys.map((apiKey, index) => (
-                    <React.Fragment key={`characters-fragment-${index}`}>
-                        <br key={`characters-break-${index}`} />
-                        <div className="flex center font-size-25px" key={`account-name-${index}`}>
-                            {apiKey.accountName}
-                        </div>
-                        <div className="arrow-line" onClick={() => toggleExpansion(index)} key={`character-arrow-line-${index}`}>
-                            <div className="flex center">
-                                <div className="profile-line">
+            {apiKey &&
+                <React.Fragment key={`characters-fragment-${apiKey?._id}`}>
+                    
+                    <div className="arrow-line" onClick={() => toggleExpansion(apiKey?._id)} key={`character-arrow-line-${apiKey?._id}`}>
+                        <div className="flex center">
+                            <div className="profile-line">
 
-                                </div>{isExpanded(index) ? <img src={upArrow} className="up-down-arrow" alt="up-arrow" /> : <img src={downArrow} className="up-down-arrow" alt="down-arrow" />}
-                            </div>
+                            </div>{isExpanded(apiKey?._id) ? <img src={upArrow} className="up-down-arrow" alt="up-arrow" /> : <img src={downArrow} className="up-down-arrow" alt="down-arrow" />}
                         </div>
-                        {isExpanded(index) && (
-                            <div className="characters" key={`character-preview-${index}`}>
-                                {apiKey.characters &&
-                                    apiKey.characters.map((character, characterIndex) => (
-                                        <CharacterPreview
-                                            character={character}
-                                            apiKey={apiKey}
-                                            key={`${character.name}-${characterIndex}`}
-                                        />
-                                    ))}
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                    </div>
+                    {isExpanded(apiKey?._id) && (
+                        <div className="characters" key={`character-preview-${apiKey?._id}`}>
+                            {apiKey.characters &&
+                                apiKey.characters.map((character, characterIndex) => (
+                                    <CharacterPreview
+                                        character={character}
+                                        apiKey={apiKey}
+                                        key={`${character.name}-${characterIndex}`}
+                                    />
+                                ))}
+                        </div>
+                    )}
+                </React.Fragment>}
         </div>
     </>);
 }

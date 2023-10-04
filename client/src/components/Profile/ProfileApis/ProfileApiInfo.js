@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useCallback } from "react";
 import { usePopperTooltip } from 'react-popper-tooltip';
+import ProfileApiCharacters from './ProfileApiCharacters';
 
 function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     const [isVisible, setIsVisible] = useState(null)
@@ -45,11 +46,12 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     });
 
     return (
-        <>
+        <div>
             <div key={apiKey._id}>
-                <div className="yellow-highlight flex center" key={`api-key-account-${apiKey._id}`}>{apiKey.accountName}</div>
-                <div className="facts-div api-key-fact api-right" key={`api-key-details-${apiKey._id}`}><span className="api-key-profile">{apiKey._id}{" "}</span>
-
+                <div className="facts-div-profile api-key-fact api-right" key={`api-key-details-${apiKey._id}`}>
+                    <div className="flex center font-size-20px yellow-highlight" key={`account-name-${apiKey?._id}`}>
+                        {apiKey.accountName}
+                    </div>
                     {/* Checkbox */}
                     <label className="custom-checkbox"
                         ref={setTriggerRef}>
@@ -77,14 +79,22 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                         </div>
                     )}
 
+                    <div className="api-key-profile api-keys">{apiKey._id}{" "}</div>
                     {/* Delete Key */}
                     <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button" key={`api-key-delete-button-${apiKey._id}`}>
                         Delete Key
                     </button>
                 </div>
-                <br key={`api-key-break-${apiKey._id}`} />
             </div>
-        </>
+
+            <ProfileApiCharacters
+                apiKey={apiKey}
+                AuthService={AuthService}
+                setApiKeys={setApiKeys}
+            />
+            <br key={`api-key-break-${apiKey._id}`} />
+            <br key={`api-key-break-${apiKey._id}`} />
+        </div>
     );
 }
 

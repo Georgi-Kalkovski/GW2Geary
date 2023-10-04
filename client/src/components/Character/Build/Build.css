@@ -153,6 +153,12 @@
     align-items: center;
 }
 
+.facts-div-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .mouse-click {
     max-height: 16px;
 }

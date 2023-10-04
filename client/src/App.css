@@ -395,8 +395,10 @@ p span {
   font-size: 25px;
 }
 
-.add-api-key-button {
-  margin-left: 20px;
+.api-keys {
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-svg {
@@ -571,6 +573,7 @@ body.light-theme .pagination-item:hover {
   color: white;
   box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.2);
 }
+
 body.light-theme .accounts-hover:hover,
 body.light-theme .basic-button-search.active {
   background-color: #f1cccc;
