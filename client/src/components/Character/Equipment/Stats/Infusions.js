@@ -25,7 +25,7 @@ function Infusions({ infusions, emptyInfusions, enrichment }) {
         {/* Enrichment */}
         {enrichment?.details?.infix_upgrade?.buff?.description &&
             <div className="itemstat">
-                <span className="yellow-highlight">Enrichment </span>:
+                <span className="yellow-highlight">Enrichment</span>:
                 <span className="itemtypes itemname"> {enrichment.details?.infix_upgrade?.buff?.description}</span>
             </div>
         }

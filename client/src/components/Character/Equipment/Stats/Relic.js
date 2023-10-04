@@ -4,7 +4,7 @@ function Relic({ relic }) {
             <span className="yellow-highlight">Relic</span>:
             {relic
                 ? <span className="itemname"> {relic.name}</span>
-                : <span span className="itemname" style={{ color: '#ff1e1e' }}>Missing relic</span>
+                : <span span className="itemname" style={{ color: '#ff1e1e' }}> Missing relic</span>
             }
         </div>
     </>)
