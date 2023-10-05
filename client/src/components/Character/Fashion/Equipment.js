@@ -30,7 +30,7 @@ function Equipment({ items, embed, prof }) {
             ? (
                 <div className='logo-equipment-width'>
                     <div className="flex center">
-                        <div className="logo-loading-div" style={{ top: '210px', left: '-65px' }}>
+                        <div className="logo-loading-div" style={window.innerWidth > 550 ? { top: '210px', left: '-65px' } : { top: '210px' }}>
                             <img src={Dragon} alt="" className="logo--loading-dragon" />
                             <img src={Cog} alt="" className="logo-loading-cog" />
                         </div>
