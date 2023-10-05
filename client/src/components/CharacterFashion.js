@@ -85,7 +85,7 @@ function CharacterFashion() {
                     ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
                     : ''
                 }
-                <div className='equipment-build-flex'>
+                <div className='equipment-build-flex-fashion'>
                     <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} />
                 </div>
                 <br />

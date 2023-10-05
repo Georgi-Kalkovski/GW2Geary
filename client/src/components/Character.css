@@ -4,6 +4,16 @@
   height: 100%;
   padding-top: 5px;
   justify-content: center;
+  transform: scale(95%);
+  margin-top: -20px;
+}
+
+.equipment-build-flex-fashion {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  padding-top: 5px;
+  justify-content: center;
 }
 
 .build {
@@ -324,6 +334,8 @@ input:checked+.slider:before {
 
   .equipment-build-flex {
     max-width: 550px !important;
+    transform: scale(100%);
+    margin-top: 0;
   }
 
   .character-col {
