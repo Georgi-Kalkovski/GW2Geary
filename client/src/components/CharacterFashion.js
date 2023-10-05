@@ -3,6 +3,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import fetchData from './fetchData';
 import AuthService from "../services/auth.service";
