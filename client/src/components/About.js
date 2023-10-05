@@ -18,8 +18,9 @@ function About() {
                 />
             </Helmet>
             <div className='flex center column'>
+            <h2 style={{ textAlign: 'center' }}>About</h2>
                 <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
-                    <h2><span className='yellow-highlight'>About</span></h2>
+                    <h2><span className='yellow-highlight'>Description</span></h2>
                     <div className="line"></div>
                     <p>
                         Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
