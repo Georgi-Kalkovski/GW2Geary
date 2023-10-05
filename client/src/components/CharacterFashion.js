@@ -74,11 +74,6 @@ function CharacterFashion() {
                         content={
                             `Character info: 
                              ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
-                             ${account ? `account name: ${account?.name}` : ''}
-                             ${world ? `world: ${world}` : ''}
-                             ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${account ? `fractal level: ${account?.fractal}` : ''}
-                             ${account ? `wvw rank: ${account?.wvw_rank}` : ''}
              
              `}
                     />
