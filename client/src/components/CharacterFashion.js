@@ -64,32 +64,51 @@ function CharacterFashion() {
                     <img src={Cog} alt="" className="logo-loading-cog" />
                 </div>
             </div>
-            : <Container className='center-items'>
-                {/* Breadcrumb */}
-                <nav aria-label="breadcrumb" className="breadcrumb">
-                    <ul style={{ listStyleType: "none" }} className='flex center'>
-                        <li>
-                            <Link className='nav-a' to="/">Search</Link>
-                        </li>
-                        <li className="breadcrumb-item">
-                            <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
-                        </li>
-                        <li style={{ cursor: "default" }} aria-current="page">
-                            <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
-                        </li>
-                    </ul>
-                </nav>
+            : <div>
+                <Helmet>
+                    <title>GW2Geary - {character ? character?.name : 'Character'}</title>
+                    <meta property="og:title" content={`GW2Geary - ${character ? character?.name : 'Character'}`} />
+                    <meta
+                        name="og:description"
+                        content={
+                            `Character info: 
+                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
+                             ${account ? `account name: ${account?.name}` : ''}
+                             ${world ? `world: ${world}` : ''}
+                             ${mastery ? `mastery points: ${mastery}` : ''}
+                             ${account ? `fractal level: ${account?.fractal}` : ''}
+                             ${account ? `wvw rank: ${account?.wvw_rank}` : ''}
+             
+             `}
+                    />
+                </Helmet>
+                <Container className='center-items'>
+                    {/* Breadcrumb */}
+                    <nav aria-label="breadcrumb" className="breadcrumb">
+                        <ul style={{ listStyleType: "none" }} className='flex center'>
+                            <li>
+                                <Link className='nav-a' to="/">Search</Link>
+                            </li>
+                            <li className="breadcrumb-item">
+                                <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
+                            </li>
+                            <li style={{ cursor: "default" }} aria-current="page">
+                                <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
+                            </li>
+                        </ul>
+                    </nav>
 
-                {/* Private Character */}
-                {isPrivate === true
-                    ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
-                    : ''
-                }
-                <div className='equipment-build-flex-fashion'>
-                    <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} />
-                </div>
-                <br />
-            </Container>
+                    {/* Private Character */}
+                    {isPrivate === true
+                        ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
+                        : ''
+                    }
+                    <div className='equipment-build-flex-fashion'>
+                        <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} />
+                    </div>
+                    <br />
+                </Container>
+            </div>
     );
 }
 
