@@ -172,6 +172,72 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+//Get Account
+exports.getAccount = async (req, res) => {
+  try {
+    const fullUrl = req.originalUrl;
+
+    // Split the URL by '/' and get the last part
+    const urlParts = fullUrl.split('name=');
+    const lastPart = urlParts[urlParts.length - 1].replace(/\+/g, ' ');
+
+    const foundUser = await User.findOne({
+      'apiKeys.accountName': lastPart
+    })
+      .populate("apiKeys", "_id active accountName")
+      .select("-roles -email -username -password -_id -apiKeys._id -resetToken -_id");
+
+    if (foundUser) {
+      res.status(200).send({
+        message: "User retrieved successfully!",
+        user: foundUser,
+      });
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Get Character
+exports.getCharacter = async (req, res) => {
+  try {
+    const fullUrl = req.originalUrl;
+
+    // Split the URL by '/' and get the last part
+    const urlParts = fullUrl.split('name=');
+    const lastPart = urlParts[urlParts.length - 1].replace(/\+/g, ' ');
+
+    const foundUser = await User.findOne({
+      'apiKeys.characters.name': lastPart
+    })
+      .populate("apiKeys", "_id active accountName characters")
+      .select("-roles -email -username -password -_id -apiKeys._id -resetToken -_id");
+
+    if (foundUser) {
+      const characters = foundUser.apiKeys.reduce((acc, apiKey) => {
+        const character = apiKey.characters.find(char => char.name === lastPart);
+        if (character) {
+          acc.push(character);
+        }
+        return acc;
+      }, []);
+
+      res.status(200).send({
+        message: "User and characters retrieved successfully!",
+        user: foundUser,
+        characters: characters,
+      });
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+
 // Get all users
 exports.getEmail = async (req, res) => {
   const { email } = req.body;

@@ -49,6 +49,16 @@ router.get(
   controller.getAllUsers
 );
 
+router.get(
+  "/getAccount",
+  controller.getAccount
+);
+
+router.get(
+  "/getCharacter",
+  controller.getCharacter
+);
+
 router.post(
   "/getEmail",
   controller.getEmail

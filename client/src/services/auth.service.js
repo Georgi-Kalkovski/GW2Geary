@@ -80,6 +80,16 @@ const getAllUsers = () => {
   return axios.get(API_URL + "allUsers");
 };
 
+// Users Get Account
+const getAccount = (name) => {
+  return axios.get(API_URL + "getAccount", { params: { name } });
+};
+
+// Users Get Character
+const getCharacter = (name) => {
+  return axios.get(API_URL + "getCharacter", { params: { name } });
+};
+
 // Email Get Service
 const getEmail = (email) => {
   return axios.post(API_URL + "getEmail",
@@ -154,6 +164,8 @@ const AuthService = {
   deleteCurrentUser,
   getCurrentUser,
   getAllUsers,
+  getAccount,
+  getCharacter,
   getEmail,
   changeEmail,
   createApiKey,
