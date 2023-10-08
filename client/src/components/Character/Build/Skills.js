@@ -12,6 +12,9 @@ function Skills({ skills, water_skills, prof }) {
         heal: null,
         utilities: [null, null, null],
         elite: null,
+    });
+
+    const [skillsDataWater, setSkillsDataWater] = useState({
         waterHeal: null,
         waterUtilities: [null, null, null],
         waterElite: null
@@ -21,22 +24,28 @@ function Skills({ skills, water_skills, prof }) {
         const skillIds = [
             skills.heal,
             skills.elite,
+            ...skills.utilities,
+        ].filter(id => id !== null);
+
+        const skillIdsWater = [
             water_skills.heal,
             water_skills.elite,
-            ...skills.utilities,
             ...water_skills.utilities
         ].filter(id => id !== null);
 
         (async () => {
             try {
                 const skillsData = await fetchData('skills', skillIds.join(','));
+                const skillsDataWater = await fetchData('skills', skillIdsWater.join(','));
                 setSkillsData({
                     heal: skillsData.find(skill => skill.id === skills.heal),
                     utilities: skillsData.filter(skill => skills.utilities.includes(skill.id)).slice(0, 3),
-                    elite: skillsData.find(skill => skill.id === skills.elite),
-                    waterHeal: skillsData.find(skill => skill.id === water_skills.heal),
-                    waterUtilities: skillsData.filter(skill => water_skills.utilities.includes(skill.id)).slice(0, 3),
-                    waterElite: skillsData.find(skill => skill.id === water_skills.elite)
+                    elite: skillsData.find(skill => skill.id === skills.elite)
+                });
+                setSkillsDataWater({
+                    waterHeal: skillsDataWater.find(skill => skill.id === water_skills.heal),
+                    waterUtilities: skillsDataWater.filter(skill => water_skills.utilities.includes(skill.id)).slice(0, 3),
+                    waterElite: skillsDataWater.find(skill => skill.id === water_skills.elite)
                 });
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -94,11 +103,11 @@ function Skills({ skills, water_skills, prof }) {
                 <Col className="center-water">
                     <img src={Water} alt="water" />
                 </Col>
-                <SkillBox skill={skillsData.waterHeal} />
+                <SkillBox skill={skillsDataWater.waterHeal} />
                 {[0, 1, 2].map(index => (
-                    <SkillBox key={`water-utility-${index}`} skill={skillsData.waterUtilities[index]} />
+                    <SkillBox key={`water-utility-${index}`} skill={skillsDataWater.waterUtilities[index]} />
                 ))}
-                <SkillBox skill={skillsData.waterElite} />
+                <SkillBox skill={skillsDataWater.waterElite} />
             </Row>
         </Container>
     );
