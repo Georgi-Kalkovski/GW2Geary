@@ -41,16 +41,14 @@ const Account = () => {
   useEffect(() => {
     try {
       (async () => {
-        const users = await AuthService.getAllUsers();
+        const user = await AuthService.getAccount(formattedName);
         const updatedCharacters = [];
-        const apis = users.data?.users?.find(accs => accs?.apiKeys.find(acc => acc.accountName === formattedName));
-        const account = apis?.apiKeys?.find(chars => chars.accountName === formattedName);
+        const account = user.data?.user?.apiKeys?.find(acc => acc.accountName === formattedName);
         if (!account.active) {
-          if (!currentUser || currentUser?.apiKeys.includes(api => api?.accountName === account.accountName)) {
+          if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === account.accountName)) {
             navigate("/");
           }
           setActive(true)
-        } else {
         }
         if (account) {
           updatedCharacters.push(account);

@@ -38,14 +38,14 @@ function Skills({ skills, water_skills, prof }) {
                 const skillsData = await fetchData('skills', skillIds.join(','));
                 const skillsDataWater = await fetchData('skills', skillIdsWater.join(','));
                 setSkillsData({
-                    heal: skillsData.find(skill => skill.id === skills.heal),
-                    utilities: skillsData.filter(skill => skills.utilities.includes(skill.id)).slice(0, 3),
-                    elite: skillsData.find(skill => skill.id === skills.elite)
+                    heal: skillsData?.find(skill => skill.id === skills.heal),
+                    utilities: skillsData?.filter(skill => skills.utilities.includes(skill.id)).slice(0, 3),
+                    elite: skillsData?.find(skill => skill.id === skills.elite)
                 });
                 setSkillsDataWater({
-                    waterHeal: skillsDataWater.find(skill => skill.id === water_skills.heal),
-                    waterUtilities: skillsDataWater.filter(skill => water_skills.utilities.includes(skill.id)).slice(0, 3),
-                    waterElite: skillsDataWater.find(skill => skill.id === water_skills.elite)
+                    waterHeal: skillsDataWater?.find(skill => skill.id === water_skills.heal),
+                    waterUtilities: skillsDataWater?.filter(skill => water_skills.utilities.includes(skill.id)).slice(0, 3),
+                    waterElite: skillsDataWater?.find(skill => skill.id === water_skills.elite)
                 });
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -93,21 +93,21 @@ function Skills({ skills, water_skills, prof }) {
                 <Col className="center-land">
                     <img src={Land} alt="land" />
                 </Col>
-                <SkillBox skill={skillsData.heal} />
+                <SkillBox skill={skillsData?.heal} />
                 {[0, 1, 2].map(index => (
-                    <SkillBox key={`utility-${index}`} skill={skillsData.utilities[index]} />
+                    <SkillBox key={`utility-${index}`} skill={skillsData?.utilities?.[index]} />
                 ))}
-                <SkillBox skill={skillsData.elite} />
+                <SkillBox skill={skillsData?.elite} />
             </Row>
             <Row className="flex">
                 <Col className="center-water">
                     <img src={Water} alt="water" />
                 </Col>
-                <SkillBox skill={skillsDataWater.waterHeal} />
+                <SkillBox skill={skillsDataWater?.waterHeal} />
                 {[0, 1, 2].map(index => (
-                    <SkillBox key={`water-utility-${index}`} skill={skillsDataWater.waterUtilities[index]} />
+                    <SkillBox key={`water-utility-${index}`} skill={skillsDataWater?.waterUtilities?.[index]} />
                 ))}
-                <SkillBox skill={skillsDataWater.waterElite} />
+                <SkillBox skill={skillsDataWater?.waterElite} />
             </Row>
         </Container>
     );

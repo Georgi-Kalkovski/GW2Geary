@@ -44,17 +44,15 @@ function Character() {
     useEffect(() => {
         try {
             (async () => {
-                const users = await AuthService.getAllUsers();
-                const apis = users.data?.users?.find(accs => accs.apiKeys.find(chars => chars.characters.find(char => char.name === formattedName)))
-                const account = apis?.apiKeys?.find(chars => chars.characters.find(char => char.name === formattedName))
+                const user = await AuthService.getCharacter(formattedName);
+                const account = user.data?.user?.apiKeys?.find(acc => acc.characters.find(char => char.name === formattedName));
                 const character = account?.characters.find(char => char.name === formattedName);
                 if (!account.active || !character.active) {
-                    if (!currentUser || currentUser?.apiKeys.includes(api => api?.accountName === account.accountName)) {
+                    if (!currentUser || !currentUser.apiKeys.find(api => api.accountName === account.accountName)) {
                         navigate("/");
                     }
-                    setIsPrivate(true)
-                } else {
-                }
+                    setIsPrivate(true);
+                } 
                 if (account) {
                     const charFound = await fetchData('characters', formattedName);
                     setCharacter(charFound)
