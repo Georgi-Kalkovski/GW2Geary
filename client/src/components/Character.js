@@ -52,7 +52,6 @@ function Character() {
                 const charName = charFoundData?.name;
 
                 if (accName && charName && charName === formattedName) {
-                    console.log("Im in!!!")
                     setAccFound(getFromLocalStorage('accFound'))
                     setMastery(getFromLocalStorage('mastery'))
                     setWorld(getFromLocalStorage('world'))
