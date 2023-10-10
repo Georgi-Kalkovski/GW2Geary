@@ -15,7 +15,7 @@ function CharacterFashionEmbed() {
     const formattedName = name.replaceAll('_', ' ');
     const currentUser = AuthService.getCurrentUser();
     const [character, setCharacter] = useState(null);
-    const [account, setAccount] = useState(null);
+    const [accFound, setAccFound] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false)
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
     let navigate = useNavigate();
@@ -44,7 +44,7 @@ function CharacterFashionEmbed() {
                     const charFound = await fetchData('characters', formattedName);
                     setCharacter(charFound)
                     const accFound = await fetchData('account', account.accountName);
-                    setAccount(accFound)
+                    setAccFound(accFound)
                 }
             })();
         } catch (error) {
@@ -53,7 +53,7 @@ function CharacterFashionEmbed() {
     }, []);
 
     return (
-        character === null || account === null
+        character === null || accFound === null
             ?
             <Container className='center-items equipment equipment-fashion'>
                 <div className="flex">

@@ -135,7 +135,8 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
             <input
               type="checkbox"
               checked={isFashionOn}
-              onChange={toggleFashion} />
+              onChange={toggleFashion} 
+              name='fashion'/>
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`}></span>
           </label>
         </div>

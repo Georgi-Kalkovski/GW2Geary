@@ -100,6 +100,7 @@ function ChangeEmail({ currentUser, AuthService, EventBus }) {
           placeholder={placeholder}
           onChange={(e) => setNewEmail(e.target.value)}
           onKeyDown={handleKeyPress}
+          name="change-email"
         />
         {emailError && <div className="error">{emailError}</div>}
         <button onClick={handleChangeEmail} className="basic-button info-button">

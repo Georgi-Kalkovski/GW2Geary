@@ -13,6 +13,7 @@ import CharacterInfo from './Character/Info/CharacterInfo';
 import './Character.css';
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
+import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
 
 function Character() {
     let [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +21,7 @@ function Character() {
     const formattedName = name.replaceAll('_', ' ');
     const currentUser = AuthService.getCurrentUser();
     const [character, setCharacter] = useState(null);
-    const [account, setAccount] = useState(null);
+    const [accFound, setAccFound] = useState(null);
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false)
@@ -29,6 +30,7 @@ function Character() {
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
     const [bldUp, setBldUp] = useState(searchParams.get('bld'));
     let navigate = useNavigate();
+
     useEffect(() => {
         let params = {};
         if (eqUp) {
@@ -44,27 +46,52 @@ function Character() {
     useEffect(() => {
         try {
             (async () => {
-                const user = await AuthService.getCharacter(formattedName);
-                const account = user.data?.user?.apiKeys?.find(acc => acc.characters.find(char => char.name === formattedName));
-                const character = account?.characters.find(char => char.name === formattedName);
-                if (!account.active || !character.active) {
-                    if (!currentUser || !currentUser.apiKeys.find(api => api.accountName === account.accountName)) {
-                        navigate("/");
+                const accFoundData = getFromLocalStorage('accFound');
+                const accName = accFoundData?.name;
+
+                if (accName && accName === formattedName) {
+                    setAccFound(getFromLocalStorage('accFound'))
+                    setMastery(getFromLocalStorage('mastery'))
+                    setWorld(getFromLocalStorage('world'))
+                    setCharacter(getFromLocalStorage('character'))
+
+                    const activeStored = getFromLocalStorage('account');
+                    if (activeStored && !activeStored.active) {
+                        if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
+                            navigate("/");
+                        }
+                        setActive(true)
                     }
-                    setIsPrivate(true);
-                } 
-                if (account) {
-                    const charFound = await fetchData('characters', formattedName);
-                    setCharacter(charFound)
-                    const accFound = await fetchData('account', account.accountName);
-                    setAccount(accFound)
-                    const mastery_points = await fetchData('mastery', account.accountName);
-                    let world;
-                    if (accFound && accFound.world) {
-                        world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+                } else {
+                    const user = await AuthService.getCharacter(formattedName);
+                    const account = user.data?.user?.apiKeys?.find(acc => acc.characters.find(char => char.name === formattedName));
+                    const character = account?.characters.find(char => char.name === formattedName);
+                    if (!account.active || !character.active) {
+                        if (!currentUser || !currentUser.apiKeys.find(api => api.accountName === account.accountName)) {
+                            navigate("/");
+                        }
+                        setIsPrivate(true);
                     }
-                    setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0))
-                    setWorld(world.name)
+                    if (account) {
+                        const charFound = await fetchData('characters', formattedName);
+                        setCharacter(charFound)
+                        const accFound = await fetchData('account', account.accountName);
+                        setAccFound(accFound);
+                        const mastery_points = await fetchData('mastery', account.accountName);
+                        let world;
+                        if (accFound && accFound.world) {
+                            world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+                        }
+                        let mastery = mastery_points.totals.reduce((acc, x) => acc + x.spent, 0)
+                        setMastery(mastery)
+                        setWorld(world.name)
+
+                        saveToLocalStorage('accFound', accFound);
+                        saveToLocalStorage('mastery', mastery);
+                        saveToLocalStorage('world', world.name);
+                        saveToLocalStorage('character', charFound);
+                    }
+
                 }
             })();
         } catch (error) {
@@ -73,7 +100,7 @@ function Character() {
     }, []);
 
     return (
-        character === null || account === null
+        character === null || accFound === null
             ? <div className="flex center">
                 <div className="logo-loading-div">
                     <img src={Dragon} alt="" className="logo--loading-dragon" />
@@ -89,11 +116,11 @@ function Character() {
                         content={
                             `Character info: 
                              ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
-                             ${account ? `account name: ${account?.name}` : ''}
+                             ${accFound ? `account name: ${accFound?.name}` : ''}
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${account ? `fractal level: ${account?.fractal}` : ''}
-                             ${account ? `wvw rank: ${account?.wvw_rank}` : ''}
+                             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
              
              `}
                     />
@@ -106,7 +133,7 @@ function Character() {
                                 <Link className='nav-a' to="/">Search</Link>
                             </li>
                             <li className="breadcrumb-item">
-                                <span>{`/`} </span><Link className='nav-a' to={`/a/${account.name.replaceAll(' ', '_')}`}>Account</Link>
+                                <span>{`/`} </span><Link className='nav-a' to={`/a/${accFound.name.replaceAll(' ', '_')}`}>Account</Link>
                             </li>
                             <li style={{ cursor: "default" }} aria-current="page">
                                 <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
@@ -119,7 +146,7 @@ function Character() {
                         ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
                         : ''
                     }
-                    <CharacterInfo char={character} acc={account} mastery={mastery} world={world} shareLink={shareLink} />
+                    <CharacterInfo char={character} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
                     <div className='equipment-build-flex'>
                         <EquipmentDropdown char={character} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
                         <BuildDropdown char={character} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />

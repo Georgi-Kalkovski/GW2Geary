@@ -100,6 +100,7 @@ function ChangeUsername({ AuthService, EventBus }) {
                     placeholder="New username..."
                     onChange={(e) => setNewUsername(e.target.value)}
                     onKeyDown={handleKeyPress}
+                    name="add-new-user"
                 />
                 {usernameError && <div className="error">{usernameError}</div>}
                 <button onClick={handleChangeUsername} className="basic-button info-button">

@@ -86,6 +86,7 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               onKeyDown={handleKeyPress}
+              name="add-new-password"
             />
           </div>
           <div>
@@ -97,6 +98,8 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               onKeyDown={handleKeyPress}
+              name="add-new-password-confirm"
+
             />
           </div>
         </div>

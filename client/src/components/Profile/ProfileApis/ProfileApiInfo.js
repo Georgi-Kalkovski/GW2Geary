@@ -61,6 +61,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                             defaultChecked={apiKey.active}
                             onChange={(e) => updateApiKeyStatus(apiKey._id, e.target.checked)}
                             key={`api-key-checkbox-${apiKey._id}`}
+                            name={`checkbox-${apiKey._id}`}
                         />
                         <span className="checkmark"></span>
                     </label>

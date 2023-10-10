@@ -8,6 +8,7 @@ import CharacterPreview from "./CharacterPreview";
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
 import fetchData from "./fetchData";
+import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
 
 const Account = () => {
   const { name } = useParams();
@@ -22,23 +23,6 @@ const Account = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let navigate = useNavigate();
-
-  // Function to save data to localStorage
-  const saveToLocalStorage = (key, data) => {
-    localStorage.setItem(key, JSON.stringify(data));
-  };
-
-  // Function to get data from localStorage
-  const getFromLocalStorage = (key) => {
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : null;
-    } catch (error) {
-      console.error(`Error parsing JSON for key '${key}':`, error);
-      return null;
-    }
-  };
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -98,14 +82,14 @@ const Account = () => {
             if (accFound && accFound.world) {
               world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
             }
-
-            setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+            let mastery = mastery_points?.totals.reduce((acc, x) => acc + x.spent, 0)
+            setMastery(mastery);
             setWorld(world.name);
 
             // Save data to localStorage
             saveToLocalStorage('accFound', accFound);
             saveToLocalStorage('account', account);
-            saveToLocalStorage('mastery', mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+            saveToLocalStorage('mastery', mastery);
             saveToLocalStorage('world', world.name);
           }
 
@@ -217,21 +201,21 @@ const Account = () => {
                     {/* Mastery Points */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{mastery}</Row>
+                        <Row className="font-size-25px">{mastery ? mastery : '0'}</Row>
                         <Row className="yellow-highlight">Mastery Points </Row>
                       </Col>
                     )}
                     {/* Fractal Level */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{accFound?.fractal_level}</Row>
+                        <Row className="font-size-25px">{accFound?.fractal_level ? accFound?.fractal_level : '0'}</Row>
                         <Row className="yellow-highlight">Fractal Level</Row>
                       </Col>
                     )}
                     {/* WvW Rank */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{accFound?.wvw_rank}</Row>
+                        <Row className="font-size-25px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
                         <Row className="yellow-highlight">WvW Rank</Row>
                       </Col>
                     )}

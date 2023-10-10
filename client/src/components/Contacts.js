@@ -79,6 +79,7 @@ function Contacts() {
                                 id="email"
                                 value={email}
                                 onChange={handleEmailChange}
+                                name='email'
                             />
                         </div>
                         <div className="form-group">
@@ -89,6 +90,7 @@ function Contacts() {
                                 id="subject"
                                 value={subject}
                                 onChange={handleSubjectChange}
+                                name='subject'
                             />
                         </div>
                         <div className="form-group">

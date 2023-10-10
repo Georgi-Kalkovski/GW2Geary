@@ -329,6 +329,11 @@ input:checked+.slider:before {
   font-size: 1.5em;
 }
 
+.font-size-25px {
+  font-size: 20px;
+  padding-bottom: 6px;
+}
+
 /* Hide the API key on small screens */
 @media (max-width: 550px) {
 

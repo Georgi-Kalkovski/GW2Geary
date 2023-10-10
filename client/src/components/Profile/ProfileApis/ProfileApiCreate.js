@@ -99,6 +99,7 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
         onChange={handleApiKeyChange}
         key="api-key-input"
         onKeyDown={handleKeyPress}
+        name="add-api-key"
       />
       <button className="basic-button add-api-key-button" onClick={handleApiKeyCreate} key="add-api-key-button">
         Add API Key

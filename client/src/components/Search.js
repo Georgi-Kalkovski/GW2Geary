@@ -208,6 +208,7 @@ function Search() {
           value={searchTerm}
           onChange={handleSearch}
           key="search-input"
+          name='search'
         />
         {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ?
           <button className='basic-button x-button' onClick={toggleX} >

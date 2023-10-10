@@ -114,14 +114,14 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         {/* Fractal Level */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{acc.fractal_level}</Row>
+                                <Row className="font-size-25px">{acc.fractal_level ? acc.fractal_level : '0'}</Row>
                                 <Row className="yellow-highlight">Fractal Level</Row>
                             </Col>
                         )}
                         {/* WvW Rank */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{acc.wvw_rank}</Row>
+                                <Row className="font-size-25px">{acc.wvw_rank  ?acc.wvw_rank : '0'}</Row>
                                 <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                         )}

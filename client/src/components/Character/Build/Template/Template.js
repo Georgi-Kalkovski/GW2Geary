@@ -117,7 +117,14 @@ function Template({ buildInput }) {
 
     return (
         <div className='template-container'>
-            <input className={`${buildInput.profession.toLowerCase()}-lightning-border template-text`} type='text' value={build.toString()} readOnly onDoubleClick={copyText} />
+            <input 
+            className={`${buildInput.profession.toLowerCase()}-lightning-border template-text`} 
+            type='text' 
+            value={build.toString()} 
+            readOnly 
+            onDoubleClick={copyText}
+            name='template'
+            />
             <button
                 className={`${buildInput.profession.toLowerCase()}-border template-button`}
                 onClick={copyText}

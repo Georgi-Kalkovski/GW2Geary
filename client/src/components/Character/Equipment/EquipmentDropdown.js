@@ -225,7 +225,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isFashionOn}
-              onChange={toggleFashion} />
+              onChange={toggleFashion} 
+              name='fashion'/>
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
           {/* {switchVisible && (
@@ -249,7 +250,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isPrefixesOn}
-              onChange={togglePrefixes} />
+              onChange={togglePrefixes} 
+              name='stats'/>
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
           {/* {switchVisible && (
@@ -273,7 +275,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isSliderOn}
-              onChange={toggleSlider} />
+              onChange={toggleSlider} 
+              name='skins'/>
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
           </label>
           {/* {switch2Visible && (
