@@ -92,8 +92,8 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                 AuthService={AuthService}
                 setApiKeys={setApiKeys}
             />
-            <br key={`api-key-break-${apiKey._id}`} />
-            <br key={`api-key-break-${apiKey._id}`} />
+            <br/>
+            <br/>
         </div>
     );
 }

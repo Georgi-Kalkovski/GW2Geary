@@ -48,9 +48,9 @@ function ProfileApis({ currentUser, AuthService }) {
 
                         {/* Apis */}
                         {apiKeys &&
-                            apiKeys.map((apiKey, index) => (
+                            apiKeys.map((apiKey) => (
                                 <ProfileApiInfo
-                                    key={index}
+                                    key={apiKey._id}
                                     apiKey={apiKey}
                                     apiKeys={apiKeys}
                                     AuthService={AuthService}

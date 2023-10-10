@@ -14,7 +14,7 @@ const Account = () => {
   const currentUser = AuthService.getCurrentUser();
   const formattedName = name.replaceAll('_', ' ');
   const [characters, setCharacters] = useState(null);
-  const [account, setAccount] = useState(null);
+  const [accFound, setAccFound] = useState(null);
   const [mastery, setMastery] = useState(null);
   const [world, setWorld] = useState(null);
   const [active, setActive] = useState(false)
@@ -22,6 +22,23 @@ const Account = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let navigate = useNavigate();
+
+  // Function to save data to localStorage
+  const saveToLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
+  };
+
+  // Function to get data from localStorage
+  const getFromLocalStorage = (key) => {
+    try {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : null;
+    } catch (error) {
+      console.error(`Error parsing JSON for key '${key}':`, error);
+      return null;
+    }
+  };
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,28 +58,60 @@ const Account = () => {
   useEffect(() => {
     try {
       (async () => {
-        const user = await AuthService.getAccount(formattedName);
-        const updatedCharacters = [];
-        const account = user.data?.user?.apiKeys?.find(acc => acc.accountName === formattedName);
-        if (!account.active) {
-          if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === account.accountName)) {
-            navigate("/");
+         const accFoundData = getFromLocalStorage('accFound');
+        const accName = accFoundData?.name;
+
+        if (accName && accName === formattedName) {
+          setAccFound(getFromLocalStorage('accFound'))
+          setMastery(getFromLocalStorage('mastery'))
+          setWorld(getFromLocalStorage('world'))
+          setCharacters(getFromLocalStorage('characters'))
+
+          const activeStored = getFromLocalStorage('account');
+          if (activeStored && !activeStored.active) {
+            if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
+              navigate("/");
+            }
+            setActive(true)
           }
-          setActive(true)
-        }
-        if (account) {
-          updatedCharacters.push(account);
-          const accFound = await fetchData('account', formattedName);
-          setAccount(accFound);
-          const mastery_points = await fetchData('mastery', formattedName);
-          let world;
-          if (accFound && accFound.world) {
-            world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+        } else {
+          const user = await AuthService.getAccount(formattedName);
+          
+          const updatedCharacters = [];
+
+          const account = user.data?.user?.apiKeys?.find(acc => acc.accountName === formattedName);
+          if (!account.active) {
+            if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === account.accountName)) {
+              navigate("/");
+            }
+            setActive(true)
           }
-          setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
-          setWorld(world.name);
+          
+          if (account) {
+            updatedCharacters.push(account);
+            const accFound = await fetchData('account', formattedName);
+            setAccFound(accFound);
+
+            const mastery_points = await fetchData('mastery', formattedName);
+
+            let world;
+            if (accFound && accFound.world) {
+              world = (await axios.get(`https://api.guildwars2.com/v2/worlds/${accFound.world}`)).data;
+            }
+
+            setMastery(mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+            setWorld(world.name);
+
+            // Save data to localStorage
+            saveToLocalStorage('accFound', accFound);
+            saveToLocalStorage('account', account);
+            saveToLocalStorage('mastery', mastery_points.totals.reduce((acc, x) => acc + x.spent, 0));
+            saveToLocalStorage('world', world.name);
+          }
+
+          setCharacters(updatedCharacters);
+          saveToLocalStorage('characters', updatedCharacters);
         }
-        setCharacters(updatedCharacters);
       })();
     } catch (error) {
       console.error(error);
@@ -81,16 +130,16 @@ const Account = () => {
   return (
     <div>
       <Helmet>
-        <title>GW2Geary - {account ? account?.name : 'Account'}</title>
-        <meta property="og:title" content={`GW2Geary - ${account ? account?.name : 'Account'}`} />
+        <title>GW2Geary - {accFound ? accFound?.name : 'Account'}</title>
+        <meta property="og:title" content={`GW2Geary - ${accFound ? accFound?.name : 'Account'}`} />
         <meta
           name="og:description"
           content={
             `Account info: 
              ${world ? `world: ${world}` : ''}
              ${mastery ? `mastery points: ${mastery}` : ''}
-             ${account ? `fractal level: ${account?.fractal}` : ''}
-             ${account ? `wvw rank: ${account?.wvw_rank}` : ''}
+             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
              ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}
              `}
         />
@@ -115,7 +164,7 @@ const Account = () => {
               : ''
             }
             {/* Account */}
-            {!characters || !account
+            {!characters || !accFound
               ? <div className="flex center">
                 <div className="logo-loading-div">
                   <img src={Dragon} alt="" className="logo--loading-dragon" />
@@ -128,7 +177,7 @@ const Account = () => {
                     <Row className={`flex center acc-info accounts-box`}>
                       {/* Name */}
                       <Col className='character-col'>
-                        <Row style={{ fontSize: '30px' }}>{account.name}</Row>
+                        <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
                       </Col>
                       <div className='flex center'>
                         {window.innerWidth < 550 && !showMenu && (
@@ -176,14 +225,14 @@ const Account = () => {
                       {/* Fractal Level */}
                       {showMenu && (
                         <Col className="character-col padding-top">
-                          <Row className="font-size-25px">{account?.fractal_level}</Row>
+                          <Row className="font-size-25px">{accFound?.fractal_level}</Row>
                           <Row className="yellow-highlight">Fractal Level</Row>
                         </Col>
                       )}
                       {/* WvW Rank */}
                       {showMenu && (
                         <Col className="character-col padding-top">
-                          <Row className="font-size-25px">{account?.wvw_rank}</Row>
+                          <Row className="font-size-25px">{accFound?.wvw_rank}</Row>
                           <Row className="yellow-highlight">WvW Rank</Row>
                         </Col>
                       )}
