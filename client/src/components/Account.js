@@ -58,7 +58,7 @@ const Account = () => {
   useEffect(() => {
     try {
       (async () => {
-         const accFoundData = getFromLocalStorage('accFound');
+        const accFoundData = getFromLocalStorage('accFound');
         const accName = accFoundData?.name;
 
         if (accName && accName === formattedName) {
@@ -76,7 +76,7 @@ const Account = () => {
           }
         } else {
           const user = await AuthService.getAccount(formattedName);
-          
+
           const updatedCharacters = [];
 
           const account = user.data?.user?.apiKeys?.find(acc => acc.accountName === formattedName);
@@ -86,7 +86,7 @@ const Account = () => {
             }
             setActive(true)
           }
-          
+
           if (account) {
             updatedCharacters.push(account);
             const accFound = await fetchData('account', formattedName);
@@ -171,72 +171,33 @@ const Account = () => {
                   <img src={Cog} alt="" className="logo-loading-cog" />
                 </div>
               </div>
-              : characters.map((character, index) => (
-                <React.Fragment key={index}>
-                  <Container className="flex center center-items">
-                    <Row className={`flex center acc-info accounts-box`}>
-                      {/* Name */}
-                      <Col className='character-col'>
-                        <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
-                      </Col>
-                      <div className='flex center'>
-                        {window.innerWidth < 550 && !showMenu && (
-                          <button
-                            className={`basic-button`}
-                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
-                            onClick={() => setShowMenu(true)}
-                          >
-                            Show Details
-                          </button>
-                        )}
-                        {window.innerWidth < 550 && showMenu && (
-                          <button
-                            className={`basic-button`}
-                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
-                            onClick={() => setShowMenu(false)}
-                          >
-                            Hide Details
-                          </button>
-                        )}
-                        {window.innerWidth < 550 && (
-                          <button
-                            className={`basic-button`}
-                            style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
-                            onClick={copyText}
-                          >
-                            Copy Link
-                          </button>
-                        )}
-                      </div>
-                      {/* World */}
-                      {showMenu && (
-                        <Col className='character-col padding-top'>
-                          <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                          <Row className='yellow-highlight'>World</Row>
-                        </Col>
+              : <React.Fragment >
+                <Container className="flex center center-items">
+                  <Row className={`flex center acc-info accounts-box`}>
+                    {/* Name */}
+                    <Col className='character-col'>
+                      <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
+                    </Col>
+                    <div className='flex center'>
+                      {window.innerWidth < 550 && !showMenu && (
+                        <button
+                          className={`basic-button`}
+                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                          onClick={() => setShowMenu(true)}
+                        >
+                          Show Details
+                        </button>
                       )}
-                      {/* Mastery Points */}
-                      {showMenu && (
-                        <Col className="character-col padding-top">
-                          <Row className="font-size-25px">{mastery}</Row>
-                          <Row className="yellow-highlight">Mastery Points </Row>
-                        </Col>
+                      {window.innerWidth < 550 && showMenu && (
+                        <button
+                          className={`basic-button`}
+                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
+                          onClick={() => setShowMenu(false)}
+                        >
+                          Hide Details
+                        </button>
                       )}
-                      {/* Fractal Level */}
-                      {showMenu && (
-                        <Col className="character-col padding-top">
-                          <Row className="font-size-25px">{accFound?.fractal_level}</Row>
-                          <Row className="yellow-highlight">Fractal Level</Row>
-                        </Col>
-                      )}
-                      {/* WvW Rank */}
-                      {showMenu && (
-                        <Col className="character-col padding-top">
-                          <Row className="font-size-25px">{accFound?.wvw_rank}</Row>
-                          <Row className="yellow-highlight">WvW Rank</Row>
-                        </Col>
-                      )}
-                      {window.innerWidth >= 550 && (
+                      {window.innerWidth < 550 && (
                         <button
                           className={`basic-button`}
                           style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
@@ -245,31 +206,68 @@ const Account = () => {
                           Copy Link
                         </button>
                       )}
-                    </Row>
-                  </Container>
+                    </div>
+                    {/* World */}
+                    {showMenu && (
+                      <Col className='character-col padding-top'>
+                        <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                        <Row className='yellow-highlight'>World</Row>
+                      </Col>
+                    )}
+                    {/* Mastery Points */}
+                    {showMenu && (
+                      <Col className="character-col padding-top">
+                        <Row className="font-size-25px">{mastery}</Row>
+                        <Row className="yellow-highlight">Mastery Points </Row>
+                      </Col>
+                    )}
+                    {/* Fractal Level */}
+                    {showMenu && (
+                      <Col className="character-col padding-top">
+                        <Row className="font-size-25px">{accFound?.fractal_level}</Row>
+                        <Row className="yellow-highlight">Fractal Level</Row>
+                      </Col>
+                    )}
+                    {/* WvW Rank */}
+                    {showMenu && (
+                      <Col className="character-col padding-top">
+                        <Row className="font-size-25px">{accFound?.wvw_rank}</Row>
+                        <Row className="yellow-highlight">WvW Rank</Row>
+                      </Col>
+                    )}
+                    {window.innerWidth >= 550 && (
+                      <button
+                        className={`basic-button`}
+                        style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
+                        onClick={copyText}
+                      >
+                        Copy Link
+                      </button>
+                    )}
+                  </Row>
+                </Container>
 
-                  {/* Characters */}
-                  {characters &&
-                    characters.map((character, index) => (
-                      <React.Fragment key={index}>
-                        <div className="characters">
-                          {character &&
-                            character.characters
-                              .filter((char) => char.active !== false)
-                              .sort((a, b) => a.name.localeCompare(b.name))
-                              .map((char, charIndex) => (
-                                <React.Fragment key={charIndex}>
-                                  <CharacterPreview
-                                    character={char}
-                                    key={`${char.accountName}_${char.name}`}
-                                  />
-                                </React.Fragment>
-                              ))}
-                        </div>
-                      </React.Fragment>
-                    ))}
-                </React.Fragment>
-              ))
+                {/* Characters */}
+                {characters &&
+                  characters.map((character, index) => (
+                    <React.Fragment key={index}>
+                      <div className="characters">
+                        {character &&
+                          character.characters
+                            .filter((char) => char.active !== false)
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((char, charIndex) => (
+                              <React.Fragment key={charIndex}>
+                                <CharacterPreview
+                                  character={char}
+                                  key={`${char.accountName}_${char.name}`}
+                                />
+                              </React.Fragment>
+                            ))}
+                      </div>
+                    </React.Fragment>
+                  ))}
+              </React.Fragment>
             }
           </div>
         </div>
