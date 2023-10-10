@@ -20,7 +20,7 @@ function Character() {
     const { name } = useParams();
     const formattedName = name.replaceAll('_', ' ');
     const currentUser = AuthService.getCurrentUser();
-    const [character, setCharacter] = useState(null);
+    const [charFound, setCharFound] = useState(null);
     const [accFound, setAccFound] = useState(null);
     const [mastery, setMastery] = useState(null);
     const [world, setWorld] = useState(null);
@@ -48,12 +48,15 @@ function Character() {
             (async () => {
                 const accFoundData = getFromLocalStorage('accFound');
                 const accName = accFoundData?.name;
+                const charFoundData = getFromLocalStorage('charFound');
+                const charName = charFoundData?.name;
 
-                if (accName && accName === formattedName) {
+                if (accName && charName && charName === formattedName) {
+                    console.log("Im in!!!")
                     setAccFound(getFromLocalStorage('accFound'))
                     setMastery(getFromLocalStorage('mastery'))
                     setWorld(getFromLocalStorage('world'))
-                    setCharacter(getFromLocalStorage('character'))
+                    setCharFound(getFromLocalStorage('charFound'))
 
                     const activeStored = getFromLocalStorage('account');
                     if (activeStored && !activeStored.active) {
@@ -64,6 +67,7 @@ function Character() {
                     }
                 } else {
                     const user = await AuthService.getCharacter(formattedName);
+                    const updatedCharacters = [];
                     const account = user.data?.user?.apiKeys?.find(acc => acc.characters.find(char => char.name === formattedName));
                     const character = account?.characters.find(char => char.name === formattedName);
                     if (!account.active || !character.active) {
@@ -73,8 +77,9 @@ function Character() {
                         setIsPrivate(true);
                     }
                     if (account) {
+                        updatedCharacters.push(account);
                         const charFound = await fetchData('characters', formattedName);
-                        setCharacter(charFound)
+                        setCharFound(charFound)
                         const accFound = await fetchData('account', account.accountName);
                         setAccFound(accFound);
                         const mastery_points = await fetchData('mastery', account.accountName);
@@ -89,8 +94,10 @@ function Character() {
                         saveToLocalStorage('accFound', accFound);
                         saveToLocalStorage('mastery', mastery);
                         saveToLocalStorage('world', world.name);
-                        saveToLocalStorage('character', charFound);
+                        saveToLocalStorage('charFound', charFound);
+                        saveToLocalStorage('characters', account);
                     }
+                    saveToLocalStorage('characters', updatedCharacters);
 
                 }
             })();
@@ -100,7 +107,7 @@ function Character() {
     }, []);
 
     return (
-        character === null || accFound === null
+        charFound === null || accFound === null
             ? <div className="flex center">
                 <div className="logo-loading-div">
                     <img src={Dragon} alt="" className="logo--loading-dragon" />
@@ -109,13 +116,13 @@ function Character() {
             </div>
             : <div>
                 <Helmet>
-                    <title>GW2Geary - {character ? character?.name : 'Character'}</title>
-                    <meta property="og:title" content={`GW2Geary - ${character ? character?.name : 'Character'}`} />
+                    <title>GW2Geary - {charFound ? charFound?.name : 'Character'}</title>
+                    <meta property="og:title" content={`GW2Geary - ${charFound ? charFound?.name : 'Character'}`} />
                     <meta
                         name="og:description"
                         content={
                             `Character info: 
-                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
+                             ${charFound.level ? `lvl. ${charFound?.level}` : ''} ${charFound?.gender} ${charFound?.race} ${charFound?.profession}
                              ${accFound ? `account name: ${accFound?.name}` : ''}
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
@@ -146,10 +153,10 @@ function Character() {
                         ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
                         : ''
                     }
-                    <CharacterInfo char={character} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
+                    <CharacterInfo char={charFound} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
                     <div className='equipment-build-flex'>
-                        <EquipmentDropdown char={character} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
-                        <BuildDropdown char={character} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />
+                        <EquipmentDropdown char={charFound} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
+                        <BuildDropdown char={charFound} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />
                     </div>
                     <br />
                 </Container>
