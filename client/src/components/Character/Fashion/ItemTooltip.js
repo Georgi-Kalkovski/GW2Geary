@@ -10,6 +10,26 @@ function ItemTooltip({ item, embed }) {
 
     const [imageUrl, setImageUrl] = useState('');
 
+    const prof = localStorage.getItem('prof').toLowerCase();
+    const race = localStorage.getItem('race').toLowerCase();
+    const gender = localStorage.getItem('gender').toLowerCase();
+
+    let weight = '';
+
+    const professionWeights = {
+        'warrior': 'heavy',
+        'guardian': 'heavy',
+        'revenant': 'heavy',
+        'ranger': 'medium',
+        'thief': 'medium',
+        'engineer': 'medium',
+        'elementalist': 'light',
+        'necromancer': 'light',
+        'mesmer': 'light',
+    };
+
+    weight = professionWeights[prof] || '';
+
     useEffect(() => {
         const fetchWikiImage = async (title) => {
             try {
@@ -61,17 +81,24 @@ function ItemTooltip({ item, embed }) {
 
         const fetchItemImages = async () => {
             if (item) {
-                const skinTitle = item.skin_name || item.name;
-                const skinImageTitle = `${skinTitle} Skin`;
-                const heavyImageTitle = `${skinTitle} (heavy)`;
+                const original = item.skin_name || item.name;
+                const skin = `${original} Skin`;
+                const weigthItem = `${original} (${weight})`;
+                const armor = `${original.split(' ').slice(0, -1).join(' ')} armor`;
+                const armorWeigth = `${original.split(' ').slice(0, -1).join(' ')} armor (${weight})`;
+                const raceGender = `${original} (${weight}) ${race} ${gender} front`;
+                const armorRaceGender = `${original.split(' ').slice(0, -1).join(' ')} armor (${weight}) ${race} ${gender} front`;
 
-                await fetchWikiImage(skinTitle);
-                await fetchWikiImage(skinImageTitle);
-                await fetchWikiImage(heavyImageTitle);
+                await fetchWikiImage(armorRaceGender);
+                await fetchWikiImage(raceGender);
+                await fetchWikiImage(armorWeigth);
+                await fetchWikiImage(armor);
+                await fetchWikiImage(weigthItem);
+                await fetchWikiImage(skin);
+                await fetchWikiImage(original);
 
-                await fetchItemImage(skinTitle);
-                await fetchItemImage(skinImageTitle);
-                await fetchItemImage(heavyImageTitle);
+                await fetchItemImage(skin);
+                await fetchItemImage(original);
             }
         };
 
