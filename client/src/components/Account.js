@@ -201,21 +201,21 @@ const Account = () => {
                     {/* Mastery Points */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{mastery ? mastery : '0'}</Row>
+                        <Row className="font-size-22px">{mastery ? mastery : '0'}</Row>
                         <Row className="yellow-highlight">Mastery Points </Row>
                       </Col>
                     )}
                     {/* Fractal Level */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{accFound?.fractal_level ? accFound?.fractal_level : '0'}</Row>
+                        <Row className="font-size-22px">{accFound?.fractal_level ? accFound?.fractal_level : '0'}</Row>
                         <Row className="yellow-highlight">Fractal Level</Row>
                       </Col>
                     )}
                     {/* WvW Rank */}
                     {showMenu && (
                       <Col className="character-col padding-top">
-                        <Row className="font-size-25px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                        <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
                         <Row className="yellow-highlight">WvW Rank</Row>
                       </Col>
                     )}
