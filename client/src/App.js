@@ -84,18 +84,6 @@ const App = () => {
         Want to show your gear(armour & weapons) to others? Use GW2Geary!
         " data-react-helmet="true" />
         <meta property="og:url" content="https://gw2geary.com/" data-react-helmet="true" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="keywords" content="Guild Wars 2, GuildWars2, GW2, GW2Armory,GW2 Armory, Armory, GW2Armor, GW2 Armor, Armor, GW2Geary, GW2 Geary, GW2Gear, GW2 Gear, Gear, GW2 Inspect, Inspect, Gear Check,GearCheck, FashionWars, Fashion Wars, FashionWars2, Fashion Wars 2, Builds, GW2 Builds, GW2Builds" />
-        <meta property="og:type" content="search.armory" />
-        <meta property="og:image" content="https://i.imgur.com/2O7otCB.png" />
-        <meta property="og:image:width" content="304" />
-        <meta property="og:image:height" content="74" />
-        <meta name="tec-api-version" content="v1" />
-        <meta name="tec-api-origin" content="https://gw2geary.com" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@gw2geary" />
-        <meta property="og:locale" content="en_US" />
       </Helmet>
       {isEmbed
         ? <Routes>
