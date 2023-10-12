@@ -26,6 +26,8 @@ import Dragon from './dragon.svg';
 import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 import ErrorPage from "./components/ErrorPage";
 
+import { Helmet } from "react-helmet";
+
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [newUsername, setNewUsername] = useState("");
@@ -64,6 +66,37 @@ const App = () => {
   }
   return (
     <>
+      <Helmet>
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta charset="UTF-8" />
+        <title data-react-helmet="true">GW2Geary</title>
+        <meta name="description" content="
+        Discover and Inspect GW2 Accounts and Characters.
+        Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
+        With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
+        Want to show your gear(armour & weapons) to others? Use GW2Geary!
+        " data-react-helmet="true" />
+        <meta property="og:title" content="GW2Geary" data-react-helmet="true" />
+        <meta name="og:description" content="
+        Discover and Inspect GW2 Accounts and Characters.
+        Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
+        With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
+        Want to show your gear(armour & weapons) to others? Use GW2Geary!
+        " data-react-helmet="true" />
+        <meta property="og:url" content="https://gw2geary.com/" data-react-helmet="true" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="keywords" content="Guild Wars 2, GuildWars2, GW2, GW2Armory,GW2 Armory, Armory, GW2Armor, GW2 Armor, Armor, GW2Geary, GW2 Geary, GW2Gear, GW2 Gear, Gear, GW2 Inspect, Inspect, Gear Check,GearCheck, FashionWars, Fashion Wars, FashionWars2, Fashion Wars 2, Builds, GW2 Builds, GW2Builds" />
+        <meta property="og:type" content="search.armory" />
+        <meta property="og:image" content="https://i.imgur.com/2O7otCB.png" />
+        <meta property="og:image:width" content="304" />
+        <meta property="og:image:height" content="74" />
+        <meta name="tec-api-version" content="v1" />
+        <meta name="tec-api-origin" content="https://gw2geary.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@gw2geary" />
+        <meta property="og:locale" content="en_US" />
+      </Helmet>
       {isEmbed
         ? <Routes>
           <Route path="/f/:name" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
