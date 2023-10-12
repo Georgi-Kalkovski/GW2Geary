@@ -150,12 +150,12 @@ app.post('/api/contacts', async (req, res) => {
 app.use("/api", routes);
 
 // Serve static files from the build folder
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 // Default route with dynamic meta tags
 app.get("*", (req, res) => {
-  const pathToIndex = path.join(__dirname, "build/index.html");
-  const raw = fs.readFileSync(pathToIndex);
+  const pathToIndex = path.join(__dirname, "../client/build/index.html");
+  const raw = fs.readFileSync(pathToIndex, 'utf8');
 
   // Determine the requested page and set dynamic meta tags accordingly
   let pageTitle, pageDescription;
@@ -169,8 +169,8 @@ app.get("*", (req, res) => {
   }
 
   const updated = raw
-    .replace("__PAGE_TITLE__", `<title>${pageTitle}</title>`)
-    .replace("__PAGE_DESCRIPTION__", `<meta name="description" content="${pageDescription}" />`);
+    .replace(/__PAGE_TITLE__/g, pageTitle)
+    .replace(/__PAGE_DESCRIPTION__/g, pageDescription);
 
   res.send(updated);
 });
