@@ -169,8 +169,9 @@ app.get("*", (req, res) => {
   }
 
   const updated = raw
-    .replace(/__PAGE_TITLE__/g, pageTitle)
-    .replace(/__PAGE_DESCRIPTION__/g, pageDescription);
+  .replace(/__PAGE_TITLE__/g, pageTitle)
+  .replace(/__PAGE_DESCRIPTION__/g, `<meta name="description" content="${pageDescription}" />`);
+
 
   res.send(updated);
 });
