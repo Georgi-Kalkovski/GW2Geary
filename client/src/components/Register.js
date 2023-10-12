@@ -68,6 +68,7 @@ const Register = () => {
                    By signing up you'll be able to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
                    You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
         />
+        <meta property="og:url" content={`https://gw2geary.com/register`} />
       </Helmet>
       <div className="flex center">
         <div>

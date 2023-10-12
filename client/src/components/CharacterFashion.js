@@ -81,6 +81,7 @@ function CharacterFashion() {
                              ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}`
                         }
                     />
+                    <meta property="og:url" content={`https://gw2geary.com/c/${charFound?.name}`} />
                 </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}

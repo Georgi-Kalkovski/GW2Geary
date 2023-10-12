@@ -22,6 +22,7 @@ function About() {
                              With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
                              Want to show your gear(armour & weapons) to others? Use GW2Geary!"
                 />
+                 <meta property="og:url" content="https://gw2geary.com/about/"/>
             </Helmet>
             <div className='flex center column'>
             <h2 style={{ textAlign: 'center' }}>About</h2>

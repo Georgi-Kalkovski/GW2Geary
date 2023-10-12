@@ -125,9 +125,8 @@ function Character() {
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
                              ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
-                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
-             
-             `}
+                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
+                        }
                     />
                     <meta property="og:title" content={`GW2Geary - ${charFound ? charFound?.name : 'Character'}`} />
                     <meta
@@ -139,10 +138,10 @@ function Character() {
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
                              ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
-                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
-             
-             `}
+                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
+                        }
                     />
+                    <meta property="og:url" content={`https://gw2geary.com/c/${charFound?.name}`} />
                 </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}

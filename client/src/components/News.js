@@ -18,6 +18,7 @@ function News() {
                     content="All the News about GW2Geary are here! 
                              Latest news: Added Relic and Power Core to the character's preview."
                 />
+                <meta property="og:url" content={`https://gw2geary.com/news`} />
             </Helmet>
             <div className='flex center column'>
                 <h2 style={{ textAlign: 'center' }}>News</h2>

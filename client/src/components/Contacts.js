@@ -69,6 +69,7 @@ function Contacts() {
                     name="og:description"
                     content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
                 />
+                <meta property="og:url" content={`https://gw2geary.com/contacts`} />
             </Helmet>
             <div className="flex center">
                 <div>

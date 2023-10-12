@@ -138,6 +138,7 @@ const Account = () => {
              ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
           }
         />
+        <meta property="og:url" content={`https://gw2geary.com/а/${accFound?.name}`} />
       </Helmet>
       <div>
         <div className="container">
