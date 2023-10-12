@@ -27,10 +27,5 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://gw2geary.com/profile</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
   <!-- Add more URLs for other pages on your website -->
 </urlset>
