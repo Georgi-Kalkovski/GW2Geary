@@ -116,6 +116,19 @@ function Character() {
             : <div>
                 <Helmet>
                     <title>GW2Geary - {charFound ? charFound?.name : 'Character'}</title>
+                    <meta
+                        name="description"
+                        content={
+                            `Character info: 
+                             ${charFound.level ? `lvl. ${charFound?.level}` : ''} ${charFound?.gender} ${charFound?.race} ${charFound?.profession}
+                             ${accFound ? `account name: ${accFound?.name}` : ''}
+                             ${world ? `world: ${world}` : ''}
+                             ${mastery ? `mastery points: ${mastery}` : ''}
+                             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
+             
+             `}
+                    />
                     <meta property="og:title" content={`GW2Geary - ${charFound ? charFound?.name : 'Character'}`} />
                     <meta
                         name="og:description"

@@ -7,6 +7,11 @@ function News() {
         <div>
             <Helmet>
                 <title>GW2Geary - News</title>
+                <meta
+                    name="description"
+                    content="All the News about GW2Geary are here! 
+                             Latest news: Added Relic and Power Core to the character's preview."
+                />
                 <meta property="og:title" content="GW2Geary - News" />
                 <meta
                     name="og:description"

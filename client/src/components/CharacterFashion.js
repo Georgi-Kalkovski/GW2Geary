@@ -42,7 +42,7 @@ function CharacterFashion() {
                         navigate("/");
                     }
                     setIsPrivate(true);
-                } 
+                }
                 if (account) {
                     const charFound = await fetchData('characters', formattedName);
                     setCharacter(charFound)
@@ -66,14 +66,20 @@ function CharacterFashion() {
             : <div>
                 <Helmet>
                     <title>GW2Geary - {character ? character?.name : 'Character'}</title>
+                    <meta
+                        name="og:description"
+                        content={
+                            `Character info: 
+                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}`
+                        }
+                    />
                     <meta property="og:title" content={`GW2Geary - ${character ? character?.name : 'Character'}`} />
                     <meta
                         name="og:description"
                         content={
                             `Character info: 
-                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}
-             
-             `}
+                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}`
+                        }
                     />
                 </Helmet>
                 <Container className='center-items'>

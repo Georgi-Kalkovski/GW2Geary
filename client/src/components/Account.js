@@ -115,6 +115,17 @@ const Account = () => {
     <div>
       <Helmet>
         <title>GW2Geary - {accFound ? accFound?.name : 'Account'}</title>
+        <meta
+          name="description"
+          content={
+            `Account info: 
+            ${world ? `world: ${world}` : ''}
+            ${mastery ? `mastery points: ${mastery}` : ''}
+            ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+            ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
+            ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
+          }
+        />
         <meta property="og:title" content={`GW2Geary - ${accFound ? accFound?.name : 'Account'}`} />
         <meta
           name="og:description"
@@ -124,8 +135,8 @@ const Account = () => {
              ${mastery ? `mastery points: ${mastery}` : ''}
              ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
              ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
-             ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}
-             `}
+             ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
+          }
         />
       </Helmet>
       <div>
