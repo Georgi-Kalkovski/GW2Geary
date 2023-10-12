@@ -72,14 +72,14 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         {/* Level */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{char.level}</Row>
+                                <Row className="font-size-22px">{char.level}</Row>
                                 <Row className="yellow-highlight">Level </Row>
                             </Col>
                         )}
                         {/* Profession */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">
+                                <Row className="font-size-22px">
                                     <img
                                         src={wikiSmallProfessionIcons[char.profession]}
                                         style={{ maxWidth: '25px' }}
@@ -92,7 +92,7 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         {/* Race & Gender */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">
+                                <Row className="font-size-22px">
                                     <img
                                         src={wikiBigRacesIcons[char.race]}
                                         alt={char.profession}
@@ -107,21 +107,21 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         {/* Mastery Points */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{mastery}</Row>
+                                <Row className="font-size-22px">{mastery}</Row>
                                 <Row className="yellow-highlight">Mastery Points </Row>
                             </Col>
                         )}
                         {/* Fractal Level */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{acc.fractal_level ? acc.fractal_level : '0'}</Row>
+                                <Row className="font-size-22px">{acc.fractal_level ? acc.fractal_level : '0'}</Row>
                                 <Row className="yellow-highlight">Fractal Level</Row>
                             </Col>
                         )}
                         {/* WvW Rank */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-25px">{acc.wvw_rank  ?acc.wvw_rank : '0'}</Row>
+                                <Row className="font-size-22px">{acc.wvw_rank  ?acc.wvw_rank : '0'}</Row>
                                 <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                         )}
@@ -131,14 +131,14 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                             {/* Level */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">{char.level}</Row>
+                                    <Row className="font-size-22px">{char.level}</Row>
                                     <Row className="yellow-highlight">Level </Row>
                                 </Col>
                             )}
                             {/* Profession */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">
+                                    <Row className="font-size-22px">
                                         <img
                                             src={wikiSmallProfessionIcons[char.profession]}
                                             style={{ maxWidth: '25px' }}
@@ -151,7 +151,7 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                             {/* Race & Gender */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">
+                                    <Row className="font-size-22px">
                                         <img
                                             src={wikiBigRacesIcons[char.race]}
                                             alt={char.profession}
@@ -168,21 +168,21 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                             {/* Mastery Points */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">{mastery}</Row>
+                                    <Row className="font-size-22px">{mastery}</Row>
                                     <Row className="yellow-highlight">Mastery Points </Row>
                                 </Col>
                             )}
                             {/* Fractal Level */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">{acc.fractal_level}</Row>
+                                    <Row className="font-size-22px">{acc.fractal_level}</Row>
                                     <Row className="yellow-highlight">Fractal Level</Row>
                                 </Col>
                             )}
                             {/* WvW Rank */}
                             {showMenu && (
                                 <Col className="character-col padding-top">
-                                    <Row className="font-size-25px">{acc.wvw_rank}</Row>
+                                    <Row className="font-size-22px">{acc.wvw_rank}</Row>
                                     <Row className="yellow-highlight">WvW Rank</Row>
                                 </Col>
                             )}
