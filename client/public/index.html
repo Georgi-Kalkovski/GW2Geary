@@ -26,6 +26,26 @@
 
     gtag('config', 'G-H9RMM8EN19');
   </script>
+  <script>
+    // Function to update meta tags based on the current page
+    function updateMetaTags() {
+      const path = window.location.pathname;
+
+      if (path === '/') {
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Description for Home Page');
+      } else if (path === '/news/') {
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Description for News Page');
+      } else if (path === '/about/') {
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Description for About Page');
+      } else if (path === '/contacts/') {
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Description for Contacts Page');
+      }
+      // Add more conditions for other pages if needed
+    }
+
+    // Call the function when the DOM is ready
+    document.addEventListener('DOMContentLoaded', updateMetaTags);
+  </script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost&display=swap" />
 </head>
 
