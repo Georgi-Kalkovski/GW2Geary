@@ -124,7 +124,7 @@ function Character() {
                              ${accFound ? `account name: ${accFound?.name}` : ''}
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+                             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
                              ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
                         }
                     />
@@ -137,7 +137,7 @@ function Character() {
                              ${accFound ? `account name: ${accFound?.name}` : ''}
                              ${world ? `world: ${world}` : ''}
                              ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+                             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
                              ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
                         }
                     />

@@ -121,7 +121,7 @@ const Account = () => {
             `Account info: 
             ${world ? `world: ${world}` : ''}
             ${mastery ? `mastery points: ${mastery}` : ''}
-            ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+            ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
             ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
           }
@@ -133,7 +133,7 @@ const Account = () => {
             `Account info: 
              ${world ? `world: ${world}` : ''}
              ${mastery ? `mastery points: ${mastery}` : ''}
-             ${accFound ? `fractal level: ${accFound?.fractal}` : ''}
+             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
              ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
              ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
           }
