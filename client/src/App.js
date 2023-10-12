@@ -67,8 +67,6 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-        <meta charset="UTF-8" />
         <title data-react-helmet="true">GW2Geary</title>
         <meta name="description" content="
         Discover and Inspect GW2 Accounts and Characters.
