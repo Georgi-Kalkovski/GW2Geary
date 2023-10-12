@@ -8,7 +8,8 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
 const cookieParser = require('cookie-parser');
-const axios = require('axios');
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -148,9 +149,30 @@ app.post('/api/contacts', async (req, res) => {
 // Consolidated routes
 app.use("/api", routes);
 
-// Default route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Terter application." });
+// Serve static files from the build folder
+app.use(express.static(path.join(__dirname, "build")));
+
+// Default route with dynamic meta tags
+app.get("*", (req, res) => {
+  const pathToIndex = path.join(__dirname, "build/index.html");
+  const raw = fs.readFileSync(pathToIndex);
+
+  // Determine the requested page and set dynamic meta tags accordingly
+  let pageTitle, pageDescription;
+  if (req.path === '/news') {
+    pageTitle = "GW2Geary - News";
+    pageDescription = "All the News about GW2Geary are here! Latest news: Added Relic and Power Core to the character's preview.";
+  } else {
+    // Add more cases for other pages as needed
+    pageTitle = "Default Page Title";
+    pageDescription = "Default Page Description";
+  }
+
+  const updated = raw
+    .replace("__PAGE_TITLE__", `<title>${pageTitle}</title>`)
+    .replace("__PAGE_DESCRIPTION__", `<meta name="description" content="${pageDescription}" />`);
+
+  res.send(updated);
 });
 
 // // Set port and listen for requests
