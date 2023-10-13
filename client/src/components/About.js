@@ -7,7 +7,7 @@ import linkedin from './img/linkedin.svg';
 function About() {
     return (
         <div>
-            {/* <Helmet>
+            <Helmet>
                 <title>GW2Geary - About</title>
                 <meta
                     name="description"
@@ -23,7 +23,7 @@ function About() {
                              Want to show your gear(armour & weapons) to others? Use GW2Geary!"
                 />
                  <meta property="og:url" content="https://gw2geary.com/about/"/>
-            </Helmet> */}
+            </Helmet>
             <div className='flex center column'>
             <h2 style={{ textAlign: 'center' }}>About</h2>
                 <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>

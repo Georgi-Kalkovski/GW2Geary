@@ -5,7 +5,7 @@ import NewsList from './NewsList';
 function News() {
     return (
         <div>
-            {/* <Helmet>
+            <Helmet>
                 <title>GW2Geary - News</title>
                 <meta
                     name="description"
@@ -19,7 +19,7 @@ function News() {
                              Latest news: Added Relic and Power Core to the character's preview."
                 />
                 <meta property="og:url" content={`https://gw2geary.com/news`} />
-            </Helmet> */}
+            </Helmet>
             <div className='flex center column'>
                 <h2 style={{ textAlign: 'center' }}>News</h2>
                 <div className='about-box news-box' style={{ textAlign: 'left', alignItems: 'right', marginBottom: '20px' }}>

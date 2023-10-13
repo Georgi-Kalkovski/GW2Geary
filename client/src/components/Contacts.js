@@ -58,7 +58,7 @@ function Contacts() {
 
     return (
         <div>
-            {/* <Helmet>
+            <Helmet>
                 <title>GW2Geary - Contacts</title>
                 <meta
                     name="description"
@@ -70,7 +70,7 @@ function Contacts() {
                     content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
                 />
                 <meta property="og:url" content={`https://gw2geary.com/contacts`} />
-            </Helmet> */}
+            </Helmet>
             <div className="flex center">
                 <div>
                     <h2 style={{ textAlign: 'center' }}>Send a message</h2>

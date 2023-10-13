@@ -189,7 +189,7 @@ function Search() {
 
   return (
     <div>
-      {/* <Helmet>
+      <Helmet>
         <title>GW2Geary - Search</title>
         <meta
           name="description"
@@ -205,7 +205,7 @@ function Search() {
           Want to show your gear(armour & weapons) to others? Use GW2Geary!"
         />
         <meta property="og:url" content={`https://gw2geary.com/search`} />
-      </Helmet> */}
+      </Helmet>
       <div className="search-container">
         {/* Search Input */}
         <input

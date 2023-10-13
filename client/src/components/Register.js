@@ -53,7 +53,7 @@ const Register = () => {
 
   return (
     <div>
-      {/* <Helmet>
+      <Helmet>
         <title>GW2Geary - Register</title>
         <meta
           name="description"
@@ -69,7 +69,7 @@ const Register = () => {
                    You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
         />
         <meta property="og:url" content={`https://gw2geary.com/register`} />
-      </Helmet> */}
+      </Helmet>
       <div className="flex center">
         <div>
           <h2 style={{ textAlign: 'center' }}>Register</h2>

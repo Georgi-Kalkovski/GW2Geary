@@ -114,7 +114,7 @@ function Character() {
                 </div>
             </div>
             : <div>
-                {/* <Helmet>
+                <Helmet>
                     <title>GW2Geary - {charFound ? charFound?.name : 'Character'}</title>
                     <meta
                         name="description"
@@ -142,7 +142,7 @@ function Character() {
                         }
                     />
                     <meta property="og:url" content={`https://gw2geary.com/c/${charFound?.name}`} />
-                </Helmet> */}
+                </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">
