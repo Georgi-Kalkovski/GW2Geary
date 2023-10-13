@@ -165,7 +165,7 @@ app.get("*", (req, res) => {
       pageDescription = `Login/Sign in to access your profile's information or reset password using your email.
       By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
       You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
-      pageOgUrl = "https://gw2geary.com/client/"
+      pageOgUrl = "https://gw2geary.com/login/"
     } else if (req.path === '/register') {
       pageTitle = "GW2Geary - Register";
       pageDescription = `Register/Sign up to create a profile's information.
@@ -186,7 +186,7 @@ app.get("*", (req, res) => {
     } else if (req.path === '/contacts') {
       pageTitle = "GW2Geary - Contacts";
       pageDescription = `This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat.`;
-      pageOgUrl = "https://gw2geary.com/client/"
+      pageOgUrl = "https://gw2geary.com/contacts/"
     } else if (req.path.split('/')[1] === 'a') {
       const name = req.path.split('/')[2];
       pageTitle = `GW2Geary - ${name ? name : 'Account'}`;
