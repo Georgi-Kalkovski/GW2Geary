@@ -26,8 +26,6 @@ import Dragon from './dragon.svg';
 import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 import ErrorPage from "./components/ErrorPage";
 
-import { Helmet } from "react-helmet";
-
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [newUsername, setNewUsername] = useState("");
@@ -66,23 +64,6 @@ const App = () => {
   }
   return (
     <>
-      <Helmet>
-        <title data-react-helmet="true">GW2Geary</title>
-        <meta name="description" content="
-        Discover and Inspect GW2 Accounts and Characters.
-        Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
-        With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-        Want to show your gear(armour & weapons) to others? Use GW2Geary!
-        " data-react-helmet="true" />
-        <meta property="og:title" content="GW2Geary" data-react-helmet="true" />
-        <meta name="og:description" content="
-        Discover and Inspect GW2 Accounts and Characters.
-        Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
-        With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-        Want to show your gear(armour & weapons) to others? Use GW2Geary!
-        " data-react-helmet="true" />
-        <meta property="og:url" content="https://gw2geary.com/" data-react-helmet="true" />
-      </Helmet>
       {isEmbed
         ? <Routes>
           <Route path="/f/:name" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />

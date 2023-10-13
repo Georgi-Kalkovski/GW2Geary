@@ -67,4 +67,4 @@ class BuildTemplate {
     }
 }
 
-module.exports = BuildTemplate
+export default BuildTemplate;
