@@ -113,7 +113,7 @@ const Account = () => {
   };
   return (
     <div>
-      <Helmet>
+      {/* <Helmet>
         <title>GW2Geary - {accFound ? accFound?.name : 'Account'}</title>
         <meta
           name="description"
@@ -139,7 +139,7 @@ const Account = () => {
           }
         />
         <meta property="og:url" content={`https://gw2geary.com/а/${accFound?.name}`} />
-      </Helmet>
+      </Helmet> */}
       <div>
         <div className="container">
           <div>

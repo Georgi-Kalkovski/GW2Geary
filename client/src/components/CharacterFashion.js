@@ -64,7 +64,7 @@ function CharacterFashion() {
                 </div>
             </div>
             : <div>
-                <Helmet>
+                {/* <Helmet>
                     <title>GW2Geary - {character ? character?.name : 'Character'}</title>
                     <meta
                         name="og:description"
@@ -82,7 +82,7 @@ function CharacterFashion() {
                         }
                     />
                     <meta property="og:url" content={`https://gw2geary.com/c/${character?.name}`} />
-                </Helmet>
+                </Helmet> */}
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">

@@ -153,16 +153,27 @@ app.use("/api", routes);
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 // Default route with dynamic meta tags
-app.get("*", async (req, res) => {
-  const { acc } = req.body;
+app.get("*", (req, res) => {
   try {
     const pathToIndex = path.join(__dirname, "../client/build/index.html");
     const raw = fs.readFileSync(pathToIndex, 'UTF8');
 
     // Determine the requested page and set dynamic meta tags accordingly
     let pageTitle, pageDescription, pageOgUrl;
-
-    if (req.path === '/news') {
+    if (req.path === '/login') {
+      pageTitle = "GW2Geary - Login";
+      pageDescription = `Login/Sign in to access your profile's information or reset password using your email.
+      By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
+      You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
+      pageOgUrl = "https://gw2geary.com/client/"
+    } else if (req.path === '/register') {
+      pageTitle = "GW2Geary - Register";
+      pageDescription = `Register/Sign up to create a profile's information.
+      By signing up you'll be able to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
+      You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
+      pageOgUrl = "https://gw2geary.com/register/"
+    }
+    else if (req.path === '/news') {
       pageTitle = "GW2Geary - News";
       pageDescription = "All the News about GW2Geary are here! Latest news: Added Relic and Power Core to the character's preview.";
       pageOgUrl = "https://gw2geary.com/news/"
@@ -187,7 +198,6 @@ app.get("*", async (req, res) => {
       pageDescription = `Find more information about the character${name ? ' ' + name : '.'}`;
       pageOgUrl = `https://gw2geary.com/c/${name}/`
     } else {
-      // Add more cases for other pages as needed
       pageTitle = "GW2Geary";
       pageDescription = `Discover and Inspect GW2 Accounts and Characters.
       Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
