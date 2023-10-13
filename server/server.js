@@ -146,9 +146,6 @@ app.post('/api/contacts', async (req, res) => {
   }
 });
 
-// Consolidated routes
-app.use("/api", routes);
-
 // Serve static files from the build folder
 app.use(express.static(path.join(__dirname, "../client/build")));
 
@@ -219,6 +216,9 @@ app.get("*", (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// Consolidated routes
+app.use("/api", routes);
 
 // // Set port and listen for requests
 app.listen(port, () => {
