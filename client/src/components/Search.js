@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
@@ -188,6 +189,9 @@ function Search() {
 
   return (
     <div>
+      <Helmet>
+        <title>GW2Geary - Search</title>
+      </Helmet>
       <div className="search-container">
         {/* Search Input */}
         <input

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from 'react-helmet';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import AuthService from "../services/auth.service";
@@ -41,6 +42,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>GW2Geary - Login</title>
+      </Helmet>
       <div className="flex center">
         <div>
           <h2 style={{ textAlign: 'center' }}>Login</h2>

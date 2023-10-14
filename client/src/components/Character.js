@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -113,6 +114,9 @@ function Character() {
                 </div>
             </div>
             : <div>
+                <Helmet>
+                    <title>GW2Geary - {charFound ? charFound?.name : 'Character'}</title>
+                </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">

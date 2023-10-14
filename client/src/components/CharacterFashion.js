@@ -3,6 +3,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import fetchData from './fetchData';
 import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Fashion/EquipmentDropdown';
@@ -63,6 +64,9 @@ function CharacterFashion() {
                 </div>
             </div>
             : <div>
+                <Helmet>
+                    <title>GW2Geary - {character ? character?.name : 'Character'}</title>
+                </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">

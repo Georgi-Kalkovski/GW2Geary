@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -112,6 +113,9 @@ const Account = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>GW2Geary - {accFound ? accFound?.name : 'Account'}</title>
+      </Helmet>
       <div>
         <div className="container">
           <div>

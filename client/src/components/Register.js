@@ -53,6 +53,9 @@ const Register = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>GW2Geary - Register</title>
+      </Helmet>
       <div className="flex center">
         <div>
           <h2 style={{ textAlign: 'center' }}>Register</h2>

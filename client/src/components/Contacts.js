@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from "react-helmet";
 import AuthService from '../services/auth.service';
 
 function Contacts() {
@@ -57,6 +58,9 @@ function Contacts() {
 
     return (
         <div>
+            <Helmet>
+                <title>GW2Geary - Contacts</title>
+            </Helmet>
             <div className="flex center">
                 <div>
                     <h2 style={{ textAlign: 'center' }}>Send a message</h2>

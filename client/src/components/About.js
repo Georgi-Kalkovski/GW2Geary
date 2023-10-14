@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import github from './img/github.svg';
 import discord from './img/discord.svg';
 import linkedin from './img/linkedin.svg';
@@ -6,6 +7,9 @@ import linkedin from './img/linkedin.svg';
 function About() {
     return (
         <div>
+            <Helmet>
+                <title>GW2Geary - About</title>
+            </Helmet>
             <div className='flex center column'>
             <h2 style={{ textAlign: 'center' }}>About</h2>
                 <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
