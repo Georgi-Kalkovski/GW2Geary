@@ -105,13 +105,13 @@ router.get('/reset-password', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
-router.get("/:input", (req, res) => {
-    const pageTitle = "GW2Geary - Error Page";
-    const pageDescription = `404 - Page Not Found`;
-    const pageOgUrl = "https://gw2geary.com/"
+// router.get("/:input", (req, res) => {
+//     const pageTitle = "GW2Geary - Error Page";
+//     const pageDescription = `404 - Page Not Found`;
+//     const pageOgUrl = "https://gw2geary.com/"
 
-    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
-});
+//     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+// });
 
 const replaceMetaData = (pageTitle, pageDescription, pageOgUrl) => {
     return raw
