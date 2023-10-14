@@ -5,6 +5,19 @@ const path = require("path");
 
 const pathToIndex = path.join(__dirname, "../../client/build/index.html");
 const raw = fs.readFileSync(pathToIndex, 'UTF8');
+
+router.get("/:input", (req, res, next) => {
+    const { input } = req.params;
+    if (input.startsWith('/static/')) {
+        return next();
+    }
+    const pageTitle = "GW2Geary - Error Page";
+    const pageDescription = `404 - Page Not Found`;
+    const pageOgUrl = "https://gw2geary.com/";
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl));
+});
+
 router.get("/", (req, res) => {
     const pageTitle = "GW2Geary - Search";
     const pageDescription = `Discover and Inspect GW2 Accounts and Characters.
@@ -104,14 +117,6 @@ router.get('/reset-password', (req, res) => {
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
-
-// router.get("/:input", (req, res) => {
-//     const pageTitle = "GW2Geary - Error Page";
-//     const pageDescription = `404 - Page Not Found`;
-//     const pageOgUrl = "https://gw2geary.com/"
-
-//     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
-// });
 
 const replaceMetaData = (pageTitle, pageDescription, pageOgUrl) => {
     return raw
