@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { Helmet } from "react-helmet";
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -114,35 +113,6 @@ function Character() {
                 </div>
             </div>
             : <div>
-                <Helmet>
-                    <title>GW2Geary - {charFound ? charFound?.name : 'Character'}</title>
-                    <meta
-                        name="description"
-                        content={
-                            `Character info: 
-                             ${charFound.level ? `lvl. ${charFound?.level}` : ''} ${charFound?.gender} ${charFound?.race} ${charFound?.profession}
-                             ${accFound ? `account name: ${accFound?.name}` : ''}
-                             ${world ? `world: ${world}` : ''}
-                             ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
-                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
-                        }
-                    />
-                    <meta property="og:title" content={`GW2Geary - ${charFound ? charFound?.name : 'Character'}`} />
-                    <meta
-                        name="og:description"
-                        content={
-                            `Character info: 
-                             ${charFound.level ? `lvl. ${charFound?.level}` : ''} ${charFound?.gender} ${charFound?.race} ${charFound?.profession}
-                             ${accFound ? `account name: ${accFound?.name}` : ''}
-                             ${world ? `world: ${world}` : ''}
-                             ${mastery ? `mastery points: ${mastery}` : ''}
-                             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
-                             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}`
-                        }
-                    />
-                    <meta property="og:url" content={`https://gw2geary.com/c/${charFound?.name}`} />
-                </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">

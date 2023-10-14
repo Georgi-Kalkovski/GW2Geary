@@ -3,7 +3,6 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import fetchData from './fetchData';
 import AuthService from "../services/auth.service";
 import EquipmentDropdown from './Character/Fashion/EquipmentDropdown';
@@ -64,25 +63,6 @@ function CharacterFashion() {
                 </div>
             </div>
             : <div>
-                <Helmet>
-                    <title>GW2Geary - {character ? character?.name : 'Character'}</title>
-                    <meta
-                        name="og:description"
-                        content={
-                            `Character info: 
-                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}`
-                        }
-                    />
-                    <meta property="og:title" content={`GW2Geary - ${character ? character?.name : 'Character'}`} />
-                    <meta
-                        name="og:description"
-                        content={
-                            `Character info: 
-                             ${character.level ? `lvl. ${character?.level}` : ''} ${character?.gender} ${character?.race} ${character?.profession}`
-                        }
-                    />
-                    <meta property="og:url" content={`https://gw2geary.com/c/${character?.name}`} />
-                </Helmet>
                 <Container className='center-items'>
                     {/* Breadcrumb */}
                     <nav aria-label="breadcrumb" className="breadcrumb">

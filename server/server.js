@@ -8,7 +8,6 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user.model');
 const cookieParser = require('cookie-parser');
-const fs = require("fs");
 const path = require("path");
 
 const app = express();
@@ -149,82 +148,16 @@ app.post('/api/contacts', async (req, res) => {
 // Consolidated routes
 app.use("/api", routes);
 
+// Default route with dynamic meta tags
+app.use(require('./routes/pages.routes'));
+
 // Serve static files from the build folder
 app.use(express.static(path.join(__dirname, "../client/build")));
-
-// Default route with dynamic meta tags
-app.get("*", (req, res) => {
-  try {
-    const pathToIndex = path.join(__dirname, "../client/build/index.html");
-    const raw = fs.readFileSync(pathToIndex, 'UTF8');
-
-    // Determine the requested page and set dynamic meta tags accordingly
-    let pageTitle, pageDescription, pageOgUrl;
-    if (req.path === '/login') {
-      pageTitle = "GW2Geary - Login";
-      pageDescription = `Login/Sign in to access your profile's information or reset password using your email.
-      By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
-      You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
-      pageOgUrl = "https://gw2geary.com/login/"
-    } else if (req.path === '/register') {
-      pageTitle = "GW2Geary - Register";
-      pageDescription = `Register/Sign up to create a profile's information.
-      By signing up you'll be able to register API Keys, hide/show/delete them, as well as hide/show your characters separately.
-      You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
-      pageOgUrl = "https://gw2geary.com/register/"
-    }
-    else if (req.path === '/news') {
-      pageTitle = "GW2Geary - News";
-      pageDescription = "All the News about GW2Geary are here! Latest news: Added Relic and Power Core to the character's preview.";
-      pageOgUrl = "https://gw2geary.com/news/"
-    } else if (req.path === '/about') {
-      pageTitle = "GW2Geary - About";
-      pageDescription = `Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.
-      With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-      Want to show your gear(armour & weapons) to others? Use GW2Geary!`;
-      pageOgUrl = "https://gw2geary.com/about/"
-    } else if (req.path === '/contacts') {
-      pageTitle = "GW2Geary - Contacts";
-      pageDescription = `This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat.`;
-      pageOgUrl = "https://gw2geary.com/contacts/"
-    } else if (req.path.split('/')[1] === 'a') {
-      const name = req.path.split('/')[2];
-      pageTitle = `GW2Geary - ${name ? name : 'Account'}`;
-      pageDescription = `Find more information about the account${name ? ' ' + name : '.'}`;
-      pageOgUrl = `https://gw2geary.com/a/${name}/`
-    } else if (req.path.split('/')[1] === 'c') {
-      const name = req.path.split('/')[2];
-      pageTitle = `GW2Geary - ${name ? name : 'Character'}`;
-      pageDescription = `Find more information about the character${name ? ' ' + name : '.'}`;
-      pageOgUrl = `https://gw2geary.com/c/${name}/`
-    } else {
-      pageTitle = "GW2Geary";
-      pageDescription = `Discover and Inspect GW2 Accounts and Characters.
-      Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
-      With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-      Want to show your gear(armour & weapons) to others? Use GW2Geary!`;
-      pageOgUrl = "https://gw2geary.com/"
-    }
-
-    const updated = raw
-      .replace(/__PAGE_TITLE__/g, pageTitle)
-      .replace(/__PAGE_DESCRIPTION__/g, pageDescription)
-      .replace(/__PAGE_URL__/g, pageOgUrl);
-
-    // console.log(updated)
-
-    res.send(updated);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
-  }
-});
 
 // // Set port and listen for requests
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
 
 // Function to initialize roles
 async function initial() {

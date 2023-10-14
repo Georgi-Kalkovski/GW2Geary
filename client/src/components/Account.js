@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -113,33 +112,6 @@ const Account = () => {
   };
   return (
     <div>
-      <Helmet>
-        <title>GW2Geary - {accFound ? accFound?.name : 'Account'}</title>
-        <meta
-          name="description"
-          content={
-            `Account info: 
-            ${world ? `world: ${world}` : ''}
-            ${mastery ? `mastery points: ${mastery}` : ''}
-            ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
-            ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
-            ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
-          }
-        />
-        <meta property="og:title" content={`GW2Geary - ${accFound ? accFound?.name : 'Account'}`} />
-        <meta
-          name="og:description"
-          content={
-            `Account info: 
-             ${world ? `world: ${world}` : ''}
-             ${mastery ? `mastery points: ${mastery}` : ''}
-             ${accFound ? `fractal level: ${accFound?.fractal_level}` : ''}
-             ${accFound ? `wvw rank: ${accFound?.wvw_rank}` : ''}
-             ${characters ? `characters: ${characters.map(character => `${character?.name} (${character?.gender} ${character?.race} ${character?.profession})`).join(', ')}` : ''}`
-          }
-        />
-        <meta property="og:url" content={`https://gw2geary.com/а/${accFound?.name}`} />
-      </Helmet>
       <div>
         <div className="container">
           <div>

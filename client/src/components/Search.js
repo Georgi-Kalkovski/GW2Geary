@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from '../services/auth.service';
@@ -189,23 +188,6 @@ function Search() {
 
   return (
     <div>
-      <Helmet>
-        <title>GW2Geary - Search</title>
-        <meta
-          name="description"
-          content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.
-          With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-          Want to show your gear(armour & weapons) to others? Use GW2Geary!"
-        />
-        <meta property="og:title" content="GW2Geary - Search" />
-        <meta
-          name="og:description"
-          content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.
-          With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-          Want to show your gear(armour & weapons) to others? Use GW2Geary!"
-        />
-        <meta property="og:url" content={`https://gw2geary.com/search`} />
-      </Helmet>
       <div className="search-container">
         {/* Search Input */}
         <input

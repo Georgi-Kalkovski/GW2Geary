@@ -3,16 +3,16 @@ Allow: /
 Allow: /login
 Allow: /register
 Allow: /about
+Allow: /a/
+Allow: /c/
+Allow: /contacts
 Allow: /news
+Disallow: /static/js/bundle.js
 Disallow: /profile/
 Disallow: /reset-password/
 Disallow: /support
 Disallow: /static/
 Disallow: /static/js/
-Disallow: /static/js/bundle.js
-#Disallow: /a/
-#Disallow: /c/
-#Disallow: /contacts
 
 # Allow crawling of necessary static assets
 Allow: /favicon.ico

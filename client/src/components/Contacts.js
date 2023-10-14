@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from "react-helmet";
 import AuthService from '../services/auth.service';
 
 function Contacts() {
@@ -58,19 +57,6 @@ function Contacts() {
 
     return (
         <div>
-            <Helmet>
-                <title>GW2Geary - Contacts</title>
-                <meta
-                    name="description"
-                    content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
-                />
-                <meta property="og:title" content="GW2Geary - Contacts" />
-                <meta
-                    name="og:description"
-                    content="This is where you can contact us. Write us a message if you have a questin, an idea or just want to chat."
-                />
-                <meta property="og:url" content={`https://gw2geary.com/contacts`} />
-            </Helmet>
             <div className="flex center">
                 <div>
                     <h2 style={{ textAlign: 'center' }}>Send a message</h2>

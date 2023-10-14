@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Helmet } from 'react-helmet';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import AuthService from "../services/auth.service";
@@ -42,23 +41,6 @@ const Login = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>GW2Geary - Login</title>
-        <meta
-          name="description"
-          content="Login/Sign in to access your profile's information or reset password using your email.
-                   By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
-                   You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
-        />
-        <meta property="og:title" content="GW2Geary - Login" />
-        <meta
-          name="og:description"
-          content="Login/Sign in to access your profile's information or reset password using your email.
-                   By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
-                   You'll also be able to manipulate your profile info (change username, change email, change password, delete user)."
-        />
-        <meta property="og:url" content={`https://gw2geary.com/login`} />
-      </Helmet>
       <div className="flex center">
         <div>
           <h2 style={{ textAlign: 'center' }}>Login</h2>

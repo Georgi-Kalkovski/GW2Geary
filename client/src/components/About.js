@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import github from './img/github.svg';
 import discord from './img/discord.svg';
 import linkedin from './img/linkedin.svg';
@@ -7,23 +6,6 @@ import linkedin from './img/linkedin.svg';
 function About() {
     return (
         <div>
-            <Helmet>
-                <title>GW2Geary - About</title>
-                <meta
-                    name="description"
-                    content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.
-                             With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-                             Want to show your gear(armour & weapons) to others? Use GW2Geary!"
-                />
-                <meta property="og:title" content="GW2Geary - About" />
-                <meta
-                    name="og:description"
-                    content="Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate inspect tool to explore and inspect Guild Wars 2 accounts and characters.
-                             With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
-                             Want to show your gear(armour & weapons) to others? Use GW2Geary!"
-                />
-                 <meta property="og:url" content="https://gw2geary.com/about/"/>
-            </Helmet>
             <div className='flex center column'>
             <h2 style={{ textAlign: 'center' }}>About</h2>
                 <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
