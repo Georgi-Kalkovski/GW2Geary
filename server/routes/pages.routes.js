@@ -76,17 +76,48 @@ router.get('/profile', (req, res) => {
 
 router.get('/a/:name', (req, res) => {
     const { name } = req.params;
+    const world = req.query.w;
+    const frac = req.query.frac;
+    const wvw = req.query.wvw;
+    const mp = req.query.mp;
+
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Account'}`;
-    pageDescription = `Find more information about the account${name ? ' ' + name.replace('_', ' ') : '.'}`;
-    pageOgUrl = `https://gw2geary.com/a/${name}/`
+    pageDescription = `Click for more information about this account.
+        Account: ${name ? name.replace('_', ' ') : '.'}
+        World: ${world ? world.replace('_', ' ') : '.'}
+        Mastery Points: ${mp ? mp : '.'}
+        Fractal Level: ${frac ? frac : '.'}
+        WvW Rank: ${wvw ? wvw : '.'}
+        `;
+    pageOgUrl = `https://gw2geary.com/a/${name}/`;
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
 router.get('/c/:name', (req, res) => {
     const { name } = req.params;
+    const acc = req.query.acc;
+    const lvl = req.query.lvl;
+    const prof = req.query.prof;
+    const gen = req.query.gen;
+    const race = req.query.race;
+    const world = req.query.w;
+    const frac = req.query.frac;
+    const wvw = req.query.wvw;
+    const mp = req.query.mp;
+
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
-    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
+    pageDescription = `Click for more information about this character.
+    Character: ${name ? name.replace('_', ' ') : '.'}
+    Level: ${lvl ? lvl : '.'}
+    Profession: ${prof ? prof : '.'}
+    Race: ${gen && race ? race + ' ' + gen : '.'}
+    Account: ${acc ? acc.replace('_', ' ') : '.'}
+    World: ${world ? world.replace('_', ' ') : '.'}
+    Mastery Points: ${mp ? mp : '.'}
+    Fractal Level: ${frac ? frac : '.'}
+    WvW Rank: ${wvw ? wvw : '.'}
+    `;
     pageOgUrl = `https://gw2geary.com/c/${name}/`
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))

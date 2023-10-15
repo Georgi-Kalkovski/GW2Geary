@@ -39,9 +39,24 @@ function Character() {
         if (bldUp) {
             params.bld = bldUp;
         }
+        if (world !== null) {
+            params.w = world;
+        }
+        if (accFound && charFound) {
+            params.acc = accFound.name;
+            params.lvl = charFound.level;
+            params.prof = charFound.profession;
+            params.race = charFound.race;
+            params.gen = charFound.gender;
+            params.frac = accFound.fractal_level;
+            params.wvw = accFound.wvw_rank;
+        }
+        if (mastery !== null) {
+            params.mp = mastery;
+        }
         setSearchParams(params);
         setShareLink(window.location.href);
-    }, [eqUp, bldUp]);
+    }, [eqUp, bldUp, mastery, world, charFound, accFound]);
 
     useEffect(() => {
         try {

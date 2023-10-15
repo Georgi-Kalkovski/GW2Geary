@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import AuthService from "../services/auth.service";
@@ -12,6 +12,7 @@ import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
 
 const Account = () => {
   const { name } = useParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   const currentUser = AuthService.getCurrentUser();
   const formattedName = name.replaceAll('_', ' ');
   const [characters, setCharacters] = useState(null);
@@ -23,6 +24,21 @@ const Account = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    let params = {};
+    if (world !== null) {
+      params.w = world;
+    }
+    if (accFound) {
+      params.frac = accFound.fractal_level;
+      params.wvw = accFound.wvw_rank;
+    }
+    if (mastery !== null) {
+      params.mp = mastery;
+    }
+    setSearchParams(params);
+  }, [mastery, world, accFound]);
 
   useEffect(() => {
     const handleResize = () => {
