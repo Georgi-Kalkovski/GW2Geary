@@ -5,36 +5,27 @@ const path = require("path");
 
 const pathToIndex = path.join(__dirname, "../../client/build/index.html");
 const raw = fs.readFileSync(pathToIndex, 'UTF8');
-
-router.get("/:input", (req, res, next) => {
-    const { input } = req.params;
-    if (input.startsWith('/static/')) {
-        return next();
-    }
-    const pageTitle = "GW2Geary - Error Page";
-    const pageDescription = `404 - Page Not Found`;
-    const pageOgUrl = "https://gw2geary.com/";
-
-    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl));
-});
+let pageTitle = '';
+let pageDescription = '';
+let pageOgUrl = '';
 
 router.get("/", (req, res) => {
-    const pageTitle = "GW2Geary - Search";
-    const pageDescription = `Discover and Inspect GW2 Accounts and Characters.
+    pageTitle = "GW2Geary - Search";
+    pageDescription = `Discover and Inspect GW2 Accounts and Characters.
         Welcome to GW2Geary, a dedicated GW2 armory. Your ultimate tool to explore and inspect Guild Wars 2 accounts and characters.
         With GW2Geary, you can dive deep into the details of your favorite players equipment, builds, traits, and skills.
         Want to show your gear(armour & weapons) to others? Use GW2Geary!`;
-    const pageOgUrl = "https://gw2geary.com/"
+    pageOgUrl = "https://gw2geary.com/"
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 });
 
 router.get('/login', (req, res) => {
-    const pageTitle = "GW2Geary - Login";
-    const pageDescription = `Login/Sign in to access your profile's information or reset password using your email.
+    pageTitle = "GW2Geary - Login";
+    pageDescription = `Login/Sign in to access your profile's information or reset password using your email.
         By Login you'll have access to your API Keys, hide/show/delete them, as well as hide/show your characters separately.
         You'll also be able to manipulate your profile info (change username, change email, change password, delete user).`;
-    const pageOgUrl = "https://gw2geary.com/login/"
+    pageOgUrl = "https://gw2geary.com/login/"
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
@@ -85,8 +76,8 @@ router.get('/profile', (req, res) => {
 
 router.get('/a/:name', (req, res) => {
     const { name } = req.params;
-    pageTitle = `GW2Geary - ${name ? name : 'Account'}`;
-    pageDescription = `Find more information about the account${name ? ' ' + name : '.'}`;
+    pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Account'}`;
+    pageDescription = `Find more information about the account${name ? ' ' + name.replace('_', ' ') : '.'}`;
     pageOgUrl = `https://gw2geary.com/a/${name}/`
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
@@ -94,8 +85,8 @@ router.get('/a/:name', (req, res) => {
 
 router.get('/c/:name', (req, res) => {
     const { name } = req.params;
-    pageTitle = `GW2Geary - ${name ? name : 'Character'}`;
-    pageDescription = `Find more information about the character${name ? ' ' + name : '.'}`;
+    pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
     pageOgUrl = `https://gw2geary.com/c/${name}/`
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
@@ -103,8 +94,8 @@ router.get('/c/:name', (req, res) => {
 
 router.get('/f/:name', (req, res) => {
     const { name } = req.params;
-    pageTitle = `GW2Geary - ${name ? name : 'Character'}`;
-    pageDescription = `Find more information about the character${name ? ' ' + name : '.'}`;
+    pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
     pageOgUrl = `https://gw2geary.com/f/${name}/`
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
@@ -117,6 +108,21 @@ router.get('/reset-password', (req, res) => {
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
+
+
+
+router.get("/:input", (req, res, next) => {
+    const { input } = req.params;
+    if (input.startsWith('/static/')) {
+        return next();
+    }
+
+    pageTitle = "GW2Geary - Error Page";
+    pageDescription = `404 - Page Not Found`;
+    pageOgUrl = "https://gw2geary.com/";
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl));
+});
 
 const replaceMetaData = (pageTitle, pageDescription, pageOgUrl) => {
     return raw
