@@ -28,6 +28,11 @@ function CharacterFashion() {
         if (eqUp) {
             params.eq = eqUp;
         }
+        if (character) {
+            params.prof = character.profession;
+            params.race = character.race;
+            params.gen = character.gender;
+        }
         setSearchParams(params);
     }, [eqUp]);
 

@@ -82,8 +82,8 @@ router.get('/a/:name', (req, res) => {
     const mp = req.query.mp;
 
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Account'}`;
-    pageDescription = `Click for more information about this account.
-    ${name ? `Account: ${name.replace('_', ' ')}` : ''}
+    pageDescription = `
+    ${name ? `Account Name: ${name.replace('_', ' ')}` : ''}
     ${world ? `World: ${world.replace('_', ' ')}` : ''}
     ${mp ? `Mastery Points: ${mp}` : ''}
     ${frac ? `Fractal Level: ${frac}` : ''}
@@ -109,11 +109,10 @@ router.get('/c/:name', (req, res) => {
 
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
     pageDescription = `
-    Click for more information about this character.
     ${name ? `Character Name: ${name.replace('_', ' ')}` : ''}
     ${gen && race && lvl ? `Basic Info: lvl.${lvl} ${race} ${gen}` : ''}
     ${prof ? `Profession: ${prof}` : ''} ${spec ? `(${spec})` : ''}
-    ${acc ? `Account: ${acc.replace('_', ' ')}` : ''}
+    ${acc ? `Account Name: ${acc.replace('_', ' ')}` : ''}
     ${world ? `World: ${world.replace('_', ' ')}` : ''}
     ${mp ? `Mastery Points: ${mp}` : ''}
     ${frac ? `Fractal Level: ${frac}` : ''}

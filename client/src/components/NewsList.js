@@ -3,6 +3,14 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
+            date: '15.10.2023',
+            content: (
+                <span>
+                    Worked on the sharing system. Now the shared links will carry additional information with them.
+                </span>
+            ),
+        },
+        {
             date: '02.10.2023',
             content: (
                 <span>
