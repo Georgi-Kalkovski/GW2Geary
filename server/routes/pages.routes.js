@@ -83,11 +83,11 @@ router.get('/a/:name', (req, res) => {
 
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Account'}`;
     pageDescription = `Click for more information about this account.
-        Account: ${name ? name.replace('_', ' ') : '.'}
-        World: ${world ? world.replace('_', ' ') : '.'}
-        Mastery Points: ${mp ? mp : '.'}
-        Fractal Level: ${frac ? frac : '.'}
-        WvW Rank: ${wvw ? wvw : '.'}
+    ${name ? `Account: ${name.replace('_', ' ')}` : ''}
+    ${world ? `World: ${world.replace('_', ' ')}` : ''}
+    ${mp ? `Mastery Points: ${mp}` : ''}
+    ${frac ? `Fractal Level: ${frac}` : ''}
+    ${wvw ? `WvW Rank: ${wvw}` : ''}
         `;
     pageOgUrl = `https://gw2geary.com/a/${name}/`;
 
@@ -105,18 +105,19 @@ router.get('/c/:name', (req, res) => {
     const frac = req.query.frac;
     const wvw = req.query.wvw;
     const mp = req.query.mp;
+    const spec = req.query.spec;
 
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
-    pageDescription = `Click for more information about this character.
-    Character: ${name ? name.replace('_', ' ') : '.'}
-    Level: ${lvl ? lvl : '.'}
-    Profession: ${prof ? prof : '.'}
-    Race: ${gen && race ? race + ' ' + gen : '.'}
-    Account: ${acc ? acc.replace('_', ' ') : '.'}
-    World: ${world ? world.replace('_', ' ') : '.'}
-    Mastery Points: ${mp ? mp : '.'}
-    Fractal Level: ${frac ? frac : '.'}
-    WvW Rank: ${wvw ? wvw : '.'}
+    pageDescription = `
+    Click for more information about this character.
+    ${name ? `Character Name: ${name.replace('_', ' ')}` : ''}
+    ${gen && race && lvl ? `Basic Info: lvl.${lvl} ${race} ${gen}` : ''}
+    ${prof ? `Profession: ${prof}` : ''} ${spec ? `(${spec})` : ''}
+    ${acc ? `Account: ${acc.replace('_', ' ')}` : ''}
+    ${world ? `World: ${world.replace('_', ' ')}` : ''}
+    ${mp ? `Mastery Points: ${mp}` : ''}
+    ${frac ? `Fractal Level: ${frac}` : ''}
+    ${wvw ? `WvW Rank: ${wvw}` : ''}
     `;
     pageOgUrl = `https://gw2geary.com/c/${name}/`
 

@@ -7,7 +7,7 @@ import Spec from './Spec';
 import { specIcons } from './specIcons';
 import LinkSVG from '../link.svg';
 
-function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
+function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setEliteSpec }) {
     const [isOpen, setIsOpen] = useState(false);
     const [build, setBuild] = useState([]);
     const [spec, setSpec] = useState(null);
@@ -32,7 +32,8 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial }) {
 
     useEffect(() => {
         setSelectedBuild(build);
-    }, [build]);
+        setEliteSpec(spec);
+    }, [build, spec]);
     const wrapperRef = useRef(null);
     const handleClickOutside = (event) => {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {

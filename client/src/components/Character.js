@@ -29,6 +29,7 @@ function Character() {
     const [shareLink, setShareLink] = useState(window.location.href);
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
     const [bldUp, setBldUp] = useState(searchParams.get('bld'));
+    const [specUp, setSpecUp] = useState(null);
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -51,13 +52,15 @@ function Character() {
             params.frac = accFound.fractal_level;
             params.wvw = accFound.wvw_rank;
         }
+        if (specUp !== null) {
+            params.spec = specUp
+        }
         if (mastery !== null) {
             params.mp = mastery;
         }
         setSearchParams(params);
         setShareLink(window.location.href);
-    }, [eqUp, bldUp, mastery, world, charFound, accFound]);
-
+    }, [eqUp, bldUp, mastery, world, charFound, accFound, specUp]);
     useEffect(() => {
         try {
             (async () => {
@@ -156,7 +159,7 @@ function Character() {
                     <CharacterInfo char={charFound} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
                     <div className='equipment-build-flex'>
                         <EquipmentDropdown char={charFound} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
-                        <BuildDropdown char={charFound} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} />
+                        <BuildDropdown char={charFound} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} setEliteSpec={setSpecUp} />
                     </div>
                     <br />
                 </Container>
