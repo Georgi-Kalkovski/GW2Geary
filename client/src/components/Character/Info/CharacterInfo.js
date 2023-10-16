@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from '../../icons';
 import CharacterShareLink from './CharacterShareLink';
+import Share from '../../Share';
+
 function CharacterInfo({ char, acc, mastery, world, shareLink }) {
     const [showMenu, setShowMenu] = useState(true);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -54,8 +56,8 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         </button>
                     )}
                     {window.innerWidth < 550 &&
-                        <Col className="character-col">
-                            <CharacterShareLink buildInput={char.profession} shareLink={shareLink} style={{ width: 0 }} />
+                        <Col className='character-col'>
+                            <Share prof={char.profession} />
                         </Col>
                     }
 
@@ -121,7 +123,7 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                         {/* WvW Rank */}
                         {showMenu && (
                             <Col className="character-col padding-top">
-                                <Row className="font-size-22px">{acc.wvw_rank  ?acc.wvw_rank : '0'}</Row>
+                                <Row className="font-size-22px">{acc.wvw_rank ? acc.wvw_rank : '0'}</Row>
                                 <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                         )}
@@ -190,11 +192,11 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
 
                     </div>)
                 }
-                {window.innerWidth >= 550 &&
-                    <Col className="character-col" style={{ marginRight: '10px' }}>
-                        <CharacterShareLink className='copy-character' buildInput={char.profession} shareLink={shareLink} style={{ width: 0 }} />
+                {window.innerWidth >= 550 && (
+                    <Col className='character-col'>
+                        <Share prof={char.profession} />
                     </Col>
-                }
+                )}
             </Row>
         </Container >
     );

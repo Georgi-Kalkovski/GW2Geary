@@ -480,6 +480,49 @@ iframe {
   font-weight: 500;
 }
 
+.link-svg {
+  margin-right: 5px;
+  width: 20px;
+  margin-bottom: -3px;
+}
+
+.share-div {
+  position: absolute;
+  background-color: white;
+  border: 1.5px solid rgb(255, 255, 255);
+  box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.2);
+  padding: 10px 0px 5px 10px !important;
+  margin-top:70px !important;
+}
+
+.share-div>div {
+  padding: 4px;
+  margin-bottom: -6px;
+}
+
+.share-input {
+  margin: 0;
+  padding: 0;
+  height: 36px;
+  width: 175px;
+  margin-right: 10px;
+  padding-top: 3px;
+  border: none;
+  background: #35363a;
+  color: white;
+}
+
+.share-copy {
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 5px;
+  padding: 2px 0px;
+  width: 100px;
+  border: 1px solid;
+}
+
 /* Light Mode */
 
 body.light-theme {
@@ -523,6 +566,10 @@ body.light-theme .contact-svg img {
   filter: invert(80%) sepia(2%) saturate(4015%) hue-rotate(188deg) brightness(102%) contrast(83%);
 }
 
+body.light-theme .link-svg,
+body.light-theme .wiki-button img {
+  filter: invert(75%) sepia(97%) saturate(4%) hue-rotate(28deg) brightness(103%) contrast(100%);
+}
 
 body.light-theme .contact-svg img:hover {
   filter: invert(80%) sepia(33%) saturate(5291%) hue-rotate(339deg) brightness(98%) contrast(115%);

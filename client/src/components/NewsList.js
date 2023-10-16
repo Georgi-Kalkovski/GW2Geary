@@ -3,6 +3,14 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
+            date: '16.10.2023',
+            content: (
+                <span>
+                    Added <span className="yellow-highlight"> more sharing options </span> for the <span className="yellow-highlight"> accounts </span> and <span className="yellow-highlight"> characters</span>.
+                </span>
+            ),
+        },
+        {
             date: '15.10.2023',
             content: (
                 <span>

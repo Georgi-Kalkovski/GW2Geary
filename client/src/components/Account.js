@@ -9,6 +9,7 @@ import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
 import fetchData from "./fetchData";
 import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
+import Share from "./Share";
 
 const Account = () => {
   const { name } = useParams();
@@ -186,13 +187,7 @@ const Account = () => {
                         </button>
                       )}
                       {window.innerWidth < 550 && (
-                        <button
-                          className={`basic-button`}
-                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
-                          onClick={copyText}
-                        >
-                          Copy Link
-                        </button>
+                        <Share />
                       )}
                     </div>
                     {/* World */}
@@ -224,14 +219,9 @@ const Account = () => {
                       </Col>
                     )}
                     {window.innerWidth >= 550 && (
-                      <button
-                        className={`basic-button`}
-                        style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid', backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
-                        onClick={copyText}
-                      >
-                        Copy Link
-                      </button>
+                      <Share />
                     )}
+
                   </Row>
                 </Container>
 

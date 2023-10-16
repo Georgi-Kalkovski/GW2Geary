@@ -506,4 +506,9 @@ input:checked+.slider:before {
   .thin-hr {
     width: 75%;
   }
+
+  .share-div {
+    flex-direction: row;
+    margin-left: -250px !important;
+  }
 }
