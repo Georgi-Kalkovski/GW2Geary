@@ -34,7 +34,7 @@ import {
     WhatsappIcon
 } from "react-share";
 
-function Share({ prof }) {
+function Share({ fashion, prof }) {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [buttonColor, setButtonColor] = useState('');
     const [buttonColor2, setButtonColor2] = useState('');
@@ -47,7 +47,11 @@ function Share({ prof }) {
     };
 
     const copyText = () => {
-        navigator?.clipboard?.writeText(window.location.href.split('w=')[0].slice(0, -1));
+        if (fashion) {
+            navigator?.clipboard?.writeText(shareUrl.split('prof=')[0].slice(0, -1));
+        } else {
+            navigator?.clipboard?.writeText(shareUrl.split('w=')[0].slice(0, -1));
+        }
         setButtonColor('darkgreen');
         setShowSavedMessage(true);
         setTimeout(() => {
@@ -66,10 +70,14 @@ function Share({ prof }) {
         }, 500);
     };
 
+    const preventUrlChange = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="flex">
             <div onClick={togglePopup}>
-                <Link className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
+                <Link onClick={preventUrlChange} className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
             </div>
             {isPopupOpen &&
                 <div className="flex column">

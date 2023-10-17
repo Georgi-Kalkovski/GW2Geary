@@ -86,7 +86,7 @@ function CharacterFashion() {
                                 <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
                             </li>
                             <li className="breadcrumb-item flex">
-                                <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share prof={character.profession} /></span>
+                                <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share fashion={true} prof={character.profession} /></span>
                             </li>
                         </ul>
                     </nav>
