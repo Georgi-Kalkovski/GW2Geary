@@ -14,6 +14,7 @@ import './Character.css';
 import Dragon from '../dragon.svg';
 import Cog from '../cog.svg';
 import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
+import Share from './Share';
 
 function Character() {
     let [searchParams, setSearchParams] = useSearchParams();
@@ -147,6 +148,9 @@ function Character() {
                             </li>
                             <li style={{ cursor: "default" }} aria-current="page">
                                 <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
+                            </li>
+                            <li className="breadcrumb-item flex">
+                                <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share prof={charFound.profession} /></span>
                             </li>
                         </ul>
                     </nav>

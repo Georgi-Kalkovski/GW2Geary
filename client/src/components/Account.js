@@ -145,6 +145,9 @@ const Account = () => {
                 <li style={{ cursor: "default" }} aria-current="page">
                   <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101)" }}>Account</span>
                 </li>
+                <li className="flex">
+                  <span style={{margin: '0px 5px'}}>{`-`}</span><span><Share /></span>
+                </li>
               </div>
             </nav>
             {/* Private Account */}
@@ -186,9 +189,6 @@ const Account = () => {
                           Hide Details
                         </button>
                       )}
-                      {window.innerWidth < 550 && (
-                        <Share />
-                      )}
                     </div>
                     {/* World */}
                     {showMenu && (
@@ -217,9 +217,6 @@ const Account = () => {
                         <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
                         <Row className="yellow-highlight">WvW Rank</Row>
                       </Col>
-                    )}
-                    {window.innerWidth >= 550 && (
-                      <Share />
                     )}
 
                   </Row>

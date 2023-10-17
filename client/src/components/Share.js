@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import LinkSvg from './Character/link.svg'
+import { Link } from "react-router-dom";
 
 import {
     EmailShareButton,
@@ -67,18 +68,14 @@ function Share({ prof }) {
 
     return (
         <div className="flex">
-            <button className={prof ? `${prof?.toLowerCase()}-border dropdown-button show-menu-button` : 'basic-button'}
-                style={prof ? { width: '100px' } : { width: '100px', marginTop: '5px', border: '1px solid' }}
-                onClick={togglePopup}
-            >
-                <img className="link-svg" src={LinkSvg} alt="" /> Share
-            </button>
-            {
-                isPopupOpen &&
+            <div onClick={togglePopup}>
+                <Link className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
+            </div>
+            {isPopupOpen &&
                 <div className="flex column">
                     <div
                         className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border` : "flex acc-info account-box share-div"}
-                        style={{ flexWrap: 'wrap', width: '250px', zIndex: 1, marginLeft: '-200px' }}
+                        style={{ flexWrap: 'wrap', width: '250px', zIndex: 1 }}
                     >
                         <div>
                             <FacebookShareButton
@@ -166,7 +163,7 @@ function Share({ prof }) {
                                 <VKIcon size={40} />
                             </VKShareButton>
                         </div>
-                        {/* <div>
+                        <div>
                             <TumblrShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -175,7 +172,7 @@ function Share({ prof }) {
                             >
                                 <TumblrIcon size={40} />
                             </TumblrShareButton>
-                        </div> */}
+                        </div>
                         <div>
                             <WeiboShareButton
                                 url={shareUrl}

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { wikiSmallProfessionIcons, wikiBigRacesIcons } from '../../icons';
-import CharacterShareLink from './CharacterShareLink';
-import Share from '../../Share';
 
-function CharacterInfo({ char, acc, mastery, world, shareLink }) {
+function CharacterInfo({ char, acc, mastery, world }) {
     const [showMenu, setShowMenu] = useState(true);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -55,11 +53,6 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                             Hide Details
                         </button>
                     )}
-                    {window.innerWidth < 550 &&
-                        <Col className='character-col'>
-                            <Share prof={char.profession} />
-                        </Col>
-                    }
 
                 </div>
                 {/* World */}
@@ -189,14 +182,8 @@ function CharacterInfo({ char, acc, mastery, world, shareLink }) {
                                 </Col>
                             )}
                         </div>
-
                     </div>)
                 }
-                {window.innerWidth >= 550 && (
-                    <Col className='character-col'>
-                        <Share prof={char.profession} />
-                    </Col>
-                )}
             </Row>
         </Container >
     );

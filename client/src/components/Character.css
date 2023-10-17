@@ -509,6 +509,5 @@ input:checked+.slider:before {
 
   .share-div {
     flex-direction: row;
-    margin-left: -250px !important;
   }
 }
