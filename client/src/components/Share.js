@@ -81,7 +81,7 @@ function Share({ fashion, prof }) {
             </div>
                 <div className="flex column">
                     <div
-                        className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : "flex acc-info account-box share-div"}
+                        className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : `flex acc-info account-box share-div transition-hover-search ${isPopupOpen ? 'open' : ''}`}
                         style={{ flexWrap: 'wrap', width: '250px'}}
                     >
                         <div>
