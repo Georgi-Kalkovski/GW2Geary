@@ -492,7 +492,7 @@ iframe {
   background-color: white;
   border: 1.5px solid rgb(255, 255, 255);
   box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.2);
-  padding: 10px 0px 5px 10px !important;
+  padding: 0px 0px 0px 10px !important;
   margin-top: 40px !important;
   width: 250px;
   left: 50%;

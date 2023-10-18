@@ -58,13 +58,13 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 50%; 
-  transform: translateX(-55%); 
+  left: 50%;
+  transform: translateX(-55%);
   background-color: #f1f1f1;
   padding: 0;
-  margin: 2% 0 0 0; 
-  width: auto; 
-  max-width: 45%; 
+  margin: 2% 0 0 0;
+  width: auto;
+  max-width: 45%;
 }
 
 .dropdown-menu li {
@@ -422,15 +422,18 @@ input:checked+.slider:before {
     max-width: 350px;
   }
 
-  .char-info,
-  .acc-info {
+  .char-info {
     flex-direction: column;
     min-width: 330px !important;
   }
 
   .acc-info {
     flex-direction: column;
-    min-width: 188px !important;
+    min-width: 240px !important;
+  }
+
+  .character {
+    min-width: 268px;
   }
 
   .footer-left {
