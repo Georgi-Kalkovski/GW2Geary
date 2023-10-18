@@ -566,7 +566,8 @@ body.light-theme .sun-moon:hover {
 }
 
 body.light-theme .plus-minus-button img,
-body.light-theme .contact-svg img {
+body.light-theme .contact-svg img,
+body.light-theme .news-svg img  {
   filter: invert(80%) sepia(2%) saturate(4015%) hue-rotate(188deg) brightness(102%) contrast(83%);
 }
 
