@@ -126,7 +126,7 @@ function Template({ buildInput }) {
             name='template'
             />
             <button
-                className={`${buildInput.profession.toLowerCase()}-border template-button`}
+                className={`class-hover ${buildInput.profession.toLowerCase()}-border template-button`}
                 onClick={copyText}
                 style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                 ref={setTriggerRef}>

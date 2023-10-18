@@ -79,11 +79,10 @@ function Share({ fashion, prof }) {
             <div onClick={togglePopup}>
                 <Link onClick={preventUrlChange} className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
             </div>
-            {isPopupOpen &&
                 <div className="flex column">
                     <div
-                        className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border` : "flex acc-info account-box share-div"}
-                        style={{ flexWrap: 'wrap', width: '250px', zIndex: 1 }}
+                        className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : "flex acc-info account-box share-div"}
+                        style={{ flexWrap: 'wrap', width: '250px'}}
                     >
                         <div>
                             <FacebookShareButton
@@ -218,8 +217,6 @@ function Share({ fashion, prof }) {
                         </div>
                     </div>
                 </div>
-
-            }
         </div >
     );
 };

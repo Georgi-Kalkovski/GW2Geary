@@ -91,14 +91,20 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
         <div className={`build ${char.profession.toLowerCase()}-lightning-border`} ref={wrapperRef}>
 
             {/* Dropdown menu */}
-            <div className="dropdown">
-                <button className={`${char.profession.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setTriggerRef}>
+            <div className="dropdown" style={{ marginLeft: '10px' }}>
+                <button
+                    className={`class-hover ${char.profession.toLowerCase()}-border dropdown-button`}
+                    style={{ marginLeft: '29px' }}
+                    onClick={toggleMenu} 
+                    ref={setTriggerRef}
+                >
                     {selectedBldTab && selectedBldTab.build.name ? selectedBldTab.build.name : `Build ${selectedBldTab.tab}`}
                 </button>
 
                 {/* Specialization icon */}
                 <div
                     className="skill-box-container"
+                    style={{ width: '35px', height: '35px' }}
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
                     {showWikiButton &&
@@ -119,19 +125,17 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
                         <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                     </div>
                 )} */}
-                {isOpen && (
-                    <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border`}>
-                        {char.build_tabs.map((buildTab) => (
-                            <li
-                                key={buildTab.tab}
-                                onClick={handleItemClick}
-                                value={buildTab.tab}
-                            >
-                                {buildTab.build.name ? buildTab.build.name : `Build ${buildTab.tab}`}
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                <ul className={`dropdown-menu ${char.profession.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`}>
+                    {char.build_tabs.map((buildTab) => (
+                        <li
+                            key={buildTab.tab}
+                            onClick={handleItemClick}
+                            value={buildTab.tab}
+                        >
+                            {buildTab.build.name ? buildTab.build.name : `Build ${buildTab.tab}`}
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             {/* Build Content */}

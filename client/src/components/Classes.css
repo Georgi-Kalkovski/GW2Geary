@@ -1,3 +1,7 @@
+.class-hover {
+  transition: background-color 0.3s ease-out;
+}
+
 /* Engineer */
 .engineer-text {
   color: #98692c;
@@ -9,7 +13,6 @@ input:checked+.engineer-switch,
 }
 
 .engineer-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #65451d;
 }
 
@@ -38,7 +41,6 @@ input:checked+.necromancer-switch,
 }
 
 .necromancer-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #1a241d;
 }
 
@@ -68,7 +70,6 @@ input:checked+.thief-switch,
 }
 
 .thief-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #293045;
 }
 
@@ -97,7 +98,6 @@ input:checked+.elementalist-switch,
 }
 
 .elementalist-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #6f251f;
 }
 
@@ -126,7 +126,6 @@ input:checked+.warrior-switch,
 }
 
 .warrior-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #896610;
 }
 
@@ -155,7 +154,6 @@ input:checked+.ranger-switch,
 }
 
 .ranger-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #627228;
 }
 
@@ -183,8 +181,7 @@ input:checked+.mesmer-switch,
   background-color: #724192;
 }
 
-.mesmer-border:hover{
-  transition: background-color 0.3s ease-out;
+.mesmer-border:hover {
   background-color: #4a2a5e;
 }
 
@@ -213,7 +210,6 @@ input:checked+.guardian-switch,
 }
 
 .guardian-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #4d8297;
 }
 
@@ -242,7 +238,6 @@ input:checked+.revenant-switch,
 }
 
 .revenant-border:hover {
-  transition: background-color 0.3s ease-out;
   background-color: #240e15;
 }
 

@@ -129,7 +129,7 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
         <div style={{ fontSize: '35px', padding: '10px', marginTop: '-10px' }}>{char.name}</div>
       }
       <div className="dropdown">
-        <button className={`${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
+        <button className={`class-hover ${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         <div className='flex' style={{ textAlign: 'left', padding: '5px 0px 0px 5px' }}>
@@ -144,8 +144,7 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`}></span>
           </label>
         </div>
-        {isOpen && (
-          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
+          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
             {char?.equipment_tabs.map((equip) => (
               <li
                 key={equip.tab}
@@ -156,7 +155,6 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
               </li>
             ))}
           </ul>
-        )}
       </div>
       <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} prof={char?.profession} embed={embed} />
     </div>

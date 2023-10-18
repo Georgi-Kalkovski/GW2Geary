@@ -37,7 +37,7 @@
 }
 
 .dropdown>ul {
-  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.2);
+  margin-top: 6px;
 }
 
 .dropdown>ul>li:hover {
@@ -58,12 +58,13 @@
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%; 
+  transform: translateX(-55%); 
   background-color: #f1f1f1;
   padding: 0;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  margin: 2% 30% 0 25%;
-  width: 45%;
+  margin: 2% 0 0 0; 
+  width: auto; 
+  max-width: 45%; 
 }
 
 .dropdown-menu li {
@@ -71,6 +72,7 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  height: auto;
 }
 
 .dropdown-menu li:hover {

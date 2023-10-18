@@ -186,7 +186,11 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   return (
     <div className={`equipment ${char?.profession?.toLowerCase()}-lightning-border`} ref={wrapperRef}>
       <div className="dropdown">
-        <button className={`${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu} ref={setDropdownTriggerRef}>
+        <button
+          className={`${char?.profession?.toLowerCase()}-border dropdown-button`}
+          style={{ marginLeft: '10px' }}
+          onClick={toggleMenu}
+          ref={setDropdownTriggerRef}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
         {/* {dropdownVisible && (
@@ -202,19 +206,19 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <div {...getDropdownArrowProps({ className: 'tooltip-arrow' })} />
           </div>
         )} */}
-        {isOpen && (
-          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border`} style={{ zIndex: '7' }}>
-            {char?.equipment_tabs.map((equip) => (
-              <li
-                key={equip.tab}
-                onClick={handleItemClick}
-                value={equip.tab}
-              >
-                {equip.name ? equip.name : `Equipment ${equip.tab}`}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul
+          className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`}
+          style={{ marginLeft: '10px' }}>
+          {char?.equipment_tabs.map((equip) => (
+            <li
+              key={equip.tab}
+              onClick={handleItemClick}
+              value={equip.tab}
+            >
+              {equip.name ? equip.name : `Equipment ${equip.tab}`}
+            </li>
+          ))}
+        </ul>
       </div>
       {/* Switches */}
       <div className='flex center' style={{ margin: '15px' }}>
@@ -225,8 +229,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isFashionOn}
-              onChange={toggleFashion} 
-              name='fashion'/>
+              onChange={toggleFashion}
+              name='fashion' />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
           {/* {switchVisible && (
@@ -250,8 +254,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isPrefixesOn}
-              onChange={togglePrefixes} 
-              name='stats'/>
+              onChange={togglePrefixes}
+              name='stats' />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
           </label>
           {/* {switchVisible && (
@@ -275,8 +279,8 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             <input
               type="checkbox"
               checked={isSliderOn}
-              onChange={toggleSlider} 
-              name='skins'/>
+              onChange={toggleSlider}
+              name='skins' />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
           </label>
           {/* {switch2Visible && (

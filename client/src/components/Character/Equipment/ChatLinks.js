@@ -87,14 +87,14 @@ function ChatLinks({ items, prof, fashion, relic, powerCore }) {
             ? (<Container>
                 <div className='template-container'>
                     <button
-                        className={`${prof.toLowerCase()}-border template-button`}
+                        className={`class-hover ${prof.toLowerCase()}-border template-button`}
                         onClick={copyItems}
                         style={{ backgroundColor: buttonColor1, transition: 'background-color 0.3s ease-out', marginRight: '7px' }}
                     >
                         Copy Items
                     </button>
                     <button
-                        className={`${prof.toLowerCase()}-border template-button`}
+                        className={`class-hover ${prof.toLowerCase()}-border template-button`}
                         onClick={copySkins}
                         style={{ backgroundColor: buttonColor2, transition: 'background-color 0.3s ease-out' }}
                     >
@@ -106,7 +106,7 @@ function ChatLinks({ items, prof, fashion, relic, powerCore }) {
                 <Container>
                     <div className='template-container'>
                         <button
-                            className={`${prof.toLowerCase()}-border template-button`}
+                            className={`class-hover ${prof.toLowerCase()}-border template-button`}
                             onClick={copySkins}
                             style={{ backgroundColor: buttonColor2, transition: 'background-color 0.3s ease-out' }}
                         >

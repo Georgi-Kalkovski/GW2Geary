@@ -225,17 +225,15 @@ function Search() {
         }
       </div>
       {/* Search Button Menu*/}
-      {isOpen && (
-        <SearchMenu
-          isOpen={isOpen}
-          selectedGenderUp={handleGenderSelection}
-          selectedGender={selectedGender}
-          selectedRaceUp={handleRaceSelection}
-          selectedRace={selectedRace}
-          selectedProfessionUp={handleProfessionSelection}
-          selectedProfession={selectedProfession}
-        />
-      )}
+      <SearchMenu
+        isOpen={isOpen}
+        selectedGenderUp={handleGenderSelection}
+        selectedGender={selectedGender}
+        selectedRaceUp={handleRaceSelection}
+        selectedRace={selectedRace}
+        selectedProfessionUp={handleProfessionSelection}
+        selectedProfession={selectedProfession}
+      />
 
       <div className='flex center' style={{ marginTop: '0px', marginBottom: '5px' }}>
         {selectedGender && !isOpen && (

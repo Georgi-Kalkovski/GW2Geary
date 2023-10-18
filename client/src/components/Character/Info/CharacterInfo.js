@@ -37,7 +37,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                 <div className='flex center'>
                     {window.innerWidth < 550 && !showMenu && (
                         <button
-                            className={`${char.profession.toLowerCase()}-border dropdown-button show-menu-button`}
+                            className={`class-hover ${char.profession.toLowerCase()}-border dropdown-button show-menu-button`}
                             style={{ padding: '2px 0', width: '100px' }}
                             onClick={() => setShowMenu(true)}
                         >
@@ -46,7 +46,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                     )}
                     {window.innerWidth < 550 && showMenu && (
                         <button
-                            className={`${char.profession.toLowerCase()}-border dropdown-button`}
+                            className={`class-hover ${char.profession.toLowerCase()}-border dropdown-button`}
                             style={{ padding: '2px 0', width: '100px' }}
                             onClick={() => setShowMenu(false)}
                         >

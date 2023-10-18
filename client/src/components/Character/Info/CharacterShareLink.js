@@ -26,7 +26,7 @@ function CharacterShareLink({ buildInput, shareLink }) {
         {buildInput &&
             <div>
                 <button
-                    className={`${buildInput.toLowerCase()}-border template-button`}
+                    className={`class-hover ${buildInput.toLowerCase()}-border template-button`}
                     onClick={copyText}
                     style={{ backgroundColor: buttonColor, transition: 'background-color 0.3s ease-out' }}
                     ref={setTriggerRef}>

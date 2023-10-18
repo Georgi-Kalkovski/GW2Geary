@@ -15,6 +15,10 @@
     color: white;
 }
 
+.accounts-hover {
+    transition: background-color 0.3s ease-out;
+}
+
 .accounts-hover:hover {
     box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
     background-color: #35363a;
@@ -237,4 +241,20 @@
     margin: 0 10px;
     opacity: 0.6;
     box-shadow: 0 0 2px 3px rgba(204, 204, 204, 0.1);
+}
+
+.transition-hover-search,
+.dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, z-index 0.3s ease-in-out;
+    /* You can adjust the duration and easing function */
+    z-index:-1 !important;
+}
+
+.transition-hover-search.open,
+.dropdown-menu.open {
+    max-height: 1000px;
+    z-index:10 !important;
+    /* Adjust the maximum height as needed */
 }

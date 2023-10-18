@@ -65,7 +65,7 @@ function CharacterPreview({ character, apiKey }) {
             </>)}
 
             <Link to={`/c/${character.name.replace(/\s/g, "_")}`} className="character-link">
-                <Container className={`${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border character-box`}>
+                <Container className={`class-hover ${character.profession.toLowerCase()}-border ${character.profession.toLowerCase()}-lightning-border character-box`}>
                     <Row className='character-name-div'>
                         <div className="character-name">{character.name}</div>
                     </Row>

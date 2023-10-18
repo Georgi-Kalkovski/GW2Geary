@@ -5,7 +5,7 @@ function SearchSubbutton({ active, text, onClick }) {
     const Icon = wikiBigProfessionIcons[text] || wikiBigRacesColoredIcons[text] ? (wikiBigProfessionIcons[text] ? wikiBigProfessionIcons[text] : wikiBigRacesColoredIcons[text]) : genderIcons[text];
     return (
         <button
-            className={`${active === text ? 'active' : ''} basic-button-search`}
+            className={`${active === text ? 'active' : ''} basic-button-search accounts-hover`}
             onClick={onClick}
         >
             <div>
