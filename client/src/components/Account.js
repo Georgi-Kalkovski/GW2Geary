@@ -170,7 +170,7 @@ const Account = () => {
                     )}
                     {window.innerWidth < 550 && (
                       <div className='flex center'>
-                        <Col className={showMenu ? 'character-col' : ''}>
+                        <Col className={showMenu ? 'character-col' : 'character-col-close'}>
                           <Row style={{ fontSize: '30px' }}>
                             {accFound.name}
                             <div className="arrow-logic" style={!showMenu ? {} : { marginRight: '15px' }}>

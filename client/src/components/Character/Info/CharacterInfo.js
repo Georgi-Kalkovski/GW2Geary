@@ -40,7 +40,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                 )}
                 {window.innerWidth < 550 && (
                     <div className='flex center' >
-                        <Col className={showMenu ? 'character-col' : ''}>
+                        <Col className={showMenu ? 'character-col' : 'character-col-close'}>
                             <Row style={{ fontSize: '30px' }}>
                                 {char.name}
                                 <div className="arrow-logic" style={!showMenu ? {} : { marginRight: '15px' }}>
@@ -56,7 +56,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                 )}
                 {/* World */}
                 <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
-                    <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                    <Row style={{ fontSize: '20px'}}>{world}</Row>
                     <Row className="yellow-highlight">World</Row>
                 </Col>
                 {window.innerWidth >= 550
