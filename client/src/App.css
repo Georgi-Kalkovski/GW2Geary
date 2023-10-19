@@ -527,6 +527,44 @@ iframe {
   border: 1px solid;
 }
 
+.padding-box {
+  padding: 1px 4px;
+}
+
+.show-content {
+  opacity: 1;
+  max-height: 100px;
+  /* Set a reasonable max-height */
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.hide-content {
+  opacity: 0;
+  max-height: 0px;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.arrow-logic {
+  position: absolute;
+  width: 30px;
+  margin-right: 22px;
+  margin-bottom: 3px;
+  bottom: 0;
+  right: 0;
+  display: flex;
+}
+
+.arrow-text {
+  font-size: 13px;
+  margin-top: -4px;
+  padding-right: 3px;
+}
+
+.arrow-svg {
+  width: 15px;
+}
+
 /* Light Mode */
 
 body.light-theme {
@@ -567,7 +605,8 @@ body.light-theme .sun-moon:hover {
 
 body.light-theme .plus-minus-button img,
 body.light-theme .contact-svg img,
-body.light-theme .news-svg img  {
+body.light-theme .news-svg img,
+body.light-theme .arrow-svg {
   filter: invert(80%) sepia(2%) saturate(4015%) hue-rotate(188deg) brightness(102%) contrast(83%);
 }
 

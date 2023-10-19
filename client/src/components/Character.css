@@ -119,6 +119,13 @@
   margin: 17px 0 15px 0;
 }
 
+.acc-info-new {
+  position: relative;
+  background-color: #202124;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
 .info-size {
   height: 20px;
 }
@@ -333,7 +340,6 @@ input:checked+.slider:before {
 
 .font-size-22px {
   font-size: 22px;
-  padding-bottom: 6px;
 }
 
 /* Hide the API key on small screens */
@@ -347,6 +353,7 @@ input:checked+.slider:before {
 
   .character-col {
     margin-right: 0;
+    padding-bottom: 20px;
   }
 
   .copy-character {

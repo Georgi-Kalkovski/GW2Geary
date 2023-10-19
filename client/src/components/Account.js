@@ -10,6 +10,7 @@ import Cog from '../cog.svg';
 import fetchData from "./fetchData";
 import { getFromLocalStorage, saveToLocalStorage } from "./localStorage";
 import Share from "./Share";
+import ArrowSvg from './arrow.svg'
 
 const Account = () => {
   const { name } = useParams();
@@ -21,10 +22,14 @@ const Account = () => {
   const [mastery, setMastery] = useState(null);
   const [world, setWorld] = useState(null);
   const [active, setActive] = useState(false)
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   useEffect(() => {
     let params = {};
@@ -118,16 +123,7 @@ const Account = () => {
       console.error(error);
     }
   }, []);
-
-  const [buttonColor, setButtonColor] = useState('');
-
-  const copyText = () => {
-    navigator?.clipboard?.writeText(window.location.href);
-    setButtonColor('darkgreen');
-    setTimeout(() => {
-      setButtonColor('');
-    }, 250);
-  };
+  
   return (
     <div>
       <Helmet>
@@ -146,7 +142,7 @@ const Account = () => {
                   <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101)" }}>Account</span>
                 </li>
                 <li className="flex">
-                  <span style={{margin: '0px 5px'}}>{`-`}</span><span><Share /></span>
+                  <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share /></span>
                 </li>
               </div>
             </nav>
@@ -164,61 +160,86 @@ const Account = () => {
                 </div>
               </div>
               : <React.Fragment >
-                <Container className="flex center center-items">
-                  <Row className={`flex center acc-info accounts-box`}>
+                <Container className="flex center center-items" onClick={window.innerWidth < 550 ? toggleMenu : ''}>
+                  <Row className={`flex center acc-info acc-info-new accounts-box`}>
                     {/* Name */}
-                    <Col className='character-col'>
-                      <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
-                    </Col>
-                    <div className='flex center'>
-                      {window.innerWidth < 550 && !showMenu && (
-                        <button
-                          className={`basic-button`}
-                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
-                          onClick={() => setShowMenu(true)}
-                        >
-                          Show Details
-                        </button>
-                      )}
-                      {window.innerWidth < 550 && showMenu && (
-                        <button
-                          className={`basic-button`}
-                          style={{ marginTop: '5px', padding: '2px 0', width: '100px', border: '1px solid' }}
-                          onClick={() => setShowMenu(false)}
-                        >
-                          Hide Details
-                        </button>
-                      )}
-                    </div>
-                    {/* World */}
-                    {showMenu && (
-                      <Col className='character-col padding-top'>
-                        <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                        <Row className='yellow-highlight'>World</Row>
+                    {window.innerWidth >= 550 && (
+                      <Col className='character-col'>
+                        <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
                       </Col>
                     )}
-                    {/* Mastery Points */}
-                    {showMenu && (
-                      <Col className="character-col padding-top">
-                        <Row className="font-size-22px">{mastery ? mastery : '0'}</Row>
-                        <Row className="yellow-highlight">Mastery Points </Row>
-                      </Col>
+                    {window.innerWidth < 550 && (
+                      <div className='flex center'>
+                        <Col className={showMenu ? 'character-col' : ''}>
+                          <Row style={{ fontSize: '30px' }}>
+                            {accFound.name}
+                            <div className="arrow-logic" style={!showMenu ? {} : { marginRight: '15px' }}>
+                              <span className="arrow-text">{!showMenu ? 'more' : 'less'}</span>
+                              <img className='arrow-svg' src={ArrowSvg} style={!showMenu ? {} : { transform: 'scaleY(-1)' }} alt="" />
+                            </div>
+                          </Row>
+                        </Col>
+                      </div>
                     )}
-                    {/* Fractal Level */}
-                    {showMenu && (
-                      <Col className="character-col padding-top">
-                        <Row className="font-size-22px">{accFound?.fractal_level ? accFound?.fractal_level : '0'}</Row>
-                        <Row className="yellow-highlight">Fractal Level</Row>
-                      </Col>
-                    )}
-                    {/* WvW Rank */}
-                    {showMenu && (
-                      <Col className="character-col padding-top">
-                        <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
-                        <Row className="yellow-highlight">WvW Rank</Row>
-                      </Col>
-                    )}
-
+                    {window.innerWidth < 550
+                      ? (showMenu &&
+                        (
+                          <div className="flex">
+                            <div style={{ paddingRight: '10px' }}>
+                              {/* World */}
+                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                                <Row style={{ fontSize: '20px' }}>{world}</Row>
+                                <Row className='yellow-highlight'>World</Row>
+                              </Col>
+                              {/* Mastery Points */}
+                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                                <Row className="font-size-22px">{mastery !== null ? mastery : '0'}</Row>
+                                <Row className="yellow-highlight">Mastery Points </Row>
+                              </Col>
+                            </div>
+                            <div style={{ paddingLeft: '10px' }}>
+                              {/* Fractal Level */}
+                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                                <Row className="font-size-22px">
+                                  {accFound?.fractal_level ? accFound?.fractal_level : '0'}
+                                </Row>
+                                <Row className="yellow-highlight">Fractal Level</Row>
+                              </Col>
+                              {/* WvW Rank */}
+                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                                <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                                <Row className="yellow-highlight">WvW Rank</Row>
+                              </Col>
+                            </div>
+                          </div>
+                        )
+                      ) : (
+                        <>
+                          {/* World */}
+                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                            <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                            <Row className='yellow-highlight'>World</Row>
+                          </Col>
+                          {/* Mastery Points */}
+                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                            <Row className="font-size-22px">{mastery !== null ? mastery : '0'}</Row>
+                            <Row className="yellow-highlight">Mastery Points </Row>
+                          </Col>
+                          {/* Fractal Level */}
+                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                            <Row className="font-size-22px">
+                              {accFound?.fractal_level ? accFound?.fractal_level : '0'}
+                            </Row>
+                            <Row className="yellow-highlight">Fractal Level</Row>
+                          </Col>
+                          {/* WvW Rank */}
+                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                            <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                            <Row className="yellow-highlight">WvW Rank</Row>
+                          </Col>
+                        </>
+                      )
+                    }
                   </Row>
                 </Container>
 
@@ -248,7 +269,7 @@ const Account = () => {
         </div>
         <br />
       </div>
-    </div>
+    </div >
   );
 };
 

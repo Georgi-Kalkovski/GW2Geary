@@ -79,12 +79,13 @@ function Share({ fashion, prof }) {
             <div onClick={togglePopup}>
                 <Link onClick={preventUrlChange} className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
             </div>
-                <div className="flex column">
-                    <div
-                        className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : `flex acc-info account-box share-div transition-hover-search ${isPopupOpen ? 'open' : ''}`}
-                        style={{ flexWrap: 'wrap', width: '250px'}}
-                    >
-                        <div>
+            <div className="flex column">
+                <div
+                    className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : `flex acc-info account-box share-div transition-hover-search ${isPopupOpen ? 'open' : ''}`}
+                    style={{ flexWrap: 'wrap', width: '250px' }}
+                >
+                    <div className="flex" style={{ padding: '10px 0 5px 0px', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                        <div className="padding-box">
                             <FacebookShareButton
                                 url={shareUrl}
                                 quote={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -93,7 +94,7 @@ function Share({ fashion, prof }) {
                                 <FacebookIcon size={40} />
                             </FacebookShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <FacebookMessengerShareButton
                                 url={shareUrl}
                                 redirectUri='https://gw2geary.com/'
@@ -101,7 +102,7 @@ function Share({ fashion, prof }) {
                                 <FacebookMessengerIcon size={40} />
                             </FacebookMessengerShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <WhatsappShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -109,7 +110,7 @@ function Share({ fashion, prof }) {
                                 <WhatsappIcon size={40} />
                             </WhatsappShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <TwitterShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -118,7 +119,7 @@ function Share({ fashion, prof }) {
                                 <TwitterIcon size={40} />
                             </TwitterShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <RedditShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -126,7 +127,7 @@ function Share({ fashion, prof }) {
                                 <RedditIcon size={40} />
                             </RedditShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <TelegramShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -134,7 +135,7 @@ function Share({ fashion, prof }) {
                                 <TelegramIcon size={40} />
                             </TelegramShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <PinterestShareButton
                                 url={shareUrl}
                                 media='https://i.imgur.com/2O7otCB.png'
@@ -143,7 +144,7 @@ function Share({ fashion, prof }) {
                                 <PinterestIcon size={40} />
                             </PinterestShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <LinkedinShareButton
                                 url={shareUrl}
                                 title={`${prof ? 'Character' : 'Account'} in GW2Geary.`}
@@ -153,7 +154,7 @@ function Share({ fashion, prof }) {
                                 <LinkedinIcon size={40} />
                             </LinkedinShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <ViberShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -161,7 +162,7 @@ function Share({ fashion, prof }) {
                                 <ViberIcon size={40} />
                             </ViberShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <VKShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -170,7 +171,7 @@ function Share({ fashion, prof }) {
                                 <VKIcon size={40} />
                             </VKShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <TumblrShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -180,7 +181,7 @@ function Share({ fashion, prof }) {
                                 <TumblrIcon size={40} />
                             </TumblrShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <WeiboShareButton
                                 url={shareUrl}
                                 title={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
@@ -189,7 +190,7 @@ function Share({ fashion, prof }) {
                                 <WeiboIcon size={40} />
                             </WeiboShareButton>
                         </div>
-                        <div>
+                        <div className="padding-box">
                             <EmailShareButton url={shareUrl}
                                 subject={`This is my ${prof ? 'character' : 'account'} in GW2Geary.`}
                                 body={`This is my ${prof ? 'character' : 'account'}. If you want to see more information, like equipments or builds, please visit the link.\n`}
@@ -217,6 +218,7 @@ function Share({ fashion, prof }) {
                         </div>
                     </div>
                 </div>
+            </div>
         </div >
     );
 };
