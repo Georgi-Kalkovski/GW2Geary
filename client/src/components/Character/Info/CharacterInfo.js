@@ -54,15 +54,11 @@ function CharacterInfo({ char, acc, mastery, world }) {
                         </Col>
                     </div>
                 )}
-                {showMenu &&
-                    <>
-                        {/* World */}
-                        <Col className={`${showMenu ? 'show-content' : 'hide-content character-col'}`}>
-                            <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
-                            <Row className="yellow-highlight">World</Row>
-                        </Col>
-                    </>
-                }
+                {/* World */}
+                <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
+                    <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
+                    <Row className="yellow-highlight">World</Row>
+                </Col>
                 {window.innerWidth >= 550
                     ? (
                         <>
@@ -112,59 +108,57 @@ function CharacterInfo({ char, acc, mastery, world }) {
                             </Col>
                         </>
                     )
-                    : (showMenu &&
-                        (
-                            <div className='flex center'>
-                                <div className='column' style={{ paddingRight: '20px' }}>
-                                    {/* Level */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{char.level}</Row>
-                                        <Row className="yellow-highlight">Level </Row>
-                                    </Col>
-                                    {/* Profession */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">
-                                            <img
-                                                src={wikiSmallProfessionIcons[char.profession]}
-                                                style={{ maxWidth: '25px' }}
-                                                alt={char.profession}
-                                            />
-                                        </Row>
-                                        <Row className="yellow-highlight">{char.profession}</Row>
-                                    </Col>
-                                    {/* Race & Gender */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">
-                                            <img
-                                                src={wikiBigRacesIcons[char.race]}
-                                                alt={char.profession}
-                                                style={{ maxWidth: '25px' }}
-                                            />
-                                        </Row>
-                                        <Row className="yellow-highlight">
-                                            {char.race} {char.gender}
-                                        </Row>
-                                    </Col>
-                                </div>
-                                <div className='column' style={{ paddingLeft: '20px' }}>
-                                    {/* Mastery Points */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{mastery}</Row>
-                                        <Row className="yellow-highlight">Mastery Points </Row>
-                                    </Col>
-                                    {/* Fractal Level */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{acc.fractal_level}</Row>
-                                        <Row className="yellow-highlight">Fractal Level</Row>
-                                    </Col>
-                                    {/* WvW Rank */}
-                                    <Col className={`character-col  ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{acc.wvw_rank}</Row>
-                                        <Row className="yellow-highlight">WvW Rank</Row>
-                                    </Col>
-                                </div>
+                    : (
+                        <div className='flex center'>
+                            <div className='column' style={{ paddingRight: '20px' }}>
+                                {/* Level */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">{char.level}</Row>
+                                    <Row className="yellow-highlight">Level </Row>
+                                </Col>
+                                {/* Profession */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">
+                                        <img
+                                            src={wikiSmallProfessionIcons[char.profession]}
+                                            style={{ maxWidth: '25px' }}
+                                            alt={char.profession}
+                                        />
+                                    </Row>
+                                    <Row className="yellow-highlight">{char.profession}</Row>
+                                </Col>
+                                {/* Race & Gender */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">
+                                        <img
+                                            src={wikiBigRacesIcons[char.race]}
+                                            alt={char.profession}
+                                            style={{ maxWidth: '25px' }}
+                                        />
+                                    </Row>
+                                    <Row className="yellow-highlight">
+                                        {char.race} {char.gender}
+                                    </Row>
+                                </Col>
                             </div>
-                        )
+                            <div className='column' style={{ paddingLeft: '20px' }}>
+                                {/* Mastery Points */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">{mastery}</Row>
+                                    <Row className="yellow-highlight">Mastery Points </Row>
+                                </Col>
+                                {/* Fractal Level */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">{acc.fractal_level}</Row>
+                                    <Row className="yellow-highlight">Fractal Level</Row>
+                                </Col>
+                                {/* WvW Rank */}
+                                <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                    <Row className="font-size-22px">{acc.wvw_rank}</Row>
+                                    <Row className="yellow-highlight">WvW Rank</Row>
+                                </Col>
+                            </div>
+                        </div>
                     )
                 }
             </Row>

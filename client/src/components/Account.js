@@ -123,7 +123,7 @@ const Account = () => {
       console.error(error);
     }
   }, []);
-  
+
   return (
     <div>
       <Helmet>
@@ -182,58 +182,56 @@ const Account = () => {
                       </div>
                     )}
                     {window.innerWidth < 550
-                      ? (showMenu &&
-                        (
-                          <div className="flex">
-                            <div style={{ paddingRight: '10px' }}>
-                              {/* World */}
-                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                <Row style={{ fontSize: '20px' }}>{world}</Row>
-                                <Row className='yellow-highlight'>World</Row>
-                              </Col>
-                              {/* Mastery Points */}
-                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                <Row className="font-size-22px">{mastery !== null ? mastery : '0'}</Row>
-                                <Row className="yellow-highlight">Mastery Points </Row>
-                              </Col>
-                            </div>
-                            <div style={{ paddingLeft: '10px' }}>
-                              {/* Fractal Level */}
-                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                <Row className="font-size-22px">
-                                  {accFound?.fractal_level ? accFound?.fractal_level : '0'}
-                                </Row>
-                                <Row className="yellow-highlight">Fractal Level</Row>
-                              </Col>
-                              {/* WvW Rank */}
-                              <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
-                                <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
-                                <Row className="yellow-highlight">WvW Rank</Row>
-                              </Col>
-                            </div>
+                      ? (
+                        <div className="flex">
+                          <div style={{ paddingRight: '10px' }}>
+                            {/* World */}
+                            <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
+                              <Row style={{ fontSize: '20px' }}>{world}</Row>
+                              <Row className='yellow-highlight'>World</Row>
+                            </Col>
+                            {/* Mastery Points */}
+                            <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
+                              <Row className="font-size-22px">{mastery !== null ? mastery : '0'}</Row>
+                              <Row className="yellow-highlight">Mastery Points </Row>
+                            </Col>
                           </div>
-                        )
+                          <div style={{ paddingLeft: '10px' }}>
+                            {/* Fractal Level */}
+                            <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
+                              <Row className="font-size-22px">
+                                {accFound?.fractal_level ? accFound?.fractal_level : '0'}
+                              </Row>
+                              <Row className="yellow-highlight">Fractal Level</Row>
+                            </Col>
+                            {/* WvW Rank */}
+                            <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
+                              <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                              <Row className="yellow-highlight">WvW Rank</Row>
+                            </Col>
+                          </div>
+                        </div>
                       ) : (
                         <>
                           {/* World */}
-                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                          <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
                             <Row style={{ fontSize: '20px', paddingBottom: '6px' }}>{world}</Row>
                             <Row className='yellow-highlight'>World</Row>
                           </Col>
                           {/* Mastery Points */}
-                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                          <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
                             <Row className="font-size-22px">{mastery !== null ? mastery : '0'}</Row>
                             <Row className="yellow-highlight">Mastery Points </Row>
                           </Col>
                           {/* Fractal Level */}
-                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                          <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
                             <Row className="font-size-22px">
                               {accFound?.fractal_level ? accFound?.fractal_level : '0'}
                             </Row>
                             <Row className="yellow-highlight">Fractal Level</Row>
                           </Col>
                           {/* WvW Rank */}
-                          <Col className={`character-col ${showMenu ? 'show-content' : 'hide-content'}`}>
+                          <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
                             <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
                             <Row className="yellow-highlight">WvW Rank</Row>
                           </Col>
