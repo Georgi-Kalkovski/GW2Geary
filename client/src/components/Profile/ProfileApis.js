@@ -39,7 +39,7 @@ function ProfileApis({ currentUser, AuthService }) {
         if (window.innerWidth >= 550) {
             setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.6);
         } else {
-            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.55);
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.5);
         }
     }, []);
 

@@ -191,7 +191,7 @@ function Search() {
 
   useEffect(() => {
     if (window.innerWidth <= 550) {
-      setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
+      setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.6);
     }
   }, []);
 
