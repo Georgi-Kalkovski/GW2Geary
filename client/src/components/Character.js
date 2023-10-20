@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Helmet } from "react-helmet";
-import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -124,6 +123,14 @@ function Character() {
         }
     }, []);
 
+    const [maxHeight, setMaxHeight] = useState(0);
+
+    useEffect(() => {
+        if (window.innerWidth <= 550) {
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
+        }
+    }, []);
+
     return (
         charFound === null || accFound === null
             ? <div className="flex center">
@@ -161,7 +168,7 @@ function Character() {
                         : ''
                     }
                     <CharacterInfo char={charFound} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
-                    <div className='equipment-build-flex'>
+                    <div className={window.innerWidth < 550 ? 'custom-scrollbar equipment-build-flex' : 'equipment-build-flex'} style={window.innerWidth < 550 ? { textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
                         <EquipmentDropdown char={charFound} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
                         <BuildDropdown char={charFound} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} setEliteSpec={setSpecUp} />
                     </div>

@@ -124,6 +124,15 @@ const Account = () => {
     }
   }, []);
 
+  const [maxHeight, setMaxHeight] = useState(0);
+
+  useEffect(() => {
+    if (window.innerWidth <= 550) {
+      setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
+    }
+  }, []);
+
+
   return (
     <div>
       <Helmet>
@@ -240,27 +249,28 @@ const Account = () => {
                     }
                   </Row>
                 </Container>
-
                 {/* Characters */}
-                {characters &&
-                  characters.map((character, index) => (
-                    <React.Fragment key={index}>
-                      <div className="characters">
-                        {character &&
-                          character.characters
-                            .filter((char) => char.active !== false)
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .map((char, charIndex) => (
-                              <React.Fragment key={charIndex}>
-                                <CharacterPreview
-                                  character={char}
-                                  key={`${char.accountName}_${char.name}`}
-                                />
-                              </React.Fragment>
-                            ))}
-                      </div>
-                    </React.Fragment>
-                  ))}
+                <div className={window.innerWidth < 550 ? 'custom-scrollbar' : ''} style={window.innerWidth < 550 ? { textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
+                  {characters &&
+                    characters.map((character, index) => (
+                      <React.Fragment key={index}>
+                        <div className="characters">
+                          {character &&
+                            character.characters
+                              .filter((char) => char.active !== false)
+                              .sort((a, b) => a.name.localeCompare(b.name))
+                              .map((char, charIndex) => (
+                                <React.Fragment key={charIndex}>
+                                  <CharacterPreview
+                                    character={char}
+                                    key={`${char.accountName}_${char.name}`}
+                                  />
+                                </React.Fragment>
+                              ))}
+                        </div>
+                      </React.Fragment>
+                    ))}
+                </div>
               </React.Fragment>
             }
           </div>

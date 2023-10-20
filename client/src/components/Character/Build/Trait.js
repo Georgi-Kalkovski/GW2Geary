@@ -15,7 +15,11 @@ function Trait({ traitMin, traitMaj, traitsActive, prof }) {
         };
 
         const handleLeftClick = (event) => {
-            setShowWikiButton(true);
+            if (showWikiButton) {
+                setShowWikiButton(false);
+            } else {
+                setShowWikiButton(true);
+            }
         };
 
         return (
@@ -24,7 +28,7 @@ function Trait({ traitMin, traitMaj, traitsActive, prof }) {
                 onMouseLeave={() => setShowWikiButton(false)}
             >
                 {showWikiButton && (
-                    <button className='wiki-button basic-button' onClick={handleButtonClick}>
+                    <button className='wiki-button-traits' onClick={handleButtonClick}>
                         Wiki <img src={Link} alt="" />
                     </button>
                 )}

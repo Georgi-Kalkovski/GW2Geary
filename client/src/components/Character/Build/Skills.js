@@ -63,7 +63,11 @@ function Skills({ skills, water_skills, prof }) {
         };
 
         const handleLeftClick = (event) => {
-            setShowWikiButton(true);
+            if (showWikiButton) {
+                setShowWikiButton(false);
+            } else {
+                setShowWikiButton(true);
+            }
         };
 
         if (skill && skill.name) {
@@ -73,13 +77,13 @@ function Skills({ skills, water_skills, prof }) {
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
                     {showWikiButton &&
-                        <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={Link} alt="" /></button>
+                        <button className='wiki-button-traits' style={{ marginTop: '15px' }} onClick={handleButtonClick}>Wiki <img src={Link} alt="" /></button>
                     }
                     <Tooltip tooltip={skill} prof={prof}>
-                        <img 
-                    style={{cursor: 'pointer'}} className="skill-box cursor" src={skill.icon} alt={skill.name} />
+                        <img
+                            style={{ cursor: 'pointer' }} className="skill-box cursor" src={skill.icon} alt={skill.name} />
                     </Tooltip>
-                </Container>
+                </Container >
             );
         } else {
             return <img className="skill-box" alt="" />;

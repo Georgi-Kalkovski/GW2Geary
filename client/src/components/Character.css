@@ -303,10 +303,9 @@ input:checked+.slider:before {
   color: #aa0404;
 }
 
-.wiki-button {
+.wiki-button,
+.wiki-button-traits {
   position: absolute;
-  margin-left: 0px;
-  margin-top: -25px;
   padding: 3px;
   font-size: 16px;
   border: 1px solid;
@@ -314,11 +313,38 @@ input:checked+.slider:before {
   display: flex;
   align-items: center;
   z-index: 2;
+  background-color: #202124;
+  color: #d9d9d9;
+  border: none;
+  font-size: 1em;
+  border: 2px dashed #d36565;
+  box-shadow: 0 2px 7px 2px rgba(152, 152, 152, 0.2);
 }
 
-.wiki-button img {
+.wiki-button {
+  margin-left: 0px;
+  margin-top: -25px;
+}
+
+.wiki-button-traits {
+  margin-left: -50px;
+  margin-top: 5px;
+
+}
+
+.wiki-button img,
+.wiki-button-traits img {
   padding-left: 5px;
   width: 15px;
+}
+
+.wiki-button.active {
+  box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.2);
+}
+
+.wiki-button:hover {
+  background-color: #2c2c30;
+  box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.2);
 }
 
 /* Character */

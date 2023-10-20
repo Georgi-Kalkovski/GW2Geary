@@ -29,7 +29,11 @@ function ItemTooltip({ item, slider }) {
     };
 
     const handleLeftClick = (event) => {
-        setShowWikiButton(true);
+        if (showWikiButton) {
+            setShowWikiButton(false);
+        } else {
+            setShowWikiButton(true);
+        }
     };
 
     return (
@@ -245,13 +249,13 @@ function ItemTooltip({ item, slider }) {
                     {showWikiButton &&
                         <div className='flex column' style={{ marginLeft: '-25px' }}>
                             {!item.skin_name &&
-                                <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+                                <button className='wiki-button' onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
 
                             }
                             {item.skin_name &&
                                 <div>
-                                    <button className='wiki-button basic-button' style={{ marginTop: '5px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
-                                    <button className='wiki-button basic-button' style={{ marginTop: '32px' }} onClick={handleButtonSkinClick}>Wiki Skin<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '-25px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '-50px' }} onClick={handleButtonSkinClick}>Wiki Skin<img src={Link} alt="" /></button>
 
                                 </div>
                             }

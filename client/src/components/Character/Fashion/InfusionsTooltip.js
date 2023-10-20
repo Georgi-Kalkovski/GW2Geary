@@ -102,12 +102,12 @@ function InfusionTooltip({ infusion, leng, embed }) {
                     {showWikiButton && embed !== true &&
                         <div className='flex column' style={{ marginLeft: '2px' }}>
                             {!infusion.skin_name &&
-                                <button className='wiki-button basic-button' onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
+                                <button className='wiki-button' onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
 
                             }
                             {infusion.skin_name &&
                                 <div>
-                                    <button className='wiki-button basic-button' style={{ marginTop: '20px' }} onClick={handleButtonSkinClick}>Wiki<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '20px' }} onClick={handleButtonSkinClick}>Wiki<img src={Link} alt="" /></button>
                                 </div>
                             }
                         </div>

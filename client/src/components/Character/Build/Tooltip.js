@@ -4,7 +4,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import mouseClick from '.././mouse-click.svg'
 
 const Tooltip = ({ tooltip, prof, children, className }) => {
-    const [isVisible, setIsVisible] = useState(false);
     const [tooltipIndex, setTooltipIndex] = useState(0);
 
     const handleClick = () => {
@@ -25,9 +24,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
         setTriggerRef,
         visible,
     } = usePopperTooltip({
-        placement: 'top',
-        visible: isVisible,
-        onVisibleChange: setIsVisible,
+        placement: 'top'
     });
 
     const ref = useRef(null);

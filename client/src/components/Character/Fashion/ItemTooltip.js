@@ -171,12 +171,12 @@ function ItemTooltip({ item, embed }) {
                     {showWikiButton && embed !== true &&
                         <div className='flex column' style={{ marginLeft: '2px' }}>
                             {!item.skin_name &&
-                                <button className='wiki-button basic-button' style={{ marginTop: '20px' }} onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
+                                <button className='wiki-button' style={{ marginTop: '20px' }} onClick={handleButtonClick}>Wiki<img src={Link} alt="" /></button>
 
                             }
                             {item.skin_name &&
                                 <div>
-                                    <button className='wiki-button basic-button' style={{ marginTop: '20px' }} onClick={handleButtonSkinClick}>Wiki<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '20px' }} onClick={handleButtonSkinClick}>Wiki<img src={Link} alt="" /></button>
                                 </div>
                             }
                         </div>

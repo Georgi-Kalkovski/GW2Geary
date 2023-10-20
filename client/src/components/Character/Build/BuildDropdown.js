@@ -108,7 +108,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
                     {showWikiButton &&
-                        <button style={{ marginTop: '10px' }} className='wiki-button basic-button' onClick={handleButtonClick}>Wiki <img src={LinkSVG} alt="" /></button>
+                        <button style={{ marginTop: '10px' }} className='wiki-button' onClick={handleButtonClick}>Wiki <img src={LinkSVG} alt="" /></button>
                     }
                     <Spec spec={spec} prof={char.profession} />
                 </div>
