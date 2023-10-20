@@ -25,7 +25,7 @@ const Tooltip = ({ tooltip, prof, children, className }) => {
         setTriggerRef,
         visible,
     } = usePopperTooltip({
-        placement: 'right',
+        placement: 'top',
         visible: isVisible,
         onVisibleChange: setIsVisible,
     });

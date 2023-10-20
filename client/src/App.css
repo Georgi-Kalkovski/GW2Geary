@@ -27,7 +27,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .App {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -84,8 +84,7 @@ body::-webkit-scrollbar-thumb {
 .app-nav {
   background-color: #202124;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
-  padding-top: 15px;
-  padding-bottom: 10px;
+  max-width: 100%;
 }
 
 .app-nav,

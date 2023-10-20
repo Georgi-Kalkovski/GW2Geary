@@ -346,7 +346,6 @@ input:checked+.slider:before {
 @media (max-width: 550px) {
 
   .equipment-build-flex {
-    max-width: 550px !important;
     transform: scale(100%);
     margin-top: 0;
   }
@@ -419,7 +418,6 @@ input:checked+.slider:before {
   }
 
   .build {
-    margin: 5px 10%;
     overflow: hidden;
   }
 
