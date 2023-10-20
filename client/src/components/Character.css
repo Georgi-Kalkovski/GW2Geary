@@ -381,11 +381,7 @@ input:checked+.slider:before {
   }
 
   .content {
-    margin-top: 1em;
-  }
-
-  .api-key-fact {
-    justify-content: center;
+    margin-top: 0em;
   }
 
   .api-key-profile {
@@ -527,5 +523,9 @@ input:checked+.slider:before {
 
   .share-div {
     flex-direction: row;
+  }
+
+  .api-right {
+    margin-right: 0px;
   }
 }

@@ -187,6 +187,14 @@ function Search() {
     setSelectedProfession('');
   }
 
+  const [maxHeight, setMaxHeight] = useState(0);
+
+  useEffect(() => {
+    if (window.innerWidth <= 550) {
+      setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.55);
+    }
+  }, []);
+
   return (
     <div>
       <Helmet>
@@ -263,10 +271,15 @@ function Search() {
       </div>
 
       {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
-        <React.Fragment key={`home-fragment-${searchTerm}`}>
+        <div
+        key={`home-fragment-${searchTerm}`} 
+        className='custom-scrollbar'
+        style={window.innerWidth <= 550 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}
+        >
           {searchTerm !== '' && selectedGender === '' && selectedRace === '' && selectedProfession === '' && (
             <>
-              <Container className="characters" key={`accounts-container-${searchTerm}`}>
+              <Container className="characters" key={`accounts-container-${searchTerm}`}
+              >
                 {displayedAccounts.length > 0 ? (
                   displayedAccounts.map((account, index) => (
                     <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
@@ -300,17 +313,18 @@ function Search() {
             </React.Fragment>
           </div>
           <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
-        </React.Fragment>
+        </div>
       ) : (
-        <>
+        <div className='custom-scrollbar' style={window.innerWidth <= 550 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
           {/* Empty Search Text */}
           <SearchWelcome />
           <SearchNews />
           <SearchCounter accounts={accounts} />
           <br />
-        </>
-      )}
-    </div>
+        </div>
+      )
+      }
+    </div >
   );
 }
 

@@ -28,7 +28,7 @@ function ProfileApiCharacters({ apiKey }) {
                         </div>
                     </div>
                     {isExpanded(apiKey?._id) && (
-                        <div className="characters" key={`character-preview-${apiKey?._id}`}>
+                        <div className="characters" style={{margin: 0}} key={`character-preview-${apiKey?._id}`}>
                             {apiKey.characters &&
                                 apiKey.characters.map((character, characterIndex) => (
                                     <CharacterPreview

@@ -48,7 +48,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     return (
         <div>
             <div key={apiKey._id}>
-                <div className="facts-div-profile api-key-fact api-right" key={`api-key-details-${apiKey._id}`}>
+                <div className="facts-div-profile api-right" key={`api-key-details-${apiKey._id}`}>
                     <div className="flex center font-size-20px yellow-highlight" key={`account-name-${apiKey?._id}`}>
                         {apiKey.accountName}
                     </div>

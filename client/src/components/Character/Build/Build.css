@@ -145,7 +145,8 @@
 }
 
 .api-right {
-    justify-content: flex-end;
+justify-content: flex-end;
+margin-right: 100px;
 }
 
 .facts-div {
@@ -156,7 +157,6 @@
 .facts-div-profile {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .mouse-click {

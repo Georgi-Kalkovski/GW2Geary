@@ -462,6 +462,21 @@ p span {
   margin-bottom: 20px;
 }
 
+.profile-box {
+  background-color: #202124;
+  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.2);
+  color: #d3d3d3;
+  margin: 0% 1.5% 0 1%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.profile-box button {
+  background-color: #35363a;
+}
+
 iframe {
   display: none;
 }
@@ -535,14 +550,14 @@ iframe {
   opacity: 1;
   max-height: 100px;
   /* Set a reasonable max-height */
-  transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease;
+  transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
 }
 
 .hide-content {
   opacity: 0;
   max-height: 0px;
   overflow: hidden;
-  transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease;
+  transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
 }
 
 .arrow-logic {
@@ -565,6 +580,26 @@ iframe {
   width: 15px;
 }
 
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #35363a #d3d3d3;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #35363a;
+  border-radius: 6px;
+  box-shadow: 0 0 7px 2px rgba(204, 204, 204, 0.3);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #d3d3d3;
+}
+
 /* Light Mode */
 
 body.light-theme {
@@ -575,6 +610,7 @@ body.light-theme {
 body.light-theme .app-nav,
 body.light-theme .home-empty-search-box,
 body.light-theme .about-box,
+body.light-theme .profile-box,
 body.light-theme .search-input,
 body.light-theme ::placeholder,
 body.light-theme .center-class,

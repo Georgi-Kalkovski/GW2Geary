@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import github from './img/github.svg';
 import discord from './img/discord.svg';
 import linkedin from './img/linkedin.svg';
 
 function About() {
+    const [maxHeight, setMaxHeight] = useState(0);
+
+    useEffect(() => {
+        if (window.innerWidth >= 550) {
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.7);
+        } else {
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.45);
+        }
+    }, []);
+
     return (
         <div>
             <Helmet>
                 <title>GW2Geary - About</title>
             </Helmet>
             <div className='flex center column'>
-            <h2 style={{ textAlign: 'center' }}>About</h2>
-                <div className='about-box' style={{ textAlign: 'left', alignItems: 'right' }}>
+                <h2 style={{ textAlign: 'center' }}>About</h2>
+                <div className='about-box news-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                     <h2><span className='yellow-highlight'>Description</span></h2>
                     <div className="line"></div>
                     <p>

@@ -31,7 +31,7 @@ function SearchMenu({ isOpen, selectedGenderUp, selectedRaceUp, selectedProfessi
         <div className={`transition-hover-search ${isOpen ? 'open' : ''}`}>
             {/* Dropdown menu */}
             <div className="dropdown">
-                    <div className='hr-container' style={{ marginTop: '-10px' }}>
+                    <div className='hr-container'>
                         <div className='flex cursor search-menu-flex'>
                             <div>
                                 <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />

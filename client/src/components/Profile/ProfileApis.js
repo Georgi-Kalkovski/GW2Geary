@@ -33,20 +33,30 @@ function ProfileApis({ currentUser, AuthService }) {
         }
     }, [currentUser]);
 
+    const [maxHeight, setMaxHeight] = useState(0);
+
+    useEffect(() => {
+        if (window.innerWidth >= 550) {
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.6);
+        } else {
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.35);
+        }
+    }, []);
 
     return (
         <>
             {/* API Keys Section */}
-            <div className="container" key="profile-container">
-                <div className="flex center apis-flex" key="apis-flex">
-                    <div className="flex column" >
-                        <ProfileApiCreate
-                            currentUser={currentUser}
-                            fetchApiKeys={fetchApiKeys}
-                            setApiKeys={setApiKeys}
-                        />
+            <div className="container" key="profile-container" style={{ marginTop: '20px'}}>
+            <div className="flex center apis-flex" key="apis-flex">
+                <div className="flex column" >
+                    <ProfileApiCreate
+                        currentUser={currentUser}
+                        fetchApiKeys={fetchApiKeys}
+                        setApiKeys={setApiKeys}
+                    />
 
-                        {/* Apis */}
+                    {/* Apis */}
+                    <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth:'790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                         {apiKeys &&
                             apiKeys.map((apiKey) => (
                                 <ProfileApiInfo
@@ -56,13 +66,15 @@ function ProfileApis({ currentUser, AuthService }) {
                                     AuthService={AuthService}
                                     setApiKeys={setApiKeys}
                                 />
-                            ))}
+                            ))
+                        }
                     </div>
                 </div>
-
-                {/* Characters */}
-                <ProfileApiCharacters apiKeys={apiKeys} />
             </div>
+
+            {/* Characters */}
+            <ProfileApiCharacters apiKeys={apiKeys} />
+        </div >
         </>
     );
 }
