@@ -9,7 +9,7 @@ function News() {
         if (window.innerWidth >= 550) {
             setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.7);
         } else {
-            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.45);
+            setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
         }
     }, []);
     return (
