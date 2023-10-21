@@ -124,9 +124,13 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
   return (
     <div
       className={`equipment equipment-fashion ${embed === true ? '' : char?.profession?.toLowerCase()}-lightning-border`}
-      ref={wrapperRef}>
+      style={embed === true ? {} : { marginTop: '-4px' }}
+      ref={wrapperRef} >
       {embed !== true &&
-        <div style={{ fontSize: '35px', padding: '10px', marginTop: '-10px' }}>{char.name}</div>
+        <div>
+          <div style={{ fontSize: '35px', marginTop: '-10px' }}>{char.name}</div>
+          <div style={{ margin: '0  0 10px 0' }}>{char.gender} {char.race} {char.profession}</div>
+        </div>
       }
       <div className="dropdown">
         <button className={`class-hover ${char?.profession?.toLowerCase()}-border dropdown-button`} onClick={toggleMenu}>
@@ -139,25 +143,25 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
             <input
               type="checkbox"
               checked={isFashionOn}
-              onChange={toggleFashion} 
-              name='fashion'/>
+              onChange={toggleFashion}
+              name='fashion' />
             <span className={`${char?.profession?.toLowerCase()}-switch slider round`}></span>
           </label>
         </div>
-          <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
-            {char?.equipment_tabs.map((equip) => (
-              <li
-                key={equip.tab}
-                onClick={handleItemClick}
-                value={equip.tab}
-              >
-                {equip.name ? equip.name : `Equipment ${equip.tab}`}
-              </li>
-            ))}
-          </ul>
+        <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>
+          {char?.equipment_tabs.map((equip) => (
+            <li
+              key={equip.tab}
+              onClick={handleItemClick}
+              value={equip.tab}
+            >
+              {equip.name ? equip.name : `Equipment ${equip.tab}`}
+            </li>
+          ))}
+        </ul>
       </div>
       <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} prof={char?.profession} embed={embed} />
-    </div>
+    </div >
   );
 }
 
