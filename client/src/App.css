@@ -597,7 +597,7 @@ iframe {
 .custom-scrollbar::-webkit-scrollbar-thumb,
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   background-color: #aa0404;
-  box-shadow: inset 0 0 5px #35363a;
+  /* box-shadow: inset 0 0 5px #35363a; */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track,
@@ -651,6 +651,8 @@ body.light-theme .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
 body.light-theme .custom-scrollbar::-webkit-scrollbar-track,
 body.light-theme .custom-scrollbar::-webkit-scrollbar-track:horizontal {
   background-color: #ffffff;
+  border: 1px solid #35363a;
+
 
 }
 
