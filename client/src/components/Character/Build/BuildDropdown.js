@@ -103,12 +103,12 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
 
                 {/* Specialization icon */}
                 <div
-                    className="skill-box-container"
+                    className="skill-box-container elite-spec-icon"
                     style={{ width: '35px', height: '35px' }}
                     onClick={handleLeftClick}
                     onMouseLeave={() => setShowWikiButton(false)}>
                     {showWikiButton &&
-                        <button style={{ marginTop: '10px' }} className='wiki-button' onClick={handleButtonClick}>Wiki <img src={LinkSVG} alt="" /></button>
+                        <button style={{ marginTop: '10px' }} className='wiki-button-traits' onClick={handleButtonClick}>Wiki <img src={LinkSVG} alt="" /></button>
                     }
                     <Spec spec={spec} prof={char.profession} />
                 </div>

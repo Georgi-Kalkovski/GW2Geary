@@ -30,11 +30,17 @@
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.item-box:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
 .equipment-col-1 {
     margin-left: 0;
-    margin-right: 160px;
+    width: 210px;
 }
 
 .item-popup {

@@ -35,6 +35,13 @@
 .major-trait-icon {
     max-width: 64px;
     width: 58%;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.minor-trait-icon:hover,
+.major-trait-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
 .major-col {
@@ -60,7 +67,26 @@
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
+    transition: transform 0.2s, filter 0.2s;
 }
+
+
+.skill-box:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+
+.elite-spec-icon {
+    transition: transform 0.2s, filter 0.2s;
+}
+
+
+.elite-spec-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
 
 .center-land,
 .center-water {

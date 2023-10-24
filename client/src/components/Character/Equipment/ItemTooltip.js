@@ -41,7 +41,7 @@ function ItemTooltip({ item, slider }) {
             {visible && (
                 <div
                     ref={setTooltipRef}
-                    {...getTooltipProps({ className: 'tooltip-container pointer' })}
+                    {...getTooltipProps({ className: 'remove-margin-right tooltip-container pointer' })}
                 >
                     <Container className={`item-popup border-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>
                         {/* NAME */}
@@ -54,7 +54,25 @@ function ItemTooltip({ item, slider }) {
 
                         <br />
                         {/* RELIC & POWER CORE &  */}
-                        {['Relic', 'PowerCore'].includes(item.type) && <div>{item.description}</div>}
+                        {['Relic', 'PowerCore'].includes(item.type) &&
+                            <div>
+                                {(() => {
+                                    const bonus = item.description
+                                        .replace('</c>', '')
+                                        .replace('</br>', '')
+                                        .replace('<br>', '')
+                                        .split('<c=@reminder>')
+                                        .slice(0, 2);
+                                    return (
+                                        <>
+                                            <span className='upgrade-blue'>{bonus[0]}</span>
+                                            <br />
+                                            <span className='upgrade-gray'>{bonus[1]}</span>
+                                        </>
+                                    );
+                                })()}
+                            </div>
+                        }
 
                         {/* DEFENSE */}
                         {item.details && item.details.defense !== 0 && item.details.defense &&
@@ -245,17 +263,18 @@ function ItemTooltip({ item, slider }) {
                 ?
                 <div ref={setTriggerRef}
                     onClick={handleLeftClick}
-                    onMouseLeave={() => setShowWikiButton(false)}>
+                    onMouseLeave={() => setShowWikiButton(false)}
+                    style={{ width: '62px' }}>
                     {showWikiButton &&
-                        <div className='flex column' style={{ marginLeft: '-25px' }}>
+                        <div className='flex column'>
                             {!item.skin_name &&
-                                <button className='wiki-button' onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+                                <button className='wiki-button' style={{ marginTop: '60px', marginLeft: '-30px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
 
                             }
                             {item.skin_name &&
                                 <div>
-                                    <button className='wiki-button' style={{ marginTop: '-25px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
-                                    <button className='wiki-button' style={{ marginTop: '-50px' }} onClick={handleButtonSkinClick}>Wiki Skin<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '60px', marginLeft: '-30px' }} onClick={handleButtonClick}>Wiki Item<img src={Link} alt="" /></button>
+                                    <button className='wiki-button' style={{ marginTop: '85px', marginLeft: '-30px' }} onClick={handleButtonSkinClick}>Wiki Skin<img src={Link} alt="" /></button>
 
                                 </div>
                             }

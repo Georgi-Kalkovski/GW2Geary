@@ -271,7 +271,7 @@ function Attributes({ items, prof, build, relic, powerCore }) {
         { name: "Boon Duration", icon: BoonDuration, value: boonDuration.toFixed(2) + "%" }
     ];
     return (
-        <div className={`${prof.toLowerCase()}-lightning-border  attributes-unzoom`} style={{ borderWidth: '2px', paddingBottom: '5px', marginBottom: '10px' }}>
+        <div className={`${prof.toLowerCase()}-lightning-border  attributes-unzoom`} style={{ borderWidth: '2px', paddingBottom: '5px', marginBottom: '10px', textAlign: 'center' }}>
             <Row style={{ borderWidth: '0 0 0px 0', padding: '5px 0 5px 0' }}>
                 Attributes
             </Row>
