@@ -36,7 +36,7 @@ function ProfileApis({ currentUser, AuthService }) {
     const [maxHeight, setMaxHeight] = useState(0);
 
     useEffect(() => {
-        if (window.innerWidth >= 550) {
+        if (window.innerWidth >= 900) {
             setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.6);
         } else {
             setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.55);

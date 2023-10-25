@@ -23,14 +23,14 @@ function CharacterInfo({ char, acc, mastery, world }) {
     }, []);
 
     useEffect(() => {
-        setShowMenu(windowWidth >= 550);
+        setShowMenu(windowWidth >= 900);
     }, [windowWidth]);
 
     return (
-        <Container className="flex center" onClick={() => window.innerWidth < 550 ? toggleMenu() : null}>
+        <Container className="flex center" onClick={() => window.innerWidth < 900 ? toggleMenu() : null}>
             <Row className={`flex center char-info acc-info-new ${char.profession.toLowerCase()}-lightning-border`}>
                 {/* Name */}
-                {window.innerWidth >= 550 && (
+                {window.innerWidth >= 900 && (
                     <Col className="character-col">
                         <Row style={{ fontSize: '30px' }}>{char.name}</Row>
                         <Row className="yellow-highlight" style={{ fontSize: '20px' }}>
@@ -38,7 +38,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                         </Row>
                     </Col>
                 )}
-                {window.innerWidth < 550 && (
+                {window.innerWidth < 900 && (
                     <div className='flex center' >
                         <Col className={showMenu ? 'character-col' : 'character-col-close'}>
                             <Row className='acc-name-font-mobile'>
@@ -54,7 +54,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                         </Col>
                     </div>
                 )}
-                {window.innerWidth >= 550
+                {window.innerWidth >= 900
                     ? (
                         <>
                             {/* World */}

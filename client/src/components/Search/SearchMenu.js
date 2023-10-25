@@ -37,7 +37,7 @@ function SearchMenu({ isOpen, selectedGenderUp, selectedRaceUp, selectedProfessi
                                 <SearchSubbutton active={selectedGender} text='Female' onClick={() => handleGenderSelection('Female')} />
                                 <SearchSubbutton active={selectedGender} text='Male' onClick={() => handleGenderSelection('Male')} />
                             </div>
-                            {window.innerWidth > 550
+                            {window.innerWidth > 900
                                 ? <span className="thin-hr-vertical"></span>
                                 : <span className="thin-hr"></span>
                             }

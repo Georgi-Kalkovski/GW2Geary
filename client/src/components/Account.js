@@ -58,7 +58,7 @@ const Account = () => {
   }, []);
 
   useEffect(() => {
-    setShowMenu(windowWidth >= 550);
+    setShowMenu(windowWidth >= 900);
   }, [windowWidth]);
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const Account = () => {
   const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
-    if (window.innerWidth <= 550) {
+    if (window.innerWidth <= 900) {
       setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
     }
   }, []);
@@ -169,15 +169,15 @@ const Account = () => {
                 </div>
               </div>
               : <React.Fragment >
-                <Container className="flex center center-items" onClick={() => window.innerWidth < 550 ? toggleMenu() : ''}>
+                <Container className="flex center center-items" onClick={() => window.innerWidth < 900 ? toggleMenu() : ''}>
                   <Row className={`flex center acc-info acc-info-new accounts-box`}>
                     {/* Name */}
-                    {window.innerWidth >= 550 && (
+                    {window.innerWidth >= 900 && (
                       <Col className='character-col'>
                         <Row style={{ fontSize: '30px' }}>{accFound.name}</Row>
                       </Col>
                     )}
-                    {window.innerWidth < 550 && (
+                    {window.innerWidth < 900 && (
                       <div className='flex center'>
                         <Col className={showMenu ? 'character-col' : 'character-col-close'}>
                           <Row className="acc-name-font-mobile" style={{ fontSize: '30px' }}>
@@ -190,7 +190,7 @@ const Account = () => {
                         </Col>
                       </div>
                     )}
-                    {window.innerWidth < 550
+                    {window.innerWidth < 900
                       ? (
                         <div className="flex acc-info-font-mobile">
                           <div  style={{ paddingRight: '10px' }}>
@@ -250,7 +250,7 @@ const Account = () => {
                   </Row>
                 </Container>
                 {/* Characters */}
-                <div className={window.innerWidth < 550 ? 'custom-scrollbar' : ''} style={window.innerWidth < 550 ? { textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
+                <div className={window.innerWidth < 900 ? 'custom-scrollbar' : ''} style={window.innerWidth < 900 ? { textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
                   {characters &&
                     characters.map((character, index) => (
                       <React.Fragment key={index}>

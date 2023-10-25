@@ -379,7 +379,7 @@ input:checked+.slider:before {
 }
 
 /* Hide the API key on small screens */
-@media (max-width: 550px) {
+@media (max-width: 900px){
 
   .character-checkbox {
     margin-left: 80px;

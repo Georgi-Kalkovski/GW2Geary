@@ -190,7 +190,7 @@ function Search() {
   const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect(() => {
-    if (window.innerWidth <= 550) {
+    if (window.innerWidth <= 900) {
       setMaxHeight(Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.68);
     }
   }, []);
@@ -274,7 +274,7 @@ function Search() {
         <div
         key={`home-fragment-${searchTerm}`} 
         className='custom-scrollbar'
-        style={window.innerWidth <= 550 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}
+        style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}
         >
           {searchTerm !== '' && selectedGender === '' && selectedRace === '' && selectedProfession === '' && (
             <>
@@ -315,7 +315,7 @@ function Search() {
           <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
         </div>
       ) : (
-        <div className='custom-scrollbar' style={window.innerWidth <= 550 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
+        <div className='custom-scrollbar' style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
           {/* Empty Search Text */}
           <SearchWelcome />
           <SearchNews />
