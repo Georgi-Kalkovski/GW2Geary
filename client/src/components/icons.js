@@ -38,6 +38,26 @@ import Warrior_icon_white from './img/Warrior_icon_white.png';
 import Male from './img/male.png';
 import Female from './img/female.png';
 
+// Gear Icons
+import Helm from './img/Gear/Helm.png';
+import Shoulders from './img/Gear/Shoulders.png';
+import Coat from './img/Gear/Coat.png';
+import Gloves from './img/Gear/Gloves.png';
+import Leggings from './img/Gear/Leggings.png';
+import Boots from './img/Gear/Boots.png';
+import Weapon1 from './img/Gear/Weapon1.png';
+import Weapon2 from './img/Gear/Weapon2.png';
+import Backpack from './img/Gear/Backpack.png';
+import Accessory1 from './img/Gear/Accessory1.png';
+import Accessory2 from './img/Gear/Accessory2.png';
+import Amulet from './img/Gear/Amulet.png';
+import Ring1 from './img/Gear/Ring1.png';
+import Ring2 from './img/Gear/Ring2.png';
+import HelmAquatic from './img/Gear/HelmAquatic.png';
+import WeaponAquatic from './img/Gear/WeaponAquatic.png';
+import JadeCore from './img/Gear/JadeCore.png';
+import Relic from './img/Gear/Relic.png';
+
 const wikiBigRacesIcons = {
     Asura: Asura_Big,
     Charr: Charr_Big,
@@ -83,10 +103,32 @@ const genderIcons = {
     Female: Female
 };
 
+const gearIcons = {
+    Helm: Helm,
+    Shoulders: Shoulders,
+    Coat: Coat,
+    Gloves: Gloves,
+    Leggings: Leggings,
+    Boots: Boots,
+    Weapon1: Weapon1,
+    Weapon2: Weapon2,
+    Backpack: Backpack,
+    Accessory1: Accessory1,
+    Accessory2: Accessory2,
+    Amulet: Amulet,
+    Ring1: Ring1,
+    Ring2: Ring2,
+    HelmAquatic: HelmAquatic,
+    WeaponAquatic: WeaponAquatic,
+    JadeCore: JadeCore,
+    Relic: Relic
+}
+
 export {
     wikiBigRacesIcons,
     wikiBigProfessionIcons,
     wikiSmallProfessionIcons,
     wikiBigRacesColoredIcons,
     genderIcons,
+    gearIcons,
 };

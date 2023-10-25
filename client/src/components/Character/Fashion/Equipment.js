@@ -41,12 +41,12 @@ function Equipment({ items, embed, prof }) {
                     <Container className="equipment-box" style={{ marginTop: '15px' }}>
                         <Col>
                             <Col className='flex column' style={{ marginRight: '5px' }}>
-                                <ItemTooltip item={items.find(x => x.slot === 'Helm')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Coat')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Gloves')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Leggings')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Boots')} embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Helm')} gear='Helm' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} gear='Shoulders' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Coat')} gear='Coat' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Gloves')} gear='Gloves' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Leggings')} gear='Leggings' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Boots')} gear='Boots' embed={embed} />
                             </Col>
                         </Col>
                         <Col>
@@ -61,11 +61,11 @@ function Equipment({ items, embed, prof }) {
                         </Col>
                         <Col>
                             <Col className='flex column' style={{ marginRight: '5px' }}>
-                                <ItemTooltip item={items.find(x => x.slot === 'Backpack')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'Backpack')} gear='Backpack' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'WeaponA1')} gear='Weapon1' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'WeaponA2')} gear='Weapon2' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'WeaponB1')} gear='Weapon1' embed={embed} />
+                                <ItemTooltip item={items.find(x => x.slot === 'WeaponB2')} gear='Weapon2' embed={embed} />
                             </Col>
                         </Col>
                         <Col>

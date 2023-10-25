@@ -27,7 +27,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
     }, [windowWidth]);
 
     return (
-        <Container className="flex center" onClick={window.innerWidth < 550 ? toggleMenu : ''}>
+<Container className="flex center" onClick={() => window.innerWidth < 550 ? toggleMenu() : null}>
             <Row className={`flex center char-info acc-info-new ${char.profession.toLowerCase()}-lightning-border`}>
                 {/* Name */}
                 {window.innerWidth >= 550 && (

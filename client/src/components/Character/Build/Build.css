@@ -67,11 +67,14 @@
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
+}
+
+.skill-box-container .skill-box {
     transition: transform 0.2s, filter 0.2s;
 }
 
 
-.skill-box:hover {
+.skill-box-container .skill-box:hover {
     transform: scale(1.1);
     filter: brightness(1.2);
 }
@@ -172,8 +175,8 @@
 }
 
 .api-right {
-justify-content: flex-end;
-margin-right: 100px;
+    justify-content: flex-end;
+    margin-right: 100px;
 }
 
 .facts-div {

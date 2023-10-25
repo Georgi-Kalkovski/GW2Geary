@@ -4,8 +4,9 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 import WikiImage from './WikiImage';
 import axios from 'axios';
+import { gearIcons } from '../../icons';
 
-function ItemTooltip({ item, embed }) {
+function ItemTooltip({ item, gear, embed }) {
     // console.log('item ', item)
 
     const [imageUrl, setImageUrl] = useState('');
@@ -189,7 +190,10 @@ function ItemTooltip({ item, embed }) {
                             style={{ cursor: 'pointer' }} />
                     }
                 </div>
-                : ''
+                : (gearIcons[gear]
+                    ? <img className="item-box box-gray" style={{ width: '50px', height: '50px' }} src={gearIcons[gear]} alt={gear} />
+                    : ''
+                )
             }
         </React.Fragment>
     );

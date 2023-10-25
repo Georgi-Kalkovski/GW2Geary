@@ -169,7 +169,7 @@ const Account = () => {
                 </div>
               </div>
               : <React.Fragment >
-                <Container className="flex center center-items" onClick={window.innerWidth < 550 ? toggleMenu : ''}>
+                <Container className="flex center center-items" onClick={() => window.innerWidth < 550 ? toggleMenu() : ''}>
                   <Row className={`flex center acc-info acc-info-new accounts-box`}>
                     {/* Name */}
                     {window.innerWidth >= 550 && (

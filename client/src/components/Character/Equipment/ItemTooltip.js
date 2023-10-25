@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
+import { gearIcons } from '../../icons';
 
-function ItemTooltip({ item, slider }) {
+function ItemTooltip({ item, gear, slider }) {
     // console.log('item ', item)
 
     const {
@@ -259,6 +260,7 @@ function ItemTooltip({ item, slider }) {
                     <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                 </div>
             )}
+
             {item
                 ?
                 <div ref={setTriggerRef}
@@ -288,7 +290,7 @@ function ItemTooltip({ item, slider }) {
                             style={{ cursor: 'pointer' }} />
                     }
                 </div>
-                : <img className="item-box box-gray" alt="" />
+                : <img className="item-box box-gray" style={{ width: '50px', height: '50px' }} src={gearIcons[gear]} alt={gear} />
             }
         </React.Fragment>
     );

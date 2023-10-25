@@ -9,7 +9,7 @@ function Dyes({ item }) {
     return (
         <Container className='flex'>
             {/* Dyes */}
-            {nonNullDyes && (
+            {nonNullDyes ? (
                 <div>
                     {nonNullDyes.length === 0 &&
                         <div className="item-box box-gray">
@@ -75,7 +75,9 @@ function Dyes({ item }) {
                 //             }</Row>
                 //     ))}
                 // </Col>
-            )}
+            )
+                : <div className="item-box">
+                </div>}
         </Container>
     )
 }

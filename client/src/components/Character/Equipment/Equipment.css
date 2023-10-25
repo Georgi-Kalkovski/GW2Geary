@@ -136,6 +136,11 @@
     border: 3px solid gray;
 }
 
+.box-gray:hover {
+    transform: none;
+    filter: none;
+}
+
 .name-unknown {
     color: #f30606;
 }
