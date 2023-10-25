@@ -381,6 +381,19 @@ input:checked+.slider:before {
 /* Hide the API key on small screens */
 @media (max-width: 550px) {
 
+  .character-checkbox {
+    margin-left: 80px;
+  }
+
+  .profile-characters>div>a>div {
+    height: 130px;
+    margin: 3px 1px;
+  }
+
+  div.characters.profile-characters>div>a>div>div.flex.space-between.row>div.flex.column.col {
+    margin-top: 40px;
+  }
+
   .equipment-build-flex {
     transform: scale(100%);
     margin-top: 0;
@@ -462,7 +475,7 @@ input:checked+.slider:before {
   }
 
   .logo-build-width {
-    max-width: 350px;
+    max-width: 355px;
   }
 
   .char-info {
@@ -475,8 +488,41 @@ input:checked+.slider:before {
     min-width: 240px !important;
   }
 
+  .characters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0%;
+  }
+
+  .characters-boxes,
   .character {
-    min-width: 268px;
+    min-width: 120px;
+    max-width: 120px;
+    font-size: 12px;
+    margin: 1px;
+  }
+
+  .custom-scrollbar>div>div>a>div>div.flex.space-between.row>div>div {
+    font-size: 10px;
+  }
+
+  .character-name-div {
+    height: 40px;
+  }
+
+  .flex.space-between.row>div.flex.column.col>div>img {
+    width: 35px !important;
+  }
+
+  .acc-name-font-mobile {
+    font-size: 20px !important;
+  }
+
+  .acc-info-font-mobile {
+    justify-content: center;
+    font-size: 15px !important;
   }
 
   .footer-left {

@@ -79,14 +79,16 @@
     filter: brightness(1.2);
 }
 
+.elite-spec-icon .wiki-button-traits {
+    margin-left:-60px;
+}
 
 .elite-spec-icon {
-    transition: transform 0.2s, filter 0.2s;
+    transition: filter 0.2s;
 }
 
 
 .elite-spec-icon:hover {
-    transform: scale(1.1);
     filter: brightness(1.2);
 }
 

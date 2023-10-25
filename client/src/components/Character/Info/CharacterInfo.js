@@ -27,7 +27,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
     }, [windowWidth]);
 
     return (
-<Container className="flex center" onClick={() => window.innerWidth < 550 ? toggleMenu() : null}>
+        <Container className="flex center" onClick={() => window.innerWidth < 550 ? toggleMenu() : null}>
             <Row className={`flex center char-info acc-info-new ${char.profession.toLowerCase()}-lightning-border`}>
                 {/* Name */}
                 {window.innerWidth >= 550 && (
@@ -41,14 +41,14 @@ function CharacterInfo({ char, acc, mastery, world }) {
                 {window.innerWidth < 550 && (
                     <div className='flex center' >
                         <Col className={showMenu ? 'character-col' : 'character-col-close'}>
-                            <Row style={{ fontSize: '30px' }}>
+                            <Row className='acc-name-font-mobile'>
                                 {char.name}
                                 <div className="arrow-logic" style={!showMenu ? {} : { marginRight: '15px' }}>
                                     <span className="arrow-text">{!showMenu ? 'more' : 'less'}</span>
                                     <img className='arrow-svg' src={ArrowSvg} style={!showMenu ? {} : { transform: 'scaleY(-1)' }} alt="" />
                                 </div>
                             </Row>
-                            <Row className="yellow-highlight" style={{ fontSize: '20px' }}>
+                            <Row className="yellow-highlight" >
                                 {acc.name}
                             </Row>
                         </Col>
@@ -97,22 +97,22 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                 <Row className="yellow-highlight">Mastery Points </Row>
                             </Col>
                             {/* Fractal Level */}
-                            <Col className="character-col ">
+                            <Col className="character-col">
                                 <Row className="font-size-22px">{acc.fractal_level ? acc.fractal_level : '0'}</Row>
                                 <Row className="yellow-highlight">Fractal Level</Row>
                             </Col>
                             {/* WvW Rank */}
-                            <Col className="character-col ">
+                            <Col className="character-col">
                                 <Row className="font-size-22px">{acc.wvw_rank ? acc.wvw_rank : '0'}</Row>
                                 <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                         </>
                     )
                     : (
-                        <>
+                        <div className='acc-info-font-mobile'>
                             {/* World */}
                             <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
-                                <Row style={{ fontSize: '20px' }}>{world}</Row>
+                                <Row>{world}</Row>
                                 <Row className="yellow-highlight">World</Row>
                             </Col>
 
@@ -120,7 +120,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                 <div className='column' style={{ paddingRight: '20px' }}>
                                     {/* Level */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{char.level}</Row>
+                                        <Row>{char.level}</Row>
                                         <Row className="yellow-highlight">Level </Row>
                                     </Col>
                                     {/* Profession */}
@@ -128,7 +128,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                         <Row className="font-size-22px">
                                             <img
                                                 src={wikiSmallProfessionIcons[char.profession]}
-                                                style={{ maxWidth: '25px' }}
+                                                style={{ maxWidth: '20px' }}
                                                 alt={char.profession}
                                             />
                                         </Row>
@@ -140,7 +140,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                             <img
                                                 src={wikiBigRacesIcons[char.race]}
                                                 alt={char.profession}
-                                                style={{ maxWidth: '25px' }}
+                                                style={{ maxWidth: '20px'}}
                                             />
                                         </Row>
                                         <Row className="yellow-highlight">
@@ -151,22 +151,22 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                 <div className='column' style={{ paddingLeft: '20px' }}>
                                     {/* Mastery Points */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{mastery}</Row>
+                                        <Row>{mastery}</Row>
                                         <Row className="yellow-highlight">Mastery Points </Row>
                                     </Col>
                                     {/* Fractal Level */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{acc.fractal_level}</Row>
+                                        <Row>{acc.fractal_level}</Row>
                                         <Row className="yellow-highlight">Fractal Level</Row>
                                     </Col>
                                     {/* WvW Rank */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">{acc.wvw_rank}</Row>
+                                        <Row>{acc.wvw_rank}</Row>
                                         <Row className="yellow-highlight">WvW Rank</Row>
                                     </Col>
                                 </div>
                             </div>
-                        </>
+                        </div>
                     )
                 }
             </Row>

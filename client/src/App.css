@@ -543,6 +543,12 @@ iframe {
 
 .padding-box {
   padding: 1px 4px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.padding-box:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
 }
 
 .show-content {
