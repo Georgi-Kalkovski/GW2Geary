@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { usePopperTooltip } from 'react-popper-tooltip';
 import ProfileApiCharacters from './ProfileApiCharacters';
 import upArrow from '../up-arrow.svg';
@@ -7,7 +6,8 @@ import downArrow from '../down-arrow.svg';
 
 function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     const [expandedIndexes, setExpandedIndexes] = useState([]);
-    const [isVisible, setIsVisible] = useState(null)
+    const [isVisible, setIsVisible] = useState(null);
+    const [deleteButtonState, setDeleteButtonState] = useState("Delete"); // Add state for the button text
 
     const isExpanded = (apiKey) => expandedIndexes.includes(apiKey?._id);
 
@@ -32,19 +32,24 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     }, [setApiKeys, AuthService]);
 
     const deleteApiKey = useCallback((apiKeyId) => {
-        AuthService.deleteApiKey(apiKeyId)
-            .then((response) => {
-                if (response.user && response.user.apiKeys) {
-                    setApiKeys(response.user.apiKeys);
-                }
-            })
-            .then(() => {
-                setApiKeys(apiKeys.filter((apiKey) => apiKey._id !== apiKeyId));
-            })
-            .catch((error) => {
-                console.error("Error deleting API key:", error);
-            });
-    }, [setApiKeys, AuthService]);
+        // Change the button text and handle delete logic
+        if (deleteButtonState === "Delete") {
+            setDeleteButtonState("Confirm");
+        } else {
+            AuthService.deleteApiKey(apiKeyId)
+                .then((response) => {
+                    if (response.user && response.user.apiKeys) {
+                        setApiKeys(response.user.apiKeys);
+                    }
+                })
+                .then(() => {
+                    setApiKeys(apiKeys.filter((apiKey) => apiKey._id !== apiKeyId));
+                })
+                .catch((error) => {
+                    console.error("Error deleting API key:", error);
+                });
+        }
+    }, [setApiKeys, AuthService, apiKeys, deleteButtonState]);
 
     const {
         getArrowProps,
@@ -80,8 +85,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                     </div>
 
                     {/* Checkbox */}
-                    <label className="custom-checkbox"
-                        ref={setTriggerRef}>
+                    <label className="custom-checkbox" ref={setTriggerRef}>
                         <input
                             type="checkbox"
                             className="api-checkbox "
@@ -101,7 +105,6 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                                 Make accounts & characters
                                 <span style={{ color: 'darkgreen' }}> Public </span>
                                 /<span style={{ color: '#aa0404' }}> Private </span>
-
                             </div>
                             <div {...getArrowProps({ className: 'tooltip-arrow' })} />
                         </div>
@@ -110,7 +113,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                     <div className="api-key-profile api-keys">{apiKey._id}{" "}</div>
                     {/* Delete Key */}
                     <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button delete-button" key={`api-key-delete-button-${apiKey._id}`}>
-                        Delete
+                        {deleteButtonState}
                     </button>
                 </div>
             </div>
@@ -125,4 +128,4 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     );
 }
 
-export default ProfileApiInfo
+export default ProfileApiInfo;
