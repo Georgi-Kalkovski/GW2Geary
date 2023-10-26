@@ -379,10 +379,10 @@ input:checked+.slider:before {
 
 /* Hide the API key on small screens */
 @media (max-width: 900px) {
-  
-  .facts-div-profile>div:first-child {
+
+  /* .facts-div-profile>div:first-child {
     max-width: 230px;
-  }
+  } */
 
   .profile-characters>div>a>div>.character-name-div.row>div {
     max-width: 80px;
