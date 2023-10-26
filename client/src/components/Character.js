@@ -168,7 +168,7 @@ function Character() {
                         : ''
                     }
                     <CharacterInfo char={charFound} acc={accFound} mastery={mastery ? mastery : '0'} world={world ? world : '0'} shareLink={shareLink} />
-                    <div className={window.innerWidth < 900 ? 'custom-scrollbar equipment-build-flex' : 'equipment-build-flex'} style={window.innerWidth < 900 ? { textAlign: 'left', justifyContent: 'right', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
+                    <div className={window.innerWidth < 900 ? 'custom-scrollbar equipment-build-flex' : 'equipment-build-flex'} style={window.innerWidth < 900 ? { textAlign: 'left', marginBottom: '20px', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
                         <EquipmentDropdown char={charFound} initial={eqUp} build={selectedBuild} setEquip={setEqUp} />
                         <BuildDropdown char={charFound} initial={bldUp} setSelectedBuild={setSelectedBuild} setBuildState={setBldUp} setEliteSpec={setSpecUp} />
                     </div>
