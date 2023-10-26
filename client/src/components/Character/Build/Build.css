@@ -80,7 +80,7 @@
 }
 
 .elite-spec-icon .wiki-button-traits {
-    margin-left:-60px;
+    margin-left: -60px;
 }
 
 .elite-spec-icon {
@@ -182,11 +182,6 @@
 }
 
 .facts-div {
-    display: flex;
-    align-items: center;
-}
-
-.facts-div-profile {
     display: flex;
     align-items: center;
 }

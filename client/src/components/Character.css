@@ -21,7 +21,7 @@
   height: 652px;
   padding: 20px;
   background-color: #202124;
-  margin: 5px;
+  margin: 4px;
 }
 
 .dropdown {
@@ -169,8 +169,14 @@
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid #202124;
+  border: 2px solid #d3d3d3;
   background-color: #aa0404;
+  transition: all 0.3s ease;
+}
+
+.custom-checkbox .checkmark:hover {
+  transform: scale(1.1);
+  filter: brightness(2);
 }
 
 .custom-checkbox .api-checkbox:checked+.checkmark,
@@ -285,16 +291,8 @@ input:checked+.slider:before {
 
 /* Profile */
 
-.profile-line {
-  cursor: pointer;
-  margin-bottom: 9px;
-  border-bottom: 2px solid white;
-  margin-left: 0 40%;
-  width: 100px;
-  margin-right: 4px;
-}
-
 .up-down-arrow {
+  filter: invert(93%) sepia(42%) saturate(4211%) hue-rotate(307deg) brightness(123%) contrast(104%);
   cursor: pointer;
 }
 
@@ -381,6 +379,10 @@ input:checked+.slider:before {
 
 /* Hide the API key on small screens */
 @media (max-width: 900px) {
+  
+  .facts-div-profile>div:first-child {
+    max-width: 230px;
+  }
 
   .profile-characters>div>a>div>.character-name-div.row>div {
     max-width: 80px;

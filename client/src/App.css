@@ -279,13 +279,30 @@ input:focus:-webkit-autofill {
 
 .delete-button {
   cursor: pointer;
-  background-color: #aa0404;
+  background-color: #510303;
   color: #d9d9d9;
   border: none;
   margin: 10px;
   padding: 5px 10px;
   font-size: 1em;
 }
+
+.delete-button:hover {
+  background-color: #aa0404 !important;
+}
+
+.profile-apis-first-child:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-apis-first-child:hover {
+  border-bottom: 2px dashed;
+  margin-top: 2px;
+  filter: brightness(3);
+  transition: filter 0.2s;
+}
+
 
 .cancel-button {
   cursor: pointer;
@@ -546,8 +563,8 @@ iframe {
 }
 
 .padding-box:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .show-content {
@@ -610,7 +627,46 @@ iframe {
   background-color: #d3d3d3;
 }
 
-/* Light Mode */
+.facts-div-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.facts-div-profile>div:first-child {
+  text-align: end;
+}
+
+.profile-names {
+  margin-right: 5px;
+}
+
+.profile-characters {
+  margin: 0px !important;
+}
+
+.characters-section {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.characters-profile-characters {
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.characters-section.show {
+  padding-bottom: 10px;
+  max-height: 1000px;
+  /* Set an appropriate value to allow the content to expand */
+}
+
+.characters-profile-characters.show {
+  transform: translateY(0);
+}
+
+/* LIGHT MODE */
 
 body.light-theme {
   background-color: #e7e6e6;
@@ -638,9 +694,18 @@ body.light-theme .dropdown>ul>li,
 body.light-theme .form-control,
 body.light-theme .footer,
 body.light-theme .form-button:disabled,
-body.light-theme .itemstats {
+body.light-theme .itemstats,
+body.light-theme .profile-box button {
   background-color: rgb(255, 255, 255);
   color: #35363a;
+}
+
+body.light-theme .profile-box button:hover {
+  color: white;
+}
+
+body.light-theme .custom-checkbox .checkmark {
+  border: 2px solid #202124;
 }
 
 body.light-theme .custom-scrollbar {
@@ -657,9 +722,13 @@ body.light-theme .custom-scrollbar::-webkit-scrollbar-track,
 body.light-theme .custom-scrollbar::-webkit-scrollbar-track:horizontal {
   background-color: #ffffff;
   border: 1px solid #35363a;
-
-
 }
+
+body.light-theme .delete-button {
+  background-color: #510303;
+  color: white;
+}
+
 
 body.light-theme .line {
   border-top: 1px solid rgb(0, 0, 0);
@@ -698,12 +767,8 @@ body.light-theme .form-control {
   box-shadow: 0 0 7px 2px rgba(152, 152, 152, 0.2);
 }
 
-body.light-theme .arrow-line>div>div {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.48);
-}
-
 body.light-theme .up-down-arrow {
-  filter: invert(75%) sepia(97%) saturate(4%) hue-rotate(28deg) brightness(103%) contrast(100%);
+  filter: invert(12%) sepia(63%) saturate(4962%) hue-rotate(354deg) brightness(99%) contrast(108%);
 }
 
 body.light-theme .pagination-item:hover,

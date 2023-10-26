@@ -27,7 +27,7 @@ function DeleteUser({ AuthService }) {
             {/* Delete User Button */}
             <button
                 onClick={confirmUserBeforeDelete}
-                className="basic-button"
+                className="basic-button delete-button"
                 style={{ marginLeft: '3px' }}
             >
                 Delete User

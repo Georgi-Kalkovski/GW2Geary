@@ -2,9 +2,22 @@ import React from 'react';
 import { useState, useCallback } from "react";
 import { usePopperTooltip } from 'react-popper-tooltip';
 import ProfileApiCharacters from './ProfileApiCharacters';
+import upArrow from '../up-arrow.svg';
+import downArrow from '../down-arrow.svg';
 
 function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
+    const [expandedIndexes, setExpandedIndexes] = useState([]);
     const [isVisible, setIsVisible] = useState(null)
+
+    const isExpanded = (apiKey) => expandedIndexes.includes(apiKey?._id);
+
+    const toggleExpansion = (apiKey) => {
+        if (isExpanded(apiKey?._id)) {
+            setExpandedIndexes(expandedIndexes.filter((i) => i !== apiKey?._id));
+        } else {
+            setExpandedIndexes([...expandedIndexes, apiKey?._id]);
+        }
+    };
 
     const updateApiKeyStatus = useCallback((apiKeyId, active) => {
         AuthService.updateApiKeyStatus(apiKeyId, active)
@@ -49,9 +62,23 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
         <div>
             <div key={apiKey._id}>
                 <div className="facts-div-profile api-right" key={`api-key-details-${apiKey._id}`}>
-                    <div className="flex center font-size-20px yellow-highlight" key={`account-name-${apiKey?._id}`}>
-                        {apiKey.accountName}
+                    <div
+                        className="profile-apis-first-child flex center font-size-20px yellow-highlight"
+                        style={{ alignItems: 'center' }}
+                        key={`account-name-${apiKey?._id}`}
+                    >
+                        {apiKey && (
+                            <div className="arrow-line" onClick={() => toggleExpansion(apiKey?._id)} key={`character-arrow-line-${apiKey?._id}`}>
+                                <div className="flex center">
+                                    <div className='profile-names'>
+                                        {apiKey.accountName}
+                                    </div>
+                                    {isExpanded(apiKey?._id) ? <img src={upArrow} className="up-down-arrow" alt="up-arrow" /> : <img src={downArrow} className="up-down-arrow" alt="down-arrow" />}
+                                </div>
+                            </div>
+                        )}
                     </div>
+
                     {/* Checkbox */}
                     <label className="custom-checkbox"
                         ref={setTriggerRef}>
@@ -82,8 +109,8 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
 
                     <div className="api-key-profile api-keys">{apiKey._id}{" "}</div>
                     {/* Delete Key */}
-                    <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button" key={`api-key-delete-button-${apiKey._id}`}>
-                        Delete Key
+                    <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button delete-button" key={`api-key-delete-button-${apiKey._id}`}>
+                        Delete
                     </button>
                 </div>
             </div>
@@ -92,9 +119,8 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                 apiKey={apiKey}
                 AuthService={AuthService}
                 setApiKeys={setApiKeys}
+                show={isExpanded(apiKey?._id)}
             />
-            <br/>
-            <br/>
         </div>
     );
 }
