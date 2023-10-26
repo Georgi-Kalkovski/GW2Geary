@@ -117,47 +117,49 @@ function CharacterInfo({ char, acc, mastery, world }) {
                             </Col>
 
                             <div className='flex center'>
-                                <div className='column' style={{ paddingRight: '20px' }}>
+                                <div className='column' style={{ paddingRight: '20px', marginTop: '-2px' }}>
                                     {/* Level */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
                                         <Row>{char.level}</Row>
                                         <Row className="yellow-highlight">Level </Row>
                                     </Col>
-                                    {/* Profession */}
-                                    <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row style={{marginTop:'-5px'}}>
-                                            <img
-                                                src={wikiSmallProfessionIcons[char.profession]}
-                                                style={{ maxWidth: '20px' }}
-                                                alt={char.profession}
-                                            />
-                                        </Row>
-                                        <Row className="yellow-highlight">{char.profession}</Row>
-                                    </Col>
-                                    {/* Race & Gender */}
-                                    <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row style={{marginTop:'-5px'}}>
-                                            <img
-                                                src={wikiBigRacesIcons[char.race]}
-                                                alt={char.profession}
-                                                style={{ maxWidth: '20px'}}
-                                            />
-                                        </Row>
-                                        <Row className="yellow-highlight">
-                                            {char.race} {char.gender}
-                                        </Row>
-                                    </Col>
-                                </div>
-                                <div className='column' style={{ paddingLeft: '20px' }}>
                                     {/* Mastery Points */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
                                         <Row>{mastery}</Row>
                                         <Row className="yellow-highlight">Mastery Points </Row>
                                     </Col>
+                                </div>
+                                <div className='column' style={{ marginTop: '-5px' }}>
+                                    {/* Profession */}
+                                    <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                        <Row style={{ marginTop: '-5px' }}>
+                                            <img
+                                                src={wikiSmallProfessionIcons[char.profession]}
+                                                style={{ maxWidth: '25px' }}
+                                                alt={char.profession}
+                                            />
+                                        </Row>
+                                        <Row className="yellow-highlight">{char.profession}</Row>
+                                    </Col>
                                     {/* Fractal Level */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
                                         <Row>{acc.fractal_level}</Row>
                                         <Row className="yellow-highlight">Fractal Level</Row>
+                                    </Col>
+                                </div>
+                                <div className='column' style={{ paddingLeft: '20px' }}>
+                                    {/* Race & Gender */}
+                                    <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
+                                        <Row style={{ marginTop: '-5px' }}>
+                                            <img
+                                                src={wikiBigRacesIcons[char.race]}
+                                                alt={char.profession}
+                                                style={{ maxWidth: '20px' }}
+                                            />
+                                        </Row>
+                                        <Row className="yellow-highlight">
+                                            {char.race} {char.gender}
+                                        </Row>
                                     </Col>
                                     {/* WvW Rank */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
