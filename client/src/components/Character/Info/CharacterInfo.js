@@ -125,7 +125,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                     </Col>
                                     {/* Profession */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">
+                                        <Row style={{marginTop:'-5px'}}>
                                             <img
                                                 src={wikiSmallProfessionIcons[char.profession]}
                                                 style={{ maxWidth: '20px' }}
@@ -136,7 +136,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                     </Col>
                                     {/* Race & Gender */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row className="font-size-22px">
+                                        <Row style={{marginTop:'-5px'}}>
                                             <img
                                                 src={wikiBigRacesIcons[char.race]}
                                                 alt={char.profession}
