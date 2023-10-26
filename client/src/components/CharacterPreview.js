@@ -70,7 +70,7 @@ function CharacterPreview({ character, apiKey }) {
                         <div className="character-name">{character.name}</div>
                     </Row>
                     <Row className='flex space-between'>
-                        <Col style={{ fontSize: '15px' }}>
+                        <Col>
                             <Row className='flex'>
                                 lvl. {character.level}
                                 {/* lvl. {character.level} {character.gender.toLowerCase()} */}

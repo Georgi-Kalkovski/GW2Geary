@@ -181,6 +181,7 @@
 .custom-checkbox .checkmark {
   vertical-align: middle;
   margin-right: 8px;
+  margin-left: -8px;
 }
 
 /* Character Box */
@@ -379,19 +380,19 @@ input:checked+.slider:before {
 }
 
 /* Hide the API key on small screens */
-@media (max-width: 900px){
+@media (max-width: 900px) {
+
+  .profile-characters>div>a>div>.character-name-div.row>div {
+    max-width: 80px;
+  }
 
   .character-checkbox {
     margin-left: 80px;
   }
 
   .profile-characters>div>a>div {
-    height: 130px;
+    height: 95px;
     margin: 3px 1px;
-  }
-
-  div.characters.profile-characters>div>a>div>div.flex.space-between.row>div.flex.column.col {
-    margin-top: 40px;
   }
 
   .equipment-build-flex {
@@ -498,9 +499,9 @@ input:checked+.slider:before {
 
   .characters-boxes,
   .character {
-    min-width: 120px;
-    max-width: 120px;
-    font-size: 12px;
+    min-width: 115px;
+    max-width: 115px;
+    font-size: 10px;
     margin: 1px;
   }
 
@@ -541,10 +542,9 @@ input:checked+.slider:before {
   }
 
   .equipment,
-  .build,
-  .char-ifno {
+  .build {
     width: 355px !important;
-    margin-right: 14px;
+    margin-right: 0px;
   }
 
   .about-box {
