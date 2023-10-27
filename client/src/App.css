@@ -666,6 +666,10 @@ iframe {
   transform: translateY(0);
 }
 
+.alert-danger {
+  color: #f16565;
+}
+
 /* LIGHT MODE */
 
 body.light-theme {

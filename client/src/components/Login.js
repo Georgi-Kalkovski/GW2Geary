@@ -39,7 +39,6 @@ const Login = () => {
   const toggleForgotPassword = () => {
     setShowForgotPassword(!showForgotPassword);
   };
-
   return (
     <div>
       <Helmet>
@@ -78,7 +77,7 @@ const Login = () => {
                 </div>
               )}
             </div>
-
+            <div className="alert alert-danger">{message}</div>
             <div className="form-group flex center">
               <button className="basic-button" disabled={loading}>
                 {loading && (

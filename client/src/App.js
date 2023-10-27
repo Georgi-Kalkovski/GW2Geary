@@ -27,7 +27,7 @@ import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 import ErrorPage from "./components/ErrorPage";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const [newUsername, setNewUsername] = useState("");
   const storedFashion = localStorage.getItem('isFashionOn');
   const isFashionOn = storedFashion === 'true';
@@ -35,11 +35,6 @@ const App = () => {
   const isEmbed = matchPath('/f/*', pathname);
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-
     EventBus.on("logout", () => {
       logOut();
     });
@@ -120,13 +115,9 @@ const App = () => {
 
           <div className="app-body content">
             <Routes>
-              {currentUser
-                ? <Route path="/profile" element={<Profile />} />
-                : <>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                </>
-              }
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/" element={<Search />} />
               <Route path="/a/:name" element={<ErrorBoundary><Account /></ErrorBoundary>} />
               {isFashionOn ? (

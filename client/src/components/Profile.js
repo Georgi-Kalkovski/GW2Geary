@@ -21,7 +21,7 @@ const Profile = () => {
       setShowProfileInfo(false);
     }
   };
-
+  console.log(currentUser.username)
   return (
     <div>
       {currentUser && (
