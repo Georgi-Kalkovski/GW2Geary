@@ -24,7 +24,7 @@ const Account = () => {
   const [active, setActive] = useState(false)
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  const [isOpen, setIsOpen] = useState(false);
   let navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -151,7 +151,13 @@ const Account = () => {
                   <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101)" }}>Account</span>
                 </li>
                 <li className="flex">
-                  <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share /></span>
+                  <span style={{ margin: '0px 5px' }}>{`-`}</span>
+                  <span>
+                    <Share
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  </span>
                 </li>
               </div>
             </nav>
@@ -193,7 +199,7 @@ const Account = () => {
                     {window.innerWidth < 900
                       ? (
                         <div className="flex acc-info-font-mobile">
-                          <div  style={{ paddingRight: '10px' }}>
+                          <div style={{ paddingRight: '10px' }}>
                             {/* World */}
                             <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
                               <Row>{world}</Row>

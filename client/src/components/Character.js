@@ -30,6 +30,7 @@ function Character() {
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
     const [bldUp, setBldUp] = useState(searchParams.get('bld'));
     const [specUp, setSpecUp] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -157,7 +158,14 @@ function Character() {
                                 <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
                             </li>
                             <li className="breadcrumb-item flex">
-                                <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share prof={charFound.profession} /></span>
+                                <span style={{ margin: '0px 5px' }}>{`-`}</span>
+                                <span>
+                                    <Share
+                                        isOpen={isOpen}
+                                        setIsOpen={setIsOpen}
+                                        prof={charFound.profession}
+                                    />
+                                </span>
                             </li>
                         </ul>
                     </nav>

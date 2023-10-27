@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -21,6 +20,7 @@ function CharacterFashion() {
     const [accFound, setAccFound] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false)
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
+    const [isOpen, setIsOpen] = useState(false);
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -86,7 +86,15 @@ function CharacterFashion() {
                                 <span>{`/`} </span><span style={{ color: "rgb(241, 101, 101" }}>Character</span>
                             </li>
                             <li className="breadcrumb-item flex">
-                                <span style={{ margin: '0px 5px' }}>{`-`}</span><span><Share fashion={true} prof={character.profession} /></span>
+                                <span style={{ margin: '0px 5px' }}>{`-`}</span>
+                                <span>
+                                    <Share
+                                        isOpen={isOpen}
+                                        setIsOpen={setIsOpen}
+                                        fashion={true}
+                                        prof={character.profession}
+                                    />
+                                </span>
                             </li>
                         </ul>
                     </nav>

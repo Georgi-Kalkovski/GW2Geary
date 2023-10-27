@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LinkSvg from './Character/link.svg'
 import { Link } from "react-router-dom";
 
@@ -34,16 +34,16 @@ import {
     WhatsappIcon
 } from "react-share";
 
-function Share({ fashion, prof }) {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+function Share({ fashion, prof, isOpen, setIsOpen }) {
     const [buttonColor, setButtonColor] = useState('');
     const [buttonColor2, setButtonColor2] = useState('');
     const shareUrl = window.location.href;
     const [showSavedMessage, setShowSavedMessage] = useState(false);
     const [showSavedMessage2, setShowSavedMessage2] = useState(false);
+    const searchMenuRef = useRef(null);
 
     const togglePopup = () => {
-        setIsPopupOpen(!isPopupOpen);
+        setIsOpen(!isOpen);
     };
 
     const copyText = () => {
@@ -74,14 +74,27 @@ function Share({ fashion, prof }) {
         e.preventDefault();
     };
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (searchMenuRef.current && !searchMenuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div className="flex">
+        <div className="flex" ref={searchMenuRef}>
             <div onClick={togglePopup}>
                 <Link onClick={preventUrlChange} className='nav-a'><img className="link-svg" src={LinkSvg} alt="" /> Share</Link>
             </div>
             <div className="flex column">
                 <div
-                    className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isPopupOpen ? 'open' : ''}` : `flex acc-info account-box share-div transition-hover-search ${isPopupOpen ? 'open' : ''}`}
+                    ref={searchMenuRef}
+                    className={prof ? `flex acc-info account-box share-div ${prof.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}` : `flex acc-info account-box share-div transition-hover-search ${isOpen ? 'open' : ''}`}
                     style={{ flexWrap: 'wrap', width: '250px' }}
                 >
                     <div className="flex" style={{ padding: '10px 0 5px 0px', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
