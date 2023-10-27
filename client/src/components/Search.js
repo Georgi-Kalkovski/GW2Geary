@@ -225,12 +225,12 @@ function Search() {
         }
         {/* Search Button */}
         {isOpen === true &&
-          <button onClick={toggleMenuOn} className='basic-button-search plus-minus-button'  >
+          <button onClick={toggleMenuOn} className='basic-button-search plus-minus-button active'  >
             <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
           </button>
         }
         {isOpen === false &&
-          <button onClick={toggleMenuOff} className='basic-button-search plus-minus-button active'  >
+          <button onClick={toggleMenuOff} className='basic-button-search plus-minus-button'  >
             <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
           </button>
         }
