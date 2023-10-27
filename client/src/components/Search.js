@@ -176,7 +176,11 @@ function Search() {
     }
   };
 
-  const toggleMenu = () => {
+  const toggleMenuOn = () => {
+    setIsOpen(isOpen);
+  }
+
+  const toggleMenuOff = () => {
     setIsOpen(!isOpen);
   }
 
@@ -220,21 +224,21 @@ function Search() {
           </button>
         }
         {/* Search Button */}
-        {!isOpen
-          ? (
-            <button onClick={toggleMenu} className='basic-button-search plus-minus-button'  >
-              <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
-            </button>
-          ) : (
-            <button onClick={toggleMenu} className='basic-button-search plus-minus-button active'  >
-              <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
-            </button>
-          )
+        {isOpen === true &&
+          <button onClick={toggleMenuOn} className='basic-button-search plus-minus-button'  >
+            <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
+          </button>
+        }
+        {isOpen === false &&
+          <button onClick={toggleMenuOff} className='basic-button-search plus-minus-button active'  >
+            <img src={Filter} style={{ width: "25px", display: "flex" }} alt="" />
+          </button>
         }
       </div>
       {/* Search Button Menu*/}
       <SearchMenu
         isOpen={isOpen}
+        setIsOpen={setIsOpen}
         selectedGenderUp={handleGenderSelection}
         selectedGender={selectedGender}
         selectedRaceUp={handleRaceSelection}
@@ -270,59 +274,60 @@ function Search() {
         )}
       </div>
 
-      {searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
-        <div
-        key={`home-fragment-${searchTerm}`} 
-        className='custom-scrollbar'
-        style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}
-        >
-          {searchTerm !== '' && selectedGender === '' && selectedRace === '' && selectedProfession === '' && (
-            <>
-              <Container className="characters" key={`accounts-container-${searchTerm}`}
-              >
-                {displayedAccounts.length > 0 ? (
-                  displayedAccounts.map((account, index) => (
-                    <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
-                      <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
-                        <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
-                          <Col>
-                            <Row className="center-class accounts-hover">
-                              <div className="accounts-name">{account.accountName}</div>
-                            </Row>
-                          </Col>
-                        </Container>
-                      </Link>
-                    </div>
-                  ))
-                ) : (
-                  <div key="no-matching-accounts">No matching accounts & characters found.</div>
-                )}
-              </Container>
-              <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
-            </>
-          )}
-          <div className="characters" key={`character-div-${searchTerm}`}>
-            <React.Fragment key={`character-fragment-${searchTerm}`}>
-              {displayedCharacters.map((character, index) => (
-                <React.Fragment key={`character-fragment-${character.name}-${index}`}>
-                  {character.active != false &&
-                    <CharacterPreview character={character} key={`character-name-${character.name}-${index}`} />
-                  }
-                </React.Fragment>
-              ))}
-            </React.Fragment>
+      {
+        searchTerm !== '' || selectedGender !== '' || selectedRace !== '' || selectedProfession !== '' ? (
+          <div
+            key={`home-fragment-${searchTerm}`}
+            className='custom-scrollbar'
+            style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}
+          >
+            {searchTerm !== '' && selectedGender === '' && selectedRace === '' && selectedProfession === '' && (
+              <>
+                <Container className="characters" key={`accounts-container-${searchTerm}`}
+                >
+                  {displayedAccounts.length > 0 ? (
+                    displayedAccounts.map((account, index) => (
+                      <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
+                        <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
+                          <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
+                            <Col>
+                              <Row className="center-class accounts-hover">
+                                <div className="accounts-name">{account.accountName}</div>
+                              </Row>
+                            </Col>
+                          </Container>
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <div key="no-matching-accounts">No matching accounts & characters found.</div>
+                  )}
+                </Container>
+                <Pagination filtered={filteredAccounts} itemsPerPage={itemsPerPage} totalPages={totalPagesAccounts} page={accountsPage} setPage={setAccountsPage} />
+              </>
+            )}
+            <div className="characters" key={`character-div-${searchTerm}`}>
+              <React.Fragment key={`character-fragment-${searchTerm}`}>
+                {displayedCharacters.map((character, index) => (
+                  <React.Fragment key={`character-fragment-${character.name}-${index}`}>
+                    {character.active != false &&
+                      <CharacterPreview character={character} key={`character-name-${character.name}-${index}`} />
+                    }
+                  </React.Fragment>
+                ))}
+              </React.Fragment>
+            </div>
+            <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
           </div>
-          <Pagination filtered={filteredCharacters} itemsPerPage={itemsPerPage} totalPages={totalPagesCharacters} page={charactersPage} setPage={setCharactersPage} />
-        </div>
-      ) : (
-        <div className='custom-scrollbar' style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
-          {/* Empty Search Text */}
-          <SearchWelcome />
-          <SearchNews />
-          <SearchCounter accounts={accounts} />
-          <br />
-        </div>
-      )
+        ) : (
+          <div className='custom-scrollbar' style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
+            {/* Empty Search Text */}
+            <SearchWelcome />
+            <SearchNews />
+            <SearchCounter accounts={accounts} />
+            <br />
+          </div>
+        )
       }
     </div >
   );
