@@ -154,7 +154,7 @@
 
 .custom-checkbox {
   margin: 0;
-  margin-left: 15px;
+  margin-left: 8px;
   cursor: pointer;
 }
 
@@ -167,16 +167,15 @@
 
 .custom-checkbox .checkmark {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #d3d3d3;
+  border: 0px solid #d3d3d3;
   background-color: #aa0404;
   transition: all 0.3s ease;
+  padding-top: 2px;
 }
 
 .custom-checkbox .checkmark:hover {
   transform: scale(1.1);
-  filter: brightness(2);
+  filter: brightness(1.2);
 }
 
 .custom-checkbox .api-checkbox:checked+.checkmark,

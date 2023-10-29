@@ -227,76 +227,45 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           <div style={{ marginRight: '5px' }}>Fashion:</div>
           <label className="switch">
             <input
+              class="tgl tgl-skewed"
+              id="cb3"
               type="checkbox"
               checked={isFashionOn}
               onChange={toggleFashion}
-              name='fashion' />
-            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
+            />
+            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitchTriggerRef}></span>
           </label>
-          {/* {switchVisible && (
-            <div
-              ref={setSwitchTooltipRef}
-              {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
-            >
-              <div>
-                <div>
-                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
-                </div>
-              </div>
-              <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
-            </div>
-          )} */}
         </div>
         {/* Prefixes Switch */}
         <div className='flex' style={{ marginRight: '20px' }}>
           <div style={{ marginRight: '5px' }}>Stats:</div>
           <label className="switch">
             <input
+              class="tgl tgl-skewed"
+              id="cb3"
               type="checkbox"
+
               checked={isPrefixesOn}
               onChange={togglePrefixes}
-              name='stats' />
-            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitchTriggerRef}></span>
+            />
+            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitchTriggerRef}></span>
           </label>
-          {/* {switchVisible && (
-            <div
-              ref={setSwitchTooltipRef}
-              {...getSwitchTooltipProps({ className: 'tooltip-container equip-tooltip' })}
-            >
-              <div>
-                <div>
-                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to <span className='off-text'>hide</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>show</span> <span className='yellow-popup'>prefixes</span>, <span className='yellow-popup'>runes</span> and <span className='yellow-popup'>sigils</span>.
-                </div>
-              </div>
-              <div {...getSwitchArrowProps({ className: 'tooltip-arrow' })} />
-            </div>
-          )} */}
         </div>
         {/* Skins Switch */}
         <div className='flex'>
           <div style={{ marginRight: '5px' }}>Skins:</div>
           <label className="switch">
             <input
+              class="tgl tgl-skewed"
+              id="cb3"
               type="checkbox"
               checked={isSliderOn}
               onChange={toggleSlider}
-              name='skins' />
-            <span className={`${char?.profession?.toLowerCase()}-switch slider round`} ref={setSwitch2TriggerRef}></span>
+            />
+            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitch2TriggerRef}></span>
           </label>
-          {/* {switch2Visible && (
-            <div
-              ref={setSwitch2TooltipRef}
-              {...getSwitch2TooltipProps({ className: 'tooltip-container equip-tooltip' })}
-            >
-              <div>
-                <div>
-                  <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to toggle <span className='yellow-popup'>item skins</span> <span className='off-text'>off</span>/<span className={`${char?.profession?.toLowerCase()}-text`}>on</span>
-                </div>
-              </div>
-              <div {...getSwitch2ArrowProps({ className: 'tooltip-arrow' })} />
-            </div>
-          )} */}
         </div>
+
       </div>
       <Equipment
         key={selectedEqTab?.tab + selectedEqTab?.name}

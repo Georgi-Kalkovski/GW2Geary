@@ -24,6 +24,122 @@
     padding: 0px 5px 0px 0px;
 }
 
+/* NEW SWITCH START */
+.tgl {
+    display: none;
+}
+
+.tgl,
+.tgl:after,
+.tgl:before,
+.tgl *,
+.tgl *:after,
+.tgl *:before,
+.tgl+.tgl-btn {
+    box-sizing: border-box;
+}
+
+.tgl,
+.tgl:after,
+.tgl:before,
+.tgl+.tgl-btn::selection {
+    background: none;
+}
+
+.tgl+.tgl-btn {
+    outline: 0;
+    display: block;
+    width: 2.4em;
+    height: 1.5em;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tgl+.tgl-btn:after,
+.tgl+.tgl-btn:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+}
+
+.tgl+.tgl-btn:after {
+    left: 0;
+}
+
+.tgl+.tgl-btn:before {
+    display: none;
+}
+
+.tgl:checked+.tgl-btn:after {
+    left: 50%;
+}
+
+.tgl-light+.tgl-btn {
+    background: #f0f0f0;
+    border-radius: 2em;
+    padding: 2px;
+    transition: all 0.4s ease;
+}
+
+.tgl-light+.tgl-btn:after {
+    border-radius: 50%;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.tgl-skewed+.tgl-btn {
+    overflow: hidden;
+    transform: skew(0deg);
+    backface-visibility: hidden;
+    transition: all 0.2s ease;
+    background: #888;
+}
+
+.tgl-skewed+.tgl-btn:after,
+.tgl-skewed+.tgl-btn:before {
+    transform: skew(0deg);
+    display: inline-block;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    line-height: 1.5em;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tgl-skewed+.tgl-btn:after {
+    left: 100%;
+    content: attr(data-tg-on);
+}
+
+.tgl-skewed+.tgl-btn:before {
+    left: 0;
+    content: attr(data-tg-off);
+}
+
+.tgl-skewed+.tgl-btn:active {
+    background: #888;
+}
+
+.tgl-skewed:checked+.tgl-btn:before {
+    left: -100%;
+}
+
+.tgl-skewed:checked+.tgl-btn:after {
+    left: 0;
+}
+
+.tgl-skewed:checked+.tgl-btn:active:after {
+    left: 10%;
+}
+/* NEW SWITCH STOP */
+
 .item-box {
     display: flex;
     margin: 3px;

@@ -69,7 +69,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                 <div className="facts-div-profile api-right" key={`api-key-details-${apiKey._id}`}>
                     <div
                         className="profile-apis-first-child flex center font-size-20px yellow-highlight"
-                        style={{ alignItems: 'center' }}
+                        style={{ alignItems: 'center', marginRight: '5px'  }}
                         key={`account-name-${apiKey?._id}`}
                     >
                         {apiKey && (
@@ -87,14 +87,16 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                     {/* Checkbox */}
                     <label className="custom-checkbox" ref={setTriggerRef}>
                         <input
+                            class="tgl tgl-skewed api-checkbox"
+                            id="cb3"
                             type="checkbox"
-                            className="api-checkbox "
                             defaultChecked={apiKey.active}
                             onChange={(e) => updateApiKeyStatus(apiKey._id, e.target.checked)}
                             key={`api-key-checkbox-${apiKey._id}`}
                             name={`checkbox-${apiKey._id}`}
+
                         />
-                        <span className="checkmark"></span>
+                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setTriggerRef}></span>
                     </label>
                     {visible && (
                         <div

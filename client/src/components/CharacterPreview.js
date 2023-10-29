@@ -37,16 +37,17 @@ function CharacterPreview({ character, apiKey }) {
             {/* Checkbox */}
             {apiKey && character && (<>
                 <div className='character-checkbox'>
-                    <label className="custom-checkbox"
-                        ref={setTriggerRef}>
+                    <label className="custom-checkbox">
                         <input
+                            class="tgl tgl-skewed api-checkbox"
+                            id="cb3"
                             type="checkbox"
-                            className="api-checkbox"
-                            defaultChecked={character.active}
+                            defaultChecked={apiKey.active}
                             onChange={(e) => updateCharacterStatus(e.target.checked)}
                             key={`api-key-checkbox-${apiKey._id}`}
+
                         />
-                        <span className="checkmark"></span>
+                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setTriggerRef}></span>
                     </label>
                     {visible && (
                         <div
@@ -77,7 +78,7 @@ function CharacterPreview({ character, apiKey }) {
                                 {/* lvl. {character.level} <img style={{ width: '20px', height: '20px', marginTop: '1px', marginLeft: '4px' }} src={character.gender === 'Male' ? Male : Female} alt="" /> */}
                             </Row>
                             <Row >
-                            {character.gender} {character.race}
+                                {character.gender} {character.race}
                             </Row>
                             <Row>{character.profession}</Row>
                         </Col>

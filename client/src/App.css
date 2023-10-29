@@ -709,7 +709,7 @@ body.light-theme .profile-box button:hover {
 }
 
 body.light-theme .custom-checkbox .checkmark {
-  border: 2px solid #202124;
+  border: 0px solid #202124;
 }
 
 body.light-theme .custom-scrollbar {
