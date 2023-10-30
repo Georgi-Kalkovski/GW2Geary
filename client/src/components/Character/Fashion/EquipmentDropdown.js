@@ -141,13 +141,13 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
           {/* Fashion Switch */}
           <label className="switch" >
             <input
-              class="tgl tgl-skewed"
+              className="tgl tgl-skewed"
               id="cb3"
               type="checkbox"
               checked={isFashionOn}
               onChange={toggleFashion}
             />
-            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3"></span>
+            <span className={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON"></span>
           </label>
         </div>
         <ul className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`} style={{ zIndex: '7', width: '90%', margin: '5px 5%' }}>

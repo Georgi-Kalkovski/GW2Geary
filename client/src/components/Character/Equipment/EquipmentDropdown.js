@@ -227,13 +227,13 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           <div style={{ marginRight: '5px' }}>Fashion:</div>
           <label className="switch">
             <input
-              class="tgl tgl-skewed"
+              className="tgl tgl-skewed"
               id="cb3"
               type="checkbox"
               checked={isFashionOn}
               onChange={toggleFashion}
             />
-            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitchTriggerRef}></span>
+            <span className={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" ref={setSwitchTriggerRef}></span>
           </label>
         </div>
         {/* Prefixes Switch */}
@@ -241,14 +241,14 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           <div style={{ marginRight: '5px' }}>Stats:</div>
           <label className="switch">
             <input
-              class="tgl tgl-skewed"
+              className="tgl tgl-skewed"
               id="cb3"
               type="checkbox"
 
               checked={isPrefixesOn}
               onChange={togglePrefixes}
             />
-            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitchTriggerRef}></span>
+            <span className={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" ref={setSwitchTriggerRef}></span>
           </label>
         </div>
         {/* Skins Switch */}
@@ -256,13 +256,13 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           <div style={{ marginRight: '5px' }}>Skins:</div>
           <label className="switch">
             <input
-              class="tgl tgl-skewed"
+              className="tgl tgl-skewed"
               id="cb3"
               type="checkbox"
               checked={isSliderOn}
               onChange={toggleSlider}
             />
-            <span class={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setSwitch2TriggerRef}></span>
+            <span className={`tgl-btn ${char?.profession?.toLowerCase()}-switch`} style={{ paddingTop: '2px' }} data-tg-off="OFF" data-tg-on="ON" ref={setSwitch2TriggerRef}></span>
           </label>
         </div>
 

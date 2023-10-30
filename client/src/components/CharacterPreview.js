@@ -47,7 +47,7 @@ function CharacterPreview({ character, apiKey }) {
                             key={`api-key-checkbox-${apiKey._id}`}
 
                         />
-                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" for="cb3" ref={setTriggerRef}></span>
+                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" ref={setTriggerRef}></span>
                     </label>
                     {visible && (
                         <div
