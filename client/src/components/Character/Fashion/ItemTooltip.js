@@ -79,6 +79,8 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                 `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front in combat`,
                                 `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front`,
                                 `${removeFirstFromTitle} (${weight}) ${race} ${gender} front in combat`,
+                                `${removeFirstFromTitleArmor} ${race} ${gender} front`,
+                                `${removeFirstFromTitleArmor}`,
                                 `${removeFirstFromTitle} (${weight}) ${race} ${gender} front`,
                                 `${titleArmor} (${weight}) ${race} ${gender} front in combat`,
                                 `${titleArmor} (${weight}) ${race} ${gender} front`,
@@ -95,7 +97,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                 gearNames.push(`${prefixes[i]} ${title}`);
                             }
 
-                            // console.log(gearNames);
+                            // console.log(title, gearNames);
 
                             let itemFound = false;
 
@@ -120,7 +122,6 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
 
                                 if (Object.keys(jpgPage)[0] !== '-1') {
                                     setImageUrl(Object.values(jpgPage)[0].imageinfo[0].url);
-                                    // console.log((Object.values(jpgPage)[0].imageinfo[0].url));
                                     itemFound = true;
                                 }
                             } if (itemFound === false) {
@@ -139,7 +140,6 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                 if (Object.keys(gearPage)[0] !== '-1') {
                                     const gearImages = Object.values(gearFound.data.query.pages)[0].images;
                                     console.log(gearImages[1]?.title.replace('.png', '.jpg'))
-                                    // console.log(notArmorSetImages)
                                     const imagesNew = gearImages[1]?.title.replace('.png', '.jpg')
                                     const imageUrl = await axios.get('https://wiki.guildwars2.com/api.php', {
                                         params: {
