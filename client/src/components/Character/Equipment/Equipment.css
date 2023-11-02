@@ -170,6 +170,10 @@
     text-align: left;
 }
 
+.item-popup-fashion {
+    width: 140px;
+}
+
 .item-name {
     font-size: medium;
     font-weight: 500;

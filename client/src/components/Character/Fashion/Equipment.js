@@ -7,10 +7,15 @@ import '../Equipment/Equipment.css';
 import Cog from '../../../cog.svg';
 import Dragon from '../../../dragon.svg';
 import ChatLinks from '../Equipment/ChatLinks';
+import axios from 'axios';
 
-function Equipment({ items, embed, prof }) {
+function Equipment({ items, embed, char }) {
     const infusions = [];
+    let auraCounter = 0;
     for (const item of items) {
+        if (item.name === 'Aurora') { auraCounter++ }
+        if (item.name === 'Vision') { auraCounter++ }
+        if (item.name === 'Coalescence') { auraCounter++ }
         if (item.infusions.length > 0) {
             infusions.push(...item.infusions)
         }
@@ -24,6 +29,28 @@ function Equipment({ items, embed, prof }) {
             setIsLoading(false);
         }, 2000);
     }, [items]);
+
+    const [armors, setArmors] = useState([]);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const armorsApi = await axios.get('https://wiki.guildwars2.com/api.php', {
+                    params: {
+                        action: 'query',
+                        format: 'json',
+                        prop: 'revisions',
+                        titles: 'Armor_set',
+                        rvprop: 'content',
+                        origin: '*'
+                    }
+                });
+                setArmors(Object.values(armorsApi.data.query.pages)[0].revisions[0]['*'])
+            } catch (error) {
+            }
+        }
+        fetchData();
+    }, []);
+    localStorage.setItem('armors', armors);
 
     return (<>
         {isLoading && embed !== true
@@ -41,12 +68,12 @@ function Equipment({ items, embed, prof }) {
                     <Container className="equipment-box" style={{ marginTop: '15px' }}>
                         <Col>
                             <Col className='flex column' style={{ marginRight: '5px' }}>
-                                <ItemTooltip item={items.find(x => x.slot === 'Helm')} gear='Helm' embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Shoulders')} gear='Shoulders' embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Coat')} gear='Coat' embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Gloves')} gear='Gloves' embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Leggings')} gear='Leggings' embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Boots')} gear='Boots' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Helm')} gear='Helm' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Shoulders')} gear='Shoulders' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Coat')} gear='Coat' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Gloves')} gear='Gloves' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Leggings')} gear='Leggings' embed={embed} />
+                                <ItemTooltip char={char} item={items.find(x => x.slot === 'Boots')} gear='Boots' embed={embed} />
                             </Col>
                         </Col>
                         <Col>
@@ -71,17 +98,32 @@ function Equipment({ items, embed, prof }) {
                         <Col>
                             <Col className='flex column'>
                                 <Dyes item={items.find(x => x.slot === 'Backpack')} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Accessory1' && x.name === 'Aurora' || x.name === 'Vision')} embed={embed} />
-                                <ItemTooltip item={items.find(x =>
-                                    (x.slot === 'Accessory2' && (x.name === 'Aurora' || x.name === 'Vision')) ||
-                                    (x.slot === 'Accessory1' && items.filter(y => y.slot === 'Accessory1').length === 2))}
+                                <ItemTooltip
+                                    item={items.find(x =>
+                                        x.slot === 'Accessory1' && x.name === 'Aurora' || x.name === 'Vision')
+                                    }
+                                    auraCounter={auraCounter}
+                                    embed={embed} />
+                                <ItemTooltip
+                                    item={items.find(x =>
+                                        (x.slot === 'Accessory2' && (x.name === 'Aurora' || x.name === 'Vision')) ||
+                                        (x.slot === 'Accessory1' && items.filter(y => y.slot === 'Accessory1').length === 2))}
+                                    auraCounter={auraCounter}
                                     embed={embed}
                                 />
                                 <ItemTooltip item={items.find(x => x.slot === 'Amulet' && x.name === `Prismatic Champion's Regalia` || x.name === 'Transcendence')} embed={embed} />
-                                <ItemTooltip item={items.find(x => x.slot === 'Ring1' && x.name === 'Coalescence' || x.name === 'Conflux')} embed={embed} />
-                                <ItemTooltip item={items.find(x =>
-                                    (x.slot === 'Ring2' && (x.name === 'Coalescence' || x.name === 'Conflux')) ||
-                                    (x.slot === 'Ring1' && items.filter(y => y.slot === 'Ring1').length === 2))}
+                                <ItemTooltip
+                                    item={items.find(x =>
+                                        x.slot === 'Ring1' && x.name === 'Coalescence' || x.name === 'Conflux')
+                                    }
+                                    auraCounter={auraCounter}
+                                    embed={embed}
+                                />
+                                <ItemTooltip
+                                    item={items.find(x =>
+                                        (x.slot === 'Ring2' && (x.name === 'Coalescence' || x.name === 'Conflux')) ||
+                                        (x.slot === 'Ring1' && items.filter(y => y.slot === 'Ring1').length === 2))}
+                                    auraCounter={auraCounter}
                                     embed={embed}
                                 />
                             </Col>
@@ -100,7 +142,7 @@ function Equipment({ items, embed, prof }) {
                         </Col>
                     </Container>
                     {!embed &&
-                        <ChatLinks items={items} prof={prof} fashion={true} />
+                        <ChatLinks items={items} prof={char.profession} fashion={true} />
                     }
                 </Container>
             )

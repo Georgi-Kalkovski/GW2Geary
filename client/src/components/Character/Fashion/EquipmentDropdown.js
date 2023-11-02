@@ -162,7 +162,7 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
           ))}
         </ul>
       </div>
-      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} prof={char?.profession} embed={embed} />
+      <Equipment key={selectedEqTab?.tab + selectedEqTab?.name} items={mergedItems} char={char} embed={embed} />
     </div >
   );
 }

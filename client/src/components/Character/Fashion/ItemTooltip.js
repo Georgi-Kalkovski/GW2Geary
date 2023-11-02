@@ -6,15 +6,10 @@ import WikiImage from './WikiImage';
 import axios from 'axios';
 import { gearIcons } from '../../icons';
 
-function ItemTooltip({ item, gear, embed }) {
+function ItemTooltip({ char, auraCounter, item, gear, embed }) {
     // console.log('item ', item)
 
-    const [imageUrl, setImageUrl] = useState('');
-
-    const prof = localStorage.getItem('prof').toLowerCase();
-    const race = localStorage.getItem('race').toLowerCase();
-    const gender = localStorage.getItem('gender').toLowerCase();
-
+    const [imageUrl, setImageUrl] = useState(null);
     let weight = '';
 
     const professionWeights = {
@@ -29,82 +24,181 @@ function ItemTooltip({ item, gear, embed }) {
         'mesmer': 'light',
     };
 
-    weight = professionWeights[prof] || '';
+    const prefixes = [
+        "Apostate's", "Apothecary's", "Assassin's", "Berserker's",
+        "Bringer's", "Captain's", "Carrion", "Cavalier's",
+        "Celestial", "Cleric's", "Dire", "Forsaken",
+        "Giver's", "Knight's", "Magi's", "Nomad's",
+        "Rabid", "Rampager's", "Sentinel's", "Settler's",
+        "Shaman's", "Sinister", "Soldier's", "Valkyrie",
+        "Zealot's", "Commander's", "Crusader", "Marauder",
+        "Minstrel's", "Seraph", "Trailblazer's", "Vigilant",
+        "Viper's", "Wanderer's", "Diviner's", "Grieving",
+        "Harrier's", "Marshal's", "Plaguedoctor's", "Dragon's", "Ritualist's"
+    ];
 
+    weight = professionWeights[char?.profession.toLowerCase()] || '';
+    const race = char?.race.toLowerCase();
+    const gender = char?.gender.toLowerCase();
     useEffect(() => {
         const fetchWikiImage = async (title) => {
-            try {
-                const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                    params: {
-                        action: 'query',
-                        format: 'json',
-                        prop: 'revisions',
-                        titles: title,
-                        prop: 'pageimages',
-                        pithumbsize: 300,
-                        origin: '*'
+            if (title) {
+                // Legendary Trinkets Check
+                if (
+                    title === 'Aurora' ||
+                    title === 'Vision' ||
+                    title === 'Coalescence' ||
+                    title === "Prismatic Champion's Regalia" ||
+                    title === 'Transcendence' ||
+                    title === 'Conflux'
+                ) {
+                    if (auraCounter === 1) { setImageUrl('https://wiki.guildwars2.com/images/c/c0/One_legendary_trinket_drawn.jpg') }
+                    if (auraCounter === 2) { setImageUrl('https://wiki.guildwars2.com/images/9/99/Two_legendary_trinkets_drawn.jpg') }
+                    if (auraCounter === 3) { setImageUrl('https://wiki.guildwars2.com/images/2/28/Three_legendary_trinkets_drawn.jpg') }
+                    if (title === "Prismatic Champion's Regalia") { setImageUrl('https://wiki.guildwars2.com/images/8/87/Prismatic_Champion%27s_Regalia.gif') }
+                    if (title === "Transcendence") { setImageUrl('https://wiki.guildwars2.com/images/a/a1/Transcendence.gif') }
+                    if (title === "Conflux") { setImageUrl('https://wiki.guildwars2.com/images/7/73/Conflux.jpg') }
+                } else {
+                    try {
+                        // Armor Check
+                        if (
+                            gear === 'Helm' ||
+                            gear === 'Shoulders' ||
+                            gear === 'Coat' ||
+                            gear === 'Gloves' ||
+                            gear === 'Leggings' ||
+                            gear === 'Boots'
+                        ) {
+                            const titleSkin = title + ' Skin';
+                            const titleNoWeight = title.replace(/Heavy |Medium |Light /g, '');
+                            const titleArmor = title.split(' ').length > 1 ? title.replace(/ [^ ]*$/, ' armor') : 'armor';
+                            const removeFirstFromTitle = title.replace(/^(\S+\s+)/, "");
+                            const removeFirstFromTitleArmor = removeFirstFromTitle.split(' ').length > 1 ? removeFirstFromTitle.replace(/ [^ ]*$/, ' armor') : 'armor';
+
+                            const gearNames = [
+                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front in combat`,
+                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front`,
+                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front in combat`,
+                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front`,
+                                `${titleArmor} (${weight}) ${race} ${gender} front in combat`,
+                                `${titleArmor} (${weight}) ${race} ${gender} front`,
+                                `${titleArmor} ${race} ${gender} front in combat`,
+                                `${titleArmor} ${race} ${gender} front`,
+                                `${titleArmor}`,
+                                `${titleSkin} ${race} ${gender}`,
+                                `${titleSkin}`,
+                                `${title}`,
+                                `${titleNoWeight}`
+                            ];
+
+                            for (let i = 0; i < prefixes.length; i++) {
+                                gearNames.push(`${prefixes[i]} ${title}`);
+                            }
+
+                            // console.log(gearNames);
+
+                            let itemFound = false;
+
+                            for (const gearName of gearNames) {
+                                if (itemFound) {
+                                    break;
+                                }
+
+                                const jpgFound = await axios.get('https://wiki.guildwars2.com/api.php', {
+                                    params: {
+                                        action: 'query',
+                                        format: 'json',
+                                        prop: 'imageinfo',
+                                        iiprop: 'url',
+                                        titles: 'File:' + gearName + '.jpg',
+                                        iiurlwidth: 200,
+                                        origin: '*',
+                                    },
+                                });
+
+                                const jpgPage = jpgFound.data.query.pages;
+
+                                if (Object.keys(jpgPage)[0] !== '-1') {
+                                    setImageUrl(Object.values(jpgPage)[0].imageinfo[0].url);
+                                    // console.log((Object.values(jpgPage)[0].imageinfo[0].url));
+                                    itemFound = true;
+                                }
+                            } if (itemFound === false) {
+                                const gearFound = await axios.get('https://wiki.guildwars2.com/api.php', {
+                                    params: {
+                                        action: 'query',
+                                        format: 'json',
+                                        prop: 'images',
+                                        titles: title,
+                                        pithumbsize: 300,
+                                        imlimit: 5,
+                                        origin: '*'
+                                    }
+                                });
+                                const gearPage = gearFound.data.query.pages;
+                                if (Object.keys(gearPage)[0] !== '-1') {
+                                    const gearImages = Object.values(gearFound.data.query.pages)[0].images;
+                                    console.log(gearImages[1]?.title.replace('.png', '.jpg'))
+                                    // console.log(notArmorSetImages)
+                                    const imagesNew = gearImages[1]?.title.replace('.png', '.jpg')
+                                    const imageUrl = await axios.get('https://wiki.guildwars2.com/api.php', {
+                                        params: {
+                                            action: 'query',
+                                            format: 'json',
+                                            prop: 'imageinfo',
+                                            iiprop: 'url',
+                                            titles: imagesNew,
+                                            pithumbsize: 300,
+                                            origin: '*'
+                                        }
+                                    });
+                                    setImageUrl(Object.values(imageUrl.data.query.pages)[0].imageinfo[0].url)
+                                }
+                            }
+                        }
+                        // Weapons/Backpack Check
+                        else {
+                            const gearFound = await axios.get('https://wiki.guildwars2.com/api.php', {
+                                params: {
+                                    action: 'query',
+                                    format: 'json',
+                                    prop: 'images',
+                                    titles: title,
+                                    pithumbsize: 300,
+                                    imlimit: 150,
+                                    origin: '*'
+                                }
+                            });
+                            const gearPage = gearFound.data.query.pages;
+                            if (Object.keys(gearPage)[0] !== '-1') {
+                                const gearImages = Object.values(gearFound.data.query.pages)[0].images;
+                                const imagesNew = gearImages.filter(i =>
+                                    !i.title.includes('.png')
+                                );
+                                const filteredImageFile = imagesNew[0].title;
+                                const imageUrl = await axios.get('https://wiki.guildwars2.com/api.php', {
+                                    params: {
+                                        action: 'query',
+                                        format: 'json',
+                                        prop: 'imageinfo',
+                                        iiprop: 'url',
+                                        titles: filteredImageFile,
+                                        pithumbsize: 300,
+                                        origin: '*'
+                                    }
+                                });
+                                setImageUrl(Object.values(imageUrl.data.query.pages)[0].imageinfo[0].url)
+                            }
+                        }
+                    } catch (error) {
+                        console.log(error)
                     }
-                });
-                const pageData = response.data.query.pages;
-                const pageId = Object.keys(pageData)[0];
-                const thumbnail = pageData[pageId].thumbnail;
-                if (thumbnail.source) {
-                    setImageUrl(thumbnail.source);
                 }
-            } catch (error) {
-                // Handle errors here
             }
         };
 
-        const fetchItemImage = async (title) => {
-
-            try {
-                const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                    params: {
-                        action: 'query',
-                        format: 'json',
-                        prop: 'revisions',
-                        titles: title,
-                        prop: 'images',
-                        pithumbsize: 300,
-                        origin: '*'
-                    }
-                });
-                const pageData = response.data.query.pages;
-                const image = Object.values(pageData)[0].images?.find(x => x.title.includes('armor') || x.title.includes('weapon')).title;
-                if (image) {
-                    await fetchWikiImage(image);
-                }
-            } catch (error) {
-                // Handle errors here
-            }
-        };
-
-        const fetchItemImages = async () => {
-            if (item) {
-                const original = item.skin_name || item.name;
-                const skin = `${original} Skin`;
-                const weigthItem = `${original} (${weight})`;
-                const armor = `${original.split(' ').slice(0, -1).join(' ')} armor`;
-                const armorWeigth = `${original.split(' ').slice(0, -1).join(' ')} armor (${weight})`;
-                const raceGender = `${original} (${weight}) ${race} ${gender} front`;
-                const armorRaceGender = `${original.split(' ').slice(0, -1).join(' ')} armor (${weight}) ${race} ${gender} front`;
-
-                await fetchWikiImage(armorRaceGender);
-                await fetchWikiImage(raceGender);
-                await fetchWikiImage(armorWeigth);
-                await fetchWikiImage(armor);
-                await fetchWikiImage(weigthItem);
-                await fetchWikiImage(skin);
-                await fetchWikiImage(original);
-
-                await fetchItemImage(skin);
-                await fetchItemImage(original);
-            }
-        };
-
-        fetchItemImages();
-    }, [item?.skin_name, item?.name]);
+        fetchWikiImage(item?.skin_name ? item?.skin_name : item?.name);
+    }, [auraCounter, char, item?.skin_name, item?.name]);
 
     const {
         getArrowProps,
@@ -112,7 +206,7 @@ function ItemTooltip({ item, gear, embed }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({ placement: 'top' });
+    } = usePopperTooltip(window.innerWidth < 900 ? { placement: 'top' } : { placement: 'right' });
 
     const [showWikiButton, setShowWikiButton] = useState(false);
 
@@ -140,7 +234,7 @@ function ItemTooltip({ item, gear, embed }) {
                     {...getTooltipProps({ className: 'tooltip-container pointer' })
                     }
                 >
-                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
+                    <Container className={`item-popup item-popup-fashion`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
                         {/* NAME */}
                         <Row key={`name-${item.id}`}>
                             {item.skin_name
