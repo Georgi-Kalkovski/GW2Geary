@@ -172,6 +172,7 @@
 
 .item-popup-fashion {
     width: 140px;
+    z-index:9999!important;
 }
 
 .item-name {

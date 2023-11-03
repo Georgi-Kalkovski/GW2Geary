@@ -6,7 +6,6 @@ import InfusionsName from './InfusionsName';
 const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mergedItems, setMergedItems] = useState([]);
-  const [itemstatsOutput, setItemstatsOutput] = useState([]);
   const [isFashionOn, setIsFashionOn] = useState(() => {
     const storedValue = localStorage.getItem('isFashionOn');
     return storedValue !== null ? JSON.parse(storedValue) : false;
@@ -115,7 +114,7 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
         console.log(error)
       }
     })();
-  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs, itemstatsOutput]);
+  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs]);
 
   localStorage.setItem('prof', char?.profession);
   localStorage.setItem('race', char?.race);

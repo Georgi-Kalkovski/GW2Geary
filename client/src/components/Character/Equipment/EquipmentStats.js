@@ -7,7 +7,7 @@ import Infusions from "./Stats/Infusions";
 import Relic from "./Stats/Relic";
 import PowerCore from "./Stats/PowerCore";
 
-function EquipmentStats({ prof, items, relic, powerCore }) {
+function EquipmentStats({ items, relic, powerCore }) {
     const stats = [];
     const upgrades = [];
     const finishedItemstats = [];

@@ -104,7 +104,7 @@ function ChatLinks({ items, prof, fashion, relic, powerCore }) {
             </Container>
             ) : (
                 <Container>
-                    <div className='template-container'>
+                    <div className='template-container' style={window.innerWidth >= 900 ? { marginTop: '50px' } : {}}>
                         <button
                             className={`class-hover ${prof.toLowerCase()}-border template-button`}
                             onClick={copySkins}

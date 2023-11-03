@@ -535,6 +535,7 @@ input:checked+.slider:before {
 
   .equipment {
     height: auto;
+    min-height: auto;
   }
 
   .build {

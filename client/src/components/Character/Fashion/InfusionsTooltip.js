@@ -4,15 +4,19 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
 import WikiImage from './WikiImage';
 import axios from 'axios';
+import Cog from '../../../cog.svg';
+import Dragon from '../../../dragon.svg';
 
 function InfusionTooltip({ infusion, leng, embed }) {
     // console.log('item ', item)
 
     const [imageUrl, setImageUrl] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchWikiContent = async () => {
             try {
+                setLoading(true);
                 if (infusion) {
                     const response = await axios.get('https://wiki.guildwars2.com/api.php', {
                         params: {
@@ -31,6 +35,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
                     const image = thumbnail.source;
                     if (image) {
                         setImageUrl(image);
+                        setLoading(false);
                     }
                 }
             } catch (error) {
@@ -75,7 +80,7 @@ function InfusionTooltip({ infusion, leng, embed }) {
                     ref={setTooltipRef}
                     {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
-                    <Container className={`item-popup`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
+                    <Container className={`item-popup item-popup-fashion`} style={{ boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.3)' }}>
                         {/* NAME */}
                         <Row key={`name-${infusion.id}`}>
                             {infusion.skin_name
@@ -84,10 +89,20 @@ function InfusionTooltip({ infusion, leng, embed }) {
                             }
                         </Row>
 
-                        {/* WikiImage HERE */}
-                        {embed !== true &&
-                            <WikiImage imageUrl={imageUrl} />
-                        }
+                        {/* Check if loading */}
+                        {loading ? (
+                            <div style={{ height: '-50px' }}>
+                                <div className="flex logo-spin logo-spin-loading">
+                                    <div className="logo-div">
+                                        <img src={Dragon} alt="" className="logo-dragon logo-dragon-loading" style={{ marginTop: '23px' }} />
+                                        <img src={Cog} alt="" className="logo-cog logo-cog-loading" />
+                                    </div>
+                                </div>
+                                Loading...</div>
+                        ) : (
+                            /* WikiImage HERE */
+                            (embed !== true && <WikiImage imageUrl={imageUrl} />)
+                        )}
 
                     </Container>
 

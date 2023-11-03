@@ -6,9 +6,10 @@ import './Equipment.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 import EquipmentStats from './EquipmentStats';
+import EquipmentFashion from '../Fashion/Equipment';
 import ChatLinks from './ChatLinks';
 
-function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic }) {
+function Equipment({ char, items, prof, build, slider, prefixSlider, fashionSlider, powerCore, relic, selectedEqTab }) {
     // console.log('items', items)
     const [isLoading, setIsLoading] = useState(true);
 
@@ -33,9 +34,16 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                 </div>
             ) : (
                 <>
-                    {prefixSlider
+                    {prefixSlider || fashionSlider
                         ? (
-                            <EquipmentStats items={items} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
+                            <>
+                                {prefixSlider && (
+                                    <EquipmentStats items={items} prof={prof} relic={relic ? relic[0] : ''} powerCore={powerCore ? powerCore[0] : ''} />
+                                )}
+                                {fashionSlider && (
+                                    <EquipmentFashion key={selectedEqTab?.tab + selectedEqTab?.name} items={items} char={char} slider={slider} />
+                                )}
+                            </>
                         ) : (
                             <>
                                 <Container className="equipment-box">
@@ -83,14 +91,14 @@ function Equipment({ items, prof, slider, build, prefixSlider, powerCore, relic 
                                                 <ItemTooltip item={items.filter(x => x.slot === 'Accessory1').length == 2 ? items.find(x => x.slot === 'Accessory1') : items.find(x => x.slot === 'Accessory2')} gear='Accessory2' slider={slider} />
                                             </Col>
                                             <Col className='flex' style={{ marginBottom: '12px' }}>
-                                                <ItemTooltip item={items.find(x => x.slot === 'Amulet')}gear='Amulet' slider={slider} />
-                                                <ItemTooltip item={items.find(x => x.slot === 'Ring1')}gear='Ring1' slider={slider} />
-                                                <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')}gear='Ring2' slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Amulet')} gear='Amulet' slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'Ring1')} gear='Ring1' slider={slider} />
+                                                <ItemTooltip item={items.filter(x => x.slot === 'Ring1').length == 2 ? items.find(x => x.slot === 'Ring1') : items.find(x => x.slot === 'Ring2')} gear='Ring2' slider={slider} />
                                             </Col>
                                             <Col className='flex' >
-                                                <ItemTooltip item={items.find(x => x.slot === 'HelmAquatic')}gear='HelmAquatic' slider={slider} />
-                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticA')}gear='WeaponAquatic' slider={slider} />
-                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticB')}gear='WeaponAquatic' slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'HelmAquatic')} gear='HelmAquatic' slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticA')} gear='WeaponAquatic' slider={slider} />
+                                                <ItemTooltip item={items.find(x => x.slot === 'WeaponAquaticB')} gear='WeaponAquatic' slider={slider} />
                                             </Col>
                                         </Col>
                                     </>

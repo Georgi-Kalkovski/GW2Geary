@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Equipment from './Equipment';
-import EquipmentStats from './EquipmentStats';
 import fetchData from '../../fetchData';
-import mouseClick from '.././mouse-click.svg';
+import InfusionsName from '../Fashion/InfusionsName';
 
 const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +20,6 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
     const storedValue = localStorage.getItem('isFashionOn');
     return storedValue !== null ? JSON.parse(storedValue) : false;
   });
-  const [itemstatsOutput, setItemstatsOutput] = useState([]);
   const [relic, setRelic] = useState(null);
   const [powerCore, setPowerCore] = useState(null);
   const [selectedEqTab, setSelectedEqTab] = useState(() => {
@@ -48,20 +46,28 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
     localStorage.setItem('isSliderOn', JSON.stringify(isSliderOn));
   }, [isSliderOn]);
 
-  const togglePrefixes = () => setIsPrefixesOn(!isPrefixesOn);
-  useEffect(() => {
-    localStorage.setItem('isPrefixesOn', JSON.stringify(isPrefixesOn));
-  }, [isPrefixesOn]);
+  const togglePrefixes = () => {
+    if (isPrefixesOn) {
+      setIsPrefixesOn(false);
+    } else {
+      setIsPrefixesOn(true);
+    }
+    setIsFashionOn(false);
+  };
 
   const toggleFashion = () => {
-    setIsFashionOn(!isFashionOn);
-    window.location.reload();
+    if (isFashionOn) {
+      setIsFashionOn(false);
+    }else {
+      setIsFashionOn(true);
+    }
+    setIsPrefixesOn(false);
   };
 
   useEffect(() => {
+    localStorage.setItem('isPrefixesOn', JSON.stringify(isPrefixesOn));
     localStorage.setItem('isFashionOn', JSON.stringify(isFashionOn));
-  }, [isFashionOn]);
-
+  }, [isPrefixesOn, isFashionOn]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -149,7 +155,17 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
             ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
           ] : '',
           itemstats: fetchedItemstats,
-          powerCore: fetchedItems.find(item => item.type === 'PowerCore')
+          powerCore: fetchedItems.find(item => item.type === 'PowerCore'),
+          infusions: fetchedInfusions ? (item.infusions
+            ?? char?.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
+            ?? []
+          ).map(infusionId => {
+            const fetchedInfusion = fetchedInfusions.find(fetchedInfusion => fetchedInfusion.id === infusionId);
+            if (fetchedInfusion && InfusionsName(fetchedInfusion.name)) {
+              return fetchedInfusion;
+            }
+            return null; // or handle non-matching cases as needed
+          }).filter(infusion => infusion !== null) : [],
         }));
 
         setMergedItems(mergingItems);
@@ -157,30 +173,18 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         console.log(error)
       }
     })();
-  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs, itemstatsOutput]);
+  }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs]);
 
   const {
-    getArrowProps: getDropdownArrowProps,
-    getTooltipProps: getDropdownTooltipProps,
-    setTooltipRef: setDropdownTooltipRef,
     setTriggerRef: setDropdownTriggerRef,
-    visible: dropdownVisible,
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
   const {
-    getArrowProps: getSwitchArrowProps,
-    getTooltipProps: getSwitchTooltipProps,
-    setTooltipRef: setSwitchTooltipRef,
     setTriggerRef: setSwitchTriggerRef,
-    visible: switchVisible,
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
   const {
-    getArrowProps: getSwitch2ArrowProps,
-    getTooltipProps: getSwitch2TooltipProps,
-    setTooltipRef: setSwitch2TooltipRef,
     setTriggerRef: setSwitch2TriggerRef,
-    visible: switch2Visible,
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
 
   return (
@@ -193,19 +197,6 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           ref={setDropdownTriggerRef}>
           {selectedEqTab && selectedEqTab.name ? selectedEqTab.name : `Equipment ${selectedEqTab.tab}`}
         </button>
-        {/* {dropdownVisible && (
-          <div
-            ref={setDropdownTooltipRef}
-            {...getDropdownTooltipProps({ className: 'tooltip-container equip-tooltip dropdown-popup' })}
-          >
-            <div>
-              <div>
-                <img className='mouse-click' src={mouseClick} alt="" /> <span className='yellow-popup'>Click</span> to choose <span className='yellow-popup'>Equipment</span>
-              </div>
-            </div>
-            <div {...getDropdownArrowProps({ className: 'tooltip-arrow' })} />
-          </div>
-        )} */}
         <ul
           className={`dropdown-menu ${char?.profession?.toLowerCase()}-lightning-border transition-hover-search ${isOpen ? 'open' : ''}`}
           style={{ marginLeft: '10px' }}>
@@ -269,8 +260,10 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
       </div>
       <Equipment
         key={selectedEqTab?.tab + selectedEqTab?.name}
+        selectedEqTab={selectedEqTab}
         items={mergedItems}
         build={build}
+        char={char}
         prof={char?.profession}
         slider={isSliderOn}
         prefixSlider={isPrefixesOn}

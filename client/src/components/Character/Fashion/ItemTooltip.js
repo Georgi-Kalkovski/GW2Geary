@@ -5,11 +5,13 @@ import Link from '../link.svg';
 import WikiImage from './WikiImage';
 import axios from 'axios';
 import { gearIcons } from '../../icons';
+import Cog from '../../../cog.svg';
+import Dragon from '../../../dragon.svg';
 
-function ItemTooltip({ char, auraCounter, item, gear, embed }) {
+function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
     // console.log('item ', item)
-
     const [imageUrl, setImageUrl] = useState(null);
+    const [loading, setLoading] = useState(true);
     let weight = '';
 
     const professionWeights = {
@@ -40,6 +42,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
     weight = professionWeights[char?.profession.toLowerCase()] || '';
     const race = char?.race.toLowerCase();
     const gender = char?.gender.toLowerCase();
+
     useEffect(() => {
         const fetchWikiImage = async (title) => {
             if (title) {
@@ -58,7 +61,9 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                     if (title === "Prismatic Champion's Regalia") { setImageUrl('https://wiki.guildwars2.com/images/8/87/Prismatic_Champion%27s_Regalia.gif') }
                     if (title === "Transcendence") { setImageUrl('https://wiki.guildwars2.com/images/a/a1/Transcendence.gif') }
                     if (title === "Conflux") { setImageUrl('https://wiki.guildwars2.com/images/7/73/Conflux.jpg') }
+                    setLoading(false);
                 } else {
+                    setLoading(true);
                     try {
                         // Armor Check
                         if (
@@ -69,6 +74,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                             gear === 'Leggings' ||
                             gear === 'Boots'
                         ) {
+                            title = title.replace(/ of the .*/, '');
                             const titleSkin = title + ' Skin';
                             const titleNoWeight = title.replace(/Heavy |Medium |Light /g, '');
                             const titleArmor = title.split(' ').length > 1 ? title.replace(/ [^ ]*$/, ' armor') : 'armor';
@@ -76,12 +82,6 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                             const removeFirstFromTitleArmor = removeFirstFromTitle.split(' ').length > 1 ? removeFirstFromTitle.replace(/ [^ ]*$/, ' armor') : 'armor';
 
                             const gearNames = [
-                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front in combat`,
-                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front`,
-                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front in combat`,
-                                `${removeFirstFromTitleArmor} ${race} ${gender} front`,
-                                `${removeFirstFromTitleArmor}`,
-                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front`,
                                 `${titleArmor} (${weight}) ${race} ${gender} front in combat`,
                                 `${titleArmor} (${weight}) ${race} ${gender} front`,
                                 `${titleArmor} ${race} ${gender} front in combat`,
@@ -90,7 +90,15 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                 `${titleSkin} ${race} ${gender}`,
                                 `${titleSkin}`,
                                 `${title}`,
-                                `${titleNoWeight}`
+                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front in combat`,
+                                `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front`,
+                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front in combat`,
+                                `${removeFirstFromTitle}`,
+                                `${removeFirstFromTitleArmor} ${race} ${gender} front`,
+                                `${removeFirstFromTitleArmor}`,
+                                `${removeFirstFromTitle} (${weight}) ${race} ${gender} front`,
+                                `${titleNoWeight}`,
+                                `${prefixes[0]} ${title}`
                             ];
 
                             for (let i = 0; i < prefixes.length; i++) {
@@ -122,6 +130,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
 
                                 if (Object.keys(jpgPage)[0] !== '-1') {
                                     setImageUrl(Object.values(jpgPage)[0].imageinfo[0].url);
+                                    setLoading(false);
                                     itemFound = true;
                                 }
                             } if (itemFound === false) {
@@ -139,7 +148,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                 const gearPage = gearFound.data.query.pages;
                                 if (Object.keys(gearPage)[0] !== '-1') {
                                     const gearImages = Object.values(gearFound.data.query.pages)[0].images;
-                                    console.log(gearImages[1]?.title.replace('.png', '.jpg'))
+                                    // console.log(gearImages[1]?.title.replace('.png', '.jpg'))
                                     const imagesNew = gearImages[1]?.title.replace('.png', '.jpg')
                                     const imageUrl = await axios.get('https://wiki.guildwars2.com/api.php', {
                                         params: {
@@ -152,7 +161,8 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                                             origin: '*'
                                         }
                                     });
-                                    setImageUrl(Object.values(imageUrl.data.query.pages)[0].imageinfo[0].url)
+                                    setImageUrl(Object.values(imageUrl.data.query.pages)[0].imageinfo[0].url);
+                                    setLoading(false);
                                 }
                             }
                         }
@@ -172,22 +182,25 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                             const gearPage = gearFound.data.query.pages;
                             if (Object.keys(gearPage)[0] !== '-1') {
                                 const gearImages = Object.values(gearFound.data.query.pages)[0].images;
+                                // console.log(title, gearImages)
                                 const imagesNew = gearImages.filter(i =>
-                                    !i.title.includes('.png')
+                                    !i.title.includes('.png'),
                                 );
-                                const filteredImageFile = imagesNew[0].title;
+
+                                const filteredImageFile = imagesNew?.find(i => i.title === 'File:' + title + '.jpg')?.title;
                                 const imageUrl = await axios.get('https://wiki.guildwars2.com/api.php', {
                                     params: {
                                         action: 'query',
                                         format: 'json',
                                         prop: 'imageinfo',
                                         iiprop: 'url',
-                                        titles: filteredImageFile,
+                                        titles: filteredImageFile || imagesNew[0].title,
                                         pithumbsize: 300,
                                         origin: '*'
                                     }
                                 });
                                 setImageUrl(Object.values(imageUrl.data.query.pages)[0].imageinfo[0].url)
+                                setLoading(false);
                             }
                         }
                     } catch (error) {
@@ -197,8 +210,8 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
             }
         };
 
-        fetchWikiImage(item?.skin_name ? item?.skin_name : item?.name);
-    }, [auraCounter, char, item?.skin_name, item?.name]);
+        fetchWikiImage(item?.skin_name && slider === true ? item?.skin_name : item?.name);
+    }, [auraCounter, char, item?.skin_name, item?.name, slider]);
 
     const {
         getArrowProps,
@@ -206,20 +219,26 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip(window.innerWidth < 900 ? { placement: 'top' } : { placement: 'right' });
+    } = usePopperTooltip(window.innerWidth < 900 ? { placement: 'auto' } : { placement: 'right' });
 
     const [showWikiButton, setShowWikiButton] = useState(false);
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-
-        window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+        if (slider === false) {
+            window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+        } else {
+            window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name}`, '_blank');
+        }
     };
 
     const handleButtonSkinClick = (event) => {
         event.preventDefault();
-
-        window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name}`, '_blank');
+        if (slider === true) {
+            window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name}`, '_blank');
+        } else {
+            window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+        }
     };
 
     const handleLeftClick = (event) => {
@@ -245,10 +264,20 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
 
                         <br />
 
-                        {/* WikiImage HERE */}
-                        {embed !== true &&
-                            <WikiImage imageUrl={imageUrl} />
-                        }
+                        {/* Check if loading */}
+                        {loading ? (
+                            <div style={{ height: '-50px' }}>
+                                <div className="flex logo-spin logo-spin-loading">
+                                    <div className="logo-div">
+                                        <img src={Dragon} alt="" className="logo-dragon logo-dragon-loading" style={{ marginTop: '23px' }} />
+                                        <img src={Cog} alt="" className="logo-cog logo-cog-loading" />
+                                    </div>
+                                </div>
+                                Loading...</div>
+                        ) : (
+                            /* WikiImage HERE */
+                            (embed !== true && <WikiImage imageUrl={imageUrl} />)
+                        )}
 
                         {/* WEIGHT & TYPE */}
                         <div>{item.details ? item.details.weight_class : ''} {item.details ? (item.details.type ? item.details.type : item.slot) : ''}</div>
@@ -277,12 +306,20 @@ function ItemTooltip({ char, auraCounter, item, gear, embed }) {
                         </div>
                     }
                     {/* ITEM ICON */}
-                    {item.skin_icon && item.skin_name
-                        ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
-                            style={{ cursor: 'pointer' }} />
-                        : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
-                            style={{ cursor: 'pointer' }} />
+                    {embed !== true
+                        ? (item.skin_icon && item.skin_name && slider
+                            ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
+                                style={{ cursor: 'pointer' }} />
+                            : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
+                                style={{ cursor: 'pointer' }} />
+                        ) : (item.skin_icon && item.skin_name
+                            ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
+                                style={{ cursor: 'pointer' }} />
+                            : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
+                                style={{ cursor: 'pointer' }} />)
+
                     }
+
                 </div>
                 : (gearIcons[gear]
                     ? <img className="item-box box-gray" style={{ width: '50px', height: '50px' }} src={gearIcons[gear]} alt={gear} />

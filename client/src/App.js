@@ -18,7 +18,6 @@ import About from "./components/About";
 import Contacts from "./components/Contacts";
 import News from "./components/News";
 import Support from "./components/Support";
-import CharacterFashion from "./components/CharacterFashion";
 import ErrorBoundary from "./ErrorBoundary";
 
 import Cog from './cog.svg';
@@ -29,8 +28,6 @@ import ErrorPage from "./components/ErrorPage";
 const App = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
   const [newUsername, setNewUsername] = useState("");
-  const storedFashion = localStorage.getItem('isFashionOn');
-  const isFashionOn = storedFashion === 'true';
   const { pathname } = useLocation();
   const isEmbed = matchPath('/f/*', pathname);
 
@@ -120,17 +117,8 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Search />} />
               <Route path="/a/:name" element={<ErrorBoundary><Account /></ErrorBoundary>} />
-              {isFashionOn ? (
-                <>
-                  <Route path="/c/:name" element={<ErrorBoundary><CharacterFashion /></ErrorBoundary>} />
-                  <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><CharacterFashion /></ErrorBoundary>} />
-                </>
-              ) : (
-                <>
-                  <Route path="/c/:name" element={<ErrorBoundary><Character /></ErrorBoundary>} />
-                  <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><Character /></ErrorBoundary>} />
-                </>
-              )}
+              <Route path="/c/:name" element={<ErrorBoundary><Character /></ErrorBoundary>} />
+              <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><Character /></ErrorBoundary>} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />

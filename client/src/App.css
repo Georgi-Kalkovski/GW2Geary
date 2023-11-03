@@ -223,7 +223,22 @@ label {
   filter: drop-shadow(1.5px 2px 0px rgba(0, 0, 0, 1));
 }
 
+.logo-dragon-loading,
+.logo-cog-loading {
+  top: 0px;
+}
+
 .logo-spin:hover .logo-cog {
+  animation: spin 15s linear infinite;
+  animation-iteration-count: infinite;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.logo-spin-loading {
+  height: 50px;
+}
+
+.logo-spin-loading .logo-cog {
   animation: spin 15s linear infinite;
   animation-iteration-count: infinite;
   transform: translate(-50%, -50%) rotate(0deg);

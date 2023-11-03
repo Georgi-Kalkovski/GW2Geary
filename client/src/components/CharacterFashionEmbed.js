@@ -16,7 +16,6 @@ function CharacterFashionEmbed() {
     const currentUser = AuthService.getCurrentUser();
     const [character, setCharacter] = useState(null);
     const [accFound, setAccFound] = useState(null);
-    const [isPrivate, setIsPrivate] = useState(false)
     const [eqUp, setEqUp] = useState(searchParams.get('eq'));
     let navigate = useNavigate();
 
@@ -38,7 +37,6 @@ function CharacterFashionEmbed() {
                     if (!currentUser || !currentUser.apiKeys.find(api => api.accountName === account.accountName)) {
                         navigate("/");
                     }
-                    setIsPrivate(true);
                 } 
                 if (account) {
                     const charFound = await fetchData('characters', formattedName);
@@ -64,11 +62,6 @@ function CharacterFashionEmbed() {
                 </div>
             </Container>
             : <Container className='center-items'>
-                {/* Private Character */}
-                {isPrivate === true
-                    ? <div className="flex center" style={{ color: '#f16565', fontSize: '25px', paddingBottom: '20px', marginTop: '-15px' }}>Only you can see this character !</div>
-                    : ''
-                }
                 <div style={{ margin: '-75px 0 -5px -36px' }}>
                     <EquipmentDropdown char={character} initial={eqUp} setEquip={setEqUp} embed={true}/>
                 </div>

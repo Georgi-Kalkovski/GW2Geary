@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import Link from '../link.svg';
@@ -42,7 +42,7 @@ function ItemTooltip({ item, gear, slider }) {
             {visible && (
                 <div
                     ref={setTooltipRef}
-                    {...getTooltipProps({ className: 'remove-margin-right tooltip-container pointer' })}
+                    {...getTooltipProps({ className: 'tooltip-container pointer' })}
                 >
                     <Container className={`item-popup border-${item.rarity ? item.rarity.toLowerCase() : 'unknown'}`}>
                         {/* NAME */}
