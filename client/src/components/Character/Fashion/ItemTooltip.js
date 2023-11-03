@@ -74,10 +74,10 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                             gear === 'Leggings' ||
                             gear === 'Boots'
                         ) {
-                            title = title.replace(/ of the .*/, '');
-                            const titleSkin = title + ' Skin';
-                            const titleNoWeight = title.replace(/Heavy |Medium |Light /g, '');
-                            const titleArmor = title.split(' ').length > 1 ? title.replace(/ [^ ]*$/, ' armor') : 'armor';
+                            const newTitle = title.replace(/ of the .*/, '');
+                            const titleSkin = newTitle + ' Skin';
+                            const titleNoWeight = newTitle.replace(/Heavy |Medium |Light /g, '');
+                            const titleArmor = newTitle.split(' ').length > 1 ? newTitle.replace(/ [^ ]*$/, ' armor') : 'armor';
                             const removeFirstFromTitle = title.replace(/^(\S+\s+)/, "");
                             const removeFirstFromTitleArmor = removeFirstFromTitle.split(' ').length > 1 ? removeFirstFromTitle.replace(/ [^ ]*$/, ' armor') : 'armor';
 
@@ -89,6 +89,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                                 `${titleArmor}`,
                                 `${titleSkin} ${race} ${gender}`,
                                 `${titleSkin}`,
+                                `${newTitle}`,
                                 `${title}`,
                                 `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front in combat`,
                                 `${removeFirstFromTitleArmor} (${weight}) ${race} ${gender} front`,
@@ -98,11 +99,11 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                                 `${removeFirstFromTitleArmor}`,
                                 `${removeFirstFromTitle} (${weight}) ${race} ${gender} front`,
                                 `${titleNoWeight}`,
-                                `${prefixes[0]} ${title}`
+                                `${prefixes[0]} ${newTitle}`
                             ];
 
                             for (let i = 0; i < prefixes.length; i++) {
-                                gearNames.push(`${prefixes[i]} ${title}`);
+                                gearNames.push(`${prefixes[i]} ${newTitle}`);
                             }
 
                             // console.log(title, gearNames);
