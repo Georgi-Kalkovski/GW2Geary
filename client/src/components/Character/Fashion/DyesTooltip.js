@@ -22,7 +22,7 @@ const DyesTooltip = ({ dye, box, className }) => {
     return (
         <>
             <Col ref={setTriggerRef} >
-                <Row className={box}
+                <Row className={`${box} dye-hover`}
                     style={{
                         backgroundColor: `rgb(${dye.cloth.rgb[0]}, ${dye.cloth.rgb[1]}, ${dye.cloth.rgb[2]})`
                     }}>

@@ -130,14 +130,14 @@ function InfusionTooltip({ infusion, leng, embed }) {
                     {/* ITEM ICON */}
                     {leng > 7
                         ? (infusion.skin_icon && infusion.skin_name
-                            ? <img className={`infusion-box box-infusion`} src={infusion.skin_icon} alt={infusion.skin_icon}
+                            ? <img className={`infusion-box box-infusion item-box box-gray`} src={infusion.skin_icon} alt={infusion.skin_icon}
                                 style={{ cursor: 'pointer' }} />
-                            : <img className={`infusion-box box-infusion`} src={infusion.icon} alt={infusion.icon}
+                            : <img className={`infusion-box box-infusion item-box box-gray`} src={infusion.icon} alt={infusion.icon}
                                 style={{ cursor: 'pointer' }} />
                         ) : (infusion.skin_icon && infusion.skin_name
-                            ? <img className={`infusion-box-big box-infusion`} src={infusion.skin_icon} alt={infusion.skin_icon}
+                            ? <img className={`infusion-box-big box-infusion item-box box-gray`} src={infusion.skin_icon} alt={infusion.skin_icon}
                                 style={{ cursor: 'pointer' }} />
-                            : <img className={`infusion-box-big box-infusion`} src={infusion.icon} alt={infusion.icon}
+                            : <img className={`infusion-box-big box-infusion item-box box-gray`} src={infusion.icon} alt={infusion.icon}
                                 style={{ cursor: 'pointer' }} />)
                     }
                 </div>

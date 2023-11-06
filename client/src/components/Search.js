@@ -26,6 +26,8 @@ function Search() {
   const [accountsPage, setAccountsPage] = useState(1);
   const [charactersPage, setCharactersPage] = useState(1);
 
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+
   function getRandomSort() {
     return Math.random() - 0.5;
   }
@@ -324,7 +326,9 @@ function Search() {
             {/* Empty Search Text */}
             <SearchWelcome />
             <SearchNews />
-            <SearchCounter accounts={accounts} />
+            {currentUser && currentUser.username === 'Terter' &&
+              <SearchCounter accounts={accounts} />
+            }
             <br />
           </div>
         )

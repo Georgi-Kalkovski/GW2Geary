@@ -290,7 +290,7 @@ function ItemTooltip({ item, gear, slider }) {
                             style={{ cursor: 'pointer' }} />
                     }
                 </div>
-                : <img className="item-box box-gray" style={{ width: '50px', height: '50px' }} src={gearIcons[gear]} alt={gear} />
+                : <img className="item-box box-gray" style={{ width: '50px', height: '50px', transform: 'none', filter: 'none' }} src={gearIcons[gear]} alt={gear} />
             }
         </React.Fragment>
     );

@@ -12,18 +12,18 @@ function Dyes({ item }) {
             {nonNullDyes ? (
                 <div>
                     {nonNullDyes.length === 0 &&
-                        <div className="item-box box-gray">
+                        <div className="item-box box-gray box-gray-colors">
                         </div>
                     }
                     {nonNullDyes.length === 1 &&
-                        <div className="item-box box-gray">
+                        <div className="item-box box-gray box-gray-colors">
                             <Col className="flex">
                                 <DyesTooltip dye={nonNullDyes[0]} box={'box-big'} />
                             </Col>
                         </div>
                     }
                     {nonNullDyes.length === 2 &&
-                        <Container className="item-box box-gray flex column">
+                        <Container className="item-box box-gray box-gray-colors flex column">
                             <Col className="flex">
                                 <DyesTooltip dye={nonNullDyes[0]} box={'box-long'} />
                             </Col>
@@ -33,7 +33,7 @@ function Dyes({ item }) {
                         </Container>
                     }
                     {nonNullDyes.length === 3 &&
-                        <Container className="item-box box-gray flex column">
+                        <Container className="item-box box-gray box-gray-colors flex column">
                             <Col className="flex">
                                 <DyesTooltip dye={nonNullDyes[0]} box={'box-long'} />
                             </Col>
@@ -44,7 +44,7 @@ function Dyes({ item }) {
                         </Container>
                     }
                     {nonNullDyes.length === 4 &&
-                        <Container className="item-box box-gray flex column">
+                        <Container className="item-box box-gray box-gray-colors flex column">
                             <Col className="flex">
                                 <DyesTooltip dye={nonNullDyes[0]} box={'box'} />
                                 <DyesTooltip dye={nonNullDyes[1]} box={'box'} />

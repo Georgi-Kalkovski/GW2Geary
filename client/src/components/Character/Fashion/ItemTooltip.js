@@ -323,7 +323,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
 
                 </div>
                 : (gearIcons[gear]
-                    ? <img className="item-box box-gray" style={{ width: '50px', height: '50px' }} src={gearIcons[gear]} alt={gear} />
+                    ? <img className="item-box box-gray" style={{ width: '50px', height: '50px', transform: 'none', filter: 'none' }} src={gearIcons[gear]} alt={gear} />
                     : ''
                 )
             }

@@ -138,6 +138,7 @@
 .tgl-skewed:checked+.tgl-btn:active:after {
     left: 10%;
 }
+
 /* NEW SWITCH STOP */
 
 .item-box {
@@ -153,6 +154,16 @@
     transform: scale(1.1);
     filter: brightness(1.2);
 }
+
+.dye-hover {
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.dye-hover:hover {
+    transform: scale(1.2);
+    filter: brightness(1);
+}
+
 
 .equipment-col-1 {
     margin-left: 0;
@@ -172,7 +183,7 @@
 
 .item-popup-fashion {
     width: 140px;
-    z-index:9999!important;
+    z-index: 9999 !important;
 }
 
 .item-name {
@@ -257,7 +268,7 @@
     border: 3px solid gray;
 }
 
-.box-gray:hover {
+.box-gray-colors:hover {
     transform: none;
     filter: none;
 }
