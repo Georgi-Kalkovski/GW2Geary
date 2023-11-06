@@ -141,6 +141,15 @@
 
 /* NEW SWITCH STOP */
 
+.box-hover {
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.box-hover:hover {
+    transform: scale(1.03);
+    filter: brightness(1.2);
+}
+
 .item-box {
     display: flex;
     margin: 3px;

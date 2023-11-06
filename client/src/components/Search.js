@@ -290,8 +290,8 @@ function Search() {
                   {displayedAccounts.length > 0 ? (
                     displayedAccounts.map((account, index) => (
                       <div key={`${account.accountName}-div-${index}`} className="characters-boxes">
-                        <Link className="accounts-link" to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
-                          <Container className="accounts-box" key={`${account.accountName}-container-${index}`}>
+                        <Link className="accounts-link " to={`/a/${account.accountName.replace(/\s/g, '_')}`}>
+                          <Container className="accounts-box box-hover" key={`${account.accountName}-container-${index}`}>
                             <Col>
                               <Row className="center-class accounts-hover">
                                 <div className="accounts-name">{account.accountName}</div>

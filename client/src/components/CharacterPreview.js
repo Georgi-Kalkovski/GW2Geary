@@ -33,7 +33,7 @@ function CharacterPreview({ character, apiKey }) {
     });
 
     return (
-        <Container key={`${character.name}-box`} className="character">
+        <Container key={`${character.name}-box`} className="character box-hover">
             {/* Checkbox */}
             {apiKey && character && (<>
                 <div className='character-checkbox'>
