@@ -38,6 +38,29 @@ function Share({ fashion, prof, isOpen, setIsOpen }) {
     const [buttonColor, setButtonColor] = useState('');
     const [buttonColor2, setButtonColor2] = useState('');
     const shareUrl = window.location.href;
+    const queryParams = {
+        w: localStorage.getItem('w'),
+        acc: localStorage.getItem('acc'),
+        lvl: localStorage.getItem('lvl'),
+        prof: localStorage.getItem('prof'),
+        race: localStorage.getItem('race'),
+        gen: localStorage.getItem('gen'),
+        frac: localStorage.getItem('frac'),
+        wvw: localStorage.getItem('wvw'),
+        spec: localStorage.getItem('spec'),
+        mp: localStorage.getItem('mp'),
+    };
+
+    const urlSearchParams = new URLSearchParams();
+
+    for (const [param, value] of Object.entries(queryParams)) {
+        if (value !== null) {
+            urlSearchParams.append(param, value);
+        }
+    }
+
+    const longUrl = shareUrl.split('?')[0] + "?" + urlSearchParams.toString();
+
     const [showSavedMessage, setShowSavedMessage] = useState(false);
     const [showSavedMessage2, setShowSavedMessage2] = useState(false);
     const searchMenuRef = useRef(null);
@@ -61,7 +84,7 @@ function Share({ fashion, prof, isOpen, setIsOpen }) {
     };
 
     const copyText2 = () => {
-        navigator?.clipboard?.writeText(window.location.href);
+        navigator?.clipboard?.writeText(longUrl);
         setButtonColor2('darkgreen');
         setShowSavedMessage2(true);
         setTimeout(() => {

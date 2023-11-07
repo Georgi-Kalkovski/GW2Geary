@@ -14,7 +14,6 @@ import ArrowSvg from './arrow.svg'
 
 const Account = () => {
   const { name } = useParams();
-  let [searchParams, setSearchParams] = useSearchParams();
   const currentUser = AuthService.getCurrentUser();
   const formattedName = name.replaceAll('_', ' ');
   const [characters, setCharacters] = useState(null);
@@ -32,18 +31,24 @@ const Account = () => {
   };
 
   useEffect(() => {
-    let params = {};
     if (world !== null) {
-      params.w = world;
+      localStorage.setItem('w', world);
     }
+
     if (accFound) {
-      params.frac = accFound.fractal_level;
-      params.wvw = accFound.wvw_rank;
+      localStorage.removeItem('acc');
+      localStorage.removeItem('lvl');
+      localStorage.removeItem('prof');
+      localStorage.removeItem('race');
+      localStorage.removeItem('gen');
+      localStorage.removeItem('frac', accFound.fractal_level);
+      localStorage.setItem('wvw', accFound.wvw_rank);
     }
+    localStorage.removeItem('spec');
+
     if (mastery !== null) {
-      params.mp = mastery;
+      localStorage.setItem('mp', mastery);
     }
-    setSearchParams(params);
   }, [mastery, world, accFound]);
 
   useEffect(() => {

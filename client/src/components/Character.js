@@ -42,22 +42,25 @@ function Character() {
             params.bld = bldUp;
         }
         if (world !== null) {
-            params.w = world;
+            localStorage.setItem('w', world);
         }
+
         if (accFound && charFound) {
-            params.acc = accFound.name;
-            params.lvl = charFound.level;
-            params.prof = charFound.profession;
-            params.race = charFound.race;
-            params.gen = charFound.gender;
-            params.frac = accFound.fractal_level;
-            params.wvw = accFound.wvw_rank;
+            localStorage.setItem('acc', accFound.name);
+            localStorage.setItem('lvl', charFound.level);
+            localStorage.setItem('prof', charFound.profession);
+            localStorage.setItem('race', charFound.race);
+            localStorage.setItem('gen', charFound.gender);
+            localStorage.setItem('frac', accFound.fractal_level);
+            localStorage.setItem('wvw', accFound.wvw_rank);
         }
+
         if (specUp !== null) {
-            params.spec = specUp
+            localStorage.setItem('spec', specUp);
         }
+
         if (mastery !== null) {
-            params.mp = mastery;
+            localStorage.setItem('mp', mastery);
         }
         setSearchParams(params);
         setShareLink(window.location.href);
