@@ -41,7 +41,7 @@ const Profile = () => {
           <div className="flex center">
             <button className={`basic-button ${showProfileInfo ? 'active' : ''}`} onClick={toggleProfileInfo}>Profile Info</button>
             <button className={`basic-button ${showProfileApis ? 'active' : ''}`} onClick={toggleProfileApis}>Profile Apis</button>
-            <button className={`basic-button ${showProfileStorage ? 'active' : ''}`} onClick={toggleProfileStorage}>Profile Storage</button>
+            {/* <button className={`basic-button ${showProfileStorage ? 'active' : ''}`} onClick={toggleProfileStorage}>Profile Storage</button> */}
           </div>
           <div>
             {showProfileInfo && (

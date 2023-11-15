@@ -69,13 +69,13 @@ function Build({ setBuild, setSpec, tab, char }) {
                 : <Container className='spec-box logo-build-width'>
                     {specializations && tab.skills && tab.aquatic_skills && (
                         <div style={{ position: 'relative' }}>
-                            {currentUser?.apiKeys?.find(key => key.accountName === localStorage.getItem('acc')) &&
+                            {/* {currentUser?.apiKeys?.find(key => key.accountName === localStorage.getItem('acc')) &&
                                 <div className='flex column' style={{ position: 'absolute', right: '10px', top: '-50px' }}>
                                     <div>
                                         <BuildSaveButton tab={tab} char={char} currentUser={currentUser} spec={specializations[2].specialization.name}/>
                                     </div>
                                 </div>
-                            }
+                            } */}
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
                             <Traits setTraits={() => setTraits} specializations={specializations} prof={tab.profession} />
                             <Template buildInput={tab} />
