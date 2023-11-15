@@ -47,7 +47,6 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
         };
     }, [wrapperRef]);
 
-
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
@@ -76,7 +75,6 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-
         window.open(`https://wiki.guildwars2.com/wiki/${spec !== null && specIcons.hasOwnProperty(spec.toLowerCase())
             ? spec
             : char.profession}`,
@@ -95,7 +93,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
                 <button
                     className={`class-hover ${char.profession.toLowerCase()}-border dropdown-button`}
                     style={{ marginLeft: '29px' }}
-                    onClick={toggleMenu} 
+                    onClick={toggleMenu}
                     ref={setTriggerRef}
                 >
                     {selectedBldTab && selectedBldTab.build.name ? selectedBldTab.build.name : `Build ${selectedBldTab.tab}`}
@@ -139,7 +137,7 @@ function BuildDropdown({ setSelectedBuild, char, setBuildState, initial, setElit
             </div>
 
             {/* Build Content */}
-            {<Build tab={selectedBldTab.build} setBuild={() => setBuild} setSpec={setSpec} key={selectedBldTab.tab} />}
+            {<Build tab={selectedBldTab.build} setBuild={() => setBuild} setSpec={setSpec} key={selectedBldTab.tab} char={char}/>}
         </div>
     );
 }

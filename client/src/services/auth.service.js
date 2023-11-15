@@ -155,6 +155,58 @@ const updateCharacterStatus = (apiKeyId, characterId, active) => {
   );
 };
 
+// Set Build Service
+const setBuild = async (name) => {
+  try {
+    const currentUser = getCurrentUser();
+    const { id: userId, accessToken } = currentUser;
+
+    const response = await axios.put(
+      `${API_URL}users/c/${name}`,
+      {
+        owner: userId,
+        name,
+        profession,
+        spec,
+        skills,
+        aquatic_skills,
+        specializations,
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error setting build:', error);
+    throw error;
+  }
+};
+
+// Get Build Service
+const getBuild = (name, id) => {
+  return axios.get(API_URL + `users/blds/${name}/${id}`);
+};
+
+// Delete Stored Build Service
+const deleteBuild = async (storedBuildId) => {
+  const currentUser = getCurrentUser();
+  try {
+    const response = await axios.delete(API_URL + `/storedBuilds/${storedBuildId}`, {
+      headers: {
+        'Authorization': `Bearer ${currentUser.accessToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error('Error deleting stored build');
+  }
+};
+
 const AuthService = {
   register,
   login,
@@ -173,6 +225,9 @@ const AuthService = {
   updateApiKeyStatus,
   deleteApiKey,
   updateCharacterStatus,
+  setBuild,
+  getBuild,
+  deleteBuild,
 };
 
 export default AuthService;

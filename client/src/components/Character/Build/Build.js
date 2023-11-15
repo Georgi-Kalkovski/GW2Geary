@@ -7,10 +7,12 @@ import fetchData from '../../fetchData';
 import './Build.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
+import BuildSaveButton from './BuildSaveButton';
+import AuthService from '../../../services/auth.service';
 
-function Build({ setBuild, setSpec, tab }) {
+function Build({ setBuild, setSpec, tab, char }) {
+    const currentUser = AuthService.getCurrentUser();
     const [isLoading, setIsLoading] = useState(true);
-
     const [specializations, setSpecializations] = useState([]);
 
     const [traits, setTraits] = useState([]);
@@ -66,13 +68,20 @@ function Build({ setBuild, setSpec, tab }) {
                 </div>
                 : <Container className='spec-box logo-build-width'>
                     {specializations && tab.skills && tab.aquatic_skills && (
-                        <>
+                        <div style={{ position: 'relative' }}>
+                            {currentUser?.apiKeys?.find(key => key.accountName === localStorage.getItem('acc')) &&
+                                <div className='flex column' style={{ position: 'absolute', right: '10px', top: '-50px' }}>
+                                    <div>
+                                        <BuildSaveButton tab={tab} char={char} currentUser={currentUser} spec={specializations[2].specialization.name}/>
+                                    </div>
+                                </div>
+                            }
                             <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
                             <Traits setTraits={() => setTraits} specializations={specializations} prof={tab.profession} />
                             <Template buildInput={tab} />
-                        </>
+                        </div>
                     )}
-                </Container>
+                </Container >
         }
     </>
     );

@@ -24,6 +24,7 @@ import Cog from './cog.svg';
 import Dragon from './dragon.svg';
 import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 import ErrorPage from "./components/ErrorPage";
+import BuildSaved from "./components/Character/Build/BuildSaved";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -119,6 +120,7 @@ const App = () => {
               <Route path="/a/:name" element={<ErrorBoundary><Account /></ErrorBoundary>} />
               <Route path="/c/:name" element={<ErrorBoundary><Character /></ErrorBoundary>} />
               <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><Character /></ErrorBoundary>} />
+              <Route path="/blds/:name/:id" element={<ErrorBoundary><BuildSaved /></ErrorBoundary>} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />

@@ -306,7 +306,8 @@ input:focus:-webkit-autofill {
   background-color: #aa0404 !important;
 }
 
-.profile-apis-first-child:hover {
+.profile-apis-first-child:hover,
+.profile-storage-first-child:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -315,6 +316,13 @@ input:focus:-webkit-autofill {
   border-bottom: 2px dashed;
   margin-top: 2px;
   filter: brightness(3);
+  transition: filter 0.2s;
+}
+
+.profile-storage-first-child:hover {
+  border-bottom: 2px dashed;
+  margin-top: 2px;
+  filter: brightness(1.3);
   transition: filter 0.2s;
 }
 
@@ -691,6 +699,23 @@ body.light-theme {
   background-color: #e7e6e6;
   color: #35363a;
 }
+
+.game-button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  width: 30px;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.game-button:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
 
 body.light-theme .app-nav,
 body.light-theme .home-empty-search-box,

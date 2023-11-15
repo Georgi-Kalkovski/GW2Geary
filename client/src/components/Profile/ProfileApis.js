@@ -56,9 +56,9 @@ function ProfileApis({ currentUser, AuthService }) {
                         />
 
                         {/* Apis */}
-                        <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
-                            {apiKeys &&
-                                apiKeys.map((apiKey) => (
+                        {apiKeys.length > 0 ?
+                            <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
+                                {apiKeys.map((apiKey) => (
                                     <ProfileApiInfo
                                         key={apiKey._id}
                                         apiKey={apiKey}
@@ -67,8 +67,10 @@ function ProfileApis({ currentUser, AuthService }) {
                                         setApiKeys={setApiKeys}
                                     />
                                 ))
-                            }
-                        </div>
+                                }
+                            </div>
+                            : <div className="flex center">No API Keys Stored</div>
+                        }
                     </div>
                 </div>
 

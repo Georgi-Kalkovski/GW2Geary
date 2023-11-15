@@ -7,7 +7,7 @@ import downArrow from '../down-arrow.svg';
 function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     const [expandedIndexes, setExpandedIndexes] = useState([]);
     const [isVisible, setIsVisible] = useState(null);
-    const [deleteButtonState, setDeleteButtonState] = useState("Delete"); // Add state for the button text
+    const [deleteButtonState, setDeleteButtonState] = useState("Delete");
 
     const isExpanded = (apiKey) => expandedIndexes.includes(apiKey?._id);
 
@@ -32,7 +32,6 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     }, [setApiKeys, AuthService]);
 
     const deleteApiKey = useCallback((apiKeyId) => {
-        // Change the button text and handle delete logic
         if (deleteButtonState === "Delete") {
             setDeleteButtonState("Confirm");
         } else {
@@ -87,8 +86,8 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                     {/* Checkbox */}
                     <label className="custom-checkbox" ref={setTriggerRef}>
                         <input
-                            class="tgl tgl-skewed api-checkbox"
-                            id="cb3"
+                            className="tgl tgl-skewed api-checkbox"
+                            id={"cb3" + apiKey._id}
                             type="checkbox"
                             defaultChecked={apiKey.active}
                             onChange={(e) => updateApiKeyStatus(apiKey._id, e.target.checked)}
@@ -96,7 +95,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                             name={`checkbox-${apiKey._id}`}
 
                         />
-                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" ref={setTriggerRef}></span>
+                        <span className={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" ref={setTriggerRef}></span>
                     </label>
                     {visible && (
                         <div

@@ -2,6 +2,7 @@ const config = require("../config/auth.config");
 const axios = require('axios');
 const db = require("../models");
 const User = db.user;
+const BldSave = db.bldsave;
 const Role = db.role;
 
 const jwt = require("jsonwebtoken");
@@ -78,6 +79,7 @@ exports.signin = async (req, res) => {
       roles: authorities,
       accessToken: token,
       apiKeys: user.apiKeys,
+      storedBuilds: user.storedBuilds,
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -483,5 +485,71 @@ exports.updateCharacterStatus = async (req, res) => {
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
+  }
+};
+
+// Set Build
+exports.setBuild = async (req, res) => {
+  try {
+    const { owner, name, profession, spec, skills, aquatic_skills, specializations } = req.body;
+    const newBuild = new BldSave({
+      owner,
+      name,
+      profession,
+      spec,
+      skills,
+      aquatic_skills,
+      specializations,
+    });
+
+    const savedBuild = await newBuild.save();
+
+    const user = await User.findById(owner);
+    user.storedBuilds.push({ char: name, id: savedBuild._id, profession: savedBuild.profession, spec: savedBuild.spec });
+
+    await user.save();
+
+    res.status(201).json(savedBuild);
+
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Get Build
+exports.getBuild = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const { id } = req.params;
+    const build = await BldSave.findOne({ _id: id, name: name });
+    if (!build) {
+      return res.status(404).send({ message: "Build Not found." });
+    }
+
+    res.status(200).send({
+      message: "Build retrieved successfully!",
+      build: build,
+    });
+    return;
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Delete Build
+exports.deleteBuild = async (req, res) => {
+  try {
+    const { storedBuildId } = req.params;
+
+    const user = await User.findOneAndUpdate(
+      { 'storedBuilds.id': storedBuildId },
+      { $pull: { storedBuilds: { id: storedBuildId } } }
+    );
+
+    await BldSave.findOneAndDelete({ _id: storedBuildId });
+
+    return res.status(200).json({ message: 'Stored build deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };

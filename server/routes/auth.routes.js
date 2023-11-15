@@ -84,5 +84,16 @@ router.put(
 //   controller.refreshAllUserData
 // );
 
-module.exports = router;
+router.put(
+  "/users/blds/:name",
+  controller.setBuild
+);
 
+router.get(
+  "/users/blds/:name/:id",
+  controller.getBuild
+);
+
+router.delete('/storedBuilds/:storedBuildId', controller.deleteBuild);
+
+module.exports = router;

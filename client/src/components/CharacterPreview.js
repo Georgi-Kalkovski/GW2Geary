@@ -39,15 +39,15 @@ function CharacterPreview({ character, apiKey }) {
                 <div className='character-checkbox'>
                     <label className="custom-checkbox">
                         <input
-                            class="tgl tgl-skewed api-checkbox"
-                            id="cb3"
+                            className="tgl tgl-skewed api-checkbox"
+                            id={"cb3" + character.name}
                             type="checkbox"
                             defaultChecked={apiKey.active}
                             onChange={(e) => updateCharacterStatus(e.target.checked)}
                             key={`api-key-checkbox-${apiKey._id}`}
 
                         />
-                        <span class={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" ref={setTriggerRef}></span>
+                        <span className={`tgl-btn checkmark`} data-tg-off="OFF" data-tg-on="ON" ref={setTriggerRef}></span>
                     </label>
                     {visible && (
                         <div
