@@ -18,13 +18,13 @@ import About from "./components/About";
 import Contacts from "./components/Contacts";
 import News from "./components/News";
 import Support from "./components/Support";
+import BuildSaved from "./components/Character/Build/BuildSaved";
 import ErrorBoundary from "./ErrorBoundary";
 
 import Cog from './cog.svg';
 import Dragon from './dragon.svg';
 import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
 import ErrorPage from "./components/ErrorPage";
-import BuildSaved from "./components/Character/Build/BuildSaved";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());

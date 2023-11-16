@@ -140,7 +140,18 @@ router.get('/reset-password', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
+router.get('/blds/:name/:id', (req, res) => {
+    const { name } = req.params;
+    const { id } = req.params;
 
+    pageTitle = `GW2Geary Build - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `
+    This is ${name ? `${name.replace('_', ' ')}` : ''}'s Build.
+    `;
+    pageOgUrl = `https://gw2geary.com/blds/${name}/${id}`
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+})
 
 router.get("/:input", (req, res, next) => {
     const { input } = req.params;
