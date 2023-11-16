@@ -45,22 +45,6 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                     const user = JSON.parse(localStorage.getItem('user')) || {};
 
                     const currentDate = new Date();
-                    console.log('tolocal',currentDate.toLocaleDateString())
-                    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-                    const formattedDate = currentDate.toLocaleDateString(undefined, {
-                        timeZone: userTimezone,
-                        year: 'numeric',
-                        month: 'numeric',
-                        day: 'numeric'
-                    });
-
-                    const formattedTime = currentDate.toLocaleTimeString(undefined, {
-                        timeZone: userTimezone,
-                        hour: 'numeric',
-                        minute: 'numeric',
-                        second: 'numeric'
-                    });
                     const updatedUser = {
                         ...user,
                         storedBuilds: [
@@ -70,7 +54,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                                 id: response.data._id,
                                 profession: char.profession,
                                 spec: builds.includes(spec.toLowerCase()) ? spec : char.profession,
-                                creationDate: `${formattedDate}T${formattedTime}`
+                                creationDate: currentDate
                             }
                         ]
                     };

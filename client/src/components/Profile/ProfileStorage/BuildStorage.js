@@ -85,7 +85,7 @@ function BuildStorage() {
                                 </div>
                                 <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
-                                        {stored.creationDate?.split('T')[1]}
+                                        {stored.creationDate?.split('T')[1]?.split('.')[0]}
                                     </div>
                                     <div>
                                         {stored.creationDate.split('T')[0]}
