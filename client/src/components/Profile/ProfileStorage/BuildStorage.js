@@ -77,7 +77,6 @@ function BuildStorage() {
                 <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
-                            {console.log(stored)}
                             <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char}/${stored.id}`}>
                                 <img style={{ width: '30px', height: '30px' }} src={specIcons[stored.spec.toLowerCase()]} alt="" />
                                 <div className=" font-size-20px yellow-highlight profile-names">
