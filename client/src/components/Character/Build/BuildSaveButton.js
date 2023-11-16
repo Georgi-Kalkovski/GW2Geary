@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Build.css';
-import StoreBuild from './store-build.png';
+import StoreBuild from '../../Profile/store.png';
 
 function BuildSaveButton({ tab, char, currentUser, spec }) {
     const navigate = useNavigate();
-    const ip = 'https://gw2geary.com/api';
+    const ip = 'http://localhost:3001/api';
     const [formData, setFormData] = useState({
         owner: null,
         name: null,
@@ -45,6 +45,22 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                     const user = JSON.parse(localStorage.getItem('user')) || {};
 
                     const currentDate = new Date();
+                    console.log('tolocal',currentDate.toLocaleDateString())
+                    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+                    const formattedDate = currentDate.toLocaleDateString(undefined, {
+                        timeZone: userTimezone,
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric'
+                    });
+
+                    const formattedTime = currentDate.toLocaleTimeString(undefined, {
+                        timeZone: userTimezone,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                    });
                     const updatedUser = {
                         ...user,
                         storedBuilds: [
@@ -54,7 +70,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                                 id: response.data._id,
                                 profession: char.profession,
                                 spec: builds.includes(spec.toLowerCase()) ? spec : char.profession,
-                                creationDate: currentDate
+                                creationDate: `${formattedDate}T${formattedTime}`
                             }
                         ]
                     };
@@ -71,7 +87,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
 
     const handleSubmit = () => {
         if (tab && tab.skills && tab.aquatic_skills && char && currentUser) {
-            
+
             const user = JSON.parse(localStorage.getItem('user')) || {};
             const { storedBuilds } = user;
             if (storedBuilds && storedBuilds.length >= 15) {

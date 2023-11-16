@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useState, useCallback, useEffect } from "react";
 import { specIcons } from '../../Character/Build/specIcons';
-import CopyBuild from '../../Character/Build/copy-build.png';
-import ApplyBuild from '../../Character/Build/apply-build.png';
+import CopyBuild from '../copy.png';
+import ApplyBuild from '../apply.png';
 function BuildStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
@@ -78,14 +78,14 @@ function BuildStorage() {
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
                             {console.log(stored)}
-                            <Link className="flex profile-storage-first-child" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char}/${stored.id}`}>
+                            <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char}/${stored.id}`}>
                                 <img style={{ width: '30px', height: '30px' }} src={specIcons[stored.spec.toLowerCase()]} alt="" />
                                 <div className=" font-size-20px yellow-highlight profile-names">
                                     {stored.char}
                                 </div>
                                 <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
-                                        {stored.creationDate.split('T')[1].split('.')[0]}
+                                        {stored.creationDate?.split('T')[1]}
                                     </div>
                                     <div>
                                         {stored.creationDate.split('T')[0]}
@@ -94,6 +94,7 @@ function BuildStorage() {
                             </Link >
                             <button
                                 type='button'
+                                title='Copy Link'
                                 className='game-button'
                                 style={{ background: 'none' }}
                                 onClick={() => copyBuildLink(`/blds/${stored.char}/${stored.id}`, stored.id)}

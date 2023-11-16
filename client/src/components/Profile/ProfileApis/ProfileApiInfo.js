@@ -3,6 +3,8 @@ import { usePopperTooltip } from 'react-popper-tooltip';
 import ProfileApiCharacters from './ProfileApiCharacters';
 import upArrow from '../up-arrow.svg';
 import downArrow from '../down-arrow.svg';
+import CopyBuild from '../copy.png';
+import ApplyBuild from '../apply.png';
 
 function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
     const [expandedIndexes, setExpandedIndexes] = useState([]);
@@ -30,6 +32,35 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                 console.error("Error updating API key status:", error);
             });
     }, [setApiKeys, AuthService]);
+
+    const [copiedMap, setCopiedMap] = useState({});
+
+    const handleButtonClick = (apiKey) => {
+        if (copiedMap[apiKey._id]) {
+            applyBuild(apiKey._id);
+        } else {
+            copyApiKey(apiKey._id);
+        }
+    };
+    
+    const copyApiKey = (storedId) => {
+        navigator.clipboard.writeText(storedId)
+            .then(() => {
+                setCopiedMap((prevState) => ({
+                    ...prevState,
+                    [storedId]: true,
+                }));
+                setTimeout(() => {
+                    setCopiedMap((prevState) => ({
+                        ...prevState,
+                        [storedId]: false,
+                    }));
+                }, 800);
+            })
+            .catch((error) => {
+                console.error('Error copying API key:', error);
+            });
+    };
 
     const deleteApiKey = useCallback((apiKeyId) => {
         if (deleteButtonState === "Delete") {
@@ -68,7 +99,7 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                 <div className="facts-div-profile api-right" key={`api-key-details-${apiKey._id}`}>
                     <div
                         className="profile-apis-first-child flex center font-size-20px yellow-highlight"
-                        style={{ alignItems: 'center', marginRight: '5px'  }}
+                        style={{ alignItems: 'center', marginRight: '5px' }}
                         key={`account-name-${apiKey?._id}`}
                     >
                         {apiKey && (
@@ -111,7 +142,23 @@ function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
                         </div>
                     )}
 
+                    {/* Api Key Visual */}
                     <div className="api-key-profile api-keys">{apiKey._id}{" "}</div>
+
+                    {/* Copy Api Key */}
+                    <button
+                        type='button'
+                        title={copiedMap[apiKey._id] ? 'Apply Api Key' : 'Copy Api Key'}
+                        className='game-button'
+                        style={{ background: 'none' }}
+                        onClick={() => handleButtonClick(apiKey)}
+                    >
+                        <img
+                            src={copiedMap[apiKey._id] ? ApplyBuild : CopyBuild}
+                            alt={copiedMap[apiKey._id] ? 'ApplyBuild' : 'StoreBuild'}
+                        />
+                    </button>
+
                     {/* Delete Key */}
                     <button onClick={() => deleteApiKey(apiKey._id)} className="basic-button delete-button" key={`api-key-delete-button-${apiKey._id}`}>
                         {deleteButtonState}

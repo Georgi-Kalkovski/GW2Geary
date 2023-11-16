@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import axios from "axios";
 
 function SendMail({ AuthService }) {
-  const ip = "https://gw2geary.com/api";
+  const ip = "http://localhost:3001/api";
   // const [usernameInput, setUsernameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
