@@ -4,7 +4,7 @@ import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
 function ProfileApis({ currentUser, AuthService }) {
-    const ip = 'http://localhost:3001/api';
+    const ip = 'https://gw2geary.com/api';
     const [apiKeys, setApiKeys] = useState([]);
 
     const fetchApiKeys = (userId, accessToken) => {

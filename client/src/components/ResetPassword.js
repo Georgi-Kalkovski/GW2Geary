@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
     const { token } = useParams();
-    const ip = 'http://localhost:3001/api';
+    const ip = 'https://gw2geary.com/api';
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");

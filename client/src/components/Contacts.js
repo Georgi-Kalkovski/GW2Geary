@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import AuthService from '../services/auth.service';
 
 function Contacts() {
-    const ip = 'http://localhost:3001/api';
+    const ip = 'https://gw2geary.com/api';
     const user = AuthService.getCurrentUser();
     const [email, setEmail] = useState(user?.email || '');
     const [subject, setSubject] = useState('');

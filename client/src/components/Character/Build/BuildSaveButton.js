@@ -6,7 +6,7 @@ import StoreBuild from '../../Profile/store.png';
 
 function BuildSaveButton({ tab, char, currentUser, spec }) {
     const navigate = useNavigate();
-    const ip = 'http://localhost:3001/api';
+    const ip = 'https://gw2geary.com/api';
     const [formData, setFormData] = useState({
         owner: null,
         name: null,
