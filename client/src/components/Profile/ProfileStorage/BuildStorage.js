@@ -16,29 +16,6 @@ function BuildStorage() {
         fetchStoredBuilds();
     }, [fetchStoredBuilds]);
 
-    const formatCreationDate = (dateString) => {
-        const creationDate = new Date(dateString);
-        creationDate.setHours(creationDate.getHours() + 2);
-
-        // Format the date part
-        const formattedDate = creationDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-        });
-
-        // Format the time part
-        const formattedTime = creationDate.toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: 'numeric',
-            second: 'numeric'
-        });
-
-        const formattedDateTime = `${formattedDate}T${formattedTime}`;
-
-        return formattedDateTime;
-    };
-
     const [copiedMap, setCopiedMap] = useState({});
 
     const copyBuildLink = (link, storedId) => {
@@ -108,10 +85,10 @@ function BuildStorage() {
                                 </div>
                                 <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
-                                        {formatCreationDate(stored.creationDate).split('T')[1]}
+                                        {stored.creationDate.split('T')[1].split('.')[0]}
                                     </div>
                                     <div>
-                                        {formatCreationDate(stored.creationDate)?.split('T')[0].split(',')[0]}
+                                        {stored.creationDate.split('T')[0]}
                                     </div>
                                 </div>
                             </Link >
