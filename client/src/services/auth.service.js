@@ -75,6 +75,23 @@ const getCurrentUser = () => {
   return user;
 };
 
+const getUser = async () => {
+  try {
+    const currentUser = getCurrentUser();
+    let name = currentUser.username;
+    let accessToken = currentUser.accessToken;
+    const response = await axios.get(`${API_URL}getUser`,
+      { params: { name, accessToken } }, {
+      headers: {
+        Authorization: `Bearer ${currentUser.accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error
+  }
+};
+
 // Users Get Service
 const getAllUsers = () => {
   return axios.get(API_URL + "allUsers");
@@ -228,6 +245,7 @@ const AuthService = {
   setBuild,
   getBuild,
   deleteBuild,
+  getUser
 };
 
 export default AuthService;

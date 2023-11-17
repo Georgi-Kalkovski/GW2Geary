@@ -7,13 +7,28 @@ import ApplyBuild from '../apply.png';
 function BuildStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-    const fetchStoredBuilds = useCallback(() => {
-        const user = JSON.parse(localStorage.getItem('user')) || {};
-        setStorage(user.storedBuilds || []);
+    const fetchStoredBuilds = useCallback(async () => {
+        try {
+            const user = JSON.parse(localStorage.getItem('user')) || {};
+            setStorage(user.storedBuilds || []);
+        } catch (error) {
+            console.error('Error fetching stored builds:', error);
+        }
     }, []);
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const user = await AuthService.getUser();
+                setStorage(user.storedBuilds || []);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchData();
         fetchStoredBuilds();
+
     }, [fetchStoredBuilds]);
 
     const [copiedMap, setCopiedMap] = useState({});

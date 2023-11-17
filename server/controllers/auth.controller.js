@@ -86,6 +86,38 @@ exports.signin = async (req, res) => {
   }
 };
 
+// Get User
+exports.getUser = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const { accessToken } = req.query;
+    if (!name) {
+      return res.status(400).send({ message: "Name parameter is missing" });
+    }
+
+    const user = await User.findOne({
+      'username': name
+    })
+      .populate('storedBuilds');
+    if (user) {
+      res.status(200).send({
+        message: "User retrieved successfully!",
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        accessToken: accessToken,
+        apiKeys: user.apiKeys,
+        storedBuilds: user.storedBuilds,
+      });
+
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 // Change Username
 exports.changeUsername = async (req, res) => {
   try {

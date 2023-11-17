@@ -14,6 +14,11 @@ router.post(
   controller.signin
 );
 
+router.get(
+  "/getUser",
+  controller.getUser
+);
+
 router.put(
   "/users/:userId/username",
   controller.changeUsername
@@ -94,6 +99,9 @@ router.get(
   controller.getBuild
 );
 
-router.delete('/storedBuilds/:storedBuildId', controller.deleteBuild);
+router.delete(
+  '/storedBuilds/:storedBuildId',
+  controller.deleteBuild
+);
 
 module.exports = router;
