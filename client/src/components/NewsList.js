@@ -3,6 +3,24 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
+            date: '17.11.2023',
+            content: (
+                <span>
+                    Now the user can
+                    <span className="yellow-highlight"> store his own builds statically </span>
+                    and <span className="yellow-highlight"> share </span>
+                    them. New button has been added to each character owned by the user called
+                    <span className="yellow-highlight"> "Store"</span>.
+                    Builds can be previewed from the new section in the
+                    <span style={{fontSize: '15px'}}>
+                        <span className="yellow-highlight"> Profile</span>{`>`}
+                        <span className="yellow-highlight">Profile Storage</span>{`>`}
+                        <span className="yellow-highlight">Build Storage</span>
+                    </span>.
+                </span>
+            ),
+        },
+        {
             date: '16.10.2023',
             content: (
                 <span>
