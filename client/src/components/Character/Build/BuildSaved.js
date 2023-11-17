@@ -49,7 +49,7 @@ function BuildSaved() {
     return (
         <div className='flex center'>
             {tab && (
-                <div className={`build ${tab.profession.toLowerCase()}-lightning-border`} style={{marginRight:'4px'}}>
+                <div className={`build ${tab.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                     <div className="dropdown">
                         {isLoading ? (
                             <div className='logo-build-width'>
@@ -68,7 +68,16 @@ function BuildSaved() {
                                         <div className='flex center' style={{ marginLeft: '50px' }}>
                                             <div style={{ fontSize: '30px' }}>{tab.name}</div>
                                             <div className='center-land'>
-                                                <img className='' style={{ width: '40px', height: '40px' }} src={specIcons[tab.spec.toLowerCase()]} alt="" />
+                                                <img
+                                                    className=''
+                                                    style={{ width: '40px', height: '40px' }}
+                                                    src={
+                                                        specIcons[tab.spec.toLowerCase()]
+                                                            ? specIcons[tab.spec.toLowerCase()]
+                                                            : specIcons[tab.profession.toLowerCase()]
+                                                    }
+                                                    alt=""
+                                                />
                                             </div>
                                         </div>
                                         <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
