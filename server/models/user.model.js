@@ -67,13 +67,6 @@ const UserSchema = new mongoose.Schema({
   resetTokenExpires: Date
 }, { versionKey: false });
 
-UserSchema.pre('save', function (next) {
-  if (this.storedBuilds && this.storedBuilds.length === 0) {
-    this.storedBuilds = undefined;
-  }
-  next();
-});
-
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
