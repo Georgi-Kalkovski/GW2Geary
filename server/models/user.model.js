@@ -69,7 +69,7 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', function (next) {
   if (this.storedBuilds && this.storedBuilds.length === 0) {
-    this.storedBuilds = undefined; // Set storedBuilds to undefined if it's an empty array
+    this.storedBuilds = undefined;
   }
   next();
 });
