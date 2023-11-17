@@ -34,7 +34,8 @@ function BuildStorage() {
     const [copiedMap, setCopiedMap] = useState({});
 
     const copyBuildLink = (link, storedId) => {
-        const fullLink = `${window.location.origin}${link}`;
+        const correctedLink = link.replaceAll(' ', '_');
+        const fullLink = `${window.location.origin}${correctedLink}`;
         navigator.clipboard.writeText(fullLink)
             .then(() => {
                 setCopiedMap(prevState => ({
@@ -92,7 +93,7 @@ function BuildStorage() {
                 <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
-                            <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char}/${stored.id}`}>
+                            <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
                                 <img style={{ width: '30px', height: '30px' }} src={specIcons[stored.spec.toLowerCase()]} alt="" />
                                 <div className=" font-size-20px yellow-highlight profile-names">
                                     {stored.char}

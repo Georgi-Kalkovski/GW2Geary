@@ -75,6 +75,7 @@ const getCurrentUser = () => {
   return user;
 };
 
+// Get User
 const getUser = async () => {
   try {
     const currentUser = getCurrentUser();
@@ -205,7 +206,7 @@ const setBuild = async (name) => {
 
 // Get Build Service
 const getBuild = (name, id) => {
-  return axios.get(API_URL + `users/blds/${name}/${id}`);
+  return axios.get(API_URL + `users/blds/${name.replaceAll('_', ' ')}/${id}`);
 };
 
 // Delete Stored Build Service
