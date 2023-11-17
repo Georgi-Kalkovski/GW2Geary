@@ -47,22 +47,19 @@ const UserSchema = new mongoose.Schema({
       ]
     }
   ],
-  storedBuilds: {
-    type: [
-      {
-        char: String,
-        id: String,
-        profession: String,
-        spec: String,
-        creationDate: {
-          type: Date,
-          default: Date.now
-        },
-        _id: false
-      }
-    ],
-    default: undefined
-  },
+  storedBuilds: [
+    {
+      char: String,
+      id: String,
+      profession: String,
+      spec: String,
+      creationDate: {
+        type: Date,
+        default: Date.now
+      },
+      _id: false
+    }
+  ],
   resetToken: String,
   resetTokenExpires: Date
 }, { versionKey: false });
