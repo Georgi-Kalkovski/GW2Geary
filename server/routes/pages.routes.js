@@ -153,6 +153,19 @@ router.get('/blds/:name/:id', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
+router.get('/fs/:name/:id', (req, res) => {
+    const { name } = req.params;
+    const { id } = req.params;
+
+    pageTitle = `GW2Geary Fashion - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `
+    This is ${name ? `${name.replace('_', ' ')}` : ''}'s Fashion.
+    `;
+    pageOgUrl = `https://gw2geary.com/fs/${name}/${id}`
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+})
+
 router.get("/:input", (req, res, next) => {
     const { input } = req.params;
     if (input.startsWith('/static/')) {

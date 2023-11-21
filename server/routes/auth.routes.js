@@ -104,4 +104,19 @@ router.delete(
   controller.deleteBuild
 );
 
+router.put(
+  "/users/fs/:name",
+  controller.setFashion
+);
+
+router.get(
+  "/users/fs/:name/:id",
+  controller.getFashion
+);
+
+router.delete(
+  '/storedFashion/:storedFashionId',
+  controller.deleteFashion
+);
+
 module.exports = router;

@@ -8,6 +8,15 @@
     margin: 4px;
 }
 
+.equipment-save {
+    min-width: 280px;
+    max-width: 345px;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #202124;
+    margin: 4px;
+}
+
 .equipment-box {
     display: flex;
     justify-content: center;

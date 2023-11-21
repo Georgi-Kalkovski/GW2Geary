@@ -3,6 +3,7 @@ const axios = require('axios');
 const db = require("../models");
 const User = db.user;
 const BldSave = db.bldsave;
+const FSave = db.fsave;
 const Role = db.role;
 
 const jwt = require("jsonwebtoken");
@@ -80,6 +81,7 @@ exports.signin = async (req, res) => {
       accessToken: token,
       apiKeys: user.apiKeys,
       storedBuilds: user.storedBuilds,
+      storedFashion: user.storedFashion,
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -98,7 +100,8 @@ exports.getUser = async (req, res) => {
     const user = await User.findOne({
       'username': name
     })
-      .populate('storedBuilds');
+      .populate('storedBuilds')
+      .populate('storedFashion');
     if (user) {
       res.status(200).send({
         message: "User retrieved successfully!",
@@ -108,6 +111,7 @@ exports.getUser = async (req, res) => {
         accessToken: accessToken,
         apiKeys: user.apiKeys,
         storedBuilds: user.storedBuilds,
+        storedFashion: user.storedFashion,
       });
 
     } else {
@@ -581,6 +585,89 @@ exports.deleteBuild = async (req, res) => {
     await BldSave.findOneAndDelete({ _id: storedBuildId });
 
     return res.status(200).json({ message: 'Stored build deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+// Set Fashion
+exports.setFashion = async (req, res) => {
+  try {
+    const { owner, name, gender, race, profession, equipment } = req.body;
+
+    const updatedEquipment = equipment.map(eq => {
+      if (eq.dyes) {
+        eq.dyes = eq.dyes.map(dye => (dye && dye.id) ? dye.id : null);
+      }
+      if (Array.isArray(eq.infusions) && eq.infusions.length > 0) {
+        eq.infusions = eq.infusions.map(infusion => (infusion && infusion.id) ? infusion.id : null);
+      }
+      return eq;
+    });
+
+    const newFashion = new FSave({
+      owner,
+      name,
+      gender,
+      race,
+      profession,
+      equipment: updatedEquipment,
+    });
+
+    const savedFashion = await newFashion.save();
+
+    const user = await User.findById(owner);
+    user.storedFashion.push({
+      char: name,
+      id: savedFashion._id,
+      gender: savedFashion.gender,
+      race: savedFashion.race,
+      profession: savedFashion.profession,
+    });
+
+    await user.save();
+
+    res.status(200).json(savedFashion);
+
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+
+// Get Fashion
+exports.getFashion = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const { id } = req.params;
+    const fashion = await FSave.findOne({ _id: id, name: name });
+    if (!fashion) {
+      return res.status(404).send({ message: "Build Not found." });
+    }
+
+    res.status(200).send({
+      message: "Fashion retrieved successfully!",
+      fashion: fashion,
+    });
+    return;
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Delete Fashion
+exports.deleteFashion = async (req, res) => {
+  try {
+    const { storedFashionId } = req.params;
+
+    const user = await User.findOneAndUpdate(
+      { 'storedFashion.id': storedFashionId },
+      { $pull: { storedFashion: { id: storedFashionId } } }
+    );
+
+    await FSave.findOneAndDelete({ _id: storedFashionId });
+
+    return res.status(200).json({ message: 'Stored fashion deleted successfully' });
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }

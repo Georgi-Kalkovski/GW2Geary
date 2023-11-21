@@ -60,6 +60,20 @@ const UserSchema = new mongoose.Schema({
       _id: false
     }
   ],
+  storedFashion: [
+    {
+      char: String,
+      id: String,
+      gender: String,
+      race: String,
+      profession: String,
+      creationDate: {
+        type: Date,
+        default: Date.now
+      },
+      _id: false
+    }
+  ],
   resetToken: String,
   resetTokenExpires: Date
 }, { versionKey: false });

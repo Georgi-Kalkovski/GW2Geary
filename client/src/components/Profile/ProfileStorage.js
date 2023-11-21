@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BuildStorage from "./ProfileStorage/BuildStorage";
+import FashionStorage from "./ProfileStorage/FashionStorage";
 
 function ProfileStorage({ currentUser }) {
   const [showProfileFashionStorage, setShowProfileFashionStorage] = useState(
@@ -61,8 +62,9 @@ function ProfileStorage({ currentUser }) {
                   <div>
                     {showProfileFashionStorage && (
                       <>
-                        {/* TODO: Make Fashion Storage */}
-                        <div className="flex center">Fashion Storage - SOON TM</div>
+                        <FashionStorage
+                          storage={currentUser.storedFashion}
+                        />
                       </>
                     )}
 

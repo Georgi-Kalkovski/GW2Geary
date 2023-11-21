@@ -115,7 +115,7 @@ const EquipmentDropdown = ({ char, setEquip, initial, embed }) => {
       }
     })();
   }, [selectedEqTab?.equipment, char?.equipment, char?.equipment_tabs]);
-
+  
   localStorage.setItem('prof', char?.profession);
   localStorage.setItem('race', char?.race);
   localStorage.setItem('gender', char?.gender);

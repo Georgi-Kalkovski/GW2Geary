@@ -19,12 +19,13 @@ import Contacts from "./components/Contacts";
 import News from "./components/News";
 import Support from "./components/Support";
 import BuildSaved from "./components/Character/Build/BuildSaved";
+import FashionSaved from "./components/Character/Fashion/FashionSaved";
+import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
+import ErrorPage from "./components/ErrorPage";
 import ErrorBoundary from "./ErrorBoundary";
 
 import Cog from './cog.svg';
 import Dragon from './dragon.svg';
-import CharacterFashionEmbed from "./components/CharacterFashionEmbed";
-import ErrorPage from "./components/ErrorPage";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -121,6 +122,7 @@ const App = () => {
               <Route path="/c/:name" element={<ErrorBoundary><Character /></ErrorBoundary>} />
               <Route path="/c/:name/:eq/:bld" element={<ErrorBoundary><Character /></ErrorBoundary>} />
               <Route path="/blds/:name/:id" element={<ErrorBoundary><BuildSaved /></ErrorBoundary>} />
+              <Route path="/fs/:name/:id" element={<ErrorBoundary><FashionSaved /></ErrorBoundary>} />
               <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />

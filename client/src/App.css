@@ -705,6 +705,7 @@ body.light-theme {
   background: none;
   padding: 0;
   margin: 0;
+  margin-right:10px;
   cursor: pointer;
   outline: none;
   width: 30px;

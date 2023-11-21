@@ -225,6 +225,64 @@ const deleteBuild = async (storedBuildId) => {
   }
 };
 
+// Set Fashion Service
+const setFashion = async (name) => {
+  try {
+    const currentUser = getCurrentUser();
+    const { id: userId, accessToken } = currentUser;
+
+    const modifiedEquipment = {
+      id: equipment.id,
+      skin: equipment.skin,
+      dyes: equipment.dyes,
+      infusions: equipment.infusions
+    };
+
+    const response = await axios.put(
+      `${API_URL}users/c/${name}`,
+      {
+        owner: userId,
+        name,
+        gender,
+        race,
+        profession,
+        equipment: modifiedEquipment
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error setting build:', error);
+    throw error;
+  }
+};
+
+// Get Fashion Service
+const getFashion = (name, id) => {
+  return axios.get(API_URL + `users/fs/${name.replaceAll('_', ' ')}/${id}`);
+};
+
+// Delete Stored Build Service
+const deleteFashion = async (storedFashionId) => {
+  const currentUser = getCurrentUser();
+  try {
+    const response = await axios.delete(API_URL + `/storedFashion/${storedFashionId}`, {
+      headers: {
+        'Authorization': `Bearer ${currentUser.accessToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error('Error deleting stored fashion');
+  }
+};
+
 const AuthService = {
   register,
   login,
@@ -243,10 +301,13 @@ const AuthService = {
   updateApiKeyStatus,
   deleteApiKey,
   updateCharacterStatus,
+  getUser,
   setBuild,
   getBuild,
   deleteBuild,
-  getUser
+  setFashion,
+  getFashion,
+  deleteFashion,
 };
 
 export default AuthService;

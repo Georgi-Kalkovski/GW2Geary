@@ -17,16 +17,16 @@ function BuildSaved() {
     const [isLoading, setIsLoading] = useState(true);
     const [specializations, setSpecializations] = useState([]);
     const [traits, setTraits] = useState([]);
-    const [tab, setTab] = useState(null);
+    const [build, setBuild] = useState(null);
 
     useEffect(() => {
         const fetchBuildData = async () => {
             try {
-                let fetchedTab = await AuthService.getBuild(name, id);
-                setTab(fetchedTab.data.build);
+                let fetchedBuild = await AuthService.getBuild(name, id);
+                setBuild(fetchedBuild.data.build);
 
                 const specializationData = await Promise.all(
-                    fetchedTab.data.build.specializations.map(async (spec) => {
+                    fetchedBuild.data.build.specializations.map(async (spec) => {
                         const sp = await fetchData('specializations', spec.id);
                         const [min, maj] = await Promise.all([
                             fetchData('traits', sp[0].minor_traits.join(',')),
@@ -48,8 +48,8 @@ function BuildSaved() {
 
     return (
         <div className='flex center'>
-            {tab && (
-                <div className={`build ${tab.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
+            {build && (
+                <div className={`build ${build.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                     <div className="dropdown">
                         {isLoading ? (
                             <div className='logo-build-width'>
@@ -62,27 +62,27 @@ function BuildSaved() {
                             </div>
                         ) : (
                             <Container className='spec-box logo-build-width' style={{ marginTop: 0 }}>
-                                {specializations.length > 0 && tab && (
+                                {specializations.length > 0 && build && (
                                     <div>
                                         <BackButton />
                                         <div className='flex center' style={{ marginLeft: '50px' }}>
-                                            <div style={{ fontSize: '30px' }}>{tab.name}</div>
+                                            <div style={{ fontSize: '30px' }}>{build.name}</div>
                                             <div className='center-land'>
                                                 <img
                                                     className=''
                                                     style={{ width: '40px', height: '40px' }}
                                                     src={
-                                                        specIcons[tab.spec.toLowerCase()]
-                                                            ? specIcons[tab.spec.toLowerCase()]
-                                                            : specIcons[tab.profession.toLowerCase()]
+                                                        specIcons[build.spec.toLowerCase()]
+                                                            ? specIcons[build.spec.toLowerCase()]
+                                                            : specIcons[build.profession.toLowerCase()]
                                                     }
                                                     alt=""
                                                 />
                                             </div>
                                         </div>
-                                        <Skills skills={tab.skills} water_skills={tab.aquatic_skills} prof={tab.profession} />
-                                        <Traits setTraits={setTraits} specializations={specializations} prof={tab.profession} />
-                                        <Template buildInput={tab} />
+                                        <Skills skills={build.skills} water_skills={build.aquatic_skills} prof={build.profession} />
+                                        <Traits setTraits={setTraits} specializations={specializations} prof={build.profession} />
+                                        <Template buildInput={build} />
                                     </div>
                                 )}
                             </Container>

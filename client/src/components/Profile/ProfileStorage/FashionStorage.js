@@ -2,17 +2,18 @@ import { Link } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useState, useCallback, useEffect } from "react";
 import { specIcons } from '../../Character/Build/specIcons';
-import CopyBuild from '../copy.png';
-import ApplyBuild from '../apply.png';
-function BuildStorage() {
+import { genderIcons,wikiBigRacesColoredIcons } from '../../icons';
+import CopyFashion from '../copy.png';
+import ApplyFashion from '../apply.png';
+function FashionStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-    const fetchStoredBuilds = useCallback(async () => {
+    const fetchStoredFashion = useCallback(async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user')) || {};
-            setStorage(user.storedBuilds || []);
+            setStorage(user.storedFashion || []);
         } catch (error) {
-            console.error('Error fetching stored builds:', error);
+            console.error('Error fetching stored fashion:', error);
         }
     }, []);
 
@@ -20,20 +21,20 @@ function BuildStorage() {
         const fetchData = async () => {
             try {
                 const user = await AuthService.getUser();
-                setStorage(user.storedBuilds || []);
+                setStorage(user.storedFashion || []);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         };
 
         fetchData();
-        fetchStoredBuilds();
+        fetchStoredFashion();
 
-    }, [fetchStoredBuilds]);
+    }, [fetchStoredFashion]);
 
     const [copiedMap, setCopiedMap] = useState({});
 
-    const copyBuildLink = (link, storedId) => {
+    const copyFashionLink = (link, storedId) => {
         const correctedLink = link.replaceAll(' ', '_');
         const fullLink = `${window.location.origin}${correctedLink}`;
         navigator.clipboard.writeText(fullLink)
@@ -50,29 +51,29 @@ function BuildStorage() {
                 }, 800);
             })
             .catch((error) => {
-                console.error('Error copying full build link:', error);
+                console.error('Error copying full fashion link:', error);
             });
     };
 
-    const deleteStoredBuild = useCallback((storedBuildId) => {
-        if (deleteConfirmation === storedBuildId) {
-            AuthService.deleteFashion(storedBuildId)
+    const deleteStoredFashion = useCallback((storedFashionId) => {
+        if (deleteConfirmation === storedFashionId) {
+            AuthService.deleteFashion(storedFashionId)
                 .then((response) => {
                     const user = JSON.parse(localStorage.getItem('user')) || {};
-                    const updatedStoredBuilds = user.storedBuilds.filter(build => build.id !== storedBuildId);
+                    const updatedStoredFashion = user.storedFashion.filter(fashion => fashion.id !== storedFashionId);
                     const updatedUser = {
                         ...user,
-                        storedBuilds: updatedStoredBuilds,
+                        storedFashion: updatedStoredFashion,
                     };
                     localStorage.setItem('user', JSON.stringify(updatedUser));
-                    setStorage(updatedStoredBuilds);
+                    setStorage(updatedStoredFashion);
                     setDeleteConfirmation(null);
                 })
                 .catch((error) => {
-                    console.error("Error deleting stored build:", error);
+                    console.error("Error deleting stored fashion:", error);
                 });
         } else {
-            setDeleteConfirmation(storedBuildId);
+            setDeleteConfirmation(storedFashionId);
         }
     }, [deleteConfirmation]);
 
@@ -93,19 +94,28 @@ function BuildStorage() {
                 <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
-                            <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
+                            <Link className="flex profile-storage-first-child" title="Redirect to Fashion" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/fs/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
+                                
                                 <div className=" font-size-20px yellow-highlight profile-names">
                                     {stored.char}
                                 </div>
                                 <img
                                     style={{ width: '30px', height: '30px' }}
-                                    src={
-                                        specIcons[stored.spec.toLowerCase()]
-                                            ? specIcons[stored.spec.toLowerCase()]
-                                            : specIcons[stored.profession.toLowerCase()]
-                                    }
+                                    src={genderIcons[stored.gender]}
                                     alt=""
-                                    title={specIcons[stored.spec.toLowerCase()] ? stored.spec : stored.profession}
+                                    title={stored.gender}
+                                />
+                                 <img
+                                    style={{ width: '30px', height: '30px' }}
+                                    src={wikiBigRacesColoredIcons[stored.race]}
+                                    alt=""
+                                    title={stored.race}
+                                />
+                                 <img
+                                    style={{ width: '30px', height: '30px' }}
+                                    src={specIcons[stored.profession.toLowerCase()]}
+                                    alt=""
+                                    title={stored.profession}
                                 />
                                 <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
@@ -115,23 +125,24 @@ function BuildStorage() {
                                         {stored.creationDate.split('T')[0]}
                                     </div>
                                 </div>
+                                
                             </Link >
                             <button
                                 type='button'
                                 title='Copy Link'
                                 className='game-button'
                                 style={{ background: 'none' }}
-                                onClick={() => copyBuildLink(`/blds/${stored.char}/${stored.id}`, stored.id)}
+                                onClick={() => copyFashionLink(`/fs/${stored.char}/${stored.id}`, stored.id)}
                             >
-                                <img src={copiedMap[stored.id] ? ApplyBuild : CopyBuild} alt={copiedMap[stored.id] ? 'ApplyBuild' : 'StoreBuild'} />
+                                <img src={copiedMap[stored.id] ? ApplyFashion : CopyFashion} alt={copiedMap[stored.id] ? 'ApplyFashion' : 'StoreFashion'} />
                             </button>
 
                             {deleteConfirmation === stored.id ? (
                                 <>
-                                    <button className="basic-button delete-button" onClick={() => deleteStoredBuild(stored.id)}>Confirm</button>
+                                    <button className="basic-button delete-button" onClick={() => deleteStoredFashion(stored.id)}>Confirm</button>
                                 </>
                             ) : (
-                                <button className="basic-button delete-button" onClick={() => deleteStoredBuild(stored.id)}>Delete</button>
+                                <button className="basic-button delete-button" onClick={() => deleteStoredFashion(stored.id)}>Delete</button>
                             )
                             }
                             <div>
@@ -139,10 +150,10 @@ function BuildStorage() {
                         </div >
                     ))}
                 </div >
-                : <div className="flex center">No Builds Stored</div>
+                : <div className="flex center">No Fashion Stored</div>
             }
         </>
     );
 }
 
-export default BuildStorage;
+export default FashionStorage;

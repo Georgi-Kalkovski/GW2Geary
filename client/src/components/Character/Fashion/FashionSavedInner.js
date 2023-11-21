@@ -5,11 +5,8 @@ import Dyes from './Dyes';
 import InfusionsTooltip from './InfusionsTooltip';
 import '../Equipment/Equipment.css';
 import ChatLinks from '../Equipment/ChatLinks';
-import FashionSaveButton from './FashionSaveButton';
-import AuthService from '../../../services/auth.service';
 
-function Equipment({ items, embed, char, slider }) {
-    const currentUser = AuthService.getCurrentUser();
+function FashionSavedInner({ items, embed, char, slider }) {
     const infusions = [];
     let auraCounter = 0;
 
@@ -25,18 +22,6 @@ function Equipment({ items, embed, char, slider }) {
     return (
         <Container>
             <div style={{ position: 'relative' }}>
-                {currentUser?.apiKeys?.find(key => key.accountName === localStorage.getItem('acc')) &&
-                    <div
-                        className='flex column'
-                        style={window.innerWidth < 900
-                            ? { position: 'absolute', right: '10px', top: '-125px' }
-                            : { position: 'absolute', right: '30px', top: '-125px' }
-                        }>
-                        <div>
-                            <FashionSaveButton items={items} char={char} embed={embed} slider={slider} currentUser={currentUser} />
-                        </div>
-                    </div>
-                }
                 <Container className="equipment-box" style={embed ? { marginTop: '15px' } : { marginTop: '40px' }}>
                     <Col>
                         <Col className='flex column' style={{ marginRight: '5px' }}>
@@ -107,13 +92,13 @@ function Equipment({ items, embed, char, slider }) {
                         embed || window.innerWidth < 900
                             ? {
                                 marginTop: '0px',
-                                marginLeft: '39px',
-                                marginRight: '9px',
+                                marginLeft: '35px',
+                                marginRight: '35px',
                                 justifyContent: 'flex-start'
                             } : {
                                 marginTop: '0px',
-                                marginLeft: '80px',
-                                marginRight: '85px',
+                                marginLeft: '15px',
+                                marginRight: '15px',
                                 justifyContent: 'flex-start'
                             }
                     }>
@@ -124,12 +109,12 @@ function Equipment({ items, embed, char, slider }) {
                     </Col>
                 </Container>
                 {
-                    !embed &&
-                    <ChatLinks items={items} prof={char.profession} fashion={true} />
+                    !embed && items && char &&
+                    <ChatLinks items={items} prof={char?.profession} fashion={true} />
                 }
             </div>
         </Container >
     );
 }
 
-export default Equipment;
+export default FashionSavedInner;
