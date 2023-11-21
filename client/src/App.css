@@ -740,7 +740,8 @@ body.light-theme .form-control,
 body.light-theme .footer,
 body.light-theme .form-button:disabled,
 body.light-theme .itemstats,
-body.light-theme .profile-box button {
+body.light-theme .profile-box button,
+body.light-theme .equipment-save {
   background-color: rgb(255, 255, 255);
   color: #35363a;
 }
