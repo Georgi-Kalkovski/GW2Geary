@@ -61,7 +61,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                     localStorage.setItem('user', JSON.stringify(updatedUser));
                 } catch (error) {
                     console.error('Error submitting building data:', error);
-                    alert('Error submitting building data');
+                    //alert('Error submitting building data');
                 }
             }
         }
