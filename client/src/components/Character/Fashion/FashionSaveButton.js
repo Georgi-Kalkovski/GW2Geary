@@ -38,7 +38,7 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
                     const updatedUser = {
                         ...user,
                         storedFashion: [
-                            ...user.storedFashion.filter(fashion => fashion.id !== response.data.id),
+                            ...user.storedFashion?.filter(fashion => fashion.id !== response.data.id),
                             {
                                 char: response.data.name,
                                 id: response.data._id,
