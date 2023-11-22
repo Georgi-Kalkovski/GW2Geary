@@ -1,5 +1,5 @@
 import axios from "axios";
-const ip = 'https://gw2geary.com/api';
+const ip = 'http://localhost:3001/api';
 const API_URL = `${ip}/auth/`;
 
 // User Register Service
@@ -283,6 +283,68 @@ const deleteFashion = async (storedFashionId) => {
   }
 };
 
+// Set Equipment Service
+const setEquipment = async (name) => {
+  try {
+    const currentUser = getCurrentUser();
+    const { id: userId, accessToken } = currentUser;
+
+    const modifiedEquipment = {
+      id: equipment.id,
+      skin: equipment.skin,
+      dyes: equipment.dyes,
+      infusions: equipment.infusions,
+      upgrades: equipment.upgrades,
+      stats: equipment.stats
+    };
+
+    const response = await axios.put(
+      `${API_URL}users/c/${name}`,
+      {
+        owner: userId,
+        name,
+        gender,
+        race,
+        profession,
+        relic,
+        powerCore,
+        equipment: modifiedEquipment
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error setting build:', error);
+    throw error;
+  }
+};
+
+// Get Equipment Service
+const getEquipment = (name, id) => {
+  return axios.get(API_URL + `users/eqs/${name.replaceAll('_', ' ')}/${id}`);
+};
+
+// Delete Equipment Build Service
+const deleteEquipment = async (storedEquipmentId) => {
+  const currentUser = getCurrentUser();
+  try {
+    const response = await axios.delete(API_URL + `/storedEquipment/${storedEquipmentId}`, {
+      headers: {
+        'Authorization': `Bearer ${currentUser.accessToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error('Error deleting stored equipment');
+  }
+};
+
 const AuthService = {
   register,
   login,
@@ -308,6 +370,9 @@ const AuthService = {
   setFashion,
   getFashion,
   deleteFashion,
+  setEquipment,
+  getEquipment,
+  deleteEquipment,
 };
 
 export default AuthService;

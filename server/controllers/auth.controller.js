@@ -4,6 +4,7 @@ const db = require("../models");
 const User = db.user;
 const BldSave = db.bldsave;
 const FSave = db.fsave;
+const EqSave = db.eqsave;
 const Role = db.role;
 
 const jwt = require("jsonwebtoken");
@@ -82,6 +83,7 @@ exports.signin = async (req, res) => {
       apiKeys: user.apiKeys,
       storedBuilds: user.storedBuilds,
       storedFashion: user.storedFashion,
+      storedEquipment: user.storedEquipment,
     });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -101,7 +103,8 @@ exports.getUser = async (req, res) => {
       'username': name
     })
       .populate('storedBuilds')
-      .populate('storedFashion');
+      .populate('storedFashion')
+      .populate('storedEquipment');
     if (user) {
       res.status(200).send({
         message: "User retrieved successfully!",
@@ -112,6 +115,7 @@ exports.getUser = async (req, res) => {
         apiKeys: user.apiKeys,
         storedBuilds: user.storedBuilds,
         storedFashion: user.storedFashion,
+        storedEquipment: user.storedEquipment,
       });
 
     } else {
@@ -642,7 +646,7 @@ exports.getFashion = async (req, res) => {
     const { id } = req.params;
     const fashion = await FSave.findOne({ _id: id, name: name });
     if (!fashion) {
-      return res.status(404).send({ message: "Build Not found." });
+      return res.status(404).send({ message: "Fashion Not found." });
     }
 
     res.status(200).send({
@@ -668,6 +672,94 @@ exports.deleteFashion = async (req, res) => {
     await FSave.findOneAndDelete({ _id: storedFashionId });
 
     return res.status(200).json({ message: 'Stored fashion deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+// Set Equipment
+exports.setEquipment = async (req, res) => {
+  try {
+    const { owner, name, gender, race, profession, relic, powerCore, equipment } = req.body;
+
+    const updatedEquipment = equipment.map(eq => {
+      if (eq.dyes) {
+        eq.dyes = eq.dyes.map(dye => (dye && dye.id) ? dye.id : null);
+      }
+      if (Array.isArray(eq.infusions) && eq.infusions.length > 0) {
+        eq.infusions = eq.infusions.map(infusion => (infusion && infusion.id) ? infusion.id : null);
+      }
+      if (Array.isArray(eq.upgrades) && eq.upgrades.length > 0) {
+        eq.upgrades = eq.upgrades.map(upgrade => (upgrade && upgrade.id) ? upgrade.id : null);
+      }
+      return eq;
+    });
+
+    const newEquipment = new EqSave({
+      owner,
+      name,
+      gender,
+      race,
+      profession,
+      relic,
+      powerCore,
+      equipment: updatedEquipment,
+    });
+
+    const savedEquipment = await newEquipment.save();
+
+    const user = await User.findById(owner);
+    user.storedEquipment.push({
+      char: name,
+      id: savedEquipment._id,
+      gender: savedEquipment.gender,
+      race: savedEquipment.race,
+      profession: savedEquipment.profession,
+    });
+
+    await user.save();
+
+    res.status(200).json(savedEquipment);
+
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+
+// Get Equipment
+exports.getEquipment = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const { id } = req.params;
+    const equipment = await EqSave.findOne({ _id: id, name: name });
+    if (!equipment) {
+      return res.status(404).send({ message: "Equipment Not found." });
+    }
+
+    res.status(200).send({
+      message: "Equipment retrieved successfully!",
+      equipment: equipment,
+    });
+    return;
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// Delete Equipment
+exports.deleteEquipment = async (req, res) => {
+  try {
+    const { storedEquipmentId } = req.params;
+
+    const user = await User.findOneAndUpdate(
+      { 'storedEquipment.id': storedEquipmentId },
+      { $pull: { storedEquipment: { id: storedEquipmentId } } }
+    );
+
+    await EqSave.findOneAndDelete({ _id: storedEquipmentId });
+
+    return res.status(200).json({ message: 'Stored equipment deleted successfully' });
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }

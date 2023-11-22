@@ -166,6 +166,19 @@ router.get('/fs/:name/:id', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
+router.get('/eqs/:name/:id', (req, res) => {
+    const { name } = req.params;
+    const { id } = req.params;
+
+    pageTitle = `GW2Geary Equipment - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `
+    This is ${name ? `${name.replace('_', ' ')}` : ''}'s Equipment.
+    `;
+    pageOgUrl = `https://gw2geary.com/eqs/${name}/${id}`
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+})
+
 router.get("/:input", (req, res, next) => {
     const { input } = req.params;
     if (input.startsWith('/static/')) {

@@ -104,6 +104,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           setMergedItems([]);
           return;
         }
+        console.log('CHAR EQUIPMENT',char.equipment)
         setRelic(await fetchData('items', char.equipment.find((equip) => equip.slot === 'Relic')?.id))
         setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore')?.id))
         const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
@@ -186,6 +187,9 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const {
     setTriggerRef: setSwitch2TriggerRef,
   } = usePopperTooltip({ placement: 'top', offset: [0, 3] });
+
+
+console.log(mergedItems)
 
   return (
     <div className={`equipment ${char?.profession?.toLowerCase()}-lightning-border`} ref={wrapperRef}>

@@ -533,11 +533,6 @@ input:checked+.slider:before {
     text-align: center;
   }
 
-  .equipment {
-    height: auto;
-    min-height: auto;
-  }
-
   .build {
     height: 700px;
     padding: 20px 0 !important;

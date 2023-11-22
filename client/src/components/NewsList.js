@@ -3,37 +3,22 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
-            date: '21.11.2023',
+            date: '22.11.2023',
             content: (
                 <span>
                     Now the user can
-                    <span className="yellow-highlight"> store his own fashion statically </span>
-                    and <span className="yellow-highlight"> share </span>
-                    it. New button has been added to each character owned by the user called
-                    <span className="yellow-highlight"> "Store Fashion"</span>.
-                    Fashion can be previewed from the new section in the
-                    <span style={{fontSize: '15px'}}>
-                        <span className="yellow-highlight"> Profile</span>{`>`}
-                        <span className="yellow-highlight">Profile Storage</span>{`>`}
-                        <span className="yellow-highlight">Fashion Storage</span>
-                    </span>.
-                </span>
-            ),
-        },
-        {
-            date: '17.11.2023',
-            content: (
-                <span>
-                    Now the user can
-                    <span className="yellow-highlight"> store his own builds statically </span>
-                    and <span className="yellow-highlight"> share </span>
-                    them. New button has been added to each character owned by the user called
-                    <span className="yellow-highlight"> "Store"</span>.
-                    Builds can be previewed from the new section in the
-                    <span style={{fontSize: '15px'}}>
-                        <span className="yellow-highlight"> Profile</span>{`>`}
-                        <span className="yellow-highlight">Profile Storage</span>{`>`}
-                        <span className="yellow-highlight">Build Storage</span>
+                    <span className="yellow-highlight"> store</span> and  <span className="yellow-highlight">share </span>
+                    his own <span className="yellow-highlight">fashion</span>,
+                    <span className="yellow-highlight"> equipment </span>
+                    and  <span className="yellow-highlight">builds statically</span>.
+                    New buttons have been added to each character owned by the user called
+                    <span className="yellow-highlight"> "Store Fashion"</span>,
+                    <span className="yellow-highlight"> "Store Equipment" </span>
+                    and just<span className="yellow-highlight"> "Store"</span> for the Builds.
+                    The stored info can be previewed from the new sections in the
+                    <span style={{ fontSize: '15px' }}>
+                        <span className="yellow-highlight"> Profile </span>{`>`}
+                        <span className="yellow-highlight"> Profile Storage</span>
                     </span>.
                 </span>
             ),

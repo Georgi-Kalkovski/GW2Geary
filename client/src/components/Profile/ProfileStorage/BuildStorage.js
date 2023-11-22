@@ -56,7 +56,7 @@ function BuildStorage() {
 
     const deleteStoredBuild = useCallback((storedBuildId) => {
         if (deleteConfirmation === storedBuildId) {
-            AuthService.deleteFashion(storedBuildId)
+            AuthService.deleteBuild(storedBuildId)
                 .then((response) => {
                     const user = JSON.parse(localStorage.getItem('user')) || {};
                     const updatedStoredBuilds = user.storedBuilds.filter(build => build.id !== storedBuildId);

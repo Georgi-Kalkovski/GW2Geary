@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import StoreFashion from '../../Profile/store.png';
+import StoreEquipment from '../../Profile/store.png';
 
-function FashionSaveButton({ char, currentUser, items, slider }) {
+function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slider }) {
 
     const navigate = useNavigate();
     const ip = 'http://localhost:3001/api';
@@ -13,15 +13,23 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
         gender: null,
         race: null,
         profession: null,
+        relic: null,
+        powerCore: null,
         equipment: []
     });
-
     useEffect(() => {
         async function saveFormData() {
-            if (formData.owner && formData.name && formData.gender && formData.race && formData.profession) {
+            if (formData.owner &&
+                formData.name &&
+                formData.gender &&
+                formData.race &&
+                formData.profession &&
+                formData.relic &&
+                formData.powerCore
+                ) {
                 try {
                     const response = await axios.put(
-                        `${ip}/auth/users/fs/${formData.name}`,
+                        `${ip}/auth/users/eqs/${formData.name}`,
                         formData,
                         {
                             headers: {
@@ -30,15 +38,15 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
                             },
                         }
                     );
-                    console.log('Fashion stored successfully');
-                    navigate(`/fs/${response.data.name}/${response.data._id}`);
+                    console.log('Equipment stored successfully');
+                    navigate(`/eqs/${response.data.name}/${response.data._id}`);
                     const user = JSON.parse(localStorage.getItem('user')) || {};
 
                     const currentDate = new Date();
                     const updatedUser = {
                         ...user,
-                        storedFashion: [
-                            ...user.storedFashion?.filter(fashion => fashion.id !== response.data.id),
+                        storedEquipment: [
+                            ...user.storedEquipment?.filter(equipment => equipment.id !== response.data.id),
                             {
                                 char: response.data.name,
                                 id: response.data._id,
@@ -64,18 +72,20 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
         if (char && currentUser) {
 
             const user = JSON.parse(localStorage.getItem('user')) || {};
-            const { storedFashion } = user;
-            if (storedFashion && storedFashion.length >= 15) {
-                alert('You have reached the maximum limit of stored fashion (15).');
+            const { storedEquipment } = user;
+            if (storedEquipment && storedEquipment.length >= 15) {
+                alert('You have reached the maximum limit of stored equipment (15).');
                 return;
             }
 
-            const modifiedItems = items.map(item => ({
+            const modifiedItems = items.map(item => (console.log(item),{
                 id: item.id,
                 skin: slider ? item.skin : undefined,
                 slot: item.slot,
                 dyes: item.dyes,
-                infusions: item.infusions
+                infusions: item.infusions,
+                upgrades: item.upgrades,
+                stats: item.stats
             }));
 
             setFormData(prevFormData => ({
@@ -85,17 +95,19 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
                 gender: char.gender,
                 race: char.race,
                 profession: char.profession,
-                equipment: modifiedItems
+                relic: relic[0].id,
+                powerCore: powerCore[0].id,
+                equipment: modifiedItems,
             }));
         }
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit}>
-            <img src={StoreFashion} alt='StoreFashion' />
-            <div className='nav-a' style={{marginLeft:'-2px', display: 'inline-block', fontSize: '10px' }}>Store Fashion</div>
+        <button type='button' className='game-button' onClick={handleSubmit} style={{marginTop:'25px'}}>
+            <img src={StoreEquipment} alt='StoreEquipment' />
+            <div className='nav-a' style={{ marginLeft: '-8px', display: 'inline-block', fontSize: '10px' }}>Store Equipment</div>
         </button >
     )
 }
 
-export default FashionSaveButton;
+export default EquipmentSaveButton;

@@ -119,4 +119,19 @@ router.delete(
   controller.deleteFashion
 );
 
+router.put(
+  "/users/eqs/:name",
+  controller.setEquipment
+);
+
+router.get(
+  "/users/eqs/:name/:id",
+  controller.getEquipment
+);
+
+router.delete(
+  '/storedEquipment/:storedEquipmentId',
+  controller.deleteEquipment
+);
+
 module.exports = router;

@@ -3,18 +3,18 @@ import AuthService from "../../../services/auth.service";
 import { useState, useCallback, useEffect } from "react";
 import { specIcons } from '../../Character/Build/specIcons';
 import { genderIcons,wikiBigRacesColoredIcons } from '../../icons';
-import CopyFashion from '../copy.png';
-import ApplyFashion from '../apply.png';
+import CopyEquipment from '../copy.png';
+import ApplyEquipment from '../apply.png';
 
-function FashionStorage() {
+function EquipmentStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-    const fetchStoredFashion = useCallback(async () => {
+    const fetchStoredEquipment = useCallback(async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user')) || {};
-            setStorage(user.storedFashion || []);
+            setStorage(user.storedEquipment || []);
         } catch (error) {
-            console.error('Error fetching stored fashion:', error);
+            console.error('Error fetching stored equipment:', error);
         }
     }, []);
 
@@ -22,20 +22,20 @@ function FashionStorage() {
         const fetchData = async () => {
             try {
                 const user = await AuthService.getUser();
-                setStorage(user.storedFashion || []);
+                setStorage(user.storedEquipment || []);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         };
 
         fetchData();
-        fetchStoredFashion();
+        fetchStoredEquipment();
 
-    }, [fetchStoredFashion]);
+    }, [fetchStoredEquipment]);
 
     const [copiedMap, setCopiedMap] = useState({});
 
-    const copyFashionLink = (link, storedId) => {
+    const copyEquipmentLink = (link, storedId) => {
         const correctedLink = link.replaceAll(' ', '_');
         const fullLink = `${window.location.origin}${correctedLink}`;
         navigator.clipboard.writeText(fullLink)
@@ -52,29 +52,29 @@ function FashionStorage() {
                 }, 800);
             })
             .catch((error) => {
-                console.error('Error copying full fashion link:', error);
+                console.error('Error copying full equipment link:', error);
             });
     };
 
-    const deleteStoredFashion = useCallback((storedFashionId) => {
-        if (deleteConfirmation === storedFashionId) {
-            AuthService.deleteFashion(storedFashionId)
+    const deleteStoredEquipment = useCallback((storedEquipmentId) => {
+        if (deleteConfirmation === storedEquipmentId) {
+            AuthService.deleteEquipment(storedEquipmentId)
                 .then((response) => {
                     const user = JSON.parse(localStorage.getItem('user')) || {};
-                    const updatedStoredFashion = user.storedFashion.filter(fashion => fashion.id !== storedFashionId);
+                    const updatedStoredEquipment = user.storedEquipment.filter(equipment => equipment.id !== storedEquipmentId);
                     const updatedUser = {
                         ...user,
-                        storedFashion: updatedStoredFashion,
+                        storedEquipment: updatedStoredEquipment,
                     };
                     localStorage.setItem('user', JSON.stringify(updatedUser));
-                    setStorage(updatedStoredFashion);
+                    setStorage(updatedStoredEquipment);
                     setDeleteConfirmation(null);
                 })
                 .catch((error) => {
-                    console.error("Error deleting stored fashion:", error);
+                    console.error("Error deleting stored equipment:", error);
                 });
         } else {
-            setDeleteConfirmation(storedFashionId);
+            setDeleteConfirmation(storedEquipmentId);
         }
     }, [deleteConfirmation]);
 
@@ -95,7 +95,7 @@ function FashionStorage() {
                 <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
-                            <Link className="flex profile-storage-first-child" title="Redirect to Fashion" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/fs/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
+                            <Link className="flex profile-storage-first-child" title="Redirect to Equipment" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/eqs/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
                                 
                                 <div className=" font-size-20px yellow-highlight profile-names">
                                     {stored.char}
@@ -133,17 +133,17 @@ function FashionStorage() {
                                 title='Copy Link'
                                 className='game-button'
                                 style={{ background: 'none' }}
-                                onClick={() => copyFashionLink(`/fs/${stored.char}/${stored.id}`, stored.id)}
+                                onClick={() => copyEquipmentLink(`/eqs/${stored.char}/${stored.id}`, stored.id)}
                             >
-                                <img src={copiedMap[stored.id] ? ApplyFashion : CopyFashion} alt={copiedMap[stored.id] ? 'ApplyFashion' : 'StoreFashion'} />
+                                <img src={copiedMap[stored.id] ? ApplyEquipment : CopyEquipment} alt={copiedMap[stored.id] ? 'ApplyEquipment' : 'StoreEquipment'} />
                             </button>
 
                             {deleteConfirmation === stored.id ? (
                                 <>
-                                    <button className="basic-button delete-button" onClick={() => deleteStoredFashion(stored.id)}>Confirm</button>
+                                    <button className="basic-button delete-button" onClick={() => deleteStoredEquipment(stored.id)}>Confirm</button>
                                 </>
                             ) : (
-                                <button className="basic-button delete-button" onClick={() => deleteStoredFashion(stored.id)}>Delete</button>
+                                <button className="basic-button delete-button" onClick={() => deleteStoredEquipment(stored.id)}>Delete</button>
                             )
                             }
                             <div>
@@ -151,10 +151,10 @@ function FashionStorage() {
                         </div >
                     ))}
                 </div >
-                : <div className="flex center">No Fashion Stored</div>
+                : <div className="flex center">No Equipment Stored</div>
             }
         </>
     );
 }
 
-export default FashionStorage;
+export default EquipmentStorage;

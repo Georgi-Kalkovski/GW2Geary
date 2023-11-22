@@ -8,6 +8,7 @@ db.mongoose = mongoose;
 db.user = require("./user.model");
 db.bldsave = require("./bldsave.model");
 db.fsave = require("./fsave.model");
+db.eqsave = require("./eqsave.model");
 db.role = require("./role.model");
 
 db.ROLES = ["user", "admin", "moderator"];

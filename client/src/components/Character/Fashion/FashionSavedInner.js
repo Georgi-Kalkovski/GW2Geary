@@ -110,7 +110,7 @@ function FashionSavedInner({ items, embed, char, slider }) {
                 </Container>
                 {
                     !embed && items && char &&
-                    <ChatLinks items={items} prof={char?.profession} fashion={true} />
+                    <div style={window.innerWidth > 900 ? { marginTop: '-30px' } : {}}><ChatLinks items={items} prof={char?.profession} fashion={true} /></div>
                 }
             </div>
         </Container >

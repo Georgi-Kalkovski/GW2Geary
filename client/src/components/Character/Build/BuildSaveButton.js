@@ -112,7 +112,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit}>
+        <button type='button' className='game-button' onClick={handleSubmit} style={window.innerWidth > 900 ? { marginTop: '-8px' } : {}}>
             <img src={StoreBuild} alt='StoreBuild' />
             <div className='nav-a'>Store</div>
         </button >
