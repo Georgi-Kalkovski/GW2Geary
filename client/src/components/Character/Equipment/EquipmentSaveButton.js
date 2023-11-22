@@ -6,7 +6,7 @@ import StoreEquipment from '../../Profile/store.png';
 function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slider }) {
 
     const navigate = useNavigate();
-    const ip = 'http://localhost:3001/api';
+    const ip = 'https://gw2geary.com/api';
     const [formData, setFormData] = useState({
         owner: null,
         name: null,
