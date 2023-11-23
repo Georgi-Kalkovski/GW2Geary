@@ -7,6 +7,7 @@ import ProfileStorage from "./Profile/ProfileStorage";
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
   const activeButtonFromStorage = localStorage.getItem("activeButton");
+  const [showMessage, setShowMessage] = useState(localStorage.getItem('showMessage'));
   const [showProfileInfo, setShowProfileInfo] = useState(
     activeButtonFromStorage === "profileInfo"
   );
@@ -49,6 +50,16 @@ const Profile = () => {
     }
   }, [showProfileInfo, showProfileApis, showProfileStorage]);
 
+  useEffect(() => {
+    const showMessageStatus = localStorage.getItem('showMessage');
+    setShowMessage(showMessageStatus !== 'false');
+  }, []);
+
+  const handleClose = () => {
+    setShowMessage(false);
+    localStorage.setItem('showMessage', 'false');
+  };
+
   return (
     <div>
       {currentUser && (
@@ -88,7 +99,20 @@ const Profile = () => {
                 AuthService={AuthService}
               />
             )}
+            {showMessage === true && (
+              <div className="flex center" >
+                <div className="flex center" style={{ backgroundColor: '#ff3b3b', padding: '0 10px' }}>
+                  <div>
+                    <span style={{ fontSize: '18px' }}>Important!</span> If you are missing information, please Logout and Login again.
+                  </div>
+                  <div onClick={handleClose} style={{ marginLeft: '5px', cursor: 'pointer', fontSize: '20px' }}>
+                    ✖
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+
           <br />
         </>
       )}
