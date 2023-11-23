@@ -123,20 +123,12 @@ router.get('/c/:name', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
-router.get('/f/:name', (req, res) => {
+router.get('/f/:name/:id', (req, res) => {
     const { name } = req.params;
+    const { id } = req.params;
     pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
-    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
-    pageOgUrl = `https://gw2geary.com/f/${name}/`
-
-    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
-})
-
-router.get('/fsave/:name', (req, res) => {
-    const { name } = req.params;
-    pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
-    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
-    pageOgUrl = `https://gw2geary.com/f/${name}/`
+    pageDescription = `Find more information about the character - ${name ? ' ' + name.replace('_', ' ') : '.'}`;
+    pageOgUrl = `https://gw2geary.com/f/${name}/${id}`
 
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
