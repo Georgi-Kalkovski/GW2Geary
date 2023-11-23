@@ -87,9 +87,22 @@ const FashionSaved = () => {
             {pathname.split('/')[1] === 'f'
                 ? (
                     <div style={{ position: 'absolute', marginTop: '-10px', marginLeft: '10px' }}>
-                        {mergedItems !== undefined &&
-                            <FashionSavedInner items={mergedItems} char={fashion} embed={true} slider={true} />
-                        }
+                        {isLoading ? (
+                            <Container className='center-items equipment equipment-fashion'>
+                                <div className="flex">
+                                    <div className="logo-loading-div" style={{ top: '170px', left: '135px' }}>
+                                        <img src={Dragon} alt="" className="logo--loading-dragon" />
+                                        <img src={Cog} alt="" className="logo-loading-cog" />
+                                    </div>
+                                </div>
+                            </Container>
+                        ) : (
+                            <div>
+                                {mergedItems !== undefined && (
+                                    <FashionSavedInner items={mergedItems} char={fashion} embed={true} slider={true} />
+                                )}
+                            </div>
+                        )}
                     </div>
                 )
                 : <div className='flex center'>
