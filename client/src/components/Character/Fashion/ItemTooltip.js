@@ -269,7 +269,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                         <br />
 
                         {/* Check if loading */}
-                        {loading ? (
+                        {loading && embed === false ? (
                             <div style={{ height: '-50px' }}>
                                 <div className="flex logo-spin logo-spin-loading">
                                     <div className="logo-div">

@@ -34,6 +34,7 @@ const App = () => {
   const { pathname } = useLocation();
   const isEmbed = matchPath('/f/*', pathname);
 
+
   useEffect(() => {
     EventBus.on("logout", () => {
       logOut();
@@ -61,9 +62,7 @@ const App = () => {
     <>
       {isEmbed
         ? <Routes>
-          <Route path="/f/:name" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
-          <Route path="/f/:name/:eq" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
-          <Route path="/f/:name/:eq/:bld" element={<ErrorBoundary><CharacterFashionEmbed /></ErrorBoundary>} />
+          <Route path="/f/:name/:id" element={<ErrorBoundary><FashionSaved /></ErrorBoundary>} />
         </Routes>
         : <div className="App">
           <nav className="app-nav">

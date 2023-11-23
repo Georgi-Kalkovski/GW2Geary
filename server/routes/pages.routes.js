@@ -132,6 +132,15 @@ router.get('/f/:name', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
+router.get('/fsave/:name', (req, res) => {
+    const { name } = req.params;
+    pageTitle = `GW2Geary - ${name ? name.replace('_', ' ') : 'Character'}`;
+    pageDescription = `Find more information about the character${name ? ' ' + name.replace('_', ' ') : '.'}`;
+    pageOgUrl = `https://gw2geary.com/f/${name}/`
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+})
+
 router.get('/reset-password', (req, res) => {
     pageTitle = `GW2Geary - Reset Password`;
     pageDescription = `Change the password of your user`;
