@@ -87,7 +87,7 @@ const FashionSaved = () => {
             {pathname.split('/')[1] === 'f'
                 ? (
                     <div style={{ position: 'absolute', marginTop: '-10px', marginLeft: '10px' }}>
-                        {isLoading ? (
+                        {/* {isLoading ? (
                             <Container className='center-items equipment equipment-fashion'>
                                 <div className="flex">
                                     <div className="logo-loading-div" style={{ top: '170px', left: '135px' }}>
@@ -96,20 +96,20 @@ const FashionSaved = () => {
                                     </div>
                                 </div>
                             </Container>
-                        ) : (
-                            <div>
-                                {mergedItems !== undefined && (
-                                    <FashionSavedInner items={mergedItems} char={fashion} embed={true} slider={true} />
-                                )}
-                            </div>
-                        )}
+                        ) : ( */}
+                        <div>
+                            {mergedItems !== undefined && (
+                                <FashionSavedInner items={mergedItems} char={fashion} embed={true} slider={true} />
+                            )}
+                        </div>
+                        {/* )} */}
                     </div>
                 )
                 : <div className='flex center'>
                     {fashion && (
                         <div className={`equipment-save ${fashion.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                             <div className="dropdown">
-                                {/* {isLoading ? (
+                                {isLoading ? (
                                     <div className='logo-equipment-width'>
                                         <div className="flex center">
                                             <div className="logo-loading-div-equipment">
@@ -118,7 +118,7 @@ const FashionSaved = () => {
                                             </div>
                                         </div>
                                     </div>
-                                ) : ( */}
+                                ) : (
                                     <Container className='spec-box logo-equipment-width' style={{ marginTop: 0 }}>
                                         <div>
                                             <BackButton />
@@ -143,7 +143,7 @@ const FashionSaved = () => {
                                             }
                                         </div>
                                     </Container>
-                                {/* )} */}
+                                )}
                             </div>
                         </div>
                     )}
