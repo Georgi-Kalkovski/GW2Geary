@@ -109,7 +109,7 @@ const FashionSaved = () => {
                     {fashion && (
                         <div className={`equipment-save ${fashion.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                             <div className="dropdown">
-                                {isLoading ? (
+                                {/* {isLoading ? (
                                     <div className='logo-equipment-width'>
                                         <div className="flex center">
                                             <div className="logo-loading-div-equipment">
@@ -118,7 +118,7 @@ const FashionSaved = () => {
                                             </div>
                                         </div>
                                     </div>
-                                ) : (
+                                ) : ( */}
                                     <Container className='spec-box logo-equipment-width' style={{ marginTop: 0 }}>
                                         <div>
                                             <BackButton />
@@ -143,7 +143,7 @@ const FashionSaved = () => {
                                             }
                                         </div>
                                     </Container>
-                                )}
+                                {/* )} */}
                             </div>
                         </div>
                     )}
