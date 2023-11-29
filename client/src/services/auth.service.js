@@ -187,6 +187,7 @@ const setBuild = async (name) => {
         profession,
         spec,
         skills,
+        bldname,
         aquatic_skills,
         specializations,
       },
@@ -308,6 +309,7 @@ const setEquipment = async (name) => {
         profession,
         relic,
         powerCore,
+        eqname,
         equipment: modifiedEquipment
       },
       {

@@ -18,6 +18,10 @@ const EqSaveSchema = new mongoose.Schema({
     profession: String,
     relic: Number,
     powerCore: Number,
+    eqname: {
+        type: String,
+        required: false
+    },
     equipment: [EquipmentSchema]
 }, { versionKey: false });
 

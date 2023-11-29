@@ -10,6 +10,10 @@ const BldSaveSchema = new mongoose.Schema({
     name: String,
     profession: String,
     spec: String,
+    bldname: {
+        type: String,
+        required: false
+    },
     skills: {
         heal: Number,
         utilities: [Number],

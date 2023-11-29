@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StoreEquipment from '../../Profile/store.png';
 
-function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slider }) {
-
+function EquipmentSaveButton({ tab, char, currentUser, items, relic, powerCore, slider }) {
     const navigate = useNavigate();
     const ip = 'https://gw2geary.com/api';
     const [formData, setFormData] = useState({
@@ -15,6 +14,7 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
         profession: null,
         relic: null,
         powerCore: null,
+        eqname: null,
         equipment: []
     });
     useEffect(() => {
@@ -25,8 +25,9 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
                 formData.race &&
                 formData.profession &&
                 formData.relic &&
-                formData.powerCore
-                ) {
+                formData.powerCore &&
+                formData.eqname
+            ) {
                 try {
                     const response = await axios.put(
                         `${ip}/auth/users/eqs/${formData.name}`,
@@ -53,6 +54,7 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
                                 gender: char.gender,
                                 race: char.race,
                                 profession: char.profession,
+                                eqname: tab?.name,
                                 creationDate: currentDate
                             }
                         ]
@@ -66,7 +68,7 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
         }
 
         saveFormData();
-    }, [formData, currentUser?.accessToken, ip, navigate, char]);
+    }, [formData, tab.name, currentUser?.accessToken, ip, navigate, char]);
 
     const handleSubmit = () => {
         if (char && currentUser) {
@@ -78,7 +80,7 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
                 return;
             }
 
-            const modifiedItems = items.map(item => (console.log(item),{
+            const modifiedItems = items.map(item => ({
                 id: item.id,
                 skin: slider ? item.skin : undefined,
                 slot: item.slot,
@@ -97,13 +99,14 @@ function EquipmentSaveButton({ char, currentUser, items, relic, powerCore, slide
                 profession: char.profession,
                 relic: relic[0].id,
                 powerCore: powerCore[0].id,
+                eqname: tab.name,
                 equipment: modifiedItems,
             }));
         }
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit} style={{marginTop:'25px'}}>
+        <button type='button' className='game-button' onClick={handleSubmit} style={{ marginTop: '25px' }}>
             <img src={StoreEquipment} alt='StoreEquipment' />
             <div className='nav-a' style={{ marginLeft: '-8px', display: 'inline-block', fontSize: '10px' }}>Store Equipment</div>
         </button >

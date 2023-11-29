@@ -6,12 +6,10 @@ import './Equipment.css';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 import EquipmentStats from './EquipmentStats';
-import EquipmentFashion from '../Fashion/Equipment';
 import ChatLinks from './ChatLinks';
 import AuthService from '../../../services/auth.service';
 
 function EquipmentSavedInner({ items, prof, slider, prefixSlider, powerCore, relic }) {
-    console.log('items', items)
     const currentUser = AuthService.getCurrentUser();
     const [isLoading, setIsLoading] = useState(true);
 

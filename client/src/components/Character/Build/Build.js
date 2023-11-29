@@ -72,7 +72,7 @@ function Build({ setBuild, setSpec, tab, char }) {
                             {currentUser?.apiKeys?.find(key => key.accountName === localStorage.getItem('acc')) &&
                                 <div className='flex column' style={{ position: 'absolute', right: '10px', top: '-50px' }}>
                                     <div>
-                                        <BuildSaveButton tab={tab} char={char} currentUser={currentUser} spec={specializations[2].specialization.name}/>
+                                        <BuildSaveButton tab={tab} char={char} currentUser={currentUser} spec={specializations[2]?.specialization?.name}/>
                                     </div>
                                 </div>
                             }

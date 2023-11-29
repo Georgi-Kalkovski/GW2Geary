@@ -94,8 +94,9 @@ function BuildStorage() {
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
                             <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
-                                <div className=" font-size-20px yellow-highlight profile-names">
-                                    {stored.char}
+                                <div style={{ textAlign: 'right' }}>
+                                    <div className="font-size-20px yellow-highlight profile-names">{stored.char}</div>
+                                    <div style={{ fontSize: '10px' }}>{stored?.bldname}</div>
                                 </div>
                                 <img
                                     style={{ width: '30px', height: '30px' }}

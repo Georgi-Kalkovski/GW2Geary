@@ -58,7 +58,7 @@ function Equipment({ char, items, prof, build, slider, prefixSlider, fashionSlid
                                                 : { position: 'absolute', right: '30px', top: '-125px' }
                                             }>
                                             <div>
-                                                <EquipmentSaveButton items={items} char={char} slider={slider} currentUser={currentUser} relic={relic} powerCore={powerCore}/>
+                                                <EquipmentSaveButton tab={selectedEqTab} items={items} char={char} slider={slider} currentUser={currentUser} relic={relic} powerCore={powerCore} />
                                             </div>
                                         </div>
                                     }

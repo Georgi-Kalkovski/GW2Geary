@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useState, useCallback, useEffect } from "react";
 import { specIcons } from '../../Character/Build/specIcons';
-import { genderIcons,wikiBigRacesColoredIcons } from '../../icons';
+import { genderIcons, wikiBigRacesColoredIcons } from '../../icons';
 import CopyEquipment from '../copy.png';
 import ApplyEquipment from '../apply.png';
 
@@ -96,9 +96,10 @@ function EquipmentStorage() {
                     {storage.map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
                             <Link className="flex profile-storage-first-child" title="Redirect to Equipment" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/eqs/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
-                                
-                                <div className=" font-size-20px yellow-highlight profile-names">
-                                    {stored.char}
+
+                                <div style={{ textAlign: 'right' }}>
+                                    <div className="font-size-20px yellow-highlight profile-names">{stored.char}</div>
+                                    <div style={{ fontSize: '10px' }}>{stored?.eqname}</div>
                                 </div>
                                 <img
                                     style={{ width: '30px', height: '30px' }}
@@ -106,13 +107,13 @@ function EquipmentStorage() {
                                     alt=""
                                     title={stored.gender}
                                 />
-                                 <img
+                                <img
                                     style={{ width: '30px', height: '30px' }}
                                     src={wikiBigRacesColoredIcons[stored.race]}
                                     alt=""
                                     title={stored.race}
                                 />
-                                 <img
+                                <img
                                     style={{ width: '30px', height: '30px' }}
                                     src={specIcons[stored.profession.toLowerCase()]}
                                     alt=""
@@ -126,7 +127,7 @@ function EquipmentStorage() {
                                         {stored.creationDate.split('T')[0]}
                                     </div>
                                 </div>
-                                
+
                             </Link >
                             <button
                                 type='button'

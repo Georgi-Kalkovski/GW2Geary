@@ -54,6 +54,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                                 id: response.data._id,
                                 profession: char.profession,
                                 spec: builds.includes(spec.toLowerCase()) ? spec : char.profession,
+                                bldname: response.data.bldname,
                                 creationDate: currentDate
                             }
                         ]
@@ -78,13 +79,13 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                 alert('You have reached the maximum limit of stored builds (15).');
                 return;
             }
-
             setFormData(prevFormData => ({
                 ...prevFormData,
                 owner: currentUser.id,
                 name: char.name,
                 profession: char.profession,
                 spec: spec ? spec : char.profession,
+                bldname: tab.name,
                 skills: {
                     heal: tab.skills.heal,
                     utilities: [

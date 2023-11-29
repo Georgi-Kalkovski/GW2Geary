@@ -531,12 +531,13 @@ exports.updateCharacterStatus = async (req, res) => {
 // Set Build
 exports.setBuild = async (req, res) => {
   try {
-    const { owner, name, profession, spec, skills, aquatic_skills, specializations } = req.body;
+    const { owner, name, profession, spec, bldname, skills, aquatic_skills, specializations } = req.body;
     const newBuild = new BldSave({
       owner,
       name,
       profession,
       spec,
+      bldname,
       skills,
       aquatic_skills,
       specializations,
@@ -545,7 +546,7 @@ exports.setBuild = async (req, res) => {
     const savedBuild = await newBuild.save();
 
     const user = await User.findById(owner);
-    user.storedBuilds.push({ char: name, id: savedBuild._id, profession: savedBuild.profession, spec: savedBuild.spec });
+    user.storedBuilds.push({ char: name, id: savedBuild._id, profession: savedBuild.profession, spec: savedBuild.spec, bldname: savedBuild.bldname });
 
     await user.save();
 
@@ -680,7 +681,7 @@ exports.deleteFashion = async (req, res) => {
 // Set Equipment
 exports.setEquipment = async (req, res) => {
   try {
-    const { owner, name, gender, race, profession, relic, powerCore, equipment } = req.body;
+    const { owner, name, gender, race, profession, relic, powerCore, eqname, equipment } = req.body;
 
     const updatedEquipment = equipment.map(eq => {
       if (eq.dyes) {
@@ -703,6 +704,7 @@ exports.setEquipment = async (req, res) => {
       profession,
       relic,
       powerCore,
+      eqname,
       equipment: updatedEquipment,
     });
 
@@ -715,6 +717,7 @@ exports.setEquipment = async (req, res) => {
       gender: savedEquipment.gender,
       race: savedEquipment.race,
       profession: savedEquipment.profession,
+      eqname: savedEquipment.eqname
     });
 
     await user.save();

@@ -53,6 +53,10 @@ const UserSchema = new mongoose.Schema({
       id: String,
       profession: String,
       spec: String,
+      bldname: {
+        type: String,
+        required: false
+      },
       creationDate: {
         type: Date,
         default: Date.now
@@ -81,6 +85,10 @@ const UserSchema = new mongoose.Schema({
       gender: String,
       race: String,
       profession: String,
+      eqname: {
+        type: String,
+        required: false
+      },
       creationDate: {
         type: Date,
         default: Date.now
