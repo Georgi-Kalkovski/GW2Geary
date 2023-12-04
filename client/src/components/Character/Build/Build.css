@@ -209,6 +209,11 @@
 }
 
 @media (max-width: 900px) {
+
+    .profile-names {
+        font-size: 16px;
+      }
+
     .build {
         min-width: 350px !important;
         padding: 5px !important;

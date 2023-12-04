@@ -98,28 +98,22 @@ function EquipmentStorage() {
                             <Link className="flex profile-storage-first-child" title="Redirect to Equipment" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/eqs/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
 
                                 <div style={{ textAlign: 'right' }}>
-                                    <div className="font-size-20px yellow-highlight profile-names">{stored.char}</div>
-                                    <div style={{ fontSize: '10px' }}>{stored?.eqname}</div>
-                                </div>
+                                    <div
+                                        className="font-size-20px yellow-highlight profile-names"
+                                        style={window.innerWidth < 900
+                                            ? { fontSize: '15px' }
+                                            : {}}
+                                    >
+                                        {stored.char}
+                                    </div>
+                                    <div style={{ fontSize: '10px' }}>{stored?.eqname}</div></div>
                                 <img
-                                    style={{ width: '30px', height: '30px' }}
-                                    src={genderIcons[stored.gender]}
-                                    alt=""
-                                    title={stored.gender}
-                                />
-                                <img
-                                    style={{ width: '30px', height: '30px' }}
-                                    src={wikiBigRacesColoredIcons[stored.race]}
-                                    alt=""
-                                    title={stored.race}
-                                />
-                                <img
-                                    style={{ width: '30px', height: '30px' }}
+                                    style={window.innerWidth < 900 ? { width: '25px', height: '25px' } : { width: '30px', height: '30px' }}
                                     src={specIcons[stored.profession.toLowerCase()]}
                                     alt=""
                                     title={stored.profession}
                                 />
-                                <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
+                                <div style={window.innerWidth < 900 ? { marginLeft: '5px', marginRight: '5px', fontSize: '9px' } : { marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
                                         {stored.creationDate.split('T')[1].split('.')[0]}
                                     </div>
@@ -127,7 +121,6 @@ function EquipmentStorage() {
                                         {stored.creationDate.split('T')[0]}
                                     </div>
                                 </div>
-
                             </Link >
                             <button
                                 type='button'

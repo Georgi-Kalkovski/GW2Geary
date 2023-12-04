@@ -95,11 +95,17 @@ function BuildStorage() {
                         <div className="facts-div-profile api-right" key={stored.id}>
                             <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
                                 <div style={{ textAlign: 'right' }}>
-                                    <div className="font-size-20px yellow-highlight profile-names">{stored.char}</div>
-                                    <div style={{ fontSize: '10px' }}>{stored?.bldname}</div>
-                                </div>
+                                    <div
+                                        className="font-size-20px yellow-highlight profile-names"
+                                        style={window.innerWidth < 900
+                                            ? { fontSize: '15px' }
+                                            : {}}
+                                    >
+                                        {stored.char}
+                                    </div>
+                                    <div style={{ fontSize: '10px' }}>{stored?.bldname}</div></div>
                                 <img
-                                    style={{ width: '30px', height: '30px' }}
+                                    style={window.innerWidth < 900 ? { width: '25px', height: '25px' } : { width: '30px', height: '30px' }}
                                     src={
                                         specIcons[stored.spec.toLowerCase()]
                                             ? specIcons[stored.spec.toLowerCase()]
@@ -108,7 +114,7 @@ function BuildStorage() {
                                     alt=""
                                     title={specIcons[stored.spec.toLowerCase()] ? stored.spec : stored.profession}
                                 />
-                                <div style={{ marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
+                                <div style={window.innerWidth < 900 ? { marginLeft: '5px', marginRight: '5px', fontSize: '9px' } : { marginLeft: '5px', marginRight: '5px', fontSize: '12px' }}>
                                     <div>
                                         {stored.creationDate.split('T')[1].split('.')[0]}
                                     </div>
