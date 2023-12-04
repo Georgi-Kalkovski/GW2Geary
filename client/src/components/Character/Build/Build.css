@@ -210,9 +210,13 @@
 
 @media (max-width: 900px) {
 
+    .custom-checkbox {
+        font-size: 13.5px;
+    }
+
     .profile-names {
         font-size: 16px;
-      }
+    }
 
     .build {
         min-width: 350px !important;
