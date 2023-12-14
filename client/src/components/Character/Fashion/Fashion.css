@@ -55,9 +55,9 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
-    width: 17px;
-    height: 280px;
+    width: 15px;
+    height: 258px;
     padding: 0px;
-    font-size: 12px;
+    font-size: 10px;
     color: gray;
 }
