@@ -50,3 +50,14 @@
     margin-left: -20px;
     margin-top: 0px;
 }
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    width: 17px;
+    height: 280px;
+    padding: 0px;
+    font-size: 12px;
+    color: gray;
+}

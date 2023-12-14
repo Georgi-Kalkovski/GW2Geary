@@ -171,7 +171,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                                 }
                             }
                         }
-                        
+
                         // Weapons/Backpack Check
                         else {
                             const gearFound = await axios.get('https://wiki.guildwars2.com/api.php', {
@@ -302,18 +302,11 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
                         </div>
                     }
                     {/* ITEM ICON */}
-                    {embed !== true
-                        ? (item.skin_icon && item.skin_name && slider
-                            ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
-                                style={{ cursor: 'pointer' }} />
-                            : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
-                                style={{ cursor: 'pointer' }} />
-                        ) : (item.skin_icon && item.skin_name
-                            ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
-                                style={{ cursor: 'pointer' }} />
-                            : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
-                                style={{ cursor: 'pointer' }} />)
-
+                    {item.skin_icon && item.skin_name && slider
+                        ? <img className={`item-box box-gray`} src={item.skin_icon} alt={item.skin_icon}
+                            style={{ cursor: 'pointer' }} />
+                        : <img className={`item-box box-gray`} src={item.icon} alt={item.icon}
+                            style={{ cursor: 'pointer' }} />
                     }
 
                 </div>

@@ -5,6 +5,7 @@ import Dyes from './Dyes';
 import InfusionsTooltip from './InfusionsTooltip';
 import '../Equipment/Equipment.css';
 import ChatLinks from '../Equipment/ChatLinks';
+import { Link } from 'react-router-dom';
 
 function FashionSavedInner({ items, embed, char, slider }) {
     const infusions = [];
@@ -33,8 +34,8 @@ function FashionSavedInner({ items, embed, char, slider }) {
                             <ItemTooltip char={char} item={items.find(x => x.slot === 'Boots')} gear='Boots' slider={slider} embed={embed} />
                         </Col>
                     </Col>
-                    <Col>
-                        <Col className='flex column' style={embed || window.innerWidth < 900 ? { marginRight: '20px' } : { marginRight: '65px' }}>
+                    <Col style={embed ? { width: '62px' } : {}}>
+                        <Col className='flex column' style={embed || window.innerWidth < 900 ? embed === false ? { marginRight: '20px' } : {} : { marginRight: '45px' }}>
                             <Dyes item={items.find(x => x.slot === 'Helm')} slider={slider} embed={embed} />
                             <Dyes item={items.find(x => x.slot === 'Shoulders')} slider={slider} embed={embed} />
                             <Dyes item={items.find(x => x.slot === 'Coat')} slider={slider} embed={embed} />
@@ -43,6 +44,11 @@ function FashionSavedInner({ items, embed, char, slider }) {
                             <Dyes item={items.find(x => x.slot === 'Boots')} slider={slider} embed={embed} />
                         </Col>
                     </Col>
+                    {embed === true &&
+                        <div class="vertical-text flex">
+                            POWERED BY <Link to='https://gw2geary.com/' target="_blank" style={{ textDecoration: 'none' }}><span style={{ color: '#cd3333', paddingTop: '5px' }}>GW2</span><span style={{ color: '#b1b1b1' }}>GEARY</span><span style={{ color: '#cd3333' }}>.COM</span></Link>
+                        </div>
+                    }
                     <Col>
                         <Col className='flex column' style={{ marginRight: '5px' }}>
                             <ItemTooltip item={items.find(x => x.slot === 'Backpack')} gear='Backpack' slider={slider} embed={embed} />
@@ -88,20 +94,13 @@ function FashionSavedInner({ items, embed, char, slider }) {
                 </Container>
                 <Container
                     className="equipment-box"
-                    style={
-                        embed || window.innerWidth < 900
-                            ? {
-                                marginTop: '0px',
-                                marginLeft: '35px',
-                                marginRight: '35px',
-                                justifyContent: 'flex-start'
-                            } : {
-                                marginTop: '0px',
-                                marginLeft: '15px',
-                                marginRight: '15px',
-                                justifyContent: 'flex-start'
-                            }
-                    }>
+                    style={{
+                        marginTop: '0px',
+                        marginLeft: window.innerWidth < 900 ? (embed ? '1px' : '35px') : (embed ? '0px' : '22px'),
+                        marginRight: window.innerWidth < 900 ? (embed ? '0px' : '35px') : (embed ? '0px' : '22px'),
+                        justifyContent: 'flex-start'
+                    }}
+                >
                     <Col className='flex' style={{ flexWrap: 'wrap' }}>
                         {infusions && infusions.length > 0 && infusions.map(infusion => (
                             <InfusionsTooltip key={infusion.id} infusion={infusion} leng={infusions.length} slider={slider} embed={embed} />
@@ -112,7 +111,7 @@ function FashionSavedInner({ items, embed, char, slider }) {
                     !embed && items && char &&
                     <div style={window.innerWidth > 900 ? { marginTop: '-30px' } : {}}><ChatLinks items={items} prof={char?.profession} fashion={true} /></div>
                 }
-            </div>
+            </div >
         </Container >
     );
 }
