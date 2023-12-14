@@ -46,7 +46,7 @@ function FashionSavedInner({ items, embed, char, slider }) {
                     </Col>
                     {embed === true &&
                         <div class="vertical-text flex">
-                            POWERED BY <Link to='https://gw2geary.com/' target="_blank" style={{ textDecoration: 'none' }}><span style={{ color: '#cd3333', paddingTop: '5px' }}>GW2</span><span style={{ color: '#b1b1b1' }}>GEARY</span><span style={{ color: '#cd3333' }}>.COM</span></Link>
+                            POWERED BY <Link to='https://gw2geary.com/' target="_blank" style={{ textDecoration: 'none' }}><span style={{ color: '#b1b1b1', paddingTop: '5px' }}>GW2</span><span style={{ color: '#b1b1b1' }}>GEARY</span><span style={{ color: '#b1b1b1' }}>.COM</span></Link>
                         </div>
                     }
                     <Col>
