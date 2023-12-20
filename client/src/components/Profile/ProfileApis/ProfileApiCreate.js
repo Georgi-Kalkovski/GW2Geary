@@ -82,43 +82,49 @@ function ProfileApiCreate({ currentUser, fetchApiKeys, setApiKeys }) {
   return (
     <div className="flex center">
       <div className="api-info-field ">
-      <label htmlFor="apiKey">
-        Enter a valid API key created from{" "}
-        <Link style={{ color: '#d70000' }} to="https://account.arena.net/applications" target="_blank">
-          Guild Wars 2
-        </Link>
-        :
-      </label>
-      <input
-        type="text"
-        id="apiKey"
-        size="75"
-        className="form-control api-form-control"
-        placeholder="Add API Key here..."
-        value={apiKey}
-        onChange={handleApiKeyChange}
-        key="api-key-input"
-        onKeyDown={handleKeyPress}
-        name="add-api-key"
-      />
-      <button className="basic-button add-api-key-button" onClick={handleApiKeyCreate} key="add-api-key-button">
-        Add API Key
-      </button>
-      <br /><br />
-      {text !== null
-        ? <span>{text}</span>
-        : ''
-      }
-      {/* Loader */}
-      {loading && (
-        <div className="flex center">
-          <div className="logo-loading-div">
-            <img src={Dragon} alt="" className="logo--loading-dragon" />
-            <img src={Cog} alt="" className="logo-loading-cog" />
+        <label htmlFor="apiKey">
+          Enter a valid API key created from{" "}
+          <Link style={{ color: '#d70000' }} to="https://account.arena.net/applications" target="_blank">
+            Guild Wars 2
+          </Link> with the permissions
+          <span style={{ fontSize: '13px' }}> (<span className='yellow-highlight'></span>
+            <span className='yellow-highlight' style={{ borderBottom: '1px dotted' }}>account</span>
+            , <span className='yellow-highlight' style={{ borderBottom: '1px dotted' }}>characters</span>
+            , <span className='yellow-highlight' style={{ borderBottom: '1px dotted' }}>builds</span>
+            , <span className='yellow-highlight' style={{ borderBottom: '1px dotted' }}>progression</span>)
+            </span>
+            :
+        </label>
+        <input
+          type="text"
+          id="apiKey"
+          size="75"
+          className="form-control api-form-control"
+          placeholder="Add API Key here..."
+          value={apiKey}
+          onChange={handleApiKeyChange}
+          key="api-key-input"
+          onKeyDown={handleKeyPress}
+          name="add-api-key"
+        />
+        <button className="basic-button add-api-key-button" onClick={handleApiKeyCreate} key="add-api-key-button">
+          Add API Key
+        </button>
+        <br /><br />
+        {text !== null
+          ? <span>{text}</span>
+          : ''
+        }
+        {/* Loader */}
+        {loading && (
+          <div className="flex center">
+            <div className="logo-loading-div">
+              <img src={Dragon} alt="" className="logo--loading-dragon" />
+              <img src={Cog} alt="" className="logo-loading-cog" />
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
     </div>
   );
 }
