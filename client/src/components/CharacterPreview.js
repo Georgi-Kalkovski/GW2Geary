@@ -42,7 +42,7 @@ function CharacterPreview({ character, apiKey }) {
                             className="tgl tgl-skewed api-checkbox"
                             id={"cb3" + character.name}
                             type="checkbox"
-                            defaultChecked={apiKey.active}
+                            defaultChecked={character.active}
                             onChange={(e) => updateCharacterStatus(e.target.checked)}
                             key={`api-key-checkbox-${apiKey._id}`}
 
