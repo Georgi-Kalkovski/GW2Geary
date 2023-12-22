@@ -25,14 +25,14 @@ const BackButton = () => {
         >
             <img
                 className='game-button'
-                style={ { width: '40px' }}
+                style={{ width: '40px' }}
                 src={ArrowBack}
                 title='Back'
                 alt="Back"
             />
             <div
                 className='nav-a'
-                style={{  marginTop: '-5px' }}
+                style={{ marginTop: '-5px', marginLeft: '6px' }}
             >
                 Back
             </div>

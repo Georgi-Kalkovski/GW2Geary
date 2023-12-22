@@ -14,7 +14,7 @@ function NewsList({ isSearchNews, limit }) {
                     New buttons have been added to each character owned by the user called
                     <span className="yellow-highlight"> "Store Fashion"</span>,
                     <span className="yellow-highlight"> "Store Equipment" </span>
-                    and just<span className="yellow-highlight"> "Store"</span> for the Builds.
+                    and just<span className="yellow-highlight"> "Store Build"</span> for the Builds.
                     The stored info can be previewed from the new sections in the
                     <span style={{ fontSize: '15px' }}>
                         <span className="yellow-highlight"> Profile </span>{`>`}

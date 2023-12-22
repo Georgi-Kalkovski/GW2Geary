@@ -113,10 +113,10 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit} style={window.innerWidth > 900 ? { marginTop: '-8px' } : {}}>
-            <img src={StoreBuild} alt='StoreBuild' />
-            <div className='nav-a'>Store</div>
-        </button >
+<button type='button' className='game-button' onClick={handleSubmit}>
+<img src={StoreBuild} alt='StoreFashion' />
+<div className='nav-a' style={{marginLeft:'4px', display: 'inline-block', fontSize: '10px' }}>Store Build</div>
+</button >
     )
 }
 
