@@ -11,7 +11,10 @@ const DyesTooltip = ({ dye, box, className }) => {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({
+    } = usePopperTooltip(innerWidth < 900
+        ? { placement: 'right' }
+        : { followCursor: true, placement: 'right-start', offset: [10, 10] },{
+        
         trigger: 'hover',
         placement: 'top-start',
         closeOnOutsideClick: false,

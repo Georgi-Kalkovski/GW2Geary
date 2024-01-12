@@ -236,7 +236,9 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip(window.innerWidth < 900 ? { placement: 'auto' } : { placement: 'right' });
+    } = usePopperTooltip(innerWidth < 900
+        ? { placement: 'auto' }
+        : { followCursor: true, placement: 'right-start', offset: [10, 10] });
 
     const [showWikiButton, setShowWikiButton] = useState(false);
 

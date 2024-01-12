@@ -4,7 +4,6 @@
   height: 100%;
   padding-top: 5px;
   justify-content: center;
-  transform: scale(95%);
   margin-top: -20px;
 }
 
@@ -127,7 +126,7 @@
   position: relative;
   background-color: #202124;
   padding: 10px;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .info-size {
@@ -382,6 +381,10 @@ input:checked+.slider:before {
   /* .facts-div-profile>div:first-child {
     max-width: 230px;
   } */
+
+  .acc-info-new {
+    margin-bottom: 0px;
+  }
 
   .profile-characters>div>a>div>.character-name-div.row>div {
     max-width: 80px;

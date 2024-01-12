@@ -13,7 +13,11 @@ function ItemTooltip({ item, gear, slider }) {
         setTooltipRef,
         setTriggerRef,
         visible,
-    } = usePopperTooltip({ placement: 'right' });
+    } = usePopperTooltip(
+        innerWidth < 900
+            ? { placement: 'right' }
+            : { followCursor: true, placement: 'right-start', offset: [10, 10] }
+    );
 
     const [showWikiButton, setShowWikiButton] = useState(false);
 
