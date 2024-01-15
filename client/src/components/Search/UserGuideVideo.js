@@ -33,7 +33,7 @@ function UserGuideVideo() {
 
                 <Row className='flex center'>
                     <li style={{ width: 'auto', listStyleType: 'none' }}>
-                        <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px' }}>
+                        <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px', cursor: 'pointer' }}>
                             <span style={{ fontSize: '1.3em', }}>
                                 Watch a User Guide video
                             </span>
