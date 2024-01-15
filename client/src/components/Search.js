@@ -12,6 +12,7 @@ import Filter from './Search/filter.svg';
 import SearchWelcome from './Search/SearchWelcome';
 import SearchNews from './Search/SearchNews';
 import SearchCounter from './Search/SearchCounter';
+import UserGuideVideo from './Search/UserGuideVideo';
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
@@ -325,6 +326,7 @@ function Search() {
           <div className='custom-scrollbar' style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
             {/* Empty Search Text */}
             <SearchWelcome />
+            <UserGuideVideo />
             <SearchNews />
             {currentUser && currentUser.username === 'Terter' &&
               <SearchCounter accounts={accounts} />

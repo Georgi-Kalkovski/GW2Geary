@@ -693,6 +693,21 @@ iframe {
   color: #f16565;
 }
 
+.video-body {
+  cursor: pointer;
+}
+
+.video-body:hover img {
+  filter: invert(119%) sepia(82%) saturate(5978%) hue-rotate(0deg) brightness(77%) contrast(107%);
+}
+
+.youtube-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 /* LIGHT MODE */
 
 body.light-theme {
@@ -705,7 +720,7 @@ body.light-theme {
   background: none;
   padding: 0;
   margin: 0;
-  margin-right:10px;
+  margin-right: 10px;
   cursor: pointer;
   outline: none;
   width: 30px;
@@ -744,6 +759,14 @@ body.light-theme .profile-box button,
 body.light-theme .equipment-save {
   background-color: rgb(255, 255, 255);
   color: #35363a;
+}
+
+body.light-theme .video-icon {
+  filter: brightness(0.2);
+}
+
+body.light-theme .video-body:hover img {
+  filter: invert(119%) sepia(82%) saturate(5978%) hue-rotate(0deg) brightness(77%) contrast(107%);
 }
 
 body.light-theme .profile-box button:hover {
