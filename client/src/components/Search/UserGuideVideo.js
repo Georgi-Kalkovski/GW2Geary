@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
-import YouTube from 'react-youtube';
 import Video from './video.png';
+import VideoLight from './video2.png';
 
 function UserGuideVideo() {
     const [playVideo, setPlayVideo] = useState(false);
+    const [isLightTheme, setIsLightTheme] = useState(document.body.classList.contains('light-theme'));
 
-    const opts = {
-        height: "400",
-        playerVars: {
-            autoplay: 1,
-            controls: 1,
-            origin: 'https://gw2geary.com/'
-        },
-    };
+    useEffect(() => {
+        const handleBodyClassChange = () => {
+            setIsLightTheme(document.body.classList.contains('light-theme'));
+        };
+
+        document.body.addEventListener('click', handleBodyClassChange);
+
+        return () => {
+            document.body.removeEventListener('click', handleBodyClassChange);
+        };
+    }, []);
 
     const handleClick = () => {
         setPlayVideo(true);
@@ -28,21 +32,26 @@ function UserGuideVideo() {
             <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
 
                 <Row className='flex center'>
-                    <li className='video-body' style={{ width: 'auto', listStyleType: 'none' }}>
-                        <a className='flex align nav-a' onClick={handleClick}>
-                            <span style={innerWidth < 900 ? { fontSize: '1.3em' } : { fontSize: '1.5em' }}>
+                    <li style={{ width: 'auto', listStyleType: 'none' }}>
+                        <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px' }}>
+                            <span style={{ fontSize: '1.3em', }}>
                                 Watch a User Guide video
                             </span>
-                            <img className='video-icon' src={Video} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "50px", display: "flex" }} alt="" />
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                            {!isLightTheme
+                                ? <img src={Video} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "45px", display: "flex" }} alt="" />
+                                : <img src={VideoLight} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "45px", display: "flex" }} alt="" />
+                            }
                         </a>
                     </li>
                 </Row>
 
-                 {playVideo && (
+                {playVideo && (
                     <div onClick={handleClose} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
                         <div style={{ position: 'relative', zIndex: 10000 }}>
-                            <YouTube videoId='L5Gq026_MIg' opts={opts} />
+                            {innerWidth < 900
+                                ? <iframe style={{ display: 'block', border: 'none' }} width="340" height="169.6" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                                : <iframe style={{ display: 'block', border: 'none' }} width="840" height="472.5" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                            }
                         </div>
                     </div>
                 )}

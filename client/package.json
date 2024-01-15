@@ -16,7 +16,6 @@
     "react-router-dom": "^6.11.1",
     "react-scripts": "^5.0.1",
     "react-share": "^4.4.1",
-    "react-youtube": "^10.1.0",
     "validator": "^13.9.0"
   },
   "scripts": {
