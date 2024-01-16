@@ -22,23 +22,28 @@ GW2Geary is a web application built with React that allows users to explore and 
 
 2. **Search Page**
 
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/caa81d1e-1ba2-4b75-a81b-ff6457240ac8)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/4ca098e8-32b9-4e16-bc53-288d1818e071)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/9556cf86-19b3-44d5-8591-972c3b212bfd)
 
 
-3. **Account Page**
+4. **Account Page**
 
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/e0900ed5-a05d-427d-b32d-5e7b95fbd290)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/5f961026-3eac-48b5-af4d-88f19eb7d26e)
 
-5. **Character Page**
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/57a755e9-f200-41bb-a9ce-5e8eaa0555d3)
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cd3888e2-5d24-4e04-8acc-907641ac502b)
+6. **Character Page**
+
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/9c3382f7-227f-4b83-8ed7-bf6c15a4fb3d)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/1206e937-aca4-43d9-9241-785c425cd15e)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/e2f664a8-74cd-4810-98cf-dd885dcf30db)
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/7a231a41-8b0f-479f-9182-a5479b86cc47)
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cdc8dabd-f863-4552-a232-720b7da6ac41)
 
-6. **Profile Page - Profile Info, Profile Apis**
+8. **Profile Page - Profile Info, Profile Apis, Profile Storage**
 
 ![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/ede9e6d0-fd39-487c-bb9d-529942382029)
-![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/861b61fb-43e0-4c0b-8955-4dc93ae1ca6d)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/cfa3ac16-7cbf-4211-bb9a-34d50d50ac4e)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/7042d09f-bdfc-4e25-9ca4-700b0e1bb770)
+![image](https://github.com/Georgi-Kalkovski/GW2Geary/assets/54138918/b76c9d5b-f3bf-487e-8d88-78d5da78ba2d)
 
 ## Acknowledgements
 
