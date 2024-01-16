@@ -5,17 +5,20 @@ import VideoLight from './video2.png';
 
 function UserGuideVideo() {
     const [playVideo, setPlayVideo] = useState(false);
-    const [isLightTheme, setIsLightTheme] = useState(document.body.classList.contains('light-theme'));
+    const [isLightTheme, setIsLightTheme] = useState(null);
+
+    const handleThemeChange = () => {
+        const isLight = document.body.classList.contains('light-theme');
+        setIsLightTheme(isLight);
+    };
 
     useEffect(() => {
-        const handleBodyClassChange = () => {
-            setIsLightTheme(document.body.classList.contains('light-theme'));
-        };
+        handleThemeChange();
 
-        document.body.addEventListener('click', handleBodyClassChange);
-
+        document.body.addEventListener('click', handleThemeChange);
+        
         return () => {
-            document.body.removeEventListener('click', handleBodyClassChange);
+            document.body.removeEventListener('click', handleThemeChange);
         };
     }, []);
 
@@ -30,14 +33,13 @@ function UserGuideVideo() {
     return (
         <Container className="flex center">
             <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
-
                 <Row className='flex center'>
                     <li style={{ width: 'auto', listStyleType: 'none' }}>
                         <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px', cursor: 'pointer' }}>
-                            <span style={{ fontSize: '1.3em', }}>
+                            <span style={{ fontSize: '1.3em' }}>
                                 Watch a User Guide video
                             </span>
-                            {!isLightTheme
+                            {isLightTheme === false
                                 ? <img src={Video} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "45px", display: "flex" }} alt="" />
                                 : <img src={VideoLight} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "45px", display: "flex" }} alt="" />
                             }
