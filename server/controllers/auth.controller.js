@@ -221,7 +221,7 @@ exports.getAccount = async (req, res) => {
 
     // Split the URL by '/' and get the last part
     const urlParts = fullUrl.split('name=');
-    const lastPart = urlParts[urlParts.length - 1].replace(/\+/g, ' ');
+    const lastPart = decodeURIComponent(urlParts[urlParts.length - 1].replace(/\+/g, ' '));
 
     const foundUser = await User.findOne({
       'apiKeys.accountName': lastPart
@@ -249,7 +249,7 @@ exports.getCharacter = async (req, res) => {
 
     // Split the URL by '/' and get the last part
     const urlParts = fullUrl.split('name=');
-    const lastPart = urlParts[urlParts.length - 1].replace(/\+/g, ' ');
+    const lastPart = decodeURIComponent(urlParts[urlParts.length - 1].replace(/\+/g, ' '));
 
     const foundUser = await User.findOne({
       'apiKeys.characters.name': lastPart
