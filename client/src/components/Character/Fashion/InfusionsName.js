@@ -47,9 +47,11 @@ const InfusionsName = (name) => {
         "Clockwork Infusion",
         "Mistwalker Infusion",
         "Mote of Darkness",
-        "Silent Symphony"
+        "Silent Symphony",
+        "Arcane Flow Infusion",
+        "Wurm's"
     ];
-    return allowedNames.includes(name);
+    return allowedNames.some(allowedName => name.includes(allowedName));;
 };
 
 export default InfusionsName;

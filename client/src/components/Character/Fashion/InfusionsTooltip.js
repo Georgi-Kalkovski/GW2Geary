@@ -18,6 +18,15 @@ function InfusionTooltip({ infusion, leng, embed }) {
             try {
                 setLoading(true);
                 if (infusion) {
+                    infusion.name = infusion.name.replace("of Concentration", "")
+                        .replace("of Condition Damage", "")
+                        .replace("of Expertise", "")
+                        .replace("of Healing Power", "")
+                        .replace("of Power", "")
+                        .replace("of Precision", "")
+                        .replace("of Toughness", "")
+                        .replace("of Vitality", "");
+
                     const response = await axios.get('https://wiki.guildwars2.com/api.php', {
                         params: {
                             action: 'query',
