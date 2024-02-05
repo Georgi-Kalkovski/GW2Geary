@@ -23,6 +23,7 @@ router.get(
 
 router.put(
   "/users/:userId/username",
+  authJwt.verifyToken,
   controller.changeUsername
 );
 
