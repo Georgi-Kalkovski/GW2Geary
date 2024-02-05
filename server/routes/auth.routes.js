@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
+const authJwt = require("../middlewares/authJwt");
 
 router.post(
   "/register",
@@ -16,6 +17,7 @@ router.post(
 
 router.get(
   "/getUser",
+  authJwt.verifyToken,
   controller.getUser
 );
 
@@ -26,16 +28,19 @@ router.put(
 
 router.put(
   "/users/:userId/email",
+  authJwt.verifyToken,
   controller.changeEmail
 );
 
 router.put(
   "/users/:userId/password",
+  authJwt.verifyToken,
   controller.changePassword
 );
 
 router.delete(
   "/users/:userId",
+  authJwt.verifyToken,
   controller.deleteUser
 );
 
