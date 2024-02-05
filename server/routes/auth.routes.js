@@ -23,25 +23,21 @@ router.get(
 
 router.put(
   "/users/:userId/username",
-  authJwt.verifyToken,
   controller.changeUsername
 );
 
 router.put(
   "/users/:userId/email",
-  authJwt.verifyToken,
   controller.changeEmail
 );
 
 router.put(
   "/users/:userId/password",
-  authJwt.verifyToken,
   controller.changePassword
 );
 
 router.delete(
   "/users/:userId",
-  authJwt.verifyToken,
   controller.deleteUser
 );
 
