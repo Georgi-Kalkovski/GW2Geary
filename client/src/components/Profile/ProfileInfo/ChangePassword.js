@@ -25,8 +25,8 @@ function ChangePassword({ currentUser, AuthService, EventBus }) {
       setErrorMessage("Password can only contain letters and numbers.");
       return;
     }
-    console.log(currentUser.password)
-    AuthService.changePassword(newPassword)
+
+    AuthService.changePassword(newPassword, currentUser.accessToken)
       .then((response) => {
         console.log(response.data.message);
         setShowNotification(true);

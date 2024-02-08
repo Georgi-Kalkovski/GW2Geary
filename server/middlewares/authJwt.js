@@ -15,10 +15,21 @@ verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
-    req.userId = decoded.id;
+    
+    req.token = decoded;
     next();
   });
 };
+
+verifySameUser = (req, res, next) => {
+  const { userId } = req.params;
+  const { token } = req;
+
+  if (token.id !== userId) {
+    return res.status(403).send({ message: "Forbidden: Access token does not match user" });
+  }
+  next();
+}
 
 isAdmin = (req, res, next) => {
   User.findById(req.userId)
@@ -70,6 +81,7 @@ isModerator = (req, res, next) => {
 
 const authJwt = {
   verifyToken,
+  verifySameUser,
   isAdmin,
   isModerator
 };

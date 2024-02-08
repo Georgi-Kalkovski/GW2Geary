@@ -44,7 +44,7 @@ function ChangeEmail({ currentUser, AuthService, EventBus }) {
           return;
         }
 
-        AuthService.changeEmail(newEmail)
+        AuthService.changeEmail(newEmail, currentUser.accessToken)
           .then((response) => {
             console.log(response.data.message);
 

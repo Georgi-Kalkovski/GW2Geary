@@ -17,27 +17,30 @@ router.post(
 
 router.get(
   "/getUser",
-  authJwt.verifyToken,
   controller.getUser
 );
 
 router.put(
   "/users/:userId/username",
+  [authJwt.verifyToken, authJwt.verifySameUser],
   controller.changeUsername
 );
 
 router.put(
   "/users/:userId/email",
+  [authJwt.verifyToken, authJwt.verifySameUser],
   controller.changeEmail
 );
 
 router.put(
   "/users/:userId/password",
+  [authJwt.verifyToken, authJwt.verifySameUser],
   controller.changePassword
 );
 
 router.delete(
-  "/users/:userId",
+  "/users/:userId/delete",
+  [authJwt.verifyToken, authJwt.verifySameUser],
   controller.deleteUser
 );
 

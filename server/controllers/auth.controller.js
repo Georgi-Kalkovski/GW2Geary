@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // Sign Up
-exports.signup = async (req, res) => {
+exports.signup = async (req, res) => {;
   try {
     const user = new User({
       username: req.body.username,
@@ -93,44 +93,59 @@ exports.signin = async (req, res) => {
 // Get User
 exports.getUser = async (req, res) => {
   try {
-    const { name } = req.query;
-    const { accessToken } = req.query;
-    if (!name) {
-      return res.status(400).send({ message: "Name parameter is missing" });
+    const { name, accessToken } = req.query;
+
+    if (!name || !accessToken) {
+      return res.status(400).send({ message: "Name and accessToken parameters are required" });
     }
 
-    const user = await User.findOne({
-      'username': name
-    })
-      .populate('storedBuilds')
-      .populate('storedFashion')
-      .populate('storedEquipment');
-    if (user) {
-      res.status(200).send({
-        message: "User retrieved successfully!",
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        accessToken: accessToken,
-        apiKeys: user.apiKeys,
-        storedBuilds: user.storedBuilds,
-        storedFashion: user.storedFashion,
-        storedEquipment: user.storedEquipment,
-      });
+    // Verify the access token
+    jwt.verify(accessToken, config.secret, async (err, decoded) => {
+      if (err) {
+        return res.status(401).send({ message: "Unauthorized: Invalid access token" });
+      }
 
-    } else {
-      res.status(404).send({ message: "User not found" });
-    }
+      const user = await User.findOne({
+        'username': name
+      })
+        .populate('storedBuilds')
+        .populate('storedFashion')
+        .populate('storedEquipment');
+
+      if (user) {
+        if (decoded.id !== user.id) {
+          return res.status(403).send({ message: "Forbidden: Access token does not match user" });
+        }
+
+        res.status(200).send({
+          message: "User retrieved successfully!",
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          accessToken: accessToken,
+          apiKeys: user.apiKeys,
+          storedBuilds: user.storedBuilds,
+          storedFashion: user.storedFashion,
+          storedEquipment: user.storedEquipment,
+        });
+      } else {
+        res.status(404).send({ message: "User not found" });
+      }
+    });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
 };
+
 
 // Change Username
 exports.changeUsername = async (req, res) => {
   try {
     const { userId } = req.params;
     const { newUsername } = req.body;
+    if (!newUsername) {
+      return res.status(400).send({ message: "newUsername parameter is required" });
+    }
 
     const user = await User.findByIdAndUpdate(userId, { username: newUsername }, { new: true });
 
@@ -149,14 +164,17 @@ exports.changeEmail = async (req, res) => {
   try {
     const { userId } = req.params;
     const { newEmail } = req.body;
-
-    const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
-
-    if (!user) {
-      return res.status(404).send({ message: "User not found." });
+    if (!newEmail) {
+      return res.status(400).send({ message: "newEmail parameter are required" });
     }
 
-    res.status(200).send({ message: "Email changed successfully!", user });
+      const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
+
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      res.status(200).send({ message: "Email changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -168,16 +186,20 @@ exports.changePassword = async (req, res) => {
     const { userId } = req.params;
     const { newPassword } = req.body;
 
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).send({ message: "User not found." });
+    if (!newPassword) {
+      return res.status(400).send({ message: "newPassword parameter are required" });
     }
 
-    user.password = bcrypt.hashSync(newPassword, 8);
-    await user.save();
+      const user = await User.findById(userId);
 
-    res.status(200).send({ message: "Password changed successfully!", user });
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      user.password = bcrypt.hashSync(newPassword, 8);
+      await user.save();
+
+      res.status(200).send({ message: "Password changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -284,7 +306,7 @@ exports.getCharacter = async (req, res) => {
 exports.getEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = (await User.find(email).select("-roles -resetToken -password -_id -apiKeys -_id"));
+    const user = (await User.find(email).select("-roles -resetToken -password -_id -apiKeys -_id -storedBuilds -storedFashion -storedEquipment"));
     if (user) {
       res.status(200).send({
         message: "Users retrieved successfully!",

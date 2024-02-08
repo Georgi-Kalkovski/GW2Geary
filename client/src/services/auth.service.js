@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 const ip = 'https://gw2geary.com/api';
 const API_URL = `${ip}/auth/`;
 
@@ -37,7 +38,8 @@ const changeUsername = (newUsername) => {
   const currentUser = getCurrentUser();
   return axios.put(
     API_URL + `users/${currentUser.id}/username`,
-    { newUsername }
+    { newUsername, },
+    { headers: authHeader(), }
   );
 };
 
@@ -46,7 +48,8 @@ const changeEmail = (newEmail) => {
   const currentUser = getCurrentUser();
   return axios.put(
     API_URL + `users/${currentUser.id}/email`,
-    { newEmail }
+    { newEmail, },
+    { headers: authHeader(), }
   );
 };
 
@@ -55,18 +58,17 @@ const changePassword = (newPassword) => {
   const currentUser = getCurrentUser();
   return axios.put(
     API_URL + `users/${currentUser.id}/password`,
-    { newPassword }
+    { newPassword },
+    { headers: authHeader(), }
   );
 };
 
 // User Delete Service
-const deleteCurrentUser = () => {
+const deleteCurrentUser = (accessToken) => {
   const currentUser = getCurrentUser();
-  return axios.delete(API_URL + `users/${currentUser.id}`, {
-    headers: {
-      Authorization: `Bearer ${currentUser.accessToken}`,
-    },
-  });
+  return axios.delete(API_URL + `users/${currentUser.id}/delete`,
+    { headers: authHeader(), }
+  );
 };
 
 // User Get Service
@@ -84,7 +86,7 @@ const getUser = async () => {
     const response = await axios.get(`${API_URL}getUser`,
       { params: { name, accessToken } }, {
       headers: {
-        Authorization: `Bearer ${currentUser.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return response.data;
@@ -118,21 +120,16 @@ const getEmail = (email) => {
 // Api Create Service
 const createApiKey = (apiKey) => {
   const currentUser = getCurrentUser();
-  return axios.put(API_URL + `users/${currentUser.id}/apiKey`, { apiKey }, {
-    headers: {
-      'Authorization': `Bearer ${currentUser.accessToken}`,
-    },
-  });
+  return axios.put(API_URL + `users/${currentUser.id}/apiKey`,
+    { apiKey },
+    { headers: authHeader(), });
 };
 
 // Apis Get Service
 const getApiKeys = () => {
   const currentUser = getCurrentUser();
-  return axios.get(API_URL + `users/${currentUser.id}/apiKeys`, {
-    headers: {
-      'Authorization': `Bearer ${currentUser.accessToken}`,
-    },
-  });
+  return axios.get(API_URL + `users/${currentUser.id}/apiKeys`,
+    { headers: authHeader(), });
 };
 
 // Api Update Service
@@ -141,22 +138,16 @@ const updateApiKeyStatus = (apiKeyId, active) => {
   return axios.put(
     API_URL + `users/${currentUser.id}/apiKeys/${apiKeyId}`,
     { active },
-    {
-      headers: {
-        Authorization: `Bearer ${currentUser.accessToken}`,
-      },
-    }
+    { headers: authHeader(), }
   );
 };
 
 // API Delete Service
 const deleteApiKey = (apiKeyId) => {
   const currentUser = getCurrentUser();
-  return axios.delete(API_URL + `users/${currentUser.id}/apiKeys/${apiKeyId}`, {
-    headers: {
-      'Authorization': `Bearer ${currentUser.accessToken}`,
-    },
-  });
+  return axios.delete(API_URL + `users/${currentUser.id}/apiKeys/${apiKeyId}`,
+    { headers: authHeader(), }
+  );
 };
 
 // Api Update Service
@@ -165,11 +156,7 @@ const updateCharacterStatus = (apiKeyId, characterId, active) => {
   return axios.put(
     API_URL + `users/${currentUser.id}/apiKeys/${apiKeyId}/characters/${characterId}`,
     { active },
-    {
-      headers: {
-        Authorization: `Bearer ${currentUser.accessToken}`,
-      },
-    }
+    { headers: authHeader(), }
   );
 };
 

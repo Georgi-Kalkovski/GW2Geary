@@ -1,14 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-function DeleteUser({ AuthService }) {
+function DeleteUser({ AuthService, currentUser }) {
     const [showPopup, setShowPopup] = useState(false);
-
     const confirmUserBeforeDelete = () => {
         togglePopup();
     };
 
     const deleteCurrentUser = useCallback(() => {
-        AuthService.deleteCurrentUser()
+        AuthService.deleteCurrentUser(currentUser.accessToken)
             .then(() => {
                 AuthService.logout();
                 window.location.reload();

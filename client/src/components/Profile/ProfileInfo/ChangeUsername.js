@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-function ChangeUsername({ AuthService, EventBus }) {
+function ChangeUsername({ AuthService, EventBus, currentUser }) {
     const [users, setUsers] = useState([]);
     const [newUsername, setNewUsername] = useState("");
     const [usernameError, setUsernameError] = useState("");
@@ -51,7 +51,7 @@ function ChangeUsername({ AuthService, EventBus }) {
                     return;
                 }
 
-                AuthService.changeUsername(newUsername)
+                AuthService.changeUsername(newUsername, currentUser.accessToken)
                     .then((response) => {
                         console.log(response.data.message);
 

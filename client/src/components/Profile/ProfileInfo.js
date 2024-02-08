@@ -12,7 +12,7 @@ function ProfileInfo({ currentUser, AuthService }) {
             {/* User */}
             <div className="flex-row-center">
                 <div>
-                    <ChangeUsername AuthService={AuthService} EventBus={EventBus} />
+                    <ChangeUsername currentUser={currentUser} AuthService={AuthService} EventBus={EventBus} />
                     <ChangeEmail currentUser={currentUser} AuthService={AuthService} EventBus={EventBus} />
                     <ChangePassword currentUser={currentUser} AuthService={AuthService} EventBus={EventBus} />
                     <DeleteUser currentUser={currentUser} AuthService={AuthService} />
