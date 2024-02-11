@@ -12,19 +12,15 @@ function SendMail({ AuthService }) {
     const userFound = (await AuthService.getEmail({ email: emailInput })).data.user.find(
       (u) => u.email === emailInput
     );
-    if (userFound && userFound.email) {
-      axios
-        .post(`${ip}/reset-password`, { user: userFound }, { headers: { "Content-Type": "application/json" } })
-        .then((response) => {
-          console.log(response.data);
-          setErrorMessage("Email sent successfully!");
-        })
-        .catch((error) => {
-          console.error("Error checking username:", error);
-        });
-    } else {
-      setErrorMessage("Username doesn't have email.");
-    }
+    axios
+      .post(`${ip}/reset-password`, { user: userFound }, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        console.log(response.data);
+        setErrorMessage("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error("Error checking username:", error);
+      });
   };
 
   const handleKeyPress = useCallback(
