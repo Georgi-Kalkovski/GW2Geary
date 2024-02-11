@@ -11,7 +11,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // Sign Up
-exports.signup = async (req, res) => {;
+exports.signup = async (req, res) => {
+  ;
   try {
     const user = new User({
       username: req.body.username,
@@ -168,13 +169,13 @@ exports.changeEmail = async (req, res) => {
       return res.status(400).send({ message: "newEmail parameter are required" });
     }
 
-      const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
+    const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
 
-      if (!user) {
-        return res.status(404).send({ message: "User not found." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
 
-      res.status(200).send({ message: "Email changed successfully!", user });
+    res.status(200).send({ message: "Email changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -190,16 +191,16 @@ exports.changePassword = async (req, res) => {
       return res.status(400).send({ message: "newPassword parameter are required" });
     }
 
-      const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-      if (!user) {
-        return res.status(404).send({ message: "User not found." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
 
-      user.password = bcrypt.hashSync(newPassword, 8);
-      await user.save();
+    user.password = bcrypt.hashSync(newPassword, 8);
+    await user.save();
 
-      res.status(200).send({ message: "Password changed successfully!", user });
+    res.status(200).send({ message: "Password changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -301,17 +302,23 @@ exports.getCharacter = async (req, res) => {
   }
 };
 
-
-// Get all users
+// Get user by email
 exports.getEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = (await User.find(email).select("-roles -resetToken -password -_id -apiKeys -_id -storedBuilds -storedFashion -storedEquipment"));
+    const user = await User.findOne({ email }).select("email username");
+
     if (user) {
+      console.log(user);
       res.status(200).send({
-        message: "Users retrieved successfully!",
-        user: user
+        message: "User retrieved successfully!",
+        user: [{
+          username: user.username,
+          email: user.email
+        }]
       });
+    } else {
+      res.status(404).send({ message: "User not found" });
     }
   } catch (err) {
     console.error('Error:', err);
