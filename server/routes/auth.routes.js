@@ -51,6 +51,7 @@ router.put(
 
 router.get(
   "/users/:userId/apiKeys",
+  [authJwt.verifyToken, authJwt.verifySameUser],
   controller.getApiKeys
 );
 

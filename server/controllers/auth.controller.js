@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // Sign Up
-exports.signup = async (req, res) => {;
+exports.signup = async (req, res) => {
   try {
     const user = new User({
       username: req.body.username,
@@ -168,13 +168,13 @@ exports.changeEmail = async (req, res) => {
       return res.status(400).send({ message: "newEmail parameter are required" });
     }
 
-      const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
+    const user = await User.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
 
-      if (!user) {
-        return res.status(404).send({ message: "User not found." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
 
-      res.status(200).send({ message: "Email changed successfully!", user });
+    res.status(200).send({ message: "Email changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -190,16 +190,16 @@ exports.changePassword = async (req, res) => {
       return res.status(400).send({ message: "newPassword parameter are required" });
     }
 
-      const user = await User.findById(userId);
+    const user = await User.findById(userId);
 
-      if (!user) {
-        return res.status(404).send({ message: "User not found." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
 
-      user.password = bcrypt.hashSync(newPassword, 8);
-      await user.save();
+    user.password = bcrypt.hashSync(newPassword, 8);
+    await user.save();
 
-      res.status(200).send({ message: "Password changed successfully!", user });
+    res.status(200).send({ message: "Password changed successfully!", user });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -248,10 +248,14 @@ exports.getAccount = async (req, res) => {
     const foundUser = await User.findOne({
       'apiKeys.accountName': lastPart
     })
-      .populate("apiKeys", "_id active accountName")
-      .select("-roles -email -username -password -_id -apiKeys._id -resetToken -_id");
+      .populate("apiKeys", "_id active accountName characters")
+      .select("-roles -email -username -password -_id -apiKeys._id -resetToken -_id -storedBuilds -storedEquipment -storedFashion");
 
     if (foundUser) {
+      const filteredApiKeys = foundUser.apiKeys.filter(apiKey => apiKey.accountName === lastPart);
+
+      foundUser.apiKeys = filteredApiKeys;
+
       res.status(200).send({
         message: "User retrieved successfully!",
         user: foundUser,
@@ -368,8 +372,7 @@ exports.createApiKey = async (req, res) => {
 exports.getApiKeys = async (req, res) => {
   try {
     const { userId } = req.params;
-
-    const user = await User.findById(userId).populate("apiKeys", "_id active");
+    const user = await User.findById(userId).populate("apiKeys", "_id active").select("-roles -resetToken -email -username -password -apiKeys -_id -storedBuilds -storedFashion -storedEquipment");
 
     if (!user) {
       return res.status(404).send({ message: "User Not found." });
