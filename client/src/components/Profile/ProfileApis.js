@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
-function ProfileApis({ currentUser, AuthService }) {
-    const ip = 'https://gw2geary.com/api';
-    const [apiKeys, setApiKeys] = useState([]);
 
-    const fetchApiKeys = (userId, accessToken) => {
-        return axios.get(`${ip}/auth/users/${userId}/apiKeys`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        })
+function ProfileApis({ currentUser, AuthService }) {
+    const [apiKeys, setApiKeys] = useState([]);
+    const [maxHeight, setMaxHeight] = useState(0);
+
+    const getApiKeys = () => {
+        return AuthService.getApiKeys()
             .then((response) => {
-                return response.data;
+                return response.data.user.apiKeys;
             })
             .catch((error) => {
                 throw new Error("Failed to retrieve API keys");
@@ -23,17 +19,15 @@ function ProfileApis({ currentUser, AuthService }) {
 
     useEffect(() => {
         if (currentUser) {
-            fetchApiKeys(currentUser.id, currentUser.accessToken)
+            getApiKeys()
                 .then((data) => {
-                    setApiKeys(data.user.apiKeys);
+                    setApiKeys(data);
                 })
                 .catch((error) => {
                     console.error("Error retrieving API keys:", error);
                 });
         }
     }, [currentUser]);
-
-    const [maxHeight, setMaxHeight] = useState(0);
 
     useEffect(() => {
         if (window.innerWidth >= 900) {
@@ -48,10 +42,10 @@ function ProfileApis({ currentUser, AuthService }) {
             {/* API Keys Section */}
             <div className="container" key="profile-container" style={{ marginTop: '20px' }}>
                 <div className="flex center apis-flex" key="apis-flex">
-                    <div className="flex column" >
+                    <div className="flex column">
                         <ProfileApiCreate
                             currentUser={currentUser}
-                            fetchApiKeys={fetchApiKeys}
+                            fetchApiKeys={getApiKeys}
                             setApiKeys={setApiKeys}
                         />
 
@@ -66,8 +60,7 @@ function ProfileApis({ currentUser, AuthService }) {
                                         AuthService={AuthService}
                                         setApiKeys={setApiKeys}
                                     />
-                                ))
-                                }
+                                ))}
                             </div>
                             : <div className="flex center">No API Keys Stored</div>
                         }
@@ -76,7 +69,7 @@ function ProfileApis({ currentUser, AuthService }) {
 
                 {/* Characters */}
                 <ProfileApiCharacters apiKeys={apiKeys} />
-            </div >
+            </div>
         </>
     );
 }
