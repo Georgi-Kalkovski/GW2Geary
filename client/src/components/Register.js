@@ -111,7 +111,7 @@ const Register = () => {
                     type="password"
                     className="form-control"
                     name="password"
-                    {...register("password", { required: true, minLength: 6, maxLength: 40 })}
+                    {...register("password", { required: true, minLength: 6 })}
                   />
                   {errors.password?.type === "required" && (
                     <div className="alert alert-danger" role="alert">

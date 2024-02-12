@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // Sign Up
-exports.signup = async (req, res) => {
+exports.signup = async (req, res) => {;
   try {
     const user = new User({
       username: req.body.username,
@@ -305,17 +305,23 @@ exports.getCharacter = async (req, res) => {
   }
 };
 
-
-// Get all users
+// Get user by email
 exports.getEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = (await User.find(email).select("-roles -resetToken -password -_id -apiKeys -_id -storedBuilds -storedFashion -storedEquipment"));
+    const user = await User.findOne({ email }).select("email username");
+
     if (user) {
+      console.log(user);
       res.status(200).send({
-        message: "Users retrieved successfully!",
-        user: user
+        message: "User retrieved successfully!",
+        user: [{
+          username: user.username,
+          email: user.email
+        }]
       });
+    } else {
+      res.status(404).send({ message: "User not found" });
     }
   } catch (err) {
     console.error('Error:', err);
