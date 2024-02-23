@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Build.css';
 import StoreBuild from '../../Profile/store.png';
+import limitRemovedNames from '../LimitRemovedNames';
 
 function BuildSaveButton({ tab, char, currentUser, spec }) {
     const navigate = useNavigate();
@@ -75,10 +76,14 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
 
             const user = JSON.parse(localStorage.getItem('user')) || {};
             const { storedBuilds } = user;
+
             if (storedBuilds && storedBuilds.length >= 15) {
-                alert('You have reached the maximum limit of stored builds (15).');
-                return;
+                if (!user.apiKeys.some(u => limitRemovedNames.includes(u.accountName))) {
+                    alert('You have reached the maximum limit of stored builds (15).');
+                    return;
+                }
             }
+            
             setFormData(prevFormData => ({
                 ...prevFormData,
                 owner: currentUser.id,
@@ -113,10 +118,10 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
     };
 
     return (
-<button type='button' className='game-button' onClick={handleSubmit}>
-<img src={StoreBuild} alt='StoreFashion' />
-<div className='nav-a' style={{marginLeft:'4px', display: 'inline-block', fontSize: '10px' }}>Store Build</div>
-</button >
+        <button type='button' className='game-button' onClick={handleSubmit}>
+            <img src={StoreBuild} alt='StoreFashion' />
+            <div className='nav-a' style={{ marginLeft: '4px', display: 'inline-block', fontSize: '10px' }}>Store Build</div>
+        </button >
     )
 }
 

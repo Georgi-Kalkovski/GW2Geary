@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StoreFashion from '../../Profile/store.png';
+import limitRemovedNames from '../LimitRemovedNames';
 
 function FashionSaveButton({ char, currentUser, items, slider }) {
 
@@ -65,9 +66,12 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
 
             const user = JSON.parse(localStorage.getItem('user')) || {};
             const { storedFashion } = user;
+
             if (storedFashion && storedFashion.length >= 15) {
-                alert('You have reached the maximum limit of stored fashion (15).');
-                return;
+                if (!user.apiKeys.some(u => limitRemovedNames.includes(u.accountName))) {
+                    alert('You have reached the maximum limit of stored fashion (15).');
+                    return;
+                }
             }
 
             const modifiedItems = items.map(item => ({
@@ -93,7 +97,7 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
     return (
         <button type='button' className='game-button' onClick={handleSubmit}>
             <img src={StoreFashion} alt='StoreFashion' />
-            <div className='nav-a' style={{marginLeft:'-2px', display: 'inline-block', fontSize: '10px' }}>Store Fashion</div>
+            <div className='nav-a' style={{ marginLeft: '-2px', display: 'inline-block', fontSize: '10px' }}>Store Fashion</div>
         </button >
     )
 }

@@ -16,7 +16,6 @@ const FashionSaved = () => {
     const [mergedItems, setMergedItems] = useState([]);
     const [fashion, setFashion] = useState(null);
     const { pathname } = useLocation();
-    console.log(pathname.split('/')[1])
 
     useEffect(() => {
         (async () => {

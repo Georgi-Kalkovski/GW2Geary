@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StoreEquipment from '../../Profile/store.png';
+import limitRemovedNames from '../LimitRemovedNames';
 
 function EquipmentSaveButton({ tab, char, currentUser, items, relic, powerCore, slider }) {
     const navigate = useNavigate();
@@ -75,9 +76,12 @@ function EquipmentSaveButton({ tab, char, currentUser, items, relic, powerCore, 
 
             const user = JSON.parse(localStorage.getItem('user')) || {};
             const { storedEquipment } = user;
+
             if (storedEquipment && storedEquipment.length >= 15) {
-                alert('You have reached the maximum limit of stored equipment (15).');
-                return;
+                if (!user.apiKeys.some(u => limitRemovedNames.includes(u.accountName))) {
+                    alert('You have reached the maximum limit of stored equipment (15).');
+                    return;
+                }
             }
 
             const modifiedItems = items.map(item => ({
