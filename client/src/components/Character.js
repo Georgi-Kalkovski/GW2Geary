@@ -73,20 +73,20 @@ function Character() {
                 const charFoundData = getFromLocalStorage('charFound');
                 const charName = charFoundData?.name;
 
-                if (accName && charName && charName === formattedName) {
-                    setAccFound(getFromLocalStorage('accFound'))
-                    setMastery(getFromLocalStorage('mastery'))
-                    setWorld(getFromLocalStorage('world'))
-                    setCharFound(getFromLocalStorage('charFound'))
+                // if (accName && charName && charName === formattedName) {
+                //     setAccFound(getFromLocalStorage('accFound'))
+                //     setMastery(getFromLocalStorage('mastery'))
+                //     setWorld(getFromLocalStorage('world'))
+                //     setCharFound(getFromLocalStorage('charFound'))
 
-                    const activeStored = getFromLocalStorage('account');
-                    if (activeStored && !activeStored.active) {
-                        if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
-                            navigate("/");
-                        }
-                        setActive(true)
-                    }
-                } else {
+                //     const activeStored = getFromLocalStorage('account');
+                //     if (activeStored && !activeStored.active) {
+                //         if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
+                //             navigate("/");
+                //         }
+                //         setActive(true)
+                //     }
+                // } else {
                     const user = await AuthService.getCharacter(formattedName);
                     const updatedCharacters = [];
                     const account = user.data?.user?.apiKeys?.find(acc => acc.characters.find(char => char.name === formattedName));
@@ -119,7 +119,7 @@ function Character() {
                         saveToLocalStorage('characters', account);
                     }
                     saveToLocalStorage('characters', updatedCharacters);
-                }
+                // }
             })();
         } catch (error) {
             console.error(error);
