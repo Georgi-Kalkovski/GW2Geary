@@ -244,7 +244,7 @@ function ItemTooltip({ char, auraCounter, item, gear, embed, slider }) {
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-        window.open(`https://wiki.guildwars2.com/wiki/${item.name}`, '_blank');
+        window.open(`https://wiki.guildwars2.com/wiki/${item.skin_name ? item.skin_name : item.name}`, '_blank');
     };
 
     const handleLeftClick = (event) => {
