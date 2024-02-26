@@ -73,8 +73,8 @@ function UserGuideVideo() {
                                             User Guide video
                                         </span>
                                         {isLightTheme === false
-                                            ? <img src={Video} style={{ paddingLeft: '10px', marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
-                                            : <img src={VideoLight} style={{ paddingLeft: '10px', marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
+                                            ? <img src={Video} style={{ paddingLeft: '10px', width: "35px", display: "flex" }} alt="" />
+                                            : <img src={VideoLight} style={{ paddingLeft: '10px', width: "35px", display: "flex" }} alt="" />
                                         }
                                     </a>
                                 </li>
@@ -88,7 +88,7 @@ function UserGuideVideo() {
                                 <span style={{ fontSize: '1.3em' }}>
                                     Builds
                                 </span>
-                                <img src={Builds} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "32px" : "35px", display: "flex" }} alt="" />
+                                <img src={Builds} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "28px" : "30px", display: "flex" }} alt="" />
                             </a>
                         </li>
                     </Row>
@@ -100,7 +100,7 @@ function UserGuideVideo() {
                                 <span style={{ fontSize: '1.3em' }}>
                                     Fashion
                                 </span>
-                                <img src={Fashion} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "35px" : "40px", display: "flex" }} alt="" />
+                                <img src={Fashion} style={{ paddingLeft: '10px', marginTop: '-2px', width: innerWidth < 900 ? "33px" : "35px", display: "flex" }} alt="" />
                             </a>
                         </li>
                     </Row>
