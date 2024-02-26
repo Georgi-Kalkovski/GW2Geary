@@ -38,19 +38,12 @@ function UserGuideVideo() {
                 <div onClick={handleClose} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
                     <div style={{ position: 'relative', boxShadow: '0 0 7px 2px rgba(204, 204, 204, 0.5)', zIndex: 10000 }}>
                         {innerWidth < 900
-                            ? <iframe
-                            style={{ display: 'block', border: 'none', width: '100%', height: '100%' }}
-                            src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3"
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                          ></iframe>
-                            : <iframe style={{ display: 'block', border: 'none' }} width="840" height="472.5" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+                            ? <iframe style={{ display: 'block', border: 'none' }} width="340" height="169.6" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"></iframe>
+                            : <iframe style={{ display: 'block', border: 'none' }} width="840" height="472.5" src="https://www.youtube.com/embed/L5Gq026_MIg?si=NoIHXr_c-NVmOVq3" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"></iframe>
                         }
                     </div>
                 </div>
             )}
-            
             {innerWidth < 900 ? (
                 <Row className='flex center'>
                     <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '20em' }}>
