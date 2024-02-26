@@ -327,7 +327,7 @@ function Search() {
             {/* Empty Search Text */}
             <SearchWelcome />
             <UserGuideVideo />
-            <SearchNews />
+            {/* <SearchNews /> */}
             {currentUser && currentUser.username === 'Terter' &&
               <SearchCounter accounts={accounts} />
             }
