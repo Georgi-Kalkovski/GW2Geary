@@ -46,9 +46,9 @@ function UserGuideVideo() {
             )}
             {innerWidth < 900 ? (
                 <Row className='flex center'>
-                    <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '20em' }}>
+                    <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
                         <li style={{ width: 'auto', listStyleType: 'none' }}>
-                            <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '62px', cursor: 'pointer' }}>
+                            <a className='flex align nav-a center' onClick={handleClick} style={{ cursor: 'pointer' }}>
                                 <span style={{ fontSize: '1.3em' }}>
                                     User Guide video
                                 </span>
