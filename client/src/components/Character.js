@@ -119,7 +119,6 @@ function Character() {
                         saveToLocalStorage('characters', account);
                     }
                     saveToLocalStorage('characters', updatedCharacters);
-
                 }
             })();
         } catch (error) {

@@ -72,20 +72,20 @@ const Account = () => {
         const accFoundData = getFromLocalStorage('accFound');
         const accName = accFoundData?.name;
 
-        if (accName && accName === formattedName) {
-          setAccFound(getFromLocalStorage('accFound'))
-          setMastery(getFromLocalStorage('mastery'))
-          setWorld(getFromLocalStorage('world'))
-          setCharacters(getFromLocalStorage('characters'))
+        // if (accName && accName === formattedName) {
+        //   setAccFound(getFromLocalStorage('accFound'))
+        //   setMastery(getFromLocalStorage('mastery'))
+        //   setWorld(getFromLocalStorage('world'))
+        //   setCharacters(getFromLocalStorage('characters'))
 
-          const activeStored = getFromLocalStorage('account');
-          if (activeStored && !activeStored.active) {
-            if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
-              navigate("/");
-            }
-            setActive(true)
-          }
-        } else {
+        //   const activeStored = getFromLocalStorage('account');
+        //   if (activeStored && !activeStored.active) {
+        //     if (!currentUser || !currentUser.apiKeys.find(acc => acc.accountName === activeStored.accountName)) {
+        //       navigate("/");
+        //     }
+        //     setActive(true)
+        //   }
+        // } else {
           const user = await AuthService.getAccount(formattedName);
 
           const updatedCharacters = [];
@@ -122,7 +122,7 @@ const Account = () => {
 
           setCharacters(updatedCharacters);
           saveToLocalStorage('characters', updatedCharacters);
-        }
+        // }
       })();
     } catch (error) {
       console.error(error);
