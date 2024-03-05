@@ -17,7 +17,7 @@ function ProfileApis({ AuthService }) {
                 throw new Error("Failed to retrieve API keys");
             });
     };
-
+    console.log(currentUser)
     useEffect(() => {
         if (currentUser) {
             getApiKeys()
