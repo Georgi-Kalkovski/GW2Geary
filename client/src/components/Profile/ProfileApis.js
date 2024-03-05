@@ -3,9 +3,10 @@ import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
 
-function ProfileApis({ currentUser, AuthService }) {
+function ProfileApis({ AuthService }) {
     const [apiKeys, setApiKeys] = useState([]);
     const [maxHeight, setMaxHeight] = useState(0);
+    const currentUser = AuthService.getCurrentUser();
 
     const getApiKeys = () => {
         return AuthService.getApiKeys()
