@@ -73,8 +73,18 @@ const deleteCurrentUser = (accessToken) => {
 
 // User Get Service
 const getCurrentUser = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user;
+  try {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      return user;
+    }
+  } catch (error) {
+    console.error("Error parsing user data:", error);
+  }
+
+  return null;
 };
 
 // Get User
