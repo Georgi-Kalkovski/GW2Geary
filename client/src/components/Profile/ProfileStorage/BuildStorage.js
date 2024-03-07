@@ -62,6 +62,7 @@ function BuildStorage() {
                     const updatedStoredBuilds = user.storedBuilds.filter(build => build.id !== storedBuildId);
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedBuilds: updatedStoredBuilds,
                     };
                     localStorage.setItem('user', JSON.stringify(updatedUser));

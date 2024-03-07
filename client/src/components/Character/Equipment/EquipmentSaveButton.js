@@ -47,6 +47,7 @@ function EquipmentSaveButton({ tab, char, currentUser, items, relic, powerCore, 
                     const currentDate = new Date();
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedEquipment: [
                             ...user.storedEquipment?.filter(equipment => equipment.id !== response.data.id),
                             {

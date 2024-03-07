@@ -62,7 +62,10 @@ function ProfileApis({ AuthService }) {
                                     />
                                 ))}
                             </div>
-                            : <div className="flex center">No API Keys Stored</div>
+                            : <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                <div>No API Keys Stored</div>
+                                <div>If you've registered an API key but you don't see it, please re-login.</div>
+                            </div>
                         }
                     </div>
                 </div>

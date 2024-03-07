@@ -64,6 +64,7 @@ function FashionStorage() {
                     const updatedStoredFashion = user.storedFashion.filter(fashion => fashion.id !== storedFashionId);
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedFashion: updatedStoredFashion,
                     };
                     localStorage.setItem('user', JSON.stringify(updatedUser));

@@ -59,9 +59,13 @@ function ChangeUsername({ AuthService, EventBus, currentUser }) {
 
                         const userInfoJSON = localStorage.getItem("user");
                         const userInfo = JSON.parse(userInfoJSON);
-                        userInfo.username = newUsername;
-                        const updatedUserInfoJSON = JSON.stringify(userInfo);
-                        localStorage.setItem("user", updatedUserInfoJSON);
+                        const updatedUserInfo = {
+                            ...userInfo,
+                            accessToken: currentUser.accessToken,
+                            username: newUsername
+                        };
+                        const updatedUserInfoJSON = JSON.stringify(updatedUserInfo);
+                        localStorage.setItem('user', updatedUserInfoJSON);
 
                         setPopupMessage(`Username changed to ${newUsername}.`);
                         setShowPopup(true);

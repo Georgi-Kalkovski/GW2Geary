@@ -48,6 +48,7 @@ function BuildSaveButton({ tab, char, currentUser, spec }) {
                     const currentDate = new Date();
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedBuilds: [
                             ...user.storedBuilds.filter(build => build.id !== response.data.id),
                             {

@@ -64,6 +64,7 @@ function EquipmentStorage() {
                     const updatedStoredEquipment = user.storedEquipment.filter(equipment => equipment.id !== storedEquipmentId);
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedEquipment: updatedStoredEquipment,
                     };
                     localStorage.setItem('user', JSON.stringify(updatedUser));

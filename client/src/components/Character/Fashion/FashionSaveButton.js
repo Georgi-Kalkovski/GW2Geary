@@ -38,6 +38,7 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
                     const currentDate = new Date();
                     const updatedUser = {
                         ...user,
+                        accessToken: currentUser.accessToken,
                         storedFashion: [
                             ...user.storedFashion?.filter(fashion => fashion.id !== response.data.id),
                             {

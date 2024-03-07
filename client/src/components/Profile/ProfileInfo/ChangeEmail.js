@@ -54,7 +54,7 @@ function ChangeEmail({ currentUser, AuthService, EventBus }) {
             const userInfo = JSON.parse(userInfoJSON);
             userInfo.email = newEmail;
             const updatedUserInfoJSON = JSON.stringify(userInfo);
-            localStorage.setItem("user", updatedUserInfoJSON);
+            localStorage.setItem('user', updatedUserInfoJSON);
 
             setPopupMessage(`Email changed to ${newEmail}.`);
             setShowPopup(true);
