@@ -68,7 +68,7 @@ exports.signin = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, config.secret, {
-      expiresIn: null, // infinite
+      expiresIn: '365d', // 1 year
     });
 
     const authorities = user.roles.map(
