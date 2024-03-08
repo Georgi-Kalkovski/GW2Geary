@@ -68,7 +68,7 @@ exports.signin = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, config.secret, {
-      expiresIn: 86400, // 24 hours
+      expiresIn: null, // infinite
     });
 
     const authorities = user.roles.map(
@@ -96,6 +96,7 @@ exports.getUser = async (req, res) => {
     const { name, accessToken } = req.query;
 
     if (!name || !accessToken) {
+      localStorage.removeItem('user');
       return res.status(400).send({ message: "Name and accessToken parameters are required" });
     }
 
