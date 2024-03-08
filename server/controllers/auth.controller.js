@@ -67,9 +67,7 @@ exports.signin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user.id }, config.secret, {
-      expiresIn: '365d', // 1 year
-    });
+    const token = jwt.sign({ id: user.id }, config.secret, {});
 
     const authorities = user.roles.map(
       (role) => "ROLE_" + role.name.toUpperCase()
