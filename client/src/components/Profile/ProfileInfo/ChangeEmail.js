@@ -50,7 +50,7 @@ function ChangeEmail({ currentUser, AuthService, EventBus }) {
 
             EventBus.emit("emailChanged", newEmail);
 
-            const userInfoJSON = localStorage.getItem("user");
+            const userInfoJSON = localStorage.getItem('user');
             const userInfo = JSON.parse(userInfoJSON);
             userInfo.email = newEmail;
             const updatedUserInfoJSON = JSON.stringify(userInfo);

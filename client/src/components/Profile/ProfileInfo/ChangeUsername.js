@@ -57,7 +57,7 @@ function ChangeUsername({ AuthService, EventBus, currentUser }) {
 
                         EventBus.emit("usernameChanged", newUsername);
 
-                        const userInfoJSON = localStorage.getItem("user");
+                        const userInfoJSON = localStorage.getItem('user');
                         const userInfo = JSON.parse(userInfoJSON);
                         const updatedUserInfo = {
                             ...userInfo,

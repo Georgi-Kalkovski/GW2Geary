@@ -21,7 +21,7 @@ const login = (username, password) => {
     })
     .then((response) => {
       if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem('user', JSON.stringify(response.data));
       }
 
       return response.data;
@@ -30,7 +30,7 @@ const login = (username, password) => {
 
 // User Logout Service
 const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem('user');
 };
 
 // Change Username Service
@@ -74,7 +74,7 @@ const deleteCurrentUser = (accessToken) => {
 // User Get Service
 const getCurrentUser = () => {
   try {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem('user');
 
     if (storedUser) {
       const user = JSON.parse(storedUser);
