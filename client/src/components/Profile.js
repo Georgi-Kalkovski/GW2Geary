@@ -99,7 +99,7 @@ const Profile = () => {
                 AuthService={AuthService}
               />
             )}
-            {showMessage === true && (
+            {/* {showMessage === true && (
               <div className="flex center" >
                 <div className="flex center" style={{ backgroundColor: '#ff3b3b', padding: '0 10px' }}>
                   <div>
@@ -110,7 +110,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <br />
