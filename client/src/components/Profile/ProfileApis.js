@@ -9,6 +9,7 @@ function ProfileApis({ AuthService }) {
     const [apiKeys, setApiKeys] = useState([]);
     const [maxHeight, setMaxHeight] = useState(0);
     const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+    const [loading, setLoading] = useState(true);
     let navigate = useNavigate();
 
     const getApiKeys = () => {
@@ -31,12 +32,14 @@ function ProfileApis({ AuthService }) {
             getApiKeys()
                 .then((data) => {
                     setApiKeys(data);
+                    setLoading(false);
                 })
                 .catch((error) => {
                     console.error("Error retrieving API keys:", error);
+                    setLoading(false);
                 });
         }
-    }, []);
+    }, [currentUser]);
 
     useEffect(() => {
         if (window.innerWidth >= 900) {
@@ -59,7 +62,11 @@ function ProfileApis({ AuthService }) {
                         />
 
                         {/* Apis */}
-                        {apiKeys.length > 0 ?
+                        {loading ? (
+                            <div>
+                                {/* Loading... */}
+                                </div>
+                        ) : apiKeys.length > 0 ? (
                             <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                                 {apiKeys.map((apiKey) => (
                                     <ProfileApiInfo
@@ -71,10 +78,11 @@ function ProfileApis({ AuthService }) {
                                     />
                                 ))}
                             </div>
-                            : <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                        ) : (
+                            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
                                 <div>No API Keys are stored.</div>
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
 
