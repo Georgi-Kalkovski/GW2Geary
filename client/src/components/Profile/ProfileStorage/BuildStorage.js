@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 function BuildStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+    const currentUser = AuthService.getCurrentUser();
     let navigate = useNavigate();
 
     const fetchStoredBuilds = useCallback(async () => {

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function FashionStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+    const currentUser = AuthService.getCurrentUser();
     let navigate = useNavigate();
 
     const fetchStoredFashion = useCallback(async () => {
