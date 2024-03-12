@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import ProfileApiCharacters from "./ProfileApis/ProfileApiCharacters";
 import ProfileApiInfo from "./ProfileApis/ProfileApiInfo";
 import ProfileApiCreate from "./ProfileApis/ProfileApiCreate";
+import EventBus from "../../common/EventBus";
+import { useNavigate } from "react-router-dom";
 
 function ProfileApis({ AuthService }) {
     const [apiKeys, setApiKeys] = useState([]);
     const [maxHeight, setMaxHeight] = useState(0);
-    const currentUser = AuthService.getCurrentUser();
+    const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+    let navigate = useNavigate();
 
     const getApiKeys = () => {
         return AuthService.getApiKeys()
@@ -14,9 +17,15 @@ function ProfileApis({ AuthService }) {
                 return response.data.user.apiKeys;
             })
             .catch((error) => {
-                throw new Error("Failed to retrieve API keys");
+                if (error.message === "Request failed with status code 401") {
+                    EventBus.emit("logout");
+                    navigate('/');
+                } else {
+                    throw new Error("Failed to retrieve API keys");
+                }
             });
     };
+
     useEffect(() => {
         if (currentUser) {
             getApiKeys()
@@ -63,8 +72,7 @@ function ProfileApis({ AuthService }) {
                                 ))}
                             </div>
                             : <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                                <div>No API Keys Stored</div>
-                                <div>If you've registered an API key but you don't see it, please relog your user.</div>
+                                <div>No API Keys are stored.</div>
                             </div>
                         }
                     </div>

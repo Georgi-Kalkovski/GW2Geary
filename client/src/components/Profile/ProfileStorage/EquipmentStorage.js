@@ -5,10 +5,14 @@ import { specIcons } from '../../Character/Build/specIcons';
 import { genderIcons, wikiBigRacesColoredIcons } from '../../icons';
 import CopyEquipment from '../copy.png';
 import ApplyEquipment from '../apply.png';
+import EventBus from "../../../common/EventBus";
+import { useNavigate } from "react-router-dom";
 
 function EquipmentStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+    let navigate = useNavigate();
+
     const fetchStoredEquipment = useCallback(async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -24,7 +28,12 @@ function EquipmentStorage() {
                 const user = await AuthService.getUser();
                 setStorage(user.storedEquipment || []);
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                if (error.message === "Request failed with status code 401") {
+                    EventBus.emit("logout");
+                    navigate('/');
+                } else {
+                    console.error('Error fetching user data:', error);
+                }
             }
         };
 

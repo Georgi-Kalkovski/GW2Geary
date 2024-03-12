@@ -4,9 +4,14 @@ import { useState, useCallback, useEffect } from "react";
 import { specIcons } from '../../Character/Build/specIcons';
 import CopyBuild from '../copy.png';
 import ApplyBuild from '../apply.png';
+import EventBus from "../../../common/EventBus";
+import { useNavigate } from "react-router-dom";
+
 function BuildStorage() {
     const [storage, setStorage] = useState([]);
     const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+    let navigate = useNavigate();
+
     const fetchStoredBuilds = useCallback(async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user')) || {};
@@ -22,7 +27,12 @@ function BuildStorage() {
                 const user = await AuthService.getUser();
                 setStorage(user.storedBuilds || []);
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                if (error.message === "Request failed with status code 401") {
+                    EventBus.emit("logout");
+                    navigate('/');
+                } else {
+                    console.error('Error fetching user data:', error);
+                }
             }
         };
 
