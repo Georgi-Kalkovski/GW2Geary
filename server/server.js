@@ -30,6 +30,10 @@ app.get('/set-cookie', (req, res) => {
   res.send('Cookie set successfully');
 });
 
+app.get("/favicon.ico", (req, res) => {
+  res.sendFile(path.join(__dirname, "/favicon.ico"));
+});
+
 // Connect to MongoDB
 mongoose
   .connect(
