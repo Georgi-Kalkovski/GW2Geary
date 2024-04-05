@@ -96,7 +96,7 @@ function FashionSaveButton({ char, currentUser, items, slider }) {
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit}>
+        <button type='button' className='game-button' onClick={handleSubmit} style={{marginTop:'6px'}}>
             <img src={StoreFashion} alt='StoreFashion' />
             <div className='nav-a' style={{ marginLeft: '-2px', display: 'inline-block', fontSize: '10px' }}>Store Fashion</div>
         </button >

@@ -111,7 +111,7 @@ function EquipmentSaveButton({ tab, char, currentUser, items, relic, powerCore, 
     };
 
     return (
-        <button type='button' className='game-button' onClick={handleSubmit} style={{ marginTop: '25px' }}>
+        <button type='button' className='game-button' onClick={handleSubmit} style={{ marginTop: '31px' }}>
             <img src={StoreEquipment} alt='StoreEquipment' />
             <div className='nav-a' style={{ marginLeft: '-8px', display: 'inline-block', fontSize: '10px' }}>Store Equipment</div>
         </button >

@@ -49,7 +49,9 @@ function ProfileStorage({ currentUser }) {
 
   return (
     <>
-      <div className="container" key="profile-container" style={{ marginTop: '20px' }}>
+      <div className="container" key="profile-container"
+        // style={{ marginTop: '20px' }}
+      >
         <div className="flex center apis-flex" key="apis-flex">
           <div className="flex column" >
             <div>
@@ -70,11 +72,11 @@ function ProfileStorage({ currentUser }) {
                     )}
 
                     {showProfileEquipmentStorage && (
-                       <>
-                       <EquipmentStorage
-                         storage={currentUser.storedEquipment}
-                       />
-                     </>
+                      <>
+                        <EquipmentStorage
+                          storage={currentUser.storedEquipment}
+                        />
+                      </>
                     )}
 
                     {showProfileBuildStorage && (
