@@ -104,7 +104,7 @@ const FashionSaved = () => {
                         {/* )} */}
                     </div>
                 )
-                : <div className='flex center'>
+                : <div className='flex center content-down'>
                     {fashion && (
                         <div className={`equipment-save ${fashion.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                             <div className="dropdown">

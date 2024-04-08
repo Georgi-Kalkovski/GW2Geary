@@ -136,7 +136,7 @@ const EquipmentSaved = () => {
     };
 
     return (
-        <div className='flex center'>
+        <div className='flex center content-down'>
             {equip && (
                 <div className={`equipment ${equip.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px', padingTop: '10px', paddingBottom: '10px' }}>
                     <div className="dropdown">

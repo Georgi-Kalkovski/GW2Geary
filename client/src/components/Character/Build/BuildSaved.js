@@ -47,7 +47,7 @@ function BuildSaved() {
     }, [name, id]);
 
     return (
-        <div className='flex center'>
+        <div className='flex center content-down'>
             {build && (
                 <div className={`build ${build.profession.toLowerCase()}-lightning-border`} style={{ marginRight: '4px' }}>
                     <div className="dropdown">

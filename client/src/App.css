@@ -32,8 +32,8 @@ body::-webkit-scrollbar-thumb {
   flex-direction: column;
 }
 
-.content {
-  /* margin-top: 1em; */
+.content-down {
+  margin-top: 1em;
 }
 
 .center-class {
