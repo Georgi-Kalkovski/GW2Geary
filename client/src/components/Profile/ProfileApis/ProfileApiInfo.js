@@ -6,18 +6,17 @@ import downArrow from '../down-arrow.svg';
 import CopyBuild from '../copy.png';
 import ApplyBuild from '../apply.png';
 
-function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys }) {
-    const [expandedIndexes, setExpandedIndexes] = useState([]);
+function ProfileApiInfo({ apiKey, apiKeys, AuthService, setApiKeys, expandedApiKey, handleExpandApiKey }) {
     const [isVisible, setIsVisible] = useState(null);
     const [deleteButtonState, setDeleteButtonState] = useState("Delete");
 
-    const isExpanded = (apiKey) => expandedIndexes.includes(apiKey?._id);
+    const isExpanded = () => expandedApiKey === apiKey?._id;
 
-    const toggleExpansion = (apiKey) => {
-        if (isExpanded(apiKey?._id)) {
-            setExpandedIndexes(expandedIndexes.filter((i) => i !== apiKey?._id));
+    const toggleExpansion = () => {
+        if (isExpanded()) {
+            handleExpandApiKey(null);
         } else {
-            setExpandedIndexes([...expandedIndexes, apiKey?._id]);
+            handleExpandApiKey(apiKey?._id);
         }
     };
 

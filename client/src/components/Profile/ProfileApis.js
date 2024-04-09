@@ -10,6 +10,7 @@ function ProfileApis({ AuthService }) {
     const [maxHeight, setMaxHeight] = useState(0);
     const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
     const [loading, setLoading] = useState(true);
+    const [expandedApiKey, setExpandedApiKey] = useState(null);
     let navigate = useNavigate();
 
     const getApiKeys = () => {
@@ -49,18 +50,22 @@ function ProfileApis({ AuthService }) {
         }
     }, []);
 
+    useEffect(() => {
+        if (apiKeys.length > 0 && expandedApiKey === null) {
+            setExpandedApiKey(apiKeys[0]._id);
+        }
+    }, [apiKeys, expandedApiKey]);
+
+    const handleExpandApiKey = (apiKeyId) => {
+        setExpandedApiKey(apiKeyId);
+    };
+
     return (
         <>
             {/* API Keys Section */}
             <div className="container" key="profile-container" style={{ marginTop: '20px' }}>
                 <div className="flex center apis-flex" key="apis-flex">
                     <div className="flex column">
-                        <ProfileApiCreate
-                            currentUser={currentUser}
-                            fetchApiKeys={getApiKeys}
-                            setApiKeys={setApiKeys}
-                        />
-
                         {/* Apis */}
                         {loading ? (
                             <div>
@@ -75,6 +80,8 @@ function ProfileApis({ AuthService }) {
                                         apiKeys={apiKeys}
                                         AuthService={AuthService}
                                         setApiKeys={setApiKeys}
+                                        expandedApiKey={expandedApiKey}
+                                        handleExpandApiKey={handleExpandApiKey}
                                     />
                                 ))}
                             </div>
