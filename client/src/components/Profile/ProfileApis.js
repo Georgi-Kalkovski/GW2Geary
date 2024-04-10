@@ -11,6 +11,7 @@ function ProfileApis({ AuthService }) {
     const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
     const [loading, setLoading] = useState(true);
     const [expandedApiKey, setExpandedApiKey] = useState(null);
+    const [closing, setClosing] = useState(null);
     let navigate = useNavigate();
 
     const getApiKeys = () => {
@@ -51,10 +52,11 @@ function ProfileApis({ AuthService }) {
     }, []);
 
     useEffect(() => {
-        if (apiKeys.length > 0 && expandedApiKey === null) {
+        if (apiKeys.length > 0 && expandedApiKey === null && !closing) {
             setExpandedApiKey(apiKeys[0]._id);
+            setClosing(true);
         }
-    }, [apiKeys, expandedApiKey]);
+    }, [apiKeys, expandedApiKey, closing]);
 
     const handleExpandApiKey = (apiKeyId) => {
         setExpandedApiKey(apiKeyId);
