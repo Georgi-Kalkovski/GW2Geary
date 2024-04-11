@@ -68,11 +68,16 @@ function ProfileApis({ AuthService }) {
             <div className="container" key="profile-container" style={{ marginTop: '20px' }}>
                 <div className="flex center apis-flex" key="apis-flex">
                     <div className="flex column">
+                        <ProfileApiCreate
+                            currentUser={currentUser}
+                            fetchApiKeys={getApiKeys}
+                            setApiKeys={setApiKeys}
+                        />
                         {/* Apis */}
                         {loading ? (
                             <div>
                                 {/* Loading... */}
-                                </div>
+                            </div>
                         ) : apiKeys.length > 0 ? (
                             <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
                                 {apiKeys.map((apiKey) => (
