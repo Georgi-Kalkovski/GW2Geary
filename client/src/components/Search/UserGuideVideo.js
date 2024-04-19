@@ -65,7 +65,8 @@ function UserGuideVideo() {
             <Container className="flex center">
                 {innerWidth < 900 ?
                     ('') : (
-                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '15em', marginRight: '0px' }}>
+                        // <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '15em', marginRight: '0px' }}>
+                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px'}}>
                             <Row className='flex center'>
                                 <li style={{ width: 'auto', listStyleType: 'none' }}>
                                     <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px', cursor: 'pointer' }}>
@@ -81,7 +82,7 @@ function UserGuideVideo() {
                             </Row>
                         </Col>
                     )}
-                <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '12.8em', marginRight: '0px' }}>
+                {/* <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '12.8em', marginRight: '0px' }}>
                     <Row className='flex center'>
                         <li style={{ width: 'auto', listStyleType: 'none' }}>
                             <a className='flex align nav-a' href='https://guildjen.com/builds/' target="_blank" style={{ marginLeft: '20px', cursor: 'pointer' }}>
@@ -104,7 +105,7 @@ function UserGuideVideo() {
                             </a>
                         </li>
                     </Row>
-                </Col>
+                </Col> */}
             </Container>
         </>
     );
