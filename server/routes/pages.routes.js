@@ -133,7 +133,7 @@ router.get('/f/:name/:id', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
-router.get('/reset-password', (req, res) => {
+router.get('/reset-password/:token', (req, res) => {
     pageTitle = `GW2Geary - Reset Password`;
     pageDescription = `Change the password of your user`;
     pageOgUrl = `https://gw2geary.com/reset-password`
