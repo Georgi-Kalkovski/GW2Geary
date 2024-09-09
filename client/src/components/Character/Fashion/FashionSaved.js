@@ -37,6 +37,13 @@ const FashionSaved = () => {
                 try {
                     const itemIds = fashion?.equipment.map((el) => el.id).join(',');
                     const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
+                    for (const item of fetchedItems) {
+                        if (item?.details?.type == "LongBow") { item.details.type = "Longbow" }
+                        if (item?.details?.type == "ShortBow") { item.details.type = "Shortbow" }
+                        if (item?.details?.type == "HelmAquatic") { item.details.type = "Aquatic Headgear" }
+                        if (item?.details?.type == "Harpoon") { item.details.type = "Spear" }
+                        if (item?.details?.type == "Speargun") { item.details.type = "Harpoon Gun" }
+                    }
                     const skinIds = fashion?.equipment.filter((item) => item.skin).map((item) => item.skin).join(',');
                     const fetchedSkins = skinIds ? await fetchData('skins', skinIds) : [];
                     const dyesIds = fashion?.equipment.filter((item) => item.dyes).flatMap((el) => el.dyes).join(',');

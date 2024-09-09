@@ -49,6 +49,13 @@ const EquipmentSaved = () => {
                     setPowerCore(await fetchData('items', equip.powerCore))
                     const itemIds = equip.equipment.map((el) => el.id).join(',');
                     const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
+                    for (const item of fetchedItems) {
+                        if (item?.details?.type == "LongBow") { item.details.type = "Longbow" }
+                        if (item?.details?.type == "ShortBow") { item.details.type = "Shortbow" }
+                        if (item?.details?.type == "HelmAquatic") { item.details.type = "Aquatic Headgear" }
+                        if (item?.details?.type == "Harpoon") { item.details.type = "Spear" }
+                        if (item?.details?.type == "Speargun") { item.details.type = "Harpoon Gun" }
+                    }
                     const itemstats = [
                         ...equip.equipment.filter((item) => item.stats?.id).map((item) => item.stats?.id),
                         ...equip.equipment.filter((item) => item.stats?.id).map((item) => item.stats?.id),
