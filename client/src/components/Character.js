@@ -52,7 +52,7 @@ function Character() {
             localStorage.setItem('race', charFound.race);
             localStorage.setItem('gen', charFound.gender);
             localStorage.setItem('frac', accFound.fractal_level);
-            localStorage.setItem('wvw', accFound.wvw_rank);
+            localStorage.setItem('wvw', accFound.wvw.rank);
         }
 
         if (specUp !== null) {

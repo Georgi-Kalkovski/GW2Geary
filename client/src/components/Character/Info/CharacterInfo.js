@@ -103,7 +103,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                             </Col>
                             {/* WvW Rank */}
                             <Col className="character-col">
-                                <Row className="font-size-22px">{acc.wvw_rank ? acc.wvw_rank : '0'}</Row>
+                                <Row className="font-size-22px">{acc.wvw.rank ? acc.wvw.rank : '0'}</Row>
                                 <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                         </>
@@ -163,7 +163,7 @@ function CharacterInfo({ char, acc, mastery, world }) {
                                     </Col>
                                     {/* WvW Rank */}
                                     <Col className={`${showMenu ? 'character-col  show-content' : 'hide-content'}`}>
-                                        <Row>{acc.wvw_rank}</Row>
+                                        <Row>{acc.wvw.rank}</Row>
                                         <Row className="yellow-highlight">WvW Rank</Row>
                                     </Col>
                                 </div>

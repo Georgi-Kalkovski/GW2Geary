@@ -42,7 +42,7 @@ const Account = () => {
       localStorage.removeItem('race');
       localStorage.removeItem('gen');
       localStorage.removeItem('frac', accFound.fractal_level);
-      localStorage.setItem('wvw', accFound.wvw_rank);
+      localStorage.setItem('wvw', accFound.wvw.rank);
     }
     localStorage.removeItem('spec');
 
@@ -226,7 +226,7 @@ const Account = () => {
                             </Col>
                             {/* WvW Rank */}
                             <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
-                              <Row>{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                              <Row>{accFound?.wvw.rank ? accFound?.wvw.rank : '0'}</Row>
                               <Row className="yellow-highlight">WvW Rank</Row>
                             </Col>
                           </div>
@@ -252,7 +252,7 @@ const Account = () => {
                           </Col>
                           {/* WvW Rank */}
                           <Col className={`${showMenu ? 'character-col show-content' : 'hide-content'}`}>
-                            <Row className="font-size-22px">{accFound?.wvw_rank ? accFound?.wvw_rank : '0'}</Row>
+                            <Row className="font-size-22px">{accFound?.wvw.rank ? accFound?.wvw.rank : '0'}</Row>
                             <Row className="yellow-highlight">WvW Rank</Row>
                           </Col>
                         </>
