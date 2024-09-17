@@ -58,7 +58,7 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const toggleFashion = () => {
     if (isFashionOn) {
       setIsFashionOn(false);
-    }else {
+    } else {
       setIsFashionOn(true);
     }
     setIsPrefixesOn(false);
@@ -104,16 +104,26 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
           setMergedItems([]);
           return;
         }
-        setRelic(await fetchData('items', char.equipment.find((equip) => equip.slot === 'Relic')?.id))
+
+        // Fetch Relic data from api, if there is no fetch but there is equip with slot 'Relic', fetch the legendary relic (101582).
+        const equippedRelic = char.equipment.find((equip) => equip.slot === 'Relic' && equip.location === 'Equipped');
+        const relicId = equippedRelic?.id;
+        let relicData = await fetchData('items', relicId);
+        if (!relicData && equippedRelic) {
+          console.warn('Relic data not found, fetching with backup ID 101582 (Legendary Relic).');
+          relicData = await fetchData('items', 101582);
+        }
+        setRelic(relicData);
+
         setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore')?.id))
         const itemIds = selectedEqTab?.equipment.map((el) => el.id).join(',');
         const fetchedItems = itemIds ? await fetchData('items', itemIds) : [];
         for (const item of fetchedItems) {
-          if(item?.details?.type == "LongBow"){item.details.type = "Longbow"}
-          if(item?.details?.type == "ShortBow"){item.details.type = "Shortbow"}
-          if(item?.details?.type == "HelmAquatic"){item.details.type = "Aquatic Headgear"}
-          if(item?.details?.type == "Harpoon"){item.details.type = "Spear"}
-          if(item?.details?.type == "Speargun"){item.details.type = "Harpoon Gun"}
+          if (item?.details?.type == "LongBow") { item.details.type = "Longbow" }
+          if (item?.details?.type == "ShortBow") { item.details.type = "Shortbow" }
+          if (item?.details?.type == "HelmAquatic") { item.details.type = "Aquatic Headgear" }
+          if (item?.details?.type == "Harpoon") { item.details.type = "Spear" }
+          if (item?.details?.type == "Speargun") { item.details.type = "Harpoon Gun" }
         }
         const itemstats = [
           ...selectedEqTab?.equipment.filter((item) => item.stats?.id).map((item) => item.stats?.id),
