@@ -17,9 +17,9 @@ function Footer() {
                     <li>
                         <Link className='nav-a' to='/contacts'>Contacts</Link>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link className='nav-a' to='/support'>Support Us</Link>
-                    </li> */}
+                    </li>
                 </p>
                 <div className='footer-left'>
                     <li>

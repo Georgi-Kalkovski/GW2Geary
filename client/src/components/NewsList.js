@@ -3,6 +3,23 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
+            date: '02.10.2024',
+            content: (
+                <span>
+                    Now you can <span className="yellow-highlight"> Support Us </span>
+                    using <span>
+                        <a
+                            className="nav-a"
+                            style={{ color: 'red', marginRight: '0px' }}
+                            href="/support"
+                        >
+                            Revolut
+                        </a>.
+                    </span>
+                </span>
+            ),
+        },
+        {
             date: '22.11.2023',
             content: (
                 <span>
