@@ -35,8 +35,8 @@ function SearchSupportUs() {
                                     Support Us on
                                 </span>
                                 {isLightTheme === false
-                                    ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', marginTop: '-2px', width: "85px", display: "flex" }} alt="" />
-                                    : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', marginTop: '-2px', width: "85px", display: "flex" }} alt="" />
+                                    ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', marginTop: '-2px', width: "75px", display: "flex" }} alt="" />
+                                    : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', marginTop: '-2px', width: "75px", display: "flex" }} alt="" />
                                 }
                             </Link>
                         </li>
@@ -59,8 +59,8 @@ function SearchSupportUs() {
                                             Support Us on
                                         </span>
                                         {isLightTheme === false
-                                            ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', width: "85px", display: "flex" }} alt="" />
-                                            : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', width: "85px", display: "flex" }} alt="" />
+                                            ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', width: "75px", display: "flex" }} alt="" />
+                                            : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', width: "75px", display: "flex" }} alt="" />
                                         }
                                     </Link>
                                 </li>
