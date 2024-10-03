@@ -13,6 +13,7 @@ import SearchWelcome from './Search/SearchWelcome';
 import SearchNews from './Search/SearchNews';
 import SearchCounter from './Search/SearchCounter';
 import UserGuideVideo from './Search/UserGuideVideo';
+import SearchSupportUs from './Search/SearchSupportUs';
 
 function Search() {
   const [isOpen, setIsOpen] = useState(false);
@@ -327,6 +328,7 @@ function Search() {
             {/* Empty Search Text */}
             <SearchWelcome />
             <UserGuideVideo />
+            <SearchSupportUs />
             {/* <SearchNews /> */}
             {currentUser && currentUser.username === 'Terter' &&
               <SearchCounter accounts={accounts} />
