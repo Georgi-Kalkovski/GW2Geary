@@ -327,8 +327,16 @@ function Search() {
           <div className='custom-scrollbar' style={window.innerWidth <= 900 ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' } : {}}>
             {/* Empty Search Text */}
             <SearchWelcome />
-            <UserGuideVideo />
-            <SearchSupportUs />
+            <div
+              style={
+                window.innerWidth <= 900
+                  ? { textAlign: 'left', justifyContent: 'right', maxHeight: `${maxHeight}px`, overflow: 'auto' }
+                  : { display: 'flex', justifyContent: 'center' }
+              }
+            >
+              <UserGuideVideo />
+              <SearchSupportUs />
+            </div>
             {/* <SearchNews /> */}
             {currentUser && currentUser.username === 'Terter' &&
               <SearchCounter accounts={accounts} />

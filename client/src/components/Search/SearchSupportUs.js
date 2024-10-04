@@ -47,7 +47,7 @@ function SearchSupportUs() {
             <Container className="flex center">
                 {innerWidth < 900 ?
                     ('') : (
-                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
+                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em' }}>
                             <Row className='flex center'>
                                 <li style={{ width: 'auto', listStyleType: 'none' }}>
                                     <Link
