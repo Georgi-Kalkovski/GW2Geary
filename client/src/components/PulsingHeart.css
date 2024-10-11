@@ -10,7 +10,7 @@
 
 .pulsing-heart {
     font-size: 30px;
-    animation: pulse 2.5s infinite, colorChange 20s infinite;
+    animation: pulse 1s infinite, colorChange 10s infinite;
     display: inline-block;
 }
 
