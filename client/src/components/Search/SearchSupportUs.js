@@ -47,25 +47,26 @@ function SearchSupportUs() {
             <Container className="flex center">
                 {innerWidth < 900 ?
                     ('') : (
-                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em' }}>
-                            <Row className='flex center'>
-                                <li style={{ width: 'auto', listStyleType: 'none' }}>
-                                    <Link
-                                        className='flex align nav-a'
-                                        style={{ marginLeft: '20px', cursor: 'pointer' }}
-                                        to='/support'
-                                    >
+                        <Link
+                            className='flex align nav-a box-hover'
+                            style={{ marginLeft: '20px', cursor: 'pointer' }}
+                            to='/support'
+                        >
+                            <Col className="home-empty-search-box accounts-hover" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em', margin: '15px 0 0 -10px' }}>
+                                <Row className='flex center'>
+                                    <li style={{ width: 'auto', listStyleType: 'none' }}>
+
                                         <span style={{ fontSize: '1.3em' }}>
                                             Support Us on
                                         </span>
                                         {isLightTheme === false
-                                            ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', width: "75px", display: "flex" }} alt="" />
-                                            : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', width: "75px", display: "flex" }} alt="" />
+                                            ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', width: "75px" }} alt="" />
+                                            : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', width: "75px" }} alt="" />
                                         }
-                                    </Link>
-                                </li>
-                            </Row>
-                        </Col>
+                                    </li>
+                                </Row>
+                            </Col>
+                        </Link>
                     )}
             </Container>
         </>

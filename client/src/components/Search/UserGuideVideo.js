@@ -49,12 +49,12 @@ function UserGuideVideo() {
                     <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px' }}>
                         <li style={{ width: 'auto', listStyleType: 'none' }}>
                             <a className='flex align nav-a center' onClick={handleClick} style={{ cursor: 'pointer' }}>
-                                <span style={{ fontSize: '1.3em' }}>
+                                <span style={{ fontSize: '1.3em', paddingRight: '10px' }}>
                                     User Guide video
                                 </span>
                                 {isLightTheme === false
-                                    ? <img src={Video} style={{ paddingLeft: '10px', marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
-                                    : <img src={VideoLight} style={{ paddingLeft: '10px', marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
+                                    ? <img src={Video} style={{ marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
+                                    : <img src={VideoLight} style={{ marginTop: '-2px', width: "35px", display: "flex" }} alt="" />
                                 }
                             </a>
                         </li>
@@ -66,21 +66,21 @@ function UserGuideVideo() {
                 {innerWidth < 900 ?
                     ('') : (
                         // <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '15em', marginRight: '0px' }}>
-                        <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em' }}>
-                            <Row className='flex center'>
-                                <li style={{ width: 'auto', listStyleType: 'none' }}>
-                                    <a className='flex align nav-a' onClick={handleClick} style={{ marginLeft: '20px', cursor: 'pointer' }}>
-                                        <span style={{ fontSize: '1.3em' }}>
+                        <a className='flex align nav-a box-hover' onClick={handleClick} style={{ marginLeft: '20px', cursor: 'pointer' }}>
+                            <Col className="home-empty-search-box accounts-hover" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em', margin: 'auto 0 0 -10px' }}>
+                                <Row className='flex center'>
+                                    <li style={{ width: 'auto', listStyleType: 'none', display: 'flex', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '1.3em', paddingRight: '5px' }}>
                                             User Guide video
                                         </span>
                                         {isLightTheme === false
-                                            ? <img src={Video} style={{ paddingLeft: '10px', width: "35px", display: "flex" }} alt="" />
-                                            : <img src={VideoLight} style={{ paddingLeft: '10px', width: "35px", display: "flex" }} alt="" />
+                                            ? <img src={Video} style={{ width: "35px" }} alt="" />
+                                            : <img src={VideoLight} style={{ width: "35px" }} alt="" />
                                         }
-                                    </a>
-                                </li>
-                            </Row>
-                        </Col>
+                                    </li>
+                                </Row>
+                            </Col>
+                        </a>
                     )}
                 {/* <Col className="home-empty-search-box" style={{ paddingTop: '5px', paddingBottom: '5px', width: '12.8em', marginRight: '0px' }}>
                     <Row className='flex center'>

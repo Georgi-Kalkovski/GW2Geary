@@ -721,13 +721,6 @@ iframe {
   z-index: 1;
 }
 
-/* LIGHT MODE */
-
-body.light-theme {
-  background-color: #e7e6e6;
-  color: #35363a;
-}
-
 .game-button {
   border: none;
   background: none;
@@ -745,6 +738,46 @@ body.light-theme {
   filter: brightness(1.2);
 }
 
+.rainbow-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.rainbow-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1000;
+  background: linear-gradient(45deg,
+      red, orange, yellow, green, blue, indigo, violet, red);
+  background-size: 400%;
+  animation: move 4s linear infinite;
+  opacity: 0;
+}
+
+.rainbow-box:hover::before {
+  opacity: 1;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* LIGHT MODE */
+
+body.light-theme {
+  background-color: #e7e6e6;
+  color: #35363a;
+}
 
 body.light-theme .app-nav,
 body.light-theme .home-empty-search-box,
@@ -769,7 +802,8 @@ body.light-theme .footer,
 body.light-theme .form-button:disabled,
 body.light-theme .itemstats,
 body.light-theme .profile-box button,
-body.light-theme .equipment-save {
+body.light-theme .equipment-save,
+body.light-theme .support-box {
   background-color: rgb(255, 255, 255);
   color: #35363a;
 }

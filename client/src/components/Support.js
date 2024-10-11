@@ -1,10 +1,25 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet';
 import Image from './img/support.png';
+import PulsingHeart from "./PulsingHeart";
 
 function Support() {
+    const [isLightTheme, setIsLightTheme] = useState(null);
+
+    const handleThemeChange = () => {
+        const isLight = document.body.classList.contains('light-theme');
+        setIsLightTheme(isLight);
+    };
+
+    useEffect(() => {
+        handleThemeChange();
+
+        document.body.addEventListener('click', handleThemeChange);
+
+        return () => {
+            document.body.removeEventListener('click', handleThemeChange);
+        };
+    }, []);
     return (
         <div className="flex center">
             <Helmet>
@@ -12,24 +27,32 @@ function Support() {
             </Helmet>
             <div className='flex center column'>
                 <h2 style={{ textAlign: 'center' }}>Support Us</h2>
-                <div className='support-box' style={{ justifyContent: 'right', marginBottom: '20px', paddingTop: '20px', overflow: 'auto' }}>
-                    <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" alt="Revolut Logo" />
-                    <a
-                        className="nav-a box-hover"
-                        style={{ color: 'white', paddingTop: '10px', fontSize: '25px' }}
-                        href="https://revolut.me/terterbg"
-                        target="_blank"
-                        onMouseEnter={(e) => e.target.style.color = 'red'}
-                        onMouseLeave={(e) => e.target.style.color = 'white'}
-                    >
-                        @terterbg
-                    </a>
-                    <a href="https://revolut.me/terterbg" target="_blank">
-                        <img className="box-hover" style={{ width: '290px' }} src={Image} alt="" />
-                    </a>
-                    <span style={{ marginTop: '-20px', paddingBottom: '10px', zIndex:'10' }}>Thank you! ❤️</span>
-                </div>
+                <div className='box-hover rainbow-box' style={{ marginBottom: '20px', padding: '10px' }}>
+                    <div className='support-box box-hover' style={{ paddingTop: '20px' }}>
 
+                        <a href="https://revolut.me/terterbg" target="_blank" style={{ textDecoration: 'none' }}>
+                            <div>
+                                {isLightTheme === false
+                                    ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" alt="Revolut Logo" />
+                                    : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" alt="Revolut Logo" />
+                                }
+                            </div>
+                            <div
+                                className="nav-a"
+                                style={{ paddingTop: '10px' }}
+                            >
+                                <span style={{ fontSize: '25px' }}>
+                                    @terterbg
+                                </span>
+                                {isLightTheme === false
+                                    ? <img style={{ width: '290px', filter: 'invert(0)' }} src={Image} alt="" />
+                                    : <img style={{ width: '290px', filter: 'invert(1) brightness(1.2)' }} src={Image} alt="" />
+                                }
+                                <div style={{ marginTop: '-10px', paddingBottom: '10px', zIndex: '10' }}><PulsingHeart /></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div >
     );

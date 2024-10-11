@@ -1,0 +1,98 @@
+.heart-message {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: -10px;
+    padding-bottom: 10px;
+    z-index: 10;
+}
+
+.pulsing-heart {
+    font-size: 30px;
+    animation: pulse 2.5s infinite, colorChange 20s infinite;
+    display: inline-block;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: red;
+    }
+
+    16.67% {
+        color: blue;
+    }
+
+    33.33% {
+        color: green;
+    }
+
+    50% {
+        color: yellow;
+    }
+
+    66.67% {
+        color: purple;
+    }
+
+    83.33% {
+        color: orange;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+.rainbow-text {
+    display: inline-block;
+    animation: rainbow 20s linear infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        color: red;
+    }
+
+    14% {
+        color: orange;
+    }
+
+    28% {
+        color: yellow;
+    }
+
+    42% {
+        color: green;
+    }
+
+    57% {
+        color: cyan;
+    }
+
+    71% {
+        color: blue;
+    }
+
+    85% {
+        color: violet;
+    }
+
+    100% {
+        color: red;
+    }
+}
