@@ -74,6 +74,14 @@ router.get('/profile', (req, res) => {
     res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
 })
 
+router.get('/support', (req, res) => {
+    pageTitle = "GW2Geary - Support";
+    pageDescription = `Support Us via Revolut. Thank you! ❤️`;
+    pageOgUrl = "https://gw2geary.com/support/"
+
+    res.send(replaceMetaData(pageTitle, pageDescription, pageOgUrl))
+})
+
 router.get('/a/:name', (req, res) => {
     const { name } = req.params;
     const world = req.query.w;
