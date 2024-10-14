@@ -27,7 +27,10 @@ function Support() {
             </Helmet>
             <div className='flex center column'>
                 <h2 style={{ textAlign: 'center' }}>Support Us</h2>
-                <div className='box-hover rainbow-box' style={{ marginBottom: '20px', padding: '5px', transform: 'scale(1)' }}>
+                <div
+                    className={`box-hover ${window.innerWidth < 900 ? 'mobile-rainbow-box' : 'rainbow-box'}`}
+                    style={{ marginBottom: '20px', padding: '5px', transform: 'scale(1)' }}
+                >
                     <div className='support-box box-hover' style={{ paddingTop: '20px', filter: 'brightness(1)', transform: 'scale(1)' }}>
 
                         <a href="https://revolut.me/terterbg" target="_blank" style={{ textDecoration: 'none' }}>

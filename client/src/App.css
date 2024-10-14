@@ -743,7 +743,7 @@ iframe {
   overflow: hidden;
 }
 
-.rainbow-box::before { 
+.rainbow-box::before {
   content: '';
   position: absolute;
   top: -5px;
@@ -751,16 +751,45 @@ iframe {
   right: -5px;
   bottom: -5px;
   z-index: -1;
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet,red, orange, yellow, green, blue, indigo, violet);
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet);
   background-size: 400%;
   animation: move 4s linear infinite;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
 
+.rainbow-box:hover::before {
+  opacity: 1;
+}
+
+.mobile-rainbow-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-rainbow-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 400%;
+  animation: move 4s linear infinite;
+  opacity: 1;
+  transition: none;
+}
+
 @keyframes move {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .rainbow-box:hover::before {
