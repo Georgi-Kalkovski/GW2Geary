@@ -152,6 +152,12 @@
     width: 88px;
 }
 
+.basic-button-search:hover {
+    background-color: #585a5f;
+    box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.7);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
 .basic-button-search.active {
     background-color: #424246;
     box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.7);
