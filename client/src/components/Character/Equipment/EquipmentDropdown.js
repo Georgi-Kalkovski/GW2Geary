@@ -108,96 +108,96 @@ const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
         }
 
         //Relic Logic
-        // const equippedRelic = char.equipment.find(
-        //   (equip) => equip.slot === 'Relic' && equip.location === 'Equipped'
-        // );
+        const equippedRelic = char.equipment.find(
+          (equip) => equip.slot === 'Relic' && equip.location === 'Equipped'
+        );
 
-        // const relicId = equippedRelic?.id;
+        const relicId = equippedRelic?.id;
 
-        // let relicData = relicId ? await fetchData('items', relicId) : null;
+        let relicData = relicId ? await fetchData('items', relicId) : null;
 
-        // const fetchCanonicalNameById = async (gameId) => {
-        //   try {
-        //     const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-        //       params: {
-        //         action: 'parse',
-        //         page: 'Category_talk:Relics',
-        //         format: 'json',
-        //         prop: 'text',
-        //         origin: '*',
-        //       },
-        //     });
+        const fetchCanonicalNameById = async (gameId) => {
+          try {
+            const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+              params: {
+                action: 'parse',
+                page: 'Category_talk:Relics',
+                format: 'json',
+                prop: 'text',
+                origin: '*',
+              },
+            });
 
-        //     if (response.data?.parse?.text) {
-        //       const html = response.data.parse.text['*'];
-        //       const $ = cheerio.load(html);
-        //       let canonicalName = null;
+            if (response.data?.parse?.text) {
+              const html = response.data.parse.text['*'];
+              const $ = cheerio.load(html);
+              let canonicalName = null;
 
-        //       $('table.wikitable tbody tr').each((index, element) => {
-        //         const idCell = $(element).find('.Has-game-id').text().trim();
-        //         const nameCell = $(element).find('.Has-canonical-name').text().trim();
+              $('table.wikitable tbody tr').each((index, element) => {
+                const idCell = $(element).find('.Has-game-id').text().trim();
+                const nameCell = $(element).find('.Has-canonical-name').text().trim();
 
-        //         if (idCell === gameId.toString()) {
-        //           canonicalName = nameCell;
-        //         }
-        //       });
+                if (idCell === gameId.toString()) {
+                  canonicalName = nameCell;
+                }
+              });
 
-        //       return canonicalName || `No item found for game ID: ${gameId}`;
-        //     } else {
-        //       console.log('Unexpected API response format:', response.data);
-        //       return 'Error: Unexpected API response format';
-        //     }
-        //   } catch (error) {
-        //     console.error('Error fetching or parsing data:', error);
-        //     return 'Error fetching data';
-        //   }
-        // };
+              return canonicalName || `No item found for game ID: ${gameId}`;
+            } else {
+              console.log('Unexpected API response format:', response.data);
+              return 'Error: Unexpected API response format';
+            }
+          } catch (error) {
+            console.error('Error fetching or parsing data:', error);
+            return 'Error fetching data';
+          }
+        };
 
-        // const fetchCanonicalDescriptionById = async (gameName) => {
-        //   try {
-        //     const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-        //       params: {
-        //         action: 'parse',
-        //         page: 'Relic',
-        //         format: 'json',
-        //         prop: 'text',
-        //         origin: '*',
-        //       },
-        //     });
-        //     if (response.data?.parse?.text) {
-        //       const html = response.data.parse.text['*'];
-        //       const $ = cheerio.load(html);
-        //       let canonicalDescription = null;
+        const fetchCanonicalDescriptionById = async (gameName) => {
+          try {
+            const response = await axios.get('https://wiki.guildwars2.com/api.php', {
+              params: {
+                action: 'parse',
+                page: 'Relic',
+                format: 'json',
+                prop: 'text',
+                origin: '*',
+              },
+            });
+            if (response.data?.parse?.text) {
+              const html = response.data.parse.text['*'];
+              const $ = cheerio.load(html);
+              let canonicalDescription = null;
 
-        //       $('tr').each((index, element) => {
-        //         const nameCell = $(element).find('th a').text().trim();
-        //         const descriptionCell = $(element).find('td').html()?.trim();
+              $('tr').each((index, element) => {
+                const nameCell = $(element).find('th a').text().trim();
+                const descriptionCell = $(element).find('td').html()?.trim();
 
-        //         if (nameCell === gameName.toString()) {
-        //           canonicalDescription = descriptionCell;
-        //         }
-        //       });
+                if (nameCell === gameName.toString()) {
+                  canonicalDescription = descriptionCell;
+                }
+              });
 
-        //       return canonicalDescription || `No item found for game name: ${gameName}`;
-        //     } else {
-        //       console.log('Unexpected API response format:', response.data);
-        //       return 'Error: Unexpected API response format';
-        //     }
-        //   } catch (error) {
-        //     console.error('Error fetching or parsing data:', error);
-        //     return 'Error fetching data';
-        //   }
-        // };
+              return canonicalDescription || `No item found for game name: ${gameName}`;
+            } else {
+              console.log('Unexpected API response format:', response.data);
+              return 'Error: Unexpected API response format';
+            }
+          } catch (error) {
+            console.error('Error fetching or parsing data:', error);
+            return 'Error fetching data';
+          }
+        };
 
-        // if (!relicData) {
-        //   const canonicalName = await fetchCanonicalNameById(relicId);
-        //   relicData = await fetchData('items', 101582);
-        //   const cleanText = (await fetchCanonicalDescriptionById(canonicalName)).replace(/<[^>]*>/g, '');
-        //   if (relicData?.length) {
-        //     Object.assign(relicData[0], { name: canonicalName, description: cleanText, id: relicId });
-        //   }
-        // }
-        // setRelic(relicData);
+        if (!relicData) {
+          const canonicalName = await fetchCanonicalNameById(relicId);
+          relicData = await fetchData('items', 101582);
+          const cleanText = (await fetchCanonicalDescriptionById(canonicalName)).replace(/<[^>]*>/g, '');
+          if (relicData?.length) {
+            Object.assign(relicData[0], { name: canonicalName, description: cleanText, id: relicId });
+          }
+        }
+        setRelic(relicData);
         // End of Relic Logic
 
         setPowerCore(await fetchData('items', char.equipment.find((equip) => equip.slot === 'PowerCore')?.id))
