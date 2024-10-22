@@ -19,8 +19,8 @@
     "validator": "^13.9.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start --max-old-space-size=4096",
+    "build": "react-scripts build --max-old-space-size=4096",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.js --ext .js,.jsx ."
