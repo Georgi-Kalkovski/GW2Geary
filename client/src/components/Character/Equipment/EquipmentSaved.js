@@ -10,7 +10,7 @@ import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 import EquipmentSavedInner from './EquipmentSavedInner';
 import axios from 'axios';
-// import * as cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 const EquipmentSaved = () => {
     const { name, id } = useParams();
