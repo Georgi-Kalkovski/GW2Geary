@@ -3,6 +3,15 @@ import React from 'react';
 function NewsList({ isSearchNews, limit }) {
     const newsData = [
         {
+            date: '22.10.2024',
+            content: (
+                <span>
+                    Now you can preview <span style={{color:'#701cf8'}}> Legendary Relics </span>
+                    as well.
+                </span>
+            ),
+        },
+        {
             date: '02.10.2024',
             content: (
                 <span>

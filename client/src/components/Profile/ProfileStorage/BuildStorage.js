@@ -103,7 +103,7 @@ function BuildStorage() {
             {storage && storage.length > 0
                 ?
                 <div className='profile-box custom-scrollbar' style={{ textAlign: 'left', justifyContent: 'right', maxWidth: '790px', maxHeight: `${maxHeight}px`, overflow: 'auto' }}>
-                    {storage.map((stored) => (
+                    {storage.slice().reverse().map((stored) => (
                         <div className="facts-div-profile api-right" key={stored.id}>
                             <Link className="flex profile-storage-first-child" title="Redirect to Build" style={{ marginLeft: '20px', textDecoration: 'none', color: 'inherit' }} to={`/blds/${stored.char.replaceAll(' ', '_')}/${stored.id}`}>
                                 <div style={{ textAlign: 'right' }}>
