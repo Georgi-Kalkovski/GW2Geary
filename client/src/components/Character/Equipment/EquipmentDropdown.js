@@ -4,7 +4,7 @@ import Equipment from './Equipment';
 import fetchData from '../../fetchData';
 import InfusionsName from '../Fashion/InfusionsName';
 import axios from 'axios';
-import * as cheerio from 'cheerio';
+const cheerio = require('cheerio');
 
 const EquipmentDropdown = ({ char, build, setEquip, initial }) => {
   const [isOpen, setIsOpen] = useState(false);
