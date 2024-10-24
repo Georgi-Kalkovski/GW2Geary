@@ -42,7 +42,7 @@ function Support() {
                             </div>
                             <div
                                 className="nav-a"
-                                style={{ paddingTop: '10px' }}
+                                style={{ paddingTop: '10px', margin: '0px' }}
                             >
                                 <span style={{ fontSize: '25px' }}>
                                     @terterbg
