@@ -9,8 +9,7 @@ import BackButton from '../BackButton';
 import Cog from '../../../cog.svg'
 import Dragon from '../../../dragon.svg'
 import EquipmentSavedInner from './EquipmentSavedInner';
-import axios from 'axios';
-const cheerio = require('cheerio');
+const relicsData = require('../../relics.json');
 
 const EquipmentSaved = () => {
     const { name, id } = useParams();
@@ -52,87 +51,54 @@ const EquipmentSaved = () => {
 
                     let relicData = relicId ? await fetchData('items', relicId) : null;
 
-                    const fetchCanonicalNameById = async (gameId) => {
-                        try {
-                            const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                                params: {
-                                    action: 'parse',
-                                    page: 'Category_talk:Relics',
-                                    format: 'json',
-                                    prop: 'text',
-                                    origin: '*',
-                                },
-                            });
-
-                            if (response.data?.parse?.text) {
-                                const html = response.data.parse.text['*'];
-                                const $ = cheerio.load(html);
-                                let canonicalName = null;
-
-                                $('table.wikitable tbody tr').each((index, element) => {
-                                    const idCell = $(element).find('.Has-game-id').text().trim();
-                                    const nameCell = $(element).find('.Has-canonical-name').text().trim();
-
-                                    if (idCell === gameId.toString()) {
-                                        canonicalName = nameCell;
-                                    }
-                                });
-
-                                return canonicalName || `No item found for game ID: ${gameId}`;
-                            } else {
-                                console.log('Unexpected API response format:', response.data);
-                                return 'Error: Unexpected API response format';
+                    const findItemByGameId = (gameId) => {
+                        const items = relicsData.results;
+              
+                        for (let itemKey in items) {
+                          const item = items[itemKey];
+                          const itemId = item.printouts['Has game id']?.[0];
+                          const itemName = item.printouts['Has canonical name']?.[0];
+              
+                          const hasCorrectIcon = item.printouts['Has game icon']?.[0]?.fulltext === "File:Legendary Relic.png";
+              
+                          if (itemId === gameId && hasCorrectIcon) {
+                            for (let relatedItemKey in items) {
+                              const relatedItem = items[relatedItemKey];
+                              const canonicalName = relatedItem.printouts['Has canonical name']?.[0];
+              
+                              if (canonicalName === itemName) {
+                                const description = items[itemName].printouts['Has game description']?.[0] || "No description available";
+              
+                                return {
+                                  id: gameId,
+                                  name: canonicalName,
+                                  description,
+                                };
+                              }
                             }
-                        } catch (error) {
-                            console.error('Error fetching or parsing data:', error);
-                            return 'Error fetching data';
+                          }
                         }
-                    };
+                        return null;
+                      };
+              
+                      if (!relicData) {
+                        
+                        const relicDetails = findItemByGameId(relicId);
+                        if (relicDetails) {
+                          relicData = await fetchData('items', 101582);
 
-                    const fetchCanonicalDescriptionById = async (gameName) => {
-                        try {
-                            const response = await axios.get('https://wiki.guildwars2.com/api.php', {
-                                params: {
-                                    action: 'parse',
-                                    page: 'Relic',
-                                    format: 'json',
-                                    prop: 'text',
-                                    origin: '*',
-                                },
+                          if (relicData?.length) {
+                            Object.assign(relicData[0], {
+                              id: relicDetails.id,
+                              name: relicDetails.name,
+                              description: relicDetails.description.replace(/\[\[|\]\]/g, ''),
                             });
-                            if (response.data?.parse?.text) {
-                                const html = response.data.parse.text['*'];
-                                const $ = cheerio.load(html);
-                                let canonicalDescription = null;
-
-                                $('tr').each((index, element) => {
-                                    const nameCell = $(element).find('th a').text().trim();
-                                    const descriptionCell = $(element).find('td').html()?.trim();
-
-                                    if (nameCell === gameName.toString()) {
-                                        canonicalDescription = descriptionCell;
-                                    }
-                                });
-
-                                return canonicalDescription || `No item found for game name: ${gameName}`;
-                            } else {
-                                console.log('Unexpected API response format:', response.data);
-                                return 'Error: Unexpected API response format';
-                            }
-                        } catch (error) {
-                            console.error('Error fetching or parsing data:', error);
-                            return 'Error fetching data';
+                          }
+                        } else {
+                          console.log(`No item found for game ID: ${relicId}`);
                         }
-                    };
-
-                    if (!relicData) {
-                        const canonicalName = await fetchCanonicalNameById(relicId);
-                        relicData = await fetchData('items', 101582);
-                        const cleanText = (await fetchCanonicalDescriptionById(canonicalName)).replace(/<[^>]*>/g, '');
-                        if (relicData?.length) {
-                            Object.assign(relicData[0], { name: canonicalName, description: cleanText });
-                        }
-                    }
+                      }
+              
                     setRelic(relicData);
                     // End of Relic Logic
 

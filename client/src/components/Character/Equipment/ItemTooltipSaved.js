@@ -58,15 +58,16 @@ function ItemTooltipSaved({ item, gear, slider }) {
                         </Row>
 
                         <br />
-                        {/* RELIC & POWER CORE &  */}
-                        {['Relic', 'PowerCore'].includes(item.type) &&
+                       {/* RELIC & POWER CORE */}
+                       {['Relic', 'PowerCore'].includes(item.type) &&
                             <div>
                                 {(() => {
                                     const bonus = item.description
                                         .replace('</c>', '')
                                         .replace('</br>', '')
                                         .replace('<br>', '')
-                                        .split('<c=@reminder>')
+                                        .replace('</span>', '')
+                                        .split(/<c=@reminder>|<span style="color: #808080;">/)
                                         .slice(0, 2);
                                     return (
                                         <>
