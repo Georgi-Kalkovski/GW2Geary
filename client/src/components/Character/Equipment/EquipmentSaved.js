@@ -130,7 +130,6 @@ const EquipmentSaved = () => {
                     ].join(',');
                     const fetchedInfusions = infusionIds ? await fetchData('items', infusionIds) : [];
                     const mergingItems = equip.equipment.map(item => ({
-
                         ...equip.equipment.find((fetchedItem => fetchedItem.id === item.id)),
                         ...fetchedItems?.find(fetchedItem => fetchedItem.id === item.id),
                         ...item,
@@ -143,20 +142,20 @@ const EquipmentSaved = () => {
                         skin_name: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.name,
                         skin_icon: fetchedSkins?.find(fetchedSkin => fetchedSkin.id === item.skin)?.icon,
                         upgrades: fetchedInfusions ? [
-                            ...fetchedUpgrades?.filter(fetchedUpgrade => item.upgrades?.includes(fetchedUpgrade.id)).map((upgrade) => ({
-                                ...upgrade,
-                                counter: equip.equipment.reduce((count, fetchedItem) => {
-                                    if (fetchedItem.slot === "HelmAquatic") {
-                                        return count;
-                                    }
-                                    return count + (fetchedItem.upgrades && fetchedItem.upgrades.includes(upgrade.id) ? 1 : 0);
-                                }, 0)
-                            })),
-                            ...(item.infusions
-                                ?? char?.equipment.find(fetchedItem => fetchedItem.id === item.id)?.infusions
-                                ?? []
-                            ).map(infusionId => fetchedInfusions?.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
-                        ] : '',
+                            ...item.upgrades.map(upgradeId => {
+                                const upgrade = fetchedUpgrades.find(fetchedUpgrade => fetchedUpgrade.id === upgradeId);
+                                return {
+                                    ...upgrade,
+                                    counter: equip.equipment.reduce((count, fetchedItem) => {
+                                        if (fetchedItem.slot === "HelmAquatic") {
+                                            return count;
+                                        }
+                                        return count + (fetchedItem.upgrades && fetchedItem.upgrades.includes(upgrade.id) ? 1 : 0);
+                                    }, 0)
+                                };
+                            }).filter(upgrade => upgrade !== undefined),
+                            ...(item.infusions || []).map(infusionId => fetchedInfusions.find(fetchedInfusion => fetchedInfusion.id === infusionId)),
+                        ] : [],
                         itemstats: fetchedItemstats,
                         powerCore: fetchedItems.find(item => item.type === 'PowerCore'),
                         infusions: fetchedInfusions ? (item.infusions
@@ -167,7 +166,7 @@ const EquipmentSaved = () => {
                             if (fetchedInfusion && InfusionsName(fetchedInfusion.name)) {
                                 return fetchedInfusion;
                             }
-                            return null; // or handle non-matching cases as needed
+                            return null;
                         }).filter(infusion => infusion !== null) : [],
                     }));
                     localStorage.setItem('prof', equip?.profession);
