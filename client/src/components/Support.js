@@ -20,6 +20,7 @@ function Support() {
             document.body.removeEventListener('click', handleThemeChange);
         };
     }, []);
+
     return (
         <div className="flex center">
             <Helmet>
@@ -27,6 +28,8 @@ function Support() {
             </Helmet>
             <div className='flex center column'>
                 <h2 style={{ textAlign: 'center' }}>Support Us</h2>
+
+                {/* Revolut Support Window */}
                 <div
                     className={`box-hover ${window.innerWidth < 900 ? 'mobile-rainbow-box' : 'rainbow-box'}`}
                     style={{ marginBottom: '20px', padding: '5px', transform: 'scale(1)' }}
@@ -45,7 +48,7 @@ function Support() {
                                 style={{ paddingTop: '10px', margin: '0px' }}
                             >
                                 <span style={{ fontSize: '25px' }}>
-                                    @terterbg
+                                    revolut.me/terterbg
                                 </span>
                                 {isLightTheme === false
                                     ? <img style={{ width: '290px', filter: 'invert(0)' }} src={Image} alt="" />
@@ -56,8 +59,34 @@ function Support() {
                         </a>
                     </div>
                 </div>
+
+                {/* Ko-fi Support Window */}
+                <div
+                    className={`box-hover ${window.innerWidth < 900 ? 'mobile-rainbow-box' : 'rainbow-box'}`}
+                    style={{ marginBottom: '20px', padding: '5px', transform: 'scale(1)' }}
+                >
+                    <div className='support-box box-hover' style={{ paddingTop: '20px', filter: 'brightness(1)', transform: 'scale(1)' }}>
+
+                        <a href="https://ko-fi.com/terterbg" target="_blank" style={{ textDecoration: 'none' }}>
+                            <div>
+                                <img src="https://storage.ko-fi.com/cdn/logomarkLogo.png" alt="Ko-fi Logo" />
+                            </div>
+                            <div
+                                className="nav-a"
+                                style={{ paddingTop: '10px', margin: '0px' }}
+                            >
+                                <span style={{ fontSize: '25px' }}>
+                                    Ko-fi.com/terterbg
+                                </span>
+                                <br />
+                                <br />
+                                <div style={{ marginTop: '-10px', paddingBottom: '10px', zIndex: '10' }}><PulsingHeart /></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div >
+        </div>
     );
 }
 
