@@ -55,14 +55,9 @@ function SearchSupportUs() {
                             <Col className="home-empty-search-box accounts-hover" style={{ paddingTop: '5px', paddingBottom: '5px', maxWidth: '20.9em', margin: '15px 0 0 -10px' }}>
                                 <Row className='flex center'>
                                     <li style={{ width: 'auto', listStyleType: 'none' }}>
-
                                         <span style={{ fontSize: '1.3em' }}>
-                                            Support Us on
+                                            Support Us
                                         </span>
-                                        {isLightTheme === false
-                                            ? <img src="https://assets.revolut.com/assets/brand/Revolut-White.svg" style={{ paddingLeft: '10px', width: "75px" }} alt="" />
-                                            : <img src="https://assets.revolut.com/assets/brand/Revolut-Black.svg" style={{ paddingLeft: '10px', width: "75px" }} alt="" />
-                                        }
                                     </li>
                                 </Row>
                             </Col>
